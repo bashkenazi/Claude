@@ -59,12 +59,12 @@ Apply the rules pack. Where it is silent, these sell-side specifics apply (they 
   history pages, disclosures.
 - **Keep the reason behind a number** when it changes a forecasting assumption: channel checks, order and pricing
   changes, customer wins or losses, qualification timing, capacity and supply/demand state changes, explicit
-  guidance assumptions, consequential estimate revisions with a stated mechanism, financing outcomes for
+  guidance assumptions, financing outcomes for
   capital-intensive names.
+- Do not propose an analyst's own forecasts, model outputs or estimate revisions; propose the evidence behind them.
+  Exception: scarce industry supply/demand series (CoWoS capacity, wafer starts, HBM bits, WFE).
 - Split heterogeneous bundles; keep a homogeneous metric set from one observation together.
 
-Background on how the retired pipeline phrased these rules is in `jobs/sellside-extractor/hermes-reference.md`
-(Appendix B–C). Read it only if a case is unclear; where it conflicts with the rules pack, the rules pack wins.
 
 ## Quotes
 
