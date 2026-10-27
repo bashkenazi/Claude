@@ -134,7 +134,8 @@ Each prompt gives: the absolute path of `$WORK/rules-pack.md`, the absolute repo
 to `$WORK/out/<batch>.json` (strip a surrounding code fence if present). When the Agent result points to a
 transcript file, extract the final reply from it with a short script instead of re-typing the JSON.
 
-If the subagent type is not available, stop and report it; do not extract in the main session.
+If the subagent type is not available, stop and report it; do not extract in the main session. Project subagent
+types register only when a session starts, so a type added mid-session is not visible until the next session.
 
 ## 7. Validate
 
@@ -162,15 +163,19 @@ If the subagent type is not available, stop and report it; do not extract in the
 ## 8. Stored-evidence check and admission
 
 Follow datapoint-filter Auto-load **§A** exactly: one 60-day / 60-rows-per-ID query for all resolved IDs (save to
-file), then one batched 180-day distinctive-term lookup for candidates that may restate older events. A candidate
+file; a large result comes back as a saved file, so parse it with a script, unwrapping the outer `result` field), then one batched 180-day distinctive-term lookup for candidates that may restate older events. A candidate
 that restates a stored row's event is removed as a duplicate, naming the stored ID. Also collapse duplicates
 **within this run** (the same event from two brokers' notes: keep the fuller one; a second broker counts as
-confirmation only with independent evidence). Then apply the **§B load gate**; every failing row is held with its
+confirmation only with independent evidence). The kept row must itself be loadable: never keep a row from a file
+with `complete_read: false` or a held row over a loadable one, and check that every within-run duplicate points to
+a row that passes the gate. Then apply the **§B load gate**; every failing row is held with its
 reason.
 
 ## 9. Publish, insert, read back
 
-1. **Publish the Notion page first** (layout below) under Openclaw Output, with every kept row shown as staged.
+1. **Publish the Notion page first** (layout below) under Openclaw Output, with every kept row shown as staged. If
+the page is too large for one call, create it with the main body and append the ticker toggles in chunks of about
+45k characters, splitting only between toggles.
    Dry run: publish and stop here (skip 2–3).
 2. **Insert** per datapoint-filter **§C**: re-check exact repeats on `(research_id, event_date, evidence_text)`;
    one multi-row `INSERT` per ≤ 100 rows into the nine columns, dollar-quoted text, explicit enum casts,
