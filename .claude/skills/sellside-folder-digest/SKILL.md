@@ -143,8 +143,9 @@ If the subagent type is not available, stop and report it; do not extract in the
    files `failed` with `last_error`.
 3. **`complete_read: false`:** mark the file `failed` (it retries next run, up to 3 attempts); do not load its rows.
 4. **Row errors:** fix nothing that would change meaning. A row with contract errors is held with the error as the
-   reason, except: a number missing from the quotes or an empty quote list makes the row a cut ("unsupported
-   number").
+   reason. An empty quote list makes the row a cut. "Numbers not found in quotes" is a flag for you to check
+   against the quotes: a unit conversion or rounding the quotes support (¥757,715mn → ¥757.7bn) is fine; a figure
+   the quotes do not support makes the row a cut ("unsupported number").
 5. **Re-resolve `research_id`** for every row from `ticker`/`company` against the directory (one batched query for
    anything not in the slice). Subagent IDs are proposals: if yours differs, use yours and note it; if none
    resolves, the row is held "mapping unresolved: <ticker> <company>". Never invent an ID or create a `research`

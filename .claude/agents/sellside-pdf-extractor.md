@@ -21,8 +21,9 @@ loads and publishes; you only read and return JSON.
 
 1. Call `mcp__Microsoft_365__read_resource` with the file `uri` and `startPage: 1`.
 2. If the text ends with a truncation footer (e.g. `[truncated: pages 1-14 of 16 — re-call with startPage=15]`),
-   call again from the page it names. Repeat until the last page. Read **every** page, including tables and
-   appendices; skip only boilerplate disclosures after you have confirmed they are disclosures.
+   call again from the page it names. Repeat until the last page. Open **every** page, including tables,
+   appendices and disclosure pages (you may skim a page once you have confirmed it is boilerplate). Never assume
+   unopened pages are disclosures: `complete_read: true` requires `pages_read == page_count`.
 3. Record `page_count` (from the footer's "of N", or the document's own page numbering when no footer appears) and
    `pages_read`. If any page could not be read, or a call failed after one retry, set `complete_read: false` and say
    which pages in `coverage_note`. Do not guess at unread content.

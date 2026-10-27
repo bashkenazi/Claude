@@ -20,10 +20,20 @@ IMPACTS = {"positive", "negative", "mixed"}
 SOURCE_TYPES = {"sell_side", "independent_research", "company", "news"}
 CONFIDENCE = {"high", "medium", "low"}
 NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
+# Period labels, dates and names that carry no figure of their own: 3Q26, F2Q27, FY27, 1H26, 2026E,
+# 2026/27/28E, 2026-10-26, F-35. They are context, so they need no quote.
+PERIOD = re.compile(
+    r"\b\d{4}-\d{2}-\d{2}\b"
+    r"|\b(?:[1-4]Q|Q[1-4]|[12]H|H[12]|F[1-4]Q|FY|CY|F)\d{2,4}[EF]?\b"
+    r"|\bFY\d{1,2}/\d{2}[EF]?\b"
+    r"|\b(?:YE|FYE)?20[1-3]\d(?:/\d{2})*[EF]?\b"
+    r"|\b(?:[1-4]Q|[12]H|F[1-4]Q)\b"
+    r"|\b\d{1,2}-[KQ]\b"
+    r"|\b[A-Z]{1,3}-\d+\b")
 
 
 def norm_numbers(text):
-    return {n.replace(",", "") for n in NUMBER.findall(text or "")}
+    return {n.replace(",", "") for n in NUMBER.findall(PERIOD.sub(" ", text or ""))}
 
 
 def parse_date(value):
@@ -79,9 +89,11 @@ def check_row(row, today):
 
 def check_file(entry, today):
     rows = entry.get("rows") or []
+    pages_read, page_count = entry.get("pages_read"), entry.get("page_count")
+    pages_ok = isinstance(pages_read, int) and isinstance(page_count, int) and 0 < page_count <= pages_read
     return {
         "drive_item_id": entry.get("drive_item_id"),
-        "complete_read": entry.get("complete_read") is True,
+        "complete_read": entry.get("complete_read") is True and pages_ok,
         "pages": f"{entry.get('pages_read')}/{entry.get('page_count')}",
         "publication_date": entry.get("publication_date"),
         "publication_date_basis": entry.get("publication_date_basis"),
