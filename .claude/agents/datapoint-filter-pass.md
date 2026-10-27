@@ -25,17 +25,23 @@ Apply the admission test and default exclusions in the rules pack as written. Tw
   (channel checks, supplier or customer comments, management statements, disclosed orders) when it passes on its
   own, and drop the estimate from the wording. Exception: scarce industry supply/demand series Visible Alpha does
   not carry (CoWoS capacity, wafer starts, HBM bits, WFE), labeled as the analyst's estimate.
-- **Signal over completeness.** Routine results recaps, consensus restatements, ratings and PTs, static TAMs and
-  scenario arithmetic are cut. Zero rows kept from a batch is a valid answer.
+- **Analyst views are not evidence.** Drop every clause where the broker says what it expects, believes, infers,
+  sees, models or thinks ("GS expects…", "MS sees…", "Jefferies infers…", "TD: less of a headwind than feared").
+  If nothing factual remains, cut the row. A broker's own channel checks, surveys and trackers are evidence; keep
+  them, named.
+- **Signal over completeness.** Routine results recaps (reported revenue, margin or EPS with no driver that changes
+  the forecast), consensus restatements, ratings and PTs, static TAMs and scenario arithmetic are cut. Zero rows
+  kept from a batch is a valid answer.
 
 ## Rewrite each kept row
 
 Follow the compression rules and the "Preferred shorter wording" examples: number first, one development per row,
-every model-moving figure kept and bolded with `**`, assumptions and background cut, about 15–35 words. The origin
-is in `primary_source`; do not repeat broker names or report titles in the text unless needed to tell a forecast
+the one or two model-moving figures kept and bolded with `**`, assumptions, background and secondary comparisons
+cut. Aim for 12–25 words; never more than 35. When a row holds more facts than fit, keep the one that changes the
+forecast and drop the rest. The origin is in `primary_source`; do not repeat broker names or report titles in the text unless needed to tell a forecast
 from an actual. Every number and claim in the new text must appear in `source_quotes`; never add a figure, basis
-or inference. If the row bundles a kept fact with a cut estimate, keep only the fact. If a row cannot be shortened
-without losing meaning, keep the longer wording.
+or inference. If the row bundles a kept fact with a cut estimate, keep only the fact. Never cut a qualifier that changes
+meaning (target vs actual, basis not specified, unconfirmed report).
 
 Do not change `field_key`, `field_impact` or `source_type` unless the rewrite removes the part they described;
 then set them to match what remains and say so in `note`.
