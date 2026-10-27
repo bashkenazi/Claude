@@ -131,7 +131,8 @@ Spawn `sellside-pdf-extractor` subagents with the Agent tool, `concurrency` at a
 Each prompt gives: the absolute path of `$WORK/rules-pack.md`, the absolute repo path of
 `jobs/sellside-extractor/hermes-reference.md`, the catalog slice, and the batch's files (`drive_item_id`, `uri`,
 `file_name`, `folder_path`). Ask for the JSON contract in the agent file and nothing else. Save each reply verbatim
-to `$WORK/out/<batch>.json` (strip a surrounding code fence if present).
+to `$WORK/out/<batch>.json` (strip a surrounding code fence if present). When the Agent result points to a
+transcript file, extract the final reply from it with a short script instead of re-typing the JSON.
 
 If the subagent type is not available, stop and report it; do not extract in the main session.
 
@@ -148,6 +149,10 @@ If the subagent type is not available, stop and report it; do not extract in the
    anything not in the slice). Subagent IDs are proposals: if yours differs, use yours and note it; if none
    resolves, the row is held "mapping unresolved: <ticker> <company>". Never invent an ID or create a `research`
    record.
+   **Alias groups.** The directory holds several IDs for some companies (e.g. SAP 65/768/772, APPF 688/310,
+   4062 JT 87 / 4062 JP 717, MU 15/773, NVDA 4/774). Use the canonical IDs in the agent file where listed;
+   otherwise pick the ID with the most `research_evidence` rows over the last 180 days (one batched count query),
+   tie → lowest ID. List the alias groups you resolved in the page's Inputs section.
 6. `publication_date_basis = filename_fallback` makes every row from that file held ("event_date is a filename
    fallback"), per the filter's load gate.
 7. Read each kept row against its quotes. You are the final admission judge under datapoint-filter: cut what fails

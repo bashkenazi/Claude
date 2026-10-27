@@ -48,7 +48,8 @@ Apply the rules pack. Where it is silent, these sell-side specifics apply (they 
   and the report states it), never the period described.
 - **source_type:** `sell_side` for broker research; `independent_research` for independent publishers (Cleveland
   Research, BlueFin, Edgewater and similar); `company` when the broker only relays a company disclosure (then
-  `primary_source` is the company disclosure and `secondary_source` is the broker report).
+  `primary_source` is the company disclosure and `secondary_source` is the broker report); `news` when the broker
+  only relays a press report such as Reuters, FT or Bloomberg (then `primary_source` is the article).
 - **primary_source / secondary_source:** primary is the origin, e.g. `Morgan Stanley — "MKS Inc.: Durability of
   growth", 2026-10-26` or `Morgan Stanley supply-chain checks`. Secondary is null when the broker is the origin.
 - **Cut, with a reason:** routine earnings prints or guide recaps vs consensus, consensus previews, ratings, price
@@ -91,7 +92,7 @@ Return **only** this JSON object, no prose before or after:
       "evidence_text": "…", "field_impact": "positive|negative|mixed",
       "event_date": "YYYY-MM-DD",
       "primary_source": "…", "secondary_source": null,
-      "source_type": "sell_side|independent_research|company",
+      "source_type": "sell_side|independent_research|company|news",
       "confidence": "high|medium|low",
       "source_quotes": ["exact excerpt", "…"], "page_hint": "p. 3",
       "disposition": "keep|hold", "hold_reason": null

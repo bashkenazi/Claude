@@ -17,7 +17,7 @@ FIELDS = ("research_id", "field_key", "evidence_text", "field_impact", "event_da
 VALIDATION_ONLY = ("ticker", "company", "source_quotes", "page_hint", "disposition", "hold_reason")
 FIELD_KEYS = {"growth_driver", "margin_driver", "competition", "shareholder_return", "tam", "risk"}
 IMPACTS = {"positive", "negative", "mixed"}
-SOURCE_TYPES = {"sell_side", "independent_research", "company"}
+SOURCE_TYPES = {"sell_side", "independent_research", "company", "news"}
 CONFIDENCE = {"high", "medium", "low"}
 NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
 
