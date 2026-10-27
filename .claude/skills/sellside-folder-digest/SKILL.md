@@ -149,7 +149,8 @@ types register only when a session starts, so a type added mid-session is not vi
    the quotes do not support makes the row a cut ("unsupported number").
 5. **Re-resolve `research_id`** for every row from `ticker`/`company` against the directory (one batched query for
    anything not in the slice). Subagent IDs are proposals: if yours differs, use yours and note it; if none
-   resolves, the row is held "mapping unresolved: <ticker> <company>". Never invent an ID or create a `research`
+   resolves, the row is left out (not held, not loaded) and its ticker is listed once under "Unresolved" in the page's
+   Inputs section. Never invent an ID or create a `research`
    record.
    **Alias groups.** The directory holds several IDs for some companies (e.g. SAP 65/768/772, APPF 688/310,
    4062 JT 87 / 4062 JP 717, MU 15/773, NVDA 4/774). Use the canonical IDs in the agent file where listed;
