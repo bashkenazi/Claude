@@ -226,8 +226,10 @@ dates as YYYY-MM-DD. Sections, omitting any that would be empty except contradic
    inflections; up to 5 themes; contradictions (or "no thesis stress today"); supply/demand state changes;
    revisions (≤ 5); new names or gaps (≤ 3). Numbers first.
 2. **Ticker summary:** ticker | loaded | held | top datapoint.
-3. **Ticker toggles** (alphabetical): per row, header `dot **TICKER** | field_key | confidence`, the evidence text,
-   event date, primary/secondary source, source PDF file name and folder, then `SB #id` or `Held: reason`.
+3. **Ticker toggles** (alphabetical): one toggle per company, titled `TICKER — Company (n)`. Inside it, list every
+   row flat, with no nested toggles (Bobby, 2026-10-28): opening the company toggle shows all its datapoints. Per
+   row: header `dot **TICKER** | field_key | confidence`, the evidence text, then one line with event date,
+   source firm name and `SB #id` or `Held: reason`. List source PDF file names under Coverage, not per row.
 4. **Held, cut and duplicates:** each with its reason; duplicates name the stored ID.
 5. **Coverage:** files listed / new / changed / processed / pending / failed / re-filed copies skipped / non-PDF
    skipped, per date folder; any incomplete reads with pages.
