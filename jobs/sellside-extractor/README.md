@@ -68,4 +68,4 @@ Schema: [`migrations/20261027200000_sellside_ledger.sql`](migrations/20261027200
 ## Reference
 
 [`hermes-reference.md`](hermes-reference.md) documents the retired pipeline (schedules, prompts, dedup layers,
-historical rules). Reference only; datapoint-filter v1.2 governs where they differ.
+historical rules). Reference only; datapoint-filter v1.3.1 governs where they differ.
