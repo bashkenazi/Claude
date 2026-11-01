@@ -126,7 +126,7 @@
         return true;
       });
       document.getElementById('dp-count').textContent = list.length + ' rows';
-      body.innerHTML = list.length ? list.slice(0, st.shown).map(r => `<tr><td class="mono">${fmtD(r.event_date)}</td><td>${tk(r.ticker)}</td><td class="sub">${esc(r.field_key)}</td><td>${r.impact ? `<span class="chip ${signOf(r.impact) > 0 ? 's-positive' : signOf(r.impact) < 0 ? 's-negative' : ''}">${esc(r.impact)}</span>` : ''}</td><td class="wrap">${esc(r.text)}</td><td class="sub">${esc(r.primary_source || r.source_type)}</td></tr>`).join('')
+      body.innerHTML = list.length ? list.slice(0, st.shown).map(r => `<tr><td class="mono">${fmtD(r.event_date)}</td><td>${tk(r.ticker)}</td><td class="sub">${esc(r.field_key)}</td><td>${r.impact ? `<span class="chip ${signOf(r.impact) > 0 ? 's-positive' : signOf(r.impact) < 0 ? 's-negative' : ''}">${esc(r.impact)}</span>` : ''}</td><td class="wrap">${esc(r.text)}</td><td class="sub srcc" title="${esc(r.primary_source || '')}">${esc(String(r.primary_source || r.source_type || '').slice(0, 110))}${String(r.primary_source || '').length > 110 ? '…' : ''}<div class="mono" style="font-size:10.5px">${esc(r.source_type || '')}</div></td></tr>`).join('')
         : `<tr><td colspan="6" class="nores">No datapoints match. Widen the window or clear the search.</td></tr>`;
       more.hidden = list.length <= st.shown;
     }

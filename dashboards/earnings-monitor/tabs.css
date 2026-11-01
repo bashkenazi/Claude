@@ -44,6 +44,8 @@
 /* data tables */
 table.dt td, table.dt th { white-space: nowrap; }
 table.dt td.wrap { white-space: normal; min-width: 260px; }
+table.dt td.srcc { white-space: normal; min-width: 160px; max-width: 260px; }
+#v-datapoints table.dt td.wrap { min-width: 380px; }
 table.dt tbody tr:hover { background: var(--surface-2); }
 .more { align-self: center; }
 .btn { border: 1px solid var(--rule-2); background: var(--surface); border-radius: var(--r); padding: 6px 12px; cursor: pointer; font-size: 12.5px; }
