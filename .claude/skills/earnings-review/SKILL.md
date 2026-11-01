@@ -79,7 +79,7 @@ Feedback toggles control retrieval, layout and formatting. They cannot change ad
 4. Resolve the company in the Companies DB (name, local ticker, ADR ticker, Sector, Tier). Fetch the thesis page and read its **Key Metrics (rolling)** and **Thesis Tenet Tracker (rolling)** toggles if they exist (see §5 and §6).
 
 ### 2. Gather (fire these in parallel)
-- **Desk emails (Part A).** `outlook_email_search(folderName="Tech Specialist", query="<alias>", limit=25)`, one search per alias, paging until results pass print − 7 days. The tool refuses folder + query + date together, so filter dates yourself. Write the list to `emails.md` immediately. If hits are thin, list the folder by date for the window and scan subjects.
+- **Desk emails (Part A).** `outlook_email_search(folderName="Tech Specialist", query="<alias>", limit=25)`, one search per alias, paging until results pass print − 7 days. The tool refuses folder + query + date together, so filter dates yourself. Write the list to `emails.md` immediately. If hits are thin, list the folder by date for the window and scan subjects. To protect context, hand the reading in §3 to one general-purpose subagent: give it the message ids, the extraction list in §3 and the bogey-vs-St rule, and ask for numbers only, each tagged `Analyst (Firm), date`. Note that the folder listing can ignore `beforeDateTime`, so check dates yourself.
 - **Print date.** From the emails; confirm with FactSet CalendarEvents if ambiguous. Note ET timing for Asian/European names. Window = print − 7 days through print + 3 days.
 - **Press release.** One `web_search` for "<company> <quarter> results" for exact actuals, guidance ranges, prior-year figures and y/y %. Numbers only.
 - **Transcripts.** `srs_documents(tickers=[TICKER], sources=["quartr"], document_type=["company_transcript"], num_periods=6)`. Pick earnings calls by `fiscalYear` / `fiscalPeriod`, not conference transcripts. If the current call is not in Quartr yet, use AlphaSense (`alphasense_genai` / `alphasense_doc_search`) for that call and say so. If Bobby attaches transcript PDFs, use those.
@@ -131,7 +131,7 @@ One table of the metrics that matter most for this company, built to be updated 
 | IT Services | Bookings/TCV, book-to-bill, headcount and net adds, utilization, attrition |
 | Hyperscale / cloud | Cloud revenue growth cc, cloud GM, RPO, capex, AI run-rate |
 
-**Columns:** `Metric | Src | Q-4 | Q-3 | Q-2 | Q-1 | Q` (oldest left). Each cell = value plus change indicator vs the prior quarter (🟢▲ / 🔴▼ / 🟠▶ / ★ new / ○ dropped); the oldest column has no indicator. The indicator means better or worse for the thesis, not just direction; note under the table any row where up is bad. Bold the current-quarter column. No consensus or beat/miss in this table; that lives in Part A.
+**Columns:** `Metric (src) | Q-4 | Q-3 | Q-2 | Q-1 | Q` (oldest left). The source code goes in the row label, e.g. `GM NG (VA)`, so the table stays within the feedback page's 6-column limit. Each cell = value plus change indicator vs the prior quarter (🟢▲ / 🔴▼ / 🟠▶ / ★ new / ○ dropped); the oldest column has no indicator. The indicator means better or worse for the thesis, not just direction; note under the table any row where up is bad. Bold the current-quarter column. No consensus or beat/miss in this table; that lives in Part A.
 
 **Where the numbers come from** (the `Src` column carries the code):
 1. **VA** — Visible Alpha actuals via `va_company_data` (standard lines and company-detail KPIs). Default for every row VA carries. Compute GM from revenue and cost of revenue if VA has no GM line.
@@ -152,7 +152,9 @@ How management's language on each thesis tenet has moved over the last 5 quarter
 
 **Scoring** vs the prior quarter's quote: 🟢▲ improved (stronger word, raised number, pulled-in timing), 🔴▼ deteriorated (softer word, cut number, pushed-out timing, new caveat), 🟠▶ unchanged, ★ new, ○ dropped (management stopped mentioning a tenet it used to stress; treat as a possible negative). When close, use 🟠▶ and say why.
 
-**Table:** `# | Tenet | Q-4 | Q-3 | Q-2 | Q-1 | Q | What's changing | Notable`. Each quarter cell = indicator, the quote in quotation marks, citation. What's changing = one sentence on what the row's movement means. Notable = the call commentary that explains the move or gives forward color. Never paraphrase inside quotation marks.
+**Table:** `Tenet | Q-4 | Q-3 | Q-2 | Q-1 | Q` (6 columns; rank number in the tenet label). Each quarter cell = indicator, the quote in quotation marks, citation. Beneath the table, a **What's changing / Notable** bullet per tenet: the indicator, one sentence on what the row's movement means, and the call commentary that explains it or gives forward color. Never paraphrase inside quotation marks.
+
+**If the quote extraction fails** (the SRS analyze call can error on a single transcript), retry once, then take the current quarter's quotes from the call-notes pass (§7), which also returns cited verbatim phrases. Where no verbatim phrase exists, write a factual cell without quotation marks and say so under the table.
 
 ### 7. Call Notes (Part B)
 Write as a veteran equity-research PM focused on deep fundamental analysis, intellectual honesty and thesis-critical data. Source: the current earnings-call transcript (one `srs_documents_analyze` call asking for topic-by-topic notes and every Q&A exchange).
@@ -187,6 +189,7 @@ Write as a veteran equity-research PM focused on deep fundamental analysis, inte
 ### 9. Datapoints and Supabase load
 Apply the Datapoint Filter to candidates from the Call Notes and What's Changing (management actuals, new guidance or targets, new disclosures, changed language). Beats/misses vs consensus and bogeys are consensus restatements and fail admission; do not stage them.
 - `source_type`: `company` for transcript, slides and press release; `sell_side` for desk emails.
+- Expect most call facts to be stored already by other digests on the day after the print. Run the stored-evidence check before writing candidates, and stage only what is new.
 - Run the filter's stored-evidence check, load gate, insert and read-back exactly as written there. Publish the page before inserting.
 - On the page, each kept datapoint shows `SB #<id>` or `Held: <reason>`. Add a **📤 Supabase load** block to Inputs and a **📥 Staged rows — <TICKER>** toggle holding the JSON.
 
@@ -199,7 +202,7 @@ Real period labels throughout (3Q26, FY26; company fiscal labels where they diff
 2. **Quarter — Actual vs 📊 vs 🎯** — `| | Act | 📊 | Δ📊 | 🎯 | Δ🎯 |`; margins in bp with no y/y; 1–3 attributed bullets below.
 3. **Guide — Next Quarter** — same table with Guide (midpoint) in place of Act, a "Guide range" bullet and a lead line in words.
 4. **Guide — Fiscal Year** — `| | New | Prior | Chg | 📊 | Δ📊 | 🎯 | Δ🎯 |`; state raised / reiterated / lowered / initiated / not guided.
-5. **Estimate Revisions (Visible Alpha)** — recap only. Rows Rev / OP / EPS; per period `Pre→Post (y/y pre→post) | Δ`; one-line read. Capture per the Consensus change prompt toggle (Revisions Analysis from Pre-Q; Surprise Analysis, Estimate Focus = Consensus (PreQ)); read values off the screen with `get_page_text`. If `navigate` returns "No tab available", create a tab and retry once. If VA asks for a login or the retry fails, never enter credentials: mark `pending — VA capture`. Day of print = Pass 1; a rerun appends Pass 2, never overwrites. If VA does not carry the name, say so.
+5. **Estimate Revisions (Visible Alpha)** — recap only. Rows Rev / OP / EPS; per period `Pre→Post (y/y pre→post) | Δ`; one-line read. Capture per the Consensus change prompt toggle (Revisions Analysis from Pre-Q; Surprise Analysis, Estimate Focus = Consensus (PreQ)); read values off the screen with `get_page_text`. If `navigate` returns "No tab available", create a tab and retry once. If VA asks for a login or the retry fails, never enter credentials: mark `pending — VA capture`. If Chrome is not available at all (e.g. a cloud session), mark it pending and show the current VA consensus from `va_company_data` next to the pre-print desk 📊 as an **indicative** pre→post read, labelled as not from the Revisions screen. Day of print = Pass 1; a rerun appends Pass 2, never overwrites. If VA does not carry the name, say so.
 6. **Stock** — 1-day move (label pre-market / intraday if not closed); vs SOX/index if a desk cited it.
 7. **Buy-side feedback** — positioning into the print and the post-print reaction, from emails only; "no email coverage" if none.
 
@@ -217,10 +220,11 @@ Footer: `Origin: earnings-review skill · Generated YYYY-MM-DD HH:MM ET · ~XXXk
 
 ## Publish
 
-1. **Anthropic Output:** sub-page `[dot] Company (Ticker) — [Quarter] Earnings Review — YYYY-MM-DD`. If one exists for this company and quarter, update it (append the new pass) instead of creating a second.
+1. **Anthropic Output:** sub-page `[dot] Company (Ticker) — [Quarter] Earnings Review — YYYY-MM-DD`. Put the dot in the title only; do not also set a page icon (Notion shows both). Tables use Notion `<table>` with a `<colgroup>` of explicit widths (label ~100–120px, values ~95–105px, Δ ~60px), max 6 columns. If one exists for this company and quarter, update it (append the new pass) instead of creating a second.
 2. **Thesis page**, Earnings section (a `<details><summary>Earnings</summary>` toggle or an `## Earnings {toggle="true"}` heading; match the page). Insert with `notion-update-page` `update_content`, newest first:
-   - Quarter toggle `[Quarter] · [FY] · YYYY-MM-DD` (a toggle dated within ±5 days of the print is the same quarter). Inside it: **Street** (Part A, §1–4 in full, §5–7 may be condensed with a link) and **Call** (Part B §10–12, with a link to the Anthropic Output page).
-   - Replace the contents of the **Key Metrics (rolling)** and **Thesis Tenet Tracker (rolling)** toggles directly under Earnings with the new tables; create them on the first run.
+   - Quarter toggle titled the way the page already titles quarters (e.g. `3QFY26 2026-10-29` on INTC; otherwise `[Quarter] · [FY] · YYYY-MM-DD`). A toggle dated within ±5 days of the print is the same quarter. Inside it: **Street** (Part A summary and the key quarter/guide lines, with a link to the full page) and **Call** (What's Changing and Key Questions in short form, with a link to the full call notes on the Anthropic Output page). No deeper toggles.
+   - Replace the contents of the **Key Metrics (rolling)** and **Thesis Tenet Tracker (rolling)** toggles directly under Earnings with the new tables (pipe tables are fine here); create them on the first run.
+   - If the page has a **Quarterly record** ledger, add a one-line entry for the new quarter at the top.
    - Move quarter toggles older than ~18 months into an **Old** toggle.
    - Nest with tabs per the Global Feedback formatting rule. Never touch other sub-toggles (Summary, Claude, Chat, Preview vs Print).
 3. Run the checklist before writing. If a check fails and cannot be marked inline, return the draft in chat labeled **DRAFT** and do not publish.
