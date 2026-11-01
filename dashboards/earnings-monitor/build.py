@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Build the Earnings Monitor artifact page.
 
-Usage: python3 build.py <bobby.json> <rebecca.json> <out.html> [--since YYYY-MM-DD]
+Usage: python3 build.py <bobby.json> <rebecca.json> <out.html> [--since YYYY-MM-DD] [--tabs DIR]
+
+--tabs DIR   folder holding today.json, datapoints.json, screens.json, ideas.json, prep.json
+             (any missing file renders as an empty tab)
 
 bobby.json   -- earnings reviews extracted from the earnings-preview skill's Notion pages
 rebecca.json -- earnings recaps extracted from Rebecca's earnings-recap PDFs (SharePoint)
@@ -29,6 +32,11 @@ def main():
         i = args.index("--since")
         since = args[i + 1]
         del args[i:i + 2]
+    tabs = None
+    if "--tabs" in args:
+        i = args.index("--tabs")
+        tabs = Path(args[i + 1])
+        del args[i:i + 2]
     if len(args) != 3:
         raise SystemExit(__doc__)
     bobby, rebecca, out = load(args[0]), load(args[1]), Path(args[2])
@@ -40,9 +48,15 @@ def main():
         "bobby": bobby,
         "rebecca": rebecca,
     }
+    for name in ("today", "datapoints", "screens", "ideas", "prep"):
+        f = tabs / f"{name}.json" if tabs else None
+        payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
     # Escape "</" so the JSON can't close the <script> block.
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
-    html = (HERE / "template.html").read_text().replace("/*__DATA__*/", blob)
+    html = (HERE / "template.html").read_text()
+    html = html.replace("/*__EXTRA_CSS__*/", (HERE / "tabs.css").read_text())
+    html = html.replace("/*__EXTRA_JS__*/", (HERE / "tabs.js").read_text())
+    html = html.replace("/*__DATA__*/", blob)
     out.write_text(html)
     print(f"wrote {out} ({len(html):,} bytes): {len(bobby)} reviews, {len(rebecca)} recaps")
 
