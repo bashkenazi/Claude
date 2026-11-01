@@ -169,6 +169,7 @@ td.note { color: var(--muted); }
     <a href="#ideas">Ideas &amp; cycle</a>
     <a href="#prep">Prep &amp; calendar</a>
     <a href="#health">Skill health</a>
+    <a href="#sources">Sources</a>
     <a href="#method">Method</a>
   </nav>
   <div class="stamp" id="stamp"></div>
@@ -182,6 +183,7 @@ td.note { color: var(--muted); }
 <div class="view" data-view="ideas" id="v-ideas"></div>
 <div class="view" data-view="prep" id="v-prep"></div>
 <div class="view" data-view="health" id="v-health"></div>
+<div class="view" data-view="sources" id="v-sources"></div>
 <div class="view" data-view="earnings">
   <section class="panel" style="gap:10px">
     <span class="eyebrow">Earnings season · since <span id="since"></span></span>
@@ -216,6 +218,7 @@ td.note { color: var(--muted); }
       <li><b>Today</b> and <b>Themes</b>: the latest pages from the morning, research-folder, tech-email, SemiAnalysis, analyst-folder, AlphaSense and sell-side digest skills in Notion (Anthropic Output).</li>
       <li><b>Datapoints</b>: rows in Supabase <span class="mono">research_evidence</span> from the last 21 days, which every digest skill loads through the Datapoint Filter.</li>
       <li><b>Estimates &amp; screens</b>: the latest consensus-revisions and comps-screen pages. <b>Ideas &amp; cycle</b>: idea-generator, thesis-builder, industry-cycle and operating-comps outputs. <b>Prep &amp; calendar</b>: management-prep, analyst-day, print-tables and quarterly-review outputs, plus upcoming prints for your coverage.</li>
+      <li><b>Sources</b>: the source-credibility table from Rebecca's Tech Coverage Monitor, copied at each rebuild. "On this desk" counts citations on this page whose text names the same firm (and analyst, where her entry names one).</li>
       <li><b>Skill health</b>: the last time each skill published, counted from the outputs found above.</li>
       <li><b>Earnings</b>: earnings review pages from the earnings-preview skill (Notion, Anthropic Output; tone from the 🟢/🔴 title markers) and earnings recap PDFs from the earnings-recap skill (SharePoint, Research › Claude › Earnings Recaps; tone from the Summary label). Notes on the same ticker within three days are merged into one read: the tone is their average, bullets and table rows that repeat are shown once, and sources are combined. <b>Notes disagree</b> marks a print where one note is positive and another negative.</li>
       <li>Bullets and tables are condensed from the source documents. Use the links to read the full review or recap. This page is a snapshot that is rebuilt each weekday evening.</li>

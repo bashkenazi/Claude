@@ -3,7 +3,7 @@
 
 Usage: python3 build.py <bobby.json> <rebecca.json> <out.html> [--since YYYY-MM-DD] [--tabs DIR]
 
---tabs DIR   folder holding today.json, datapoints.json, screens.json, ideas.json, prep.json
+--tabs DIR   folder holding today.json, datapoints.json, screens.json, ideas.json, prep.json, sources.json
              (any missing file renders as an empty tab)
 
 bobby.json   -- earnings reviews extracted from the earnings-preview skill's Notion pages
@@ -48,7 +48,7 @@ def main():
         "bobby": bobby,
         "rebecca": rebecca,
     }
-    for name in ("today", "datapoints", "screens", "ideas", "prep"):
+    for name in ("today", "datapoints", "screens", "ideas", "prep", "sources"):
         f = tabs / f"{name}.json" if tabs else None
         payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
     # Escape "</" so the JSON can't close the <script> block.

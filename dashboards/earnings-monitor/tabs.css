@@ -84,3 +84,11 @@ table.dt tbody tr:hover { background: var(--surface-2); }
 .attr::before { content: "— "; }
 button.tkbtn { border: 0; cursor: pointer; font: inherit; font-family: var(--f-mono); font-weight: 600; font-size: 11.5px; }
 button.tkbtn:hover { outline: 1px solid var(--rule-2); }
+
+/* credibility */
+.dots { display: inline-flex; gap: 2px; vertical-align: middle; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--rule-2); }
+.dots i.on { background: var(--accent); border-color: var(--accent); }
+table.sortable th[data-k] { cursor: pointer; user-select: none; }
+table.sortable th[aria-sort="ascending"]::after { content: " ▲"; }
+table.sortable th[aria-sort="descending"]::after { content: " ▼"; }
