@@ -62,7 +62,7 @@ Feedback toggles control retrieval, layout and formatting. They cannot change ad
 
 ## Named overrides
 
-- **2026-11-01 — Auto-load scope.** This skill's call datapoints are in scope of the filter's Auto-load policy, as if it were listed there. "stage only", "dry run" or "don't upload" turn it off for a run.
+- **Auto-load:** this skill is listed in the Datapoint Filter's Auto-load policy (filter v1.3.2, 2026-11-01), so qualifying call datapoints load automatically. "stage only", "dry run" or "don't upload" turn it off for a run.
 - **2026-11-01 — Destination.** Anthropic Output plus the thesis page (not Hermes Output or a canonical preview page), whatever the feedback page says.
 
 ## Inputs
