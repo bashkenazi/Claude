@@ -144,6 +144,14 @@ td.note { color: var(--muted); }
 .mg > div { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
 .mg > div > details:first-child { border-top: 0; padding-top: 0; }
 @media (min-width: 980px) { .mg { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+.assess { gap: 14px; border-color: var(--rule-2); }
+.astats { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.astats div { display: flex; flex-direction: column; }
+.astats .v { font-size: 20px; font-weight: 600; }
+.astats .l { font-size: 12px; color: var(--muted); }
+.agrid { display: grid; gap: 16px 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
+.agrid > div { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.c-pos { color: var(--pos); } .c-neg { color: var(--neg); }
 .tenets { display: flex; flex-direction: column; gap: 4px; }
 .tenets div { display: flex; gap: 8px; align-items: baseline; font-size: 13px; }
 .tenets .g { font-family: var(--f-mono); width: 14px; flex: none; text-align: center; }
@@ -191,10 +199,13 @@ td.note { color: var(--muted); }
     <p class="lede">One read per print, newest first: takeaways, what's changing, numbers vs Street, thesis tenets and sources merged from every review and recap on the name. Cards are highlighted where the notes disagree.</p>
   </section>
 
+  <section class="panel assess" id="assess" hidden></section>
+
   <div class="summary" id="summary"></div>
 
   <div class="ctl" role="group" aria-label="Filters">
     <label for="q">Search <input type="search" id="q" placeholder="Ticker or company"></label>
+    <label for="co">Company <select id="co"><option value="">All companies</option></select></label>
     <label for="sector">Sector <select id="sector"><option value="">All</option></select></label>
     <div class="seg" id="tone" aria-label="Tone">
       <button type="button" data-v="all" aria-pressed="true">Any tone</button>
@@ -294,11 +305,28 @@ td.note { color: var(--muted); }
     '</div><div class="mixkey">' + mix.filter(([, n]) => n).map(([k, n]) => `<span><i style="background:${COLOR[k]}"></i>${LABEL[k]} ${n}</span>`).join('') + '</div></div>';
   function stat(v, l, c) { return `<div class="stat"><span class="v"${c ? ` style="color:${c}"` : ''}>${v}</span><span class="l">${l}</span></div>`; }
 
+  // ---- combined assessment ----
+  const AS = D.earn_assess;
+  if (AS && AS.headline) {
+    const el = document.getElementById('assess'); el.hidden = false;
+    const li = xs => (xs || []).map(x => typeof x === 'string' ? `<li>${at(x)}</li>` : `<li><b class="mono">${esc(x.ticker)}</b> ${at(x.text)}</li>`).join('');
+    const st2 = AS.stats || {};
+    el.innerHTML = `<div class="panel-h"><div><span class="eyebrow">Combined earnings assessment · ${esc(AS.window || '')}</span><h2 style="margin-top:4px">${esc(AS.headline)}</h2></div><span class="muted" style="font-size:12px">${esc(AS.basis || '')}</span></div>
+      ${Object.keys(st2).length ? `<div class="astats">${Object.entries(st2).map(([k, v]) => `<div><span class="v mono">${esc(v)}</span><span class="l">${esc(k)}</span></div>`).join('')}</div>` : ''}
+      ${AS.summary && AS.summary.length ? `<ul class="b">${li(AS.summary)}</ul>` : ''}
+      <div class="agrid">
+        ${AS.by_sector && AS.by_sector.length ? `<div><h3>By sector</h3><table><thead><tr><th>Sector</th><th class="n">Prints</th><th>Tone</th><th>Read</th></tr></thead><tbody>${AS.by_sector.map(r => `<tr><td>${esc(r.sector)}</td><td class="n">${esc(r.n)}</td><td>${r.tone ? `<span class="chip s-${esc(r.tone)}">${LABEL[r.tone] || esc(r.tone)}</span>` : ''}</td><td class="note">${esc(r.note)}</td></tr>`).join('')}</tbody></table></div>` : ''}
+        ${AS.positives && AS.positives.length ? `<div><h3 class="c-pos">Strongest prints</h3><ul class="b">${li(AS.positives)}</ul></div>` : ''}
+        ${AS.negatives && AS.negatives.length ? `<div><h3 class="c-neg">Weakest prints</h3><ul class="b">${li(AS.negatives)}</ul></div>` : ''}
+        ${AS.themes && AS.themes.length ? `<div><h3>Cross-cutting themes</h3><ul class="b">${li(AS.themes)}</ul></div>` : ''}
+      </div>`;
+  }
+
   // ---- filters ----
   const sectors = [...new Set(items.map(i => i.sector))].sort();
   const sel = document.getElementById('sector');
   sectors.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
-  const st = { q: '', sector: '', tone: 'all' };
+  const st = { q: '', sector: '', tone: 'all', co: '' };
   try { const saved = JSON.parse(localStorage.getItem('em-filters2') || 'null'); if (saved) Object.assign(st, saved, { q: '' }); } catch (e) {}
   sel.value = sectors.includes(st.sector) ? st.sector : (st.sector = '');
   const segEl = document.getElementById('tone');
@@ -308,7 +336,12 @@ td.note { color: var(--muted); }
   });
   document.getElementById('q').addEventListener('input', e => { st.q = e.target.value.trim().toLowerCase(); render(); });
   sel.addEventListener('change', e => { st.sector = e.target.value; render(); });
+  const coSel = document.getElementById('co');
+  items.slice().sort((a, b) => String(a.company || a.ticker).localeCompare(String(b.company || b.ticker))).forEach(it => {
+    const o = document.createElement('option'); o.value = it.ticker + '|' + it.date; o.textContent = (it.company || it.ticker) + ' (' + it.ticker + ') · ' + it.quarter; coSel.appendChild(o); });
+  coSel.addEventListener('change', e => { st.co = e.target.value; render(); if (st.co) document.getElementById('feed').scrollIntoView({ block: 'start' }); });
   function pass(it) {
+    if (st.co && st.co !== it.ticker + '|' + it.date) return false;
     if (st.q && !(it.ticker + ' ' + it.company).toLowerCase().includes(st.q)) return false;
     if (st.sector && it.sector !== st.sector) return false;
     if (st.tone === 'pos' && !(it.score >= 0.5)) return false;

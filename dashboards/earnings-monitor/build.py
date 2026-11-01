@@ -48,7 +48,7 @@ def main():
         "bobby": bobby,
         "rebecca": rebecca,
     }
-    for name in ("today", "datapoints", "screens", "ideas", "prep", "sources"):
+    for name in ("today", "datapoints", "screens", "ideas", "prep", "sources", "earn_assess"):
         f = tabs / f"{name}.json" if tabs else None
         payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
     # Escape "</" so the JSON can't close the <script> block.
