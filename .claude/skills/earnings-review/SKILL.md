@@ -1,6 +1,6 @@
 ---
 name: earnings-review
-description: Single-name earnings review for Bobby Ashkenazi (SRS) that merges Bobby's earnings preview/recap with Rebecca's (RC) earnings recap. Part A is Bobby's Street review (bar vs 📊 consensus and 🎯 buy-side bogeys, quarter, next-quarter and FY guide, Visible Alpha revisions, stock, buy-side feedback). Part B adds RC's company detail (What's Changing, a rolling Key Metrics table with Notable drivers, the Thesis Tenet Tracker over the last 5 quarters, call notes in the PM script, Key Questions). Built to run across the whole Companies DB universe and roll forward each quarter. Publishes under Anthropic Output, files to the company's thesis page and auto-loads qualifying call datapoints to Supabase. Use when Bobby says "run earnings review on [ticker]", "earnings review for [ticker]", "full earnings review", "review the [ticker] print", "update the earnings review for [ticker]", or asks for both the Street read and the call notes for one company's quarter.
+description: Single-name earnings review for Bobby Ashkenazi (SRS) that merges Bobby's earnings preview/recap with Rebecca's (RC) earnings recap. Part A is Bobby's Street review (bar vs 📊 consensus and 🎯 buy-side bogeys, quarter, next-quarter and FY guide, Visible Alpha revisions, stock, buy-side feedback). Part B adds RC's company detail (a rolling Key Metrics table with Notable drivers, the Thesis Tenet Tracker over the last 5 quarters, call notes in the PM script, then What's Changing and Key Questions at the end). Built to run across the whole Companies DB universe and roll forward each quarter. Publishes under Anthropic Output, files to the company's thesis page and auto-loads qualifying call datapoints to Supabase. Use when Bobby says "run earnings review on [ticker]", "earnings review for [ticker]", "full earnings review", "review the [ticker] print", "update the earnings review for [ticker]", or asks for both the Street read and the call notes for one company's quarter.
 ---
 
 # Earnings Review
@@ -204,10 +204,10 @@ Real period labels throughout (3Q26, FY26; company fiscal labels where they diff
 7. **Buy-side feedback** — positioning into the print and the post-print reaction, from emails only; "no email coverage" if none.
 
 **Part B — Company Detail**
-8. **What's Changing**
-9. **Key Metrics — last 5 quarters** (table, then Notable bullets)
-10. **Thesis Tenet Tracker — last 5 quarters**
-11. **Call Notes**
+8. **Key Metrics — last 5 quarters** (table, then Notable bullets)
+9. **Thesis Tenet Tracker — last 5 quarters**
+10. **Call Notes**
+11. **What's Changing**
 12. **Key Questions**
 13. **Datapoints** (kept rows with `SB #` / `Held:`) and 📥 staged-row toggle
 
@@ -219,7 +219,7 @@ Footer: `Origin: earnings-review skill · Generated YYYY-MM-DD HH:MM ET · ~XXXk
 
 1. **Anthropic Output:** sub-page `[dot] Company (Ticker) — [Quarter] Earnings Review — YYYY-MM-DD`. If one exists for this company and quarter, update it (append the new pass) instead of creating a second.
 2. **Thesis page**, Earnings section (a `<details><summary>Earnings</summary>` toggle or an `## Earnings {toggle="true"}` heading; match the page). Insert with `notion-update-page` `update_content`, newest first:
-   - Quarter toggle `[Quarter] · [FY] · YYYY-MM-DD` (a toggle dated within ±5 days of the print is the same quarter). Inside it: **Street** (Part A, §1–4 in full, §5–7 may be condensed with a link) and **Call** (Part B §8 and §11–12, with a link to the Anthropic Output page).
+   - Quarter toggle `[Quarter] · [FY] · YYYY-MM-DD` (a toggle dated within ±5 days of the print is the same quarter). Inside it: **Street** (Part A, §1–4 in full, §5–7 may be condensed with a link) and **Call** (Part B §10–12, with a link to the Anthropic Output page).
    - Replace the contents of the **Key Metrics (rolling)** and **Thesis Tenet Tracker (rolling)** toggles directly under Earnings with the new tables; create them on the first run.
    - Move quarter toggles older than ~18 months into an **Old** toggle.
    - Nest with tabs per the Global Feedback formatting rule. Never touch other sub-toggles (Summary, Claude, Chat, Preview vs Print).
