@@ -75,3 +75,12 @@ table.dt tbody tr:hover { background: var(--surface-2); }
 .cal-day .dd { font-weight: 650; font-size: 13px; }
 .cal-day .dd span { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
 @media (max-width: 520px) { .cal-day { grid-template-columns: 1fr; gap: 4px; } }
+
+/* sources */
+.srcl { font-size: 12px; color: var(--muted); display: flex; gap: 4px 8px; flex-wrap: wrap; align-items: baseline; }
+.srcl span { font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; font-weight: 650; color: var(--ink-2); }
+.srcb { color: var(--ink-2); font-weight: 600; }
+.attr { font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+.attr::before { content: "— "; }
+button.tkbtn { border: 0; cursor: pointer; font: inherit; font-family: var(--f-mono); font-weight: 600; font-size: 11.5px; }
+button.tkbtn:hover { outline: 1px solid var(--rule-2); }
