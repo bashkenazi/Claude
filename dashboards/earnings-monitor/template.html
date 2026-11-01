@@ -140,6 +140,10 @@ td.n { font-family: var(--f-mono); font-variant-numeric: tabular-nums; white-spa
 th.n { text-align: right; }
 td.up { color: var(--pos); } td.dn { color: var(--neg); }
 td.note { color: var(--muted); }
+.mg { display: grid; gap: 12px 28px; }
+.mg > div { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.mg > div > details:first-child { border-top: 0; padding-top: 0; }
+@media (min-width: 980px) { .mg { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
 .tenets { display: flex; flex-direction: column; gap: 4px; }
 .tenets div { display: flex; gap: 8px; align-items: baseline; font-size: 13px; }
 .tenets .g { font-family: var(--f-mono); width: 14px; flex: none; text-align: center; }
@@ -182,7 +186,7 @@ td.note { color: var(--muted); }
   <section class="panel" style="gap:10px">
     <span class="eyebrow">Earnings season · since <span id="since"></span></span>
     <h1>Recent prints</h1>
-    <p class="lede">Bobby's earnings reviews and Rebecca's earnings recaps side by side, newest first. Cards are highlighted where the two reads point in opposite directions.</p>
+    <p class="lede">One read per print, newest first: takeaways, what's changing, numbers vs Street, thesis tenets and sources merged from every review and recap on the name. Cards are highlighted where the notes disagree.</p>
   </section>
 
   <div class="summary" id="summary"></div>
@@ -190,18 +194,12 @@ td.note { color: var(--muted); }
   <div class="ctl" role="group" aria-label="Filters">
     <label for="q">Search <input type="search" id="q" placeholder="Ticker or company"></label>
     <label for="sector">Sector <select id="sector"><option value="">All</option></select></label>
-    <div class="seg" id="cov" aria-label="Coverage">
-      <button type="button" data-v="all" aria-pressed="true">All</button>
-      <button type="button" data-v="both" aria-pressed="false">Both</button>
-      <button type="button" data-v="bobby" aria-pressed="false">Bobby</button>
-      <button type="button" data-v="rebecca" aria-pressed="false">Rebecca</button>
-    </div>
     <div class="seg" id="tone" aria-label="Tone">
       <button type="button" data-v="all" aria-pressed="true">Any tone</button>
       <button type="button" data-v="pos" aria-pressed="false">Positive</button>
       <button type="button" data-v="mixed" aria-pressed="false">Mixed</button>
       <button type="button" data-v="neg" aria-pressed="false">Negative</button>
-      <button type="button" data-v="split" aria-pressed="false">Split views</button>
+      <button type="button" data-v="split" aria-pressed="false">Notes disagree</button>
     </div>
     <span class="count" id="count"></span>
   </div>
@@ -219,10 +217,7 @@ td.note { color: var(--muted); }
       <li><b>Datapoints</b>: rows in Supabase <span class="mono">research_evidence</span> from the last 21 days, which every digest skill loads through the Datapoint Filter.</li>
       <li><b>Estimates &amp; screens</b>: the latest consensus-revisions and comps-screen pages. <b>Ideas &amp; cycle</b>: idea-generator, thesis-builder, industry-cycle and operating-comps outputs. <b>Prep &amp; calendar</b>: management-prep, analyst-day, print-tables and quarterly-review outputs, plus upcoming prints for your coverage.</li>
       <li><b>Skill health</b>: the last time each skill published, counted from the outputs found above.</li>
-      <li><b>Bobby</b>: earnings review pages written by the earnings-preview skill to Notion (Work Process › Anthropic › Anthropic Output). The tone comes from the 🟢/🔴 markers in each page title.</li>
-      <li><b>Rebecca</b>: earnings recap PDFs written by the earnings-recap skill to SharePoint (SRS › Research › Rebecca › Claude › Earnings Recaps). The tone is her Summary label, for example "mixed leaning positive" counts as positive.</li>
-      <li>Reviews and recaps are paired when the ticker matches and the print dates are within three days of each other.</li>
-      <li><b>Aligned</b> means both reads point the same way. <b>Split</b> means one is positive and the other negative. <b>Partly aligned</b> means one side is mixed.</li>
+      <li><b>Earnings</b>: earnings review pages from the earnings-preview skill (Notion, Anthropic Output; tone from the 🟢/🔴 title markers) and earnings recap PDFs from the earnings-recap skill (SharePoint, Research › Claude › Earnings Recaps; tone from the Summary label). Notes on the same ticker within three days are merged into one read: the tone is their average, bullets and table rows that repeat are shown once, and sources are combined. <b>Notes disagree</b> marks a print where one note is positive and another negative.</li>
       <li>Bullets and tables are condensed from the source documents. Use the links to read the full review or recap. This page is a snapshot that is rebuilt each weekday evening.</li>
     </ul>
     <p class="muted" id="build"></p>
@@ -238,30 +233,43 @@ td.note { color: var(--muted); }
   const LABEL = { very_positive: 'Very positive', positive: 'Positive', mixed: 'Mixed', negative: 'Negative', very_negative: 'Very negative' };
   const COLOR = { very_positive: 'var(--vpos)', positive: 'var(--pos)', mixed: 'var(--warn)', negative: 'var(--neg)', very_negative: 'var(--vneg)' };
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const at = s => esc(s).replace(/\s*\[([^\]]{2,90})\]\s*$/, ' <span class="attr">$1</span>');
   const fmtDay = iso => { const d = new Date(iso + 'T12:00:00'); return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }); };
+  const A = x => Array.isArray(x) ? x : [];
 
-  // ---- pair reviews and recaps ----
+  // ---- merge every note on the same print into one read ----
   const norm = t => String(t || '').toUpperCase().replace(/\s+(US|UW|UN|UQ)$/, '').trim();
   const dnum = s => Date.parse(s + 'T00:00:00Z') / 864e5;
-  const items = [];
-  const R = (D.rebecca || []).slice();
-  (D.bobby || []).forEach(b => {
-    const i = R.findIndex(r => norm(r.ticker) === norm(b.ticker) && Math.abs(dnum(r.report_date) - dnum(b.report_date)) <= 3);
-    const r = i >= 0 ? R.splice(i, 1)[0] : null;
-    items.push({ b, r });
+  const notes = [].concat(A(D.bobby).map(x => Object.assign({ kind: 'review' }, x)), A(D.rebecca).map(x => Object.assign({ kind: 'recap' }, x)));
+  const groups = [];
+  notes.forEach(n => {
+    const g = groups.find(g => norm(g[0].ticker) === norm(n.ticker) && Math.abs(dnum(g[0].report_date) - dnum(n.report_date)) <= 3);
+    g ? g.push(n) : groups.push([n]);
   });
-  R.forEach(r => items.push({ b: null, r }));
-  items.forEach(it => {
-    const a = it.b || it.r;
-    it.ticker = a.ticker; it.company = (it.b && it.b.company) || (it.r && it.r.company);
-    it.quarter = (it.b && it.b.quarter) || (it.r && it.r.quarter);
-    it.qAlt = it.b && it.r && it.b.quarter !== it.r.quarter ? it.r.quarter : null;
-    it.date = [it.b && it.b.report_date, it.r && it.r.report_date].filter(Boolean).sort().pop();
-    it.sector = (it.b && it.b.sector) || (it.r && it.r.sector) || 'Other';
-    const sb = it.b ? SCORE[it.b.sentiment] : null, sr = it.r ? SCORE[it.r.sentiment] : null;
-    it.agree = (sb == null || sr == null) ? null : (sb * sr < 0 ? 'split' : (sb === 0 || sr === 0) && sb !== sr ? 'partial' : 'aligned');
-    const ss = [sb, sr].filter(v => v != null);
-    it.tone = ss.length ? ss.reduce((x, y) => x + y, 0) / ss.length : 0;
+  const words = s => new Set(String(s).toLowerCase().replace(/\[[^\]]*\]/g, '').match(/[a-z0-9$%.+-]{3,}/g) || []);
+  const similar = (a, b) => { const A1 = words(a), B1 = words(b); if (!A1.size || !B1.size) return false; let n = 0; A1.forEach(w => B1.has(w) && n++); return n / Math.min(A1.size, B1.size) >= 0.6; };
+  const union = lists => { const out = []; lists.forEach(l => A(l).forEach(s => { if (!out.some(o => similar(o, s))) out.push(s); })); return out; };
+  const uniq = xs => xs.filter((v, i, a) => v && a.indexOf(v) === i);
+  const toneOf = v => v >= 1.5 ? 'very_positive' : v >= 0.5 ? 'positive' : v > -0.5 ? 'mixed' : v > -1.5 ? 'negative' : 'very_negative';
+
+  const items = groups.map(g => {
+    g.sort((a, b) => (a.kind === 'review' ? -1 : 1));
+    const sc = g.map(n => SCORE[n.sentiment]).filter(v => v != null);
+    const avg = sc.length ? sc.reduce((a, b) => a + b, 0) / sc.length : 0;
+    const differ = sc.some(v => v > 0) && sc.some(v => v < 0);
+    const heads = uniq(g.map(n => n.headline));
+    const nums = []; g.forEach(n => A(n.numbers).forEach(r => { if (!nums.some(o => similar(o.metric, r.metric))) nums.push(r); }));
+    return {
+      ticker: g[0].ticker, company: g.map(n => n.company).find(Boolean), quarter: uniq(g.map(n => n.quarter)).join(' / '),
+      date: g.map(n => n.report_date).sort().pop(), sector: g.map(n => n.sector).find(Boolean) || 'Other',
+      tone: toneOf(avg), score: avg, differ, labels: uniq(g.map(n => n.sentiment_label)).filter(l => l.toLowerCase() !== (LABEL[toneOf(avg)] || '').toLowerCase()),
+      headline: heads[0] || '', summary: union([heads.slice(1)].concat(g.map(n => n.summary))).slice(0, 9),
+      whats_changing: union(g.map(n => n.whats_changing)).slice(0, 7), numbers: nums.slice(0, 10),
+      tenets: [].concat(...g.map(n => A(n.tenets))), questions: union(g.map(n => n.questions)).slice(0, 4),
+      reaction: g.map(n => n.reaction).find(Boolean), sources: uniq([].concat(...g.map(n => A(n.sources)))),
+      links: g.filter(n => n.url).map(n => ({ url: n.url, label: n.kind === 'review' ? 'Notion review' : 'Recap PDF' })),
+      n: g.length
+    };
   });
   items.sort((x, y) => (y.date || '').localeCompare(x.date || '') || x.ticker.localeCompare(y.ticker));
   window.__EARN = items;
@@ -271,16 +279,14 @@ td.note { color: var(--muted); }
   const built = D.built_at ? new Date(D.built_at) : null;
   const stampTxt = built ? 'Updated ' + built.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
   document.getElementById('stamp').textContent = stampTxt;
-  document.getElementById('build').textContent = stampTxt + (stampTxt ? ' · ' : '') + (D.bobby || []).length + ' reviews · ' + (D.rebecca || []).length + ' recaps';
-
-  const both = items.filter(i => i.b && i.r).length, splits = items.filter(i => i.agree === 'split').length;
-  const all = [].concat(D.bobby || [], D.rebecca || []);
-  const mix = Object.keys(SCORE).map(k => [k, all.filter(x => x.sentiment === k).length]);
-  const tot = all.length || 1;
+  document.getElementById('build').textContent = stampTxt + (stampTxt ? ' · ' : '') + items.length + ' prints from ' + notes.length + ' notes';
+  const cnt = f => items.filter(f).length;
+  const mix = Object.keys(SCORE).map(k => [k, cnt(i => i.tone === k)]);
+  const tot = items.length || 1;
   document.getElementById('summary').innerHTML =
-    stat(items.length, 'Prints covered') + stat((D.bobby || []).length, 'Bobby reviews') + stat((D.rebecca || []).length, 'Rebecca recaps') +
-    stat(both, 'Covered by both') + stat(splits, 'Split views', splits ? 'var(--warn)' : '') +
-    '<div class="stat" style="min-width:min(100%,260px)"><span class="l">Tone across all notes</span><div class="mixbar">' +
+    stat(items.length, 'Prints covered') + stat(cnt(i => i.score >= 0.5), 'Positive', 'var(--pos)') + stat(cnt(i => Math.abs(i.score) < 0.5), 'Mixed', 'var(--warn)') +
+    stat(cnt(i => i.score <= -0.5), 'Negative', 'var(--neg)') + stat(cnt(i => i.differ), 'Notes disagree') +
+    '<div class="stat" style="min-width:min(100%,260px)"><span class="l">Tone across prints</span><div class="mixbar">' +
     mix.map(([k, n]) => n ? `<i style="width:${(n / tot * 100).toFixed(2)}%;background:${COLOR[k]}" title="${LABEL[k]}: ${n}"></i>` : '').join('') +
     '</div><div class="mixkey">' + mix.filter(([, n]) => n).map(([k, n]) => `<span><i style="background:${COLOR[k]}"></i>${LABEL[k]} ${n}</span>`).join('') + '</div></div>';
   function stat(v, l, c) { return `<div class="stat"><span class="v"${c ? ` style="color:${c}"` : ''}>${v}</span><span class="l">${l}</span></div>`; }
@@ -289,84 +295,55 @@ td.note { color: var(--muted); }
   const sectors = [...new Set(items.map(i => i.sector))].sort();
   const sel = document.getElementById('sector');
   sectors.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
-  const st = { q: '', sector: '', cov: 'all', tone: 'all' };
-  try { const saved = JSON.parse(localStorage.getItem('em-filters') || 'null'); if (saved) Object.assign(st, saved, { q: '' }); } catch (e) {}
+  const st = { q: '', sector: '', tone: 'all' };
+  try { const saved = JSON.parse(localStorage.getItem('em-filters2') || 'null'); if (saved) Object.assign(st, saved, { q: '' }); } catch (e) {}
   sel.value = sectors.includes(st.sector) ? st.sector : (st.sector = '');
-  function bindSeg(id, key) {
-    const el = document.getElementById(id);
-    el.querySelectorAll('button').forEach(b => {
-      b.setAttribute('aria-pressed', String(b.dataset.v === st[key]));
-      b.addEventListener('click', () => { st[key] = b.dataset.v; el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); render(); });
-    });
-  }
-  bindSeg('cov', 'cov'); bindSeg('tone', 'tone');
+  const segEl = document.getElementById('tone');
+  segEl.querySelectorAll('button').forEach(b => {
+    b.setAttribute('aria-pressed', String(b.dataset.v === st.tone));
+    b.addEventListener('click', () => { st.tone = b.dataset.v; segEl.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); render(); });
+  });
   document.getElementById('q').addEventListener('input', e => { st.q = e.target.value.trim().toLowerCase(); render(); });
   sel.addEventListener('change', e => { st.sector = e.target.value; render(); });
-
   function pass(it) {
     if (st.q && !(it.ticker + ' ' + it.company).toLowerCase().includes(st.q)) return false;
     if (st.sector && it.sector !== st.sector) return false;
-    if (st.cov === 'both' && !(it.b && it.r)) return false;
-    if (st.cov === 'bobby' && !it.b) return false;
-    if (st.cov === 'rebecca' && !it.r) return false;
-    if (st.tone === 'pos' && !(it.tone > 0.25)) return false;
-    if (st.tone === 'neg' && !(it.tone < -0.25)) return false;
-    if (st.tone === 'mixed' && !(Math.abs(it.tone) <= 0.25)) return false;
-    if (st.tone === 'split' && it.agree !== 'split') return false;
+    if (st.tone === 'pos' && !(it.score >= 0.5)) return false;
+    if (st.tone === 'neg' && !(it.score <= -0.5)) return false;
+    if (st.tone === 'mixed' && !(Math.abs(it.score) < 0.5)) return false;
+    if (st.tone === 'split' && !it.differ) return false;
     return true;
   }
 
   // ---- render ----
-  const AGREE = { aligned: ['a-aligned', 'Aligned'], split: ['a-split', 'Split view'], partial: ['a-partial', 'Partly aligned'] };
   const TEN = { improved: ['▲', 'improved'], deteriorated: ['▼', 'deteriorated'], 'no change': ['▶', 'nochange'], new: ['★', 'new'], dropped: ['○', 'dropped'] };
-  const pill = s => s ? `<span class="chip s-${esc(s)}">${LABEL[s] || esc(s)}</span>` : '';
   const dir = v => { const s = String(v || '').trim().toLowerCase(); if (/^\+|beat|above|raise/.test(s)) return 'up'; if (/^[-−–]|miss|below|cut|lower/.test(s)) return 'dn'; return ''; };
-
-  function side(x, who, linkLabel) {
-    if (!x) return `<div class="col"><div class="col-h"><span class="who">${who}</span></div><p class="empty">No ${who === 'Bobby' ? 'review' : 'recap'} for this print yet.</p></div>`;
-    let h = `<div class="col"><div class="col-h"><span class="who">${who}</span>${pill(x.sentiment)}`;
-    if (x.sentiment_label && x.sentiment_label.toLowerCase() !== (LABEL[x.sentiment] || '').toLowerCase()) h += `<span class="chip out">${esc(x.sentiment_label)}</span>`;
-    if (x.pass) h += `<span class="chip out">${esc(x.pass)}</span>`;
-    if (x.url) h += `<a href="${esc(x.url)}" target="_blank" rel="noopener">${linkLabel} ↗</a>`;
-    h += `</div>`;
-    const at = s => esc(s).replace(/\s*\[([^\]]{2,90})\]\s*$/, ' <span class="attr">$1</span>');
-    if (x.headline) h += `<p class="headline">${esc(x.headline)}</p>`;
-    if (x.sources && x.sources.length) h += `<div class="srcl"><span>Sources</span>${x.sources.map(esc).join(' · ')}</div>`;
-    if (x.summary && x.summary.length) h += `<ul class="b">${x.summary.map(s => `<li>${at(s)}</li>`).join('')}</ul>`;
-    if (x.reaction) h += `<div class="muted" style="font-size:12.5px">Stock reaction: <span class="mono">${esc(x.reaction)}</span></div>`;
-    if (x.whats_changing && x.whats_changing.length) h += `<details open><summary>What's changing</summary><ul class="b">${x.whats_changing.map(s => `<li>${at(s)}</li>`).join('')}</ul></details>`;
-    if (x.numbers && x.numbers.length) {
-      h += `<details><summary>Numbers vs Street</summary><div class="tbl-wrap"><table><thead><tr><th>Metric</th><th class="n">Actual</th><th class="n">Street</th><th class="n">vs St</th><th>Note</th></tr></thead><tbody>` +
-        x.numbers.map(n => `<tr><td>${esc(n.metric)}</td><td class="n">${esc(n.actual)}</td><td class="n">${esc(n.street)}</td><td class="n ${dir(n.vs_street)}">${esc(n.vs_street)}</td><td class="note">${esc(n.note)}</td></tr>`).join('') +
-        `</tbody></table></div></details>`;
-    }
-    if (x.tenets && x.tenets.length) {
-      h += `<details><summary>Thesis tenets</summary><div class="tenets">${x.tenets.map(t => {
-        const k = TEN[String(t.status || '').toLowerCase()] || ['·', ''];
-        return `<div><span class="g ${k[1]}" title="${esc(t.status)}">${k[0]}</span><span>${esc(t.tenet)}</span></div>`;
-      }).join('')}</div></details>`;
-    }
-    if (x.questions && x.questions.length) h += `<details><summary>Key questions</summary><ul class="b">${x.questions.map(s => `<li>${esc(s)}</li>`).join('')}</ul></details>`;
-    return h + `</div>`;
-  }
-
   function card(it) {
-    const ag = it.agree ? AGREE[it.agree] : null;
-    return `<article class="card${it.agree === 'split' ? ' split' : ''}" id="c-${esc(norm(it.ticker).replace(/[^A-Z0-9]/g, ''))}-${esc(it.date)}">
+    let h = `<article class="card${it.differ ? ' split' : ''}">
       <div class="card-h"><span class="tk">${esc(it.ticker)}</span><span class="co">${esc(it.company)}</span>
-        <span class="meta">${esc(it.quarter)}${it.qAlt ? ' / ' + esc(it.qAlt) : ''} · ${fmtDay(it.date)}</span>
-        <span class="right"><span class="chip">${esc(it.sector)}</span>${ag ? `<span class="chip ${ag[0]}">${ag[1]}</span>` : `<span class="chip out">${it.b ? 'Bobby only' : 'Rebecca only'}</span>`}</span></div>
-      <div class="cols${it.b && it.r ? '' : ' one'}">${it.b ? side(it.b, 'Bobby', 'Notion') : ''}${it.r ? side(it.r, 'Rebecca', 'PDF') : ''}</div></article>`;
+        <span class="meta">${esc(it.quarter)} · ${fmtDay(it.date)}</span>
+        <span class="right"><span class="chip s-${it.tone}">${LABEL[it.tone]}</span>${it.labels.map(l => `<span class="chip out">${esc(l)}</span>`).join('')}${it.differ ? '<span class="chip a-split" title="One note reads positive and another negative">Notes disagree</span>' : ''}<span class="chip">${esc(it.sector)}</span></span></div>
+      <div class="col">`;
+    h += `<div class="col-h">${it.headline ? `<p class="headline" style="flex:1;min-width:0">${at(it.headline)}</p>` : ''}<span class="chips" style="margin-left:auto">${it.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('')}</span></div>`;
+    if (it.sources.length) h += `<div class="srcl"><span>Sources</span>${it.sources.map(esc).join(' · ')}</div>`;
+    h += `<div class="mg"><div>`;
+    if (it.summary.length) h += `<ul class="b">${it.summary.map(s => `<li>${at(s)}</li>`).join('')}</ul>`;
+    if (it.reaction) h += `<div class="muted" style="font-size:12.5px">Stock reaction: <span class="mono">${esc(it.reaction)}</span></div>`;
+    h += `</div><div>`;
+    if (it.whats_changing.length) h += `<details open><summary>What's changing</summary><ul class="b">${it.whats_changing.map(s => `<li>${at(s)}</li>`).join('')}</ul></details>`;
+    if (it.numbers.length) h += `<details><summary>Numbers vs Street</summary><div class="tbl-wrap"><table><thead><tr><th>Metric</th><th class="n">Actual</th><th class="n">Street</th><th class="n">vs St</th><th>Note</th></tr></thead><tbody>` +
+      it.numbers.map(n => `<tr><td>${esc(n.metric)}</td><td class="n">${esc(n.actual)}</td><td class="n">${esc(n.street)}</td><td class="n ${dir(n.vs_street)}">${esc(n.vs_street)}</td><td class="note">${esc(n.note)}</td></tr>`).join('') + `</tbody></table></div></details>`;
+    if (it.tenets.length) h += `<details><summary>Thesis tenets</summary><div class="tenets">${it.tenets.map(t => { const k = TEN[String(t.status || '').toLowerCase()] || ['·', '']; return `<div><span class="g ${k[1]}" title="${esc(t.status)}">${k[0]}</span><span>${esc(t.tenet)}</span></div>`; }).join('')}</div></details>`;
+    if (it.questions.length) h += `<details><summary>Key questions</summary><ul class="b">${it.questions.map(s => `<li>${esc(s)}</li>`).join('')}</ul></details>`;
+    return h + `</div></div></div></article>`;
   }
-
   function render() {
-    try { localStorage.setItem('em-filters', JSON.stringify({ sector: st.sector, cov: st.cov, tone: st.tone })); } catch (e) {}
+    try { localStorage.setItem('em-filters2', JSON.stringify({ sector: st.sector, tone: st.tone })); } catch (e) {}
     const list = items.filter(pass);
     document.getElementById('count').textContent = list.length + ' of ' + items.length + ' prints';
     const byDay = new Map();
     list.forEach(it => { if (!byDay.has(it.date)) byDay.set(it.date, []); byDay.get(it.date).push(it); });
-    const feed = document.getElementById('feed');
-    feed.innerHTML = list.length ? [...byDay].map(([d, arr]) =>
+    document.getElementById('feed').innerHTML = list.length ? [...byDay].map(([d, arr]) =>
       `<section class="day"><div class="day-h"><h2>${fmtDay(d)}</h2><span class="muted">${arr.length} print${arr.length > 1 ? 's' : ''}</span></div>${arr.map(card).join('')}</section>`).join('')
       : '<div class="nores">No prints match these filters. Clear the search or pick another tone.</div>';
   }
