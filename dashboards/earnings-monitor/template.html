@@ -114,7 +114,7 @@ ul.b { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap
 ul.b li { color: var(--ink-2); }
 .empty { color: var(--muted); font-size: 13px; font-style: italic; }
 details { border-top: 1px dashed var(--rule); padding-top: 8px; }
-summary { cursor: pointer; font-size: 12px; font-weight: 650; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; list-style-position: outside; }
+summary { cursor: pointer; font-size: 12px; font-weight: 650; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; list-style-position: inside; }
 summary::marker { color: var(--muted); }
 details > :not(summary) { margin-top: 8px; }
 
@@ -326,7 +326,7 @@ td.note { color: var(--muted); }
       <div class="card-h"><span class="tk">${esc(it.ticker)}</span><span class="co">${esc(it.company)}</span>
         <span class="meta">${esc(it.quarter)}${it.qAlt ? ' / ' + esc(it.qAlt) : ''} · ${fmtDay(it.date)}</span>
         <span class="right"><span class="chip">${esc(it.sector)}</span>${ag ? `<span class="chip ${ag[0]}">${ag[1]}</span>` : `<span class="chip out">${it.b ? 'Bobby only' : 'Rebecca only'}</span>`}</span></div>
-      <div class="cols">${side(it.b, 'Bobby', 'Notion')}${side(it.r, 'Rebecca', 'PDF')}</div></article>`;
+      <div class="cols${it.b && it.r ? '' : ' one'}">${it.b ? side(it.b, 'Bobby', 'Notion') : ''}${it.r ? side(it.r, 'Rebecca', 'PDF') : ''}</div></article>`;
   }
 
   function render() {
