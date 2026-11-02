@@ -56,6 +56,8 @@ def record_from_page(title, url, sections, known):
     dots = m.group(1).replace(" ", "")
     tone = next((t for k, t in TONES if k in dots), "mixed")
     ticker = m.group(3).split("/")[0].strip()
+    if ticker.endswith(" JT"):  # one Tokyo listing, two suffixes in use
+        ticker = ticker[:-3] + " JP"
     flat = []
     for s in sections:
         flat += s.get("subs", [s])
