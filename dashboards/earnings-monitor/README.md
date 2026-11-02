@@ -42,3 +42,11 @@ python3 build.py bobby.json rebecca.json earnings-monitor.html --since 2026-10-0
 Pairing: a review and a recap are matched when the tickers agree and the print dates are within 3 days. Split view = one side positive, the other negative.
 
 The built HTML embeds research content, so don't commit it. Only the template and the build script live here.
+
+## History in Supabase
+
+Everything the page shows is also written to Supabase so it can be read back as a time series:
+`earnings_prints`, `earnings_metrics`, `earnings_assessments`, `daily_moves`, `tech_daily_snapshots`
+(see `store/schema.sql`). `store/parse_reviews.py <scratch>` parses the built page plus the review
+markdown into `parsed.json`; `store/reviews_to_sql.py <scratch>` turns that into idempotent upsert batches.
+Full review text (`earnings_prints.review_md`) loads once the Supabase host is reachable from the session.

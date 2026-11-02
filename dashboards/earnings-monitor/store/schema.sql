@@ -1,0 +1,7 @@
+-- Tech Daily history tables (Supabase project hftouzahniiwigcchvje, schema public). RLS on, no anon policy.
+-- earnings_prints      one row per company x calendar quarter (unique ticker+calendar_quarter; local_key unique)
+-- earnings_metrics     beat/miss rows from Part A sections 2-4 (quarter, next_q_guide, fy_guide), FK print_id
+-- earnings_assessments combined read per calendar quarter (payload = the earn_assess*.json shape)
+-- daily_moves          Daily moves tab: stock and sector rows per as_of date
+-- tech_daily_snapshots any tab's JSON payload per snapshot_date (today, screens, ideas, prep, sources, ...)
+-- See migrations tech_daily_earnings_and_snapshots and tech_daily_moves for the DDL.
