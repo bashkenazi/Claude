@@ -39,8 +39,9 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    (digest pages from the last 7 days; research_evidence last 21 days; consensus-revisions and comps-screen;
    idea-generator, thesis-builder, industry-cycle, operating-comps; management-prep, analyst-day,
    print-tables, quarterly-review plus next-4-weeks Tier 1–2 prints from FactSet).
-5. tabs/daily.json — biggest company and sector moves today for the Master comps universe (FactSet closes),
-   with the reason for each (news, desk mail, filings).
+5. tabs/daily.json — only after the day's tech digest (step 4) has run: biggest company and sector moves
+   for the Master comps universe (FactSet closes), with the reason for each taken from that digest first,
+   then desk mail, filings and news. If the digest has not run, keep the previous daily.json.
 6. tabs/signals.json, tabs/comps.json, tabs/sources.json — rebuild only if their inputs changed.
 
 Then:
