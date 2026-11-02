@@ -25,8 +25,12 @@ BULLET = re.compile(r"^(\s*)[-*]\s+(.*)$")
 NUM = re.compile(r"^(\s*)\d+[.)]\s+(.*)$")
 
 
+UNESC = re.compile(r"\\([$~_*#\[\]()|>`.!+-])")
+
+
 def _inline(s):
     s = ATTR_BRACES.sub("", s)
+    s = UNESC.sub(r"\1", s)
     s = MENTION.sub(lambda m: (f'<a href="{m.group(1)}" target="_blank" rel="noopener">{m.group(2)}</a>'
                                if m.group(1) else m.group(2)), s)
     s = SELF_CLOSING_JUNK.sub("", s)
@@ -84,27 +88,43 @@ def _blocks(lines):
     return "\n".join(out)
 
 
+def _split(esc, level):
+    """Split escaped lines at headings of exactly `level`; returns [(title, lines)]."""
+    out, cur_t, cur = [], "Overview", []
+    for l in esc:
+        h = HEAD.match(l.strip())
+        if h and len(h.group(1)) == level:
+            if any(x.strip() for x in cur):
+                out.append((cur_t, cur))
+            cur_t, cur = _inline(h.group(2)), []
+            continue
+        cur.append(l)
+    if any(x.strip() for x in cur):
+        out.append((cur_t, cur))
+    return out
+
+
 def convert(md_text):
-    """Return (title, url, sections) where sections = [{"title", "html"}]."""
+    """Return (title, url, sections); a section is {"title","html"} or {"title","subs":[...]}."""
     lines = md_text.splitlines()
     title = lines[0].strip().lstrip("#").strip() if lines else ""
     url = lines[1].strip() if len(lines) > 1 and lines[1].strip().startswith("http") else ""
     body = lines[2:] if url else lines[1:]
     esc = [html.escape(l, quote=True) for l in body]
-    sections, cur_title, cur = [], "Overview", []
-    top = None
-    for l in esc:
-        h = HEAD.match(l.strip())
-        if h and (top is None or len(h.group(1)) <= top):
-            if top is None:
-                top = len(h.group(1))
-            if cur and any(x.strip() for x in cur):
-                sections.append({"title": cur_title, "html": _blocks(cur)})
-            cur_title, cur = _inline(h.group(2)), []
-            continue
-        cur.append(l)
-    if cur and any(x.strip() for x in cur):
-        sections.append({"title": cur_title, "html": _blocks(cur)})
+    levels = sorted({len(m.group(1)) for m in (HEAD.match(l.strip()) for l in esc) if m})
+    if not levels:
+        return title, url, [{"title": "Review", "html": _blocks(esc)}]
+    top = levels[0]
+    tops = _split(esc, top)
+    nest = len(levels) > 1 and len([t for t, _ in tops if t != "Overview"]) <= 4
+    sections = []
+    for t, ls in tops:
+        if nest:
+            subs = _split(ls, levels[1])
+            if len(subs) > 1 or (subs and subs[0][0] != "Overview"):
+                sections.append({"title": t, "subs": [{"title": st, "html": _blocks(sl)} for st, sl in subs]})
+                continue
+        sections.append({"title": t, "html": _blocks(ls)})
     return title, url, sections
 
 
@@ -112,4 +132,4 @@ if __name__ == "__main__":
     import sys, json
     t, u, s = convert(open(sys.argv[1]).read())
     print(t, u, len(s))
-    print(json.dumps([x["title"] for x in s], ensure_ascii=False))
+    print(json.dumps([[x["title"], [y["title"] for y in x.get("subs", [])]] for x in s], ensure_ascii=False)[:600])

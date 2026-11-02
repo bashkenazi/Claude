@@ -166,6 +166,7 @@ td.note { color: var(--muted); }
 .fr-html td, .fr-html th { border: 1px solid var(--rule); padding: 3px 7px; font-size: 12px; white-space: nowrap; }
 .fr-html details { margin: 4px 0 4px 6px; }
 .fr-html details > summary { text-transform: none; letter-spacing: 0; font-size: 12.5px; color: var(--ink); }
+.fr-sub { background: var(--surface); }
 .fr-callout { background: var(--accent-wash); border-radius: 6px; padding: 6px 10px; margin: 6px 0; }
 .fr-html a { color: var(--accent); }
 .tenets { display: flex; flex-direction: column; gap: 4px; }
@@ -392,8 +393,8 @@ td.note { color: var(--muted); }
     it.links.forEach(l => {
       const f = FULL[String(l.url).split('?')[0]];
       if (!f) return;
-      h += `<details class="fr"><summary>Full ${esc(l.label.toLowerCase())} · ${f.sections.length} sections</summary><div class="fr-body">${f.sections.map((s, i) =>
-        `<details class="fr-sec"${i === 0 ? ' open' : ''}><summary>${s.title}</summary><div class="fr-html">${s.html}</div></details>`).join('')}</div></details>`;
+      h += `<details class="fr"><summary>Full review${it.links.length > 1 ? ' (' + esc(l.label) + ')' : ''} · open sections below</summary><div class="fr-body">${f.sections.map((s, i) =>
+        `<details class="fr-sec"${i === 0 && !s.subs ? ' open' : ''}><summary>${s.title}</summary>${s.subs ? `<div class="fr-body">${s.subs.map(u => `<details class="fr-sec fr-sub"><summary>${u.title}</summary><div class="fr-html">${u.html}</div></details>`).join('')}</div>` : `<div class="fr-html">${s.html}</div>`}</details>`).join('')}</div></details>`;
     });
     return h + `</div></article>`;
   }
