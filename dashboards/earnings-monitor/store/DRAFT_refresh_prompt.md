@@ -42,6 +42,11 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
 5. tabs/daily.json — only after the day's tech digest (step 4) has run: biggest company and sector moves
    for the Master comps universe (FactSet closes), with the reason for each taken from that digest first,
    then desk mail, filings and news. If the digest has not run, keep the previous daily.json.
+   Shape: as_of, universe_n, summary[], sectors[] (group, n, median_1d, best, worst, why — a why for
+   every sector), up[]/down[] (top 12 each), moves[] (every priced name: t, n, g, c), and stories{} keyed
+   by ticker ({why, sources}) for every name that moved >=5% AND >=3 points away from its sector median
+   (most extreme first, cap 60). A story is the catalyst, or "no catalyst found in your sources or the
+   news"; when a name moved with its group, say so and name the group driver instead of guessing.
 6. tabs/signals.json, tabs/comps.json, tabs/sources.json — rebuild only if their inputs changed.
 
 Then:

@@ -105,3 +105,12 @@ table.sortable th[aria-sort="descending"]::after { content: " ▼"; }
 .sb-bar.pos { background: var(--pos); } .sb-bar.neg { background: var(--neg); }
 .sb-v { text-align: right; }
 @media (max-width: 700px) { .sb-row { grid-template-columns: 1fr 70px; } .sb-track, .sb-w { display: none; } }
+
+.sb-click { cursor: pointer; border-radius: 4px; padding: 2px 4px; margin: 0 -4px; }
+.sb-click:hover, .sb-click:focus-visible { background: var(--surface-2); outline: none; }
+.sb-click .sb-l::before { content: "▸ "; color: var(--muted, inherit); }
+.sb-click[aria-expanded="true"] .sb-l::before { content: "▾ "; }
+.sb-det { margin: 2px 0 10px 18px; padding: 8px 10px; border-left: 2px solid var(--rule-2); font-size: 12.5px; }
+.sd-row { display: grid; grid-template-columns: minmax(140px, 230px) 56px 70px minmax(0, 1fr); gap: 10px; padding: 3px 0; align-items: baseline; }
+.sd-row.big .sd-t { font-weight: 600; }
+@media (max-width: 700px) { .sd-row { grid-template-columns: 1fr 56px; } .sd-row > :nth-child(3) { display: none; } .sd-w { grid-column: 1 / -1; } }
