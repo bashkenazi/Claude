@@ -85,6 +85,14 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    reported, then the web. A story is the catalyst with figures, "moved with <group>: <driver>", or "No catalyst
    found in your sources or the news." If no digest has run today, keep the previous daily.json.
 6. tabs/signals.json and tabs/sources.json (EVENING) — rebuild only if their inputs changed.
+7. Datapoints + Composite Evidence Index (EVENING): export public.research_evidence for the last 9 months with
+   execute_sql in pages of 4,000 rows by id (select id, research_id r, field_key k, field_impact i, event_date d,
+   confidence::text c, source_type::text s, primary_source p, secondary_source q, evidence_text t ... order by id;
+   large results are saved to files — parse them, never paste them), plus research (id, ticker, company_name n,
+   sector, subsector) for those ids. Then
+   python3 dashboards/earnings-monitor/store/build_datapoints.py evidence.json research.json <S>/tabs/universe.json <S>/dpout
+   and copy <S>/dpout/dp_index.json to <S>/tabs/. Publish dpout/dp/*.json with the page as supporting files
+   (Artifact files map "dp/sources.json", "dp/part1.json" … "dp/partN.json").
 
 Then:
 - Read the live artifact first (Artifact tool, action read, url above) and save its HTML as <S>/live.html.
