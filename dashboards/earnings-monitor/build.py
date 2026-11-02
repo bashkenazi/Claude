@@ -111,6 +111,14 @@ def main():
     for name in ("today", "datapoints", "screens", "ideas", "prep", "sources", "earn_assess", "signals", "comps", "daily", "earn_assess_cq2", "universe", "routines", "dp_index", "pipeline"):
         f = tabs / f"{name}.json" if tabs else None
         payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
+    # earlier Daily moves reads (tabs/daily_YYYY-MM-DD.json) for the "As of" picker
+    payload["daily_history"] = {}
+    if tabs:
+        for f in sorted(tabs.glob("daily_20??-??-??.json")):
+            try:
+                h = json.loads(f.read_text()); payload["daily_history"][h.get("as_of") or f.stem[6:]] = h
+            except Exception:
+                pass
     payload["full"] = {}
     if keep_full and keep_full.exists():
         import base64, gzip, re as _re
