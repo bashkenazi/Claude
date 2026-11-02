@@ -97,6 +97,10 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    (Artifact files map "dp/sources.json", "dp/part1.json" … "dp/partN.json").
 
 Then:
+- History for the page's "As of" picker: for each of the last 30 snapshot dates in public.tech_daily_snapshots,
+  rebuild that day's Daily moves read (tab 'daily', or 'daily.midday' + '.stories' + '.moves' parts joined) and write it
+  as <S>/tabs/daily_YYYY-MM-DD.json. Store every tab you rebuild as a snapshot row (insert, on conflict do nothing):
+  daily, today, routines.index, pipeline, ideas, screens, prep, signals, comps, earn_assess — so any day can be replayed.
 - Read the live artifact first (Artifact tool, action read, url above) and save its HTML as <S>/live.html.
 - python3 dashboards/earnings-monitor/build.py <S>/bobby.json <S>/rebecca.json <S>/earnings-monitor.html
   --since 2026-07-01 --tabs <S>/tabs --full <S>/review_md --keep-full <S>/live.html
