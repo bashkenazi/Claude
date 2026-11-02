@@ -707,10 +707,10 @@
       const runs = lim(arr(cur.runs).filter(r => inWin(r.date, null)), 14);
       const runIx = Math.min(+((location.hash || '').split('/')[2] || 0), Math.max(0, runs.length - 1));
       const sel = runs[runIx];
-      const FULL = D.full || {}, fp = sel && FULL[String(sel.url || '').split('?')[0]];
+      const FULL = window.__FULL || {}, fp = sel && FULL[String(sel.url || '').split('?')[0]];
       const fullHtml = !sel ? '' : fp ? `<section class="panel rt-full"><div class="panel-h"><h2>${esc(fp.title || sel.title)}</h2>${link(sel.url, 'Notion')}</div>${fp.sections.map((x, i) =>
           `<details class="fr-sec"${i < 3 ? ' open' : ''}><summary>${x.title}</summary>${x.subs ? `<div class="fr-body">${x.subs.map(u => `<details class="fr-sec fr-sub" open><summary>${u.title}</summary><div class="fr-html">${u.html}</div></details>`).join('')}</div>` : `<div class="fr-html">${x.html}</div>`}</details>`).join('')}</section>`
-        : (D.full ? `<section class="panel">${none('The full page for this run is not in this build yet. ' + (sel.url ? '' : ''))}${link(sel.url, 'Open in Notion')}</section>` : `<section class="panel"><p class="sub">Loading the full page…</p></section>`);
+        : (window.__FULL ? `<section class="panel">${none('The full page for this run is not in this build yet.')}${link(sel.url, 'Open in Notion')}</section>` : `<section class="panel"><p class="sub">Loading the full page…</p></section>`);
       const runPick = runs.length > 1 ? `<div class="rt-runs" role="tablist" aria-label="Runs">${runs.map((r, i) => `<a role="tab" href="#routines/${esc(cur.key)}/${i}"${i === runIx ? ' aria-selected="true"' : ''}>${esc(fmtD(r.date))}${r.created ? ' <span class="sub">' + esc(String(r.created).slice(11, 16)) + '</span>' : ''}</a>`).join('')}</div>` : '';
       const li = x => `<div class="li"><span class="stripe ${sent(x.sentiment)}"></span><div class="body">${x.ticker ? tk(x.ticker) + ' ' : ''}${attr(x.text || '')}${x.sb_id ? ` <span class="sub mono">SB #${esc(x.sb_id)}</span>` : ''}</div></div>`;
       const secs = Object.entries(cur.by_sector || {});
