@@ -3,6 +3,7 @@
 
 Usage: python3 build.py <bobby.json> <rebecca.json> <out.html> [--since YYYY-MM-DD] [--tabs DIR]
 
+--keep-full HTML  previously built page whose full reviews are carried over
 --full DIR   folder of full review pages as Notion markdown (<TICKER>_<date>.md; line 1 title, line 2 url)
 --tabs DIR   folder holding today.json, datapoints.json, screens.json, ideas.json, prep.json, sources.json
              (any missing file renders as an empty tab)
@@ -86,6 +87,11 @@ def main():
         i = args.index("--full")
         full_dir = Path(args[i + 1])
         del args[i:i + 2]
+    keep_full = None
+    if "--keep-full" in args:  # a previously built page: its full reviews are kept unless a newer md replaces them
+        i = args.index("--keep-full")
+        keep_full = Path(args[i + 1])
+        del args[i:i + 2]
     tabs = None
     if "--tabs" in args:
         i = args.index("--tabs")
@@ -106,6 +112,14 @@ def main():
         f = tabs / f"{name}.json" if tabs else None
         payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
     payload["full"] = {}
+    if keep_full and keep_full.exists():
+        import base64, gzip, re as _re
+        m = _re.search(r'<script id="data"[^>]*>(.*?)</script>', keep_full.read_text(), _re.S)
+        prev = json.loads(m.group(1).replace("<\\/", "</")) if m else {}
+        if prev.get("full_gz"):
+            payload["full"].update(json.loads(gzip.decompress(base64.b64decode(prev["full_gz"]))))
+        else:
+            payload["full"].update(prev.get("full") or {})
     if full_dir and full_dir.exists():
         sys.path.insert(0, str(HERE))
         from md2html import convert
