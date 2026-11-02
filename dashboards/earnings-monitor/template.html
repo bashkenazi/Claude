@@ -328,7 +328,7 @@ td.note { color: var(--muted); }
 
   // ---- combined assessment ----
   const AS = D.earn_assess;
-  if (AS && AS.headline) setTimeout(() => {
+  function renderAssess() { if (!(AS && AS.headline)) return;
     const el = document.getElementById('assess'); el.hidden = false;
     const li = xs => (xs || []).map(x => typeof x === 'string' ? `<li>${at(x)}</li>` : `<li><b class="mono">${esc(x.ticker)}</b> ${at(x.text)}${window.__valLine ? window.__valLine(x.ticker, true) : ''}</li>`).join('');
     const st2 = AS.stats || {};
@@ -341,7 +341,8 @@ td.note { color: var(--muted); }
         ${AS.negatives && AS.negatives.length ? `<div><h3 class="c-neg">Weakest prints</h3><ul class="b">${li(AS.negatives)}</ul></div>` : ''}
         ${AS.themes && AS.themes.length ? `<div><h3>Cross-cutting themes</h3><ul class="b">${li(AS.themes)}</ul></div>` : ''}
       </div>`;
-  }, 0);
+  }
+  setTimeout(renderAssess, 0);
 
   // ---- filters ----
   const sectors = [...new Set(items.map(i => i.sector))].sort();
@@ -414,6 +415,7 @@ td.note { color: var(--muted); }
       : '<div class="nores">No prints match these filters. Clear the search or pick another tone.</div>';
   }
   setTimeout(render, 0);
+  window.__earnRender = () => { renderAssess(); render(); };
 })();
 </script>
 <script>/*__EXTRA_JS__*/</script>

@@ -424,6 +424,7 @@
   const mast = document.querySelector('.mast');
   const setH = () => document.documentElement.style.setProperty('--mast-h', mast.offsetHeight + 'px');
   setH(); window.addEventListener('resize', setH);
+  if (window.__earnRender) window.__earnRender();
   window.addEventListener('hashchange', show);
   show();
 })();
