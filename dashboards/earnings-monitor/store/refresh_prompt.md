@@ -70,6 +70,13 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    {"as_of", "routines": [{"key","name","schedule","status": "ok|missed|running","last_run","runs":[{"title",
    "url","date","window","datapoint_count","supabase_line"}], "callouts":[...], "themes":[...], "by_sector":
    {"<sector>": [{"ticker","text","sentiment","sb_id"}]}, "note"}]} — newest run's content, up to 14 runs listed.
+   Also save the FULL content of every run listed (notion-fetch, the <content> markdown unchanged) as
+   <S>/routine_md/<key>__<NN>.md (line 1 title, line 2 url, then the content) and pass --routines <S>/routine_md
+   to build.py, so the Routines tab shows each run in full.
+   tabs/today.json also gets "market": {as_of, headline, market[] (indices, rates, oil, macro and positioning, with
+   figures), tech[] (what drove tech overall and why), leaders[]/laggards[] (subsectors from tabs/daily.json sectors:
+   group, n, median_1d, best, worst, why), sources[{label,url}]} — written from the routine pages, desk morning wraps
+   (TMTB, MS TMT, BofA TMT, Gugg, Jefferies, RBC) and a web check of index levels at run time.
    Consensus Revisions and Idea Generator also feed tabs/screens.json and tabs/ideas.json (EVENING) as before,
    with thesis-builder, industry-cycle, operating-comps; tabs/datapoints.json from research_evidence last 21 days;
    tabs/prep.json from management-prep, analyst-day, print-tables, quarterly-review plus next-4-weeks prints from

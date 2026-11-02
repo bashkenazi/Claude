@@ -60,6 +60,15 @@
   window.__srcLine = srcLine; window.__attr = attr;
 
   // ================= TODAY =================
+  function marketPanel() {
+    const M = TODAY.market; if (!M) return '';
+    const p1 = v => v == null ? '' : (v > 0 ? '+' : '') + (+v).toFixed(1) + '%';
+    const row = x => `<div class="mk-row"><span class="mk-g">${esc(x.group)} <span class="sub">(${esc(x.n)})</span></span><span class="mono ${+x.median_1d >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.median_1d)}</span><span class="mk-w">${attr(x.why || '')}${x.best ? ` <span class="sub">· best ${esc(x.best)} · worst ${esc(x.worst)}</span>` : ''}</span></div>`;
+    return `<section class="panel mk"><div class="panel-h"><div><span class="eyebrow">Market commentary · ${esc(M.as_of || '')}</span><h2 style="margin-top:4px">${esc(M.headline || '')}</h2></div><a href="#daily">Daily moves →</a></div>
+      <div class="grid2"><div><h3>Market</h3><ul class="b">${arr(M.market).map(x => `<li>${attr(x)}</li>`).join('')}</ul></div><div><h3>Tech</h3><ul class="b">${arr(M.tech).map(x => `<li>${attr(x)}</li>`).join('')}</ul></div></div>
+      <div class="grid2" style="margin-top:8px"><div><h3 class="c-pos">Leading subsectors</h3>${arr(M.leaders).map(row).join('')}</div><div><h3 class="c-neg">Lagging subsectors</h3>${arr(M.laggards).map(row).join('')}</div></div>
+      ${arr(M.sources).length ? `<div class="srcl"><span>Sources</span>${arr(M.sources).map(x => x.url ? link(x.url, x.label) : esc(x.label)).join(' · ')}</div>` : ''}</section>`;
+  }
   function renderToday() {
     const digs = arr(TODAY.digests).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
     const latestBySkill = new Map();
@@ -93,6 +102,7 @@
     document.getElementById('v-today').innerHTML =
       head('Today · ' + built.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }), 'What changed',
         'Callouts from your latest digest runs with their primary sources, the prints from the last few days and what reports next.') +
+      marketPanel() +
       `<div class="runs">${strip}</div>` +
       `<div class="grid3">${col('pos', 'Most positive')}${col('neg', 'Most negative')}${col('inf', 'Inflections')}</div>` +
       (calls.some(c => kindOf(c) === 'oth') ? `<div>${col('oth', 'Other callouts')}</div>` : '') +
@@ -669,6 +679,7 @@
   }
 
   // ================= ROUTINES: one page per scheduled routine =================
+  window.__onFull = () => { if ((location.hash || '').startsWith('#routines')) renderRoutines(); };
   function renderRoutines() {
     const RT = D.routines || {}, list = arr(RT.routines);
     const host = document.getElementById('v-routines');
@@ -680,17 +691,26 @@
     let body = none('No routine output collected yet.');
     if (cur) {
       const runs = lim(arr(cur.runs).filter(r => inWin(r.date, null)), 14);
+      const runIx = Math.min(+((location.hash || '').split('/')[2] || 0), Math.max(0, runs.length - 1));
+      const sel = runs[runIx];
+      const FULL = D.full || {}, fp = sel && FULL[String(sel.url || '').split('?')[0]];
+      const fullHtml = !sel ? '' : fp ? `<section class="panel rt-full"><div class="panel-h"><h2>${esc(fp.title || sel.title)}</h2>${link(sel.url, 'Notion')}</div>${fp.sections.map((x, i) =>
+          `<details class="fr-sec"${i < 3 ? ' open' : ''}><summary>${x.title}</summary>${x.subs ? `<div class="fr-body">${x.subs.map(u => `<details class="fr-sec fr-sub" open><summary>${u.title}</summary><div class="fr-html">${u.html}</div></details>`).join('')}</div>` : `<div class="fr-html">${x.html}</div>`}</details>`).join('')}</section>`
+        : (D.full ? `<section class="panel">${none('The full page for this run is not in this build yet. ' + (sel.url ? '' : ''))}${link(sel.url, 'Open in Notion')}</section>` : `<section class="panel"><p class="sub">Loading the full page…</p></section>`);
+      const runPick = runs.length > 1 ? `<div class="rt-runs" role="tablist" aria-label="Runs">${runs.map((r, i) => `<a role="tab" href="#routines/${esc(cur.key)}/${i}"${i === runIx ? ' aria-selected="true"' : ''}>${esc(fmtD(r.date))}${r.created ? ' <span class="sub">' + esc(String(r.created).slice(11, 16)) + '</span>' : ''}</a>`).join('')}</div>` : '';
       const li = x => `<div class="li"><span class="stripe ${sent(x.sentiment)}"></span><div class="body">${x.ticker ? tk(x.ticker) + ' ' : ''}${attr(x.text || '')}${x.sb_id ? ` <span class="sub mono">SB #${esc(x.sb_id)}</span>` : ''}</div></div>`;
       const secs = Object.entries(cur.by_sector || {});
       body = `<section class="panel"><div class="panel-h"><h2>${esc(cur.name)}</h2><span class="muted"><i class="dot ${dotCls(cur.status)}"></i> ${esc(cur.status || '')}${cur.last_run ? ' · last run ' + esc(cur.last_run) : ''}</span></div>` +
         `<p class="sub" style="margin:0 0 8px">${esc(cur.schedule || '')}${cur.note ? ' · ' + attr(cur.note) : ''}</p>` +
-        (runs[0] ? `<p style="margin:0">${link(runs[0].url, 'Open the latest page in Notion')}${runs[0].window ? ' · ' + esc(runs[0].window) : ''}${runs[0].supabase_line ? ' · ' + esc(runs[0].supabase_line) : ''}</p>` : '') + `</section>` +
+        (sel ? `<p style="margin:0">${sel.window ? esc(sel.window) : ''}${sel.supabase_line ? ' · ' + esc(sel.supabase_line) : ''}</p>` : '') + runPick + `</section>` +
+        (fp ? fullHtml : fullHtml + 
         (arr(cur.callouts).length ? `<section class="panel"><h2>Call-outs</h2><div class="list">${lim(cur.callouts).map(li).join('')}</div></section>` : '') +
         (arr(cur.themes).length ? `<section class="panel"><h2>Themes</h2>${arr(cur.themes).map(t => `<div class="theme"><h3>${esc(t.theme || '')}</h3><p>${attr(t.whats_changing || '')}</p>${(arr(t.winners).length || arr(t.losers).length) ? `<div class="wl">${arr(t.winners).length ? `<span>Benefits</span>${arr(t.winners).map(x => tk(x, 'up')).join(' ')}` : ''}${arr(t.losers).length ? `<span>Hurt</span>${arr(t.losers).map(x => tk(x, 'down')).join(' ')}` : ''}</div>` : ''}</div>`).join('')}</section>` : '') +
         (arr(cur.revisions).length ? `<section class="panel"><h2>Revisions</h2><div class="list">${arr(cur.revisions).map(x => li({ ticker: x.ticker, text: [x.metric, x.change, x.text].filter(Boolean).join(' · '), sentiment: x.sentiment || (String(x.change || '').trim().startsWith('-') ? 'negative' : 'positive') })).join('')}</div></section>` : '') +
         (arr(cur.ideas).length ? `<section class="panel"><h2>Ideas</h2><div class="list">${arr(cur.ideas).map(x => li({ ticker: x.ticker, text: (x.bucket ? '<b>' + esc(x.bucket) + '</b> · ' : '') + esc(x.thesis || x.text || ''), sentiment: /short/i.test(x.bucket || '') ? 'negative' : 'positive' })).join('')}</div></section>` : '') +
         (secs.length ? `<section class="panel"><h2>Datapoints by sector</h2>${secs.map(([g, xs]) => `<details class="rt-sec"><summary><b>${esc(g)}</b> <span class="sub">${arr(xs).length}</span></summary><div class="list">${arr(xs).map(li).join('')}</div></details>`).join('')}</section>` : '') +
-        (runs.length ? `<section class="panel"><h2>Recent runs</h2><table class="dt"><thead><tr><th>Run</th><th>Window</th><th class="n">Datapoints</th><th>Supabase</th></tr></thead><tbody>${runs.map(r => `<tr><td>${link(r.url, r.title || r.date)}</td><td class="sub">${esc(r.window || '')}</td><td class="n">${esc(r.datapoint_count ?? '')}</td><td class="sub">${esc(r.supabase_line || '')}</td></tr>`).join('')}</tbody></table></section>` : '');
+        '') +
+        (runs.length ? `<section class="panel"><h2>Recent runs</h2><table class="dt"><thead><tr><th>Run</th><th>Window</th><th class="n">Datapoints</th><th>Supabase</th></tr></thead><tbody>${runs.map((r, i) => `<tr><td><a href="#routines/${esc(cur.key)}/${i}">${esc(r.title || r.date)}</a> ${link(r.url, '')}</td><td class="sub">${esc(r.window || '')}</td><td class="n">${esc(r.datapoint_count ?? '')}</td><td class="sub">${esc(r.supabase_line || '')}</td></tr>`).join('')}</tbody></table></section>` : '');
     }
     host.innerHTML = head('Routines' + (RT.as_of ? ' · ' + esc(RT.as_of) : ''), 'Your scheduled research routines', 'One page per routine: its latest call-outs, themes and datapoints, whether it ran on schedule, and its recent runs. The Daily moves reasons are drawn from these first.') +
       `<div class="rt-wrap">${nav}<div class="rt-body">${body}</div></div>`;

@@ -145,3 +145,11 @@ pre.method { white-space: pre-wrap; font-size: 12px; margin: 8px 0 0; }
 .pl-src { display: flex; flex-wrap: wrap; gap: 8px; font-size: 12px; }
 .pl-themes { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 10px; }
 @media (max-width: 520px) { .pl-list { grid-template-columns: 1fr; } }
+
+.mk .mk-row { display: grid; grid-template-columns: minmax(140px, 200px) 56px minmax(0, 1fr); gap: 10px; padding: 4px 0; font-size: 12.5px; border-bottom: 1px solid var(--rule); align-items: baseline; }
+@media (max-width: 700px) { .mk .mk-row { grid-template-columns: 1fr 56px; } .mk .mk-w { grid-column: 1 / -1; } }
+
+.rt-runs { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.rt-runs a { font-size: 12px; padding: 3px 8px; border: 1px solid var(--rule-2); border-radius: 12px; text-decoration: none; color: inherit; }
+.rt-runs a[aria-selected="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.rt-full .fr-html { font-size: 13px; }

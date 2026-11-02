@@ -92,6 +92,11 @@ def main():
         i = args.index("--keep-full")
         keep_full = Path(args[i + 1])
         del args[i:i + 2]
+    routines_dir = None
+    if "--routines" in args:  # full routine pages (Notion markdown: line 1 title, line 2 url) shown in full on the Routines tab
+        i = args.index("--routines")
+        routines_dir = Path(args[i + 1])
+        del args[i:i + 2]
     tabs = None
     if "--tabs" in args:
         i = args.index("--tabs")
@@ -144,6 +149,13 @@ def main():
                     rec = record_from_page(title, url, sections, bobby + rebecca)
                     if rec and rec["report_date"] >= since:
                         bobby.append(rec)
+    if routines_dir and routines_dir.exists():
+        sys.path.insert(0, str(HERE))
+        from md2html import convert
+        for f in sorted(routines_dir.glob("*.md")):
+            title, url, sections = convert(f.read_text())
+            if url and sections:
+                payload["full"][url.split("?")[0]] = {"title": title, "sections": sections}
     # a local earnings-review page supersedes older preview/review notes on the same print (same ticker, same date)
     key = lambda r: (r.get("ticker", "").split("/")[0].split()[0] if r.get("ticker") else "", r.get("report_date", ""))
     fresh = {key(r) for r in bobby if str(r.get("url", "")).startswith("local:")}
