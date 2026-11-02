@@ -153,3 +153,6 @@ pre.method { white-space: pre-wrap; font-size: 12px; margin: 8px 0 0; }
 .rt-runs a { font-size: 12px; padding: 3px 8px; border: 1px solid var(--rule-2); border-radius: 12px; text-decoration: none; color: inherit; }
 .rt-runs a[aria-selected="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
 .rt-full .fr-html { font-size: 13px; }
+
+.id-col { display: flex; flex-direction: column; gap: 10px; }
+.chip.b-amazing { background: var(--pos); color: #fff; } .chip.b-contrarian { background: var(--warn, #eda100); color: #111; }
