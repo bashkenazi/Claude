@@ -153,6 +153,21 @@ td.note { color: var(--muted); }
 .agrid { display: grid; gap: 16px 28px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); }
 .agrid > div { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
 .c-pos { color: var(--pos); } .c-neg { color: var(--neg); }
+.fr { border-top: 1px solid var(--rule); padding-top: 10px; }
+.fr > summary { font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--accent); font-weight: 650; }
+.fr-body { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.fr-sec { border: 1px solid var(--rule); border-radius: 6px; padding: 6px 10px; background: var(--bg); }
+.fr-sec > summary { font-size: 12.5px; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.fr-html { font-size: 13px; color: var(--ink-2); overflow-x: auto; min-width: 0; }
+.fr-html p { margin: 6px 0; max-width: 95ch; }
+.fr-html ul, .fr-html ol { margin: 4px 0; padding-left: 20px; }
+.fr-html h4, .fr-html h5, .fr-html h6 { margin: 10px 0 4px; font-size: 13px; color: var(--ink); }
+.fr-html table { width: auto; min-width: 60%; margin: 6px 0; }
+.fr-html td, .fr-html th { border: 1px solid var(--rule); padding: 3px 7px; font-size: 12px; white-space: nowrap; }
+.fr-html details { margin: 4px 0 4px 6px; }
+.fr-html details > summary { text-transform: none; letter-spacing: 0; font-size: 12.5px; color: var(--ink); }
+.fr-callout { background: var(--accent-wash); border-radius: 6px; padding: 6px 10px; margin: 6px 0; }
+.fr-html a { color: var(--accent); }
 .tenets { display: flex; flex-direction: column; gap: 4px; }
 .tenets div { display: flex; gap: 8px; align-items: baseline; font-size: 13px; }
 .tenets .g { font-family: var(--f-mono); width: 14px; flex: none; text-align: center; }
@@ -372,7 +387,15 @@ td.note { color: var(--muted); }
       it.numbers.map(n => `<tr><td>${esc(n.metric)}</td><td class="n">${esc(n.actual)}</td><td class="n">${esc(n.street)}</td><td class="n ${dir(n.vs_street)}">${esc(n.vs_street)}</td><td class="note">${esc(n.note)}</td></tr>`).join('') + `</tbody></table></div></details>`;
     if (it.tenets.length) h += `<details><summary>Thesis tenets</summary><div class="tenets">${it.tenets.map(t => { const k = TEN[String(t.status || '').toLowerCase()] || ['·', '']; return `<div><span class="g ${k[1]}" title="${esc(t.status)}">${k[0]}</span><span>${esc(t.tenet)}</span></div>`; }).join('')}</div></details>`;
     if (it.questions.length) h += `<details><summary>Key questions</summary><ul class="b">${it.questions.map(s => `<li>${esc(s)}</li>`).join('')}</ul></details>`;
-    return h + `</div></div></div></article>`;
+    h += `</div></div>`;
+    const FULL = D.full || {};
+    it.links.forEach(l => {
+      const f = FULL[String(l.url).split('?')[0]];
+      if (!f) return;
+      h += `<details class="fr"><summary>Full ${esc(l.label.toLowerCase())} · ${f.sections.length} sections</summary><div class="fr-body">${f.sections.map((s, i) =>
+        `<details class="fr-sec"${i === 0 ? ' open' : ''}><summary>${s.title}</summary><div class="fr-html">${s.html}</div></details>`).join('')}</div></details>`;
+    });
+    return h + `</div></article>`;
   }
   function render() {
     try { localStorage.setItem('em-filters2', JSON.stringify({ sector: st.sector, tone: st.tone })); } catch (e) {}

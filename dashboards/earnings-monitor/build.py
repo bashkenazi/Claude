@@ -3,6 +3,7 @@
 
 Usage: python3 build.py <bobby.json> <rebecca.json> <out.html> [--since YYYY-MM-DD] [--tabs DIR]
 
+--full DIR   folder of full review pages as Notion markdown (<TICKER>_<date>.md; line 1 title, line 2 url)
 --tabs DIR   folder holding today.json, datapoints.json, screens.json, ideas.json, prep.json, sources.json
              (any missing file renders as an empty tab)
 
@@ -32,6 +33,11 @@ def main():
         i = args.index("--since")
         since = args[i + 1]
         del args[i:i + 2]
+    full_dir = None
+    if "--full" in args:
+        i = args.index("--full")
+        full_dir = Path(args[i + 1])
+        del args[i:i + 2]
     tabs = None
     if "--tabs" in args:
         i = args.index("--tabs")
@@ -51,6 +57,14 @@ def main():
     for name in ("today", "datapoints", "screens", "ideas", "prep", "sources", "earn_assess"):
         f = tabs / f"{name}.json" if tabs else None
         payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
+    payload["full"] = {}
+    if full_dir and full_dir.exists():
+        sys.path.insert(0, str(HERE))
+        from md2html import convert
+        for f in sorted(full_dir.glob("*.md")):
+            title, url, sections = convert(f.read_text())
+            if url and sections:
+                payload["full"][url.split("?")[0]] = {"title": title, "sections": sections}
     # Escape "</" so the JSON can't close the <script> block.
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     html = (HERE / "template.html").read_text()
