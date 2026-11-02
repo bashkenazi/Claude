@@ -108,7 +108,7 @@ def convert(md_text):
     """Return (title, url, sections); a section is {"title","html"} or {"title","subs":[...]}."""
     lines = md_text.splitlines()
     title = lines[0].strip().lstrip("#").strip() if lines else ""
-    url = lines[1].strip() if len(lines) > 1 and lines[1].strip().startswith("http") else ""
+    url = lines[1].strip() if len(lines) > 1 and lines[1].strip().startswith(("http", "local:")) else ""
     body = lines[2:] if url else lines[1:]
     esc = [html.escape(l, quote=True) for l in body]
     levels = sorted({len(m.group(1)) for m in (HEAD.match(l.strip()) for l in esc) if m})

@@ -377,7 +377,7 @@ td.note { color: var(--muted); }
         <span class="meta">${esc(it.quarter)} · ${fmtDay(it.date)}</span>
         <span class="right"><span class="chip s-${it.tone}">${LABEL[it.tone]}</span>${it.labels.map(l => `<span class="chip out">${esc(l)}</span>`).join('')}${it.differ ? '<span class="chip a-split" title="One note reads positive and another negative">Notes disagree</span>' : ''}<span class="chip">${esc(it.sector)}</span></span></div>
       <div class="col">`;
-    h += `<div class="col-h">${it.headline ? `<p class="headline" style="flex:1;min-width:0">${at(it.headline)}</p>` : ''}<span class="chips" style="margin-left:auto">${it.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${l.label} ↗</a>`).join('')}</span></div>`;
+    h += `<div class="col-h">${it.headline ? `<p class="headline" style="flex:1;min-width:0">${at(it.headline)}</p>` : ''}<span class="chips" style="margin-left:auto">${it.links.map(l => String(l.url).startsWith('http') ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${l.label} ↗</a>` : `<span class="chip out" title="Built tonight; not yet published to Notion">Not yet in Notion</span>`).join('')}</span></div>`;
     if (it.sources.length) h += `<div class="srcl"><span>Sources</span>${it.sources.map(esc).join(' · ')}</div>`;
     h += `<div class="mg"><div>`;
     if (it.summary.length) h += `<ul class="b">${it.summary.map(s => `<li>${at(s)}</li>`).join('')}</ul>`;
