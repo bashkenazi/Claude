@@ -228,7 +228,7 @@ td.note { color: var(--muted); }
 
   <div class="ctl" role="group" aria-label="Filters">
     <label for="q">Search <input type="search" id="q" placeholder="Ticker or company"></label>
-    <div class="seg" id="qtr" aria-label="Quarter"><button type="button" data-v="CQ3" aria-pressed="true">CQ3 2026</button><button type="button" data-v="CQ2" aria-pressed="false">CQ2 2026</button></div>
+    <div class="seg" id="qtr" aria-label="Quarter"><button type="button" data-v="CQ3" aria-pressed="true">CQ3 2026</button><button type="button" data-v="CQ2" aria-pressed="false">CQ2 2026</button><button type="button" data-v="ALL" aria-pressed="false">All</button></div>
     <label for="co">Company <select id="co"><option value="">All companies</option></select></label>
     <label for="sector">Sector <select id="sector"><option value="">All</option></select></label>
     <div class="seg" id="tone" aria-label="Tone">
@@ -238,6 +238,10 @@ td.note { color: var(--muted); }
       <button type="button" data-v="neg" aria-pressed="false">Negative</button>
       <button type="button" data-v="split" aria-pressed="false">Notes disagree</button>
     </div>
+    <label for="d-from">From <input type="date" id="d-from"></label>
+    <label for="d-to">To <input type="date" id="d-to"></label>
+    <div class="seg" id="d-quick" aria-label="Date range"><button type="button" data-v="7" aria-pressed="false">7d</button><button type="button" data-v="30" aria-pressed="false">30d</button><button type="button" data-v="" aria-pressed="true">Any date</button></div>
+    <label for="sort">Sort <select id="sort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="co">Company A–Z</option><option value="pos">Most positive</option><option value="neg">Most negative</option></select></label>
     <span class="count" id="count"></span>
   </div>
 
@@ -328,7 +332,7 @@ td.note { color: var(--muted); }
   document.getElementById('stamp').textContent = stampTxt;
   document.getElementById('build').textContent = stampTxt + (stampTxt ? ' · ' : '') + items.length + ' prints from ' + notes.length + ' notes';
   function renderSummary() {
-  const qi = items.filter(i => i.cq === curQ);
+  const qi = items.filter(i => curQ === 'ALL' || i.cq === curQ);
   const cnt = f => qi.filter(f).length;
   const mix = Object.keys(SCORE).map(k => [k, cnt(i => i.tone === k)]);
   const tot = qi.length || 1;
@@ -344,7 +348,7 @@ td.note { color: var(--muted); }
 
   // ---- combined assessment ----
   function renderAssess() {
-    const AS = curQ === 'CQ2' ? D.earn_assess_cq2 : D.earn_assess;
+    const AS = curQ === 'CQ2' ? D.earn_assess_cq2 : curQ === 'ALL' ? null : D.earn_assess;
     const el = document.getElementById('assess');
     if (!(AS && AS.headline)) { el.hidden = true; return; }
     el.hidden = false;
@@ -366,7 +370,7 @@ td.note { color: var(--muted); }
   const sectors = [...new Set(items.map(i => i.sector))].sort();
   const sel = document.getElementById('sector');
   sectors.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
-  const st = { q: '', sector: '', tone: 'all', co: '' };
+  const st = { q: '', sector: '', tone: 'all', co: '', from: '', to: '', sort: 'new' };
   try { const saved = JSON.parse(localStorage.getItem('em-filters2') || 'null'); if (saved) Object.assign(st, saved, { q: '' }); } catch (e) {}
   sel.value = sectors.includes(st.sector) ? st.sector : (st.sector = '');
   const segEl = document.getElementById('tone');
@@ -380,8 +384,20 @@ td.note { color: var(--muted); }
   items.slice().sort((a, b) => String(a.company || a.ticker).localeCompare(String(b.company || b.ticker))).forEach(it => {
     const o = document.createElement('option'); o.value = it.ticker + '|' + it.date; o.textContent = (it.company || it.ticker) + ' (' + it.ticker + ') · ' + it.quarter; coSel.appendChild(o); });
   coSel.addEventListener('change', e => { st.co = e.target.value; render(); if (st.co) document.getElementById('feed').scrollIntoView({ block: 'start' }); });
+  const fromEl = document.getElementById('d-from'), toEl = document.getElementById('d-to'), sortEl = document.getElementById('sort'), dq = document.getElementById('d-quick');
+  const dqSet = v => dq.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.v === v)));
+  fromEl.addEventListener('change', e => { st.from = e.target.value; dqSet('__'); render(); });
+  toEl.addEventListener('change', e => { st.to = e.target.value; dqSet('__'); render(); });
+  dq.querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    if (b.dataset.v) { const d = new Date(Date.now() - (+b.dataset.v) * 864e5); st.from = d.toISOString().slice(0, 10); st.to = ''; }
+    else { st.from = ''; st.to = ''; }
+    fromEl.value = st.from; toEl.value = st.to; dqSet(b.dataset.v); render(); }));
+  if (st.sort) sortEl.value = st.sort;
+  sortEl.addEventListener('change', e => { st.sort = e.target.value; render(); });
   function pass(it) {
-    if (it.cq !== curQ) return false;
+    if (curQ !== 'ALL' && it.cq !== curQ) return false;
+    if (st.from && (it.date || '') < st.from) return false;
+    if (st.to && (it.date || '') > st.to) return false;
     if (st.co && st.co !== it.ticker + '|' + it.date) return false;
     if (st.q && !(it.ticker + ' ' + it.company).toLowerCase().includes(st.q)) return false;
     if (st.sector && it.sector !== st.sector) return false;
@@ -398,7 +414,7 @@ td.note { color: var(--muted); }
   function card(it) {
     let h = `<article class="card${it.differ ? ' split' : ''}">
       <div class="card-h"><span class="tk">${esc(it.ticker)}</span><span class="co">${esc(it.company)}</span>
-        <span class="meta">${esc(it.quarter)} · ${fmtDay(it.date)}</span>
+        <span class="meta"><b class="rdate">${fmtDay(it.date)}</b> · ${esc(it.quarter)}</span>
         <span class="right"><span class="chip s-${it.tone}">${LABEL[it.tone]}</span>${it.labels.map(l => `<span class="chip out">${esc(l)}</span>`).join('')}${it.differ ? '<span class="chip a-split" title="One note reads positive and another negative">Notes disagree</span>' : ''}<span class="chip">${esc(it.sector)}</span></span></div>
       <div class="col">`;
     h += `<div class="col-h">${it.headline ? `<p class="headline" style="flex:1;min-width:0">${at(it.headline)}</p>` : ''}<span class="chips" style="margin-left:auto">${it.links.map(l => String(l.url).startsWith('http') ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${l.label} ↗</a>` : `<span class="chip out" title="Built tonight; not yet published to Notion">Not yet in Notion</span>`).join('')}</span></div>`;
@@ -424,9 +440,19 @@ td.note { color: var(--muted); }
     return h + `</div></article>`;
   }
   function render() {
-    try { localStorage.setItem('em-filters2', JSON.stringify({ sector: st.sector, tone: st.tone })); } catch (e) {}
+    try { localStorage.setItem('em-filters2', JSON.stringify({ sector: st.sector, tone: st.tone, sort: st.sort })); } catch (e) {}
     const list = items.filter(pass);
+    const cmpD = (a, b) => (b.date || '').localeCompare(a.date || '') || a.ticker.localeCompare(b.ticker);
+    if (st.sort === 'old') list.sort((a, b) => -cmpD(a, b));
+    else if (st.sort === 'co') list.sort((a, b) => String(a.company || a.ticker).localeCompare(String(b.company || b.ticker)));
+    else if (st.sort === 'pos') list.sort((a, b) => (b.score ?? -9) - (a.score ?? -9) || cmpD(a, b));
+    else if (st.sort === 'neg') list.sort((a, b) => (a.score ?? 9) - (b.score ?? 9) || cmpD(a, b));
+    else list.sort(cmpD);
     document.getElementById('count').textContent = list.length + ' of ' + items.length + ' prints';
+    if (st.sort === 'co' || st.sort === 'pos' || st.sort === 'neg') {
+      document.getElementById('feed').innerHTML = list.length ? list.map(card).join('') : '<div class="nores">No prints match these filters. Clear the search or widen the dates.</div>';
+      return;
+    }
     const byDay = new Map();
     list.forEach(it => { if (!byDay.has(it.date)) byDay.set(it.date, []); byDay.get(it.date).push(it); });
     document.getElementById('feed').innerHTML = list.length ? [...byDay].map(([d, arr]) =>
