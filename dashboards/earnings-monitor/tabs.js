@@ -428,64 +428,138 @@
   // ================= DATAPOINTS =================
   const PAL = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4', '#6250d6', '#008300', '#e34948', '#7a8599'];
   function renderDatapoints() {
-    const rows = arr(DP.rows);
-    const host = document.getElementById('v-datapoints');
-    const srcs = [...new Set(rows.map(r => r.source_type).filter(Boolean))].sort();
-    const daily = arr(DP.daily);
-    const allSrc = [...new Set(daily.map(d => d.source_type).concat(srcs))].filter(Boolean).sort();
-    const color = s => PAL[allSrc.indexOf(s) % PAL.length];
-    host.innerHTML = head('Supabase · research_evidence', 'Datapoints',
-      'Every row your digest skills loaded through the Datapoint Filter in the last 21 days. Search a ticker or a word to see what the evidence says.') +
-      `<div class="panel"><div class="panel-h"><h2>Rows loaded per day</h2><span class="muted">last 60 days, by source type</span></div><div id="dp-chart"></div><div class="legend">${allSrc.map(s => `<span><i style="background:${color(s)}"></i>${esc(s)}</span>`).join('')}</div></div>` +
-      `<div class="ctl" role="group" aria-label="Datapoint filters">
-        <label for="dp-q">Search <input type="search" id="dp-q" placeholder="Ticker, company or word"></label>
-        <label for="dp-src">Source <select id="dp-src"><option value="">All</option>${srcs.map(s => `<option>${esc(s)}</option>`).join('')}</select></label>
-        <div class="seg" id="dp-imp"><button type="button" data-v="all" aria-pressed="true">Any impact</button><button type="button" data-v="pos" aria-pressed="false">Positive</button><button type="button" data-v="neg" aria-pressed="false">Negative</button></div>
-        <div class="seg" id="dp-days"><button type="button" data-v="3" aria-pressed="false">3d</button><button type="button" data-v="7" aria-pressed="true">7d</button><button type="button" data-v="21" aria-pressed="false">21d</button></div>
+    const X = D.dp_index || {}, host = document.getElementById('v-datapoints');
+    const dates = arr(X.dates), cos = arr(X.companies), meta = arr(X.meta), secs = arr(X.sectors);
+    if (!dates.length) { host.innerHTML = head('Supabase · research_evidence', 'Datapoints', '') + none('No datapoint index in this build.'); return; }
+    const byRid = new Map(meta.map(m => [m.rid, m])), coByRid = new Map(cos.map(c => [c.rid, c]));
+    const SEC_ORDER = ['Semis', 'Hardware', 'Power & DC infra', 'Software', 'Internet', 'IT Services', 'Industry', 'Other'];
+    const secList = SEC_ORDER.filter(s => meta.some(m => m.sec === s));
+    const st = { sec: '', sub: '', sel: [], range: 270, mode: 'c', pil: '', imp: 'all', stype: '', q: '', shown: 100 };
+    const FIELD_PIL = k => /^growth|^tam/.test(k) ? 'Growth' : /^margin/.test(k) ? 'Margins' : /^competition/.test(k) ? 'Competition' : /^risk/.test(k) ? 'Risk' : 'Other';
+    const sgn = v => v == null ? '' : (v > 0 ? '+' : '') + (+v).toFixed(1);
+    host.innerHTML = head('Supabase · research_evidence · ' + esc(fmtD(X.since)) + ' – ' + esc(fmtD(X.as_of)), 'Datapoints & Composite Evidence Index',
+      `${(+X.n_rows || 0).toLocaleString()} datapoints from the last 9 months across ${meta.length} companies. Pick a sector and any tickers to chart their Composite Evidence Index and read the evidence behind it.`) +
+      `<div class="ctl dp-ctl" role="group" aria-label="Filters">
+        <label for="dp-sec">Sector <select id="dp-sec"><option value="">All sectors</option>${secList.map(s => `<option>${esc(s)}</option>`).join('')}</select></label>
+        <label for="dp-sub">Subsector <select id="dp-sub"><option value="">All</option></select></label>
+        <div class="ms" id="dp-ms"><label for="dp-tq">Tickers</label><div class="ms-box"><span id="dp-chips"></span><input id="dp-tq" type="search" placeholder="Add tickers…" autocomplete="off" aria-autocomplete="list" aria-controls="dp-opts"></div><div class="ms-opts" id="dp-opts" role="listbox" hidden></div></div>
+        <div class="seg" id="dp-range"><button type="button" data-v="90" aria-pressed="false">3M</button><button type="button" data-v="180" aria-pressed="false">6M</button><button type="button" data-v="270" aria-pressed="true">9M</button></div>
+      </div>
+      <section class="panel"><div class="panel-h"><h2 id="ix-title">Composite Evidence Index</h2><div class="seg" id="ix-mode"><button type="button" data-v="c" aria-pressed="true">Absolute</button><button type="button" data-v="x" aria-pressed="false">vs universe</button></div></div>
+        <div id="ix-chart"></div><div class="legend" id="ix-legend"></div><p class="sub" id="ix-note" style="margin:6px 0 0"></p></section>
+      <section class="panel" style="padding:0"><div class="panel-h" style="padding:12px 14px 0"><h2>Companies</h2><span class="muted" id="lb-count"></span></div><div class="tbl-wrap"><table class="dt"><thead><tr><th>Company</th><th>Sector</th><th class="n">Index</th><th class="n">vs univ.</th><th class="n">30d Δ</th><th class="n">Growth</th><th class="n">Margins</th><th class="n">Comp.</th><th class="n">Risk</th><th class="n">Rows 90d</th><th></th></tr></thead><tbody id="lb-body"></tbody></table></div></section>
+      <div class="ctl" role="group" aria-label="Datapoint filters">
+        <label for="dp-q">Search <input type="search" id="dp-q" placeholder="Word in the evidence"></label>
+        <label for="dp-pil">Driver <select id="dp-pil"><option value="">All</option><option>Growth</option><option>Margins</option><option>Competition</option><option>Risk</option><option>Other</option></select></label>
+        <label for="dp-st">Source <select id="dp-st"><option value="">All</option></select></label>
+        <div class="seg" id="dp-imp"><button type="button" data-v="all" aria-pressed="true">Any</button><button type="button" data-v="pos" aria-pressed="false">Positive</button><button type="button" data-v="neg" aria-pressed="false">Negative</button><button type="button" data-v="mix" aria-pressed="false">Mixed</button></div>
         <span class="count" id="dp-count"></span></div>
-      <div class="panel" style="padding:0"><div class="tbl-wrap"><table class="dt"><thead><tr><th>Event</th><th>Ticker</th><th>Field</th><th>Impact</th><th>Evidence</th><th>Source</th></tr></thead><tbody id="dp-body"></tbody></table></div></div>
-      <button type="button" class="btn more" id="dp-more" hidden>Show 100 more</button>`;
+      <div class="panel" style="padding:0"><div class="tbl-wrap"><table class="dt"><thead><tr><th>Event</th><th>Ticker</th><th>Driver</th><th>Impact</th><th>Evidence</th><th>Source</th></tr></thead><tbody id="dp-body"><tr><td colspan="6" class="nores">Loading datapoints…</td></tr></tbody></table></div></div>
+      <button type="button" class="btn more" id="dp-more" hidden>Show 100 more</button>
+      <details class="panel"><summary><b>How the index is built</b></summary><pre class="method">${esc(X.method || '')}</pre></details>`;
 
-    // chart
-    const dates = [...new Set(daily.map(d => String(d.date).slice(0, 10)))].sort();
-    if (dates.length) {
-      const W = 900, H = 170, L = 34, B = 20, T = 8, bw = (W - L - 4) / dates.length;
-      const tot = dates.map(dt => daily.filter(d => String(d.date).slice(0, 10) === dt).reduce((a, d) => a + (+d.n || 0), 0));
-      const max = Math.max(1, ...tot); const step = Math.pow(10, Math.floor(Math.log10(max))); const top = Math.ceil(max / step) * step;
-      const y = v => T + (H - T - B) * (1 - v / top);
-      let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Datapoints loaded per day">`;
-      [0, top / 2, top].forEach(v => { svg += `<line x1="${L}" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="var(--rule)" stroke-width="1"/><text x="${L - 4}" y="${y(v) + 3}" text-anchor="end">${Math.round(v)}</text>`; });
-      dates.forEach((dt, i) => {
-        let acc = 0;
-        allSrc.forEach(s => { const n = daily.filter(d => String(d.date).slice(0, 10) === dt && d.source_type === s).reduce((a, d) => a + (+d.n || 0), 0); if (!n) return;
-          svg += `<rect x="${(L + i * bw + 1).toFixed(1)}" y="${y(acc + n).toFixed(1)}" width="${Math.max(1, bw - 2).toFixed(1)}" height="${(y(acc) - y(acc + n)).toFixed(1)}" fill="${color(s)}"><title>${dt} · ${esc(s)}: ${n}</title></rect>`; acc += n; });
-        if (i % Math.ceil(dates.length / 8) === 0) svg += `<text x="${(L + i * bw + bw / 2).toFixed(1)}" y="${H - 6}" text-anchor="middle">${fmtD(dt)}</text>`;
+    const $ = id => document.getElementById(id);
+    const inScope = m => (!st.sec || m.sec === st.sec) && (!st.sub || m.sub === st.sub);
+    function fillSubs() {
+      const subs = [...new Set(meta.filter(m => !st.sec || m.sec === st.sec).map(m => m.sub).filter(Boolean))].sort();
+      $('dp-sub').innerHTML = `<option value="">All</option>${subs.map(s => `<option${s === st.sub ? ' selected' : ''}>${esc(s)}</option>`).join('')}`;
+    }
+    // ---- ticker multi-select ----
+    function chips() { $('dp-chips').innerHTML = st.sel.map(r => { const m = byRid.get(r) || {}; return `<button type="button" class="ms-chip" data-r="${r}" aria-label="Remove ${esc(m.t)}">${esc(m.t)} ×</button>`; }).join(''); }
+    function opts() {
+      const q = $('dp-tq').value.trim().toLowerCase();
+      const list = meta.filter(m => inScope(m) && !st.sel.includes(m.rid) && (!q || `${m.t} ${m.n}`.toLowerCase().includes(q))).sort((a, b) => b.count - a.count).slice(0, 30);
+      const box = $('dp-opts');
+      box.innerHTML = list.length ? list.map((m, i) => `<div class="ms-opt" role="option" data-r="${m.rid}" tabindex="-1"${i === 0 ? ' aria-selected="true"' : ''}><b>${esc(m.t)}</b> <span class="sub">${esc(m.n || '')} · ${esc(m.sub || m.sec)} · ${m.count}</span></div>`).join('') : '<div class="ms-opt sub">No match</div>';
+      box.hidden = false;
+    }
+    const add = r => { r = +r; if (r && !st.sel.includes(r)) st.sel.push(r); $('dp-tq').value = ''; chips(); st.shown = 100; drawAll(); opts(); };
+    $('dp-tq').addEventListener('focus', opts); $('dp-tq').addEventListener('input', opts);
+    $('dp-tq').addEventListener('keydown', e => { if (e.key === 'Enter') { const o = $('dp-opts').querySelector('.ms-opt[data-r]'); if (o) { e.preventDefault(); add(o.dataset.r); } } else if (e.key === 'Escape') $('dp-opts').hidden = true; else if (e.key === 'Backspace' && !e.target.value && st.sel.length) { st.sel.pop(); chips(); drawAll(); } });
+    $('dp-opts').addEventListener('mousedown', e => { const o = e.target.closest('.ms-opt[data-r]'); if (o) { e.preventDefault(); add(o.dataset.r); } });
+    $('dp-tq').addEventListener('blur', () => setTimeout(() => { $('dp-opts').hidden = true; }, 120));
+    $('dp-chips').addEventListener('click', e => { const c = e.target.closest('.ms-chip'); if (c) { st.sel = st.sel.filter(r => r !== +c.dataset.r); chips(); drawAll(); } });
+    $('dp-sec').addEventListener('change', e => { st.sec = e.target.value; st.sub = ''; fillSubs(); st.shown = 100; drawAll(); });
+    $('dp-sub').addEventListener('change', e => { st.sub = e.target.value; st.shown = 100; drawAll(); });
+    const seg = (id, key, cb) => host.querySelectorAll('#' + id + ' button').forEach(b => b.addEventListener('click', () => { st[key] = isNaN(+b.dataset.v) ? b.dataset.v : +b.dataset.v; host.querySelectorAll('#' + id + ' button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); st.shown = 100; cb(); }));
+    seg('dp-range', 'range', drawAll); seg('ix-mode', 'mode', drawChart); seg('dp-imp', 'imp', drawRows);
+    $('dp-q').addEventListener('input', e => { st.q = e.target.value.trim().toLowerCase(); st.shown = 100; drawRows(); });
+    $('dp-pil').addEventListener('change', e => { st.pil = e.target.value; st.shown = 100; drawRows(); });
+    $('dp-st').addEventListener('change', e => { st.stype = e.target.value; st.shown = 100; drawRows(); });
+    $('dp-more').addEventListener('click', () => { st.shown += 100; drawRows(); });
+
+    // ---- chart ----
+    function drawChart() {
+      const startIx = Math.max(0, dates.length - Math.ceil(st.range / 7) - 1);
+      const ds = dates.slice(startIx), key = st.mode;
+      let lines = [];
+      if (st.sel.length) lines = st.sel.map(r => coByRid.get(r)).filter(Boolean).map(c => ({ name: c.t, v: c[key] }));
+      else if (st.sec) { const s = secs.find(x => x.sec === st.sec); if (s) lines.push({ name: st.sec, v: s[key] }); }
+      else lines = secs.filter(s => s.sec !== 'Other' && s.sec !== 'Industry').map(s => ({ name: s.sec, v: s[key] }));
+      if (key === 'c' && X.universe) lines.push({ name: 'Universe', v: X.universe.c, dim: 1 });
+      const missing = st.sel.filter(r => !coByRid.has(r)).map(r => (byRid.get(r) || {}).t);
+      $('ix-title').textContent = 'Composite Evidence Index' + (st.sel.length ? '' : st.sec ? ' · ' + st.sec : ' · by sector');
+      $('ix-note').textContent = (missing.length ? `Not enough scored evidence to index: ${missing.join(', ')}. ` : '') + (key === 'x' ? '0 = as positive as the whole universe that week.' : 'Range −100 to +100; most evidence skews positive, so compare against the universe line.');
+      const W = 900, H = 240, L = 36, R = 8, T = 10, B = 22;
+      const vals = lines.flatMap(l => l.v.slice(startIx)).filter(v => v != null);
+      if (!vals.length) { $('ix-chart').innerHTML = none('No index values for this selection.'); $('ix-legend').innerHTML = ''; return; }
+      let lo = Math.min(0, ...vals), hi = Math.max(0, ...vals); const pad = (hi - lo) * 0.08 || 5; lo -= pad; hi += pad;
+      const x = i => L + (W - L - R) * (ds.length > 1 ? i / (ds.length - 1) : 0.5), y = v => T + (H - T - B) * (1 - (v - lo) / (hi - lo));
+      let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Composite Evidence Index">`;
+      const step = Math.pow(10, Math.floor(Math.log10(Math.max(1, hi - lo)))) / (hi - lo > 50 ? 1 : 2);
+      for (let g = Math.ceil(lo / step) * step; g <= hi; g += step) svg += `<line x1="${L}" x2="${W - R}" y1="${y(g).toFixed(1)}" y2="${y(g).toFixed(1)}" stroke="var(--rule)" stroke-width="${g === 0 ? 1.5 : 1}"/><text x="${L - 4}" y="${(y(g) + 3).toFixed(1)}" text-anchor="end">${Math.round(g)}</text>`;
+      ds.forEach((d, i) => { if (i % Math.ceil(ds.length / 8) === 0) svg += `<text x="${x(i).toFixed(1)}" y="${H - 6}" text-anchor="middle">${fmtD(d)}</text>`; });
+      lines.forEach((l, li) => {
+        const col = l.dim ? 'var(--muted, #7a8599)' : PAL[li % PAL.length];
+        const pts = l.v.slice(startIx).map((v, i) => v == null ? null : `${x(i).toFixed(1)},${y(v).toFixed(1)}`).filter(Boolean).join(' ');
+        const lv = l.v[l.v.length - 1];
+        svg += `<polyline points="${pts}" fill="none" stroke="${col}" stroke-width="${l.dim ? 1.5 : 2}"${l.dim ? ' stroke-dasharray="4 3"' : ''}><title>${esc(l.name)}: ${sgn(lv)}</title></polyline>`;
       });
-      document.getElementById('dp-chart').innerHTML = svg + '</svg>';
-    } else document.getElementById('dp-chart').innerHTML = none('No load history in the snapshot.');
-
-    const st = { q: '', src: '', imp: 'all', days: '7', shown: 100 };
-    const body = document.getElementById('dp-body'), more = document.getElementById('dp-more');
-    const seg = (id, key) => document.querySelectorAll('#' + id + ' button').forEach(b => b.addEventListener('click', () => {
-      st[key] = b.dataset.v; st.shown = 100; document.querySelectorAll('#' + id + ' button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); }));
-    seg('dp-imp', 'imp'); seg('dp-days', 'days');
-    document.getElementById('dp-q').addEventListener('input', e => { st.q = e.target.value.trim().toLowerCase(); st.shown = 100; draw(); });
-    document.getElementById('dp-src').addEventListener('change', e => { st.src = e.target.value; st.shown = 100; draw(); });
-    more.addEventListener('click', () => { st.shown += 100; draw(); });
-    function draw() {
-      const list = rows.filter(r => {
-        const a = ageDays(r.created_at || r.event_date); if (a != null && a > +st.days) return false;
-        if (st.src && r.source_type !== st.src) return false;
-        const g = signOf(r.impact); if (st.imp === 'pos' && g <= 0) return false; if (st.imp === 'neg' && g >= 0) return false;
-        if (st.q && !`${r.ticker} ${r.company} ${r.text} ${r.field_key}`.toLowerCase().includes(st.q)) return false;
+      $('ix-chart').innerHTML = svg + '</svg>';
+      $('ix-legend').innerHTML = lines.map((l, li) => `<span><i style="background:${l.dim ? 'var(--muted, #7a8599)' : PAL[li % PAL.length]}"></i>${esc(l.name)} <b class="mono">${sgn(l.v[l.v.length - 1])}</b></span>`).join('');
+    }
+    // ---- leaderboard ----
+    function drawBoard() {
+      const n = dates.length - 1, back = Math.max(0, n - 4);
+      const list = cos.filter(c => (st.sel.length ? st.sel.includes(c.rid) : inScope(c))).map(c => ({ ...c, d30: c.c[n] - c.c[back] })).sort((a, b) => b.c[n] - a.c[n]);
+      $('lb-count').textContent = `${list.length} companies indexed (≥5 scored datapoints)`;
+      $('lb-body').innerHTML = list.slice(0, 150).map(c => `<tr><td>${tk(c.t)} <span class="sub">${esc(c.n || '')}</span></td><td class="sub">${esc(c.sub || c.sec)}</td><td class="n mono">${sgn(c.c[n])}</td><td class="n mono ${c.x[n] >= 0 ? 'c-pos' : 'c-neg'}">${sgn(c.x[n])}</td><td class="n mono ${c.d30 >= 0 ? 'c-pos' : 'c-neg'}">${sgn(c.d30)}</td><td class="n mono">${sgn(c.g[n])}</td><td class="n mono">${sgn(c.m[n])}</td><td class="n mono">${sgn(c.k[n])}</td><td class="n mono">${sgn(c.r[n])}</td><td class="n">${c.e[n]}</td><td>${st.sel.includes(c.rid) ? '' : `<button type="button" class="btn lb-add" data-r="${c.rid}" aria-label="Chart ${esc(c.t)}">Chart</button>`}</td></tr>`).join('') || `<tr><td colspan="11" class="nores">No indexed companies in this selection.</td></tr>`;
+    }
+    $('lb-body').addEventListener('click', e => { const b = e.target.closest('.lb-add'); if (b) add(b.dataset.r); });
+    // ---- rows (lazy) ----
+    let ROWS = null, SRC = [];
+    const DIR = { 1: ['positive', 'pos'], '-1': ['negative', 'neg'], 0: ['mixed', 'mix'] };
+    function drawRows() {
+      const body = $('dp-body'), more = $('dp-more');
+      if (!ROWS) return;
+      const cutoff = new Date(new Date(X.as_of + 'T12:00:00') - st.range * 864e5).toISOString().slice(0, 10);
+      const sel = new Set(st.sel);
+      const list = ROWS.filter(r => {
+        if (r[2] < cutoff) return false;
+        const m = byRid.get(r[1]); if (!m) return false;
+        if (sel.size ? !sel.has(r[1]) : !inScope(m)) return false;
+        if (st.pil && FIELD_PIL(r[3]) !== st.pil) return false;
+        if (st.stype && r[6] !== st.stype) return false;
+        if (st.imp === 'pos' && r[4] !== 1) return false; if (st.imp === 'neg' && r[4] !== -1) return false; if (st.imp === 'mix' && r[4] !== 0) return false;
+        if (st.q && !r[9].toLowerCase().includes(st.q)) return false;
         return true;
       });
-      document.getElementById('dp-count').textContent = list.length + ' rows';
-      body.innerHTML = list.length ? list.slice(0, st.shown).map(r => `<tr><td class="mono">${fmtD(r.event_date)}</td><td>${tk(r.ticker)}</td><td class="sub">${esc(r.field_key)}</td><td>${r.impact ? `<span class="chip ${signOf(r.impact) > 0 ? 's-positive' : signOf(r.impact) < 0 ? 's-negative' : ''}">${esc(r.impact)}</span>` : ''}</td><td class="wrap">${esc(r.text)}</td><td class="sub srcc" title="${esc(r.primary_source || '')}">${esc(String(r.primary_source || r.source_type || '').slice(0, 110))}${String(r.primary_source || '').length > 110 ? '…' : ''}<div class="mono" style="font-size:10.5px">${esc(r.source_type || '')}</div></td></tr>`).join('')
-        : `<tr><td colspan="6" class="nores">No datapoints match. Widen the window or clear the search.</td></tr>`;
+      $('dp-count').textContent = list.length.toLocaleString() + ' rows';
+      body.innerHTML = list.length ? list.slice(0, st.shown).map(r => { const m = byRid.get(r[1]) || {}, d = DIR[r[4]]; return `<tr><td class="mono">${fmtD(r[2])}</td><td>${tk(m.t)}</td><td class="sub">${esc(r[3])}</td><td>${d ? `<span class="chip ${d[1] === 'pos' ? 'up' : d[1] === 'neg' ? 'dn' : ''}">${d[0]}</span>` : ''}</td><td>${esc(r[9])}</td><td class="sub">${esc(SRC[r[7]] || '')}${r[6] ? ` <span class="chip out">${esc(r[6])}</span>` : ''}</td></tr>`; }).join('')
+        : `<tr><td colspan="6" class="nores">No datapoints match. Widen the range or clear a filter.</td></tr>`;
       more.hidden = list.length <= st.shown;
     }
-    draw();
+    function load() {
+      const n = +X.parts || 0, get = p => fetch(p).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+      Promise.all([get('dp/sources.json')].concat(Array.from({ length: n }, (_, i) => get(`dp/part${i + 1}.json`)))).then(([s, ...ps]) => {
+        SRC = arr(s.sources); ROWS = ps.flatMap(p => arr(p.rows));
+        const types = [...new Set(ROWS.map(r => r[6]).filter(Boolean))].sort();
+        $('dp-st').innerHTML = `<option value="">All</option>${types.map(t => `<option>${esc(t)}</option>`).join('')}`;
+        drawRows();
+      }).catch(() => { $('dp-body').innerHTML = `<tr><td colspan="6" class="nores">The datapoint files did not load. Reload the page; the index above is unaffected.</td></tr>`; });
+    }
+    function drawAll() { drawChart(); drawBoard(); drawRows(); }
+    fillSubs(); chips(); drawAll(); load();
   }
 
   // ================= SCREENS =================

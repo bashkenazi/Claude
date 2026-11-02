@@ -1,0 +1,9 @@
+{
+ "_note": "Sector family for Supabase research tickers that are not in Master comps. Edit freely; keys are research.ticker (case-insensitive).",
+ "Software": ["ANTH", "OpenAI", "DEEPSEEK", "MOONSHOT", "MINIMAX", "TTAN", "TITN", "PATH", "S", "NTNX", "DSY FP", "DSY.FP", "PTC", "BOX", "SAIL", "NTSK", "Databricks", "CNVA", "WIX", "SOUN", "9984 JT", "Softbank"],
+ "Internet": ["BABA", "700 HK", "BIDU", "SPOT", "JD", "RDDT", "PDD", "ETSY", "2513 HK", "GOOGL", "GOOG", "META", "AMZN", "NFLX", "ABNB", "UBER"],
+ "Semis": ["Kioxia", "285A JT", "Nanya", "ROHM", "STMPA FP", "688008 CH", "ASE", "Tokyo Electron", "Lasertec", "Samsung", "Alchip", "Vanguard Semi", "SambaNova", "Sumco", "Siltronic", "SOI"],
+ "Hardware": ["NOK", "HUAWEI", "Huawei", "Wistron", "Winway", "Furukawa", "Fujikura", "Landmark Opto", "Accton", "Gudeng", "Kingslide", "Lenovo", "MPI", "Chroma", "Gold Circuit", "Delta", "Mitsui", "Taiyo Yuden", "Semco", "Bizlink", "Unimicron", "Innolight", "Nittobo", "Lightmatter", "CXMT"],
+ "Power & DC infra": ["ABB", "7011 JP", "7011 JT", "CARR", "ECL"],
+ "Other": ["SPCX", "TSLA", "AUR", "Macro"]
+}
