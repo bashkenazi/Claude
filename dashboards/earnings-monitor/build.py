@@ -3,7 +3,7 @@
 
 Usage: python3 build.py <bobby.json> <rebecca.json> <out.html> [--since YYYY-MM-DD] [--tabs DIR]
 
---keep-full HTML  previously built page whose full reviews are carried over
+--keep-full HTML  previously built page: its full reviews, and any tab whose file is missing, are carried over
 --full DIR   folder of full review pages as Notion markdown (<TICKER>_<date>.md; line 1 title, line 2 url)
 --tabs DIR   folder holding today.json, datapoints.json, screens.json, ideas.json, prep.json, sources.json
              (any missing file renders as an empty tab)
@@ -108,7 +108,7 @@ def main():
         "bobby": bobby,
         "rebecca": rebecca,
     }
-    for name in ("today", "datapoints", "screens", "ideas", "prep", "sources", "earn_assess", "signals", "comps", "daily", "earn_assess_cq2"):
+    for name in ("today", "datapoints", "screens", "ideas", "prep", "sources", "earn_assess", "signals", "comps", "daily", "earn_assess_cq2", "universe"):
         f = tabs / f"{name}.json" if tabs else None
         payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
     payload["full"] = {}
@@ -116,6 +116,9 @@ def main():
         import base64, gzip, re as _re
         m = _re.search(r'<script id="data"[^>]*>(.*?)</script>', keep_full.read_text(), _re.S)
         prev = json.loads(m.group(1).replace("<\\/", "</")) if m else {}
+        for k, v in prev.items():  # tabs not supplied this run keep the live page's content
+            if k in payload and k not in ("since", "built_at", "bobby", "rebecca", "full") and not payload[k] and v:
+                payload[k] = v
         if prev.get("full_gz"):
             payload["full"].update(json.loads(gzip.decompress(base64.b64decode(prev["full_gz"]))))
         else:

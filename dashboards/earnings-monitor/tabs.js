@@ -151,11 +151,97 @@
     const W = 900, bar = secs.length ? Math.max(...secs.map(s => Math.abs(+s.median_1d || 0)), 0.5) : 1;
     host.innerHTML = head('Daily moves · ' + esc(DLY.as_of || ''), 'What moved and why',
       `Biggest one-day moves across the ${esc(DLY.universe_n || '')}-name Master comps universe on ${esc(DLY.as_of || 'the last trading day')}, by company and by subsector, with the catalyst from your research flow or the news.`) +
+      `<section class="panel" id="live-moves"><div class="panel-h"><h2>Live from FactSet</h2><span class="muted" id="live-status">connecting…</span></div><div id="live-body"><p class="sub" style="margin:0">Latest closes for the whole universe load here from your FactSet connector when the page opens.</p></div></section>` +
       (DLY.summary ? `<section class="panel"><h2>The day in brief</h2><ul class="b">${arr(DLY.summary).map(x => `<li>${attr(x)}</li>`).join('')}</ul></section>` : '') +
       `<section class="panel"><div class="panel-h"><h2>Sectors</h2><span class="muted">median 1-day move by Master comps subsector</span></div>${secs.length ? `<div class="secbars">${secs.map(s => `<div class="sb-row"><span class="sb-l">${esc(s.group)} <span class="sub">(${esc(s.n)})</span></span><span class="sb-track"><span class="sb-bar ${+s.median_1d >= 0 ? 'pos' : 'neg'}" style="width:${(Math.abs(+s.median_1d || 0) / bar * 50).toFixed(1)}%;${+s.median_1d >= 0 ? 'left:50%' : 'right:50%'}"></span></span><span class="sb-v mono ${+s.median_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(s.median_1d)}</span><span class="sb-w sub">${s.why ? attr(s.why) : ''}</span></div>`).join('')}</div>` : none('No sector data yet.')}</section>` +
       `<div class="grid2"><section class="panel"><div class="panel-h"><h2 class="c-pos">Biggest gainers</h2><span class="muted">${up.length}</span></div>${up.length ? `<div class="list">${up.map(mover).join('')}</div>` : none('No data yet.')}</section>` +
       `<section class="panel"><div class="panel-h"><h2 class="c-neg">Biggest decliners</h2><span class="muted">${dn.length}</span></div>${dn.length ? `<div class="list">${dn.map(mover).join('')}</div>` : none('No data yet.')}</section></div>` +
       (DLY.notes ? `<p class="sub" style="margin:0">${esc(DLY.notes)}</p>` : '');
+    startLive();
+  }
+
+  // ---- live moves: the viewer's FactSet connector, latest closes for the Master comps universe ----
+  let liveStarted = false;
+  function startLive() {
+    if (liveStarted) return; liveStarted = true;
+    const U = D.universe || {}, names = arr(U.names), bench = arr(U.benchmarks);
+    const status = t => { const el = document.getElementById('live-status'); if (el) el.textContent = t; };
+    const body = h => { const el = document.getElementById('live-body'); if (el) el.innerHTML = h; };
+    if (!names.length) { status('no universe'); body(none('No universe list in this build.')); return; }
+    const claude = window.claude;
+    if (!claude || typeof claude.use !== 'function') { status('not available here'); body(none('Live prices need the page open on claude.ai with your FactSet connector. The written read below is from the evening refresh.')); return; }
+    const ids = [...new Set(names.map(n => n.id).concat(bench.map(b => b.id)))];
+    const batches = []; for (let i = 0; i < ids.length; i += 50) batches.push(ids.slice(i, i + 50));
+    const start = new Date(Date.now() - 12 * 864e5).toISOString().slice(0, 10);
+    const got = new Map(), errs = new Map(); let stamp = 0;
+    const meta = new Map(names.map(n => [n.id, n])); bench.forEach(b => meta.set(b.id, { t: b.t, n: b.t, g: '_bench' }));
+    const MSG = {
+      needs_reauth: 'Reconnect FactSet in claude.ai Settings → Connectors.',
+      server_not_connected: 'Add the FactSet connector in claude.ai Settings → Connectors to see live closes.',
+      selection_required: 'Choose which FactSet connector this page should use when claude.ai asks.',
+      not_in_manifest: 'FactSet is turned off for this page. Turn it on from the page\'s Permissions menu.',
+      blocked_by_policy: 'Your organization blocks FactSet for this page.',
+      approval_required: 'FactSet needs your approval for this page.',
+      not_granted: 'Live prices are not available in this view.', capability_disabled: 'Live prices are not available in this view.',
+    };
+    const DENY = new Set(['needs_reauth', 'server_not_connected', 'blocked_by_policy', 'approval_required', 'not_in_manifest', 'selection_required', 'not_granted', 'capability_disabled']);
+    function series(rows) {
+      const by = new Map();
+      arr(rows).forEach(r => { if (r && r.price != null && r.requestId) { if (!by.has(r.requestId)) by.set(r.requestId, []); by.get(r.requestId).push([String(r.date), +r.price]); } });
+      by.forEach(v => v.sort((a, b) => a[0] < b[0] ? -1 : 1)); return by;
+    }
+    function draw() {
+      const deny = [...errs.values()].find(e => DENY.has(e.code));
+      if (deny && !got.size) { status('not connected');
+        body(`<p class="sub" style="margin:0">${esc(MSG[deny.code] || deny.message || 'FactSet is not available.')}</p>` + (deny.code === 'approval_required' ? `<button class="btn" id="live-approve" style="margin-top:8px">Load latest closes from FactSet</button>` : ''));
+        const btn = document.getElementById('live-approve');
+        if (btn) btn.onclick = () => { btn.disabled = true; btn.textContent = 'Loading…'; loadOnce(); };
+        return; }
+      if (!got.size) return;
+      const rows = [];
+      got.forEach((v, id) => { const m = meta.get(id); if (!m || v.length < 2) return; const [d1, p1] = v[v.length - 1], [, p0] = v[v.length - 2]; const p5 = v.length > 5 ? v[v.length - 6][1] : null;
+        rows.push({ id, t: m.t, n: m.n, g: m.g, date: d1, c1: (p1 / p0 - 1) * 100, c5: p5 ? (p1 / p5 - 1) * 100 : null }); });
+      const stocks = rows.filter(r => r.g !== '_bench'), bm = rows.filter(r => r.g === '_bench');
+      const latest = stocks.reduce((a, r) => r.date > a ? r.date : a, '');
+      const pct = v => v == null || !isFinite(v) ? '—' : ((v > 0 ? '+' : '') + v.toFixed(1) + '%');
+      const cls = v => v >= 0 ? 'c-pos' : 'c-neg';
+      const med = a => { const s = a.slice().sort((x, y) => x - y); return s.length ? (s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2) : 0; };
+      const groups = new Map(); stocks.forEach(r => { if (!groups.has(r.g)) groups.set(r.g, []); groups.get(r.g).push(r); });
+      const secs = [...groups].map(([g, a]) => ({ g, n: a.length, m: med(a.map(r => r.c1)), best: a.reduce((x, y) => y.c1 > x.c1 ? y : x), worst: a.reduce((x, y) => y.c1 < x.c1 ? y : x) })).sort((a, b) => b.m - a.m);
+      const bar = Math.max(...secs.map(s => Math.abs(s.m)), 0.5);
+      const why = new Map(arr(DLY.up).concat(arr(DLY.down)).map(m => [m.ticker, m]));
+      const sameDay = latest && DLY.as_of === latest;
+      const line = r => { const w = sameDay ? why.get(r.t) : null; return `<div class="li"><span class="stripe ${r.c1 >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(r.t)} <b>${esc(r.n)}</b> <span class="mono ${cls(r.c1)}">${pct(r.c1)}</span> <span class="sub mono">5d ${pct(r.c5)}</span> <span class="chip out">${esc(r.g)}</span>${r.date !== latest ? ` <span class="sub">close ${esc(r.date)}</span>` : ''}${w && w.why ? `<div>${attr(w.why)}</div>` : ''}</div></div>`; };
+      const s = stocks.slice().sort((a, b) => b.c1 - a.c1), up = s.slice(0, 12), dn = s.slice(-12).reverse();
+      const upN = stocks.filter(r => r.c1 > 0).length;
+      const failed = [...errs.values()].filter(e => !DENY.has(e.code)).length;
+      status(`closes through ${latest}${stamp ? ' · fetched ' + new Date(stamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}${failed ? ` · ${failed} batch${failed > 1 ? 'es' : ''} failed` : ''}`);
+      body(`<p class="sub" style="margin:0 0 8px">${stocks.length} names priced · ${upN} up / ${stocks.length - upN} down · median ${pct(med(stocks.map(r => r.c1)))}${bm.length ? ' · ' + bm.map(b => `${esc(b.t)} <span class="mono ${cls(b.c1)}">${pct(b.c1)}</span>`).join(' · ') : ''}${sameDay ? '' : ` · <b>newer than the written read below (${esc(DLY.as_of || '—')})</b>`}</p>` +
+        `<div class="secbars">${secs.map(x => `<div class="sb-row"><span class="sb-l">${esc(x.g)} <span class="sub">(${x.n})</span></span><span class="sb-track"><span class="sb-bar ${x.m >= 0 ? 'pos' : 'neg'}" style="width:${(Math.abs(x.m) / bar * 50).toFixed(1)}%;${x.m >= 0 ? 'left:50%' : 'right:50%'}"></span></span><span class="sb-v mono ${cls(x.m)}">${pct(x.m)}</span><span class="sb-w sub">best ${esc(x.best.t)} ${pct(x.best.c1)} · worst ${esc(x.worst.t)} ${pct(x.worst.c1)}</span></div>`).join('')}</div>` +
+        `<div class="grid2" style="margin-top:14px"><div><h3 class="c-pos">Biggest gainers</h3><div class="list">${up.map(line).join('')}</div></div><div><h3 class="c-neg">Biggest decliners</h3><div class="list">${dn.map(line).join('')}</div></div></div>`);
+    }
+    let MCP = null;
+    const inputFor = b => ({ ids: b, data_type: 'prices', startDate: start, fields: ['price'], adjust: 'SPLIT', request_id: 'tech-daily-live-' + start });
+    function loadOnce() {
+      if (!MCP) return;
+      batches.forEach((b, i) => MCP.callTool('FactSet', 'FactSet_GlobalPrices', inputFor(b), { cache: { staleTime: 15 * 60e3, gcTime: 24 * 3600e3 } })
+        .then(r => { series(r.payload && r.payload.data).forEach((v, k) => got.set(k, v)); errs.delete(i); stamp = Math.max(stamp, (r.cache && r.cache.storedAt) || Date.now()); draw(); })
+        .catch(e => { errs.set(i, e || { code: 'upstream_error' }); draw(); }));
+    }
+    claude.use('mcp').then(mcp => {
+      MCP = mcp;
+      if (!mcp) { status('not available here'); body(none('Live prices are not available in this view. The written read below is from the evening refresh.')); return; }
+      status('loading ' + ids.length + ' names…');
+      batches.forEach((b, i) => {
+        mcp.watchTool('FactSet', 'FactSet_GlobalPrices', inputFor(b),
+          ev => {
+            if (ev.type === 'data') { const pl = ev.result && ev.result.payload; series(pl && pl.data).forEach((v, k) => got.set(k, v)); errs.delete(i);
+              const st = ev.result && ev.result.cache && ev.result.cache.storedAt; stamp = Math.max(stamp, st || Date.now()); }
+            else { errs.set(i, ev.error || { code: 'upstream_error' }); if (DENY.has((ev.error || {}).code)) b.forEach(id => got.delete(id)); }
+            draw();
+          }, { cache: { staleTime: 15 * 60e3, gcTime: 24 * 3600e3 }, refetchInterval: 15 * 60e3 });
+      });
+    }).catch(() => { status('not available here'); });
   }
 
   // ================= SIGNALS =================
