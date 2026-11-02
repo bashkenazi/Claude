@@ -682,9 +682,68 @@
       `<div class="rt-wrap">${nav}<div class="rt-body">${body}</div></div>`;
   }
 
+  // ================= PIPELINE: every long and short being tracked =================
+  function renderPipeline() {
+    const P = D.pipeline || {}, items = arr(P.items), host = document.getElementById('v-pipeline');
+    const moves = new Map(arr(DLY.moves).map(m => [String(m.t).toUpperCase(), m]));
+    const pctTxt = v => v == null || !isFinite(v) ? '' : (v > 0 ? '+' : '') + Math.round(v * 100) + '%';
+    const upOf = it => { const u = it.upside; if (!u) return null; const lo = u.pct_low, hi = u.pct_high; const v = hi != null ? hi : lo; return v == null ? null : v; };
+    const secs = [...new Set(items.map(i => i.sector).filter(Boolean))].sort();
+    const st = { dir: '', status: '', sec: '', q: '', sort: 'status' };
+    host.innerHTML = head('Pipeline' + (P.as_of ? ' · ' + esc(P.as_of) : ''), 'Longs & shorts we are tracking',
+      'Every name on the Pipeline/Active/Ideas page, the Shorts database, recent Idea Generator runs and thesis pages: the elevator pitch, and the upside or downside where a target has been written down.') +
+      (arr(P.themes).length ? `<section class="panel"><h2>Themes</h2><div class="pl-themes">${arr(P.themes).map(t => `<div class="theme"><div class="panel-h"><h3>${esc(t.name)}</h3>${t.status ? `<span class="chip out">${esc(t.status)}</span>` : ''}</div><p>${attr(t.pitch || '')}</p>${arr(t.names).length ? `<div class="wl">${arr(t.names).map(x => tk(x)).join(' ')}</div>` : ''}</div>`).join('')}</div></section>` : '') +
+      `<div class="ctl" role="group" aria-label="Pipeline filters">
+        <label for="pl-q">Search <input type="search" id="pl-q" placeholder="Ticker, company or word"></label>
+        <div class="seg" id="pl-dir"><button type="button" data-v="" aria-pressed="true">Longs & shorts</button><button type="button" data-v="long" aria-pressed="false">Longs</button><button type="button" data-v="short" aria-pressed="false">Shorts</button></div>
+        <div class="seg" id="pl-st"><button type="button" data-v="" aria-pressed="true">Any status</button><button type="button" data-v="active" aria-pressed="false">Active</button><button type="button" data-v="tracking" aria-pressed="false">Tracking</button><button type="button" data-v="idea" aria-pressed="false">Ideas</button></div>
+        <label for="pl-sec">Sector <select id="pl-sec"><option value="">All</option>${secs.map(s => `<option>${esc(s)}</option>`).join('')}</select></label>
+        <label for="pl-sort">Sort <select id="pl-sort"><option value="status">Status</option><option value="up">Upside / downside</option><option value="recent">Most recent</option><option value="az">Ticker A–Z</option></select></label>
+        <span class="count" id="pl-count"></span></div>
+      <div id="pl-list" class="pl-list"></div>`;
+    const $ = id => document.getElementById(id);
+    function card(it) {
+      const u = it.upside, m = moves.get(String(it.ticker || '').toUpperCase());
+      const lo = u && u.pct_low, hi = u && u.pct_high;
+      const upTxt = u ? (lo != null && hi != null && Math.abs(hi - lo) > 0.005 ? `${pctTxt(lo)} to ${pctTxt(hi)}` : lo != null || hi != null ? pctTxt(hi != null ? hi : lo) : (u.as_written_pct || '')) : '';
+      const good = v => it.direction === 'short' ? v < 0 : v > 0;
+      const upV = upOf(it);
+      return `<article class="pl-card ${it.direction === 'short' ? 'short' : 'long'}">
+        <div class="pl-h">${tk(it.ticker)} <b>${esc(it.company || '')}</b>
+          <span class="chip ${it.direction === 'short' ? 'dn' : 'up'}">${esc(it.direction || '')}</span>
+          ${it.status ? `<span class="chip out">${esc(it.status)}</span>` : ''}${it.conviction ? `<span class="chip out">${esc(it.conviction)}</span>` : ''}
+          <span class="pl-up">${upTxt ? `<span class="mono ${upV == null ? '' : good(upV) ? 'c-pos' : 'c-neg'}" title="${esc(u.basis || '')}">${esc(upTxt)}</span><span class="sub"> ${it.direction === 'short' ? 'to target' : 'to target'}</span>` : '<span class="sub">no target written</span>'}</span></div>
+        <p class="pl-pitch">${attr(it.pitch || '')}</p>
+        <div class="pl-meta sub">${[it.sector, it.theme].filter(Boolean).map(esc).join(' · ')}${it.price != null ? ` · px ${esc(it.price)}` : ''}${m ? ` · today <span class="mono ${+m.c >= 0 ? 'c-pos' : 'c-neg'}">${(+m.c > 0 ? '+' : '') + (+m.c).toFixed(1)}%</span>` : ''}${it.added ? ` · added ${esc(it.added)}` : ''}${it.updated && it.updated !== it.added ? ` · updated ${esc(it.updated)}` : ''}</div>
+        ${u && u.basis ? `<div class="pl-basis sub">Target basis: ${esc(u.basis)}</div>` : ''}
+        ${arr(it.catalysts).length || it.key_risk ? `<div class="pl-cr">${arr(it.catalysts).length ? `<span><b>Catalysts</b> ${arr(it.catalysts).map(esc).join(' · ')}</span>` : ''}${it.key_risk ? `<span><b>Risk</b> ${esc(it.key_risk)}</span>` : ''}</div>` : ''}
+        ${arr(it.sources).length ? `<div class="pl-src">${arr(it.sources).map(s => s.url ? link(s.url, s.label || 'Source') : `<span class="sub">${esc(s.label || '')}</span>`).join(' ')}</div>` : ''}
+      </article>`;
+    }
+    const SO = { active: 0, tracking: 1, idea: 2 };
+    function draw() {
+      let list = items.filter(it => (!st.dir || it.direction === st.dir) && (!st.status || it.status === st.status) && (!st.sec || it.sector === st.sec) &&
+        (!st.q || `${it.ticker} ${it.company} ${it.pitch} ${it.theme}`.toLowerCase().includes(st.q)));
+      if (st.sort === 'up') list = list.slice().sort((a, b) => { const x = upOf(a), y = upOf(b); const fx = x == null ? -9 : (a.direction === 'short' ? -x : x), fy = y == null ? -9 : (b.direction === 'short' ? -y : y); return fy - fx; });
+      else if (st.sort === 'recent') list = list.slice().sort((a, b) => String(b.updated || b.added || '').localeCompare(String(a.updated || a.added || '')));
+      else if (st.sort === 'az') list = list.slice().sort((a, b) => String(a.ticker).localeCompare(String(b.ticker)));
+      else list = list.slice().sort((a, b) => (SO[a.status] ?? 3) - (SO[b.status] ?? 3) || (a.direction === 'short') - (b.direction === 'short'));
+      const nl = list.filter(i => i.direction === 'long').length;
+      $('pl-count').textContent = `${list.length} names · ${nl} long / ${list.length - nl} short`;
+      $('pl-list').innerHTML = list.length ? list.map(card).join('') : none('Nothing matches these filters.');
+    }
+    const seg = (id, key) => host.querySelectorAll('#' + id + ' button').forEach(b => b.addEventListener('click', () => { st[key] = b.dataset.v; host.querySelectorAll('#' + id + ' button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); draw(); }));
+    seg('pl-dir', 'dir'); seg('pl-st', 'status');
+    $('pl-q').addEventListener('input', e => { st.q = e.target.value.trim().toLowerCase(); draw(); });
+    $('pl-sec').addEventListener('change', e => { st.sec = e.target.value; draw(); });
+    $('pl-sort').addEventListener('change', e => { st.sort = e.target.value; draw(); });
+    if (!items.length) { $('pl-list').innerHTML = none('No pipeline in this build yet.'); return; }
+    draw();
+  }
+
   // ================= ROUTER =================
-  const VIEWS = ['today', 'daily', 'routines', 'themes', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { daily: renderDaily, routines: renderRoutines, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'themes', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { daily: renderDaily, routines: renderRoutines, pipeline: renderPipeline, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   const done = {};
   function show() {
     let v = (location.hash || '').slice(1).split('/')[0]; if (!VIEWS.includes(v)) v = 'today';
