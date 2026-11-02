@@ -86,7 +86,7 @@ def main():
         "bobby": bobby,
         "rebecca": rebecca,
     }
-    for name in ("today", "datapoints", "screens", "ideas", "prep", "sources", "earn_assess"):
+    for name in ("today", "datapoints", "screens", "ideas", "prep", "sources", "earn_assess", "signals"):
         f = tabs / f"{name}.json" if tabs else None
         payload[name] = json.loads(f.read_text()) if f and f.exists() else {}
     payload["full"] = {}
