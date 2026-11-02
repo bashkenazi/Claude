@@ -265,6 +265,13 @@ td.note { color: var(--muted); }
 <script>
 (function () {
   const D = JSON.parse(document.getElementById('data').textContent);
+  // full reviews ship gzip+base64 to keep the page under the size limit; unpack them, then re-render
+  if (D.full_gz && typeof DecompressionStream !== 'undefined') {
+    const bin = Uint8Array.from(atob(D.full_gz), c => c.charCodeAt(0));
+    new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream('gzip'))).text()
+      .then(t => { D.full = JSON.parse(t); if (window.__earnRender) window.__earnRender(); })
+      .catch(e => console.error('full reviews', e));
+  }
   const SCORE = { very_positive: 2, positive: 1, mixed: 0, negative: -1, very_negative: -2 };
   const LABEL = { very_positive: 'Very positive', positive: 'Positive', mixed: 'Mixed', negative: 'Negative', very_negative: 'Very negative' };
   const COLOR = { very_positive: 'var(--vpos)', positive: 'var(--pos)', mixed: 'var(--warn)', negative: 'var(--neg)', very_negative: 'var(--vneg)' };

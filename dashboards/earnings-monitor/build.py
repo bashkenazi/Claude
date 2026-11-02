@@ -124,6 +124,10 @@ def main():
     for r in dropped:
         payload["full"].pop(str(r.get("url", "")).split("?")[0], None)
     payload["bobby"] = bobby
+    # ship the full review pages compressed; the page unpacks them in the browser
+    import base64, gzip
+    payload["full_gz"] = base64.b64encode(gzip.compress(json.dumps(payload["full"], ensure_ascii=False).encode(), 9)).decode()
+    payload["full"] = {}
     # Escape "</" so the JSON can't close the <script> block.
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     html = (HERE / "template.html").read_text()
