@@ -574,9 +574,8 @@
       more.hidden = list.length <= st.shown;
     }
     function load() {
-      const n = +X.parts || 0, get = p => fetch(p).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
-      Promise.all([get('dp/sources.json')].concat(Array.from({ length: n }, (_, i) => get(`dp/part${i + 1}.json`)))).then(([s, ...ps]) => {
-        SRC = arr(s.sources); ROWS = ps.flatMap(p => arr(p.rows));
+      getDP().then(o => {
+        SRC = o.SRC; ROWS = o.ROWS;
         const types = [...new Set(ROWS.map(r => r[6]).filter(Boolean))].sort();
         $('dp-st').innerHTML = `<option value="">All</option>${types.map(t => `<option>${esc(t)}</option>`).join('')}`;
         drawRows();
@@ -692,6 +691,124 @@
       `<section class="panel"><h2>On-demand tools</h2><p class="lede" style="font-size:13px">These skills answer one-off requests or support the skills above, so they have no output page to track.</p><div class="chips">${ondemand.map(s => `<span class="chip mono">${esc(s)}</span>`).join('')}</div></section>`;
   }
 
+  // ---- shared loader for the datapoint rows (dp/part*.json), used by Datapoints and Stocks ----
+  let DPP = null;
+  function getDP() {
+    if (DPP) return DPP;
+    const X = D.dp_index || {}, n = +X.parts || 0, get = p => fetch(p).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+    DPP = Promise.all([get('dp/sources.json')].concat(Array.from({ length: n }, (_, i) => get(`dp/part${i + 1}.json`)))).then(([s, ...ps]) => ({ SRC: arr(s.sources), ROWS: ps.flatMap(p => arr(p.rows)) }));
+    DPP.catch(() => { DPP = null; });
+    return DPP;
+  }
+
+  // ================= STOCKS: one page per Tier 1-2 company =================
+  function renderStocks() {
+    const ST = arr((D.stocks || {}).companies), host = document.getElementById('v-stocks');
+    const parts = (location.hash || '').split('/'), key = decodeURIComponent(parts[1] || ''), sub = parts[2] || 'debate';
+    const cur = ST.find(c => c.key === key) || null;
+    const ix = new Map(arr((D.dp_index || {}).companies).map(c => [c.rid, c]));
+    const PL = new Map(arr((D.pipeline || {}).items).map(p => [String(p.ticker).toUpperCase(), p]));
+    const TH = new Map(arr(ID.theses).map(t => [String(t.ticker).toUpperCase(), t]));
+    const MV = new Map(arr(DLY.moves).map(m => [String(m.t).toUpperCase(), m]));
+    const sgn = v => v == null || !isFinite(v) ? '' : (v > 0 ? '+' : '') + (+v).toFixed(1);
+    const idxOf = c => { const xs = c.rids.map(r => ix.get(r)).filter(Boolean); return xs.sort((a, b) => b.count - a.count)[0]; };
+    if (!host.__st) host.__st = { q: '', tier: '', sec: '' };
+    const fs = host.__st;
+    const secs = [...new Set(ST.map(c => c.sector).filter(Boolean))].sort();
+    const list = ST.filter(c => (!fs.tier || String(c.tier) === fs.tier) && (!fs.sec || c.sector === fs.sec) && (!fs.q || `${c.t} ${c.name} ${c.sub}`.toLowerCase().includes(fs.q)));
+    const nav = `<div class="sk-nav"><input type="search" id="sk-q" placeholder="Search ${ST.length} names" value="${esc(fs.q)}">
+      <div class="seg" id="sk-tier"><button type="button" data-v="" aria-pressed="${!fs.tier}">All</button><button type="button" data-v="1" aria-pressed="${fs.tier === '1'}">Tier 1</button><button type="button" data-v="2" aria-pressed="${fs.tier === '2'}">Tier 2</button></div>
+      <select id="sk-sec"><option value="">All sectors</option>${secs.map(x => `<option${x === fs.sec ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select>
+      <div class="sk-list">${list.map(c => { const I = idxOf(c), n = I ? I.c.length - 1 : 0; return `<a href="#stocks/${encodeURIComponent(c.key)}/${sub}"${cur && c.key === cur.key ? ' aria-current="page"' : ''}><b>${esc(c.t)}</b><span class="sub">${esc(c.name)}</span><span class="chip out">T${esc(c.tier)}</span>${I ? `<span class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}" title="Composite vs universe">${sgn(I.x[n])}</span>` : ''}</a>`; }).join('')}</div></div>`;
+    let body;
+    if (!cur) body = `<section class="panel"><h2>Pick a company</h2><p class="sub">Each Tier 1–2 name has four views: the debate, every datapoint organized by its drivers, the earnings-review metrics table, and what management has said over time.</p></section>`;
+    else {
+      const I = idxOf(cur), n = I ? I.c.length - 1 : 0, pl = PL.get(String(cur.t).toUpperCase()) || PL.get(String(cur.bbg).toUpperCase()), mv = MV.get(String(cur.t).toUpperCase()) || MV.get(String(cur.bbg).toUpperCase());
+      const tabs = [['debate', 'Debate'], ['datapoints', 'Datapoints'], ['earnings', 'Earnings metrics'], ['management', 'Management']];
+      body = `<section class="panel sk-head"><div class="panel-h"><div><span class="eyebrow">Tier ${esc(cur.tier)} · ${esc(cur.sector)} · ${esc(cur.sub)}</span><h2 style="margin-top:4px">${tk(cur.t)} ${esc(cur.name)}</h2></div>
+        <div class="sk-kpis">${mv ? `<span><span class="sub">Today</span> <b class="mono ${+mv.c >= 0 ? 'c-pos' : 'c-neg'}">${sgn(+mv.c)}%</b></span>` : ''}${I ? `<span><span class="sub">Index</span> <b class="mono">${sgn(I.c[n])}</b></span><span><span class="sub">vs univ.</span> <b class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}">${sgn(I.x[n])}</b></span><span><span class="sub">30d Δ</span> <b class="mono">${sgn(I.c[n] - I.c[Math.max(0, n - 4)])}</b></span>` : ''}</div></div>
+        ${pl ? `<p class="sk-pitch"><span class="chip ${pl.direction === 'short' ? 'dn' : 'up'}">${esc(pl.direction)}</span> <span class="chip out">${esc(pl.status || '')}</span> ${attr(pl.pitch || '')}${pl.upside && (pl.upside.pct_low != null || pl.upside.pct_high != null) ? ` <b class="mono">${sgn(100 * (pl.upside.pct_high ?? pl.upside.pct_low))}% to target</b>` : ''}</p>` : ''}
+        <nav class="sk-tabs">${tabs.map(([k, l]) => `<a href="#stocks/${encodeURIComponent(cur.key)}/${k}"${k === sub ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav></section><div id="sk-body"><section class="panel"><p class="sub">Loading datapoints…</p></section></div>`;
+    }
+    host.innerHTML = head('Stocks', 'Tier 1–2 companies', 'The debate, every datapoint organized by what matters for the stock, the earnings-review metrics, and what management has said over time.') + `<div class="sk-wrap">${nav}<div class="sk-main">${body}</div></div>`;
+    const $ = id => document.getElementById(id);
+    $('sk-q').addEventListener('input', e => { fs.q = e.target.value.trim().toLowerCase(); const pos = e.target.selectionStart; renderStocks(); const q = $('sk-q'); q.focus(); q.setSelectionRange(pos, pos); });
+    host.querySelectorAll('#sk-tier button').forEach(b => b.addEventListener('click', () => { fs.tier = b.dataset.v; renderStocks(); }));
+    $('sk-sec').addEventListener('change', e => { fs.sec = e.target.value; renderStocks(); });
+    if (!cur) return;
+    if (sub === 'earnings') { $('sk-body').innerHTML = earningsView(cur); return; }
+    getDP().then(({ SRC, ROWS }) => {
+      const hp = (location.hash || '').split('/'); if (!document.getElementById('sk-body') || decodeURIComponent(hp[1] || '') !== cur.key || (hp[2] || 'debate') !== sub) return;
+      const rs = new Set(cur.rids);
+      const mine = ROWS.filter(r => rs.has(r[1]) && inWin(r[2], null));
+      $('sk-body').innerHTML = sub === 'datapoints' ? dpView(cur, mine, SRC) : sub === 'management' ? mgmtView(cur, mine, SRC) : debateView(cur, mine, SRC, TH.get(String(cur.t).toUpperCase()));
+      const b = $('sk-body'); b.querySelectorAll('[data-f]').forEach(x => x.addEventListener('click', () => { b.dataset.f = x.dataset.f; b.querySelectorAll('[data-f]').forEach(y => y.setAttribute('aria-pressed', String(y === x))); b.querySelectorAll('.sk-fam').forEach(fz => { fz.hidden = !!b.dataset.f && fz.dataset.fam !== b.dataset.f; }); }));
+    }).catch(() => { $('sk-body').innerHTML = `<section class="panel">${none('The datapoint files did not load. Reload the page.')}</section>`; });
+  }
+  const FAMOF = k => /^growth/.test(k) ? 'Growth' : /^tam/.test(k) ? 'TAM' : /^margin/.test(k) ? 'Margins' : /^competition/.test(k) ? 'Competition' : /^risk/.test(k) ? 'Risk' : /^shareholder/.test(k) ? 'Capital return' : 'Other';
+  const FAMS = ['Growth', 'TAM', 'Margins', 'Competition', 'Risk', 'Capital return', 'Other'];
+  const MGMT = /management|\bmgmt\b|\bceo\b|\bcfo\b|\bcoo\b|\bcto\b|earnings call|conference call|transcript|investor day|analyst day|\bir\b|press release|guidance|10-k|10-q|8-k|filing|shareholder letter/i;
+  const REL = (st, p) => /inferred|extrapolat/i.test(p || '') ? 0.3 : /semianalysis|cleveland|bwg|trendforce|channel check|third bridge|tegus|expert/i.test(p || '') ? 1 : MGMT.test(p || '') || st === 'company' ? 1 : ({ independent_research: 1, sell_side: 0.6, news: 0.5, substack: 0.5, email: 0.5, evernote: 0.6, twitter: 0.3, reddit: 0.2 })[st] ?? 0.5;
+  function assign(cur, r) {
+    const fam = FAMOF(r[3]), t = r[9].toLowerCase();
+    const ds = cur.drivers.filter(d => d.fam === fam || (fam === 'Growth' && d.fam === 'TAM'));
+    let best = null, bs = 0;
+    ds.forEach(d => { let sc = 0; d.kw.forEach(k => { if (k.length >= 3 && t.includes(k)) sc += k.length > 6 ? 2 : 1; }); if (sc > bs) { bs = sc; best = d; } });
+    return best ? best.label : (fam === 'Other' ? 'Other' : 'Other ' + fam.toLowerCase());
+  }
+  const DIRC = v => v === 1 ? 'pos' : v === -1 ? 'neg' : 'mix';
+  const rowHtml = (r, SRC) => `<div class="li sk-dp"><span class="stripe ${DIRC(r[4])}${r[5] === 'h' ? '' : r[5] === 'l' ? ' lo' : ' md'}"></span><div class="body"><span class="mono sub">${fmtD(r[2])}</span> ${esc(r[9])}<div class="sub">${esc(SRC[r[7]] || '')}${r[6] ? ` · ${esc(r[6])}` : ''}${r[5] ? ` · ${({ h: 'high', m: 'medium', l: 'low' })[r[5]] || ''} confidence` : ''}</div></div></div>`;
+  function grouped(cur, rows) {
+    const g = new Map();
+    rows.forEach(r => { const fam = FAMOF(r[3]), d = assign(cur, r), k = fam + '|' + d; if (!g.has(k)) g.set(k, { fam, label: d, rows: [] }); g.get(k).rows.push(r); });
+    const order = new Map(cur.drivers.map((d, i) => [d.label, i]));
+    return [...g.values()].sort((a, b) => FAMS.indexOf(a.fam) - FAMS.indexOf(b.fam) || (order.get(a.label) ?? 99) - (order.get(b.label) ?? 99) || b.rows.length - a.rows.length);
+  }
+  const famBar = () => `<div class="seg"><button type="button" data-f="" aria-pressed="true">All</button>${FAMS.slice(0, 6).map(f => `<button type="button" data-f="${f}" aria-pressed="false">${f}</button>`).join('')}</div>`;
+  function dpView(cur, rows, SRC) {
+    if (!rows.length) return `<section class="panel">${none('No datapoints on this name in the window.')}</section>`;
+    rows = rows.slice().sort((a, b) => b[2].localeCompare(a[2]));
+    const gs = grouped(cur, rows), per = G.n || 8;
+    const legend = `<div class="legend"><span><i style="background:var(--pos)"></i>positive</span><span><i style="background:var(--neg)"></i>negative</span><span><i style="background:var(--warn,#eda100)"></i>mixed</span><span class="sub">fainter = lower confidence</span></div>`;
+    return `<section class="panel"><div class="panel-h"><h2>Datapoints by driver</h2><span class="muted">${rows.length} rows</span></div>${famBar()}${legend}` +
+      FAMS.map(f => { const xs = gs.filter(x => x.fam === f); if (!xs.length) return ''; return `<div class="sk-fam" data-fam="${f}"><h3>${f}</h3>${xs.map(x => { const p = x.rows.filter(r => r[4] === 1).length, n = x.rows.filter(r => r[4] === -1).length;
+        return `<details class="sk-drv"${x.rows.length && !/^Other/.test(x.label) ? ' open' : ''}><summary><b>${esc(x.label)}</b> <span class="sub">${x.rows.length} · <span class="c-pos">${p}▲</span> <span class="c-neg">${n}▼</span> · latest ${fmtD(x.rows[0][2])}</span></summary><div class="list">${x.rows.slice(0, per).map(r => rowHtml(r, SRC)).join('')}${x.rows.length > per ? `<details><summary class="sub">${x.rows.length - per} more</summary><div class="list">${x.rows.slice(per).map(r => rowHtml(r, SRC)).join('')}</div></details>` : ''}</div></details>`; }).join('')}</div>`; }).join('') + `</section>`;
+  }
+  function debateView(cur, rows, SRC, th) {
+    if (!rows.length) return `<section class="panel">${none('No datapoints on this name in the window, so no debate to show.')}</section>`;
+    const now = Date.now(), score = r => (r[4] || 0) * ({ h: 1, m: 0.75, l: 0.5 }[r[5]] || 0.75) * REL(r[6], SRC[r[7]]) * Math.pow(0.5, (now - new Date(r[2] + 'T12:00:00')) / 864e5 / 90);
+    const sc = rows.map(r => ({ r, s: score(r), d: assign(cur, r), f: FAMOF(r[3]) }));
+    const bull = sc.filter(x => x.s > 0).sort((a, b) => b.s - a.s), bear = sc.filter(x => x.s < 0).sort((a, b) => a.s - b.s);
+    const pick = (xs, n) => { const seen = new Set(), out = []; for (const x of xs) { if (seen.has(x.d) && out.length < n * 2) continue; seen.add(x.d); out.push(x); if (out.length >= n) break; } return out; };
+    const N = G.n ? Math.min(G.n, 25) : 6;
+    const it = x => `<div class="li sk-dp"><span class="stripe ${DIRC(x.r[4])}"></span><div class="body"><span class="chip out">${esc(x.d)}</span> <span class="mono sub">${fmtD(x.r[2])}</span> ${esc(x.r[9])}<div class="sub">${esc(SRC[x.r[7]] || '')}</div></div></div>`;
+    const by = new Map(); sc.forEach(x => { if (!by.has(x.d)) by.set(x.d, { d: x.d, f: x.f, p: 0, n: 0, sp: 0, sn: 0 }); const y = by.get(x.d); if (x.s > 0) { y.p++; y.sp += x.s; } else if (x.s < 0) { y.n++; y.sn -= x.s; } });
+    const contested = [...by.values()].filter(y => y.p && y.n).map(y => ({ ...y, heat: Math.min(y.sp, y.sn) })).sort((a, b) => b.heat - a.heat).slice(0, 5);
+    const bal = [...by.values()].sort((a, b) => (b.sp + b.sn) - (a.sp + a.sn)).slice(0, 10);
+    const tot = bal.reduce((m, y) => Math.max(m, y.sp, y.sn), 0.001);
+    return `<section class="panel"><div class="panel-h"><h2>The debate</h2><span class="muted">${rows.length} datapoints · weighted by source reliability × confidence × recency (90-day half-life)</span></div>
+      ${th ? `<div class="sk-th"><b>Your thesis</b> ${th.stance ? `<span class="chip out">${esc(th.stance)}</span>` : ''} ${esc(th.summary || '')}${arr(th.tenets).length ? `<ul class="b">${arr(th.tenets).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div>` : ''}
+      <div class="grid2"><div><h3 class="c-pos">Bull case</h3><div class="list">${pick(bull, N).map(it).join('') || none('No positive evidence in the window.')}</div></div><div><h3 class="c-neg">Bear case</h3><div class="list">${pick(bear, N).map(it).join('') || none('No negative evidence in the window.')}</div></div></div>
+      <h3 style="margin-top:14px">Where the evidence leans, by driver</h3><div class="sk-bal">${bal.map(y => `<div class="sk-balr"><span>${esc(y.d)} <span class="sub">${y.p}▲ ${y.n}▼</span></span><span class="sk-bt"><span class="l"><i class="neg" style="width:${(y.sn / tot * 100).toFixed(1)}%"></i></span><span class="r"><i class="pos" style="width:${(y.sp / tot * 100).toFixed(1)}%"></i></span></span></div>`).join('')}</div>
+      ${contested.length ? `<h3 style="margin-top:14px">What decides it</h3><p class="sub" style="margin:0 0 6px">Drivers with strong evidence on both sides.</p><ul class="b">${contested.map(y => `<li><b>${esc(y.d)}</b> — ${y.p} positive vs ${y.n} negative datapoints</li>`).join('')}</ul>` : ''}</section>`;
+  }
+  function mgmtView(cur, rows, SRC) {
+    const ms = rows.filter(r => r[6] === 'company' || MGMT.test(SRC[r[7]] || ''));
+    if (!ms.length) return `<section class="panel">${none('No management commentary stored for this name in the window.')}</section>`;
+    const gs = grouped(cur, ms.slice().sort((a, b) => a[2].localeCompare(b[2])));
+    return `<section class="panel"><div class="panel-h"><h2>What management has said, over time</h2><span class="muted">${ms.length} statements · oldest → newest within each driver</span></div>${famBar()}` +
+      FAMS.map(f => { const xs = gs.filter(x => x.fam === f); if (!xs.length) return ''; return `<div class="sk-fam" data-fam="${f}"><h3>${f}</h3>${xs.map(x => `<details class="sk-drv" open><summary><b>${esc(x.label)}</b> <span class="sub">${x.rows.length} · ${fmtD(x.rows[0][2])} → ${fmtD(x.rows[x.rows.length - 1][2])}</span></summary><div class="sk-tl">${x.rows.slice(-(G.n || 12)).map(r => rowHtml(r, SRC)).join('')}</div></details>`).join('')}</div>`; }).join('') + `</section>`;
+  }
+  function earningsView(cur) {
+    const ms = arr(cur.metrics); if (!ms.length) return `<section class="panel">${none('No earnings review stored for this name yet.')}</section>`;
+    const qs = [...new Set(ms.map(m => m.cq))].sort();
+    const SEC = [['quarter', 'Quarter'], ['next_q_guide', 'Next-quarter guide'], ['fy_guide', 'Fiscal-year guide']];
+    const pc = v => v == null || v === '' ? '' : `<span class="mono ${+v >= 0 ? 'c-pos' : 'c-neg'}">${(+v > 0 ? '+' : '') + (+v).toFixed(1)}%</span>`;
+    const qh = q => { const m = ms.find(x => x.cq === q); return `${esc(m.fq || q)}<div class="sub">${fmtD(m.d)} · ${esc(String(m.verdict || '').replace(/_/g, ' '))}</div>`; };
+    return SEC.map(([k, l]) => { const xs = ms.filter(m => m.section === k); if (!xs.length) return ''; const mets = [...new Set(xs.map(m => m.metric))];
+      return `<section class="panel" style="padding:0"><div class="panel-h" style="padding:12px 14px 0"><h2>${l}</h2><span class="muted">Actual · vs 📊 Street · vs 🎯 bogey</span></div><div class="tbl-wrap"><table class="dt"><thead><tr><th>Metric</th>${qs.map(q => `<th>${qh(q)}</th>`).join('')}</tr></thead><tbody>${mets.map(mt => `<tr><td>${esc(mt)}</td>${qs.map(q => { const m = xs.find(x => x.metric === mt && x.cq === q); return `<td>${m ? `${m.marker ? esc(m.marker) + ' ' : ''}<b>${esc(m.actual || '')}</b>${m.street ? `<div class="sub">📊 ${esc(m.street)} ${pc(m.vs_st)}</div>` : ''}${m.bogey ? `<div class="sub">🎯 ${esc(m.bogey)} ${pc(m.vs_bg)}</div>` : ''}` : '<span class="sub">—</span>'}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></section>`; }).join('');
+  }
+
   // ================= ROUTINES: one page per scheduled routine =================
   window.__onFull = () => { if ((location.hash || '').startsWith('#routines')) renderRoutines(); };
   function renderRoutines() {
@@ -791,8 +908,8 @@
   }
 
   // ================= ROUTER =================
-  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'themes', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { daily: renderDaily, routines: renderRoutines, pipeline: renderPipeline, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'stocks', 'themes', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { daily: renderDaily, routines: renderRoutines, pipeline: renderPipeline, stocks: renderStocks, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   let done = {};
   const HIST = D.daily_history || {};
   const gN = document.getElementById('g-n'), gD = document.getElementById('g-d'), gA = document.getElementById('g-asof'), gAL = document.getElementById('g-asof-l');
@@ -808,6 +925,7 @@
     let v = (location.hash || '').slice(1).split('/')[0]; if (!VIEWS.includes(v)) v = 'today';
     if (gAL) gAL.hidden = !(v === 'daily' && gA && gA.options.length > 1);
     if (v === 'routines' && done[v]) { renderRoutines(); }
+    if (v === 'stocks' && done[v]) { renderStocks(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
     document.querySelectorAll('nav.tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
