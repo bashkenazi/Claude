@@ -712,14 +712,18 @@
     const MV = new Map(arr(DLY.moves).map(m => [String(m.t).toUpperCase(), m]));
     const sgn = v => v == null || !isFinite(v) ? '' : (v > 0 ? '+' : '') + (+v).toFixed(1);
     const idxOf = c => { const xs = c.rids.map(r => ix.get(r)).filter(Boolean); return xs.sort((a, b) => b.count - a.count)[0]; };
-    if (!host.__st) host.__st = { q: '', tier: '', sec: '' };
+    if (!host.__st) host.__st = { q: '', tier: '', sec: '', sub: '' };
     const fs = host.__st;
-    const secs = [...new Set(ST.map(c => c.sector).filter(Boolean))].sort();
-    const list = ST.filter(c => (!fs.tier || String(c.tier) === fs.tier) && (!fs.sec || c.sector === fs.sec) && (!fs.q || `${c.t} ${c.name} ${c.sub}`.toLowerCase().includes(fs.q)));
+    const SO = ['Semis', 'Hardware', 'Power & DC infra', 'Software', 'Internet', 'IT Services', 'Other'];
+    const secs = SO.filter(x => ST.some(c => c.sector === x));
+    const subsAll = [...new Set(ST.filter(c => !fs.sec || c.sector === fs.sec).flatMap(c => arr(c.subs)))].sort();
+    const list = ST.filter(c => (!fs.tier || String(c.tier) === fs.tier) && (!fs.sec || c.sector === fs.sec) && (!fs.sub || arr(c.subs).includes(fs.sub)) && (!fs.q || `${c.t} ${c.name} ${c.sub}`.toLowerCase().includes(fs.q)))
+      .sort((a, b) => SO.indexOf(a.sector) - SO.indexOf(b.sector) || String(arr(a.subs)[0]).localeCompare(String(arr(b.subs)[0])) || (a.tier || 9) - (b.tier || 9) || a.t.localeCompare(b.t));
     const nav = `<div class="sk-nav"><input type="search" id="sk-q" placeholder="Search ${ST.length} names" value="${esc(fs.q)}">
       <div class="seg" id="sk-tier"><button type="button" data-v="" aria-pressed="${!fs.tier}">All</button><button type="button" data-v="1" aria-pressed="${fs.tier === '1'}">Tier 1</button><button type="button" data-v="2" aria-pressed="${fs.tier === '2'}">Tier 2</button></div>
       <select id="sk-sec"><option value="">All sectors</option>${secs.map(x => `<option${x === fs.sec ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select>
-      <div class="sk-list">${list.map(c => { const I = idxOf(c), n = I ? I.c.length - 1 : 0; return `<a href="#stocks/${encodeURIComponent(c.key)}/${sub}"${cur && c.key === cur.key ? ' aria-current="page"' : ''}><b>${esc(c.t)}</b><span class="sub">${esc(c.name)}</span><span class="chip out">T${esc(c.tier)}</span>${I ? `<span class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}" title="Composite vs universe">${sgn(I.x[n])}</span>` : ''}</a>`; }).join('')}</div></div>`;
+      <select id="sk-sub"><option value="">All subsectors</option>${subsAll.map(x => `<option${x === fs.sub ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select>
+      <div class="sk-list">${list.map((c, i) => { const I = idxOf(c), n = I ? I.c.length - 1 : 0, sb = arr(c.subs)[0] || c.sector, hdr = i === 0 || (arr(list[i - 1].subs)[0] || list[i - 1].sector) !== sb ? `<div class="sk-grp">${esc(c.sector)} · ${esc(sb)}</div>` : ''; return hdr + `<a href="#stocks/${encodeURIComponent(c.key)}/${sub}"${cur && c.key === cur.key ? ' aria-current="page"' : ''}><b>${esc(c.t)}</b><span class="sub">${esc(c.name)}</span><span class="chip out">T${esc(c.tier)}</span>${I ? `<span class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}" title="Composite vs universe">${sgn(I.x[n])}</span>` : ''}</a>`; }).join('')}</div></div>`;
     let body;
     if (!cur) body = `<section class="panel"><h2>Pick a company</h2><p class="sub">Each Tier 1–2 name has four views: the debate, every datapoint organized by its drivers, the earnings-review metrics table, and what management has said over time.</p></section>`;
     else {
@@ -734,7 +738,8 @@
     const $ = id => document.getElementById(id);
     $('sk-q').addEventListener('input', e => { fs.q = e.target.value.trim().toLowerCase(); const pos = e.target.selectionStart; renderStocks(); const q = $('sk-q'); q.focus(); q.setSelectionRange(pos, pos); });
     host.querySelectorAll('#sk-tier button').forEach(b => b.addEventListener('click', () => { fs.tier = b.dataset.v; renderStocks(); }));
-    $('sk-sec').addEventListener('change', e => { fs.sec = e.target.value; renderStocks(); });
+    $('sk-sec').addEventListener('change', e => { fs.sec = e.target.value; fs.sub = ''; renderStocks(); });
+    $('sk-sub').addEventListener('change', e => { fs.sub = e.target.value; renderStocks(); });
     if (!cur) return;
     if (sub === 'earnings') { $('sk-body').innerHTML = earningsView(cur); return; }
     getDP().then(({ SRC, ROWS }) => {

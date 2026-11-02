@@ -15,6 +15,9 @@ name), drivers [{k, fam, label, kw}] (named drivers with match keywords from lab
 review table rows). The page joins these to the datapoint rows it already loads (dp/part*.json) by research id.
 """
 import json, re, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from build_datapoints import FAM_OF
 
 FAMS = [("g", "Growth", 5), ("t", "TAM", 2), ("m", "Margins", 4), ("c", "Competition", 3), ("r", "Risk", 6)]
 STOP = set("the and for with from into over lt guidance revenue growth market share new long term of to in on by a an vs fy".split())
@@ -77,8 +80,10 @@ def main():
             if key in seen: continue
             seen.add(key)
             mrows.append({x: m.get(x) for x in ("cq", "fq", "d", "verdict", "section", "metric", "actual", "street", "bogey", "vs_st", "vs_bg", "marker")})
+        subs = [x for x in sub if x]
+        fam = next((FAM_OF[x] for x in subs if x in FAM_OF), None) or ("Software" if "AI Labs (private)" in subs or "Holding Cos" in subs else "Other")
         out.append({"key": re.sub(r"[^A-Za-z0-9]+", "-", disp).strip("-"), "t": disp, "bbg": bbg, "name": nm or c.get("t"), "tier": c.get("r"),
-                    "sector": c.get("s") or "", "sub": ", ".join(x for x in sub if x), "rids": rids, "drivers": drivers, "metrics": mrows})
+                    "sector": fam, "sub": ", ".join(subs), "subs": subs, "coverage": c.get("s") or "", "rids": rids, "drivers": drivers, "metrics": mrows})
     out.sort(key=lambda x: (x["tier"] or 9, x["t"]))
     json.dump({"companies": out}, open(sys.argv[6], "w"), ensure_ascii=False, separators=(",", ":"))
     print(f"{len(out)} companies · {sum(1 for x in out if x['rids'])} with evidence · {sum(1 for x in out if x['metrics'])} with earnings tables · "
