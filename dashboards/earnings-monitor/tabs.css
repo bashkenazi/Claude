@@ -92,3 +92,16 @@ button.tkbtn:hover { outline: 1px solid var(--rule-2); }
 table.sortable th[data-k] { cursor: pointer; user-select: none; }
 table.sortable th[aria-sort="ascending"]::after { content: " ▲"; }
 table.sortable th[aria-sort="descending"]::after { content: " ▼"; }
+
+/* valuation context */
+.valc { font-family: var(--f-mono); font-size: 11px; color: var(--ink-2); margin-top: 3px; white-space: normal; }
+.valc.cpt { color: var(--muted); }
+/* daily moves sector bars */
+.secbars { display: flex; flex-direction: column; gap: 4px; }
+.sb-row { display: grid; grid-template-columns: minmax(120px, 210px) minmax(120px, 1fr) 64px minmax(0, 1.4fr); gap: 10px; align-items: center; font-size: 12.5px; }
+.sb-track { position: relative; height: 10px; background: var(--surface-2); border-radius: 3px; }
+.sb-track::after { content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px; width: 1px; background: var(--rule-2); }
+.sb-bar { position: absolute; top: 0; height: 100%; border-radius: 3px; }
+.sb-bar.pos { background: var(--pos); } .sb-bar.neg { background: var(--neg); }
+.sb-v { text-align: right; }
+@media (max-width: 700px) { .sb-row { grid-template-columns: 1fr 70px; } .sb-track, .sb-w { display: none; } }
