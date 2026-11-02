@@ -34,10 +34,23 @@ def _plain(h):
     return _h.unescape(re.sub(r"<[^>]+>", " ", h)).replace("  ", " ").strip()
 
 
+# sector for review pages whose ticker has no extracted record to borrow a sector from
+SECTOR_FALLBACK = {
+    "Semis": "005930 2408 2454 2337 2330 TSM 6920 8035 AIXA ASML ASM BESI ENTG FORM KLAC MPWR NXPI RMBS SNDK STM TXN UCTT AMD NVDA AVGO MRVL MU QCOM ADI ON MCHP AMAT LRCX TER 6857 6146 CRDO ALAB COHR LITE ARM SMCI",
+    "Hardware": "009150 300308 APH TEL GLW CLS FLEX JBL VRT STX WDC TTMI 3037 2383 4062 285A ANET CSCO DELL HPE NTAP PSTG HPQ AAPL CIEN FN 2317 2382 3231",
+    "Power & DC infra": "BE GEV ETN PWR NVT HUBB MOD SBGSY TT CEG VST TLN OKLO",
+    "IT Services": "CTSH HCLT TCS WPRO INFY ACN EPAM IBM",
+    "Software": "FFIV MSFT NOW CDNS SNPS ORCL CRM ADBE PANW CRWD FTNT ZS NET DDOG SNOW MDB PLTR TWLO WDAY INTU",
+    "Internet": "GOOGL GOOG META AMZN NFLX UBER",
+    "Autos & space": "TSLA SPCX",
+}
+SECTOR_OF = {t: sec for sec, ts in SECTOR_FALLBACK.items() for t in ts.split()}
+
+
 def record_from_page(title, url, sections, known):
     """Minimal Earnings-tab record from a review page: tone, ticker, quarter, date, summary bullets."""
     import re
-    m = re.search(r"^(.*?)\s*(.+?)\s+\(([^)]+)\)\s+—\s+(.+?)\s+Earnings(?: Review)?\s+—\s+(\d{4}-\d{2}-\d{2})", title)
+    m = re.search(r"^([🟢🔴🟠🟡\s]*)(.+?)\s+\(([^)]+)\)\s+—\s+(.+?)\s+Earnings(?: Review)?\s+—\s+(\d{4}-\d{2}-\d{2})", title)
     if not m:
         return None
     dots = m.group(1).replace(" ", "")
@@ -51,7 +64,7 @@ def record_from_page(title, url, sections, known):
     bullets = [_plain(x) for x in bullets if _plain(x)][:6]
     paras = [_plain(x) for x in re.findall(r"<p>(.*?)</p>", summ["html"], re.S)] if summ else []
     headline = (paras[0] if paras else (bullets[0] if bullets else ""))[:260]
-    sector = next((r.get("sector") for r in known if r.get("ticker", "").split()[0] == ticker.split()[0] and r.get("sector")), "Other")
+    sector = SECTOR_OF.get(ticker.split()[0]) or next((r.get("sector") for r in known if r.get("ticker", "").split()[0] == ticker.split()[0] and r.get("sector")), "Other")
     return {"source": "bobby", "ticker": ticker, "company": m.group(2).strip(), "quarter": m.group(4).strip(),
             "report_date": m.group(5), "sentiment": tone, "headline": headline, "summary": [b for b in bullets if b != headline][:6],
             "whats_changing": [], "numbers": [], "reaction": None, "pass": None, "sector": sector,
@@ -103,6 +116,14 @@ def main():
                     rec = record_from_page(title, url, sections, bobby + rebecca)
                     if rec and rec["report_date"] >= since:
                         bobby.append(rec)
+    # a local earnings-review page supersedes older preview/review notes on the same print (same ticker, same date)
+    key = lambda r: (r.get("ticker", "").split("/")[0].split()[0] if r.get("ticker") else "", r.get("report_date", ""))
+    fresh = {key(r) for r in bobby if str(r.get("url", "")).startswith("local:")}
+    dropped = [r for r in bobby if key(r) in fresh and not str(r.get("url", "")).startswith("local:")]
+    bobby[:] = [r for r in bobby if r not in dropped]
+    for r in dropped:
+        payload["full"].pop(str(r.get("url", "")).split("?")[0], None)
+    payload["bobby"] = bobby
     # Escape "</" so the JSON can't close the <script> block.
     blob = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
     html = (HERE / "template.html").read_text()
