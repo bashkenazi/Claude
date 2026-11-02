@@ -92,6 +92,10 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    reported, then the web. A story is the catalyst with figures, "moved with <group>: <driver>", or "No catalyst
    found in your sources or the news." If no digest has run today, keep the previous daily.json.
 6. tabs/signals.json and tabs/sources.json (EVENING) — rebuild only if their inputs changed.
+6b. tabs/stocks.json (EVENING): Companies DB Tier 1–2 rows (Ticker, BBG Ticker, Company, Sector, Sub-sector, Tier),
+   public.research driver names (growth_driver_1..5, margin_driver_1..4, competition_1..3, tam_1..2, risk_1..6) and
+   aliases, and earnings_metrics joined to earnings_prints; then
+   python3 dashboards/earnings-monitor/store/build_stocks.py tiers.json research.json labels.json aliases.json metrics.json <S>/tabs/stocks.json
 7. PAUSED (Bobby, 2026-11-02: database is being cut down; skip this step and keep the live page's datapoints
    files and tabs/dp_index.json as they are until he says to resume).
    Datapoints + Composite Evidence Index (EVENING): export public.research_evidence for the last 9 months with
