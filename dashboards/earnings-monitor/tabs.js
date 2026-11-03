@@ -1025,7 +1025,7 @@
     const id = qrId(co.t);
     if (QR.cfg.has(id)) return QR.cfg.get(id);
     let cfg = null;
-    if (QR.db) { try { const s = await QR.db.collection('qr').doc(id).get(); if (s.exists) cfg = s.data(); } catch (e) {} }
+    if (QR.db) { try { const s = await QR.db.collection('qr').doc(id).get(); if (s.exists) cfg = JSON.parse(JSON.stringify(s.data())); } catch (e) {} }
     if (!cfg) cfg = await qrDefault(co, false);
     QR.cfg.set(id, cfg); return cfg;
   }
