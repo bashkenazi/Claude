@@ -54,6 +54,10 @@
   const fresh = a => a == null ? '' : a <= 2 ? 'fresh' : a <= 7 ? 'aging' : 'stale';
   const head = (eyebrow, title, lede) => `<section class="panel vh"><span class="eyebrow">${eyebrow}</span><h1>${title}</h1>${lede ? `<p class="lede">${lede}</p>` : ''}</section>`;
   const none = msg => `<p class="empty-panel">${msg}</p>`;
+  // one sentence: the first sentence of a reason, capped at ~30 words; the full text sits in the hover title
+  const oneSent = t => { let all = String(t || '').replace(/\s+/g, ' ').trim(); if (!all) return '';
+    const mw = all.match(/^Moved with ([^:(]+?)\s*(?:\([^)]*\))?\s*:\s*(.+)$/i); if (mw) { const d = mw[2].split(/;|\s\(|,\s(?=[a-z])/)[0].replace(/[\s.]+$/, ''); return `Moved with ${mw[1].trim()}: ${d}.`; } let x = all.split(/(?<=[.!?])\s+(?=[A-Z("'$])/)[0]; const w = x.split(' '); if (w.length > 30) x = w.slice(0, 30).join(' ').replace(/[\s,;:–—-]+$/, '') + '…'; return x; };
+  const whyHtml = t => { const one = oneSent(t); return one ? `<span class="why1" title="${esc(t)}">${attr(one)}</span>` : ''; };
   const attr = t => esc(t).replace(/\s*\[([^\]]{2,90})\]\s*$/, ' <span class="attr">$1</span>');
   const srcList = x => arr(x && x.sources).concat(x && x.source ? [x.source] : []).filter(Boolean);
   const srcLine = (x, label) => { const l = srcList(x); return l.length ? `<div class="srcl"><span>${label || 'Source'}</span>${l.map(esc).join(' · ')}</div>` : ''; };
@@ -188,7 +192,7 @@
       up = sorted.filter(m => m.c > 0).slice(0, N).map(mk); dn = sorted.filter(m => m.c < 0).reverse().slice(0, N).map(mk);
     } else { up = up.slice(0, N); dn = dn.slice(0, N); }
     const pct = v => v == null ? '' : ((+v > 0 ? '+' : '') + (+v).toFixed(1) + '%');
-    const mover = (m) => `<div class="li"><span class="stripe ${+m.chg_1d >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(m.ticker)} <b>${esc(m.name || '')}</b>${noteUI('move:' + ntKey(m.ticker) + '|' + (DLY.as_of || ''), m.ticker, (m.name || m.ticker) + ' move ' + (DLY.as_of || ''))} <span class="mono ${+m.chg_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(m.chg_1d)}</span>${m.group ? ` <span class="chip out">${esc(m.group)}</span>` : ''}<div>${attr(m.why || 'No catalyst found in your sources or the news.')}</div>${valLine(m.ticker, true)}${srcLine(m)}</div></div>`;
+    const mover = (m) => `<div class="li"><span class="stripe ${+m.chg_1d >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(m.ticker)} <b>${esc(m.name || '')}</b>${noteUI('move:' + ntKey(m.ticker) + '|' + (DLY.as_of || ''), m.ticker, (m.name || m.ticker) + ' move ' + (DLY.as_of || ''))} <span class="mono ${+m.chg_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(m.chg_1d)}</span>${m.group ? ` <span class="chip out">${esc(m.group)}</span>` : ''}<div>${m.why ? whyHtml(m.why) : '<span class="sub">No catalyst found in your sources or the news.</span>'}</div>${valLine(m.ticker, true)}${srcLine(m)}</div></div>`;
     const W = 900, bar = secs.length ? Math.max(...secs.map(s => Math.abs(+s.median_1d || 0)), 0.5) : 1;
     host.innerHTML = head('Daily moves · ' + esc(DLY.as_of || ''), 'What moved and why',
       `Biggest one-day moves across the ${esc(DLY.universe_n || '')}-name Master comps universe on ${esc(DLY.as_of || 'the last trading day')}, by company and by subsector, with the catalyst from your research flow or the news.`) +
@@ -219,7 +223,7 @@
     names.sort((a, b) => b.c - a.c);
     const why = useStories && sec && sec.why ? `<p style="margin:0 0 6px">${attr(sec.why)}</p>` : (useStories ? '' : `<p class="sub" style="margin:0 0 6px">Reasons are written after the day's tech digest; these are live prices only.</p>`);
     const rows = names.map(x => { const s = useStories ? storyOf(x.t) : null, big = Math.abs(x.c) >= 5;
-      return `<div class="sd-row${big ? ' big' : ''}"><span class="sd-t">${tk(x.t)} <span class="sub">${esc(x.n || '')}</span></span><span class="mono ${x.c >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.c)}</span>${x.c5 != null ? `<span class="sub mono">5d ${p1(x.c5)}</span>` : '<span></span>'}<span class="sd-w">${s && s.why ? attr(s.why) + (arr(s.sources).length ? ` <span class="sub">· ${arr(s.sources).map(esc).join(' · ')}</span>` : '') : (big && useStories ? '<span class="sub">No catalyst found in your sources or the news.</span>' : '')}</span></div>`; }).join('');
+      return `<div class="sd-row${big ? ' big' : ''}"><span class="sd-t">${tk(x.t)} <span class="sub">${esc(x.n || '')}</span></span><span class="mono ${x.c >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.c)}</span>${x.c5 != null ? `<span class="sub mono">5d ${p1(x.c5)}</span>` : '<span></span>'}<span class="sd-w">${s && s.why ? whyHtml(s.why) + (arr(s.sources).length ? ` <span class="sub">· ${arr(s.sources).map(esc).join(' · ')}</span>` : '') : (big && useStories ? '<span class="sub">No catalyst found in your sources or the news.</span>' : '')}</span></div>`; }).join('');
     return `<div class="sb-det">${why}${rows || '<p class="sub" style="margin:0">No names priced in this group.</p>'}</div>`;
   }
   function wireSectors(host) {
@@ -288,7 +292,7 @@
       const bar = Math.max(...secs.map(s => Math.abs(s.m)), 0.5);
       const why = new Map(arr(DLY.up).concat(arr(DLY.down)).map(m => [m.ticker, m]));
       const sameDay = showDate ? (latest && DLY.as_of === latest) : (DLY.as_of === latest);
-      const line = r => { const w = sameDay ? why.get(r.t) : null; return `<div class="li"><span class="stripe ${r.c1 >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(r.t)} <b>${esc(r.n)}</b> <span class="mono ${cls(r.c1)}">${pct(r.c1)}</span> ${r.c5 != null ? `<span class="sub mono">5d ${pct(r.c5)}</span>` : ''} <span class="chip out">${esc(r.g)}</span>${showDate && r.date !== latest ? ` <span class="sub">close ${esc(r.date)}</span>` : ''}${w && w.why ? `<div>${attr(w.why)}</div>` : ''}</div></div>`; };
+      const line = r => { const w = sameDay ? why.get(r.t) : null; return `<div class="li"><span class="stripe ${r.c1 >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(r.t)} <b>${esc(r.n)}</b> <span class="mono ${cls(r.c1)}">${pct(r.c1)}</span> ${r.c5 != null ? `<span class="sub mono">5d ${pct(r.c5)}</span>` : ''} <span class="chip out">${esc(r.g)}</span>${showDate && r.date !== latest ? ` <span class="sub">close ${esc(r.date)}</span>` : ''}${w && w.why ? `<div>${whyHtml(w.why)}</div>` : ((DLY.stories || {})[r.t] && sameDay ? `<div>${whyHtml((DLY.stories || {})[r.t].why)}</div>` : '')}</div></div>`; };
       const s = stocks.slice().sort((a, b) => b.c1 - a.c1), NN = Math.min(G.n || 12, s.length), up = s.slice(0, NN), dn = s.slice(-NN).reverse();
       const upN = stocks.filter(r => r.c1 > 0).length;
       status(stat);

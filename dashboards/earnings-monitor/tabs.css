@@ -213,3 +213,5 @@ table.dt tbody tr:hover td:first-child { background: var(--surface-2); }
 .tbl-wrap > table td:first-child { max-width: 320px; white-space: normal; }
 
 .mk-short h3 { font-size: 12.5px; margin-bottom: 2px; } .mk-short ul.b { gap: 2px; } .mk .mk-row { padding: 3px 0; } .mk-more { margin-top: 2px; }
+
+.why1 { cursor: help; }

@@ -131,7 +131,7 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    (most extreme first, cap 60). Sources for each story, in order: the routine pages from step 4, then desk mail
    since the prior trading day (Outlook search by ticker/name), today's Daily Research PDFs (OneDrive, folder named
    like 11.2.26), AlphaSense (alphasense_genai; ignore its price figures), srs_documents for names that just
-   reported, then the web. A story is the catalyst with figures, "moved with <group>: <driver>", or "No catalyst
+   reported, then the web. A story is ONE sentence (≤ 30 words; Bobby, 2026-11-03) on why it moved: the catalyst with its key figure, "moved with <group>: <driver>", or "No catalyst
    found in your sources or the news." If no digest has run today, keep the previous daily.json.
 6. tabs/signals.json and tabs/sources.json (EVENING) — rebuild only if their inputs changed.
 6b. tabs/stocks.json (EVENING): Companies DB Tier 1–2 rows (Ticker, BBG Ticker, Company, Sector, Sub-sector, Tier),
