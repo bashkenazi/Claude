@@ -18,6 +18,10 @@ new row per date, on conflict do nothing, and read the latest one first).
   public.research_ideas row with created_at after the stamp (stamp key 'research_ideas' = max(created_at)).
 - Ideas & themes (tabs/ideas.json + digest themes in today.json): any new Idea Generator, thesis-builder, industry-cycle or
   operating-comps page since the stamp, or any new public.research_ideas row since the stamp.
+- Earnings (steps 1–3): any public.earnings_prints row with created_at or updated_at after the stamp (stamp key
+  'earnings_prints' = max(greatest(created_at, updated_at))). The "Earnings Review — New Prints" routine writes these
+  rows as each review finishes, so a new review shows on the Earnings tab at the next run (within ~2 hours) instead of
+  waiting for 16:00. Rebuild Earnings (and the Stocks earnings metrics for those tickers) whenever this check fires.
 - Estimates & screens (tabs/screens.json): a new Consensus Revisions or Comps Screen page since the stamp.
 - Valuation (tabs/comps.json, the valuation lines on every card): the Master comps workbook's lastModifiedDateTime, or a
   new Comps Screen / Consensus Revisions page since the stamp. Read the values from the workbook's 'Template (2)' sheet
