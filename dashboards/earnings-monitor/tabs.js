@@ -39,7 +39,29 @@
   const fmtD = iso => { if (!iso) return ''; const d = new Date(String(iso).slice(0, 10) + 'T12:00:00'); return isNaN(d) ? esc(iso) : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
   const fmtDW = iso => { const d = new Date(String(iso).slice(0, 10) + 'T12:00:00'); return isNaN(d) ? esc(iso) : d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' }); };
   const link = (url, label) => url ? `<a class="ext" href="${esc(url)}" target="_blank" rel="noopener">${label || 'Open'} ↗</a>` : '';
-  const tk = (t, cls) => t ? `<span class="tk-chip${cls ? ' ' + cls : ''}">${esc(t)}</span>` : '';
+  // ---- company names for numeric tickers (2330 TT, 285A JT, 000660 KS…): shown next to the ticker everywhere ----
+  const nk = t => String(t || '').toUpperCase().replace(/\s+EQUITY$/, '').replace(/\s+JT$/, ' JP').replace(/\s+(US|UW|UN|UQ)$/, '').replace(/\s+/g, ' ').trim();
+  const NAMES = new Map();
+  const nmClean = n => String(n || '').replace(/\s*\([^)]*\)\s*$/, '').trim();
+  const putName = (t, n, strong) => { const k = nk(t), v = nmClean(n); if (!k || !v || v.toUpperCase() === k) return; if (strong || !NAMES.has(k)) NAMES.set(k, v); };
+  arr((D.universe || {}).names).forEach(x => putName(x.t, x.n));                      // Bloomberg short names (fallback)
+  Object.values((D.comps || {}).rows || {}).forEach(x => putName(x.bbg_ticker, x.name));
+  arr((D.daily || {}).moves).forEach(x => putName(x.t, x.n));
+  arr((D.dp_index || {}).meta).forEach(x => putName(x.t, x.n, true));
+  arr((D.pipeline || {}).items).forEach(x => putName(x.ticker, x.company, true));
+  arr((D.stocks || {}).companies).forEach(x => { putName(x.t, x.name, true); putName(x.bbg, x.name, true); });
+  const isNumT = t => /^\d/.test(String(t || '').trim());
+  const nameOf = t => NAMES.get(nk(t)) || NAMES.get(nk(t).split(' ')[0]) || '';
+  const tk = (t, cls) => { if (!t) return ''; const nm = isNumT(t) ? nameOf(t) : '';
+    return `<span class="tk-chip${cls ? ' ' + cls : ''}"${nm ? ` data-nm="${esc(nm)}" title="${esc(nm)}"` : ''}>${esc(t)}${nm ? `<span class="tk-nm"> · ${esc(nm)}</span>` : ''}</span>`; };
+  // drop the name inside the chip where the same name is already printed right after it
+  const dedupeNames = root => (root || document).querySelectorAll('.tk-chip[data-nm]:not([data-dd])').forEach(c => {
+    c.dataset.dd = '1'; let n = c.nextSibling, txt = '';
+    while (n && txt.trim().length < 4) { txt += (n.textContent || ''); n = n.nextSibling; }
+    const a = txt.trim().toLowerCase().replace(/[^a-z0-9]/g, ''), b = c.dataset.nm.toLowerCase().replace(/[^a-z0-9]/g, '');
+    if (a && b && (a.startsWith(b.slice(0, 5)) || b.startsWith(a.slice(0, 5)))) { const s2 = c.querySelector('.tk-nm'); if (s2) s2.remove(); } });
+  new MutationObserver(() => dedupeNames()).observe(document.documentElement, { childList: true, subtree: true });
+  window.__tkName = t => isNumT(t) ? nameOf(t) : '';
   const signOf = v => { const s = String(v == null ? '' : v).trim().toLowerCase(); if (/^\+|^pos|bull|up\b|beat|raise|improv|accel/.test(s)) return 1; if (/^[-−–]|^neg|bear|down\b|miss|cut|deteri|decel/.test(s)) return -1; return 0; };
   const numCls = v => { const g = signOf(v); return g > 0 ? 'up' : g < 0 ? 'dn' : ''; };
   const SKILL_NAME = {
@@ -755,6 +777,7 @@
       <div class="seg" id="sk-tier"><button type="button" data-v="" aria-pressed="${!fs.tier}">All</button><button type="button" data-v="1" aria-pressed="${fs.tier === '1'}">Tier 1</button><button type="button" data-v="2" aria-pressed="${fs.tier === '2'}">Tier 2</button></div>
       <select id="sk-sec"><option value="">All sectors</option>${secs.map(x => `<option${x === fs.sec ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select>
       <select id="sk-sub"><option value="">All subsectors</option>${subsAll.map(x => `<option${x === fs.sub ? ' selected' : ''}>${esc(x)}</option>`).join('')}</select>
+      <div class="sub sk-key" title="Composite Evidence Index minus the universe, from your Supabase datapoints: reliability × confidence × recency. 0 = as positive as the average name.">Number = evidence index vs universe (−100 to +100; 0 = average, + more bullish)</div>
       <div class="sk-list">${list.map((c, i) => { const I = idxOf(c), n = I ? I.c.length - 1 : 0, sb = arr(c.subs)[0] || c.sector, hdr = i === 0 || (arr(list[i - 1].subs)[0] || list[i - 1].sector) !== sb ? `<div class="sk-grp">${esc(c.sector)} · ${esc(sb)}</div>` : ''; return hdr + `<a href="#stocks/${encodeURIComponent(c.key)}/${sub}"${cur && c.key === cur.key ? ' aria-current="page"' : ''}><b>${esc(c.t)}</b><span class="sub">${esc(c.name)}</span><span class="chip out">T${esc(c.tier)}</span>${I ? `<span class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}" title="Composite vs universe">${sgn(I.x[n])}</span>` : ''}</a>`; }).join('')}</div></div>`;
     let body;
     if (!cur) body = `<section class="panel"><h2>Pick a company</h2><p class="sub">Each Tier 1–2 name has four views: the debate, every datapoint organized by its drivers, the earnings-review metrics table, and what management has said over time.</p></section>`;
