@@ -181,3 +181,10 @@ pre.method { white-space: pre-wrap; font-size: 12px; margin: 8px 0 0; }
 @media (max-width: 860px) { .sk-wrap { grid-template-columns: 1fr; } .sk-nav { position: static; max-height: none; } .sk-list { max-height: 240px; } }
 
 .sk-grp { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--ink-3, #7a8599); padding: 8px 8px 2px; }
+
+.sk-ctl { flex-wrap: wrap; margin: 6px 0; }
+.sk-sum .b li { margin: 3px 0; }
+.sk-pitch2 { margin: 0 0 10px; font-size: 13.5px; }
+.sk-conv { display: inline-block; width: 60px; height: 6px; background: var(--surface-2); border-radius: 3px; margin-right: 6px; vertical-align: middle; }
+.sk-conv i { display: block; height: 100%; background: var(--ink-2); border-radius: 3px; }
+.sk-ten td { vertical-align: top; } .nowrap { white-space: nowrap; }

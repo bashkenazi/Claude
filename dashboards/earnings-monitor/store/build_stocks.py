@@ -2,6 +2,10 @@
 """Stocks tab data: one entry per Companies DB Tier 1-2 name.
 
 Usage: python3 build_stocks.py <tiers.json> <research.json> <labels.json> <aliases.json> <metrics.json> <out.json>
+       [--debate a.json,b.json,...] [--theses theses_revised.json]
+
+--debate   written debates {key: {bull[], bear[], decides[], tenets[{tenet, conviction, lean, evidence}]}}
+--theses   tenets from the Notion "Thesis - Revised" pages {pages: [{company, ticker, url, summary_pitch, stance, tenets[]}]}
 
 tiers.json    Companies DB rows [{t (Ticker), b (BBG Ticker), c (Company), s (Sector), u (Sub-sector JSON list), r (Tier)}]
 research.json public.research [{id, ticker, n}]  (the research ids that have evidence)
@@ -42,7 +46,22 @@ def kws(*texts):
 
 
 def main():
+    args = sys.argv[1:]
+    opt = {}
+    for flag in ("--debate", "--theses"):
+        if flag in args:
+            i = args.index(flag); opt[flag] = args[i + 1]; del args[i:i + 2]
+    sys.argv[1:] = args
     tiers, research, labels, aliases, metrics = (json.load(open(a)) for a in sys.argv[1:6])
+    debate = {}
+    for f in (opt.get("--debate") or "").split(","):
+        if f:
+            try: debate.update(json.load(open(f)))
+            except Exception as e: print("skip", f, e)
+    theses = []
+    if opt.get("--theses"):
+        try: theses = json.load(open(opt["--theses"])).get("pages", [])
+        except Exception as e: print("skip theses", e)
     lab = {r["id"]: r for r in labels}; ali = {r["id"]: r for r in aliases}
     by_t, by_n = {}, {}
     for r in research:
@@ -84,6 +103,20 @@ def main():
         fam = next((FAM_OF[x] for x in subs if x in FAM_OF), None) or ("Software" if "AI Labs (private)" in subs or "Holding Cos" in subs else "Other")
         out.append({"key": re.sub(r"[^A-Za-z0-9]+", "-", disp).strip("-"), "t": disp, "bbg": bbg, "name": nm or c.get("t"), "tier": c.get("r"),
                     "sector": fam, "sub": ", ".join(subs), "subs": subs, "coverage": c.get("s") or "", "rids": rids, "drivers": drivers, "metrics": mrows})
+    def match_thesis(c):
+        keys = {norm(c["t"]), norm(c["bbg"]), norm(c["t"]).split()[0] if c["t"] else ""}
+        nm = re.sub(r"[^a-z0-9]", "", (c["name"] or "").lower())
+        for p in theses:
+            pt = norm(p.get("ticker") or "")
+            pc = re.sub(r"[^a-z0-9]", "", re.sub(r"thesis.*$", "", (p.get("company") or "").lower()))
+            if (pt and (pt in keys or pt.split()[0] in keys)) or (pc and len(pc) >= 3 and (nm.startswith(pc) or pc.startswith(nm[:max(4, len(pc))]))):
+                return p
+        return None
+    for c in out:
+        if c["key"] in debate: c["debate"] = debate[c["key"]]
+        p = match_thesis(c)
+        if p: c["thesis"] = {k: p.get(k) for k in ("url", "summary_pitch", "stance", "tenets", "updated", "company")}
+    print(f"debates {sum(1 for c in out if c.get('debate'))} · revised theses {sum(1 for c in out if c.get('thesis'))}")
     out.sort(key=lambda x: (x["tier"] or 9, x["t"]))
     json.dump({"companies": out}, open(sys.argv[6], "w"), ensure_ascii=False, separators=(",", ":"))
     print(f"{len(out)} companies · {sum(1 for x in out if x['rids'])} with evidence · {sum(1 for x in out if x['metrics'])} with earnings tables · "

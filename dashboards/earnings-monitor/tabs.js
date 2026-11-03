@@ -780,14 +780,55 @@
     return [...g.values()].sort((a, b) => FAMS.indexOf(a.fam) - FAMS.indexOf(b.fam) || (order.get(a.label) ?? 99) - (order.get(b.label) ?? 99) || b.rows.length - a.rows.length);
   }
   const famBar = () => `<div class="seg"><button type="button" data-f="" aria-pressed="true">All</button>${FAMS.slice(0, 6).map(f => `<button type="button" data-f="${f}" aria-pressed="false">${f}</button>`).join('')}</div>`;
+  const IMPSC = (r, SRC) => { const age = (Date.now() - new Date(r[2] + 'T12:00:00')) / 864e5; if (age > 183) return 0;
+    return REL(r[6], SRC[r[7]]) * ({ h: 1, m: 0.75, l: 0.45 }[r[5]] || 0.7) * (/\d/.test(r[9]) ? 1.25 : 1) * (r[4] === 0 || r[4] == null ? 0.7 : 1) * Math.pow(0.5, age / 120); };
+  function importantSet(cur, rows, SRC) {
+    const sc = rows.map(r => ({ r, s: IMPSC(r, SRC), d: assign(cur, r) })).filter(x => x.s > 0).sort((a, b) => b.s - a.s);
+    const keep = new Set(sc.slice(0, 30).map(x => x.r[0])), per = new Map();
+    sc.forEach(x => { const n = per.get(x.d) || 0; if (n < 2) { keep.add(x.r[0]); per.set(x.d, n + 1); } });
+    return keep;
+  }
+  const STYPE = { sell_side: 'Sell-side', company: 'Company / mgmt', independent_research: 'Independent research', news: 'News', substack: 'Substack', email: 'Email', evernote: 'Notes', twitter: 'X / Twitter', reddit: 'Reddit', fintool: 'Fintool' };
   function dpView(cur, rows, SRC) {
     if (!rows.length) return `<section class="panel">${none('No datapoints on this name in the window.')}</section>`;
-    rows = rows.slice().sort((a, b) => b[2].localeCompare(a[2]));
-    const gs = grouped(cur, rows), per = G.n || 8;
-    const legend = `<div class="legend"><span><i style="background:var(--pos)"></i>positive</span><span><i style="background:var(--neg)"></i>negative</span><span><i style="background:var(--warn,#eda100)"></i>mixed</span><span class="sub">fainter = lower confidence</span></div>`;
-    return `<section class="panel"><div class="panel-h"><h2>Datapoints by driver</h2><span class="muted">${rows.length} rows</span></div>${famBar()}${legend}` +
-      FAMS.map(f => { const xs = gs.filter(x => x.fam === f); if (!xs.length) return ''; return `<div class="sk-fam" data-fam="${f}"><h3>${f}</h3>${xs.map(x => { const p = x.rows.filter(r => r[4] === 1).length, n = x.rows.filter(r => r[4] === -1).length;
-        return `<details class="sk-drv"${x.rows.length && !/^Other/.test(x.label) ? ' open' : ''}><summary><b>${esc(x.label)}</b> <span class="sub">${x.rows.length} · <span class="c-pos">${p}▲</span> <span class="c-neg">${n}▼</span> · latest ${fmtD(x.rows[0][2])}</span></summary><div class="list">${x.rows.slice(0, per).map(r => rowHtml(r, SRC)).join('')}${x.rows.length > per ? `<details><summary class="sub">${x.rows.length - per} more</summary><div class="list">${x.rows.slice(per).map(r => rowHtml(r, SRC)).join('')}</div></details>` : ''}</div></details>`; }).join('')}</div>`; }).join('') + `</section>`;
+    const imp = importantSet(cur, rows, SRC);
+    const types = [...new Set(rows.map(r => r[6]).filter(Boolean))].sort();
+    const drivers = [...new Set(rows.map(r => assign(cur, r)))].sort();
+    setTimeout(() => wireDp(cur, rows, SRC, imp), 0);
+    return `<section class="panel"><div class="panel-h"><h2>Datapoints</h2><span class="muted" id="skd-count"></span></div>
+      <div class="ctl sk-ctl" role="group" aria-label="Datapoint filters">
+        <div class="seg" id="skd-imp"><button type="button" data-v="imp" aria-pressed="true">Most important</button><button type="button" data-v="all" aria-pressed="false">All</button></div>
+        ${famBar()}
+        <label>Driver <select id="skd-drv"><option value="">All</option>${drivers.map(d => `<option>${esc(d)}</option>`).join('')}</select></label>
+        <div class="seg" id="skd-dir"><button type="button" data-v="" aria-pressed="true">Any</button><button type="button" data-v="1" aria-pressed="false">Positive</button><button type="button" data-v="-1" aria-pressed="false">Negative</button><button type="button" data-v="0" aria-pressed="false">Mixed</button></div>
+        <label>Source <select id="skd-src"><option value="">All</option>${types.map(t => `<option value="${esc(t)}">${esc(STYPE[t] || t)}</option>`).join('')}<option value="__channel">Channel checks &amp; experts</option><option value="__mgmt">Management only</option></select></label>
+        <label>Confidence <select id="skd-conf"><option value="">Any</option><option value="h">High</option><option value="hm">High + medium</option></select></label>
+        <label>Search <input type="search" id="skd-q" placeholder="Word or number"></label>
+      </div>
+      <div class="legend"><span><i style="background:var(--pos)"></i>positive</span><span><i style="background:var(--neg)"></i>negative</span><span><i style="background:var(--warn,#eda100)"></i>mixed</span><span class="sub">fainter = lower confidence · newest first</span></div>
+      <div class="list" id="skd-list"></div><button type="button" class="btn more" id="skd-more" hidden>Show 50 more</button></section>`;
+  }
+  function wireDp(cur, rows, SRC, imp) {
+    const b = document.getElementById('sk-body'); if (!b || !document.getElementById('skd-list')) return;
+    const st = { imp: 'imp', fam: '', drv: '', dir: '', src: '', conf: '', q: '', shown: 50 };
+    const CHAN = /semianalysis|cleveland|bwg|trendforce|channel check|third bridge|tegus|expert|supply chain/i;
+    const sorted = rows.slice().sort((a, b) => b[2].localeCompare(a[2]) || b[0] - a[0]);
+    const draw = () => {
+      const xs = sorted.filter(r => (st.imp === 'all' || imp.has(r[0])) && (!st.fam || FAMOF(r[3]) === st.fam) && (!st.drv || assign(cur, r) === st.drv) && (st.dir === '' || String(r[4]) === st.dir)
+        && (!st.src || (st.src === '__channel' ? CHAN.test(SRC[r[7]] || '') : st.src === '__mgmt' ? (r[6] === 'company' || MGMT.test(SRC[r[7]] || '')) : r[6] === st.src))
+        && (!st.conf || (st.conf === 'h' ? r[5] === 'h' : r[5] === 'h' || r[5] === 'm')) && (!st.q || r[9].toLowerCase().includes(st.q)));
+      document.getElementById('skd-count').textContent = `${xs.length} of ${rows.length} datapoints`;
+      document.getElementById('skd-list').innerHTML = xs.slice(0, st.shown).map(r => rowHtml(r, SRC).replace('<span class="mono sub">', `<span class="chip out">${esc(assign(cur, r))}</span> <span class="mono sub">`)).join('') || none('Nothing matches these filters.');
+      document.getElementById('skd-more').hidden = xs.length <= st.shown;
+    };
+    const seg = (id, k) => b.querySelectorAll('#' + id + ' button').forEach(x => x.addEventListener('click', () => { st[k] = x.dataset.v; st.shown = 50; b.querySelectorAll('#' + id + ' button').forEach(y => y.setAttribute('aria-pressed', String(y === x))); draw(); }));
+    seg('skd-imp', 'imp'); seg('skd-dir', 'dir');
+    b.querySelectorAll('[data-f]').forEach(x => x.addEventListener('click', () => { st.fam = x.dataset.f; st.shown = 50; draw(); }));
+    const sel = (id, k) => document.getElementById(id).addEventListener('change', e => { st[k] = e.target.value; st.shown = 50; draw(); });
+    sel('skd-drv', 'drv'); sel('skd-src', 'src'); sel('skd-conf', 'conf');
+    document.getElementById('skd-q').addEventListener('input', e => { st.q = e.target.value.trim().toLowerCase(); st.shown = 50; draw(); });
+    document.getElementById('skd-more').addEventListener('click', () => { st.shown += 50; draw(); });
+    draw();
   }
   function debateView(cur, rows, SRC, th) {
     if (!rows.length) return `<section class="panel">${none('No datapoints on this name in the window, so no debate to show.')}</section>`;
@@ -801,11 +842,26 @@
     const contested = [...by.values()].filter(y => y.p && y.n).map(y => ({ ...y, heat: Math.min(y.sp, y.sn) })).sort((a, b) => b.heat - a.heat).slice(0, 5);
     const bal = [...by.values()].sort((a, b) => (b.sp + b.sn) - (a.sp + a.sn)).slice(0, 10);
     const tot = bal.reduce((m, y) => Math.max(m, y.sp, y.sn), 0.001);
-    return `<section class="panel"><div class="panel-h"><h2>The debate</h2><span class="muted">${rows.length} datapoints · weighted by source reliability × confidence × recency (90-day half-life)</span></div>
-      ${th ? `<div class="sk-th"><b>Your thesis</b> ${th.stance ? `<span class="chip out">${esc(th.stance)}</span>` : ''} ${esc(th.summary || '')}${arr(th.tenets).length ? `<ul class="b">${arr(th.tenets).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div>` : ''}
+    return summaryPanel(cur, th) + `<section class="panel"><div class="panel-h"><h2>The evidence behind it</h2><span class="muted">${rows.length} datapoints · weighted by source reliability × confidence × recency (90-day half-life)</span></div>
       <div class="grid2"><div><h3 class="c-pos">Bull case</h3><div class="list">${pick(bull, N).map(it).join('') || none('No positive evidence in the window.')}</div></div><div><h3 class="c-neg">Bear case</h3><div class="list">${pick(bear, N).map(it).join('') || none('No negative evidence in the window.')}</div></div></div>
       <h3 style="margin-top:14px">Where the evidence leans, by driver</h3><div class="sk-bal">${bal.map(y => `<div class="sk-balr"><span>${esc(y.d)} <span class="sub">${y.p}▲ ${y.n}▼</span></span><span class="sk-bt"><span class="l"><i class="neg" style="width:${(y.sn / tot * 100).toFixed(1)}%"></i></span><span class="r"><i class="pos" style="width:${(y.sp / tot * 100).toFixed(1)}%"></i></span></span></div>`).join('')}</div>
       ${contested.length ? `<h3 style="margin-top:14px">What decides it</h3><p class="sub" style="margin:0 0 6px">Drivers with strong evidence on both sides.</p><ul class="b">${contested.map(y => `<li><b>${esc(y.d)}</b> — ${y.p} positive vs ${y.n} negative datapoints</li>`).join('')}</ul>` : ''}</section>`;
+  }
+  function summaryPanel(cur, th) {
+    const DB = cur.debate || {}, RT = cur.thesis || null;
+    const tenets = RT && arr(RT.tenets).length ? RT.tenets : arr(DB.tenets);
+    const isDraft = !(RT && arr(RT.tenets).length);
+    const conv = v => { const n = +v; return isFinite(n) && n > 0 ? `<span class="sk-conv" title="Conviction ${n}/10"><i style="width:${n * 10}%"></i></span><b class="mono">${n}</b>` : '<span class="sub">—</span>'; };
+    const lean = t => { const l = String(t.lean || t.status || ''); const c = /support|strength|🟢|improv/i.test(l) ? 'c-pos' : /challeng|weak|🔴|deterior/i.test(l) ? 'c-neg' : ''; return l ? `<span class="${c}">${esc(l)}</span>` : ''; };
+    const ul = (xs, cls) => arr(xs).length ? `<ul class="b ${cls || ''}">${arr(xs).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : none('Not written yet.');
+    return `<section class="panel sk-sum">
+      ${RT && RT.summary_pitch ? `<p class="sk-pitch2"><b>Summary pitch</b> ${esc(RT.summary_pitch)} ${link(RT.url, 'Thesis')}</p>` : ''}
+      <div class="grid2"><div><h3 class="c-pos">Bull case</h3>${ul(DB.bull)}</div><div><h3 class="c-neg">Bear case</h3>${ul(DB.bear)}</div></div>
+      ${arr(DB.decides).length ? `<h3>What decides it</h3>${ul(DB.decides)}` : ''}
+      ${tenets.length ? `<h3>Thesis tenets ${isDraft ? '<span class="chip out">Draft from evidence — edit in Notion</span>' : `<span class="chip out">From your revised thesis</span> ${link(RT.url, 'Notion')}`}</h3>
+        <table class="dt sk-ten"><thead><tr><th>Tenet</th><th>Conviction</th><th>${isDraft ? 'Evidence lean' : 'Status'}</th><th>Why</th></tr></thead><tbody>${tenets.map(t => `<tr><td>${esc(t.tenet || '')}</td><td class="nowrap">${conv(t.conviction)}</td><td>${lean(t)}</td><td class="sub">${esc(t.why || t.evidence || '')}</td></tr>`).join('')}</tbody></table>` : ''}
+      ${th && !RT ? `<p class="sub" style="margin-top:8px">Thesis page: ${esc(th.stance || '')} ${esc(th.summary || '')}</p>` : ''}
+      ${!DB.bull ? '<p class="sub">The written debate for this name is not in this build yet; the evidence below is.</p>' : ''}</section>`;
   }
   function mgmtView(cur, rows, SRC) {
     const ms = rows.filter(r => r[6] === 'company' || MGMT.test(SRC[r[7]] || ''));
