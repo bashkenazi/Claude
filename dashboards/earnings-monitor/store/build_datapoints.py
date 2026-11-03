@@ -154,7 +154,8 @@ def main():
         sec = ov.get((r.get("ticker") or "").upper()) or FAM_OF.get(sub) or FALLBACK.get(k.split()[0] if k else "") or kw_family(r.get("subsector"), r.get("sector"), r.get("n"), k)
         comp[r["id"]] = {"t": r.get("ticker") or r.get("n") or str(r["id"]), "n": r.get("n") or u.get("n") or "",
                          "sub": sub or r.get("subsector") or sec, "sec": sec}
-    ev = [e for e in ev if e.get("d")]
+    # rows the cleanup tagged "[ARCHIVED dup_of=…]" are duplicates kept in Supabase for audit; leave them out
+    ev = [e for e in ev if e.get("d") and not str(e.get("t") or "").lstrip().startswith("[ARCHIVED")]
     last = asof or max(date.fromisoformat(e["d"]) for e in ev)
     first = min(date.fromisoformat(e["d"]) for e in ev)
     dates = list(fridays(first, last))
