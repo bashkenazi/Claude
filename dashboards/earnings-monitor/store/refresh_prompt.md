@@ -14,9 +14,10 @@ WHEN-CHANGED checks (every run, cheap): rebuild a tab only if its source has som
 last build's source stamps are stored in public.tech_daily_snapshots tab 'build.state' (payload {source: stamp}; insert a
 new row per date, on conflict do nothing, and read the latest one first).
 - Pipeline (tabs/pipeline.json): the Notion page Pipeline/Active/Ideas (dd4260f087554ddca72eaad2a0a0aa15) last_edited, the
-  Shorts database, and any new Idea Generator or Thesis - Revised page under Anthropic Output since the stamp.
+  Shorts database, any new Idea Generator or Thesis - Revised page under Anthropic Output since the stamp, and any
+  public.research_ideas row with created_at after the stamp (stamp key 'research_ideas' = max(created_at)).
 - Ideas & themes (tabs/ideas.json + digest themes in today.json): any new Idea Generator, thesis-builder, industry-cycle or
-  operating-comps page since the stamp.
+  operating-comps page since the stamp, or any new public.research_ideas row since the stamp.
 - Estimates & screens (tabs/screens.json): a new Consensus Revisions or Comps Screen page since the stamp.
 - Valuation (tabs/comps.json, the valuation lines on every card): the Master comps workbook's lastModifiedDateTime, or a
   new Comps Screen / Consensus Revisions page since the stamp. Read the values from the workbook's 'Template (2)' sheet
@@ -41,12 +42,25 @@ reads; store/ has the history schema). Check out that branch first.
 
 Routines (Bobby's scheduled tasks; each publishes a page under Notion "Anthropic Output", page 33ba883333de80a6ab40d2ed18985f31):
 | key | routine | schedule (ET) | page title starts with |
-| research-folder-digest | Research Folder Digest | weekdays 5:27 AM | "Research Digest —" (morning run) |
-| tech-email-digest-new | Tech Specialist Email Digest | daily 11:30 AM | "Tech Specialist Digest —" |
-| research-inbox-digest | Research Inbox Folder Digest | daily 6:00 PM | "Research Digest —" (evening run) |
-| semianalysis-digest | SemiAnalysis Digest | daily 8:00 PM | "SemiAnalysis Digest —" |
+| research-folder-digest | Research Inbox Folder Digest | daily 9:30 AM | "Research Digest —" |
+| semianalysis-digest | SemiAnalysis Digest | daily 10:00 AM | "SemiAnalysis Digest —" |
+| tech-email-digest-new | Tech Specialist Email Digest | daily 10:30 AM | "Tech Specialist Digest —" |
+| feedly-digest | Feedly Daily | daily 8:00 AM | "Feedly" |
 | consensus-revisions | Consensus Revisions | Fri 7:00 AM | "Consensus Revisions —" |
 | idea-generator | Idea Generator | Sun 5:00 AM | "Idea Generator —" / "Ideas —" |
+| x-scan | Grok X bot (outside Claude) | varies | "X Idea Scan", "X List Monitor" |
+| output-sweep | Anthropic Output Sweep | daily 11:00 AM | (writes Supabase only; no Notion page) |
+
+Archiving (from 2026-11-03): the daily Anthropic Output Sweep reads every run page, loads its datapoints to
+public.research_evidence, its ideas/themes/theses to public.research_ideas, saves the full page to
+public.output_sweep_ledger (content_md), then MOVES the page to Anthropic Output › Archived
+(40da883333de81a28d02ca1fdae930d5). Bobby may delete archived pages, so:
+- Search Archived as well as Anthropic Output when finding a routine's pages.
+- If a page cannot be fetched (deleted), use output_sweep_ledger.content_md for that url/page_id instead; a run listed in
+  the ledger is never "missed".
+- tabs/ideas.json ideas[] and the theme lists come FIRST from public.research_ideas (kind idea/callout -> ideas[] using
+  payload when present; kind thesis -> theses[]; kind theme -> digest themes), last 60 days by source_date, then any
+  run page newer than the sweep that is not yet in the table. Dedupe on dedupe_key / (ticker, source_url).
 Also read, when present: sellside-folder-digest ("Sell-Side Folder Sweep —"), alphasense-digest ("AlphaSense Digest —"),
 analyst-folder-extractor. Find each routine's pages with notion-search (title + date, sorted by recency) and fetch them.
 Several runs on one day are normal (manual reruns): use all of them, newest first, and dedupe datapoints.

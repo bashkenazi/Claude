@@ -5,3 +5,6 @@
 -- daily_moves          Daily moves tab: stock and sector rows per as_of date
 -- tech_daily_snapshots any tab's JSON payload per snapshot_date (today, screens, ideas, prep, sources, ...)
 -- See migrations tech_daily_earnings_and_snapshots and tech_daily_moves for the DDL.
+-- research_ideas       ideas / themes / theses / callouts swept from Notion run pages (dedupe_key unique); Tech Daily Ideas & themes
+-- output_sweep_ledger  one row per swept Notion page, with its full content_md, counts and archived_at
+-- See migration output_sweep_ideas_and_ledger for the DDL.
