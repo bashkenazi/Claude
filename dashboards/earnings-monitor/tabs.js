@@ -1234,7 +1234,7 @@
   // Mount a live QR into `host` for company `co` ({t, bbg, name}); used by the Stocks tab and the Earnings cards.
   function qrMount(host, co) {
     if (!host || host.__qr) return; host.__qr = true;
-    const st = { edit: false, yy: true, qq: true, mix: false, beat: false, mode: 'q', val: false, fresh: false, cfg: null, dq: null, dfy: null, msg: '', busy: false, viewSet: false };
+    const st = { edit: false, yy: true, qq: true, mix: false, beat: false, mode: 'q', val: true, fresh: false, cfg: null, dq: null, dfy: null, msg: '', busy: false, viewSet: false };
     const bar = () => `<div class="ctl qr-bar" role="group" aria-label="Quarterly review controls">
       <button type="button" class="btn" data-qb="update" ${st.busy ? 'disabled' : ''}>${st.busy ? 'Loading…' : 'Update'}</button>
       <button type="button" class="btn" data-qb="edit" aria-pressed="${st.edit}">${st.edit ? 'Done editing' : 'Edit rows'}</button>
@@ -1248,7 +1248,7 @@
       ${st.cfg && st.cfg.rows.length > 1 ? `<label>or a ratio <select class="qr-num">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}">${esc(r.label || r.name)}</option>`).join('')}</select> ÷ <select class="qr-den">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}"${r.role === 'rev' ? ' selected' : ''}>${esc(r.label || r.name)}</option>`).join('')}</select></label><button type="button" class="btn" data-qb="ratio">Add ratio</button>` : ''}
       <button type="button" class="btn" data-qb="reset" title="Go back to the default rows from Visible Alpha">Reset to default</button><div class="qr-cands"></div></div>` : '';
     const sets = () => st.mode === 'q' ? (st.dq ? [{ data: st.dq, fy: false }] : null) : st.mode === 'fy' ? (st.dfy ? [{ data: st.dfy, fy: true }] : null) : (st.dq && st.dfy ? [{ data: st.dq, fy: false }, { data: st.dfy, fy: true }] : null);
-    const valHtml = () => !st.val ? '' : `<section class="qv"><div class="panel-h"><h3>Upside / downside valuation</h3><span class="muted">defaults to consensus · type to override</span></div><div class="qv-body">${st.dfy && st.cfg.valk ? qrValModel(co, st.cfg, st.dfy, st) : '<p class="sub">Loading consensus for the valuation…</p>'}</div></section>`;
+    const valHtml = () => !st.val ? '' : `<section class="qv"><div class="panel-h"><h3>Upside / downside valuation · 5 columns: FY actual, FY+1, FY+2, Upside, Downside</h3><span class="muted">defaults to Visible Alpha consensus · type in a blue box to override</span></div><div class="qv-body">${st.dfy && st.cfg.valk ? qrValModel(co, st.cfg, st.dfy, st) : '<p class="sub">Loading consensus for the valuation…</p>'}</div></section>`;
     const paint = () => {
       const S = st.cfg && sets();
       const body = !st.cfg ? `<p class="sub">${esc(st.msg || 'Loading Visible Alpha…')}</p>` : !S ? '<p class="sub">Loading Visible Alpha…</p>' : qrTable(co, st.cfg, S, st);
