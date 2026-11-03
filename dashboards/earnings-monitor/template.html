@@ -193,13 +193,11 @@ td.note { color: var(--muted); }
     <a href="#today">Today</a>
     <a href="#daily">Daily moves</a>
     <a href="#routines">Routines</a>
-    <a href="#pipeline">Pipeline</a>
     <a href="#stocks">Stocks</a>
     <a href="#earnings">Earnings</a>
     <a href="#datapoints">Datapoints</a>
-    <a href="#signals">Signals</a>
     <a href="#screens">Estimates &amp; screens</a>
-    <a href="#ideas">Ideas &amp; themes</a>
+    <a href="#ideas">Pipeline, ideas &amp; themes</a>
     <a href="#prep">Prep &amp; calendar</a>
     <a href="#health">Skill health</a>
     <a href="#sources">Sources</a>
@@ -218,12 +216,12 @@ td.note { color: var(--muted); }
 <div class="view" data-view="today" id="v-today"></div>
 <div class="view" data-view="daily" id="v-daily"></div>
 <div class="view" data-view="routines" id="v-routines"></div>
-<div class="view" data-view="pipeline" id="v-pipeline"></div>
+
 <div class="view" data-view="stocks" id="v-stocks"></div>
 <div class="view" data-view="notes" id="v-notes"></div>
 <div class="view" data-view="themes" id="v-themes"></div>
 <div class="view" data-view="datapoints" id="v-datapoints"></div>
-<div class="view" data-view="signals" id="v-signals"></div>
+
 <div class="view" data-view="screens" id="v-screens"></div>
 <div class="view" data-view="ideas" id="v-ideas"></div>
 <div class="view" data-view="prep" id="v-prep"></div>
@@ -259,6 +257,7 @@ td.note { color: var(--muted); }
     <span class="count" id="count"></span>
   </div>
 
+  <section class="panel" id="pending" hidden></section>
   <div id="feed" style="display:flex;flex-direction:column;gap:18px"></div>
 </div>
 <div class="view" data-view="method">
@@ -447,6 +446,8 @@ td.note { color: var(--muted); }
     if (it.tenets.length) h += `<details><summary>Thesis tenets</summary><div class="tenets">${it.tenets.map(t => { const k = TEN[String(t.status || '').toLowerCase()] || ['·', '']; return `<div><span class="g ${k[1]}" title="${esc(t.status)}">${k[0]}</span><span>${esc(t.tenet)}</span></div>`; }).join('')}</div></details>`;
     if (it.questions.length) h += `<details><summary>Key questions</summary><ul class="b">${it.questions.map(s => `<li>${esc(s)}</li>`).join('')}</ul></details>`;
     h += `</div></div>`;
+    { const sc = window.__qrFind ? window.__qrFind(it.ticker) : null;
+      h += `<details class="fr qr-det" data-qrt="${esc(it.ticker)}"><summary>Quarterly review · live Visible Alpha${sc ? ` · <a href="#stocks/${encodeURIComponent(sc.key)}/qr" onclick="event.stopPropagation()">open on Stocks →</a>` : ''}</summary><div class="qr"></div></details>`; }
     const FULL = D.full || {};
     it.links.forEach(l => {
       const f = FULL[String(l.url).split('?')[0]];
@@ -479,6 +480,26 @@ td.note { color: var(--muted); }
   }
   setTimeout(render, 0);
   window.__earnRender = () => { renderAssess(); render(); };
+  // mount the live Quarterly Review when its toggle is first opened (same table and saved rows as the Stocks tab)
+  document.getElementById('feed').addEventListener('toggle', e => {
+    const d = e.target; if (!d.classList || !d.classList.contains('qr-det') || !d.open || !window.__qrMount) return;
+    const tkr = d.dataset.qrt, sc = window.__qrFind && window.__qrFind(tkr), it = items.find(x => x.ticker === tkr) || {};
+    window.__qrMount(d.querySelector('.qr'), sc || { t: tkr, bbg: tkr + ' US', name: it.company || tkr });
+  }, true);
+  // ---- reported per the calendar, but no earnings review stored yet ----
+  (function pending() {
+    const el = document.getElementById('pending'), up = ((D.prep || {}).upcoming) || [];
+    const today = new Date().toISOString().slice(0, 10), now = new Date();
+    const etH = +new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', hourCycle: 'h23' }).format(now);
+    const reported = u => u.date < today || (u.date === today && (String(u.time || '').toUpperCase() === 'BMO' || (String(u.time || '').toUpperCase() === 'AMC' && etH >= 17)));
+    const has = u => items.some(it => String(it.ticker).toUpperCase() === String(u.ticker).toUpperCase() && (it.date || '') >= u.date);
+    const xs = up.filter(u => u.date && reported(u) && !has(u) && (Date.parse(today) - Date.parse(u.date)) / 864e5 <= 21).sort((a, b) => b.date.localeCompare(a.date) || String(a.ticker).localeCompare(String(b.ticker)));
+    if (!xs.length) return;
+    el.hidden = false;
+    el.innerHTML = `<div class="panel-h"><h2>Reported, review not run yet</h2><span class="muted">${xs.length} · from the FactSet calendar for your coverage</span></div>
+      <p class="sub" style="margin:0 0 8px">These companies have reported but no earnings review is stored for the print. Reviews appear here once the earnings-review skill runs for them.</p>
+      <div class="chips" style="display:flex;flex-wrap:wrap;gap:6px">${xs.map(u => `<span class="chip out" title="${esc(u.company || '')} · ${esc(u.date_status || '')}"><b>${esc(u.ticker)}</b> ${esc(u.company && u.company !== u.ticker ? u.company : '')} · ${fmtDay(u.date)}${u.time ? ' ' + esc(u.time) : ''}${u.tier ? ' · T' + esc(u.tier) : ''}</span>`).join('')}</div>`;
+  })();
   document.querySelectorAll('#qtr button').forEach(b => b.addEventListener('click', () => {
     curQ = b.dataset.v; document.querySelectorAll('#qtr button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
     st.co = ''; document.getElementById('co').value = ''; renderSummary(); renderAssess(); render(); }));

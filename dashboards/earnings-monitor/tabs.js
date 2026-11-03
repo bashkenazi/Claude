@@ -613,7 +613,7 @@
       });
       $('dp-count').textContent = list.length.toLocaleString() + ' rows';
       if (G.n && st.shown === 100) st.shown = Math.min(G.n, 100000);
-      body.innerHTML = list.length ? list.slice(0, st.shown).map(r => { const m = byRid.get(r[1]) || {}, d = DIR[r[4]]; return `<tr><td class="mono">${fmtD(r[2])}</td><td>${tk(m.t)}</td><td class="sub">${esc(r[3])}</td><td>${d ? `<span class="chip ${d[1] === 'pos' ? 'up' : d[1] === 'neg' ? 'dn' : ''}">${d[0]}</span>` : ''}</td><td>${esc(r[9])}</td><td class="sub">${esc(SRC[r[7]] || '')}${r[6] ? ` <span class="chip out">${esc(r[6])}</span>` : ''}</td></tr>`; }).join('')
+      body.innerHTML = list.length ? list.slice(0, st.shown).map(r => { const m = byRid.get(r[1]) || {}, d = DIR[r[4]]; return `<tr><td class="mono">${fmtD(r[2])}</td><td>${tk(m.t)}</td><td class="sub">${esc(r[3])}</td><td>${d ? `<span class="chip ${d[1] === 'pos' ? 'up' : d[1] === 'neg' ? 'dn' : ''}">${d[0]}</span>` : ''}</td><td class="ev-wrap">${esc(r[9])}</td><td class="sub ev-src">${esc(SRC[r[7]] || '')}${r[6] ? ` <span class="chip out">${esc(r[6])}</span>` : ''}</td></tr>`; }).join('')
         : `<tr><td colspan="6" class="nores">No datapoints match. Widen the range or clear a filter.</td></tr>`;
       more.hidden = list.length <= st.shown;
     }
@@ -663,11 +663,11 @@
     const ideas = lim(arr(ID.ideas).filter(i => inWin(i.date, null))), theses = lim(arr(ID.theses).filter(t => inWin(t.updated || t.date, null))), cycles = arr(ID.cycles), oc = lim(arr(ID.opcomps).filter(o => inWin(o.date, null)));
     const dir = d => { const s = String(d || '').toLowerCase(); return ['long', 'short', 'pair', 'watch'].find(k => s.includes(k)) || 'watch'; };
     document.getElementById('v-ideas').innerHTML =
-      head('Idea generator · digests · thesis builder · industry cycle', 'Ideas &amp; themes', 'Single-stock ideas and the themes behind them in one place. Filter by type, direction and bucket.') +
-      `<div class="ctl" role="group" aria-label="Show"><div class="seg" id="it-type"><button type="button" data-v="" aria-pressed="true">Everything</button><button type="button" data-v="ideas" aria-pressed="false">Single-stock ideas</button><button type="button" data-v="themes" aria-pressed="false">Themes</button><button type="button" data-v="more" aria-pressed="false">Theses, cycle &amp; comps</button></div>
+      head('Pipeline · idea generator · digests · thesis builder · industry cycle', 'Pipeline, ideas &amp; themes', 'The names we are tracking, new single-stock ideas and the themes behind them in one place. Filter by type, direction and bucket.') +
+      `<div class="ctl" role="group" aria-label="Show"><div class="seg" id="it-type"><button type="button" data-v="" aria-pressed="true">Everything</button><button type="button" data-v="pipeline" aria-pressed="false">Pipeline</button><button type="button" data-v="ideas" aria-pressed="false">New ideas</button><button type="button" data-v="themes" aria-pressed="false">Themes</button><button type="button" data-v="more" aria-pressed="false">Theses, cycle &amp; comps</button></div>
         <div class="seg" id="it-dir"><button type="button" data-v="" aria-pressed="true">Longs &amp; shorts</button><button type="button" data-v="long" aria-pressed="false">Longs</button><button type="button" data-v="short" aria-pressed="false">Shorts</button></div>
         <label for="it-q">Search <input type="search" id="it-q" placeholder="Ticker or word"></label></div>` +
-      `<section class="panel" id="id-ideas" data-it="ideas"></section><div id="th-host" data-it="themes"></div>` +
+      `<div id="pl-host" data-it="pipeline"></div><section class="panel" id="id-ideas" data-it="ideas"></section><div id="th-host" data-it="themes"></div>` +
       `<section class="panel" data-it="more"><div class="panel-h"><h2>Industry cycle</h2></div>${cycles.length ? `<div class="grid3">${cycles.map(c =>
         `<article class="idea"><div class="top"><b>${esc(c.industry)}</b>${c.phase ? `<span class="chip phase">${esc(c.phase)}</span>` : ''}${link(c.url, fmtD(c.date))}</div><dl class="kv">${c.margin_vs_peak ? `<dt>Margin vs peak</dt><dd>${esc(c.margin_vs_peak)}</dd>` : ''}${c.valuation ? `<dt>Valuation</dt><dd>${esc(c.valuation)}</dd>` : ''}</dl>${arr(c.signals).length ? `<ul class="b">${arr(c.signals).map(s => `<li>${attr(s)}</li>`).join('')}</ul>` : ''}${srcLine(c)}</article>`).join('')}</div>` : none('No industry-cycle output found since September.')}</section>` +
       `<section class="panel" data-it="more"><div class="panel-h"><h2>Theses</h2><span class="muted">${theses.length} · dated by last edit</span></div>${theses.length ? `<div class="list">${theses.map(t =>
@@ -689,13 +689,14 @@
       document.querySelectorAll('#id-b button').forEach(btn => btn.addEventListener('click', () => { ist.b = btn.dataset.v; drawIdeas(); }));
     }
     drawIdeas();
+    renderPipeline();
     renderThemes();
     const vI = document.getElementById('v-ideas');
     const applyType = v => vI.querySelectorAll('[data-it]').forEach(el => { el.style.display = v && el.dataset.it !== v ? 'none' : ''; });
     vI.querySelectorAll('#it-type button').forEach(b => b.addEventListener('click', () => { vI.querySelectorAll('#it-type button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); applyType(b.dataset.v); }));
-    vI.querySelectorAll('#it-dir button').forEach(b => b.addEventListener('click', () => { vI.querySelectorAll('#it-dir button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); ist.dir = b.dataset.v; drawIdeas();
+    vI.querySelectorAll('#it-dir button').forEach(b => b.addEventListener('click', () => { vI.querySelectorAll('#it-dir button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); ist.dir = b.dataset.v; drawIdeas(); const pb = vI.querySelector('#pl-dir button[data-v="' + b.dataset.v + '"]'); if (pb) pb.click();
       vI.querySelectorAll('#th-host .theme').forEach(el => { const w = el.querySelector('.wl'); el.style.display = ist.dir && !(w && w.innerHTML.includes(ist.dir === 'long' ? 'Benefits' : 'Hurt')) ? 'none' : ''; }); }));
-    document.getElementById('it-q').addEventListener('input', e => { ist.q = e.target.value.trim().toLowerCase(); drawIdeas(); const tq = document.getElementById('th-q'); if (tq) { tq.value = e.target.value; tq.dispatchEvent(new Event('input')); } });
+    document.getElementById('it-q').addEventListener('input', e => { ist.q = e.target.value.trim().toLowerCase(); drawIdeas(); const pq = document.getElementById('pl-q'); if (pq) { pq.value = e.target.value; pq.dispatchEvent(new Event('input')); } const tq = document.getElementById('th-q'); if (tq) { tq.value = e.target.value; tq.dispatchEvent(new Event('input')); } });
   }
 
   // ================= PREP =================
@@ -780,17 +781,17 @@
       <div class="sub sk-key" title="Composite Evidence Index minus the universe, from your Supabase datapoints: reliability × confidence × recency. 0 = as positive as the average name.">Number = evidence index vs universe (−100 to +100; 0 = average, + more bullish)</div>
       <div class="sk-list">${list.map((c, i) => { const I = idxOf(c), n = I ? I.c.length - 1 : 0, sb = arr(c.subs)[0] || c.sector, hdr = i === 0 || (arr(list[i - 1].subs)[0] || list[i - 1].sector) !== sb ? `<div class="sk-grp">${esc(c.sector)} · ${esc(sb)}</div>` : ''; return hdr + `<a href="#stocks/${encodeURIComponent(c.key)}/${sub}"${cur && c.key === cur.key ? ' aria-current="page"' : ''}><b>${esc(c.t)}</b><span class="sub">${esc(c.name)}</span><span class="chip out">T${esc(c.tier)}</span>${I ? `<span class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}" title="Composite vs universe">${sgn(I.x[n])}</span>` : ''}</a>`; }).join('')}</div></div>`;
     let body;
-    if (!cur) body = `<section class="panel"><h2>Pick a company</h2><p class="sub">Each Tier 1–2 name has four views: the debate, every datapoint organized by its drivers, the earnings-review metrics table, and what management has said over time.</p></section>`;
+    if (!cur) body = `<section class="panel"><h2>Pick a company</h2><p class="sub">Each Tier 1–2 name has six views: the Tech Specialist debate, the thesis tenets, a live Visible Alpha quarterly review, every datapoint organized by its drivers, the earnings-review metrics table, and what management has said over time.</p></section>`;
     else {
       const I = idxOf(cur), n = I ? I.c.length - 1 : 0, pl = PL.get(String(cur.t).toUpperCase()) || PL.get(String(cur.bbg).toUpperCase()), mv = MV.get(String(cur.t).toUpperCase()) || MV.get(String(cur.bbg).toUpperCase());
-      const tabs = [['debate', 'Debate'], ['datapoints', 'Datapoints'], ['earnings', 'Earnings metrics'], ['management', 'Management']];
+      const tabs = [['debate', 'Debate'], ['thesis', 'Thesis'], ['qr', 'Quarterly review'], ['datapoints', 'Datapoints'], ['earnings', 'Earnings metrics'], ['management', 'Management']];
       body = `<section class="panel sk-head"><div class="panel-h"><div><span class="eyebrow">Tier ${esc(cur.tier)} · ${esc(cur.sector)} · ${esc(cur.sub)}</span><h2 style="margin-top:4px">${tk(cur.t)} ${esc(cur.name)}</h2></div>
         <div class="sk-kpis">${mv ? `<span><span class="sub">Today</span> <b class="mono ${+mv.c >= 0 ? 'c-pos' : 'c-neg'}">${sgn(+mv.c)}%</b></span>` : ''}${I ? `<span><span class="sub">Index</span> <b class="mono">${sgn(I.c[n])}</b></span><span><span class="sub">vs univ.</span> <b class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}">${sgn(I.x[n])}</b></span><span><span class="sub">30d Δ</span> <b class="mono">${sgn(I.c[n] - I.c[Math.max(0, n - 4)])}</b></span>` : ''}</div></div>
         ${pl ? `<p class="sk-pitch"><span class="chip ${pl.direction === 'short' ? 'dn' : 'up'}">${esc(pl.direction)}</span> <span class="chip out">${esc(pl.status || '')}</span> ${attr(pl.pitch || '')}${pl.upside && (pl.upside.pct_low != null || pl.upside.pct_high != null) ? ` <b class="mono">${sgn(100 * (pl.upside.pct_high ?? pl.upside.pct_low))}% to target</b>` : ''}</p>` : ''}
         <div class="sk-notes">${noteUI('stock:' + cur.key, cur.t, cur.name)} <span class="sub">Add a note on ${esc(cur.t)}</span><div id="sk-tnotes" data-tk="${esc(ntKey(cur.t))}" data-tk2="${esc(ntKey(cur.bbg))}"></div></div>
         <nav class="sk-tabs">${tabs.map(([k, l]) => `<a href="#stocks/${encodeURIComponent(cur.key)}/${k}"${k === sub ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav></section><div id="sk-body"><section class="panel"><p class="sub">Loading datapoints…</p></section></div>`;
     }
-    host.innerHTML = head('Stocks', 'Tier 1–2 companies', 'The debate, every datapoint organized by what matters for the stock, the earnings-review metrics, and what management has said over time.') + `<div class="sk-wrap">${nav}<div class="sk-main">${body}</div></div>`;
+    host.innerHTML = head('Stocks', 'Tier 1–2 companies', 'The Tech Specialist debate, the thesis tenets, a live Visible Alpha quarterly review, every datapoint organized by what matters for the stock, the earnings-review metrics, and what management has said over time.') + `<div class="sk-wrap">${nav}<div class="sk-main">${body}</div></div>`;
     const $ = id => document.getElementById(id);
     $('sk-q').addEventListener('input', e => { fs.q = e.target.value.trim().toLowerCase(); const pos = e.target.selectionStart; renderStocks(); const q = $('sk-q'); q.focus(); q.setSelectionRange(pos, pos); });
     host.querySelectorAll('#sk-tier button').forEach(b => b.addEventListener('click', () => { fs.tier = b.dataset.v; renderStocks(); }));
@@ -798,13 +799,14 @@
     $('sk-sub').addEventListener('change', e => { fs.sub = e.target.value; renderStocks(); });
     if (!cur) return;
     if (sub === 'earnings') { $('sk-body').innerHTML = earningsView(cur); return; }
+    if (sub === 'qr') { $('sk-body').innerHTML = `<section class="panel"><div class="panel-h"><h2>Quarterly review</h2><span class="muted">Visible Alpha · live</span></div><div class="qr" id="sk-qr"></div></section>`; qrMount($('sk-qr'), cur); return; }
     getDP().then(({ SRC, ROWS }) => {
       const hp = (location.hash || '').split('/'); if (!document.getElementById('sk-body') || decodeURIComponent(hp[1] || '') !== cur.key || (hp[2] || 'debate') !== sub) return;
       const rs = new Set(cur.rids);
       const mine = ROWS.filter(r => rs.has(r[1]) && inWin(r[2], null));
-      $('sk-body').innerHTML = sub === 'datapoints' ? dpView(cur, mine, SRC) : sub === 'management' ? mgmtView(cur, mine, SRC) : debateView(cur, mine, SRC, TH.get(String(cur.t).toUpperCase()));
+      $('sk-body').innerHTML = sub === 'datapoints' ? dpView(cur, mine, SRC) : sub === 'management' ? mgmtView(cur, mine, SRC) : sub === 'thesis' ? thesisView(cur, mine, SRC, TH.get(String(cur.t).toUpperCase())) : debateView(cur, mine, SRC, TH.get(String(cur.t).toUpperCase()));
       const b = $('sk-body'); b.querySelectorAll('[data-f]').forEach(x => x.addEventListener('click', () => { b.dataset.f = x.dataset.f; b.querySelectorAll('[data-f]').forEach(y => y.setAttribute('aria-pressed', String(y === x))); b.querySelectorAll('.sk-fam').forEach(fz => { fz.hidden = !!b.dataset.f && fz.dataset.fam !== b.dataset.f; }); }));
-    }).catch(() => { $('sk-body').innerHTML = `<section class="panel">${none('The datapoint files did not load. Reload the page.')}</section>`; });
+    }).catch(e => { console.error(e); $('sk-body').innerHTML = `<section class="panel">${none('The datapoint files did not load. Reload the page.')}</section>`; });
   }
   const FAMOF = k => /^growth/.test(k) ? 'Growth' : /^tam/.test(k) ? 'TAM' : /^margin/.test(k) ? 'Margins' : /^competition/.test(k) ? 'Competition' : /^risk/.test(k) ? 'Risk' : /^shareholder/.test(k) ? 'Capital return' : 'Other';
   const FAMS = ['Growth', 'TAM', 'Margins', 'Competition', 'Risk', 'Capital return', 'Other'];
@@ -877,7 +879,7 @@
     draw();
   }
   function debateView(cur, rows, SRC, th) {
-    if (!rows.length) return `<section class="panel">${none('No datapoints on this name in the window, so no debate to show.')}</section>`;
+    if (!rows.length) return agentPanel(cur) + `<section class="panel">${none('No datapoints on this name in the window.')}</section>`;
     const now = Date.now(), score = r => (r[4] || 0) * ({ h: 1, m: 0.75, l: 0.5 }[r[5]] || 0.75) * REL(r[6], SRC[r[7]]) * Math.pow(0.5, (now - new Date(r[2] + 'T12:00:00')) / 864e5 / 90);
     const sc = rows.map(r => ({ r, s: score(r), d: assign(cur, r), f: FAMOF(r[3]) }));
     const bull = sc.filter(x => x.s > 0).sort((a, b) => b.s - a.s), bear = sc.filter(x => x.s < 0).sort((a, b) => a.s - b.s);
@@ -888,12 +890,47 @@
     const contested = [...by.values()].filter(y => y.p && y.n).map(y => ({ ...y, heat: Math.min(y.sp, y.sn) })).sort((a, b) => b.heat - a.heat).slice(0, 5);
     const bal = [...by.values()].sort((a, b) => (b.sp + b.sn) - (a.sp + a.sn)).slice(0, 10);
     const tot = bal.reduce((m, y) => Math.max(m, y.sp, y.sn), 0.001);
-    return summaryPanel(cur, th) + `<section class="panel"><div class="panel-h"><h2>The evidence behind it</h2><span class="muted">${rows.length} datapoints · weighted by source reliability × confidence × recency (90-day half-life)</span></div>
+    return agentPanel(cur) + summaryPanel(cur, th, true) + `<section class="panel"><div class="panel-h"><h2>The evidence behind it</h2><span class="muted">${rows.length} datapoints · weighted by source reliability × confidence × recency (90-day half-life)</span></div>
       <div class="grid2"><div><h3 class="c-pos">Bull case</h3><div class="list">${pick(bull, N).map(it).join('') || none('No positive evidence in the window.')}</div></div><div><h3 class="c-neg">Bear case</h3><div class="list">${pick(bear, N).map(it).join('') || none('No negative evidence in the window.')}</div></div></div>
       <h3 style="margin-top:14px">Where the evidence leans, by driver</h3><div class="sk-bal">${bal.map(y => `<div class="sk-balr"><span>${esc(y.d)} <span class="sub">${y.p}▲ ${y.n}▼</span></span><span class="sk-bt"><span class="l"><i class="neg" style="width:${(y.sn / tot * 100).toFixed(1)}%"></i></span><span class="r"><i class="pos" style="width:${(y.sp / tot * 100).toFixed(1)}%"></i></span></span></div>`).join('')}</div>
       ${contested.length ? `<h3 style="margin-top:14px">What decides it</h3><p class="sub" style="margin:0 0 6px">Drivers with strong evidence on both sides.</p><ul class="b">${contested.map(y => `<li><b>${esc(y.d)}</b> — ${y.p} positive vs ${y.n} negative datapoints</li>`).join('')}</ul>` : ''}</section>`;
   }
-  function summaryPanel(cur, th) {
+
+  // Tech Specialist debate agent output (stock-debate skill / Tech Specialist Debate History pages), shown in full
+  function agentPanel(cur) {
+    const P = cur.debate_page, FULL = window.__FULL || {};
+    if (!P) return `<section class="panel sk-agent"><div class="panel-h"><h2>Tech Specialist debate</h2><span class="chip out">Not run on ${esc(cur.t)} yet</span></div>
+      <p class="sub" style="margin:0">The debate agent reads about nine months of Tech Specialist desk notes on the name, plus the latest earnings review and your Supabase datapoints, and writes the debate onto the thesis page. It has run on ${DEBN} names so far. Until it runs on ${esc(cur.t)}, the short read below is drafted from your datapoints.</p></section>`;
+    const f = FULL[String(P.url).split('?')[0]];
+    const age = Math.round((Date.now() - new Date(P.date + 'T12:00:00')) / 864e5);
+    const hdr = `<div class="panel-h"><div><span class="eyebrow">${P.kind === 'stock-debate' ? 'Stock debate agent' : 'Tech Specialist debate history'} · ${esc(fmtD(P.date))}${isFinite(age) ? ` · ${age} days old` : ''}${P.dry_run ? ' · dry run' : ''}</span><h2 style="margin-top:4px">${esc(String(P.title || '').replace(/^(🔍\s*)+/, ''))}</h2></div>${link(P.url, 'Notion')}</div>`;
+    if (!f) return `<section class="panel sk-agent">${hdr}<p class="sub">${window.__FULL ? 'The page text is not in this build.' : 'Loading the debate…'}</p></section>`;
+    const openT = /overview|debate|callouts|key issues|bull|bear/i;
+    return `<section class="panel sk-agent">${hdr}${f.sections.map((x, i) => x.subs
+      ? `<details class="fr-sec" open><summary>${x.title}</summary><div class="fr-body">${x.subs.map(u => `<details class="fr-sec fr-sub"${openT.test(u.title) ? ' open' : ''}><summary>${u.title === 'Overview' ? 'Summary' : u.title}</summary><div class="fr-html">${u.html}</div></details>`).join('')}</div></details>`
+      : `<details class="fr-sec"${i < 2 || openT.test(x.title) && i < 3 ? ' open' : ''}><summary>${x.title === 'Overview' ? 'The debate in five bullets' : x.title}</summary><div class="fr-html">${x.html}</div></details>`).join('')}</section>`;
+  }
+  const DEBN = arr((D.stocks || {}).companies).filter(c => c.debate_page).length;
+  // Thesis tab: key tenets from the revised thesis page (or drafted thesis-builder style), with the evidence on each
+  function thesisView(cur, rows, SRC, th) {
+    const DB = cur.debate || {}, RT = cur.thesis || null;
+    const tenets = RT && arr(RT.tenets).length ? RT.tenets : arr(DB.tenets);
+    const isDraft = !(RT && arr(RT.tenets).length);
+    const conv = v => { const n = +v; return isFinite(n) && n > 0 ? `<span class="sk-conv" title="Conviction ${n}/10"><i style="width:${n * 10}%"></i></span><b class="mono">${n}/10</b>` : ''; };
+    const STOPW = new Set('the and for with from into over that this than will are its not but has have been more less into onto via per our their they them what when which while about after before under above across through'.split(' '));
+    const words = t => [...new Set(String(t || '').toLowerCase().replace(/[^a-z0-9%$.\- ]/g, ' ').split(/\s+/).filter(w => w.length >= 4 && !STOPW.has(w)))];
+    const now = Date.now(), score = r => ({ h: 1, m: 0.75, l: 0.5 }[r[5]] || 0.75) * REL(r[6], SRC[r[7]]) * Math.pow(0.5, (now - new Date(r[2] + 'T12:00:00')) / 864e5 / 90);
+    const evFor = t => { const ws = words(t.tenet + ' ' + (t.why || '')); if (!ws.length) return [];
+      return rows.map(r => { const txt = r[9].toLowerCase(); let hit = 0; ws.forEach(w => { if (txt.includes(w)) hit += w.length > 6 ? 2 : 1; }); return { r, s: hit >= 3 ? hit * score(r) : 0 }; }).filter(x => x.s > 0).sort((a, b) => b.s - a.s).slice(0, 4).map(x => x.r); };
+    const lean = t => { const l = String(t.lean || t.status || ''); const c = /support|strength|🟢|improv/i.test(l) ? 'c-pos' : /challeng|weak|🔴|deterior/i.test(l) ? 'c-neg' : ''; return l ? `<span class="chip out ${c}">${esc(l)}</span>` : ''; };
+    if (!tenets.length) return `<section class="panel">${none('No thesis tenets for this name yet.')}</section>`;
+    return `<section class="panel sk-thesis"><div class="panel-h"><h2>Thesis</h2>${isDraft ? '<span class="chip out">Draft from your datapoints · not yet a revised thesis page</span>' : `<span class="chip out">From your revised thesis${RT.updated ? ' · ' + esc(String(RT.updated).slice(0, 10)) : ''}</span> ${link(RT.url, 'Notion')}`}</div>
+      ${RT && RT.summary_pitch ? `<p class="sk-pitch2"><b>Summary pitch</b> ${esc(RT.summary_pitch)}</p>` : ''}
+      ${RT && RT.stance ? `<p class="sub" style="margin:0 0 8px">Stance: <b>${esc(RT.stance)}</b></p>` : th && th.stance ? `<p class="sub" style="margin:0 0 8px">Stance: <b>${esc(th.stance)}</b></p>` : ''}
+      <ol class="sk-tenets">${tenets.map(t => { const ev = evFor(t); return `<li><div class="sk-ten-h"><b>${esc(t.tenet || '')}</b> ${conv(t.conviction)} ${lean(t)}</div>${t.why || t.evidence ? `<p class="sub">${esc(t.why || t.evidence)}</p>` : ''}${ev.length ? `<details><summary>Latest evidence on this tenet (${ev.length})</summary><div class="list">${ev.map(r => rowHtml(r, SRC)).join('')}</div></details>` : ''}</li>`; }).join('')}</ol>
+      ${arr(DB.decides).length ? `<h3>What decides it</h3><ul class="b">${arr(DB.decides).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</section>`;
+  }
+  function summaryPanel(cur, th, noTenets) {
     const DB = cur.debate || {}, RT = cur.thesis || null;
     const tenets = RT && arr(RT.tenets).length ? RT.tenets : arr(DB.tenets);
     const isDraft = !(RT && arr(RT.tenets).length);
@@ -902,9 +939,9 @@
     const ul = (xs, cls) => arr(xs).length ? `<ul class="b ${cls || ''}">${arr(xs).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : none('Not written yet.');
     return `<section class="panel sk-sum">
       ${RT && RT.summary_pitch ? `<p class="sk-pitch2"><b>Summary pitch</b> ${esc(RT.summary_pitch)} ${link(RT.url, 'Thesis')}</p>` : ''}
-      <div class="grid2"><div><h3 class="c-pos">Bull case</h3>${ul(DB.bull)}</div><div><h3 class="c-neg">Bear case</h3>${ul(DB.bear)}</div></div>
+      ${noTenets ? `<div class="panel-h"><h2>Short read</h2><span class="muted">Bull and bear in a line each, drafted from your datapoints</span></div>` : ''}<div class="grid2"><div><h3 class="c-pos">Bull case</h3>${ul(DB.bull)}</div><div><h3 class="c-neg">Bear case</h3>${ul(DB.bear)}</div></div>
       ${arr(DB.decides).length ? `<h3>What decides it</h3>${ul(DB.decides)}` : ''}
-      ${tenets.length ? `<h3>Thesis tenets ${isDraft ? '<span class="chip out">Draft from evidence — edit in Notion</span>' : `<span class="chip out">From your revised thesis</span> ${link(RT.url, 'Notion')}`}</h3>
+      ${tenets.length && !noTenets ? `<h3>Thesis tenets ${isDraft ? '<span class="chip out">Draft from evidence — edit in Notion</span>' : `<span class="chip out">From your revised thesis</span> ${link(RT.url, 'Notion')}`}</h3>
         <table class="dt sk-ten"><thead><tr><th>Tenet</th><th>Conviction</th><th>${isDraft ? 'Evidence lean' : 'Status'}</th><th>Why</th></tr></thead><tbody>${tenets.map(t => `<tr><td>${esc(t.tenet || '')}</td><td class="nowrap">${conv(t.conviction)}</td><td>${lean(t)}</td><td class="sub">${esc(t.why || t.evidence || '')}</td></tr>`).join('')}</tbody></table>` : ''}
       ${th && !RT ? `<p class="sub" style="margin-top:8px">Thesis page: ${esc(th.stance || '')} ${esc(th.summary || '')}</p>` : ''}
       ${!DB.bull ? '<p class="sub">The written debate for this name is not in this build yet; the evidence below is.</p>' : ''}</section>`;
@@ -926,8 +963,181 @@
       return `<section class="panel" style="padding:0"><div class="panel-h" style="padding:12px 14px 0"><h2>${l}</h2><span class="muted">Actual · vs 📊 Street · vs 🎯 bogey</span></div><div class="tbl-wrap"><table class="dt"><thead><tr><th>Metric</th>${qs.map(q => `<th>${qh(q)}</th>`).join('')}</tr></thead><tbody>${mets.map(mt => `<tr><td>${esc(mt)}</td>${qs.map(q => { const m = xs.find(x => x.metric === mt && x.cq === q); return `<td>${m ? `${m.marker ? esc(m.marker) + ' ' : ''}<b>${esc(m.actual || '')}</b>${m.street ? `<div class="sub">📊 ${esc(m.street)} ${pc(m.vs_st)}</div>` : ''}${m.bogey ? `<div class="sub">🎯 ${esc(m.bogey)} ${pc(m.vs_bg)}</div>` : ''}` : '<span class="sub">—</span>'}</td>`; }).join('')}</tr>`).join('')}</tbody></table></div></section>`; }).join('');
   }
 
+  // ================= QUARTERLY REVIEW: live Visible Alpha table (Stocks tab + Earnings cards) =================
+  // Rows are Visible Alpha KPIs pulled through the viewer's SRS MCP connector (va_company_data). The row set,
+  // labels and guidance/disclosure notes per company are saved in the page db (collection "qr") so edits stick.
+  const QR = { mcp: null, db: null, ready: null, cfg: new Map() };
+  const VA = 'SRS MCP', VAT = 'va_company_data';
+  QR.ready = (window.claude && typeof window.claude.use === 'function')
+    ? Promise.all([window.claude.use('mcp').catch(() => null), window.claude.use('db').catch(() => null)]).then(([m, d]) => { QR.mcp = m; QR.db = d; })
+    : Promise.resolve();
+  const qrId = t => ntKey(t).replace(/[^A-Za-z0-9]+/g, '_');
+  const vaCall = (input, fresh) => QR.mcp.callTool(VA, VAT, input, { cache: fresh ? { refresh: true, staleTime: 6 * 3600e3, gcTime: 7 * 864e5 } : { staleTime: 6 * 3600e3, gcTime: 7 * 864e5 } }).then(r => r.payload);
+  const vaErr = e => {
+    const c = e && e.code;
+    if (c === 'server_not_connected' || c === 'selection_required') return 'Add the SRS MCP connector in claude.ai Settings → Connectors to load Visible Alpha.';
+    if (c === 'needs_reauth') return 'Reconnect SRS MCP in claude.ai Settings → Connectors.';
+    if (c === 'not_in_manifest' || c === 'approval_required' || c === 'consent_required') return 'Visible Alpha needs your OK for this page: press Update and allow SRS MCP.';
+    if (c === 'blocked_by_policy') return 'Your organization blocks this Visible Alpha call.';
+    if (c === 'server_unavailable') return 'Visible Alpha did not answer. Press Update to try again.';
+    return 'Visible Alpha call failed' + (e && e.message ? ': ' + String(e.message).slice(0, 160) : '.');
+  };
+  function qrFmt(v, row, unit) {
+    if (v == null || !isFinite(v)) return '';
+    const n = String(row.label || row.name || '');
+    if (unit === '%' || row.kind === 'ratio') return (+v * (row.kind === 'ratio' || Math.abs(v) <= 1.5 ? 100 : 1)).toFixed(1) + '%';
+    if (/\bEPS\b|per share|DPS/i.test(n)) return (+v).toFixed(2);
+    const a = Math.abs(v);
+    if (unit && unit !== 'Amount') return a >= 1e6 ? (v / 1e6).toFixed(1) + 'M' : a >= 1e3 ? Math.round(v).toLocaleString() : (+v).toFixed(a < 10 ? 2 : 1);
+    return a >= 1e9 ? (v / 1e9).toFixed(2) + 'B' : a >= 1e6 ? (v / 1e6).toFixed(1) + 'M' : a >= 1e3 ? (v / 1e3).toFixed(1) + 'K' : (+v).toFixed(2);
+  }
+  const pct = v => v == null || !isFinite(v) ? '' : (v > 0 ? '+' : '') + (v * 100).toFixed(1) + '%';
+  async function qrDefault(co, fresh) {
+    let r = await vaCall({ action: 'resolve', company: co.bbg || co.t }, fresh);
+    if (r.status !== 'single_match' && co.name) {
+      const c = arr(r.candidates).find(x => String(x.bloomberg_ticker || '').toUpperCase() === String(co.bbg || '').toUpperCase());
+      if (c) r = { status: 'single_match', selection: c };
+      else { const r2 = await vaCall({ action: 'resolve', company: co.name }, fresh); if (r2.status === 'single_match') r = r2; else if (arr(r.candidates).length) r = { status: 'single_match', selection: r.candidates[0] }; }
+    }
+    if (r.status !== 'single_match') throw { code: 'no_va', message: r.display_message || 'Not found in Visible Alpha' };
+    const id = r.selection.va_company_id, vt = r.selection.va_ticker;
+    const list = async kw => { try { const x = await vaCall(Object.assign({ action: 'list_kpis', va_company_id: id, period_type: 'QTR' }, kw ? { search: [kw] } : {}), fresh); return arr(x.candidates || (x.selection ? [x.selection] : [])); } catch (e) { return []; } };
+    const common = await list(null);
+    const rows = [], add = (k, extra) => { if (k && !rows.some(x => x.kpi_id === k.kpi_id)) rows.push(Object.assign({ kind: 'kpi', kpi_id: k.kpi_id, name: k.kpi_name, label: k.kpi_name }, extra || {})); };
+    const rev = common.find(k => /^(total )?revenues?$/i.test(k.kpi_name)) || common.find(k => /revenue/i.test(k.kpi_name) && !/ - |mix|cost|deferred/i.test(k.kpi_name));
+    add(rev, { role: 'rev', label: 'Total revenue' });
+    common.filter(k => /^(total )?revenues? - /i.test(k.kpi_name) && !/miscellaneous|other$/i.test(k.kpi_name)).slice(0, 10)
+      .forEach(k => add(k, { label: k.kpi_name.replace(/^(total )?revenues? - /i, '  '), seg: true }));
+    const pick = (xs, pref) => xs.find(k => pref.test(k.kpi_name)) || xs[0];
+    const gp = pick((await list('Gross profit')).filter(k => /gross profit/i.test(k.kpi_name) && !/mix|margin|adjust|segment/i.test(k.kpi_name)), / - Operating$/i);
+    if (gp) { add(gp, { role: 'gp', label: 'Gross profit' }); }
+    const oi = pick((await list('Operating income')).filter(k => /operating income/i.test(k.kpi_name) && !/mix|margin|adjust|segment| - (?!Operating)/i.test(k.kpi_name)), / - Operating$/i) || pick((await list('EBIT')).filter(k => /^EBIT\b/i.test(k.kpi_name) && !/margin|mix/i.test(k.kpi_name)), /^EBIT( - Operating)?$/i);
+    if (oi) add(oi, { role: 'oi', label: 'Operating income' });
+    const eps = pick((await list('EPS')).filter(k => /diluted/i.test(k.kpi_name)), /^EPS - Diluted - Operating$/i);
+    if (eps) add(eps, { role: 'eps', label: 'EPS (diluted)' });
+    const R = rows.find(x => x.role === 'rev');
+    const after = (role, row) => { const i = rows.findIndex(x => x.role === role); if (i >= 0) rows.splice(i + 1, 0, row); };
+    if (R && gp) after('gp', { kind: 'ratio', num: gp.kpi_id, den: R.kpi_id, label: 'Gross margin' });
+    if (R && oi) after('oi', { kind: 'ratio', num: oi.kpi_id, den: R.kpi_id, label: 'Operating margin' });
+    return { va_company_id: id, va_ticker: vt, rows, nq: 12, auto: true };
+  }
+  async function qrLoadCfg(co) {
+    const id = qrId(co.t);
+    if (QR.cfg.has(id)) return QR.cfg.get(id);
+    let cfg = null;
+    if (QR.db) { try { const s = await QR.db.collection('qr').doc(id).get(); if (s.exists) cfg = s.data(); } catch (e) {} }
+    if (!cfg) cfg = await qrDefault(co, false);
+    QR.cfg.set(id, cfg); return cfg;
+  }
+  async function qrSave(co, cfg) {
+    QR.cfg.set(qrId(co.t), cfg);
+    if (!QR.db) throw new Error('Saving needs the page open on claude.ai.');
+    const clean = JSON.parse(JSON.stringify(Object.assign({}, cfg, { auto: false, updated: new Date().toISOString(), ticker: co.t })));
+    await QR.db.collection('qr').doc(qrId(co.t)).set(clean);
+  }
+  async function qrData(cfg, fresh, fy) {
+    const y = new Date().getFullYear(), out = new Map();
+    const ids = [...new Set(cfg.rows.flatMap(r => r.kind === 'ratio' ? [r.num, r.den] : [r.kpi_id]).filter(Boolean))];
+    const errs = [];
+    await Promise.all(ids.map(k => vaCall({ action: 'kpi_data', va_company_id: cfg.va_company_id, kpi_id: k, period_type: fy ? 'FY' : 'QTR', min_year: y - (fy ? 3 : 3), max_year: y + (fy ? 2 : 1) }, fresh)
+      .then(p => out.set(k, arr(Array.isArray(p) ? p : (p && p.rows) || [])))
+      .catch(e => { errs.push(e); out.set(k, []); })));
+    return { byK: out, errs };
+  }
+  function qrTable(co, cfg, data, opt) {
+    const per = new Map();
+    data.byK.forEach(rs => rs.forEach(r => { if (!per.has(r.PERIOD)) per.set(r.PERIOD, { p: r.PERIOD, y: r.YEAR, n: r.PERIOD_NUMBER || 0, end: r.PERIOD_END_DATE, act: false }); if (r.REPORTED_VALUE != null) per.get(r.PERIOD).act = true; }));
+    let ps = [...per.values()].sort((a, b) => a.y - b.y || a.n - b.n);
+    const lastA = ps.map(p => p.act).lastIndexOf(true);
+    const nA = opt.fy ? 3 : Math.max(4, (cfg.nq || 12) - 4), nE = opt.fy ? 2 : 4;
+    ps = ps.slice(Math.max(0, lastA + 1 - nA), lastA + 1 + nE);
+    const cell = (k, p) => (data.byK.get(k) || []).find(r => r.PERIOD === p.p);
+    const val = (k, p) => { const c = cell(k, p); return c ? (c.REPORTED_VALUE != null ? c.REPORTED_VALUE : c.CONSENSUS_VALUE) : null; };
+    const lbl = p => opt.fy ? 'FY' + String(p.y).slice(2) : p.n + 'Q' + String(p.y).slice(2);
+    const rev = cfg.rows.find(r => r.role === 'rev');
+    const th = ps.map(p => `<th class="n${p.act ? '' : ' qr-e'}" title="${esc(p.end || '')}">${lbl(p)}${p.act ? 'A' : 'E'}</th>`).join('');
+    const ed = opt.edit;
+    let body = '';
+    cfg.rows.forEach((r, i) => {
+      const ctl = ed ? `<span class="qr-ctl"><button type="button" data-qa="up" data-i="${i}" title="Move up">↑</button><button type="button" data-qa="dn" data-i="${i}" title="Move down">↓</button><button type="button" data-qa="rm" data-i="${i}" title="Remove row">✕</button></span>` : '';
+      const name = ed ? `<input class="qr-lbl" data-i="${i}" value="${esc(r.label || r.name)}" aria-label="Row label">` : `${esc(r.label || r.name)}${r.kind === 'kpi' && r.name && r.label !== r.name ? '' : ''}`;
+      const cells = ps.map(p => {
+        if (r.kind === 'ratio') { const a = val(r.num, p), b = val(r.den, p); const v = a != null && b ? a / b : null; return `<td class="n${p.act ? '' : ' qr-e'}">${qrFmt(v, r)}</td>`; }
+        const c = cell(r.kpi_id, p); if (!c) return '<td class="n sub">—</td>';
+        const v = c.REPORTED_VALUE != null ? c.REPORTED_VALUE : c.CONSENSUS_VALUE, bm = c.BEAT_MISS_PCT;
+        const tip = `Reported ${c.REPORTED_VALUE ?? '—'} · Consensus ${c.CONSENSUS_VALUE ?? '—'}${c.NUMBER_OF_BROKER ? ' (' + c.NUMBER_OF_BROKER + ' brokers)' : ''}${bm != null ? ' · vs cons ' + pct(bm) : ''}`;
+        return `<td class="n${c.REPORTED_VALUE != null ? '' : ' qr-e'}" title="${esc(tip)}">${qrFmt(v, r, c.UNIT_SYMBOL)}${opt.beat && bm != null ? `<div class="qr-s ${bm >= 0 ? 'c-pos' : 'c-neg'}">${pct(bm)}</div>` : ''}</td>`;
+      }).join('');
+      body += `<tr class="${r.seg ? 'qr-seg' : r.kind === 'ratio' ? 'qr-ratio' : 'qr-main'}"><td class="qr-name">${ctl}${name}</td>${cells}</tr>`;
+      if (r.kind === 'kpi' && opt.yy) {
+        body += `<tr class="qr-sub"><td class="qr-name sub">y/y</td>${ps.map(p => { const c = cell(r.kpi_id, p); const v = c ? (c.REPORTED_YY != null ? c.REPORTED_YY : c.CONSENSUS_YY) : null; return `<td class="n ${v == null ? '' : v >= 0 ? 'c-pos' : 'c-neg'}${c && c.REPORTED_VALUE == null ? ' qr-e' : ''}">${c && c.UNIT_SYMBOL === '%' ? '' : pct(v)}</td>`; }).join('')}</tr>`;
+        if (!opt.fy && opt.qq) body += `<tr class="qr-sub"><td class="qr-name sub">q/q</td>${ps.map((p, j) => { const a = val(r.kpi_id, p), b = j ? val(r.kpi_id, ps[j - 1]) : null; const v = a != null && b ? a / b - 1 : null; return `<td class="n ${v == null ? '' : v >= 0 ? 'c-pos' : 'c-neg'}">${pct(v)}</td>`; }).join('')}</tr>`;
+        if (r.seg && rev && opt.mix) body += `<tr class="qr-sub"><td class="qr-name sub">% of revenue</td>${ps.map(p => { const a = val(r.kpi_id, p), b = val(rev.kpi_id, p); return `<td class="n sub">${a != null && b ? (a / b * 100).toFixed(1) + '%' : ''}</td>`; }).join('')}</tr>`;
+      }
+      if (ed) body += `<tr class="qr-sub"><td colspan="${ps.length + 1}"><input class="qr-note" data-i="${i}" value="${esc(r.note || '')}" placeholder="Gd: / Discl: shorthand for this row (e.g. 3Q26: HSD q/q, 2H wtd)"></td></tr>`;
+      else if (r.note) body += `<tr class="qr-sub"><td class="qr-note-v" colspan="${ps.length + 1}">${esc(r.note)}</td></tr>`;
+    });
+    return `<div class="tbl-wrap"><table class="dt qr-t"><thead><tr><th>${esc(cfg.va_ticker || '')} · Visible Alpha</th>${th}</tr></thead><tbody>${body}</tbody></table></div>`;
+  }
+  // Mount a live QR into `host` for company `co` ({t, bbg, name}); used by the Stocks tab and the Earnings cards.
+  function qrMount(host, co) {
+    if (!host || host.__qr) return; host.__qr = true;
+    const st = { edit: false, yy: true, qq: false, mix: false, beat: false, fy: false, fresh: false, cfg: null, data: null, msg: '', busy: false };
+    const bar = () => `<div class="ctl qr-bar" role="group" aria-label="Quarterly review controls">
+      <button type="button" class="btn" data-qb="update" ${st.busy ? 'disabled' : ''}>${st.busy ? 'Loading…' : 'Update'}</button>
+      <button type="button" class="btn" data-qb="edit" aria-pressed="${st.edit}">${st.edit ? 'Done editing' : 'Edit rows'}</button>
+      <div class="seg"><button type="button" data-qb="q" aria-pressed="${!st.fy}">Quarters</button><button type="button" data-qb="fy" aria-pressed="${st.fy}">Fiscal years</button></div>
+      <label><input type="checkbox" data-qo="yy" ${st.yy ? 'checked' : ''}> y/y</label>${st.fy ? '' : `<label><input type="checkbox" data-qo="qq" ${st.qq ? 'checked' : ''}> q/q</label>`}
+      <label><input type="checkbox" data-qo="mix" ${st.mix ? 'checked' : ''}> % of revenue</label><label><input type="checkbox" data-qo="beat" ${st.beat ? 'checked' : ''}> vs consensus</label>
+      ${st.fy ? '' : `<label>Quarters <select data-qo="nq">${[8, 12, 16].map(n => `<option${(st.cfg && st.cfg.nq || 12) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`}
+      <span class="muted qr-msg">${esc(st.msg)}</span></div>`;
+    const addUi = () => st.edit ? `<div class="qr-add"><label>Add a Visible Alpha KPI <input type="search" class="qr-kw" placeholder="e.g. gross margin, data center, bits, ASP"></label><button type="button" class="btn" data-qb="search">Search</button>
+      ${st.cfg && st.cfg.rows.length > 1 ? `<label>or a ratio <select class="qr-num">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}">${esc(r.label || r.name)}</option>`).join('')}</select> ÷ <select class="qr-den">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}"${r.role === 'rev' ? ' selected' : ''}>${esc(r.label || r.name)}</option>`).join('')}</select></label><button type="button" class="btn" data-qb="ratio">Add ratio</button>` : ''}
+      <button type="button" class="btn" data-qb="save">Save rows</button><button type="button" class="btn" data-qb="reset" title="Go back to the default rows from Visible Alpha">Reset to default</button><div class="qr-cands"></div></div>` : '';
+    const paint = () => {
+      const body = !st.cfg ? `<p class="sub">${esc(st.msg || 'Loading Visible Alpha…')}</p>` : !st.data ? '<p class="sub">Loading Visible Alpha…</p>' : qrTable(co, st.cfg, st.data, st);
+      host.innerHTML = bar() + addUi() + body + `<p class="sub qr-foot">Live from Visible Alpha through your SRS MCP connector: reported actuals in bold type, consensus in italics (E). Hover a number for reported vs consensus. ${st.cfg && st.cfg.auto ? 'Default rows: total revenue, every reported segment, gross profit, operating income and EPS. Edit rows to change them; edits are saved for everyone on this page.' : st.cfg && st.cfg.updated ? 'Rows saved ' + esc(String(st.cfg.updated).slice(0, 10)) + '.' : ''}</p>`;
+    };
+    const load = async () => {
+      st.busy = true; st.msg = ''; paint();
+      try {
+        await QR.ready;
+        if (!QR.mcp) { st.msg = 'Live Visible Alpha data needs the page open on claude.ai with the SRS MCP connector.'; st.busy = false; paint(); return; }
+        if (!st.cfg) st.cfg = await qrLoadCfg(co);
+        st.data = await qrData(st.cfg, st.fresh, st.fy);
+        const nErr = st.data.errs.length;
+        st.msg = nErr ? `${nErr} row${nErr > 1 ? 's' : ''} failed: ${vaErr(st.data.errs[0])}` : (st.fresh ? 'Updated from Visible Alpha just now.' : '');
+      } catch (e) { st.msg = e && e.code === 'no_va' ? `${co.t} is not in Visible Alpha (${e.message}).` : vaErr(e); }
+      st.busy = false; st.fresh = false; paint();
+    };
+    const readInputs = () => { host.querySelectorAll('.qr-lbl').forEach(x => { st.cfg.rows[+x.dataset.i].label = x.value; }); host.querySelectorAll('.qr-note').forEach(x => { st.cfg.rows[+x.dataset.i].note = x.value.trim(); }); };
+    host.addEventListener('click', async e => {
+      const b = e.target.closest('[data-qb],[data-qa],[data-qk]'); if (!b) return;
+      if (b.dataset.qa) { readInputs(); const i = +b.dataset.i, R = st.cfg.rows; if (b.dataset.qa === 'rm') R.splice(i, 1); else { const j = b.dataset.qa === 'up' ? i - 1 : i + 1; if (j >= 0 && j < R.length) [R[i], R[j]] = [R[j], R[i]]; } paint(); return; }
+      if (b.dataset.qk) { readInputs(); const k = JSON.parse(b.dataset.qk); if (!st.cfg.rows.some(r => r.kpi_id === k.kpi_id)) st.cfg.rows.push({ kind: 'kpi', kpi_id: k.kpi_id, name: k.kpi_name, label: k.kpi_name }); st.data = null; paint(); load(); return; }
+      const a = b.dataset.qb;
+      if (a === 'update') { st.fresh = true; load(); }
+      else if (a === 'edit') { if (st.edit) readInputs(); st.edit = !st.edit; paint(); }
+      else if (a === 'q' || a === 'fy') { st.fy = a === 'fy'; st.data = null; load(); }
+      else if (a === 'search') {
+        const kw = (host.querySelector('.qr-kw') || {}).value || '', box = host.querySelector('.qr-cands'); if (!kw.trim() || !box) return;
+        box.innerHTML = '<span class="sub">Searching…</span>';
+        try { const x = await vaCall({ action: 'list_kpis', va_company_id: st.cfg.va_company_id, search: [kw.trim()], period_type: st.fy ? 'FY' : 'QTR' }); const cs = arr(x.candidates || (x.selection ? [x.selection] : []));
+          box.innerHTML = cs.length ? cs.slice(0, 40).map(c => `<button type="button" class="chip out" data-qk="${esc(JSON.stringify({ kpi_id: c.kpi_id, kpi_name: c.kpi_name }))}">+ ${esc(c.kpi_name)} <span class="sub">${esc(c.period_count || '')}</span></button>`).join(' ') : `<span class="sub">${esc(x.display_message || 'No KPIs match.')}</span>`;
+        } catch (err) { box.innerHTML = `<span class="sub">${esc(vaErr(err))}</span>`; }
+      }
+      else if (a === 'ratio') { readInputs(); const num = +host.querySelector('.qr-num').value, den = +host.querySelector('.qr-den').value; const nm = r => (st.cfg.rows.find(x => x.kpi_id === r) || {}).label || ''; st.cfg.rows.push({ kind: 'ratio', num, den, label: `${nm(num).trim()} / ${nm(den).trim()}` }); paint(); load(); }
+      else if (a === 'save') { readInputs(); try { await qrSave(co, st.cfg); st.cfg.auto = false; st.cfg.updated = new Date().toISOString(); st.msg = 'Saved.'; } catch (err) { st.msg = 'Not saved: ' + ((err && (err.code || err.message)) || 'error'); } paint(); }
+      else if (a === 'reset') { if (!confirm('Go back to the default Visible Alpha rows for ' + co.t + '? Your saved rows and notes for this company are removed.')) return; try { if (QR.db) await QR.db.collection('qr').doc(qrId(co.t)).delete(); } catch (err) {} QR.cfg.delete(qrId(co.t)); st.cfg = null; st.data = null; load(); }
+    });
+    host.addEventListener('change', e => { const o = e.target.dataset.qo; if (!o) return; if (o === 'nq') { if (st.edit) readInputs(); st.cfg.nq = +e.target.value; } else st[o] = e.target.checked; paint(); });
+    load();
+  }
+  window.__qrMount = qrMount;
+  window.__qrFind = t => { const ST = arr((D.stocks || {}).companies), k = ntKey(t); return ST.find(c => ntKey(c.t) === k || ntKey(c.bbg) === k || ntKey(c.t).split(' ')[0] === k) || null; };
+
   // ================= ROUTINES: one page per scheduled routine =================
-  window.__onFull = () => { if ((location.hash || '').startsWith('#routines')) renderRoutines(); };
+  window.__onFull = () => { const h = location.hash || ''; if (h.startsWith('#routines')) renderRoutines(); else if (h.startsWith('#stocks/') && !/\/(thesis|qr|datapoints|earnings|management)$/.test(h)) renderStocks(); };
   function renderRoutines() {
     const RT = D.routines || {}, list = arr(RT.routines);
     const host = document.getElementById('v-routines');
@@ -966,14 +1176,13 @@
 
   // ================= PIPELINE: every long and short being tracked =================
   function renderPipeline() {
-    const P = D.pipeline || {}, items = arr(P.items), host = document.getElementById('v-pipeline');
+    const P = D.pipeline || {}, items = arr(P.items), host = document.getElementById('pl-host'); if (!host) return;
     const moves = new Map(arr(DLY.moves).map(m => [String(m.t).toUpperCase(), m]));
     const pctTxt = v => v == null || !isFinite(v) ? '' : (v > 0 ? '+' : '') + Math.round(v * 100) + '%';
     const upOf = it => { const u = it.upside; if (!u) return null; const lo = u.pct_low, hi = u.pct_high; const v = hi != null ? hi : lo; return v == null ? null : v; };
     const secs = [...new Set(items.map(i => i.sector).filter(Boolean))].sort();
     const st = { dir: '', status: '', sec: '', q: '', sort: 'status' };
-    host.innerHTML = head('Pipeline' + (P.as_of ? ' · ' + esc(P.as_of) : ''), 'Longs & shorts we are tracking',
-      'Every name on the Pipeline/Active/Ideas page, the Shorts database, recent Idea Generator runs and thesis pages: the elevator pitch, and the upside or downside where a target has been written down.') +
+    host.innerHTML = `<section class="panel"><div class="panel-h"><h2>Pipeline · longs &amp; shorts we are tracking</h2><span class="muted">${P.as_of ? 'as of ' + esc(P.as_of) : ''}</span></div><p class="sub" style="margin:0">Every name on the Pipeline/Active/Ideas page, the Shorts database, recent Idea Generator runs and thesis pages: the elevator pitch, and the upside or downside where a target has been written down.</p></section>` +
       (arr(P.themes).length ? `<section class="panel"><h2>Themes</h2><div class="pl-themes">${arr(P.themes).map(t => `<div class="theme"><div class="panel-h"><h3>${esc(t.name)}</h3>${t.status ? `<span class="chip out">${esc(t.status)}</span>` : ''}</div><p>${attr(t.pitch || '')}</p>${arr(t.names).length ? `<div class="wl">${arr(t.names).map(x => tk(x)).join(' ')}</div>` : ''}</div>`).join('')}</div></section>` : '') +
       `<div class="ctl" role="group" aria-label="Pipeline filters">
         <label for="pl-q">Search <input type="search" id="pl-q" placeholder="Ticker, company or word"></label>
@@ -1079,7 +1288,7 @@
     const q = (host.__q || '').toLowerCase();
     const xs = NOTES.list.filter(n => !q || `${n.ticker} ${n.label} ${n.text}`.toLowerCase().includes(q));
     const where = t => { const [k, v] = String(t).split(':'); const tk = String(v || '').split('|')[0];
-      return k === 'earn' ? `#earnings` : k === 'stock' ? `#stocks/${encodeURIComponent(v)}/debate` : k === 'pipe' ? '#pipeline' : k === 'idea' ? '#ideas' : k === 'move' ? '#daily' : '#' + (v || 'today'); };
+      return k === 'earn' ? `#earnings` : k === 'stock' ? `#stocks/${encodeURIComponent(v)}/debate` : k === 'pipe' ? '#ideas' : k === 'idea' ? '#ideas' : k === 'move' ? '#daily' : '#' + (v || 'today'); };
     const kind = t => ({ earn: 'Earnings', stock: 'Stock', pipe: 'Pipeline', idea: 'Idea', move: 'Daily move', page: 'Page' })[String(t).split(':')[0]] || 'Note';
     host.innerHTML = head('Notes', 'Your notes', 'Every note you have left on a card, newest first. Notes live in this page’s own database, so rebuilds never erase them.') +
       `<div class="ctl"><label for="nt-q">Search <input type="search" id="nt-q" value="${esc(host.__q || '')}" placeholder="Ticker or word"></label><span class="count">${xs.length} notes</span></div>` +
@@ -1089,8 +1298,8 @@
   }
 
   // ================= ROUTER =================
-  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'stocks', 'notes', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { daily: renderDaily, routines: renderRoutines, pipeline: renderPipeline, stocks: renderStocks, notes: renderNotes, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -1124,7 +1333,7 @@
   if (gD) gD.addEventListener('change', () => { G.days = +gD.value || null; saveG(); rerender(); });
   if (gA) gA.addEventListener('change', () => { DLY = gA.value === (D.daily || {}).as_of ? (D.daily || {}) : (HIST[gA.value] || D.daily || {}); done.daily = 0; show(); });
   function show() {
-    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes') v = 'ideas'; if (!VIEWS.includes(v)) v = 'today';
+    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes' || v === 'pipeline') v = 'ideas'; if (!VIEWS.includes(v)) v = 'today';
     if (gAL) gAL.hidden = !(v === 'daily' && gA && gA.options.length > 1);
     if (v === 'routines' && done[v]) { renderRoutines(); }
     if (v === 'stocks' && done[v]) { renderStocks(); }

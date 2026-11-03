@@ -133,11 +133,21 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    like 11.2.26), AlphaSense (alphasense_genai; ignore its price figures), srs_documents for names that just
    reported, then the web. A story is ONE sentence (≤ 30 words; Bobby, 2026-11-03) on why it moved: the catalyst with its key figure, "moved with <group>: <driver>", or "No catalyst
    found in your sources or the news." If no digest has run today, keep the previous daily.json.
-6. tabs/signals.json and tabs/sources.json (EVENING) — rebuild only if their inputs changed.
+6. tabs/sources.json (EVENING) — rebuild only if its inputs changed. (The Signals tab was removed 2026-11-03; skip
+   tabs/signals.json. Pipeline now shows inside the "Pipeline, ideas & themes" tab; tabs/pipeline.json is unchanged.)
 6b. tabs/stocks.json (EVENING): Companies DB Tier 1–2 rows (Ticker, BBG Ticker, Company, Sector, Sub-sector, Tier),
    public.research driver names (growth_driver_1..5, margin_driver_1..4, competition_1..3, tam_1..2, risk_1..6) and
    aliases, and earnings_metrics joined to earnings_prints; then
-   python3 dashboards/earnings-monitor/store/build_stocks.py tiers.json research.json labels.json aliases.json metrics.json <S>/tabs/stocks.json
+   Debate agent pages: notion-search "Tech Specialist Debate History" and "Stock Debate"; for every page whose title
+   has that phrase (not "dry run" unless it is the only page on the ticker), notion-fetch it and save
+   <S>/debate_raw/<slug>.md (line 1 title, line 2 url, then the <content> markdown unchanged). Then
+   python3 dashboards/earnings-monitor/store/prep_debates.py <S>/debate_raw <S>/routine_md/debates
+   and copy <S>/routine_md/debates/*.md into <S>/routine_md (build.py --routines shows them on the Debate tab).
+   Save the live page's stocks JSON (data.stocks) as <S>/prev_stocks.json, then
+   python3 dashboards/earnings-monitor/store/build_stocks.py tiers.json research.json labels.json aliases.json metrics.json <S>/tabs/stocks.json \
+     --debpages <S>/routine_md/debates/index.json --keep <S>/prev_stocks.json
+   (--keep carries each company's written debate and revised-thesis tenets forward; never drop them.)
+   Never run the stock-debate skill or any digest from the refresh; only read the pages it has published.
 7. Datapoints + Composite Evidence Index (16:00 run; resumed 2026-11-03 after the cleanup — rows tagged
    "[ARCHIVED dup_of=…]" are skipped by the builder): export public.research_evidence for the last 9 months with
    execute_sql in pages of 4,000 rows by id (select id, research_id r, field_key k, field_impact i, event_date d,

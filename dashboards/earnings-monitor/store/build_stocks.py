@@ -2,10 +2,13 @@
 """Stocks tab data: one entry per Companies DB Tier 1-2 name.
 
 Usage: python3 build_stocks.py <tiers.json> <research.json> <labels.json> <aliases.json> <metrics.json> <out.json>
-       [--debate a.json,b.json,...] [--theses theses_revised.json]
+       [--debate a.json,b.json,...] [--theses theses_revised.json] [--debpages index.json] [--keep prev_stocks.json]
 
 --debate   written debates {key: {bull[], bear[], decides[], tenets[{tenet, conviction, lean, evidence}]}}
 --theses   tenets from the Notion "Thesis - Revised" pages {pages: [{company, ticker, url, summary_pitch, stance, tenets[]}]}
+--keep     the live page's stocks.json: a company keeps its previous debate / thesis / debate_page when this run has none
+--debpages Tech Specialist debate agent pages {ticker: {ticker, title, url, date, kind, dry_run}}; the page text itself
+           ships in the artifact's full pages (build.py --routines DIR), keyed by url
 
 tiers.json    Companies DB rows [{t (Ticker), b (BBG Ticker), c (Company), s (Sector), u (Sub-sector JSON list), r (Tier)}]
 research.json public.research [{id, ticker, n}]  (the research ids that have evidence)
@@ -48,7 +51,7 @@ def kws(*texts):
 def main():
     args = sys.argv[1:]
     opt = {}
-    for flag in ("--debate", "--theses"):
+    for flag in ("--debate", "--theses", "--debpages", "--keep"):
         if flag in args:
             i = args.index(flag); opt[flag] = args[i + 1]; del args[i:i + 2]
     sys.argv[1:] = args
@@ -114,11 +117,24 @@ def main():
             if (pt and (pt in keys or pt.split()[0] in keys)) or (pc and len(pc) >= 3 and (nm.startswith(pc) or pc.startswith(nm[:max(4, len(pc))]))):
                 return p
         return None
+    debp = {}
+    if opt.get("--debpages"):
+        try: debp = {norm(k): v for k, v in json.load(open(opt["--debpages"])).items() if k}
+        except Exception as e: print("skip debpages", e)
     for c in out:
         if c["key"] in debate: c["debate"] = debate[c["key"]]
+        dp = debp.get(norm(c["t"])) or debp.get(norm(c["bbg"])) or debp.get(norm(c["t"]).split()[0] if c["t"] else "")
+        if dp: c["debate_page"] = dp
         p = match_thesis(c)
         if p: c["thesis"] = {k: p.get(k) for k in ("url", "summary_pitch", "stance", "tenets", "updated", "company")}
-    print(f"debates {sum(1 for c in out if c.get('debate'))} · revised theses {sum(1 for c in out if c.get('thesis'))}")
+    if opt.get("--keep"):
+        try:
+            prev = {c["key"]: c for c in json.load(open(opt["--keep"])).get("companies", [])}
+            for c in out:
+                for k in ("debate", "thesis", "debate_page"):
+                    if not c.get(k) and prev.get(c["key"], {}).get(k): c[k] = prev[c["key"]][k]
+        except Exception as e: print("skip keep", e)
+    print(f"debates {sum(1 for c in out if c.get('debate'))} · revised theses {sum(1 for c in out if c.get('thesis'))} · debate-agent pages {sum(1 for c in out if c.get('debate_page'))}")
     out.sort(key=lambda x: (x["tier"] or 9, x["t"]))
     json.dump({"companies": out}, open(sys.argv[6], "w"), ensure_ascii=False, separators=(",", ":"))
     print(f"{len(out)} companies · {sum(1 for x in out if x['rids'])} with evidence · {sum(1 for x in out if x['metrics'])} with earnings tables · "
