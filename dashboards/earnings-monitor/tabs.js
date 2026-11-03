@@ -1242,19 +1242,19 @@
       <label><input type="checkbox" data-qo="yy" ${st.yy ? 'checked' : ''}> y/y</label>${st.mode === 'fy' ? '' : `<label><input type="checkbox" data-qo="qq" ${st.qq ? 'checked' : ''}> q/q</label>`}
       <label><input type="checkbox" data-qo="mix" ${st.mix ? 'checked' : ''}> % of revenue</label><label><input type="checkbox" data-qo="beat" ${st.beat ? 'checked' : ''}> vs consensus</label>
       ${st.mode === 'fy' ? '' : `<label>Quarters <select data-qo="nq">${[8, 12, 16].map(n => `<option${(st.cfg && st.cfg.nq || 12) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`}
-      <button type="button" class="btn" data-qb="val" aria-pressed="${st.val}">${st.val ? 'Hide valuation' : 'Upside / downside valuation'}</button>
+      <button type="button" class="btn" data-qb="val" aria-pressed="${st.val}">${st.val ? 'Hide valuation' : 'Show upside / downside valuation'}</button>${st.val ? '<button type="button" class="btn" data-qb="jump">↓ Jump to valuation</button>' : ''}
       <span class="muted qr-msg">${esc(st.msg)}</span></div>`;
     const addUi = () => st.edit ? `<div class="qr-add"><label>Add a Visible Alpha KPI <input type="search" class="qr-kw" placeholder="e.g. gross margin, data center, bits, ASP"></label><button type="button" class="btn" data-qb="search">Search</button>
       ${st.cfg && st.cfg.rows.length > 1 ? `<label>or a ratio <select class="qr-num">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}">${esc(r.label || r.name)}</option>`).join('')}</select> ÷ <select class="qr-den">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}"${r.role === 'rev' ? ' selected' : ''}>${esc(r.label || r.name)}</option>`).join('')}</select></label><button type="button" class="btn" data-qb="ratio">Add ratio</button>` : ''}
       <button type="button" class="btn" data-qb="reset" title="Go back to the default rows from Visible Alpha">Reset to default</button><div class="qr-cands"></div></div>` : '';
     const sets = () => st.mode === 'q' ? (st.dq ? [{ data: st.dq, fy: false }] : null) : st.mode === 'fy' ? (st.dfy ? [{ data: st.dfy, fy: true }] : null) : (st.dq && st.dfy ? [{ data: st.dq, fy: false }, { data: st.dfy, fy: true }] : null);
-    const valHtml = () => !st.val ? '' : `<section class="qv"><div class="panel-h"><h3>Upside / downside valuation · 5 columns: FY actual, FY+1, FY+2, Upside, Downside</h3><span class="muted">defaults to Visible Alpha consensus · type in a blue box to override</span></div><div class="qv-body">${st.dfy && st.cfg.valk ? qrValModel(co, st.cfg, st.dfy, st) : '<p class="sub">Loading consensus for the valuation…</p>'}</div></section>`;
+    const valHtml = () => !st.val ? '' : `<section class="qv"><div class="panel-h"><h3>Upside / downside valuation · 5 columns: FY actual, FY+1, FY+2, Upside, Downside</h3><span class="muted">defaults to Visible Alpha consensus · type in a blue box to override</span></div><div class="qv-body">${(() => { if (st.verr) return `<p class="sub c-neg">Valuation could not load: ${esc(st.verr)}</p>`; if (!(st.dfy && st.cfg.valk)) return `<p class="sub">${esc(st.vstep || 'Loading consensus for the valuation…')}</p>`; try { return qrValModel(co, st.cfg, st.dfy, st); } catch (e) { console.error(e); return `<p class="sub c-neg">Valuation error: ${esc(e && e.message || e)} — tell Claude this message.</p>`; } })()}</div></section>`;
     const paint = () => {
       const S = st.cfg && sets();
       const body = !st.cfg ? `<p class="sub">${esc(st.msg || 'Loading Visible Alpha…')}</p>` : !S ? '<p class="sub">Loading Visible Alpha…</p>' : qrTable(co, st.cfg, S, st);
       host.innerHTML = bar() + addUi() + body + valHtml() + `<p class="sub qr-foot">Live from Visible Alpha through your SRS MCP connector: reported actuals in bold type, consensus in italics (E). Hover a number for reported vs consensus. <button type="button" class="btn" data-qb="save" title="Saves the rows, labels, notes, view choices and the valuation scenario, for everyone">Save rows, view &amp; scenario</button> ${st.cfg && st.cfg.updated ? 'Saved ' + esc(String(st.cfg.updated).slice(0, 10)) + '.' : ''}</p>`;
     };
-    const paintVal = () => { const b = host.querySelector('.qv-body'); if (b && st.dfy && st.cfg.valk) { const f = document.activeElement, fk = f && f.dataset ? (f.dataset.c || '') + '|' + (f.dataset.k || f.dataset.t || '') : ''; b.innerHTML = qrValModel(co, st.cfg, st.dfy, st); if (fk !== '|') { const n = b.querySelector(`[data-c="${(fk.split('|')[0])}"][data-k="${fk.split('|')[1]}"], [data-t="${fk.split('|')[1]}"]`); if (n) { n.focus(); try { n.setSelectionRange(n.value.length, n.value.length); } catch (e) {} } } } };
+    const paintVal = () => { const b = host.querySelector('.qv-body'); if (b && st.dfy && st.cfg.valk) { const f = document.activeElement, fk = f && f.dataset ? (f.dataset.c || '') + '|' + (f.dataset.k || f.dataset.t || '') : ''; try { b.innerHTML = qrValModel(co, st.cfg, st.dfy, st); } catch (e) { b.innerHTML = `<p class="sub c-neg">Valuation error: ${esc(e && e.message || e)}</p>`; return; } if (fk !== '|') { const n = b.querySelector(`[data-c="${(fk.split('|')[0])}"][data-k="${fk.split('|')[1]}"], [data-t="${fk.split('|')[1]}"]`); if (n) { n.focus(); try { n.setSelectionRange(n.value.length, n.value.length); } catch (e) {} } } } };
     const load = async () => {
       st.busy = true; st.msg = ''; paint();
       try {
@@ -1263,7 +1263,9 @@
         if (!st.cfg) st.cfg = await qrLoadCfg(co);
         if (!st.viewSet) { st.viewSet = true; const v = st.cfg.view || {}; ['yy', 'qq', 'mix', 'beat', 'val'].forEach(k => { if (typeof v[k] === 'boolean') st[k] = v[k]; }); if (v.mode) st.mode = v.mode; }
         const needQ = st.mode !== 'fy' && (!st.dq || st.fresh), needF = (st.mode !== 'q' || st.val) && (!st.dfy || st.fresh);
-        if (st.val || st.mode !== 'q') await qrValKpis(st.cfg);
+        st.verr = '';
+        if (st.val || st.mode !== 'q') { st.vstep = 'Finding the Visible Alpha line items (tax, shares, cash flow, cash, debt)…'; paint(); try { await qrValKpis(st.cfg); } catch (e) { st.verr = 'line-item search failed: ' + vaErr(e); } }
+        st.vstep = 'Loading fiscal-year consensus…'; if (st.val) paint();
         const extra = Object.values(st.cfg.valk || {}).map(x => x.id);
         const [q, f] = await Promise.all([needQ ? qrData(st.cfg, st.fresh, false) : null, needF ? qrData(st.cfg, st.fresh, true, extra) : null]);
         if (q) st.dq = q; if (f) st.dfy = f;
@@ -1282,7 +1284,8 @@
       if (a === 'update') { st.fresh = true; load(); }
       else if (a === 'edit') { if (st.edit) readInputs(); st.edit = !st.edit; paint(); }
       else if (a === 'm-q' || a === 'm-fy' || a === 'm-both') { st.mode = a.slice(2); load(); }
-      else if (a === 'val') { st.val = !st.val; if (st.val) load(); else paint(); }
+      else if (a === 'val') { st.val = !st.val; if (st.val) { await load(); const q = host.querySelector('.qv'); if (q) q.scrollIntoView({ block: 'start', behavior: 'smooth' }); } else paint(); }
+      else if (a === 'jump') { const q = host.querySelector('.qv'); if (q) q.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
       else if (a === 'search') {
         const kw = (host.querySelector('.qr-kw') || {}).value || '', box = host.querySelector('.qr-cands'); if (!kw.trim() || !box) return;
         box.innerHTML = '<span class="sub">Searching…</span>';

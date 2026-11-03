@@ -252,7 +252,7 @@ table.dt td.ev-src { white-space: normal; max-width: 220px; }
 .sk-agent .fr-sec > summary { font-weight: 600; }
 /* QR: quarters + fiscal years, valuation scenarios */
 .qr-t td.qr-fy1, .qr-t th.qr-fy1 { border-left: 2px solid var(--rule-2); }
-.qv { margin-top: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.qv { scroll-margin-top: calc(var(--mast-h, 53px) + 24px); margin-top: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
 .qv-top { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 12.5px; margin: 6px 0 8px; }
 .qv-top label { display: inline-flex; gap: 4px; align-items: center; }
 .qv-top input.qv-t { width: 90px; font: inherit; font-family: var(--f-mono); text-align: right; padding: 2px 4px; border: 1px solid var(--rule-2); border-radius: 4px; background: var(--surface); color: var(--accent); }
