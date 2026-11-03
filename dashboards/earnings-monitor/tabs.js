@@ -1035,103 +1035,284 @@
     const clean = JSON.parse(JSON.stringify(Object.assign({}, cfg, { auto: false, updated: new Date().toISOString(), ticker: co.t })));
     await QR.db.collection('qr').doc(qrId(co.t)).set(clean);
   }
-  async function qrData(cfg, fresh, fy) {
+  async function qrData(cfg, fresh, fy, extra) {
     const y = new Date().getFullYear(), out = new Map();
-    const ids = [...new Set(cfg.rows.flatMap(r => r.kind === 'ratio' ? [r.num, r.den] : [r.kpi_id]).filter(Boolean))];
+    const ids = [...new Set(cfg.rows.flatMap(r => r.kind === 'ratio' ? [r.num, r.den] : [r.kpi_id]).concat(extra || []).filter(Boolean))];
     const errs = [];
-    await Promise.all(ids.map(k => vaCall({ action: 'kpi_data', va_company_id: cfg.va_company_id, kpi_id: k, period_type: fy ? 'FY' : 'QTR', min_year: y - (fy ? 3 : 3), max_year: y + (fy ? 2 : 1) }, fresh)
+    await Promise.all(ids.map(k => vaCall({ action: 'kpi_data', va_company_id: cfg.va_company_id, kpi_id: k, period_type: fy ? 'FY' : 'QTR', min_year: y - 3, max_year: y + (fy ? 3 : 1) }, fresh)
       .then(p => out.set(k, arr(Array.isArray(p) ? p : (p && p.rows) || [])))
       .catch(e => { errs.push(e); out.set(k, []); })));
     return { byK: out, errs };
   }
-  function qrTable(co, cfg, data, opt) {
+  // columns for one period set (quarters or fiscal years)
+  function qrCols(data, fy, cfg) {
     const per = new Map();
-    data.byK.forEach(rs => rs.forEach(r => { if (!per.has(r.PERIOD)) per.set(r.PERIOD, { p: r.PERIOD, y: r.YEAR, n: r.PERIOD_NUMBER || 0, end: r.PERIOD_END_DATE, act: false }); if (r.REPORTED_VALUE != null) per.get(r.PERIOD).act = true; }));
+    data.byK.forEach(rs => rs.forEach(r => { if (!per.has(r.PERIOD)) per.set(r.PERIOD, { p: r.PERIOD, y: r.YEAR, n: r.PERIOD_NUMBER || 0, end: r.PERIOD_END_DATE, act: false, fy, data }); if (r.REPORTED_VALUE != null) per.get(r.PERIOD).act = true; }));
     let ps = [...per.values()].sort((a, b) => a.y - b.y || a.n - b.n);
     const lastA = ps.map(p => p.act).lastIndexOf(true);
-    const nA = opt.fy ? 3 : Math.max(4, (cfg.nq || 12) - 4), nE = opt.fy ? 2 : 4;
-    ps = ps.slice(Math.max(0, lastA + 1 - nA), lastA + 1 + nE);
-    const cell = (k, p) => (data.byK.get(k) || []).find(r => r.PERIOD === p.p);
+    const nA = fy ? 3 : Math.max(4, (cfg.nq || 12) - 4), nE = fy ? 3 : 4;
+    return ps.slice(Math.max(0, lastA + 1 - nA), lastA + 1 + nE);
+  }
+  function qrTable(co, cfg, sets, opt) {
+    const ps = [];
+    sets.forEach((s, si) => qrCols(s.data, s.fy, cfg).forEach((p, j) => { p.first = si > 0 && j === 0; ps.push(p); }));
+    const cell = (k, p) => (p.data.byK.get(k) || []).find(r => r.PERIOD === p.p);
     const val = (k, p) => { const c = cell(k, p); return c ? (c.REPORTED_VALUE != null ? c.REPORTED_VALUE : c.CONSENSUS_VALUE) : null; };
-    const lbl = p => opt.fy ? 'FY' + String(p.y).slice(2) : p.n + 'Q' + String(p.y).slice(2);
+    const lbl = p => p.fy ? 'FY' + String(p.y).slice(2) : p.n + 'Q' + String(p.y).slice(2);
+    const cls = p => `n${p.act ? '' : ' qr-e'}${p.first ? ' qr-fy1' : ''}`;
+    const prevQ = (p, j) => j && !ps[j - 1].fy === !p.fy && !ps[j].first ? ps[j - 1] : null;
     const rev = cfg.rows.find(r => r.role === 'rev');
-    const th = ps.map(p => `<th class="n${p.act ? '' : ' qr-e'}" title="${esc(p.end || '')}">${lbl(p)}${p.act ? 'A' : 'E'}</th>`).join('');
+    const th = ps.map(p => `<th class="${cls(p)}" title="${esc(p.end || '')}">${lbl(p)}${p.act ? 'A' : 'E'}</th>`).join('');
     const ed = opt.edit;
     let body = '';
     cfg.rows.forEach((r, i) => {
       const ctl = ed ? `<span class="qr-ctl"><button type="button" data-qa="up" data-i="${i}" title="Move up">↑</button><button type="button" data-qa="dn" data-i="${i}" title="Move down">↓</button><button type="button" data-qa="rm" data-i="${i}" title="Remove row">✕</button></span>` : '';
-      const name = ed ? `<input class="qr-lbl" data-i="${i}" value="${esc(r.label || r.name)}" aria-label="Row label">` : `${esc(r.label || r.name)}${r.kind === 'kpi' && r.name && r.label !== r.name ? '' : ''}`;
+      const name = ed ? `<input class="qr-lbl" data-i="${i}" value="${esc(r.label || r.name)}" aria-label="Row label">` : esc(r.label || r.name);
       const cells = ps.map(p => {
-        if (r.kind === 'ratio') { const a = val(r.num, p), b = val(r.den, p); const v = a != null && b ? a / b : null; return `<td class="n${p.act ? '' : ' qr-e'}">${qrFmt(v, r)}</td>`; }
-        const c = cell(r.kpi_id, p); if (!c) return '<td class="n sub">—</td>';
+        if (r.kind === 'ratio') { const a = val(r.num, p), b = val(r.den, p); const v = a != null && b ? a / b : null; return `<td class="${cls(p)}">${qrFmt(v, r)}</td>`; }
+        const c = cell(r.kpi_id, p); if (!c) return `<td class="${cls(p)} sub">—</td>`;
         const v = c.REPORTED_VALUE != null ? c.REPORTED_VALUE : c.CONSENSUS_VALUE, bm = c.BEAT_MISS_PCT;
         const tip = `Reported ${c.REPORTED_VALUE ?? '—'} · Consensus ${c.CONSENSUS_VALUE ?? '—'}${c.NUMBER_OF_BROKER ? ' (' + c.NUMBER_OF_BROKER + ' brokers)' : ''}${bm != null ? ' · vs cons ' + pct(bm) : ''}`;
-        return `<td class="n${c.REPORTED_VALUE != null ? '' : ' qr-e'}" title="${esc(tip)}">${qrFmt(v, r, c.UNIT_SYMBOL)}${opt.beat && bm != null ? `<div class="qr-s ${bm >= 0 ? 'c-pos' : 'c-neg'}">${pct(bm)}</div>` : ''}</td>`;
+        return `<td class="n${c.REPORTED_VALUE != null ? '' : ' qr-e'}${p.first ? ' qr-fy1' : ''}" title="${esc(tip)}">${qrFmt(v, r, c.UNIT_SYMBOL)}${opt.beat && bm != null ? `<div class="qr-s ${bm >= 0 ? 'c-pos' : 'c-neg'}">${pct(bm)}</div>` : ''}</td>`;
       }).join('');
       body += `<tr class="${r.seg ? 'qr-seg' : r.kind === 'ratio' ? 'qr-ratio' : 'qr-main'}"><td class="qr-name">${ctl}${name}</td>${cells}</tr>`;
-      if (r.kind === 'kpi' && opt.yy) {
-        body += `<tr class="qr-sub"><td class="qr-name sub">y/y</td>${ps.map(p => { const c = cell(r.kpi_id, p); const v = c ? (c.REPORTED_YY != null ? c.REPORTED_YY : c.CONSENSUS_YY) : null; return `<td class="n ${v == null ? '' : v >= 0 ? 'c-pos' : 'c-neg'}${c && c.REPORTED_VALUE == null ? ' qr-e' : ''}">${c && c.UNIT_SYMBOL === '%' ? '' : pct(v)}</td>`; }).join('')}</tr>`;
-        if (!opt.fy && opt.qq) body += `<tr class="qr-sub"><td class="qr-name sub">q/q</td>${ps.map((p, j) => { const a = val(r.kpi_id, p), b = j ? val(r.kpi_id, ps[j - 1]) : null; const v = a != null && b ? a / b - 1 : null; return `<td class="n ${v == null ? '' : v >= 0 ? 'c-pos' : 'c-neg'}">${pct(v)}</td>`; }).join('')}</tr>`;
-        if (r.seg && rev && opt.mix) body += `<tr class="qr-sub"><td class="qr-name sub">% of revenue</td>${ps.map(p => { const a = val(r.kpi_id, p), b = val(rev.kpi_id, p); return `<td class="n sub">${a != null && b ? (a / b * 100).toFixed(1) + '%' : ''}</td>`; }).join('')}</tr>`;
-      }
+      if (r.kind === 'kpi' && opt.yy) body += `<tr class="qr-sub"><td class="qr-name sub">y/y</td>${ps.map(p => { const c = cell(r.kpi_id, p); const v = c ? (c.REPORTED_YY != null ? c.REPORTED_YY : c.CONSENSUS_YY) : null; return `<td class="n ${v == null ? '' : v >= 0 ? 'c-pos' : 'c-neg'}${c && c.REPORTED_VALUE == null ? ' qr-e' : ''}${p.first ? ' qr-fy1' : ''}">${c && c.UNIT_SYMBOL === '%' ? '' : pct(v)}</td>`; }).join('')}</tr>`;
+      if (r.kind === 'kpi' && opt.qq && ps.some(p => !p.fy)) body += `<tr class="qr-sub"><td class="qr-name sub">q/q</td>${ps.map((p, j) => { if (p.fy) return `<td class="n${p.first ? ' qr-fy1' : ''}"></td>`; const q = prevQ(p, j), a = val(r.kpi_id, p), b = q ? val(r.kpi_id, q) : null; const v = a != null && b ? a / b - 1 : null; return `<td class="n ${v == null ? '' : v >= 0 ? 'c-pos' : 'c-neg'}">${pct(v)}</td>`; }).join('')}</tr>`;
+      if (r.kind === 'kpi' && r.seg && rev && opt.mix) body += `<tr class="qr-sub"><td class="qr-name sub">% of revenue</td>${ps.map(p => { const a = val(r.kpi_id, p), b = val(rev.kpi_id, p); return `<td class="n sub${p.first ? ' qr-fy1' : ''}">${a != null && b ? (a / b * 100).toFixed(1) + '%' : ''}</td>`; }).join('')}</tr>`;
       if (ed) body += `<tr class="qr-sub"><td colspan="${ps.length + 1}"><input class="qr-note" data-i="${i}" value="${esc(r.note || '')}" placeholder="Gd: / Discl: shorthand for this row (e.g. 3Q26: HSD q/q, 2H wtd)"></td></tr>`;
       else if (r.note) body += `<tr class="qr-sub"><td class="qr-note-v" colspan="${ps.length + 1}">${esc(r.note)}</td></tr>`;
     });
     return `<div class="tbl-wrap"><table class="dt qr-t"><thead><tr><th>${esc(cfg.va_ticker || '')} · Visible Alpha</th>${th}</tr></thead><tbody>${body}</tbody></table></div>`;
   }
+
+  // ---- Valuation scenarios: 5 columns (last FY actual, FY+1, FY+2, FY+2 upside, FY+2 downside), seeded with consensus ----
+  // Extra Visible Alpha lines found by keyword; the line used is shown on hover so a wrong match is visible.
+  async function qrValKpis(cfg) {
+    if (cfg.valk) return cfg.valk;
+    const id = cfg.va_company_id;
+    const ls = async kw => { try { const x = await vaCall({ action: 'list_kpis', va_company_id: id, search: [kw], period_type: 'FY' }); return arr(x.candidates || (x.selection ? [x.selection] : [])); } catch (e) { return []; } };
+    const pick = (xs, ok, pref) => { const ys = xs.filter(k => ok.test(k.kpi_name)); return (pref && ys.find(k => pref.test(k.kpi_name))) || ys[0] || null; };
+    const op = / - Operating$/i;
+    const [pre, tax, shr, ni, cash, debt, cap1, cap2, fin] = await Promise.all(['before', 'income tax', 'shares', 'net income', 'cash', 'debt', 'capital expenditure', 'property', 'net profit'].map(ls));
+    const k = {
+      pretax: pick(pre.concat(await ls('pre-tax')), /(before (income )?tax|pre-?tax)/i, op),
+      tax: pick(tax, /^(provision|income tax|tax)/i, op) || pick(tax, /tax/i, op),
+      shares: pick(shr, /dil/i, op),
+      ni: pick(ni.concat(fin), /^net (income|profit)/i, op),
+      cfo: pick(cash, /operating activities|operating cash flow|cash from operations/i, null),
+      cash: pick(cash, /^cash/i, /short-term|investments|marketable/i) || pick(cash, /^cash (and|&) cash equivalents$/i, null),
+      capex: pick(cap1.concat(cap2), /(capex|capital expend|purchase|investment|additions).*(property|equipment|pp&e)|^capex|capital expenditure/i, null),
+      debt_total: pick(debt, /^total debt|^debt$|total borrowings/i, null),
+      debt_lt: pick(debt, /long[- ]term debt|long term borrowings/i, null),
+      debt_st: pick(debt, /short[- ]term debt|current portion|short term borrowings/i, null),
+    };
+    const out = {};
+    Object.entries(k).forEach(([n, v]) => { if (v) out[n] = { id: v.kpi_id, name: v.kpi_name }; });
+    cfg.valk = out; return out;
+  }
+  function qrValModel(co, cfg, fy, st) {
+    const V = cfg.val || (cfg.val = { inp: {}, top: {}, segMode: false });
+    const K = cfg.valk || {}, R = role => cfg.rows.find(r => r.role === role);
+    const rev = R('rev'), gp = R('gp'), oi = R('oi'), eps = R('eps'), segs = cfg.rows.filter(r => r.kind === 'kpi' && r.seg);
+    if (!rev) return '<p class="sub">Add a total revenue row to use the valuation block.</p>';
+    const ser = k => (fy.byK.get(k) || []);
+    const v = (k, y) => { const r = ser(k).find(x => x.YEAR === y); return r ? (r.REPORTED_VALUE != null ? r.REPORTED_VALUE : r.CONSENSUS_VALUE) : null; };
+    const rep = (k, y) => { const r = ser(k).find(x => x.YEAR === y); return r ? r.REPORTED_VALUE : null; };
+    const ys = ser(rev.kpi_id).filter(r => r.REPORTED_VALUE != null).map(r => r.YEAR);
+    if (!ys.length) return '<p class="sub">Visible Alpha has no reported fiscal-year revenue for this company.</p>';
+    const Y0 = Math.max(...ys);
+    const kv = (n, y) => K[n] ? v(K[n].id, y) : null;
+    const debtOf = y => kv('debt_total', y) != null ? kv('debt_total', y) : (kv('debt_lt', y) || 0) + (kv('debt_st', y) || 0) || null;
+    const A = n => Math.abs(n);
+    // consensus seeds for year y (ratios relative to year y-1, so the default columns reproduce consensus)
+    const seed = y => {
+      const r = v(rev.kpi_id, y), r0 = v(rev.kpi_id, y - 1), g = gp && v(gp.kpi_id, y), o = oi && v(oi.kpi_id, y);
+      const g0 = gp && v(gp.kpi_id, y - 1), o0 = oi && v(oi.kpi_id, y - 1), pt = kv('pretax', y), tx = kv('tax', y), ni = kv('ni', y), e = eps && v(eps.kpi_id, y);
+      const s = { rev_g: r && r0 ? r / r0 - 1 : null, gm: g != null && r ? g / r : null,
+        opex_g: g != null && o != null && g0 != null && o0 != null && (g0 - o0) ? (g - o) / (g0 - o0) - 1 : null,
+        below: pt != null && o != null ? pt - o : 0, tax: tx != null && pt ? A(tx) / pt : 0.15,
+        shares: ni != null && e ? ni / e : kv('shares', y), cfo_m: kv('cfo', y) != null && r ? kv('cfo', y) / r : null,
+        capex_s: kv('capex', y) != null && r ? A(kv('capex', y)) / r : null };
+      segs.forEach(sg => { const a = v(sg.kpi_id, y), b = v(sg.kpi_id, y - 1); s['seg' + sg.kpi_id] = a != null && b ? a / b - 1 : null; });
+      return s;
+    };
+    const cols = [{ id: 'A', y: Y0, h: 'FY' + String(Y0).slice(2) + 'A' }, { id: 'B', y: Y0 + 1, base: 'A', h: 'FY' + String(Y0 + 1).slice(2) + 'E' },
+      { id: 'C', y: Y0 + 2, base: 'B', h: 'FY' + String(Y0 + 2).slice(2) + 'E' }, { id: 'U', y: Y0 + 2, base: 'B', h: 'Upside FY' + String(Y0 + 2).slice(2) }, { id: 'D', y: Y0 + 2, base: 'B', h: 'Downside FY' + String(Y0 + 2).slice(2) }];
+    // current price, cash, debt, shares (editable at the top; defaults: Master comps price, last reported balance sheet)
+    const cp = ((D.comps || {}).rows || {}); const crow = cp[co.bbg + ' Equity'] || cp[co.bbg] || cp[co.t] || null;
+    const T = Object.assign({ price: crow && crow.price != null ? crow.price : null, cash: kv('cash', Y0), debt: debtOf(Y0), shares: null }, V.top || {});
+    const out = {};
+    const A0 = { rev: v(rev.kpi_id, Y0), gp: gp ? v(gp.kpi_id, Y0) : null, ebit: oi ? v(oi.kpi_id, Y0) : null, pretax: kv('pretax', Y0), ni: kv('ni', Y0), eps: eps ? v(eps.kpi_id, Y0) : null, cfo: kv('cfo', Y0), capex: kv('capex', Y0) != null ? A(kv('capex', Y0)) : null, seg: {} };
+    segs.forEach(sg => { A0.seg[sg.kpi_id] = v(sg.kpi_id, Y0); });
+    A0.opex = A0.gp != null && A0.ebit != null ? A0.gp - A0.ebit : null; A0.shares = A0.ni != null && A0.eps ? A0.ni / A0.eps : kv('shares', Y0);
+    A0.fcf = A0.cfo != null && A0.capex != null ? A0.cfo - A0.capex : null;
+    out.A = A0; if (T.shares == null) T.shares = A0.shares;
+    const I = {};
+    cols.slice(1).forEach(c => {
+      const b = out[c.base], sd = seed(c.y), ov = (V.inp || {})[c.id] || {};
+      const inp = Object.assign({}, sd, Object.fromEntries(Object.entries(ov).filter(([, x]) => x != null && x !== '')));
+      I[c.id] = { sd, inp, ov };
+      const o = { seg: {} };
+      let segSum = 0, segSum0 = 0;
+      segs.forEach(sg => { const b0 = b.seg[sg.kpi_id]; const gg = inp['seg' + sg.kpi_id]; o.seg[sg.kpi_id] = b0 != null && gg != null ? b0 * (1 + gg) : null; if (o.seg[sg.kpi_id] != null) { segSum += o.seg[sg.kpi_id]; segSum0 += b0; } });
+      o.rev = V.segMode && segSum ? segSum + (b.rev - segSum0) * (1 + (inp.rev_g || 0)) : b.rev != null && inp.rev_g != null ? b.rev * (1 + inp.rev_g) : null;
+      o.gp = o.rev != null && inp.gm != null ? o.rev * inp.gm : null;
+      o.opex = b.opex != null && inp.opex_g != null ? b.opex * (1 + inp.opex_g) : null;
+      if (ov.ebitm != null && ov.ebitm !== '' && o.rev != null) { o.ebit = o.rev * ov.ebitm; if (o.gp != null) o.opex = o.gp - o.ebit; }
+      else o.ebit = o.gp != null && o.opex != null ? o.gp - o.opex : null;
+      o.pretax = o.ebit != null ? o.ebit + (inp.below || 0) : null;
+      o.ni = o.pretax != null ? o.pretax * (1 - (inp.tax || 0)) : null;
+      o.shares = inp.shares; o.eps = o.ni != null && o.shares ? o.ni / o.shares : null;
+      o.cfo = o.rev != null && inp.cfo_m != null ? o.rev * inp.cfo_m : null; o.capex = o.rev != null && inp.capex_s != null ? o.rev * inp.capex_s : null;
+      o.fcf = o.cfo != null && o.capex != null ? o.cfo - o.capex : null; o.fcfps = o.fcf != null && o.shares ? o.fcf / o.shares : null;
+      out[c.id] = o;
+    });
+    // multiples: default = today's multiples on FY+1
+    const B = out.B, mcap = T.price != null && T.shares ? T.price * T.shares : null, ev = mcap != null ? mcap - (T.cash || 0) + (T.debt || 0) : null;
+    const mSeed = { pe: T.price != null && B.eps ? T.price / B.eps : null, pfcf: T.price != null && B.fcfps ? T.price / B.fcfps : null, evs: ev != null && B.rev ? ev / B.rev : null };
+    cols.slice(1).forEach(c => { const o = out[c.id], ov = I[c.id].ov; ['pe', 'pfcf', 'evs'].forEach(m => { o[m] = ov[m] != null && ov[m] !== '' ? +ov[m] : mSeed[m]; I[c.id].sd[m] = mSeed[m]; });
+      o.px_pe = o.eps != null && o.pe != null ? o.eps * o.pe : null; o.px_fcf = o.fcfps != null && o.pfcf != null ? o.fcfps * o.pfcf : null;
+      o.ev = o.rev != null && o.evs != null ? o.rev * o.evs : null; o.px_evs = o.ev != null && T.shares ? (o.ev - (T.debt || 0) + (T.cash || 0)) / T.shares : null; });
+    // ---- render ----
+    const M = x => x == null || !isFinite(x) ? '' : (Math.abs(x) >= 1e9 ? (x / 1e9).toFixed(2) + 'B' : (x / 1e6).toFixed(1) + 'M');
+    const P = x => x == null || !isFinite(x) ? '' : (x * 100).toFixed(1) + '%';
+    const X = x => x == null || !isFinite(x) ? '' : (+x).toFixed(1) + 'x';
+    const $ = x => x == null || !isFinite(x) ? '' : (+x).toFixed(2);
+    const up = x => T.price && x != null && isFinite(x) ? `<div class="qr-s ${x >= T.price ? 'c-pos' : 'c-neg'}">${pct(x / T.price - 1)}</div>` : '';
+    const kind = { rev_g: 'p', gm: 'p', opex_g: 'p', ebitm: 'p', below: 'm', tax: 'p', shares: 'm', cfo_m: 'p', capex_s: 'p', pe: 'x', pfcf: 'x', evs: 'x' };
+    const show = (k, x) => x == null || !isFinite(x) ? '' : kind[k] === 'p' || /^seg/.test(k) ? (x * 100).toFixed(1) : kind[k] === 'm' ? (x / 1e6).toFixed(1) : (+x).toFixed(1);
+    const inCell = (c, k, comp) => { if (c.id === 'A') return `<td class="n">${comp != null ? comp : ''}</td>`; const it = I[c.id], ovv = it.ov[k];
+      const ph = k === 'ebitm' ? (out[c.id].rev ? out[c.id].ebit / out[c.id].rev : null) : it.sd[k];
+      return `<td class="n qv-c"><input class="qv-in${ovv != null && ovv !== '' ? ' set' : ''}" data-c="${c.id}" data-k="${k}" value="${ovv != null && ovv !== '' ? esc(show(k, ovv)) : ''}" placeholder="${esc(show(k, ph))}" inputmode="decimal" title="Consensus default ${esc(show(k, it.sd[k]))}; type to override, clear to go back"></td>`; };
+    const row = (lab, fn, cl) => `<tr class="${cl || ''}"><td class="qr-name">${lab}</td>${cols.map(c => `<td class="n">${fn(out[c.id], c)}</td>`).join('')}</tr>`;
+    const inRow = (lab, k, actFn, unit) => `<tr class="qv-inr"><td class="qr-name">${lab} <span class="sub">${unit || ''}</span></td>${cols.map(c => inCell(c, k, c.id === 'A' ? actFn(out.A) : null)).join('')}</tr>`;
+    const src = n => K[n] ? `<span class="sub" title="Visible Alpha line used: ${esc(K[n].name)}">ⓘ</span>` : (n ? '<span class="sub" title="No matching Visible Alpha line; enter it">—</span>' : '');
+    let h = `<div class="qv-top"><label>Price <input class="qv-t" data-t="price" value="${esc(T.price ?? '')}" inputmode="decimal"></label>
+      <label>Cash (M) ${src('cash')}<input class="qv-t" data-t="cash" value="${esc(T.cash != null ? (T.cash / 1e6).toFixed(1) : '')}" inputmode="decimal"></label>
+      <label>Debt (M) ${src(K.debt_total ? 'debt_total' : 'debt_lt')}<input class="qv-t" data-t="debt" value="${esc(T.debt != null ? (T.debt / 1e6).toFixed(1) : '')}" inputmode="decimal"></label>
+      <label>Diluted shares (M) <input class="qv-t" data-t="shares" value="${esc(T.shares != null ? (T.shares / 1e6).toFixed(1) : '')}" inputmode="decimal"></label>
+      <span>Market cap <b class="mono">${M(mcap)}</b></span><span>EV <b class="mono">${M(ev)}</b></span>
+      <span>Today on FY${String(Y0 + 1).slice(2)}E: <b class="mono">${X(mSeed.pe)}</b> P/E · <b class="mono">${X(mSeed.pfcf)}</b> P/FCF · <b class="mono">${X(mSeed.evs)}</b> EV/sales</span>
+      <label><input type="checkbox" class="qv-seg" ${V.segMode ? 'checked' : ''}> Build revenue from segments</label>
+      <button type="button" class="btn" data-qv="reset">Reset to consensus</button></div>`;
+    h += `<div class="tbl-wrap"><table class="dt qr-t qv-t"><thead><tr><th>Scenario · ${esc(cfg.va_ticker || '')}</th>${cols.map(c => `<th class="n${c.id === 'U' ? ' qv-up' : c.id === 'D' ? ' qv-dn' : ''}">${c.h}</th>`).join('')}</tr></thead><tbody>`;
+    h += `<tr class="qv-sec"><td colspan="6">Revenue</td></tr>`;
+    segs.forEach(sg => { h += inRow(esc((sg.label || sg.name).trim()) + ' y/y', 'seg' + sg.kpi_id, a => { const b = v(sg.kpi_id, Y0 - 1); return a.seg[sg.kpi_id] != null && b ? P(a.seg[sg.kpi_id] / b - 1) : ''; }, '%');
+      h += row('<span class="sub">' + esc((sg.label || sg.name).trim()) + '</span>', o => M(o.seg[sg.kpi_id]), 'qr-sub'); });
+    h += inRow('Total revenue y/y' + (V.segMode ? ' <span class="sub">(other, when building from segments)</span>' : ''), 'rev_g', a => { const b = v(rev.kpi_id, Y0 - 1); return a.rev && b ? P(a.rev / b - 1) : ''; }, '%');
+    h += row('<b>Revenue</b>', o => `<b>${M(o.rev)}</b>`, 'qr-main');
+    h += `<tr class="qv-sec"><td colspan="6">P&amp;L</td></tr>`;
+    h += inRow('Gross margin', 'gm', a => P(a.gp != null && a.rev ? a.gp / a.rev : null), '%');
+    h += row('Gross profit', o => M(o.gp), 'qr-sub');
+    h += inRow('Opex y/y', 'opex_g', a => { const g0 = gp && v(gp.kpi_id, Y0 - 1), o0 = oi && v(oi.kpi_id, Y0 - 1); return a.opex != null && g0 != null && o0 != null ? P(a.opex / (g0 - o0) - 1) : ''; }, '%');
+    h += row('Opex', o => M(o.opex), 'qr-sub');
+    h += inRow('EBIT margin', 'ebitm', a => P(a.ebit != null && a.rev ? a.ebit / a.rev : null), '% · blank = GP − opex');
+    h += row('<b>EBIT</b>', o => `<b>${M(o.ebit)}</b>`, 'qr-main');
+    h += inRow('Interest &amp; other below the line ' + src('pretax'), 'below', a => M(a.pretax != null && a.ebit != null ? a.pretax - a.ebit : null), 'M');
+    h += row('Pre-tax income', o => M(o.pretax), 'qr-sub');
+    h += inRow('Tax rate ' + src('tax'), 'tax', a => P(a.pretax && kv('tax', Y0) != null ? A(kv('tax', Y0)) / a.pretax : null), '%');
+    h += row('Net income', o => M(o.ni), 'qr-sub');
+    h += inRow('Diluted shares ' + src('shares'), 'shares', a => a.shares != null ? (a.shares / 1e6).toFixed(1) : '', 'M');
+    h += row('<b>EPS</b>', o => `<b>${$(o.eps)}</b>`, 'qr-main');
+    h += `<tr class="qv-sec"><td colspan="6">Cash flow</td></tr>`;
+    h += inRow('CFO margin ' + src('cfo'), 'cfo_m', a => P(a.cfo != null && a.rev ? a.cfo / a.rev : null), '%');
+    h += inRow('Capex / sales ' + src('capex'), 'capex_s', a => P(a.capex != null && a.rev ? a.capex / a.rev : null), '%');
+    h += row('FCF margin', o => P(o.fcf != null && o.rev ? o.fcf / o.rev : null), 'qr-sub');
+    h += row('FCF', o => M(o.fcf), 'qr-sub');
+    h += row('<b>FCF / share</b>', o => `<b>${$(o.fcfps != null ? o.fcfps : o.fcf != null && o.shares ? o.fcf / o.shares : null)}</b>`, 'qr-main');
+    h += `<tr class="qv-sec"><td colspan="6">Value</td></tr>`;
+    h += inRow('P/E multiple', 'pe', () => '', 'x');
+    h += row('Price on P/E', o => o.px_pe != null ? `<b>${$(o.px_pe)}</b>${up(o.px_pe)}` : '', 'qr-main');
+    h += inRow('P/FCF multiple', 'pfcf', () => '', 'x');
+    h += row('Price on FCF / share', o => o.px_fcf != null ? `<b>${$(o.px_fcf)}</b>${up(o.px_fcf)}` : '', 'qr-main');
+    h += inRow('EV / sales multiple', 'evs', () => '', 'x');
+    h += row('Implied EV', o => M(o.ev), 'qr-sub');
+    h += row('Price on EV / sales', o => o.px_evs != null ? `<b>${$(o.px_evs)}</b>${up(o.px_evs)}` : '', 'qr-main');
+    h += `</tbody></table></div><p class="sub qr-foot">Grey numbers in the boxes are consensus (Visible Alpha); type a number to override it and everything below and to the right recalculates. FY+2 builds on the FY+1 column, so changes there flow into the base, upside and downside. Amounts in millions in reporting currency; percents as 12.5. Price defaults to Master comps; cash and debt to the last reported fiscal year. ⓘ shows which Visible Alpha line was used. Save rows &amp; view to keep the scenario.</p>`;
+    return h;
+  }
   // Mount a live QR into `host` for company `co` ({t, bbg, name}); used by the Stocks tab and the Earnings cards.
   function qrMount(host, co) {
     if (!host || host.__qr) return; host.__qr = true;
-    const st = { edit: false, yy: true, qq: true, mix: false, beat: false, fy: false, fresh: false, cfg: null, data: null, msg: '', busy: false, viewSet: false };
+    const st = { edit: false, yy: true, qq: true, mix: false, beat: false, mode: 'q', val: false, fresh: false, cfg: null, dq: null, dfy: null, msg: '', busy: false, viewSet: false };
     const bar = () => `<div class="ctl qr-bar" role="group" aria-label="Quarterly review controls">
       <button type="button" class="btn" data-qb="update" ${st.busy ? 'disabled' : ''}>${st.busy ? 'Loading…' : 'Update'}</button>
       <button type="button" class="btn" data-qb="edit" aria-pressed="${st.edit}">${st.edit ? 'Done editing' : 'Edit rows'}</button>
-      <div class="seg"><button type="button" data-qb="q" aria-pressed="${!st.fy}">Quarters</button><button type="button" data-qb="fy" aria-pressed="${st.fy}">Fiscal years</button></div>
-      <label><input type="checkbox" data-qo="yy" ${st.yy ? 'checked' : ''}> y/y</label>${st.fy ? '' : `<label><input type="checkbox" data-qo="qq" ${st.qq ? 'checked' : ''}> q/q</label>`}
+      <div class="seg"><button type="button" data-qb="m-q" aria-pressed="${st.mode === 'q'}">Quarters</button><button type="button" data-qb="m-fy" aria-pressed="${st.mode === 'fy'}">Fiscal years</button><button type="button" data-qb="m-both" aria-pressed="${st.mode === 'both'}">Both</button></div>
+      <label><input type="checkbox" data-qo="yy" ${st.yy ? 'checked' : ''}> y/y</label>${st.mode === 'fy' ? '' : `<label><input type="checkbox" data-qo="qq" ${st.qq ? 'checked' : ''}> q/q</label>`}
       <label><input type="checkbox" data-qo="mix" ${st.mix ? 'checked' : ''}> % of revenue</label><label><input type="checkbox" data-qo="beat" ${st.beat ? 'checked' : ''}> vs consensus</label>
-      ${st.fy ? '' : `<label>Quarters <select data-qo="nq">${[8, 12, 16].map(n => `<option${(st.cfg && st.cfg.nq || 12) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`}
+      ${st.mode === 'fy' ? '' : `<label>Quarters <select data-qo="nq">${[8, 12, 16].map(n => `<option${(st.cfg && st.cfg.nq || 12) === n ? ' selected' : ''}>${n}</option>`).join('')}</select></label>`}
+      <button type="button" class="btn" data-qb="val" aria-pressed="${st.val}">${st.val ? 'Hide valuation' : 'Upside / downside valuation'}</button>
       <span class="muted qr-msg">${esc(st.msg)}</span></div>`;
     const addUi = () => st.edit ? `<div class="qr-add"><label>Add a Visible Alpha KPI <input type="search" class="qr-kw" placeholder="e.g. gross margin, data center, bits, ASP"></label><button type="button" class="btn" data-qb="search">Search</button>
       ${st.cfg && st.cfg.rows.length > 1 ? `<label>or a ratio <select class="qr-num">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}">${esc(r.label || r.name)}</option>`).join('')}</select> ÷ <select class="qr-den">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}"${r.role === 'rev' ? ' selected' : ''}>${esc(r.label || r.name)}</option>`).join('')}</select></label><button type="button" class="btn" data-qb="ratio">Add ratio</button>` : ''}
-      <button type="button" class="btn" data-qb="save" title="Saves the rows, labels, notes and which growth lines are shown, for everyone">Save rows &amp; view</button><button type="button" class="btn" data-qb="reset" title="Go back to the default rows from Visible Alpha">Reset to default</button><div class="qr-cands"></div></div>` : '';
+      <button type="button" class="btn" data-qb="reset" title="Go back to the default rows from Visible Alpha">Reset to default</button><div class="qr-cands"></div></div>` : '';
+    const sets = () => st.mode === 'q' ? (st.dq ? [{ data: st.dq, fy: false }] : null) : st.mode === 'fy' ? (st.dfy ? [{ data: st.dfy, fy: true }] : null) : (st.dq && st.dfy ? [{ data: st.dq, fy: false }, { data: st.dfy, fy: true }] : null);
+    const valHtml = () => !st.val ? '' : `<section class="qv"><div class="panel-h"><h3>Upside / downside valuation</h3><span class="muted">defaults to consensus · type to override</span></div><div class="qv-body">${st.dfy && st.cfg.valk ? qrValModel(co, st.cfg, st.dfy, st) : '<p class="sub">Loading consensus for the valuation…</p>'}</div></section>`;
     const paint = () => {
-      const body = !st.cfg ? `<p class="sub">${esc(st.msg || 'Loading Visible Alpha…')}</p>` : !st.data ? '<p class="sub">Loading Visible Alpha…</p>' : qrTable(co, st.cfg, st.data, st);
-      host.innerHTML = bar() + addUi() + body + `<p class="sub qr-foot">Live from Visible Alpha through your SRS MCP connector: reported actuals in bold type, consensus in italics (E). Hover a number for reported vs consensus. ${st.cfg && st.cfg.auto ? 'Default rows: total revenue, every reported segment, gross profit, operating income and EPS. Edit rows to change them; edits are saved for everyone on this page.' : st.cfg && st.cfg.updated ? 'Rows saved ' + esc(String(st.cfg.updated).slice(0, 10)) + '.' : ''}</p>`;
+      const S = st.cfg && sets();
+      const body = !st.cfg ? `<p class="sub">${esc(st.msg || 'Loading Visible Alpha…')}</p>` : !S ? '<p class="sub">Loading Visible Alpha…</p>' : qrTable(co, st.cfg, S, st);
+      host.innerHTML = bar() + addUi() + body + valHtml() + `<p class="sub qr-foot">Live from Visible Alpha through your SRS MCP connector: reported actuals in bold type, consensus in italics (E). Hover a number for reported vs consensus. <button type="button" class="btn" data-qb="save" title="Saves the rows, labels, notes, view choices and the valuation scenario, for everyone">Save rows, view &amp; scenario</button> ${st.cfg && st.cfg.updated ? 'Saved ' + esc(String(st.cfg.updated).slice(0, 10)) + '.' : ''}</p>`;
     };
+    const paintVal = () => { const b = host.querySelector('.qv-body'); if (b && st.dfy && st.cfg.valk) { const f = document.activeElement, fk = f && f.dataset ? (f.dataset.c || '') + '|' + (f.dataset.k || f.dataset.t || '') : ''; b.innerHTML = qrValModel(co, st.cfg, st.dfy, st); if (fk !== '|') { const n = b.querySelector(`[data-c="${(fk.split('|')[0])}"][data-k="${fk.split('|')[1]}"], [data-t="${fk.split('|')[1]}"]`); if (n) { n.focus(); try { n.setSelectionRange(n.value.length, n.value.length); } catch (e) {} } } } };
     const load = async () => {
       st.busy = true; st.msg = ''; paint();
       try {
         await QR.ready;
         if (!QR.mcp) { st.msg = 'Live Visible Alpha data needs the page open on claude.ai with the SRS MCP connector.'; st.busy = false; paint(); return; }
         if (!st.cfg) st.cfg = await qrLoadCfg(co);
-        if (!st.viewSet) { st.viewSet = true; const v = st.cfg.view || {}; ['yy', 'qq', 'mix', 'beat'].forEach(k => { if (typeof v[k] === 'boolean') st[k] = v[k]; }); }
-        st.data = await qrData(st.cfg, st.fresh, st.fy);
-        const nErr = st.data.errs.length;
-        st.msg = nErr ? `${nErr} row${nErr > 1 ? 's' : ''} failed: ${vaErr(st.data.errs[0])}` : (st.fresh ? 'Updated from Visible Alpha just now.' : '');
+        if (!st.viewSet) { st.viewSet = true; const v = st.cfg.view || {}; ['yy', 'qq', 'mix', 'beat', 'val'].forEach(k => { if (typeof v[k] === 'boolean') st[k] = v[k]; }); if (v.mode) st.mode = v.mode; }
+        const needQ = st.mode !== 'fy' && (!st.dq || st.fresh), needF = (st.mode !== 'q' || st.val) && (!st.dfy || st.fresh);
+        if (st.val || st.mode !== 'q') await qrValKpis(st.cfg);
+        const extra = Object.values(st.cfg.valk || {}).map(x => x.id);
+        const [q, f] = await Promise.all([needQ ? qrData(st.cfg, st.fresh, false) : null, needF ? qrData(st.cfg, st.fresh, true, extra) : null]);
+        if (q) st.dq = q; if (f) st.dfy = f;
+        const errs = [].concat(q ? q.errs : [], f ? f.errs : []);
+        st.msg = errs.length ? `${errs.length} line${errs.length > 1 ? 's' : ''} failed: ${vaErr(errs[0])}` : (st.fresh ? 'Updated from Visible Alpha just now.' : '');
       } catch (e) { st.msg = e && e.code === 'no_va' ? `${co.t} is not in Visible Alpha (${e.message}).` : vaErr(e); }
       st.busy = false; st.fresh = false; paint();
     };
     const readInputs = () => { host.querySelectorAll('.qr-lbl').forEach(x => { st.cfg.rows[+x.dataset.i].label = x.value; }); host.querySelectorAll('.qr-note').forEach(x => { st.cfg.rows[+x.dataset.i].note = x.value.trim(); }); };
     host.addEventListener('click', async e => {
-      const b = e.target.closest('[data-qb],[data-qa],[data-qk]'); if (!b) return;
+      const b = e.target.closest('[data-qb],[data-qa],[data-qk],[data-qv]'); if (!b) return;
+      if (b.dataset.qv === 'reset') { if (st.cfg.val) { st.cfg.val.inp = {}; st.cfg.val.top = {}; } paintVal(); return; }
       if (b.dataset.qa) { readInputs(); const i = +b.dataset.i, R = st.cfg.rows; if (b.dataset.qa === 'rm') R.splice(i, 1); else { const j = b.dataset.qa === 'up' ? i - 1 : i + 1; if (j >= 0 && j < R.length) [R[i], R[j]] = [R[j], R[i]]; } paint(); return; }
-      if (b.dataset.qk) { readInputs(); const k = JSON.parse(b.dataset.qk); if (!st.cfg.rows.some(r => r.kpi_id === k.kpi_id)) st.cfg.rows.push({ kind: 'kpi', kpi_id: k.kpi_id, name: k.kpi_name, label: k.kpi_name }); st.data = null; paint(); load(); return; }
+      if (b.dataset.qk) { readInputs(); const k = JSON.parse(b.dataset.qk); if (!st.cfg.rows.some(r => r.kpi_id === k.kpi_id)) st.cfg.rows.push({ kind: 'kpi', kpi_id: k.kpi_id, name: k.kpi_name, label: k.kpi_name }); st.dq = st.dfy = null; paint(); load(); return; }
       const a = b.dataset.qb;
       if (a === 'update') { st.fresh = true; load(); }
       else if (a === 'edit') { if (st.edit) readInputs(); st.edit = !st.edit; paint(); }
-      else if (a === 'q' || a === 'fy') { st.fy = a === 'fy'; st.data = null; load(); }
+      else if (a === 'm-q' || a === 'm-fy' || a === 'm-both') { st.mode = a.slice(2); load(); }
+      else if (a === 'val') { st.val = !st.val; if (st.val) load(); else paint(); }
       else if (a === 'search') {
         const kw = (host.querySelector('.qr-kw') || {}).value || '', box = host.querySelector('.qr-cands'); if (!kw.trim() || !box) return;
         box.innerHTML = '<span class="sub">Searching…</span>';
-        try { const x = await vaCall({ action: 'list_kpis', va_company_id: st.cfg.va_company_id, search: [kw.trim()], period_type: st.fy ? 'FY' : 'QTR' }); const cs = arr(x.candidates || (x.selection ? [x.selection] : []));
+        try { const x = await vaCall({ action: 'list_kpis', va_company_id: st.cfg.va_company_id, search: [kw.trim()], period_type: st.mode === 'fy' ? 'FY' : 'QTR' }); const cs = arr(x.candidates || (x.selection ? [x.selection] : []));
           box.innerHTML = cs.length ? cs.slice(0, 40).map(c => `<button type="button" class="chip out" data-qk="${esc(JSON.stringify({ kpi_id: c.kpi_id, kpi_name: c.kpi_name }))}">+ ${esc(c.kpi_name)} <span class="sub">${esc(c.period_count || '')}</span></button>`).join(' ') : `<span class="sub">${esc(x.display_message || 'No KPIs match.')}</span>`;
         } catch (err) { box.innerHTML = `<span class="sub">${esc(vaErr(err))}</span>`; }
       }
       else if (a === 'ratio') { readInputs(); const num = +host.querySelector('.qr-num').value, den = +host.querySelector('.qr-den').value; const nm = r => (st.cfg.rows.find(x => x.kpi_id === r) || {}).label || ''; st.cfg.rows.push({ kind: 'ratio', num, den, label: `${nm(num).trim()} / ${nm(den).trim()}` }); paint(); load(); }
-      else if (a === 'save') { readInputs(); st.cfg.view = { yy: st.yy, qq: st.qq, mix: st.mix, beat: st.beat }; try { await qrSave(co, st.cfg); st.cfg.auto = false; st.cfg.updated = new Date().toISOString(); st.msg = 'Saved.'; } catch (err) { st.msg = 'Not saved: ' + ((err && (err.code || err.message)) || 'error'); } paint(); }
-      else if (a === 'reset') { if (!confirm('Go back to the default Visible Alpha rows for ' + co.t + '? Your saved rows and notes for this company are removed.')) return; try { if (QR.db) await QR.db.collection('qr').doc(qrId(co.t)).delete(); } catch (err) {} QR.cfg.delete(qrId(co.t)); st.cfg = null; st.data = null; load(); }
+      else if (a === 'save') { if (st.edit) readInputs(); st.cfg.view = { yy: st.yy, qq: st.qq, mix: st.mix, beat: st.beat, mode: st.mode, val: st.val }; try { await qrSave(co, st.cfg); st.cfg.auto = false; st.cfg.updated = new Date().toISOString(); st.msg = 'Saved.'; } catch (err) { st.msg = 'Not saved: ' + ((err && (err.code || err.message)) || 'error'); } paint(); }
+      else if (a === 'reset') { if (!confirm('Go back to the default Visible Alpha rows for ' + co.t + '? Your saved rows, notes and scenario for this company are removed.')) return; try { if (QR.db) await QR.db.collection('qr').doc(qrId(co.t)).delete(); } catch (err) {} QR.cfg.delete(qrId(co.t)); st.cfg = null; st.dq = st.dfy = null; load(); }
     });
-    host.addEventListener('change', e => { const o = e.target.dataset.qo; if (!o) return; if (o === 'nq') { if (st.edit) readInputs(); st.cfg.nq = +e.target.value; } else st[o] = e.target.checked; paint(); });
+    // valuation inputs: percents typed as 12.5, amounts in millions, multiples as 18
+    host.addEventListener('change', e => {
+      const t = e.target;
+      if (t.classList.contains('qv-seg')) { st.cfg.val = st.cfg.val || { inp: {}, top: {} }; st.cfg.val.segMode = t.checked; paintVal(); return; }
+      if (t.classList.contains('qv-in') || t.classList.contains('qv-t')) return;
+      const o = t.dataset.qo; if (!o) return; if (o === 'nq') { if (st.edit) readInputs(); st.cfg.nq = +t.value; } else st[o] = t.checked; paint();
+    });
+    host.addEventListener('input', e => {
+      const t = e.target; if (!t.classList.contains('qv-in') && !t.classList.contains('qv-t')) return;
+      clearTimeout(host.__qvT); host.__qvT = setTimeout(() => {
+        const V = st.cfg.val = st.cfg.val || { inp: {}, top: {}, segMode: false }; V.inp = V.inp || {}; V.top = V.top || {};
+        const raw = t.value.trim().replace(/,/g, ''), num = raw === '' ? null : +raw.replace(/[%x$]/g, '');
+        if (raw !== '' && !isFinite(num)) return;
+        if (t.classList.contains('qv-t')) { const k = t.dataset.t; if (num == null) delete V.top[k]; else V.top[k] = k === 'price' ? num : num * 1e6; }
+        else { const c = t.dataset.c, k = t.dataset.k; V.inp[c] = V.inp[c] || {};
+          V.inp[c][k] = num == null ? null : (['pe', 'pfcf', 'evs'].includes(k) ? num : ['below', 'shares'].includes(k) ? num * 1e6 : num / 100); }
+        paintVal();
+      }, 450);
+    });
     load();
   }
   window.__qrMount = qrMount;

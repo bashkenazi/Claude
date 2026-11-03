@@ -250,3 +250,15 @@ table.dt td.ev-src { white-space: normal; max-width: 220px; }
 .sk-ten-h { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .sk-ten-h .sk-conv { display: inline-block; vertical-align: middle; }
 .sk-agent .fr-sec > summary { font-weight: 600; }
+/* QR: quarters + fiscal years, valuation scenarios */
+.qr-t td.qr-fy1, .qr-t th.qr-fy1 { border-left: 2px solid var(--rule-2); }
+.qv { margin-top: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.qv-top { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 12.5px; margin: 6px 0 8px; }
+.qv-top label { display: inline-flex; gap: 4px; align-items: center; }
+.qv-top input.qv-t { width: 90px; font: inherit; font-family: var(--f-mono); text-align: right; padding: 2px 4px; border: 1px solid var(--rule-2); border-radius: 4px; background: var(--surface); color: var(--accent); }
+.qv-t td.qv-c { padding: 1px 4px; }
+.qv-in { width: 78px; font: inherit; font-family: var(--f-mono); font-size: 12px; text-align: right; padding: 1px 4px; border: 1px solid var(--rule); border-radius: 4px; background: var(--accent-wash); color: var(--accent); }
+.qv-in::placeholder { color: var(--muted); opacity: 1; }
+.qv-in.set { border-color: var(--accent); font-weight: 600; }
+.qv-t tr.qv-sec td { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); background: var(--surface-2); padding-top: 4px; }
+.qv-t th.qv-up { color: var(--pos); } .qv-t th.qv-dn { color: var(--neg); }
