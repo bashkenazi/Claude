@@ -170,7 +170,7 @@
       up = sorted.filter(m => m.c > 0).slice(0, N).map(mk); dn = sorted.filter(m => m.c < 0).reverse().slice(0, N).map(mk);
     } else { up = up.slice(0, N); dn = dn.slice(0, N); }
     const pct = v => v == null ? '' : ((+v > 0 ? '+' : '') + (+v).toFixed(1) + '%');
-    const mover = (m) => `<div class="li"><span class="stripe ${+m.chg_1d >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(m.ticker)} <b>${esc(m.name || '')}</b> <span class="mono ${+m.chg_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(m.chg_1d)}</span>${m.group ? ` <span class="chip out">${esc(m.group)}</span>` : ''}<div>${attr(m.why || 'No catalyst found in your sources or the news.')}</div>${valLine(m.ticker, true)}${srcLine(m)}</div></div>`;
+    const mover = (m) => `<div class="li"><span class="stripe ${+m.chg_1d >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(m.ticker)} <b>${esc(m.name || '')}</b>${noteUI('move:' + ntKey(m.ticker) + '|' + (DLY.as_of || ''), m.ticker, (m.name || m.ticker) + ' move ' + (DLY.as_of || ''))} <span class="mono ${+m.chg_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(m.chg_1d)}</span>${m.group ? ` <span class="chip out">${esc(m.group)}</span>` : ''}<div>${attr(m.why || 'No catalyst found in your sources or the news.')}</div>${valLine(m.ticker, true)}${srcLine(m)}</div></div>`;
     const W = 900, bar = secs.length ? Math.max(...secs.map(s => Math.abs(+s.median_1d || 0)), 0.5) : 1;
     host.innerHTML = head('Daily moves · ' + esc(DLY.as_of || ''), 'What moved and why',
       `Biggest one-day moves across the ${esc(DLY.universe_n || '')}-name Master comps universe on ${esc(DLY.as_of || 'the last trading day')}, by company and by subsector, with the catalyst from your research flow or the news.`) +
@@ -634,7 +634,7 @@
     const bucketOf = i => { const c = String(i.conviction || ''); return /most exciting|amazing/i.test(c) ? 'amazing' : /contrarian/i.test(c) ? 'contrarian' : /good/i.test(c) ? 'good' : /callout/i.test(c) ? 'callout' : 'other'; };
     const BL = { amazing: 'Amazing', contrarian: 'Contrarian', good: 'Good', callout: 'Callout', other: 'Other' };
     const ist = { b: '', dir: '', q: '' };
-    const card = i => `<article class="idea"><div class="top">${tk(i.ticker)}<b>${esc(i.company)}</b><span class="chip b-${bucketOf(i)}">${BL[bucketOf(i)]}</span>${i.conviction ? `<span class="chip out">${esc(i.conviction)}</span>` : ''}${link(i.url, fmtD(i.date))}</div><p><b>${esc(i.idea)}</b></p>${i.why_now ? `<p>${esc(i.why_now)}</p>` : ''}${arr(i.catalysts).length ? `<div class="sub">Catalysts: ${arr(i.catalysts).map(esc).join(' · ')}</div>` : ''}${arr(i.risks).length ? `<div class="sub">Risks: ${arr(i.risks).map(esc).join(' · ')}</div>` : ''}${srcLine(i)}</article>`;
+    const card = i => `<article class="idea"><div class="top">${tk(i.ticker)}<b>${esc(i.company)}</b>${noteUI('idea:' + ntKey(i.ticker) + '|' + (i.date || ''), i.ticker, (i.company || i.ticker) + ' idea')}<span class="chip b-${bucketOf(i)}">${BL[bucketOf(i)]}</span>${i.conviction ? `<span class="chip out">${esc(i.conviction)}</span>` : ''}${link(i.url, fmtD(i.date))}</div><p><b>${esc(i.idea)}</b></p>${i.why_now ? `<p>${esc(i.why_now)}</p>` : ''}${arr(i.catalysts).length ? `<div class="sub">Catalysts: ${arr(i.catalysts).map(esc).join(' · ')}</div>` : ''}${arr(i.risks).length ? `<div class="sub">Risks: ${arr(i.risks).map(esc).join(' · ')}</div>` : ''}${srcLine(i)}</article>`;
     function drawIdeas() {
       const xs = ideas.filter(i => (!ist.b || bucketOf(i) === ist.b) && (!ist.dir || dir(i.direction) === ist.dir) && (!ist.q || `${i.ticker} ${i.company} ${i.idea} ${i.why_now}`.toLowerCase().includes(ist.q)));
       const L = xs.filter(i => dir(i.direction) === 'long'), S = xs.filter(i => dir(i.direction) === 'short'), P = xs.filter(i => !['long', 'short'].includes(dir(i.direction)));
@@ -742,6 +742,7 @@
       body = `<section class="panel sk-head"><div class="panel-h"><div><span class="eyebrow">Tier ${esc(cur.tier)} · ${esc(cur.sector)} · ${esc(cur.sub)}</span><h2 style="margin-top:4px">${tk(cur.t)} ${esc(cur.name)}</h2></div>
         <div class="sk-kpis">${mv ? `<span><span class="sub">Today</span> <b class="mono ${+mv.c >= 0 ? 'c-pos' : 'c-neg'}">${sgn(+mv.c)}%</b></span>` : ''}${I ? `<span><span class="sub">Index</span> <b class="mono">${sgn(I.c[n])}</b></span><span><span class="sub">vs univ.</span> <b class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}">${sgn(I.x[n])}</b></span><span><span class="sub">30d Δ</span> <b class="mono">${sgn(I.c[n] - I.c[Math.max(0, n - 4)])}</b></span>` : ''}</div></div>
         ${pl ? `<p class="sk-pitch"><span class="chip ${pl.direction === 'short' ? 'dn' : 'up'}">${esc(pl.direction)}</span> <span class="chip out">${esc(pl.status || '')}</span> ${attr(pl.pitch || '')}${pl.upside && (pl.upside.pct_low != null || pl.upside.pct_high != null) ? ` <b class="mono">${sgn(100 * (pl.upside.pct_high ?? pl.upside.pct_low))}% to target</b>` : ''}</p>` : ''}
+        <div class="sk-notes">${noteUI('stock:' + cur.key, cur.t, cur.name)} <span class="sub">Add a note on ${esc(cur.t)}</span><div id="sk-tnotes" data-tk="${esc(ntKey(cur.t))}" data-tk2="${esc(ntKey(cur.bbg))}"></div></div>
         <nav class="sk-tabs">${tabs.map(([k, l]) => `<a href="#stocks/${encodeURIComponent(cur.key)}/${k}"${k === sub ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav></section><div id="sk-body"><section class="panel"><p class="sub">Loading datapoints…</p></section></div>`;
     }
     host.innerHTML = head('Stocks', 'Tier 1–2 companies', 'The debate, every datapoint organized by what matters for the stock, the earnings-review metrics, and what management has said over time.') + `<div class="sk-wrap">${nav}<div class="sk-main">${body}</div></div>`;
@@ -948,6 +949,7 @@
         <div class="pl-h">${tk(it.ticker)} <b>${esc(it.company || '')}</b>
           <span class="chip ${it.direction === 'short' ? 'dn' : 'up'}">${esc(it.direction || '')}</span>
           ${it.status ? `<span class="chip out">${esc(it.status)}</span>` : ''}${it.conviction ? `<span class="chip out">${esc(it.conviction)}</span>` : ''}
+          ${noteUI('pipe:' + ntKey(it.ticker), it.ticker, (it.company || it.ticker) + ' (' + (it.direction || '') + ')')}
           <span class="pl-up">${upTxt ? `<span class="mono ${upV == null ? '' : good(upV) ? 'c-pos' : 'c-neg'}" title="${esc(u.basis || '')}">${esc(upTxt)}</span><span class="sub"> ${it.direction === 'short' ? 'to target' : 'to target'}</span>` : '<span class="sub">no target written</span>'}</span></div>
         <p class="pl-pitch">${attr(it.pitch || '')}</p>
         <div class="pl-meta sub">${[it.sector, it.theme].filter(Boolean).map(esc).join(' · ')}${it.price != null ? ` · px ${esc(it.price)}` : ''}${m ? ` · today <span class="mono ${+m.c >= 0 ? 'c-pos' : 'c-neg'}">${(+m.c > 0 ? '+' : '') + (+m.c).toFixed(1)}%</span>` : ''}${it.added ? ` · added ${esc(it.added)}` : ''}${it.updated && it.updated !== it.added ? ` · updated ${esc(it.updated)}` : ''}</div>
@@ -978,9 +980,72 @@
     draw();
   }
 
+  // ================= NOTES: Bobby's own notes on any card, saved in the page's database (survive every rebuild) =================
+  // a note: notes/<id> {target, ticker, label, text, created, updated}; target ids: earn:<TICKER>|<date>, stock:<key>,
+  // pipe:<TICKER>, idea:<TICKER>|<date>, move:<TICKER>|<date>, page:<view>
+  const NOTES = { db: null, list: [], ready: false, err: '' };
+  const ntKey = t => String(t || '').toUpperCase().replace(/\s+EQUITY$/, '').replace(/\s+(US|UW|UN|UQ)$/, '').replace(/\s+JT$/, ' JP').trim();
+  window.__noteUI = (target, ticker, label) => `<span class="nt" data-nt="${esc(target)}" data-tk="${esc(ntKey(ticker))}" data-lb="${esc(label || '')}"></span>`;
+  const noteUI = window.__noteUI;
+  function paintTickerNotes() {
+    const box = document.getElementById('sk-tnotes'); if (!box) return;
+    const ks = new Set([box.dataset.tk, box.dataset.tk2, String(box.dataset.tk || '').split(' ')[0]].filter(Boolean));
+    const xs = NOTES.list.filter(n => ks.has(ntKey(n.ticker)) || ks.has(ntKey(n.ticker).split(' ')[0]));
+    const kind = t => ({ earn: 'Earnings', stock: 'Stock', pipe: 'Pipeline', idea: 'Idea', move: 'Move' })[String(t).split(':')[0]] || 'Note';
+    box.innerHTML = xs.length ? `<div class="sk-tn">${xs.map(n => `<div class="sk-tni"><span class="chip out">${kind(n.target)}</span> <span class="sub">${esc(new Date(n.updated || n.created).toLocaleDateString([], { month: 'short', day: 'numeric' }))}${n.label ? ' · ' + esc(n.label) : ''}</span><div style="white-space:pre-wrap">${esc(n.text)}</div></div>`).join('')}</div>` : '';
+  }
+  function paintNotes(root) {
+    paintTickerNotes();
+    (root || document).querySelectorAll('.nt').forEach(el => {
+      const mine = NOTES.list.filter(n => n.target === el.dataset.nt);
+      const open = el.dataset.open === '1';
+      el.innerHTML = `<button type="button" class="nt-btn${mine.length ? ' has' : ''}" aria-expanded="${open}" title="${NOTES.db ? 'Add or read notes' : 'Notes are not available in this view'}">📝${mine.length ? ' ' + mine.length : ''}</button>` +
+        (open ? `<div class="nt-pop">${mine.map(n => `<div class="nt-item" data-id="${esc(n.id)}"><div class="nt-meta sub">${esc(new Date(n.updated || n.created).toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }))}</div><div class="nt-text">${esc(n.text)}</div><button type="button" class="nt-del sub" aria-label="Delete note">Delete</button></div>`).join('')}
+          ${NOTES.db ? `<textarea class="nt-in" rows="3" placeholder="Your note on ${esc(el.dataset.lb || el.dataset.tk || 'this')}…"></textarea><div class="nt-act"><button type="button" class="btn nt-save">Save note</button></div>` : `<p class="sub">${esc(NOTES.err || 'Notes need the page open on claude.ai.')}</p>`}</div>` : '');
+    });
+  }
+  document.addEventListener('click', async e => {
+    const host = e.target.closest('.nt'); if (!host) return;
+    if (e.target.closest('.nt-btn')) { host.dataset.open = host.dataset.open === '1' ? '0' : '1'; paintNotes(host.parentNode); if (host.dataset.open === '1') { const t = host.querySelector('.nt-in'); if (t) t.focus(); } return; }
+    if (e.target.closest('.nt-save') && NOTES.db) {
+      const ta = host.querySelector('.nt-in'), text = (ta && ta.value || '').trim(); if (!text) return;
+      const b = e.target.closest('.nt-save'); b.disabled = true; b.textContent = 'Saving…';
+      try { const now = new Date().toISOString(); await NOTES.db.collection('notes').doc().set({ target: host.dataset.nt, ticker: host.dataset.tk, label: host.dataset.lb, text, created: now, updated: now }); }
+      catch (x) { b.disabled = false; b.textContent = 'Save note'; alert('Could not save the note: ' + ((x && x.message) || 'error')); }
+      return;
+    }
+    if (e.target.closest('.nt-del') && NOTES.db) { const id = e.target.closest('.nt-item').dataset.id; if (confirm('Delete this note?')) { try { await NOTES.db.collection('notes').doc(id).delete(); } catch (x) { alert('Could not delete: ' + ((x && x.message) || 'error')); } } }
+  });
+  new MutationObserver(ms => { if (ms.some(m => [...m.addedNodes].some(n => n.nodeType === 1 && (n.matches && n.matches('.nt') || n.querySelector && n.querySelector('.nt:empty'))))) paintNotes(); })
+    .observe(document.body, { childList: true, subtree: true });
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('db').then(db => {
+      if (!db) { NOTES.err = 'Notes are not available in this view (sign in on claude.ai).'; paintNotes(); return; }
+      NOTES.db = db;
+      db.collection('notes').onSnapshot(snap => {
+        NOTES.list = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => String(b.updated || b.created).localeCompare(String(a.updated || a.created)));
+        NOTES.ready = true; paintNotes(); if ((location.hash || '').startsWith('#notes')) renderNotes();
+        const c = document.getElementById('nt-count'); if (c) c.textContent = NOTES.list.length ? NOTES.list.length : '';
+      }, err => { NOTES.err = 'Notes could not load: ' + ((err && err.code) || 'error'); paintNotes(); });
+    }).catch(() => { NOTES.err = 'Notes are not available in this view.'; });
+  } else NOTES.err = 'Notes need the page open on claude.ai.';
+  function renderNotes() {
+    const host = document.getElementById('v-notes'); if (!host) return;
+    const q = (host.__q || '').toLowerCase();
+    const xs = NOTES.list.filter(n => !q || `${n.ticker} ${n.label} ${n.text}`.toLowerCase().includes(q));
+    const where = t => { const [k, v] = String(t).split(':'); const tk = String(v || '').split('|')[0];
+      return k === 'earn' ? `#earnings` : k === 'stock' ? `#stocks/${encodeURIComponent(v)}/debate` : k === 'pipe' ? '#pipeline' : k === 'idea' ? '#ideas' : k === 'move' ? '#daily' : '#' + (v || 'today'); };
+    const kind = t => ({ earn: 'Earnings', stock: 'Stock', pipe: 'Pipeline', idea: 'Idea', move: 'Daily move', page: 'Page' })[String(t).split(':')[0]] || 'Note';
+    host.innerHTML = head('Notes', 'Your notes', 'Every note you have left on a card, newest first. Notes live in this page’s own database, so rebuilds never erase them.') +
+      `<div class="ctl"><label for="nt-q">Search <input type="search" id="nt-q" value="${esc(host.__q || '')}" placeholder="Ticker or word"></label><span class="count">${xs.length} notes</span></div>` +
+      (NOTES.db ? '' : `<p class="sub">${esc(NOTES.err || 'Loading…')}</p>`) +
+      `<div class="list">${xs.map(n => `<div class="li"><div class="body">${n.ticker ? tk(n.ticker) + ' ' : ''}<span class="chip out">${kind(n.target)}</span> <b>${esc(n.label || '')}</b> <a href="${where(n.target)}" class="sub">open →</a><div style="white-space:pre-wrap">${esc(n.text)}</div><div class="sub">${esc(new Date(n.updated || n.created).toLocaleString())}</div></div></div>`).join('') || none('No notes yet. Click 📝 on any earnings print, stock, pipeline card, idea or mover.')}</div>`;
+    const qi = document.getElementById('nt-q'); qi.addEventListener('input', e => { host.__q = e.target.value; const p = e.target.selectionStart; renderNotes(); const n = document.getElementById('nt-q'); n.focus(); n.setSelectionRange(p, p); });
+  }
+
   // ================= ROUTER =================
-  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'stocks', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { daily: renderDaily, routines: renderRoutines, pipeline: renderPipeline, stocks: renderStocks, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'stocks', 'notes', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { daily: renderDaily, routines: renderRoutines, pipeline: renderPipeline, stocks: renderStocks, notes: renderNotes, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -1018,6 +1083,7 @@
     if (gAL) gAL.hidden = !(v === 'daily' && gA && gA.options.length > 1);
     if (v === 'routines' && done[v]) { renderRoutines(); }
     if (v === 'stocks' && done[v]) { renderStocks(); }
+    if (v === 'notes' && done[v]) { renderNotes(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
     document.querySelectorAll('nav.tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });

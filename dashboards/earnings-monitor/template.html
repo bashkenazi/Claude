@@ -203,6 +203,7 @@ td.note { color: var(--muted); }
     <a href="#prep">Prep &amp; calendar</a>
     <a href="#health">Skill health</a>
     <a href="#sources">Sources</a>
+    <a href="#notes">Notes <span id="nt-count" class="sub"></span></a>
     <a href="#method">Method</a>
   </nav>
   <div class="viewbar" role="group" aria-label="View options">
@@ -219,6 +220,7 @@ td.note { color: var(--muted); }
 <div class="view" data-view="routines" id="v-routines"></div>
 <div class="view" data-view="pipeline" id="v-pipeline"></div>
 <div class="view" data-view="stocks" id="v-stocks"></div>
+<div class="view" data-view="notes" id="v-notes"></div>
 <div class="view" data-view="themes" id="v-themes"></div>
 <div class="view" data-view="datapoints" id="v-datapoints"></div>
 <div class="view" data-view="signals" id="v-signals"></div>
@@ -430,7 +432,7 @@ td.note { color: var(--muted); }
     let h = `<article class="card${it.differ ? ' split' : ''}">
       <div class="card-h"><span class="tk">${esc(it.ticker)}</span><span class="co">${esc(it.company)}</span>
         <span class="meta"><b class="rdate">${fmtDay(it.date)}</b> · ${esc(it.quarter)}</span>
-        <span class="right"><span class="chip s-${it.tone}">${LABEL[it.tone]}</span>${it.labels.map(l => `<span class="chip out">${esc(l)}</span>`).join('')}${it.differ ? '<span class="chip a-split" title="One note reads positive and another negative">Notes disagree</span>' : ''}<span class="chip">${esc(it.sector)}</span></span></div>
+        <span class="right">${window.__noteUI ? window.__noteUI("earn:" + String(it.ticker).toUpperCase() + "|" + it.date, it.ticker, (it.company || it.ticker) + " " + it.quarter) : ""}<span class="chip s-${it.tone}">${LABEL[it.tone]}</span>${it.labels.map(l => `<span class="chip out">${esc(l)}</span>`).join('')}${it.differ ? '<span class="chip a-split" title="One note reads positive and another negative">Notes disagree</span>' : ''}<span class="chip">${esc(it.sector)}</span></span></div>
       <div class="col">`;
     h += `<div class="col-h">${it.headline ? `<p class="headline" style="flex:1;min-width:0">${at(it.headline)}</p>` : ''}<span class="chips" style="margin-left:auto">${it.links.map(l => String(l.url).startsWith('http') ? `<a href="${esc(l.url)}" target="_blank" rel="noopener">${l.label} ↗</a>` : `<span class="chip out" title="Built tonight; not yet published to Notion">Not yet in Notion</span>`).join('')}</span></div>`;
     if (window.__valLine) h += window.__valLine(it.ticker, false);

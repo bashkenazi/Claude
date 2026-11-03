@@ -188,3 +188,14 @@ pre.method { white-space: pre-wrap; font-size: 12px; margin: 8px 0 0; }
 .sk-conv { display: inline-block; width: 60px; height: 6px; background: var(--surface-2); border-radius: 3px; margin-right: 6px; vertical-align: middle; }
 .sk-conv i { display: block; height: 100%; background: var(--ink-2); border-radius: 3px; }
 .sk-ten td { vertical-align: top; } .nowrap { white-space: nowrap; }
+
+.nt { position: relative; display: inline-block; vertical-align: middle; margin-left: 4px; }
+.nt-btn { font: inherit; font-size: 12px; border: 1px solid var(--rule-2); background: var(--surface); color: var(--ink-2); border-radius: 12px; padding: 1px 7px; cursor: pointer; opacity: .55; }
+.nt-btn:hover, .nt-btn.has, .nt-btn[aria-expanded="true"] { opacity: 1; } .nt-btn.has { border-color: var(--ink-2); }
+.nt-pop { position: absolute; z-index: 30; top: 100%; right: 0; width: min(380px, 80vw); margin-top: 4px; background: var(--bg, #fff); border: 1px solid var(--rule-2); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.14); padding: 10px; text-align: left; font-size: 13px; font-weight: 400; }
+.nt-item { border-bottom: 1px solid var(--rule); padding: 4px 0 6px; } .nt-text { white-space: pre-wrap; color: var(--ink); }
+.nt-del { border: 0; background: none; cursor: pointer; padding: 0; text-decoration: underline; }
+.nt-in { width: 100%; box-sizing: border-box; font: inherit; margin-top: 6px; padding: 6px; border: 1px solid var(--rule-2); border-radius: 6px; background: var(--surface); color: var(--ink); }
+.nt-act { display: flex; justify-content: flex-end; margin-top: 6px; }
+.sk-notes { margin-top: 6px; }
+.sk-tn { margin-top: 8px; display: flex; flex-direction: column; gap: 6px; } .sk-tni { padding: 6px 8px; background: var(--surface-2); border-radius: 6px; font-size: 13px; }
