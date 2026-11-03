@@ -1,10 +1,32 @@
 Refresh Bobby Ashkenazi's "Bobby Tech Daily" artifact: https://claude.ai/artifact/4WAMJK6NEWt1dqETwd2Zcc .
 
-Runs weekdays at 12:20 PM ET (MIDDAY mode) and 9:20 PM ET (EVENING mode); pick the mode from the current ET time.
-- MIDDAY: after the 11:30 Tech Specialist digest. Prices are intraday Bloomberg from the Master comps Live sheet.
-  Rebuild only tabs/daily.json, tabs/today.json and tabs/routines.json; every other tab carries over from the live page.
-  No history writes except one tech_daily_snapshots row per rebuilt tab named <tab>.midday.
-- EVENING: after the 6 PM Research Inbox and 8 PM SemiAnalysis digests. Closes; rebuild every tab; full history writes.
+SCHEDULE — runs weekdays at 10:00, 11:00, 12:00, 14:00 and 16:00 ET (Bobby's schedule, 2026-11-03). Decide what to
+rebuild from the current ET hour; every tab not rebuilt carries over from the live page (--keep-full <S>/live.html).
+| ET run | Rebuild |
+| 10:00, 12:00, 14:00 | Daily moves (step 5, intraday Live sheet) and then Today's market commentary (step 4, "market" only) |
+| 11:00               | Routines (step 4: tabs/routines.json, full run pages, and today.json digests/call-outs) |
+| 16:00               | Daily moves + market commentary (near-close Live sheet), Routines, Datapoints & index (step 7), Stocks (6b), |
+|                     | Earnings (steps 1–3), history writes (snapshots + daily_moves) |
+| every run           | the WHEN-CHANGED checks below |
+| first run of the week (Monday 10:00, or the first run after a holiday) | Pipeline, Ideas & themes, Estimates & screens and Valuation in full, even if unchanged |
+
+WHEN-CHANGED checks (every run, cheap): rebuild a tab only if its source has something newer than the last build. The
+last build's source stamps are stored in public.tech_daily_snapshots tab 'build.state' (payload {source: stamp}; insert a
+new row per date, on conflict do nothing, and read the latest one first).
+- Pipeline (tabs/pipeline.json): the Notion page Pipeline/Active/Ideas (dd4260f087554ddca72eaad2a0a0aa15) last_edited, the
+  Shorts database, and any new Idea Generator or Thesis - Revised page under Anthropic Output since the stamp.
+- Ideas & themes (tabs/ideas.json + digest themes in today.json): any new Idea Generator, thesis-builder, industry-cycle or
+  operating-comps page since the stamp.
+- Estimates & screens (tabs/screens.json): a new Consensus Revisions or Comps Screen page since the stamp.
+- Valuation (tabs/comps.json, the valuation lines on every card): the Master comps workbook's lastModifiedDateTime, or a
+  new Comps Screen / Consensus Revisions page since the stamp. Read the values from the workbook's 'Template (2)' sheet
+  (or Feed sheets if a workbook has them); never require a CSV export.
+- Stocks debates and draft tenets: re-write a company's debate (bull/bear/decides/tenets, 25-word bullets, only from its
+  datapoints) when it has 5+ new important datapoints since the stamp, a new earnings review, or a new Thesis - Revised page.
+
+Prices are intraday Bloomberg from the Master comps Live sheet; the Live sheet only changes when the workbook is saved,
+so say in the Daily moves status line when the file's lastModifiedDateTime is more than 30 minutes old.
+In the steps below, "(EVENING)" means the 16:00 run and "(MIDDAY)" means the 10:00/12:00/14:00 runs.
 
 Rules: read-only on Notion, SharePoint, Outlook, AlphaSense and FactSet. Never run a digest or other skill that
 publishes to Notion or loads Supabase datapoints: Bobby's scheduled routines do that (see "Routines" below), and
@@ -96,9 +118,8 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    public.research driver names (growth_driver_1..5, margin_driver_1..4, competition_1..3, tam_1..2, risk_1..6) and
    aliases, and earnings_metrics joined to earnings_prints; then
    python3 dashboards/earnings-monitor/store/build_stocks.py tiers.json research.json labels.json aliases.json metrics.json <S>/tabs/stocks.json
-7. PAUSED (Bobby, 2026-11-02: database is being cut down; skip this step and keep the live page's datapoints
-   files and tabs/dp_index.json as they are until he says to resume).
-   Datapoints + Composite Evidence Index (EVENING): export public.research_evidence for the last 9 months with
+7. Datapoints + Composite Evidence Index (16:00 run; resumed 2026-11-03 after the cleanup — rows tagged
+   "[ARCHIVED dup_of=…]" are skipped by the builder): export public.research_evidence for the last 9 months with
    execute_sql in pages of 4,000 rows by id (select id, research_id r, field_key k, field_impact i, event_date d,
    confidence::text c, source_type::text s, primary_source p, secondary_source q, evidence_text t ... order by id;
    large results are saved to files — parse them, never paste them), plus research (id, ticker, company_name n,
