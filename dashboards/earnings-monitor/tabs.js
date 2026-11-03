@@ -1315,6 +1315,21 @@
     });
     load();
   }
+  // ---- top scrollbar on every wide table: a thin scroller above the table, synced with the table's own ----
+  function topScroll(wrap) {
+    if (!wrap || wrap.__ts) return;
+    const t = wrap.querySelector('table'); if (!t) return;
+    wrap.__ts = true;
+    const bar = document.createElement('div'); bar.className = 'tbl-top'; bar.setAttribute('aria-hidden', 'true');
+    const inner = document.createElement('div'); bar.appendChild(inner); wrap.parentNode.insertBefore(bar, wrap);
+    const size = () => { inner.style.width = wrap.scrollWidth + 'px'; bar.style.display = wrap.scrollWidth > wrap.clientWidth + 2 ? '' : 'none'; };
+    let lock = false;
+    bar.addEventListener('scroll', () => { if (lock) return; lock = true; wrap.scrollLeft = bar.scrollLeft; lock = false; });
+    wrap.addEventListener('scroll', () => { if (lock) return; lock = true; bar.scrollLeft = wrap.scrollLeft; lock = false; });
+    size(); if (window.ResizeObserver) new ResizeObserver(size).observe(t); window.addEventListener('resize', size);
+  }
+  const tsScan = () => document.querySelectorAll('.tbl-wrap').forEach(topScroll);
+  new MutationObserver(() => { clearTimeout(tsScan.t); tsScan.t = setTimeout(tsScan, 60); }).observe(document.body, { childList: true, subtree: true });
   window.__qrMount = qrMount;
   window.__qrFind = t => { const ST = arr((D.stocks || {}).companies), k = ntKey(t); return ST.find(c => ntKey(c.t) === k || ntKey(c.bbg) === k || ntKey(c.t).split(' ')[0] === k) || null; };
 
