@@ -113,6 +113,9 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    figures), tech[] (what drove tech overall and why), leaders[]/laggards[] (subsectors from tabs/daily.json sectors:
    group, n, median_1d, best, worst, why), sources[{label,url}]} — written from the routine pages, desk morning wraps
    (TMTB, MS TMT, BofA TMT, Gugg, Jefferies, RBC) and a web check of index levels at run time.
+   Keep it SHORT (Bobby, 2026-11-03): headline ≤ 15 words; market[] and tech[] 3 bullets each, ≤ 20 words, lead with
+   the number; leaders[]/laggards[] top 3 each with a why ≤ 12 words. Put any extra detail in "more": [] (shown only
+   behind "Full commentary").
    Consensus Revisions and Idea Generator also feed tabs/screens.json and tabs/ideas.json (EVENING) as before,
    with thesis-builder, industry-cycle, operating-comps; tabs/datapoints.json from research_evidence last 21 days;
    tabs/prep.json from management-prep, analyst-day, print-tables, quarterly-review plus next-4-weeks prints from

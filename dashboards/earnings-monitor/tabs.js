@@ -63,11 +63,23 @@
   function marketPanel() {
     const M = TODAY.market; if (!M) return '';
     const p1 = v => v == null ? '' : (v > 0 ? '+' : '') + (+v).toFixed(1) + '%';
-    const row = x => `<div class="mk-row"><span class="mk-g">${esc(x.group)} <span class="sub">(${esc(x.n)})</span></span><span class="mono ${+x.median_1d >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.median_1d)}</span><span class="mk-w">${attr(x.why || '')}${x.best ? ` <span class="sub">· best ${esc(x.best)} · worst ${esc(x.worst)}</span>` : ''}</span></div>`;
-    return `<section class="panel mk"><div class="panel-h"><div><span class="eyebrow">Market commentary · ${esc(M.as_of || '')}</span><h2 style="margin-top:4px">${esc(M.headline || '')}</h2></div><a href="#daily">Daily moves →</a></div>
-      <div class="grid2"><div><h3>Market</h3><ul class="b">${arr(M.market).map(x => `<li>${attr(x)}</li>`).join('')}</ul></div><div><h3>Tech</h3><ul class="b">${arr(M.tech).map(x => `<li>${attr(x)}</li>`).join('')}</ul></div></div>
-      <div class="grid2" style="margin-top:8px"><div><h3 class="c-pos">Leading subsectors</h3>${arr(M.leaders).map(row).join('')}</div><div><h3 class="c-neg">Lagging subsectors</h3>${arr(M.laggards).map(row).join('')}</div></div>
-      ${arr(M.sources).length ? `<div class="srcl"><span>Sources</span>${arr(M.sources).map(x => x.url ? link(x.url, x.label) : esc(x.label)).join(' · ')}</div>` : ''}</section>`;
+    // short form: first sentence, capped at ~22 words; full text stays one click away
+    const brief = (t, n) => {
+      const all = String(t || '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim();
+      let x = all.split(/(?<=[.;:])\s+/)[0];
+      if (x.split(' ').length < 8) x = all;                       // a too-short lead sentence keeps going
+      const w = x.split(' '); x = w.length > n ? w.slice(0, n).join(' ') : x;
+      x = x.replace(/[\s,;:–—-]+$/, '');
+      return x + (x.length < all.replace(/[.;:\s]+$/, '').length ? '…' : ''); };
+    const row = x => `<div class="mk-row"><span class="mk-g">${esc(x.group)}</span><span class="mono ${+x.median_1d >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.median_1d)}</span><span class="mk-w">${esc(brief(x.why, 12))}</span></div>`;
+    const ul = (xs, n) => `<ul class="b">${arr(xs).slice(0, n).map(x => `<li>${esc(brief(x, 22))}</li>`).join('')}</ul>`;
+    const full = `<details class="mk-more"><summary>Full commentary</summary><div class="grid2"><div><h3>Market</h3><ul class="b">${arr(M.market).map(x => `<li>${attr(x)}</li>`).join('')}</ul></div><div><h3>Tech</h3><ul class="b">${arr(M.tech).map(x => `<li>${attr(x)}</li>`).join('')}</ul></div></div>
+      <div class="grid2"><div><h3 class="c-pos">Leading</h3>${arr(M.leaders).map(x => `<div class="mk-row"><span class="mk-g">${esc(x.group)}</span><span class="mono ${+x.median_1d >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.median_1d)}</span><span class="mk-w">${attr(x.why || '')}</span></div>`).join('')}</div><div><h3 class="c-neg">Lagging</h3>${arr(M.laggards).map(x => `<div class="mk-row"><span class="mk-g">${esc(x.group)}</span><span class="mono ${+x.median_1d >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.median_1d)}</span><span class="mk-w">${attr(x.why || '')}</span></div>`).join('')}</div></div>
+      ${arr(M.sources).length ? `<div class="srcl"><span>Sources</span>${arr(M.sources).map(x => x.url ? link(x.url, x.label) : esc(x.label)).join(' · ')}</div>` : ''}</details>`;
+    return `<section class="panel mk"><div class="panel-h"><div><span class="eyebrow">Market · ${esc(String(M.as_of || '').split(';')[0])}</span><h2 style="margin-top:4px">${esc(brief(M.headline, 24))}</h2></div><a href="#daily">Daily moves →</a></div>
+      <div class="grid2 mk-short"><div><h3>Market</h3>${ul(M.market, 3)}</div><div><h3>Tech</h3>${ul(M.tech, 3)}</div></div>
+      <div class="grid2 mk-short"><div><h3 class="c-pos">Leading</h3>${arr(M.leaders).slice(0, 3).map(row).join('')}</div><div><h3 class="c-neg">Lagging</h3>${arr(M.laggards).slice(0, 3).map(row).join('')}</div></div>
+      ${full}</section>`;
   }
   function renderToday() {
     const digs = arr(TODAY.digests).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
