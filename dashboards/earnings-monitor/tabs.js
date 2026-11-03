@@ -1082,7 +1082,7 @@
   // Mount a live QR into `host` for company `co` ({t, bbg, name}); used by the Stocks tab and the Earnings cards.
   function qrMount(host, co) {
     if (!host || host.__qr) return; host.__qr = true;
-    const st = { edit: false, yy: true, qq: false, mix: false, beat: false, fy: false, fresh: false, cfg: null, data: null, msg: '', busy: false };
+    const st = { edit: false, yy: true, qq: true, mix: false, beat: false, fy: false, fresh: false, cfg: null, data: null, msg: '', busy: false, viewSet: false };
     const bar = () => `<div class="ctl qr-bar" role="group" aria-label="Quarterly review controls">
       <button type="button" class="btn" data-qb="update" ${st.busy ? 'disabled' : ''}>${st.busy ? 'Loading…' : 'Update'}</button>
       <button type="button" class="btn" data-qb="edit" aria-pressed="${st.edit}">${st.edit ? 'Done editing' : 'Edit rows'}</button>
@@ -1093,7 +1093,7 @@
       <span class="muted qr-msg">${esc(st.msg)}</span></div>`;
     const addUi = () => st.edit ? `<div class="qr-add"><label>Add a Visible Alpha KPI <input type="search" class="qr-kw" placeholder="e.g. gross margin, data center, bits, ASP"></label><button type="button" class="btn" data-qb="search">Search</button>
       ${st.cfg && st.cfg.rows.length > 1 ? `<label>or a ratio <select class="qr-num">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}">${esc(r.label || r.name)}</option>`).join('')}</select> ÷ <select class="qr-den">${st.cfg.rows.filter(r => r.kind === 'kpi').map(r => `<option value="${r.kpi_id}"${r.role === 'rev' ? ' selected' : ''}>${esc(r.label || r.name)}</option>`).join('')}</select></label><button type="button" class="btn" data-qb="ratio">Add ratio</button>` : ''}
-      <button type="button" class="btn" data-qb="save">Save rows</button><button type="button" class="btn" data-qb="reset" title="Go back to the default rows from Visible Alpha">Reset to default</button><div class="qr-cands"></div></div>` : '';
+      <button type="button" class="btn" data-qb="save" title="Saves the rows, labels, notes and which growth lines are shown, for everyone">Save rows &amp; view</button><button type="button" class="btn" data-qb="reset" title="Go back to the default rows from Visible Alpha">Reset to default</button><div class="qr-cands"></div></div>` : '';
     const paint = () => {
       const body = !st.cfg ? `<p class="sub">${esc(st.msg || 'Loading Visible Alpha…')}</p>` : !st.data ? '<p class="sub">Loading Visible Alpha…</p>' : qrTable(co, st.cfg, st.data, st);
       host.innerHTML = bar() + addUi() + body + `<p class="sub qr-foot">Live from Visible Alpha through your SRS MCP connector: reported actuals in bold type, consensus in italics (E). Hover a number for reported vs consensus. ${st.cfg && st.cfg.auto ? 'Default rows: total revenue, every reported segment, gross profit, operating income and EPS. Edit rows to change them; edits are saved for everyone on this page.' : st.cfg && st.cfg.updated ? 'Rows saved ' + esc(String(st.cfg.updated).slice(0, 10)) + '.' : ''}</p>`;
@@ -1104,6 +1104,7 @@
         await QR.ready;
         if (!QR.mcp) { st.msg = 'Live Visible Alpha data needs the page open on claude.ai with the SRS MCP connector.'; st.busy = false; paint(); return; }
         if (!st.cfg) st.cfg = await qrLoadCfg(co);
+        if (!st.viewSet) { st.viewSet = true; const v = st.cfg.view || {}; ['yy', 'qq', 'mix', 'beat'].forEach(k => { if (typeof v[k] === 'boolean') st[k] = v[k]; }); }
         st.data = await qrData(st.cfg, st.fresh, st.fy);
         const nErr = st.data.errs.length;
         st.msg = nErr ? `${nErr} row${nErr > 1 ? 's' : ''} failed: ${vaErr(st.data.errs[0])}` : (st.fresh ? 'Updated from Visible Alpha just now.' : '');
@@ -1127,7 +1128,7 @@
         } catch (err) { box.innerHTML = `<span class="sub">${esc(vaErr(err))}</span>`; }
       }
       else if (a === 'ratio') { readInputs(); const num = +host.querySelector('.qr-num').value, den = +host.querySelector('.qr-den').value; const nm = r => (st.cfg.rows.find(x => x.kpi_id === r) || {}).label || ''; st.cfg.rows.push({ kind: 'ratio', num, den, label: `${nm(num).trim()} / ${nm(den).trim()}` }); paint(); load(); }
-      else if (a === 'save') { readInputs(); try { await qrSave(co, st.cfg); st.cfg.auto = false; st.cfg.updated = new Date().toISOString(); st.msg = 'Saved.'; } catch (err) { st.msg = 'Not saved: ' + ((err && (err.code || err.message)) || 'error'); } paint(); }
+      else if (a === 'save') { readInputs(); st.cfg.view = { yy: st.yy, qq: st.qq, mix: st.mix, beat: st.beat }; try { await qrSave(co, st.cfg); st.cfg.auto = false; st.cfg.updated = new Date().toISOString(); st.msg = 'Saved.'; } catch (err) { st.msg = 'Not saved: ' + ((err && (err.code || err.message)) || 'error'); } paint(); }
       else if (a === 'reset') { if (!confirm('Go back to the default Visible Alpha rows for ' + co.t + '? Your saved rows and notes for this company are removed.')) return; try { if (QR.db) await QR.db.collection('qr').doc(qrId(co.t)).delete(); } catch (err) {} QR.cfg.delete(qrId(co.t)); st.cfg = null; st.data = null; load(); }
     });
     host.addEventListener('change', e => { const o = e.target.dataset.qo; if (!o) return; if (o === 'nq') { if (st.edit) readInputs(); st.cfg.nq = +e.target.value; } else st[o] = e.target.checked; paint(); });
