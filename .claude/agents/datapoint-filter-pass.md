@@ -29,6 +29,13 @@ Apply the admission test and default exclusions in the rules pack as written. Tw
   sees, models or thinks ("GS expects…", "MS sees…", "Jefferies infers…", "TD: less of a headwind than feared").
   If nothing factual remains, cut the row. A broker's own channel checks, surveys and trackers are evidence; keep
   them, named.
+- **Single-contact channel quotes.** Cleveland, BWG, Third Bridge and other channel/expert notes relay unfiltered
+  quotes from many contacts, so one contact's claim is not yet a finding. Keep it only when it is specific (names a
+  product, segment, customer tier, region or number) and no other contact in the quotes contradicts it. Cut it as
+  "single-contact outlier" when another contact in the same note contradicts its direction or figure, or when it
+  is an extreme number nothing else in the quotes supports. Keep the contact's role in the text ("NAND seller:").
+  On every kept single-contact row set `note` to `"single-contact"` so the main session checks it against stored
+  evidence. Contacts in the same note never confirm each other's claims unless they describe separate observations.
 - **Signal over completeness.** Routine results recaps (reported revenue, margin or EPS with no driver that changes
   the forecast), consensus restatements, ratings and PTs, static TAMs and scenario arithmetic are cut. Zero rows
   kept from a batch is a valid answer.

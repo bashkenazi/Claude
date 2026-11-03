@@ -178,8 +178,17 @@ that restates a stored row's event is removed as a duplicate, naming the stored 
 **within this run** (the same event from two brokers' notes: keep the fuller one; a second broker counts as
 confirmation only with independent evidence). The kept row must itself be loadable: never keep a row from a file
 with `complete_read: false` or a held row over a loadable one, and check that every within-run duplicate points to
-a row that passes the gate. Then apply the **§B load gate**; every failing row is held with its
-reason.
+a row that passes the gate.
+
+**Single-contact rows** (filter-pass `note: "single-contact"`): check each against the 60-day stored rows for its
+ticker and the related industry IDs. Stored evidence from an independent origin (another firm, a tracker such as
+TrendForce, company disclosure, an expert call) that supports the same direction confirms it: keep, and drop the
+note. Rows from the same firm or the same note never confirm it. If independent stored evidence contradicts it and
+nothing independent supports it, cut it as "single-contact outlier, contradicted by SB #<id>". If there is no
+related stored evidence either way, keep it at `medium` (never `high`) and mark it "single-contact, unconfirmed" on
+the page. List confirmed, unconfirmed and cut single-contact rows in the page's Inputs section.
+
+Then apply the **§B load gate**; every failing row is held with its reason.
 
 ## 9. Publish, insert, read back
 
