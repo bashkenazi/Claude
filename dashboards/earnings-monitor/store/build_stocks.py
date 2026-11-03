@@ -60,8 +60,10 @@ def main():
             except Exception as e: print("skip", f, e)
     theses = []
     if opt.get("--theses"):
-        try: theses = json.load(open(opt["--theses"])).get("pages", [])
+        try: theses = [p for p in json.load(open(opt["--theses"])).get("pages", []) if p.get("tenets")]
         except Exception as e: print("skip theses", e)
+        # several revised pages per company: the newest wins (dates appear in "updated" as written)
+        theses.sort(key=lambda p: max(re.findall(r"\d{4}-\d{2}-\d{2}", str(p.get("updated") or "")) or [""]), reverse=True)
     lab = {r["id"]: r for r in labels}; ali = {r["id"]: r for r in aliases}
     by_t, by_n = {}, {}
     for r in research:
