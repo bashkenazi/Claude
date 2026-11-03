@@ -8,6 +8,11 @@ tenets one by one, so proposed tenets are auto-confirmed and he edits them in No
    in this order: Tier 1 first, then Semis, Hardware, Power & DC infra, Software, Internet, IT Services.
 
 2. For each name (one subagent per name, at most 5 at a time), run the thesis-builder skill end to end:
+   - SUPABASE RULE (Bobby, 2026-11-03), part of Step 1, before any tenet is proposed: find every public.research id
+     for the company (ticker, BBG ticker, company name and aliases), then pull ALL public.research_evidence rows for
+     those ids from project hftouzahniiwigcchvje — no date window, no row limit (page by id in 2,000-row chunks), skip
+     rows whose evidence_text starts "[ARCHIVED". Save them to the run's scratch folder and read every row. The Step 1H
+     coverage log must state: research ids used, total rows pulled, date range, rows excluded as archived.
    - Step 2 deviation: propose the 3–6 tenets and proceed without stopping. Put this line at the top of the Thesis
      section: "Tenets auto-confirmed on <date> (Bobby: no time to approve); edit here and Tech Daily follows."
    - Publish deviation: create the page as a CHILD of the company's thesis page, titled "<TICKER> Thesis - Revised",
