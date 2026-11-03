@@ -106,7 +106,7 @@
       `<div class="runs">${strip}</div>` +
       `<div class="grid3">${col('pos', 'Most positive')}${col('neg', 'Most negative')}${col('inf', 'Inflections')}</div>` +
       (calls.some(c => kindOf(c) === 'oth') ? `<div>${col('oth', 'Other callouts')}</div>` : '') +
-      `<div class="panel"><div class="panel-h"><h2>Latest themes</h2><a href="#themes">All themes →</a></div>${themes.length ? `<div class="list">${lim(themes, 6).map(t =>
+      `<div class="panel"><div class="panel-h"><h2>Latest themes</h2><a href="#ideas">All themes →</a></div>${themes.length ? `<div class="list">${lim(themes, 6).map(t =>
         `<div class="li"><div class="body"><b>${esc(t.theme)}</b>${arr(t.winners).length ? ' ' + arr(t.winners).slice(0, 4).map(x => tk(x, 'up')).join(' ') : ''}${arr(t.losers).length ? ' ' + arr(t.losers).slice(0, 4).map(x => tk(x, 'dn')).join(' ') : ''}<div class="sub">${srcList(t).length ? `<b class="srcb">${esc(srcList(t).slice(0, 3).join(' · '))}</b> · ` : ''}${esc(sk(t.skill))} · ${fmtD(t.date)}</div></div></div>`).join('')}</div>` : none('No themes in the latest digests.')}</div>` +
       `<div class="grid2"><div class="panel"><div class="panel-h"><h2>Recent prints</h2><a href="#earnings">All earnings →</a></div>${earn.length ? `<div class="list">${earn.map(it =>
         `<div class="li"><div class="body">${tk(it.ticker)} <b>${esc(it.company)}</b> <span class="sub">${esc(it.quarter)}</span><div>${attr(it.headline)}</div>${srcLine({ sources: arr(it.sources).slice(0, 5) })}</div><div class="side chips">${tone(it)}<span>${fmtD(it.date)}</span></div></div>`).join('')}</div>` : none('No prints in the last four days.')}</div>` +
@@ -123,7 +123,7 @@
     }));
     all.sort((a, b) => String(b.date).localeCompare(String(a.date)));
     const skills = [...new Set(all.map(t => t.skill))];
-    const host = document.getElementById('v-themes');
+    const host = document.getElementById('th-host') || document.getElementById('v-themes');
     host.innerHTML = head('Themes · from every digest', 'Themes', 'What is changing across your research flow, who benefits and who gets hurt, with the primary sources behind each theme.') +
       `<div class="panel" id="th-names"></div>` +
       `<div class="ctl" role="group" aria-label="Theme filters">
@@ -619,21 +619,24 @@
     const ideas = lim(arr(ID.ideas).filter(i => inWin(i.date, null))), theses = lim(arr(ID.theses).filter(t => inWin(t.updated || t.date, null))), cycles = arr(ID.cycles), oc = lim(arr(ID.opcomps).filter(o => inWin(o.date, null)));
     const dir = d => { const s = String(d || '').toLowerCase(); return ['long', 'short', 'pair', 'watch'].find(k => s.includes(k)) || 'watch'; };
     document.getElementById('v-ideas').innerHTML =
-      head('Idea generator · thesis builder · industry cycle · operating comps', 'Ideas &amp; cycle', 'Open ideas, where each thesis stands, and where each industry sits in its cycle.') +
-      `<section class="panel" id="id-ideas"></section>` +
-      `<section class="panel"><div class="panel-h"><h2>Industry cycle</h2></div>${cycles.length ? `<div class="grid3">${cycles.map(c =>
+      head('Idea generator · digests · thesis builder · industry cycle', 'Ideas &amp; themes', 'Single-stock ideas and the themes behind them in one place. Filter by type, direction and bucket.') +
+      `<div class="ctl" role="group" aria-label="Show"><div class="seg" id="it-type"><button type="button" data-v="" aria-pressed="true">Everything</button><button type="button" data-v="ideas" aria-pressed="false">Single-stock ideas</button><button type="button" data-v="themes" aria-pressed="false">Themes</button><button type="button" data-v="more" aria-pressed="false">Theses, cycle &amp; comps</button></div>
+        <div class="seg" id="it-dir"><button type="button" data-v="" aria-pressed="true">Longs &amp; shorts</button><button type="button" data-v="long" aria-pressed="false">Longs</button><button type="button" data-v="short" aria-pressed="false">Shorts</button></div>
+        <label for="it-q">Search <input type="search" id="it-q" placeholder="Ticker or word"></label></div>` +
+      `<section class="panel" id="id-ideas" data-it="ideas"></section><div id="th-host" data-it="themes"></div>` +
+      `<section class="panel" data-it="more"><div class="panel-h"><h2>Industry cycle</h2></div>${cycles.length ? `<div class="grid3">${cycles.map(c =>
         `<article class="idea"><div class="top"><b>${esc(c.industry)}</b>${c.phase ? `<span class="chip phase">${esc(c.phase)}</span>` : ''}${link(c.url, fmtD(c.date))}</div><dl class="kv">${c.margin_vs_peak ? `<dt>Margin vs peak</dt><dd>${esc(c.margin_vs_peak)}</dd>` : ''}${c.valuation ? `<dt>Valuation</dt><dd>${esc(c.valuation)}</dd>` : ''}</dl>${arr(c.signals).length ? `<ul class="b">${arr(c.signals).map(s => `<li>${attr(s)}</li>`).join('')}</ul>` : ''}${srcLine(c)}</article>`).join('')}</div>` : none('No industry-cycle output found since September.')}</section>` +
-      `<section class="panel"><div class="panel-h"><h2>Theses</h2><span class="muted">${theses.length} · dated by last edit</span></div>${theses.length ? `<div class="list">${theses.map(t =>
+      `<section class="panel" data-it="more"><div class="panel-h"><h2>Theses</h2><span class="muted">${theses.length} · dated by last edit</span></div>${theses.length ? `<div class="list">${theses.map(t =>
         `<div class="li"><div class="body">${tk(t.ticker)} <b>${esc(t.company)}</b> ${t.stance ? `<span class="chip dir-${dir(t.stance)}">${esc(t.stance)}</span>` : ''}<div>${esc(t.summary)}</div>${srcLine(t)}${arr(t.tenets).length ? `<details><summary>Tenets</summary><ul class="b">${arr(t.tenets).map(x => `<li>${esc(x)}</li>`).join('')}</ul>${t.what_would_change ? `<p class="sub" style="margin:6px 0 0">What would change it: ${esc(t.what_would_change)}</p>` : ''}</details>` : ''}</div><div class="side">${fmtD(t.updated)} ${link(t.url, 'Notion')}</div></div>`).join('')}</div>` : none('No thesis-builder output found since September.')}</section>` +
-      `<section class="panel"><div class="panel-h"><h2>Operating comps</h2></div>${oc.length ? `<div class="grid2">${oc.map(o =>
+      `<section class="panel" data-it="more"><div class="panel-h"><h2>Operating comps</h2></div>${oc.length ? `<div class="grid2">${oc.map(o =>
         `<article class="idea"><div class="top"><b>${esc(o.title)}</b>${link(o.url, fmtD(o.date))}</div>${o.peer_set ? `<div class="sub">${esc(o.peer_set)}</div>` : ''}<ul class="b">${arr(o.findings).map(f => `<li>${attr(f)}</li>`).join('')}</ul>${srcLine(o)}</article>`).join('')}</div>` : none('No operating-comps output found since September.')}</section>`;
     // ---- ideas: longs and shorts, filtered by idea-generator bucket ----
     const bucketOf = i => { const c = String(i.conviction || ''); return /most exciting|amazing/i.test(c) ? 'amazing' : /contrarian/i.test(c) ? 'contrarian' : /good/i.test(c) ? 'good' : /callout/i.test(c) ? 'callout' : 'other'; };
     const BL = { amazing: 'Amazing', contrarian: 'Contrarian', good: 'Good', callout: 'Callout', other: 'Other' };
-    const ist = { b: '' };
+    const ist = { b: '', dir: '', q: '' };
     const card = i => `<article class="idea"><div class="top">${tk(i.ticker)}<b>${esc(i.company)}</b><span class="chip b-${bucketOf(i)}">${BL[bucketOf(i)]}</span>${i.conviction ? `<span class="chip out">${esc(i.conviction)}</span>` : ''}${link(i.url, fmtD(i.date))}</div><p><b>${esc(i.idea)}</b></p>${i.why_now ? `<p>${esc(i.why_now)}</p>` : ''}${arr(i.catalysts).length ? `<div class="sub">Catalysts: ${arr(i.catalysts).map(esc).join(' · ')}</div>` : ''}${arr(i.risks).length ? `<div class="sub">Risks: ${arr(i.risks).map(esc).join(' · ')}</div>` : ''}${srcLine(i)}</article>`;
     function drawIdeas() {
-      const xs = ideas.filter(i => !ist.b || bucketOf(i) === ist.b);
+      const xs = ideas.filter(i => (!ist.b || bucketOf(i) === ist.b) && (!ist.dir || dir(i.direction) === ist.dir) && (!ist.q || `${i.ticker} ${i.company} ${i.idea} ${i.why_now}`.toLowerCase().includes(ist.q)));
       const L = xs.filter(i => dir(i.direction) === 'long'), S = xs.filter(i => dir(i.direction) === 'short'), P = xs.filter(i => !['long', 'short'].includes(dir(i.direction)));
       const counts = b => ideas.filter(i => !b || bucketOf(i) === b).length;
       const col = (title, cls, ys) => `<div><div class="panel-h"><h3 class="${cls}">${title}</h3><span class="muted">${ys.length}</span></div>${ys.length ? `<div class="id-col">${ys.map(card).join('')}</div>` : none('None in this filter.')}</div>`;
@@ -642,6 +645,13 @@
       document.querySelectorAll('#id-b button').forEach(btn => btn.addEventListener('click', () => { ist.b = btn.dataset.v; drawIdeas(); }));
     }
     drawIdeas();
+    renderThemes();
+    const vI = document.getElementById('v-ideas');
+    const applyType = v => vI.querySelectorAll('[data-it]').forEach(el => { el.style.display = v && el.dataset.it !== v ? 'none' : ''; });
+    vI.querySelectorAll('#it-type button').forEach(b => b.addEventListener('click', () => { vI.querySelectorAll('#it-type button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); applyType(b.dataset.v); }));
+    vI.querySelectorAll('#it-dir button').forEach(b => b.addEventListener('click', () => { vI.querySelectorAll('#it-dir button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); ist.dir = b.dataset.v; drawIdeas();
+      vI.querySelectorAll('#th-host .theme').forEach(el => { const w = el.querySelector('.wl'); el.style.display = ist.dir && !(w && w.innerHTML.includes(ist.dir === 'long' ? 'Benefits' : 'Hurt')) ? 'none' : ''; }); }));
+    document.getElementById('it-q').addEventListener('input', e => { ist.q = e.target.value.trim().toLowerCase(); drawIdeas(); const tq = document.getElementById('th-q'); if (tq) { tq.value = e.target.value; tq.dispatchEvent(new Event('input')); } });
   }
 
   // ================= PREP =================
@@ -913,8 +923,29 @@
   }
 
   // ================= ROUTER =================
-  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'stocks', 'themes', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const VIEWS = ['today', 'daily', 'routines', 'pipeline', 'stocks', 'earnings', 'datapoints', 'signals', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
   const R = { daily: renderDaily, routines: renderRoutines, pipeline: renderPipeline, stocks: renderStocks, signals: renderSignals, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  // ---- top tabs: drag to reorder; order remembered per viewer ----
+  (function navOrder() {
+    const nav = document.querySelector('nav.tabs'); if (!nav) return;
+    const links = () => [...nav.querySelectorAll('a')];
+    try { const saved = JSON.parse(localStorage.getItem('td-nav') || 'null'); if (Array.isArray(saved)) saved.forEach(h => { const a = links().find(x => x.getAttribute('href') === h); if (a) nav.appendChild(a); }); } catch (e) {}
+    const save = () => { try { localStorage.setItem('td-nav', JSON.stringify(links().map(a => a.getAttribute('href')))); } catch (e) {} };
+    let drag = null;
+    links().forEach(a => {
+      a.draggable = true; a.title = 'Drag to reorder';
+      a.addEventListener('dragstart', e => { drag = a; a.classList.add('dragging'); e.dataTransfer.effectAllowed = 'move'; try { e.dataTransfer.setData('text/plain', a.getAttribute('href')); } catch (x) {} });
+      a.addEventListener('dragend', () => { if (drag) drag.classList.remove('dragging'); drag = null; links().forEach(x => x.classList.remove('drop-l', 'drop-r')); save(); });
+      a.addEventListener('dragover', e => { if (!drag || drag === a) return; e.preventDefault(); const r = a.getBoundingClientRect(), after = e.clientX > r.left + r.width / 2; links().forEach(x => x.classList.remove('drop-l', 'drop-r')); a.classList.add(after ? 'drop-r' : 'drop-l'); });
+      a.addEventListener('drop', e => { if (!drag || drag === a) return; e.preventDefault(); const r = a.getBoundingClientRect(); nav.insertBefore(drag, e.clientX > r.left + r.width / 2 ? a.nextSibling : a); });
+    });
+    const reset = document.createElement('button'); reset.type = 'button'; reset.className = 'nav-reset'; reset.textContent = '↺'; reset.title = 'Reset tab order';
+    const DEF = links().map(a => a.getAttribute('href'));
+    try { const d0 = JSON.parse(localStorage.getItem('td-nav-default') || 'null'); if (Array.isArray(d0)) DEF.splice(0, DEF.length, ...d0); } catch (e) {}
+    reset.addEventListener('click', () => { try { localStorage.removeItem('td-nav'); } catch (e) {} location.reload(); });
+    nav.after(reset);
+  })();
+
   let done = {};
   const HIST = D.daily_history || {};
   const gN = document.getElementById('g-n'), gD = document.getElementById('g-d'), gA = document.getElementById('g-asof'), gAL = document.getElementById('g-asof-l');
@@ -927,7 +958,7 @@
   if (gD) gD.addEventListener('change', () => { G.days = +gD.value || null; saveG(); rerender(); });
   if (gA) gA.addEventListener('change', () => { DLY = gA.value === (D.daily || {}).as_of ? (D.daily || {}) : (HIST[gA.value] || D.daily || {}); done.daily = 0; show(); });
   function show() {
-    let v = (location.hash || '').slice(1).split('/')[0]; if (!VIEWS.includes(v)) v = 'today';
+    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes') v = 'ideas'; if (!VIEWS.includes(v)) v = 'today';
     if (gAL) gAL.hidden = !(v === 'daily' && gA && gA.options.length > 1);
     if (v === 'routines' && done[v]) { renderRoutines(); }
     if (v === 'stocks' && done[v]) { renderStocks(); }

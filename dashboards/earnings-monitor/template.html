@@ -48,6 +48,8 @@ button, input, select { font: inherit; color: inherit; }
 .brand b { font-weight: 800; font-size: 17px; letter-spacing: -0.01em; font-variation-settings: "wdth" 118; }
 .brand span { color: var(--muted); font-size: 12px; font-variation-settings: "wdth" 80; }
 nav.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+nav.tabs a { cursor: grab; } nav.tabs a.dragging { opacity: .4; } nav.tabs a.drop-l { box-shadow: inset 2px 0 0 var(--ink); } nav.tabs a.drop-r { box-shadow: inset -2px 0 0 var(--ink); }
+.nav-reset { font: inherit; border: 1px solid var(--rule-2); background: var(--surface); color: var(--ink-2); border-radius: 6px; padding: 2px 7px; cursor: pointer; }
 .viewbar { display: flex; gap: 10px; align-items: center; font-size: 12.5px; flex-wrap: wrap; }
 .viewbar select { font: inherit; padding: 3px 6px; border-radius: 6px; border: 1px solid var(--rule-2); background: var(--surface); color: var(--ink); }
 nav.tabs a { text-decoration: none; padding: 6px 10px; border-radius: var(--r); color: var(--ink-2); font-weight: 560; font-variation-settings: "wdth" 88; }
@@ -193,12 +195,11 @@ td.note { color: var(--muted); }
     <a href="#routines">Routines</a>
     <a href="#pipeline">Pipeline</a>
     <a href="#stocks">Stocks</a>
-    <a href="#themes">Themes</a>
     <a href="#earnings">Earnings</a>
     <a href="#datapoints">Datapoints</a>
     <a href="#signals">Signals</a>
     <a href="#screens">Estimates &amp; screens</a>
-    <a href="#ideas">Ideas &amp; cycle</a>
+    <a href="#ideas">Ideas &amp; themes</a>
     <a href="#prep">Prep &amp; calendar</a>
     <a href="#health">Skill health</a>
     <a href="#sources">Sources</a>
