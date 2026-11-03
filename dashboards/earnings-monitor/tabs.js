@@ -62,6 +62,12 @@
   // ================= TODAY =================
   function marketPanel() {
     const M = TODAY.market; if (!M) return '';
+    if (arr(M.drivers).length || arr(M.under).length) {
+      const L = xs => `<ul class="b">${arr(xs).map(x => `<li>${attr(x)}</li>`).join('')}</ul>`;
+      return `<section class="panel mk"><div class="panel-h"><div><span class="eyebrow">Market · ${esc(String(M.as_of || '').split(';')[0])}</span><h2 style="margin-top:4px">${esc(M.headline || '')}</h2></div><a href="#daily">Daily moves →</a></div>
+        <div class="grid3 mk-short"><div><h3>Why it's moving</h3>${L(M.drivers)}</div><div><h3>Under the surface</h3>${L(M.under)}</div><div><h3>What to watch</h3>${L(M.watch)}</div></div>
+        ${arr(M.sources).length ? `<div class="srcl"><span>Sources</span>${arr(M.sources).map(x => x.url ? link(x.url, x.label) : esc(x.label)).join(' · ')}</div>` : ''}</section>`;
+    }
     const p1 = v => v == null ? '' : (v > 0 ? '+' : '') + (+v).toFixed(1) + '%';
     // short form: first sentence, capped at ~22 words; full text stays one click away
     const brief = (t, n) => {

@@ -109,13 +109,16 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    Also save the FULL content of every run listed (notion-fetch, the <content> markdown unchanged) as
    <S>/routine_md/<key>__<NN>.md (line 1 title, line 2 url, then the content) and pass --routines <S>/routine_md
    to build.py, so the Routines tab shows each run in full.
-   tabs/today.json also gets "market": {as_of, headline, market[] (indices, rates, oil, macro and positioning, with
-   figures), tech[] (what drove tech overall and why), leaders[]/laggards[] (subsectors from tabs/daily.json sectors:
-   group, n, median_1d, best, worst, why), sources[{label,url}]} — written from the routine pages, desk morning wraps
-   (TMTB, MS TMT, BofA TMT, Gugg, Jefferies, RBC) and a web check of index levels at run time.
-   Keep it SHORT (Bobby, 2026-11-03): headline ≤ 15 words; market[] and tech[] 3 bullets each, ≤ 20 words, lead with
-   the number; leaders[]/laggards[] top 3 each with a why ≤ 12 words. Put any extra detail in "more": [] (shown only
-   behind "Full commentary").
+   tabs/today.json also gets "market" — the WHY, not the tape (Bobby, 2026-11-03: he has prices and moves on his
+   Bloomberg monitor, so never list index levels, % moves, stock moves or subsector performance):
+   {as_of, headline (≤ 18 words: the one thing driving the session), drivers[] ("Why it's moving": 3–4 bullets on flows,
+   positioning, systematic/CTA/risk-control activity, macro and policy catalysts — the causes), under[] ("Under the
+   surface": 4–5 bullets on rotations and why, narrative shifts, funding/positioning tells, read-throughs between names
+   and sectors, what the desks are debating), watch[] ("What to watch": 2–3 bullets — tonight's prints and the bar,
+   data points that would change the read), sources[{label,url}]}. Each bullet ≤ 22 words, ends with its source tag in
+   [brackets]. Written from the routine pages, desk morning/midday wraps (TMTB, MS TMT, BofA TMT, Gugg, Jefferies, RBC,
+   UBS), SemiAnalysis and Daily Research; a figure is fine only when it explains a cause (e.g. "$85–115B of systematic
+   selling"), never a price move.
    Consensus Revisions and Idea Generator also feed tabs/screens.json and tabs/ideas.json (EVENING) as before,
    with thesis-builder, industry-cycle, operating-comps; tabs/datapoints.json from research_evidence last 21 days;
    tabs/prep.json from management-prep, analyst-day, print-tables, quarterly-review plus next-4-weeks prints from
