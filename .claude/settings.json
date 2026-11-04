@@ -9,7 +9,9 @@
       "mcp__Supabase__execute_sql",
       "mcp__Supabase__list_tables",
       "mcp__Supabase__get_advisors",
-      "mcp__Supabase__apply_migration"
+      "mcp__Supabase__apply_migration",
+      "mcp__Notion",
+      "mcp__Supabase"
     ]
   }
 }
