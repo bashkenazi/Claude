@@ -148,7 +148,8 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    python3 dashboards/earnings-monitor/store/prep_debates.py <S>/debate_raw <S>/routine_md/debates
    and copy <S>/routine_md/debates/*.md into <S>/routine_md (build.py --routines shows them on the Debate tab).
    Revised thesis pages (every 16:00 run): notion-search "Thesis - Revised" and "Thesis Revised" and keep pages whose
-   title is "<TICKER> Thesis - Revised" / "<TICKER> Thesis Revised — <date>" / "<Company> Thesis - Revised" and whose
+   title is "<Company> - Thesis Revised - <date>" (the current name) or an older form ("<TICKER> Thesis - Revised",
+   "<TICKER> Thesis Revised — <date>", "<Company> Thesis - Revised"), and whose
    last_edited is after the stamp 'theses' in build.state (first run: all of them). notion-fetch each and extract
    {company, ticker, url, updated (last edited, YYYY-MM-DD), summary_pitch (the Summary thesis / pitch block, ≤ 600 chars),
    stance (e.g. "Long, conviction 7/10"), tenets: [{tenet, conviction (1–10), status (lean/status as written), why
