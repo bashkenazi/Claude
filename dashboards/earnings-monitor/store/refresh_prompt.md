@@ -147,9 +147,18 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    <S>/debate_raw/<slug>.md (line 1 title, line 2 url, then the <content> markdown unchanged). Then
    python3 dashboards/earnings-monitor/store/prep_debates.py <S>/debate_raw <S>/routine_md/debates
    and copy <S>/routine_md/debates/*.md into <S>/routine_md (build.py --routines shows them on the Debate tab).
+   Revised thesis pages (every 16:00 run): notion-search "Thesis - Revised" and "Thesis Revised" and keep pages whose
+   title is "<TICKER> Thesis - Revised" / "<TICKER> Thesis Revised — <date>" / "<Company> Thesis - Revised" and whose
+   last_edited is after the stamp 'theses' in build.state (first run: all of them). notion-fetch each and extract
+   {company, ticker, url, updated (last edited, YYYY-MM-DD), summary_pitch (the Summary thesis / pitch block, ≤ 600 chars),
+   stance (e.g. "Long, conviction 7/10"), tenets: [{tenet, conviction (1–10), status (lean/status as written), why
+   (the tenet's investment read, ≤ 300 chars)}]} exactly as written — never invent a tenet or a number. Merge with the
+   theses already on the live page (data.stocks.companies[].thesis, keyed by url; a newly fetched page replaces the old
+   entry) into <S>/theses.json as {"pages": [...]}, and pass --theses <S>/theses.json below. Bobby edits tenets in
+   Notion, so a page edited since the stamp must be re-fetched even if it was read before.
    Save the live page's stocks JSON (data.stocks) as <S>/prev_stocks.json, then
    python3 dashboards/earnings-monitor/store/build_stocks.py tiers.json research.json labels.json aliases.json metrics.json <S>/tabs/stocks.json \
-     --debpages <S>/routine_md/debates/index.json --keep <S>/prev_stocks.json
+     --debpages <S>/routine_md/debates/index.json --theses <S>/theses.json --keep <S>/prev_stocks.json
    (--keep carries each company's written debate and revised-thesis tenets forward; never drop them.)
    Never run the stock-debate skill or any digest from the refresh; only read the pages it has published.
 7. Datapoints + Composite Evidence Index (16:00 run; resumed 2026-11-03 after the cleanup — rows tagged
