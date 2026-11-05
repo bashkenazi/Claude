@@ -299,3 +299,6 @@ li.x-isnew { font-weight: 560; }
 tr.ai-t5 > td:first-child { box-shadow: inset 3px 0 0 #e35d5d; } tr.ai-t4 > td:first-child { box-shadow: inset 3px 0 0 #f0a274; }
 .ai-bal { display: flex; height: 8px; width: 160px; background: var(--surface-2); border-radius: 3px; overflow: hidden; } .ai-bal i.t { background: var(--pos); } .ai-bal i.l { background: var(--neg); }
 #v-ai h3 { margin-top: 6px; }
+/* Daily moves: as-of banner */
+.dm-asof { flex-direction: row; flex-wrap: wrap; gap: 6px; align-items: baseline; padding: 10px 14px; font-size: 13px; }
+.dm-asof.stale { border-color: var(--warn); background: var(--warn-wash); }

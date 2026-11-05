@@ -203,6 +203,16 @@
   }
 
   // ================= DAILY MOVES =================
+  // market cap ($mm, Master comps file) for a ticker or Bloomberg code; $ move = cap x 1D %
+  const capOf = (t, bbg) => { const R = (D.comps || {}).rows || {}; const r = (bbg && (R[bbg] || R[String(bbg).replace(/\s+equity$/i, '')])) || R[t + ' US Equity'] || R[t + ' US'] || R[t] || null; return r && r.mkt_cap_usd_mm ? +r.mkt_cap_usd_mm : null; };
+  const fmtBn = v => { const b = v / 1000; return (b > 0 ? '+' : '−') + '$' + (Math.abs(b) >= 10 ? Math.abs(b).toFixed(0) : Math.abs(b).toFixed(1)) + 'bn'; };
+  function capList(rows, N, pctOf) {
+    const xs = rows.map(r => { const cap = capOf(r.t, r.bbg); return cap ? Object.assign({}, r, { cap, dm: cap * pctOf(r) / 100 }) : null; }).filter(Boolean);
+    const dn = xs.filter(x => x.dm < 0).sort((a, b) => a.dm - b.dm).slice(0, N), up = xs.filter(x => x.dm > 0).sort((a, b) => b.dm - a.dm).slice(0, N);
+    const li = x => `<div class="li"><span class="stripe ${x.dm >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(x.t)} <b>${esc(x.n || '')}</b> <span class="mono ${x.dm >= 0 ? 'c-pos' : 'c-neg'}">${fmtBn(x.dm)}</span> <span class="mono sub">${(pctOf(x) > 0 ? '+' : '') + pctOf(x).toFixed(1)}%</span></div></div>`;
+    return { up, dn, html: `<div class="grid2"><div><h3 class="c-neg">Biggest market-cap losses</h3><div class="list">${dn.map(li).join('') || none('No data.')}</div></div><div><h3 class="c-pos">Biggest market-cap gains</h3><div class="list">${up.map(li).join('') || none('No data.')}</div></div></div><p class="sub" style="margin:4px 0 0">Dollar change = market cap in the Master comps file (${esc((D.comps || {}).as_of || '')}) × today's % move. Approximate.</p>` };
+  }
+  const etToday = () => new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
   function renderDaily() {
     const host = document.getElementById('v-daily');
     let up = arr(DLY.up), dn = arr(DLY.down); const secs = arr(DLY.sectors);
@@ -219,16 +229,20 @@
     host.innerHTML = head('Daily moves · ' + esc(DLY.as_of || ''), 'What moved and why',
       `Biggest one-day moves across the ${esc(DLY.universe_n || '')}-name Master comps universe on ${esc(DLY.as_of || 'the last trading day')}, by company and by subsector, with the catalyst from your research flow or the news.`) +
       `<section class="panel" id="live-moves"><div class="panel-h"><h2 id="live-h">Live prices</h2><span class="muted" id="live-status">connecting…</span></div><div id="live-body"><p class="sub" style="margin:0">Intraday moves load here from the Live sheet in your newest Master comps file (Bloomberg, via Microsoft 365); FactSet closes are the fallback.</p></div></section>` +
-      (DLY.summary ? `<section class="panel"><h2>The day in brief</h2><ul class="b">${arr(DLY.summary).map(x => `<li>${attr(x)}</li>`).join('')}</ul></section>` : '') +
+      (() => { const stale = DLY.as_of && DLY.as_of < etToday(); const basis = /midday|intraday/i.test(DLY.notes || '') && !stale && DLY.as_of === etToday() ? 'intraday' : 'close';
+        return `<section class="panel dm-asof${stale ? ' stale' : ''}"><b>Written read below: as of ${esc(fmtD(DLY.as_of || ''))} ${basis}.</b> <span class="sub">${stale ? 'This is not today. ' : ''}Written by the last refresh, with a reason for each name. For today's numbers, use the live box above.</span></section>`; })() +
+      (DLY.summary ? `<section class="panel"><h2>The day in brief · ${esc(fmtD(DLY.as_of || ''))}</h2><ul class="b">${arr(DLY.summary).map(x => `<li>${attr(x)}</li>`).join('')}</ul></section>` : '') +
       `<section class="panel"><div class="panel-h"><h2>Sectors</h2><span class="muted">median 1-day move by Master comps subsector</span></div>${secs.length ? `<div class="secbars">${secs.map(s => `<div class="sb-row sb-click" data-g="${esc(s.group)}" data-src="eod" tabindex="0" role="button" aria-expanded="false"><span class="sb-l">${esc(s.group)} <span class="sub">(${esc(s.n)})</span></span><span class="sb-track"><span class="sb-bar ${+s.median_1d >= 0 ? 'pos' : 'neg'}" style="width:${(Math.abs(+s.median_1d || 0) / bar * 50).toFixed(1)}%;${+s.median_1d >= 0 ? 'left:50%' : 'right:50%'}"></span></span><span class="sb-v mono ${+s.median_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(s.median_1d)}</span><span class="sb-w sub">${s.why ? attr(s.why) : ''}</span></div>`).join('')}</div>` : none('No sector data yet.')}</section>` +
-      `<div class="grid2"><section class="panel"><div class="panel-h"><h2 class="c-pos">Biggest gainers</h2><span class="muted">${up.length}</span></div>${up.length ? `<div class="list">${up.map(mover).join('')}</div>` : none('No data yet.')}</section>` +
-      `<section class="panel"><div class="panel-h"><h2 class="c-neg">Biggest decliners</h2><span class="muted">${dn.length}</span></div>${dn.length ? `<div class="list">${dn.map(mover).join('')}</div>` : none('No data yet.')}</section></div>` +
+      `<div class="grid2"><section class="panel"><div class="panel-h"><h2 class="c-pos">Biggest gainers · ${esc(fmtD(DLY.as_of || ''))}</h2><span class="muted">${up.length}</span></div>${up.length ? `<div class="list">${up.map(mover).join('')}</div>` : none('No data yet.')}</section>` +
+      `<section class="panel"><div class="panel-h"><h2 class="c-neg">Biggest decliners · ${esc(fmtD(DLY.as_of || ''))}</h2><span class="muted">${dn.length}</span></div>${dn.length ? `<div class="list">${dn.map(mover).join('')}</div>` : none('No data yet.')}</section></div>` +
+      (arr(DLY.moves).length && Object.keys((D.comps || {}).rows || {}).length ? `<section class="panel"><div class="panel-h"><h2>Biggest market-cap moves · ${esc(fmtD(DLY.as_of || ''))}</h2></div>${capList(arr(DLY.moves).map(m => ({ t: m.t, n: m.n, c1: +m.c })), N, r => r.c1).html}</section>` : '') +
       (DLY.notes ? `<p class="sub" style="margin:0">${esc(DLY.notes)}</p>` : '');
     wireSectors(host);
     startLive();
   }
 
   // ---- sector drill-down: click a sector bar to see the reason and every name in it, with each name's story ----
+  let LIVE_SAVED = null;
   let LIVE_G = new Map(), LIVE_SAME = false;
   const sameDayOf = (latest, showDate) => showDate ? !!(latest && DLY.as_of === latest) : DLY.as_of === new Date().toISOString().slice(0, 10);
   function storyOf(t) {
@@ -304,7 +318,9 @@
       paint(stocks, bm, latest, `FactSet closes through ${latest}${stamp ? ' · fetched ' + new Date(stamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}${failed ? ` · ${failed} batch${failed > 1 ? 'es' : ''} failed` : ''}`, true);
     }
     function paint(stocks, bm, latest, stat, showDate) {
-      const head = document.getElementById('live-h'); if (head) head.textContent = showDate ? 'Live from FactSet (closes)' : 'Live from Bloomberg (intraday)';
+      const head = document.getElementById('live-h');
+      if (head) { const sv = !showDate && LIVE_SAVED; const old = sv && (Date.now() - sv.getTime() > 30 * 60e3 || sv.toLocaleDateString('en-CA', { timeZone: 'America/New_York' }) !== etToday());
+        head.innerHTML = showDate ? `Live from FactSet · closes through ${esc(fmtD(latest || ''))}` : `Live from Bloomberg · intraday${sv ? ` · sheet saved ${esc(sv.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }))}` : ''}${old ? ' <span class="c-neg">· sheet not saved in the last 30 min; values may be stale</span>' : ''}`; }
       const pct = v => v == null || !isFinite(v) ? '—' : ((v > 0 ? '+' : '') + v.toFixed(1) + '%');
       const cls = v => v >= 0 ? 'c-pos' : 'c-neg';
       const med = a => { const s = a.slice().sort((x, y) => x - y); return s.length ? (s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2) : 0; };
@@ -320,7 +336,8 @@
       status(stat);
       body(`<p class="sub" style="margin:0 0 8px">${stocks.length} names priced · ${upN} up / ${stocks.length - upN} down · median ${pct(med(stocks.map(r => r.c1)))}${bm.length ? ' · ' + bm.map(b => `${esc(b.t)} <span class="mono ${cls(b.c1)}">${pct(b.c1)}</span>`).join(' · ') : ''}${sameDay || !DLY.as_of ? '' : ` · <b>newer than the written read below (${esc(DLY.as_of)})</b>`}</p>` +
         `<div class="secbars">${secs.map(x => `<div class="sb-row sb-click" data-g="${esc(x.g)}" data-src="live" tabindex="0" role="button" aria-expanded="false"><span class="sb-l">${esc(x.g)} <span class="sub">(${x.n})</span></span><span class="sb-track"><span class="sb-bar ${x.m >= 0 ? 'pos' : 'neg'}" style="width:${(Math.abs(x.m) / bar * 50).toFixed(1)}%;${x.m >= 0 ? 'left:50%' : 'right:50%'}"></span></span><span class="sb-v mono ${cls(x.m)}">${pct(x.m)}</span><span class="sb-w sub">best ${esc(x.best.t)} ${pct(x.best.c1)} · worst ${esc(x.worst.t)} ${pct(x.worst.c1)}</span></div>`).join('')}</div>` +
-        `<div class="grid2" style="margin-top:14px"><div><h3 class="c-pos">Biggest gainers</h3><div class="list">${up.map(line).join('')}</div></div><div><h3 class="c-neg">Biggest decliners</h3><div class="list">${dn.map(line).join('')}</div></div></div>`);
+        `<div class="grid2" style="margin-top:14px"><div><h3 class="c-pos">Biggest gainers</h3><div class="list">${up.map(line).join('')}</div></div><div><h3 class="c-neg">Biggest decliners</h3><div class="list">${dn.map(line).join('')}</div></div></div>` +
+        (Object.keys((D.comps || {}).rows || {}).length ? `<div style="margin-top:14px">${capList(stocks, NN, r => r.c1).html}</div>` : ''));
     }
     let MCP = null;
     const inputFor = b => ({ ids: b, data_type: 'prices', startDate: start, fields: ['price'], adjust: 'SPLIT', request_id: 'tech-daily-live-' + start });
@@ -367,12 +384,13 @@
               const c1 = parseFloat(c[2]), px = parseFloat(c[1]); if (!isFinite(c1)) continue;
               const full = c[0].trim().replace(/\s+equity$/i, '').toUpperCase(), parts = full.split(/\s+/);
               const u = byT.get(full) || ((!parts[1] || parts[1] === 'US') ? byT.get(parts[0]) : null) || {};
-              stocks.push({ t: u.t || (parts[1] && parts[1] !== 'US' ? full : parts[0]), n: u.n || '', g: (c[3] || '').trim() || u.g || 'Other', c1, c5: null, px, date: today }); }
+              stocks.push({ t: u.t || (parts[1] && parts[1] !== 'US' ? full : parts[0]), bbg: c[0].trim(), n: u.n || '', g: (c[3] || '').trim() || u.g || 'Other', c1, c5: null, px, date: today }); }
             if (!stocks.length) { if (!okOnce) fallback(); return; }
             okOnce = true;
             const saved = f.lastModifiedDateTime ? new Date(f.lastModifiedDateTime) : null;
             const got = r.cache && r.cache.storedAt ? new Date(r.cache.storedAt) : new Date();
             const hm = d => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            LIVE_SAVED = saved;
             paint(stocks, [], today, `${f.name}${saved ? ' · file saved ' + (saved.toISOString().slice(0, 10) === today ? '' : saved.toISOString().slice(0, 10) + ' ') + hm(saved) : ''} · read ${hm(got)}`, false);
             clearTimeout(timer); timer = setTimeout(() => readLive(f, sheet), 5 * 60e3);
           })
