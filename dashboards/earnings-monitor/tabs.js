@@ -1747,6 +1747,7 @@
     health: () => ({ t: D.built_at, src: 'skill outputs' }),
     sources: () => ({ t: (D.sources || {}).built, src: 'Tech Coverage Monitor' }),
     ai: () => ({ t: (D.dp_index || {}).as_of, src: 'datapoints' + (AI_DC.asof ? '; state GW as of ' + AI_DC.asof : ''), live: 'ALAB quarterly numbers are live from Visible Alpha' }),
+    mgmt: () => ({ t: updMax([((D.mgmt || {}).questions || {}).as_of, ((D.mgmt || {}).insiders || {}).as_of]), src: 'Canary super analysts, Insider Score' }),
     notes: () => ({ live: 'Live: notes save to this page’s database as you write them' }),
     method: () => ({})
   };
@@ -1871,9 +1872,68 @@
     if (!AI.rows) getDP().then(({ SRC, ROWS }) => { AI.SRC = SRC; AI.rows = ROWS; paint(); }).catch(e => { AI.err = 'Could not load the datapoint files: ' + (e && e.message || e); paint(); });
   }
 
+  // ================= MANAGEMENT & INSIDERS: questions for management, insider transactions, Canary =================
+  const MG = { st: { co: '', q: '', sec: '', isort: 'net', iq: '' } };
+  function renderMgmt() {
+    const host = document.getElementById('v-mgmt'); if (!host) return;
+    const M = D.mgmt || {}, Q = M.questions || {}, I = M.insiders || {}, st = MG.st;
+    const money = v => { if (v == null || !isFinite(v)) return '–'; const a = Math.abs(v); const s = a >= 1e9 ? (a / 1e9).toFixed(1) + 'bn' : a >= 1e6 ? (a / 1e6).toFixed(1) + 'm' : a >= 1e3 ? (a / 1e3).toFixed(0) + 'k' : a.toFixed(0); return (v < 0 ? '−$' : '$') + s; };
+    const sub = (location.hash.split('/')[1] || '');
+    const paint = () => {
+      let h = head('Management & insiders', 'Questions for management and insider transactions', 'Questions to ask each company (Canary super analysts, plus your own management-prep pages), what insiders are buying and selling, and what the Canary data sets offer.') +
+        `<nav class="sk-tabs" aria-label="Sections"><a href="#mgmt/questions">Questions for management</a><a href="#mgmt/insiders">Insider transactions</a><a href="#mgmt/canary">Canary data sets</a></nav>`;
+      // ---- questions ----
+      const cos = arr(Q.companies);
+      const prepRuns = arr((D.prep || {}).runs).filter(r => /management-prep/i.test(r.skill || ''));
+      const secs = [...new Set(cos.map(c => c.sector).filter(Boolean))].sort();
+      const vis = cos.filter(c => (!st.sec || c.sector === st.sec) && (!st.co || c.t === st.co) && (!st.q || JSON.stringify(c).toLowerCase().includes(st.q.toLowerCase())));
+      h += `<section class="panel" id="mg-questions"><div class="panel-h"><h2>Questions for management</h2><span class="sub">${esc(Q.source || 'Canary super analyst')}${Q.as_of ? ' · ' + esc(fmtD(Q.as_of)) : ''} · ${cos.length} companies</span></div>` +
+        (!cos.length ? none('No questions loaded yet.') :
+        `<div class="ctl"><label for="mg-co">Company <select id="mg-co"><option value="">All</option>${cos.slice().sort((a, b) => (a.tier - b.tier) || String(a.t).localeCompare(b.t)).map(c => `<option value="${esc(c.t)}"${st.co === c.t ? ' selected' : ''}>${esc(c.t)} · ${esc(c.name || '')}</option>`).join('')}</select></label>` +
+        `<label for="mg-sec">Sector <select id="mg-sec"><option value="">All</option>${secs.map(s => `<option${st.sec === s ? ' selected' : ''}>${esc(s)}</option>`).join('')}</select></label>` +
+        `<label for="mg-q">Search <input type="search" id="mg-q" value="${esc(st.q)}" placeholder="Word or theme"></label><span class="count">${vis.length} companies</span></div>` +
+        vis.map(c => { const qs = arr(c.questions), th = [...new Set(qs.map(x => x.theme || 'Questions'))];
+          const preps = prepRuns.filter(r => new RegExp('\\b' + String(c.t).split(' ')[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b').test(r.title || ''));
+          return `<details class="fr-sec"${vis.length <= 3 ? ' open' : ''}><summary>${tk(c.t)} ${esc(c.name || '')} <span class="sub">· Tier ${esc(c.tier)} · ${qs.length} questions${arr(c.debates).length ? ' · ' + arr(c.debates).length + ' debates' : ''}</span></summary>` +
+            th.map(t => `<h4>${esc(t)}</h4><ol class="mg-q">${qs.filter(x => (x.theme || 'Questions') === t).map(x => `<li>${esc(x.q)}${x.why ? `<div class="sub">${esc(x.why)}</div>` : ''}</li>`).join('')}</ol>`).join('') +
+            (arr(c.debates).length ? `<h4>Open debates</h4><ul class="b">${arr(c.debates).map(d => `<li><b>${esc(d.title)}</b>${d.summary ? ' · ' + esc(d.summary) : ''}${d.bull ? `<div class="sub c-pos">Bull: ${esc(d.bull)}</div>` : ''}${d.bear ? `<div class="sub c-neg">Bear: ${esc(d.bear)}</div>` : ''}</li>`).join('')}</ul>` : '') +
+            (c.monitoring ? `<p class="sub"><b>What to monitor:</b> ${esc(c.monitoring)}</p>` : '') +
+            (preps.length ? `<p class="sub">Your management-prep pages: ${preps.map(r => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>`).join(' · ')}</p>` : '') +
+            `<p class="sub"><a href="#stocks/${encodeURIComponent(c.t)}/thesis">Open ${esc(c.t)} on Stocks →</a></p></details>`; }).join('')) +
+        (arr(Q.not_covered).length ? `<p class="sub">Not covered by Canary: ${arr(Q.not_covered).map(x => esc(x.t)).join(', ')}</p>` : '') + `</section>`;
+      // ---- insiders ----
+      const ic = arr(I.companies);
+      let rows = ic.filter(c => (!st.sec || c.sector === st.sec) && (!st.iq || (c.t + ' ' + (c.name || '') + ' ' + (c.read || '')).toLowerCase().includes(st.iq.toLowerCase())));
+      const key = st.isort; rows = rows.slice().sort((a, b) => key === 'buys' ? ((b.buys_6m || {}).value_usd || 0) - ((a.buys_6m || {}).value_usd || 0) : key === 'sells' ? ((b.sells_6m || {}).value_usd || 0) - ((a.sells_6m || {}).value_usd || 0) : key === 'b30' ? ((b.buys_30d || {}).value_usd || 0) - ((a.buys_30d || {}).value_usd || 0) : key === 't' ? String(a.t).localeCompare(b.t) : (b.net_6m_usd || 0) - (a.net_6m_usd || 0));
+      const txT = (xs, title, cls) => `<div><h3 class="${cls}">${title}</h3><div class="tbl-wrap"><table class="dt"><thead><tr><th>Company</th><th>Date</th><th>Insider</th><th class="n">Value</th><th class="n">Price</th><th>Plan</th></tr></thead><tbody>${arr(xs).map(x => `<tr><td>${tk(x.t)}</td><td class="nowrap">${esc(x.date || '')}</td><td>${esc(x.insider || '')}<div class="sub">${esc(x.title || '')}</div></td><td class="n">${money(x.value_usd)}</td><td class="n">${x.price != null ? esc(x.price) : '–'}</td><td>${x.plan_10b5_1 ? '10b5-1' : '<b>open</b>'}</td></tr>`).join('') || `<tr><td colspan="6">${none('None.')}</td></tr>`}</tbody></table></div></div>`;
+      h += `<section class="panel" id="mg-insiders"><div class="panel-h"><h2>Insider transactions</h2><span class="sub">${esc(arr(I.sources).join(' · '))}${I.window ? ' · ' + esc(fmtD(I.window.start)) + ' to ' + esc(fmtD(I.window.end)) : ''}</span></div>` +
+        (!ic.length ? none('No insider data loaded yet.') :
+        (arr(I.summary).length ? `<ul class="b">${arr(I.summary).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '') +
+        `<div class="grid2">${txT(I.top_buys, 'Largest buys', 'c-pos')}${txT(I.top_sells, 'Largest sells', 'c-neg')}</div>` +
+        `<div class="ctl"><label for="mg-iq">Search <input type="search" id="mg-iq" value="${esc(st.iq)}" placeholder="Ticker or word"></label>` +
+        `<label for="mg-is">Sort <select id="mg-is">${[['net', 'Net $ (6M)'], ['buys', 'Buys $ (6M)'], ['b30', 'Buys $ (30D)'], ['sells', 'Sells $ (6M)'], ['t', 'Ticker']].map(([v, l]) => `<option value="${v}"${key === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label><span class="count">${rows.length} companies</span></div>` +
+        `<div class="tbl-wrap"><table class="dt"><thead><tr><th>Company</th><th class="n">Buys 6M</th><th class="n">Sells 6M</th><th class="n">Net 6M</th><th class="n">Buys 30D</th><th class="n">Sells 30D</th><th class="n">Buyers</th><th class="n">Plan sells</th><th>Read</th></tr></thead><tbody>${rows.map(c => `<tr><td>${tk(c.t)}<div class="sub">${esc(c.sector || '')}</div></td><td class="n c-pos">${(c.buys_6m || {}).n || 0} · ${money((c.buys_6m || {}).value_usd)}</td><td class="n c-neg">${(c.sells_6m || {}).n || 0} · ${money((c.sells_6m || {}).value_usd)}</td><td class="n ${(c.net_6m_usd || 0) >= 0 ? 'c-pos' : 'c-neg'}"><b>${money(c.net_6m_usd)}</b></td><td class="n">${money((c.buys_30d || {}).value_usd)}</td><td class="n">${money((c.sells_30d || {}).value_usd)}</td><td class="n">${c.buyers_6m != null ? esc(c.buyers_6m) : '–'}</td><td class="n">${c.plan_sell_pct != null ? Math.round(c.plan_sell_pct) + '%' : '–'}</td><td class="ev-wrap">${esc(c.read || '')}${arr(c.notable).length ? `<details><summary>Notable</summary><ul class="b">${arr(c.notable).map(x => `<li>${esc(x.date || '')} · ${esc(x.insider || '')} (${esc(x.title || '')}) ${x.value_usd >= 0 && /buy/i.test(x.type || '') ? 'bought' : (x.type ? esc(x.type) : '')} ${money(x.value_usd)}${x.price != null ? ' at ' + esc(x.price) : ''}${x.plan_10b5_1 ? ' · 10b5-1' : ''}</li>`).join('')}</ul></details>` : ''}</td></tr>`).join('')}</tbody></table></div>` +
+        (arr(I.not_covered).length ? `<p class="sub">No insider data: ${arr(I.not_covered).map(x => esc(x.t)).join(', ')}</p>` : '')) + `</section>`;
+      // ---- canary ----
+      h += `<section class="panel" id="mg-canary"><div class="panel-h"><h2>Canary data sets and super analysts</h2>${M.canary_asof ? `<span class="sub">${esc(fmtD(M.canary_asof))}</span>` : ''}</div>${M.canary_md ? `<div class="fr-html">${xHtml(xParse(M.canary_md))}</div>` : none('The Canary survey is not loaded yet.')}</section>`;
+      host.innerHTML = h; wire(); dedupeNames(host);
+      host.querySelectorAll('.sk-tabs a').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#mgmt/' + sub));
+      if (sub) { const el = document.getElementById('mg-' + sub); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); }
+    };
+    function wire() {
+      const $ = id => document.getElementById(id);
+      $('mg-co') && $('mg-co').addEventListener('change', e => { st.co = e.target.value; paint(); });
+      $('mg-sec') && $('mg-sec').addEventListener('change', e => { st.sec = e.target.value; paint(); });
+      $('mg-is') && $('mg-is').addEventListener('change', e => { st.isort = e.target.value; paint(); });
+      const live = (id, k) => $(id) && $(id).addEventListener('input', e => { st[k] = e.target.value; const p = e.target.selectionStart; paint(); const n = $(id); n.focus(); n.setSelectionRange(p, p); });
+      live('mg-q', 'q'); live('mg-iq', 'iq');
+    }
+    paint();
+  }
+
   // ================= ROUTER =================
-  const VIEWS = ['today', 'x', 'ai', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { ai: renderAI, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'x', 'ai', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { mgmt: renderMgmt, ai: renderAI, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -1913,6 +1973,7 @@
     if (v === 'stocks' && done[v]) { renderStocks(); }
     if (v === 'notes' && done[v]) { renderNotes(); }
     if (v === 'ai' && done[v]) { renderAI(); }
+    if (v === 'mgmt' && done[v]) { renderMgmt(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     paintUpd(v);
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
