@@ -1638,7 +1638,7 @@
       if (M.scores.length) h += `<section class="panel"><span class="eyebrow">📊 Handle scorecards</span><p class="sub">Which accounts produce usable datapoints. Use it to prune or add to your lists.</p>${M.scores.map(b => `<details class="fr-sec"><summary>${xInline(b.title)}</summary>${xHtml(b.kids)}</details>`).join('')}</section>`;
       if (M.notes.length || M.foot.length) h += `<section class="panel"><span class="eyebrow">🧹 What the agent read and cut</span>${M.notes.map(n => `<p class="sub">${esc(n.icon)} ${xInline(n.text)}</p>`).join('')}${M.foot.map(t => `<p class="sub">${xInline(t)}</p>`).join('')}</section>`;
       h += `<section class="panel"><details class="fr"><summary>Full page as written</summary><div class="fr-html">${xHtml(xParse(data.md))}</div></details></section>`;
-      host.innerHTML = h; wire(); dedupeNames(host);
+      host.innerHTML = h; wire(); dedupeNames(host); paintUpd('x');
     };
     function wire() {
       const $ = id => document.getElementById(id);
@@ -1671,6 +1671,42 @@
     paint();
     ready.then(m => { XT.mcp = m; if (!m) { XT.err = 'The live X feed needs this page open on claude.ai with your Notion connector.'; paint(); return; } go(!!fresh); });
   }
+
+
+  // ---- "Updated" line at the top of every tab: when its data was last refreshed, and when the page was rebuilt ----
+  const updMax = xs => xs.filter(Boolean).map(String).sort().pop() || '';
+  const runMax = rs => updMax(arr(rs).map(r => r && r.date));
+  const updFmt = t => { if (!t) return ''; const s = String(t); const d = new Date(/T|\d:\d/.test(s) ? s.replace(' ', 'T') : s + 'T12:00:00');
+    if (isNaN(d)) return esc(s); return /T|\d:\d/.test(s) ? d.toLocaleString([], { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' }) : d.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }); };
+  const UPD = {
+    today: () => ({ t: (D.today || {}).as_of, src: 'latest digest pages' }),
+    x: () => ({ live: 'Live: read from the X List Monitor pages in Notion when you open the tab (the agent runs up to four times a day)', t: XT.sel && XT.cache.get(XT.sel.id) ? XT.cache.get(XT.sel.id).edited : '', src: 'latest X run' }),
+    daily: () => ({ t: (DLY || D.daily || {}).as_of, src: 'market close' }),
+    routines: () => ({ t: (D.routines || {}).as_of, src: 'routine runs' }),
+    stocks: () => ({ t: updMax([runMax((D.ideas || {}).runs), (D.dp_index || {}).as_of]), src: 'thesis pages and datapoints', live: 'Quarterly review numbers are live from Visible Alpha' }),
+    earnings: () => ({ t: updMax(arr(D.bobby).concat(arr(D.rebecca)).map(r => r.report_date)), src: 'latest print reviewed' }),
+    datapoints: () => ({ t: (D.dp_index || {}).as_of, src: 'Supabase research_evidence' }),
+    screens: () => ({ t: updMax([runMax((D.screens || {}).runs), (D.comps || {}).as_of]), src: 'revisions and comps' }),
+    ideas: () => ({ t: updMax([(D.ideas || {}).generated, (D.pipeline || {}).as_of, runMax((D.ideas || {}).runs)]), src: 'ideas, pipeline and theses' }),
+    prep: () => ({ t: runMax((D.prep || {}).runs), src: 'latest prep page' }),
+    health: () => ({ t: D.built_at, src: 'skill outputs' }),
+    sources: () => ({ t: (D.sources || {}).built, src: 'Tech Coverage Monitor' }),
+    notes: () => ({ live: 'Live: notes save to this page’s database as you write them' }),
+    method: () => ({})
+  };
+  function paintUpd(v) {
+    const el = document.getElementById('v-' + v) || document.querySelector(`.view[data-view="${v}"]`); if (!el) return;
+    let bar = el.querySelector(':scope > .upd'); if (!bar) { bar = document.createElement('div'); bar.className = 'upd'; el.prepend(bar); }
+    let u = {}; try { u = (UPD[v] || (() => ({})))() || {}; } catch (e) {}
+    const parts = [];
+    if (u.t) parts.push(`<b>Updated ${updFmt(u.t)}</b>${u.src ? ` <span>(${esc(u.src)})</span>` : ''}`);
+    if (u.live) parts.push(`<span class="upd-live">● ${esc(u.live)}</span>`);
+    if (D.built_at) parts.push(`<span>Page rebuilt ${updFmt(D.built_at)}</span>`);
+    bar.innerHTML = parts.join('<span class="upd-sep">·</span>');
+  }
+  window.__paintUpd = paintUpd;
+  // tabs that redraw themselves (Stocks, Notes, X) would drop the line; put it back when that happens
+  document.querySelectorAll('.view').forEach(el => new MutationObserver(() => { if (!el.querySelector(':scope > .upd')) paintUpd(el.dataset.view); }).observe(el, { childList: true }));
 
   // ================= ROUTER =================
   const VIEWS = ['today', 'x', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
@@ -1714,6 +1750,7 @@
     if (v === 'stocks' && done[v]) { renderStocks(); }
     if (v === 'notes' && done[v]) { renderNotes(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
+    paintUpd(v);
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
     document.querySelectorAll('nav.tabs a').forEach(a => { if (a.getAttribute('href') === '#' + v) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     window.scrollTo(0, 0);
