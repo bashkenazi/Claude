@@ -1728,6 +1728,7 @@
     prep: () => ({ t: runMax((D.prep || {}).runs), src: 'latest prep page' }),
     health: () => ({ t: D.built_at, src: 'skill outputs' }),
     sources: () => ({ t: (D.sources || {}).built, src: 'Tech Coverage Monitor' }),
+    ai: () => ({ t: (D.dp_index || {}).as_of, src: 'datapoints' + (AI_DC.asof ? '; state GW as of ' + AI_DC.asof : ''), live: 'ALAB quarterly numbers are live from Visible Alpha' }),
     notes: () => ({ live: 'Live: notes save to this page’s database as you write them' }),
     method: () => ({})
   };
@@ -1745,9 +1746,116 @@
   // tabs that redraw themselves (Stocks, Notes, X) would drop the line; put it back when that happens
   document.querySelectorAll('.view').forEach(el => new MutationObserver(() => { if (!el.querySelector(':scope > .upd')) paintUpd(el.dataset.view); }).observe(el, { childList: true }));
 
+  // ================= AI: data center politics x GW, ALAB revenue, compute supply/demand =================
+  // State GW by stage and political tier: kept in this page's database (collection "ai", doc "dc_states": {source, asof, img, note, rows:[[state, tier, active, construction, announced]]}), not in the code
+  const AI_DC = { source: '', asof: '', img: '', note: '', rows: [] };
+  const AI_TIER = { 1: 'Tier 1 · welcoming', 2: 'Tier 2', 3: 'Tier 3', 4: 'Tier 4', 5: 'Tier 5 · full moratorium' };
+  const AI_RE = {
+    policy: /moratori|ballot|zoning|governor|legislat|permit|data ?cent(er|re)s? (ban|pause|opposition|tax|subsid|bill|backlash)|local opposition|ratepayer|interconnect(ion)? queue|puc\b|public utilit|community opposition|abbott|hinojosa/i,
+    alabRev: /revenue|sales|\$\s?[0-9.]+\s?(m|b|bn|mm)\b|guid|content|attach|ramp|units|scorpio|aries|taurus|leo|trainium|backlog|run-?rate|share|design win|customer|asic|switch/i,
+    compute: /compute (shortage|constrain|capacity|demand|supply)|gpu (shortage|supply|demand|constrain|allocation)|supply[- ]constrain|sold out|capacity constrain|cannot meet demand|can't meet demand|demand (exceeds|outstrip|ahead of supply)|ahead of supply|shortage|cowos|lead times? (extend|stretch|out|\d)|tokens?\b.*(demand|growth|processed|per)|inference demand|compute demand|undersuppl|oversuppl|overbuil|digestion|allocation|push[- ]?outs?|fulfil?ment/i,
+    tight: /shortage|constrain|sold out|tight|cannot meet|can't meet|exceed|outstrip|ahead of supply|allocation|lead times?|undersuppl|backlog|fulfil?ment (still|only|\d)/i,
+    loose: /oversuppl|overbuil|digestion|glut|push[- ]?outs?|slip|cancel|excess inventor|soften|slowdown|pause/i
+  };
+  const AI_BUCKETS = [['GPUs & accelerators', /gpu|accelerat|asic|tpu|trainium|blackwell|rubin|mi[345]\d\d|xpu|nvidia|nvda|amd\b/i], ['Memory & HBM', /hbm|dram|nand|memory|ssd|hdd/i], ['Packaging & foundry', /cowos|packag|foundry|wafer|n[235]\b|2nm|3nm|substrate|tsmc/i],
+    ['Power & data center build', /power|gw\b|gigawatt|data ?cent|grid|turbine|transformer|electric|site/i], ['Networking & optics', /optic|switch|network|ethernet|nvlink|scale[- ]up|scale[- ]out|transceiver|cpo/i], ['Tokens & inference demand', /token|inference|usage|api|agent|workload|capex/i]];
+  const AI = { st: { dcSort: 'ann', tier: '', bucket: '', tone: '', q: '', days: 180, alabQ: '' }, rows: null, err: '' };
+  function renderAI() {
+    const host = document.getElementById('v-ai'); if (!host) return;
+    const st = AI.st, meta = new Map(arr((D.dp_index || {}).meta).map(m => [m.rid, m]));
+    const f1 = v => v == null ? '–' : (+v).toFixed(1);
+    const paint = () => {
+      let h = head('AI', 'AI infrastructure', 'Where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
+        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a></nav>`;
+      // ---- 1) data centers by state ----
+      if (!AI_DC.rows.length) h += `<section class="panel" id="ai-dc"><h2>Data centers: gigawatts by state and political risk</h2><p class="sub">${esc(AI.dcErr || 'Loading the state figures…')}</p><h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
+      else {
+      const R = AI_DC.rows.map(([s, t, a, c, n]) => ({ s, t, a: a || 0, c: c || 0, n: n || 0, ra: a, rc: c, rn: n, tot: (a || 0) + (c || 0) + (n || 0) }));
+      const byTier = [1, 2, 3, 4, 5, null].map(t => { const xs = R.filter(r => r.t === t); return { t, a: xs.reduce((x, r) => x + r.a, 0), c: xs.reduce((x, r) => x + r.c, 0), n: xs.reduce((x, r) => x + r.n, 0), k: xs.length }; }).filter(x => x.k);
+      const T = byTier.reduce((x, r) => ({ a: x.a + r.a, c: x.c + r.c, n: x.n + r.n }), { a: 0, c: 0, n: 0 });
+      const risk = byTier.filter(x => x.t >= 4).reduce((x, r) => ({ a: x.a + r.a, c: x.c + r.c, n: x.n + r.n }), { a: 0, c: 0, n: 0 });
+      const pc = (x, y) => y ? Math.round(100 * x / y) + '%' : '–';
+      const key = st.dcSort; let rows = R.filter(r => !st.tier || String(r.t) === st.tier);
+      rows.sort((x, y) => key === 's' ? x.s.localeCompare(y.s) : key === 't' ? ((y.t || 0) - (x.t || 0)) || (y.n - x.n) : key === 'a' ? y.a - x.a : key === 'c' ? y.c - x.c : key === 'tot' ? y.tot - x.tot : y.n - x.n);
+      const mx = Math.max(...R.map(r => r.tot));
+      h += `<section class="panel" id="ai-dc"><div class="panel-h"><h2>Data centers: gigawatts by state and political risk</h2><span class="sub">Critical IT GW · ${esc(AI_DC.source)}</span></div>` +
+        `<div class="summary">` +
+        `<div class="stat"><span class="v">${f1(T.a)}</span><span class="l">GW active (operating today)</span></div>` +
+        `<div class="stat"><span class="v">${f1(T.c)}</span><span class="l">GW under construction</span></div>` +
+        `<div class="stat"><span class="v">${f1(T.n)}</span><span class="l">GW announced, not yet under construction</span></div>` +
+        `<div class="stat"><span class="v c-neg">${f1(risk.c + risk.n)}</span><span class="l">GW building or announced in Tier 4–5 states (${pc(risk.c + risk.n, T.c + T.n)} of the pipeline)</span></div>` +
+        `<div class="stat"><span class="v c-neg">${f1(((R.find(r => r.s === 'TX') || {}).c || 0) + ((R.find(r => r.s === 'TX') || {}).n || 0))}</span><span class="l">GW of that in Texas alone (now Tier 4)</span></div></div>` +
+        `<div class="tbl-wrap"><table class="dt"><thead><tr><th>Political risk tier</th><th class="n">States</th><th class="n">Active</th><th class="n">Construction</th><th class="n">Announced</th><th class="n">Pipeline share</th></tr></thead><tbody>${byTier.map(x => `<tr class="ai-t${x.t || 0}"><td>${esc(x.t ? AI_TIER[x.t] : 'Not tiered on the map')}</td><td class="n">${x.k}</td><td class="n">${f1(x.a)}</td><td class="n">${f1(x.c)}</td><td class="n">${f1(x.n)}</td><td class="n">${pc(x.c + x.n, T.c + T.n)}</td></tr>`).join('')}</tbody></table></div>` +
+        `<p class="sub">At risk = Tier 4 (${R.filter(r => r.t === 4).map(r => r.s).join(', ')}) and Tier 5 (${R.filter(r => r.t === 5).map(r => r.s).join(', ')}, full moratorium). Tier 3 is the watch list. Pipeline = under construction + announced.</p>` +
+        `<div class="ctl"><label for="ai-tier">Tier <select id="ai-tier"><option value="">All</option>${[5, 4, 3, 2, 1].map(t => `<option value="${t}"${st.tier === String(t) ? ' selected' : ''}>${esc(AI_TIER[t])}</option>`).join('')}</select></label>` +
+        `<label for="ai-sort">Sort <select id="ai-sort">${[['ann', 'Announced GW'], ['tot', 'Total GW'], ['c', 'Under construction'], ['a', 'Active'], ['t', 'Highest risk first'], ['s', 'State A–Z']].map(([v, l]) => `<option value="${v}"${key === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label><span class="count">${rows.length} states</span></div>` +
+        `<div class="tbl-wrap"><table class="dt"><thead><tr><th>State</th><th>Tier</th><th class="n">Active</th><th class="n">Construction</th><th class="n">Announced</th><th class="n">Total</th><th style="min-width:220px">Mix</th></tr></thead><tbody>${rows.map(r => `<tr class="ai-t${r.t || 0}"><td><b>${r.s}</b></td><td><span class="chip ai-tc${r.t || 0}">${r.t ? 'Tier ' + r.t : '–'}</span>${r.t >= 4 ? ' <span class="c-neg">at risk</span>' : ''}</td><td class="n">${f1(r.ra)}</td><td class="n">${f1(r.rc)}</td><td class="n">${f1(r.rn)}</td><td class="n"><b>${f1(r.tot)}</b></td><td><div class="ai-bar" title="Active ${f1(r.ra)} · construction ${f1(r.rc)} · announced ${f1(r.rn)} GW"><i class="a" style="width:${100 * r.a / mx}%"></i><i class="c" style="width:${100 * r.c / mx}%"></i><i class="n" style="width:${100 * r.n / mx}%"></i></div></td></tr>`).join('')}</tbody></table></div>` +
+        `<div class="legend"><span><i style="background:var(--ink)"></i>Active</span><span><i style="background:var(--accent)"></i>Under construction</span><span><i style="background:#8a4fc7"></i>Announced</span></div>` +
+        `<details class="fr"><summary>Source exhibit (stored with this page)</summary><img src="${esc(AI_DC.img)}" alt="Source map of critical IT GW by state and stage, colored by political risk tier" style="max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;margin-top:8px" loading="lazy"><p class="sub">${esc(AI_DC.note || '')}</p></details>` +
+        `<h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
+      }
+      // ---- 2) ALAB revenue ----
+      const alabRev = arr(D.bobby).concat(arr(D.rebecca)).filter(r => /^ALAB/i.test(r.ticker || '')).sort((a, b) => String(b.report_date).localeCompare(String(a.report_date)));
+      h += `<section class="panel" id="ai-alab"><div class="panel-h"><h2>Astera Labs (ALAB): revenue</h2><a href="#stocks/ALAB/qr">Open ALAB on Stocks →</a></div>` +
+        `<h3>Quarterly revenue, segments and consensus (live from Visible Alpha)</h3><div class="qr" id="ai-qr"><p class="sub">Loading Visible Alpha…</p></div>` +
+        `<h3>Earnings prints</h3>${alabRev.map(r => `<details class="fr-sec"><summary>${esc(r.quarter || '')} · ${esc(r.report_date || '')} · ${esc(r.source === 'rebecca' ? 'Rebecca recap' : 'Earnings review')}</summary><p>${xInline(r.headline || '')}</p><ul class="b">${arr(r.summary).filter(s => AI_RE.alabRev.test(s)).map(s => `<li>${esc(s)}</li>`).join('')}</ul>${r.url && /^https?:/.test(r.url) ? `<a class="ext" href="${esc(r.url)}" target="_blank" rel="noopener">Open the full page →</a>` : ''}</details>`).join('') || none('No ALAB earnings pages in this build.')}` +
+        `<h3>Every revenue datapoint on ALAB</h3><div class="ctl"><label for="ai-aq">Search <input type="search" id="ai-aq" value="${esc(st.alabQ)}" placeholder="Scorpio, Trainium, guide…"></label></div><div id="ai-alabdp">${aiRowsHtml('alab')}</div></section>`;
+      // ---- 3) compute supply / demand ----
+      h += `<section class="panel" id="ai-compute"><div class="panel-h"><h2>Compute supply versus demand</h2><span class="sub">Every datapoint in Supabase that speaks to compute being tight or loose, all companies</span></div>` +
+        `<div id="ai-cmp-sum"></div>` +
+        `<div class="ctl"><label for="ai-b">Area <select id="ai-b"><option value="">All</option>${AI_BUCKETS.map(([b]) => `<option${st.bucket === b ? ' selected' : ''}>${esc(b)}</option>`).join('')}<option${st.bucket === 'Other' ? ' selected' : ''}>Other</option></select></label>` +
+        `<label for="ai-tone">Read <select id="ai-tone"><option value="">All</option><option value="tight"${st.tone === 'tight' ? ' selected' : ''}>Supply tight / demand ahead</option><option value="loose"${st.tone === 'loose' ? ' selected' : ''}>Loosening / digestion</option></select></label>` +
+        `<label for="ai-days">Window <select id="ai-days">${[[30, '1 month'], [90, '3 months'], [180, '6 months'], [100000, 'All']].map(([v, l]) => `<option value="${v}"${+st.days === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>` +
+        `<label for="ai-q">Search <input type="search" id="ai-q" value="${esc(st.q)}" placeholder="Ticker or word"></label></div><div id="ai-cmp">${aiRowsHtml('compute')}</div></section>`;
+      host.innerHTML = h; wire();
+      const sub = (location.hash.split('/')[1] || ''); host.querySelectorAll('.sk-tabs a').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#ai/' + sub));
+      if (sub) { const el = document.getElementById('ai-' + (sub === 'dc' ? 'dc' : sub)); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); }
+      const qh = document.getElementById('ai-qr'); if (qh && window.__qrMount) { const co = (window.__qrFind && window.__qrFind('ALAB')) || { t: 'ALAB', bbg: 'ALAB US', name: 'Astera Labs' }; try { window.__qrMount(qh, co); } catch (e) { qh.innerHTML = none('The Visible Alpha table could not load here.'); } }
+      dedupeNames(host);
+    };
+    function aiPick(kind) {
+      if (!AI.rows) return null;
+      const cut = new Date(Date.now() - (+st.days || 100000) * 864e5).toISOString().slice(0, 10);
+      if (kind === 'policy') return AI.rows.filter(r => AI_RE.policy.test(r[9]) && /data ?cent|power|grid|gw\b|gigawatt|utility|site/i.test(r[9]));
+      if (kind === 'alab') return AI.rows.filter(r => { const m = meta.get(r[1]); return m && /^ALAB/i.test(m.t || '') && AI_RE.alabRev.test(r[9]) && (!st.alabQ || r[9].toLowerCase().includes(st.alabQ.toLowerCase())); });
+      return AI.rows.filter(r => r[2] >= cut && AI_RE.compute.test(r[9])).map(r => { r.__b = (AI_BUCKETS.find(([, re]) => re.test(r[9])) || ['Other'])[0]; r.__t = AI_RE.loose.test(r[9]) && !AI_RE.tight.test(r[9]) ? 'loose' : AI_RE.tight.test(r[9]) ? 'tight' : ''; return r; })
+        .filter(r => (!st.bucket || r.__b === st.bucket) && (!st.tone || r.__t === st.tone) && (!st.q || (r[9] + ' ' + ((meta.get(r[1]) || {}).t || '')).toLowerCase().includes(st.q.toLowerCase())));
+    }
+    function aiRowsHtml(kind) {
+      if (AI.err) return `<p class="sub c-neg">${esc(AI.err)}</p>`;
+      const xs = aiPick(kind); if (!xs) return `<p class="sub">Loading datapoints…</p>`;
+      const rows = xs.slice().sort((a, b) => String(b[2]).localeCompare(String(a[2])));
+      const lim = G.n || (kind === 'policy' ? 40 : 200);
+      return `<p class="sub">${rows.length} datapoints${rows.length > lim ? `, newest ${lim} shown (raise "Show" at the top for more)` : ''}.</p><div class="tbl-wrap"><table class="dt"><thead><tr><th>Date</th><th>Company</th>${kind === 'compute' ? '<th>Area</th><th>Read</th>' : ''}<th>Impact</th><th>Datapoint</th><th>Source</th></tr></thead><tbody>${rows.slice(0, lim).map(r => { const m = meta.get(r[1]) || {}; return `<tr><td class="nowrap">${esc(r[2])}</td><td>${m.t ? tk(m.t) : ''}</td>${kind === 'compute' ? `<td class="sub">${esc(r.__b)}</td><td class="nowrap">${r.__t === 'tight' ? '<span class="c-pos">Tight</span>' : r.__t === 'loose' ? '<span class="c-neg">Loosening</span>' : '<span class="sub">–</span>'}</td>` : ''}<td class="nowrap">${r[4] === 1 ? '<span class="c-pos">▲</span>' : r[4] === -1 ? '<span class="c-neg">▼</span>' : '◆'}</td><td class="ev-wrap">${esc(r[9])}</td><td class="ev-src">${esc((AI.SRC || [])[r[7]] || '')}</td></tr>`; }).join('') || `<tr><td colspan="7">${none('Nothing matches.')}</td></tr>`}</tbody></table></div>`;
+    }
+    function cmpSummary() {
+      const el = document.getElementById('ai-cmp-sum'); if (!el || !AI.rows) return;
+      const save = { bucket: st.bucket, tone: st.tone, q: st.q }; Object.assign(st, { bucket: '', tone: '', q: '' }); const all = aiPick('compute'); Object.assign(st, save);
+      const g = AI_BUCKETS.map(([b]) => b).concat('Other').map(b => { const xs = all.filter(r => r.__b === b); return { b, n: xs.length, t: xs.filter(r => r.__t === 'tight').length, l: xs.filter(r => r.__t === 'loose').length }; }).filter(x => x.n);
+      el.innerHTML = `<div class="tbl-wrap"><table class="dt"><thead><tr><th>Area</th><th class="n">Datapoints</th><th class="n">Tight</th><th class="n">Loosening</th><th>Balance</th></tr></thead><tbody>${g.map(x => `<tr><td><button type="button" class="tkbtn ai-bk" data-b="${esc(x.b)}">${esc(x.b)}</button></td><td class="n">${x.n}</td><td class="n c-pos">${x.t}</td><td class="n c-neg">${x.l}</td><td><div class="ai-bal"><i class="t" style="width:${x.t + x.l ? 100 * x.t / (x.t + x.l) : 0}%"></i><i class="l" style="width:${x.t + x.l ? 100 * x.l / (x.t + x.l) : 0}%"></i></div></td></tr>`).join('')}</tbody></table></div><p class="sub">Tight = shortage, sold out, allocation, lead times or demand ahead of supply. Loosening = oversupply, overbuild, digestion, push-outs or cancellations.</p>`;
+      el.querySelectorAll('.ai-bk').forEach(b => b.addEventListener('click', () => { st.bucket = st.bucket === b.dataset.b ? '' : b.dataset.b; paint(); document.getElementById('ai-compute').scrollIntoView({ block: 'start' }); }));
+    }
+    function wire() {
+      const $ = id => document.getElementById(id), re = () => paint();
+      $('ai-tier') && $('ai-tier').addEventListener('change', e => { st.tier = e.target.value; re(); });
+      $('ai-sort') && $('ai-sort').addEventListener('change', e => { st.dcSort = e.target.value; re(); });
+      $('ai-b') && $('ai-b').addEventListener('change', e => { st.bucket = e.target.value; re(); });
+      $('ai-tone') && $('ai-tone').addEventListener('change', e => { st.tone = e.target.value; re(); });
+      $('ai-days') && $('ai-days').addEventListener('change', e => { st.days = +e.target.value; re(); });
+      const live = (id, k, box, kind) => $(id) && $(id).addEventListener('input', e => { st[k] = e.target.value; const b = $(box); if (b) b.innerHTML = aiRowsHtml(kind); dedupeNames(b); });
+      live('ai-q', 'q', 'ai-cmp', 'compute'); live('ai-aq', 'alabQ', 'ai-alabdp', 'alab');
+      cmpSummary();
+    }
+    paint();
+    if (!AI.dcLoaded) { AI.dcLoaded = true; (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('dc_states').get() : null)
+      .then(sn => { if (sn && sn.exists) Object.assign(AI_DC, JSON.parse(JSON.stringify(sn.data()))); else AI.dcErr = 'The state data center figures are not loaded in this view.'; paint(); })
+      .catch(() => { AI.dcErr = 'The state data center figures could not be read from this page’s database.'; paint(); }); }
+    if (!AI.rows) getDP().then(({ SRC, ROWS }) => { AI.SRC = SRC; AI.rows = ROWS; paint(); }).catch(e => { AI.err = 'Could not load the datapoint files: ' + (e && e.message || e); paint(); });
+  }
+
   // ================= ROUTER =================
-  const VIEWS = ['today', 'x', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'x', 'ai', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { ai: renderAI, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -1786,6 +1894,7 @@
     if (v === 'routines' && done[v]) { renderRoutines(); }
     if (v === 'stocks' && done[v]) { renderStocks(); }
     if (v === 'notes' && done[v]) { renderNotes(); }
+    if (v === 'ai' && done[v]) { renderAI(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     paintUpd(v);
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
