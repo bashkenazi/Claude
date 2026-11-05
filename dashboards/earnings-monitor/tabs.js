@@ -1807,14 +1807,74 @@
   };
   const AI_BUCKETS = [['GPUs & accelerators', /gpu|accelerat|asic|tpu|trainium|blackwell|rubin|mi[345]\d\d|xpu|nvidia|nvda|amd\b/i], ['Memory & HBM', /hbm|dram|nand|memory|ssd|hdd/i], ['Packaging & foundry', /cowos|packag|foundry|wafer|n[235]\b|2nm|3nm|substrate|tsmc/i],
     ['Power & data center build', /power|gw\b|gigawatt|data ?cent|grid|turbine|transformer|electric|site/i], ['Networking & optics', /optic|switch|network|ethernet|nvlink|scale[- ]up|scale[- ]out|transceiver|cpo/i], ['Tokens & inference demand', /token|inference|usage|api|agent|workload|capex/i]];
-  const AI = { st: { dcSort: 'ann', tier: '', bucket: '', tone: '', q: '', days: 180, alabQ: '' }, rows: null, err: '' };
+  const AI = { st: { dcSort: 'ann', tier: '', bucket: '', tone: '', q: '', days: 180, alabQ: '', gpuBasis: 'all', gpuFam: '' }, rows: null, err: '' };
+  // ---- AI › GPU rental prices: $/GPU-hour points parsed from your datapoints (refreshes with every rebuild) ----
+  const GPU_FAM = g => /a100/i.test(g) ? 'A100' : /h100/i.test(g) ? 'H100' : /h200/i.test(g) ? 'H200' : /b200/i.test(g) ? 'B200/GB200' : /b300/i.test(g) ? 'B300/GB300' : 'Rubin';
+  const GPU_COL = { A100: '#9aa3b2', H100: '#2f6fd6', H200: '#16a3a3', 'B200/GB200': '#d9822b', 'B300/GB300': '#c7414b', Rubin: '#7b4fc9' };
+  const gpuBasis = s => /forecast|tco|model|expect/i.test(s) ? 'forecast' : /spot|preempt/i.test(s) ? 'spot' : /on-?demand|list|median/i.test(s) ? 'on-demand' : /contract|year|yr|reserv|term|deal|lease|agreement|renew|sign/i.test(s) ? 'contract' : 'quoted';
+  const GPU_NAME = /\b(H100|H200|A100|B200|B300|GB200|GB300|VR NVL72|Vera Rubin|Rubin)\b/gi;
+  const GPU_PRICE = /\$\s?(\d+(?:\.\d+)?)(?:\s*(?:-|–|to)\s*\$?(\d+(?:\.\d+)?))?\s*(?:\/|per)\s*(?:GPU[-\s/]*)?(?:hr|hour|h)\b/gi;
+  function gpuPoints(rows) {
+    const out = [], seen = new Set();
+    rows.forEach(r => {
+      const t = String(r[9] || ''); if (!/\$\s?\d/.test(t) || !/(hr|hour)/i.test(t)) return;
+      const names = [...t.matchAll(GPU_NAME)].map(m => ({ i: m.index, e: m.index + m[0].length, g: m[1] }));
+      if (!names.length) return;
+      [...t.matchAll(GPU_PRICE)].forEach(m => {
+        const pre = t.slice(Math.max(0, m.index - 22), m.index), fromTo = /from\s*(about|~|roughly|around)?\s*~?\s*$/i.test(pre) && m[2] && /to/i.test(m[0]);
+        let lo = +m[1], hi = m[2] ? +m[2] : null; if (fromTo) { lo = hi; hi = null; } const v = hi ? (lo + hi) / 2 : lo; if (!(v > 0.2 && v < 40)) return;
+        const ps = m.index, pe = ps + m[0].length;
+        // the GPU this price belongs to: a name right after the price ("$2.70/GPU-hour H100"), else the nearest name before it with no other price in between
+        if (!fromTo && /(from|vs\.?|versus|earlier|was|in 20\d\d)\s*(about|~|roughly|around)?\s*~?\s*$/i.test(t.slice(Math.max(0, ps - 22), ps)) || /^\s*(in|during)\s+20\d\d/i.test(t.slice(pe, pe + 10))) return; // an earlier/comparison price, not today's
+        let nm = names.find(n => n.i >= pe && /^\s{1,2}$/.test(t.slice(pe, n.i)));
+        if (!nm) { const before = names.filter(n => n.e <= ps && ps - n.e <= 70 && !/\$\s?\d/.test(t.slice(n.e, ps))); nm = before[before.length - 1]; }
+        if (!nm) return;
+        const ctx = t.slice(Math.max(0, Math.min(nm.i, ps) - 16), Math.min(nm.i, ps)) + ' ' + (nm.i < ps ? t.slice(nm.e, ps) : t.slice(pe, nm.e)) + ' ' + t.slice(Math.max(pe, nm.e), Math.max(pe, nm.e) + 12).split(/[,;]|\$|\band\b/)[0];
+        const after = t.slice(pe, pe + 14).split(/[,;]|\$|\band\b/)[0], gap = nm.i < ps ? t.slice(nm.e, ps) : t.slice(pe, nm.e), bef = t.slice(Math.max(0, Math.min(nm.i, ps) - 16), Math.min(nm.i, ps));
+        const b0 = [after, gap, bef].map(gpuBasis).find(b => b !== 'quoted') || 'quoted', fam = GPU_FAM(nm.g), basis = /\b(forecast|TCO)\b/i.test(t) && b0 !== 'spot' && b0 !== 'on-demand' ? 'forecast' : b0;
+        const k = r[2] + fam + v.toFixed(2); if (seen.has(k)) return; seen.add(k);
+        out.push({ d: r[2], fam, v, lo, hi, basis, t, r });
+      });
+    });
+    return out.sort((a, b) => a.d.localeCompare(b.d));
+  }
+  const gpuFilter = (pts, st) => pts.filter(p => (st.gpuBasis === 'all' ? p.basis !== 'forecast' : p.basis === st.gpuBasis) && (!st.gpuFam || p.fam === st.gpuFam));
+  function gpuChartHtml(show) {
+    if (!show.length) return none('No GPU rental prices match.');
+    const W = 860, H = 300, L = 44, R = 12, T = 12, B = 30;
+    const ds = show.map(p => +new Date(p.d)), x0 = Math.min(...ds), x1 = Math.max(...ds), ymax = Math.ceil(Math.max(...show.map(p => p.v)) + 0.5);
+    const X = d => L + (W - L - R) * ((+new Date(d) - x0) / Math.max(1, x1 - x0)), Y = v => T + (H - T - B) * (1 - v / ymax);
+    const fams = [...new Set(show.map(p => p.fam))];
+    let g = '';
+    const step = ymax > 12 ? 4 : 2;
+    for (let v = 0; v <= ymax; v += step) g += `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--rule)"/><text x="${L - 6}" y="${Y(v) + 3}" text-anchor="end">$${v}</text>`;
+    const d0 = new Date(x0); for (let d = new Date(d0.getFullYear(), d0.getMonth() + 1, 1); +d <= x1; d = new Date(d.getFullYear(), d.getMonth() + 1, 1)) g += `<text x="${X(d.toISOString().slice(0, 10))}" y="${H - 8}" text-anchor="middle">${d.toLocaleDateString('en-US', { month: 'short' })}</text>`;
+    fams.forEach(f => ['contract', 'on-demand', 'spot'].forEach(bs => { const ps = show.filter(p => p.fam === f && p.basis === bs); if (ps.length > 1) g += `<polyline fill="none" stroke="${GPU_COL[f]}" stroke-width="1.5" stroke-opacity=".55"${bs === 'contract' ? '' : ' stroke-dasharray="4 3"'} points="${ps.map(p => X(p.d) + ',' + Y(p.v)).join(' ')}"/>`; }));
+    show.forEach(p => {
+      const x = X(p.d), y = Y(p.v), tip = `<title>${esc(p.d)} · ${esc(p.fam)} · $${p.v.toFixed(2)}/hr (${esc(p.basis)})${p.hi ? ` range $${p.lo}–$${p.hi}` : ''} — ${esc(p.t.slice(0, 200))}</title>`, a = `fill="${GPU_COL[p.fam]}" stroke="var(--surface)" stroke-width="1"`;
+      g += p.basis === 'spot' ? `<rect x="${x - 4}" y="${y - 4}" width="8" height="8" ${a}>${tip}</rect>` : p.basis === 'on-demand' ? `<path d="M${x},${y - 5}L${x + 5},${y + 4}L${x - 5},${y + 4}Z" ${a}>${tip}</path>` : `<circle cx="${x}" cy="${y}" r="4.5" ${a}>${tip}</circle>`;
+    });
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="GPU rental prices in dollars per GPU-hour by date">${g}</svg>` +
+      `<div class="legend">${fams.map(f => `<span><i style="background:${GPU_COL[f]}"></i>${esc(f)}</span>`).join('')}<span>● contract (solid line) / quoted</span><span>▲ on-demand (dashed)</span><span>■ spot (dashed)</span></div>`;
+  }
+  function gpuSectionHtml(pts, st) {
+    const fams = [...new Set(pts.map(p => p.fam))], show = gpuFilter(pts, st);
+    const latest = fams.map(f => { const ps = pts.filter(p => p.fam === f && p.basis !== 'forecast'); return ps.length ? ps[ps.length - 1] : null; }).filter(Boolean);
+    const opts = [['all', 'All (excl. forecasts)'], ['contract', 'Contract'], ['on-demand', 'On-demand'], ['spot', 'Spot'], ['quoted', 'Quoted, type unclear'], ['forecast', 'Forecasts / TCO']];
+    return `<div class="summary">${latest.map(p => `<div class="stat"><span class="v" style="color:${GPU_COL[p.fam]}">$${p.v.toFixed(2)}</span><span class="l">Latest ${esc(p.fam)} · ${esc(p.basis)} · ${esc(fmtD(p.d))}</span></div>`).join('')}</div>` +
+      `<div class="ctl"><label for="gpu-b">Price type <select id="gpu-b">${opts.map(([v, l]) => `<option value="${v}"${st.gpuBasis === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>` +
+      `<label for="gpu-f">GPU <select id="gpu-f"><option value="">All</option>${fams.map(f => `<option${st.gpuFam === f ? ' selected' : ''}>${esc(f)}</option>`).join('')}</select></label><span class="count">${show.length} prices</span></div>` +
+      gpuChartHtml(show) +
+      `<p class="sub">Every $/GPU-hour price quoted in your Supabase datapoints, placed on the datapoint's date. Price types and providers differ (spot, on-demand list, 1–6 year contracts), so compare like with like using the filter; ranges are plotted at their midpoint. Hover a point for its source. Canary's own GPU Rentals Tracker isn't available through its tools; its latest figures (week of Oct 26: neocloud on-demand index $8.10, H100 $4.01, GB300 $12.55) appear only in Canary's super-analyst notes.</p>` +
+      `<details class="fr"><summary>All ${show.length} prices with sources</summary><div class="tbl-wrap"><table class="dt"><thead><tr><th>Date</th><th>GPU</th><th class="n">$/hr</th><th>Type</th><th>Datapoint</th><th>Source</th></tr></thead><tbody>${show.slice().reverse().map(p => `<tr><td class="nowrap">${esc(p.d)}</td><td style="color:${GPU_COL[p.fam]}"><b>${esc(p.fam)}</b></td><td class="n">${p.hi ? `${p.lo}–${p.hi}` : p.v.toFixed(2)}</td><td>${esc(p.basis)}</td><td class="ev-wrap">${esc(p.t)}</td><td class="ev-src">${esc((AI.SRC || [])[p.r[7]] || '')}</td></tr>`).join('')}</tbody></table></div></details>`;
+  }
   function renderAI() {
     const host = document.getElementById('v-ai'); if (!host) return;
     const st = AI.st, meta = new Map(arr((D.dp_index || {}).meta).map(m => [m.rid, m]));
     const f1 = v => v == null ? '–' : (+v).toFixed(1);
     const paint = () => {
       let h = head('AI', 'AI infrastructure', 'Where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
-        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a></nav>`;
+        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
       // ---- 1) data centers by state ----
       if (!AI_DC.rows.length) h += `<section class="panel" id="ai-dc"><h2>Data centers: gigawatts by state and political risk</h2><p class="sub">${esc(AI.dcErr || 'Loading the state figures…')}</p><h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
       else {
@@ -1848,6 +1908,8 @@
         `<h3>Quarterly revenue, segments and consensus (live from Visible Alpha)</h3><div class="qr" id="ai-qr"><p class="sub">Loading Visible Alpha…</p></div>` +
         `<h3>Earnings prints</h3>${alabRev.map(r => `<details class="fr-sec"><summary>${esc(r.quarter || '')} · ${esc(r.report_date || '')} · ${esc(r.source === 'rebecca' ? 'Rebecca recap' : 'Earnings review')}</summary><p>${xInline(r.headline || '')}</p><ul class="b">${arr(r.summary).filter(s => AI_RE.alabRev.test(s)).map(s => `<li>${esc(s)}</li>`).join('')}</ul>${r.url && /^https?:/.test(r.url) ? `<a class="ext" href="${esc(r.url)}" target="_blank" rel="noopener">Open the full page →</a>` : ''}</details>`).join('') || none('No ALAB earnings pages in this build.')}` +
         `<h3>Every revenue datapoint on ALAB</h3><div class="ctl"><label for="ai-aq">Search <input type="search" id="ai-aq" value="${esc(st.alabQ)}" placeholder="Scorpio, Trainium, guide…"></label></div><div id="ai-alabdp">${aiRowsHtml('alab')}</div></section>`;
+      // ---- GPU rental prices ----
+      h += `<section class="panel" id="ai-gpu"><div class="panel-h"><h2>GPU rental prices ($ per GPU-hour)</h2><span class="sub">From your datapoints</span></div>${AI.rows ? gpuSectionHtml(gpuPoints(AI.rows), st) : '<p class="sub">Loading datapoints…</p>'}</section>`;
       // ---- 3) compute supply / demand ----
       h += `<section class="panel" id="ai-compute"><div class="panel-h"><h2>Compute supply versus demand</h2><span class="sub">Every datapoint in Supabase that speaks to compute being tight or loose, all companies</span></div>` +
         `<div id="ai-cmp-sum"></div>` +
@@ -1890,6 +1952,8 @@
       $('ai-b') && $('ai-b').addEventListener('change', e => { st.bucket = e.target.value; re(); });
       $('ai-tone') && $('ai-tone').addEventListener('change', e => { st.tone = e.target.value; re(); });
       $('ai-days') && $('ai-days').addEventListener('change', e => { st.days = +e.target.value; re(); });
+      $('gpu-b') && $('gpu-b').addEventListener('change', e => { st.gpuBasis = e.target.value; re(); });
+      $('gpu-f') && $('gpu-f').addEventListener('change', e => { st.gpuFam = e.target.value; re(); });
       const live = (id, k, box, kind) => $(id) && $(id).addEventListener('input', e => { st[k] = e.target.value; const b = $(box); if (b) b.innerHTML = aiRowsHtml(kind); dedupeNames(b); });
       live('ai-q', 'q', 'ai-cmp', 'compute'); live('ai-aq', 'alabQ', 'ai-alabdp', 'alab');
       cmpSummary();
