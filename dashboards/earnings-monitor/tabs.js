@@ -1497,9 +1497,184 @@
     const qi = document.getElementById('nt-q'); qi.addEventListener('input', e => { host.__q = e.target.value; const p = e.target.selectionStart; renderNotes(); const n = document.getElementById('nt-q'); n.focus(); n.setSelectionRange(p, p); });
   }
 
+  // ================= X / TWITTER (live from the X List Monitor pages in Notion) =================
+  const XT = { mcp: null, pages: null, sel: null, cache: new Map(), err: '', busy: false };
+  const XN = 'Notion';
+  const xCall = (tool, input, fresh) => XT.mcp.callTool(XN, tool, input, { cache: fresh ? { refresh: true, staleTime: 10 * 60e3, gcTime: 864e5 } : { staleTime: 10 * 60e3, gcTime: 864e5 } }).then(r => r.payload);
+  const xId = u => (String(u || '').match(/([0-9a-f]{32})/i) || [])[1] || String(u || '').replace(/-/g, '');
+  // Notion markdown -> safe HTML (escape everything, then rebuild a small allow-list)
+  function xInline(s) {
+    let h = esc(s);
+    h = h.replace(/&lt;(\/?)(b|strong|i|em|code|u)&gt;/g, '<$1$2>').replace(/&lt;br\s*\/?&gt;/g, '<br>');
+    h = h.replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>');
+    h = h.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (m, t, u) => `<a href="${u.replace(/&amp;/g, '&').replace(/"/g, '%22')}" target="_blank" rel="noopener">${t}</a>`);
+    h = h.replace(/\\([$~_*\[\]()#>-])/g, '$1');
+    return h;
+  }
+  function xParse(md) {
+    // returns a tree of blocks: {t:'h'|'p'|'li'|'table'|'callout'|'toggle', ...}
+    const lines = String(md || '').split('\n'); let i = 0;
+    function block(stop) {
+      const out = [];
+      while (i < lines.length) {
+        const raw = lines[i], l = raw.trim();
+        if (stop && stop.test(l)) { i++; return out; }
+        let m;
+        if (!l) { i++; continue; }
+        if ((m = l.match(/^<callout(?:\s+icon="([^"]*)")?(?:\s+color="([^"]*)")?[^>]*>(.*)$/))) { i++; const kids = block(/^<\/callout>/); out.push({ t: 'callout', icon: m[1] || '', color: m[2] || '', kids }); continue; }
+        if (/^<details>|^<toggle>/.test(l)) { i++; let title = ''; while (i < lines.length && !lines[i].trim()) i++; if (i < lines.length) { title = lines[i].trim().replace(/^<summary>|<\/summary>$/g, ''); i++; } const kids = block(/^<\/toggle>|^<\/details>/); out.push({ t: 'toggle', title, kids }); continue; }
+        if ((m = l.match(/^(#{1,4})\s+(.*)$/))) { i++; out.push({ t: 'h', lvl: m[1].length, text: m[2] }); continue; }
+        if (/^\|/.test(l)) { const rows = []; while (i < lines.length && /^\|/.test(lines[i].trim())) { const r = lines[i].trim().replace(/^\||\|$/g, '').split('|').map(c => c.trim()); if (!r.every(c => /^:?-{2,}:?$/.test(c))) rows.push(r); i++; } out.push({ t: 'table', rows }); continue; }
+        if ((m = l.match(/^(?:[-*]|\d+\.)\s+(.*)$/))) { i++; out.push({ t: 'li', text: m[1], depth: (raw.match(/^\s*/)[0].replace(/\t/g, '    ').length / 2) | 0 }); continue; }
+        if (/^<\/?(page|content|ancestor|properties|iconMetadata)/.test(l)) { i++; continue; }
+        i++; out.push({ t: 'p', text: l });
+      }
+      return out;
+    }
+    return block(null);
+  }
+  const xText = b => b.text != null ? b.text : b.title != null ? b.title : '';
+  const xPlain = s => String(s || '').replace(/<[^>]+>/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\\(.)/g, '$1').replace(/\*\*/g, '').trim();
+  const xSig = s => /🟢🟢/.test(s) ? 'vp' : /🔴🔴/.test(s) ? 'vn' : /🟢/.test(s) ? 'p' : /🔴/.test(s) ? 'n' : /🔵/.test(s) ? 'w' : /🟠|🟡/.test(s) ? 'm' : '';
+  const XSIGL = { vp: '🟢🟢 Very positive', p: '🟢 Positive', vn: '🔴🔴 Very negative', n: '🔴 Negative', w: '🔵 Watch', m: '🟠 Mixed', '': '' };
+  const xSrcs = s => [...String(s || '').matchAll(/\[(@[^\]]+)\]\((https?:\/\/[^)\s]+)\)/g)].map(m => ({ h: m[1].replace(/\\_/g, '_'), u: m[2] }));
+  function xTickers(s) {
+    const txt = xPlain(s), out = new Set();
+    (txt.match(/\b[A-Z][A-Z0-9.]{1,5}\b/g) || []).forEach(t => { if (NAMES.has(nk(t)) || NAMES.has(nk(t + ' US'))) out.add(t); });
+    return [...out];
+  }
+  function xHtml(bs) {
+    let h = '', list = [];
+    const flush = () => { if (list.length) { h += '<ul>' + list.map(x => `<li style="margin-left:${x.depth * 14}px">${xInline(x.text)}</li>`).join('') + '</ul>'; list = []; } };
+    bs.forEach(b => {
+      if (b.t === 'li') { list.push(b); return; } flush();
+      if (b.t === 'h') h += `<h${Math.min(6, b.lvl + 2)}>${xInline(b.text)}</h${Math.min(6, b.lvl + 2)}>`;
+      else if (b.t === 'p') h += `<p>${xInline(b.text)}</p>`;
+      else if (b.t === 'table') h += `<div class="tbl-wrap"><table>${b.rows.map((r, k) => `<tr>${r.map(c => k ? `<td>${xInline(c)}</td>` : `<th>${xInline(c)}</th>`).join('')}</tr>`).join('')}</table></div>`;
+      else if (b.t === 'callout') h += `<div class="fr-callout">${b.icon ? esc(b.icon) + ' ' : ''}${xHtml(b.kids)}</div>`;
+      else if (b.t === 'toggle') h += `<details class="fr-sec"><summary>${xInline(b.title)}</summary>${xHtml(b.kids)}</details>`;
+    });
+    flush(); return h;
+  }
+  // structure one run's page into callouts / hot topics / datapoints / scorecards / housekeeping
+  function xModel(md) {
+    const tree = xParse(md); const M = { callouts: [], topics: [], dps: [], scores: [], notes: [], foot: [] };
+    let list = 'Feed', inScore = false;
+    tree.forEach(b => {
+      if (b.t === 'h') { const t = xPlain(b.text); inScore = /scorecard/i.test(t); if (!inScore) list = t.replace(/^List [A-Z]:\s*/i, ''); return; }
+      if (b.t === 'callout') {
+        const head = b.kids.find(k => k.t === 'p'), lis = b.kids.filter(k => k.t === 'li');
+        if (lis.length) M.callouts.push({ icon: b.icon, title: head ? head.text : '', items: lis.map(x => x.text) });
+        else M.notes.push({ icon: b.icon, text: b.kids.map(xText).join(' ') });
+        return;
+      }
+      if (b.t === 'toggle') {
+        if (inScore) { M.scores.push(b); return; }
+        const lis = b.kids.filter(k => k.t === 'li');
+        const tp = { title: b.title, list, sig: xSig(b.title), n: lis.length, tick: new Set(), srcs: new Set() };
+        const tTks = xTickers(b.title); tTks.forEach(t => tp.tick.add(t)); const mine = [];
+        lis.forEach(x => { const s = xSig(x.text) || tp.sig; const src = xSrcs(x.text); src.forEach(z => tp.srcs.add(z.h));
+          if (/^\s*(?:<b>)?Sources?:/i.test(x.text) || !xPlain(x.text.replace(/\[@[^\]]+\]\([^)]+\)/g, '')).replace(/[\s,.;:()]/g, '')) { mine.filter(d => !d.src.length).forEach(d => d.src = src); tp.n--; return; }
+          const tks = [...new Set(xTickers(x.text).concat(tTks))]; tks.forEach(t => tp.tick.add(t));
+          mine.push(M.dps[M.dps.push({ topic: xPlain(b.title).replace(/[🟢🔴🔵🟠🟡]/gu, '').trim(), list, sig: s, text: x.text, src, tks, key: xPlain(x.text).slice(0, 80).toLowerCase() }) - 1]); });
+        M.topics.push(tp); return;
+      }
+      if (b.t === 'p') M.foot.push(b.text);
+    });
+    return M;
+  }
+  async function xLoadList(fresh) {
+    const r = await xCall('notion-search', { query: 'X List Monitor', page_size: 25, max_highlight_length: 0 }, fresh);
+    const res = arr((r && r.results) || (typeof r === 'string' ? [] : []));
+    const pages = res.filter(p => /X List Monitor/i.test(p.title || '') && (p.type || 'page') === 'page')
+      .map(p => ({ id: xId(p.url || p.id), url: p.url, title: p.title, ts: p.timestamp || '', d: ((p.title || '').match(/\d{4}-\d{2}-\d{2}(?:[ T]\d{1,2}:\d{2})?/) || [''])[0] }))
+      .sort((a, b) => (b.d + b.ts).localeCompare(a.d + a.ts));
+    const seen = new Set(); return pages.filter(p => !seen.has(p.id) && seen.add(p.id));
+  }
+  async function xLoadPage(p, fresh) {
+    if (!fresh && XT.cache.has(p.id)) return XT.cache.get(p.id);
+    const r = await xCall('notion-fetch', { id: p.id }, fresh);
+    let txt = typeof r === 'string' ? r : (r && (r.text || r.content || r.markdown)) || JSON.stringify(r || '');
+    const m = txt.match(/<content>([\s\S]*?)<\/content>/); if (m) txt = m[1];
+    const edited = (r && r.page_last_edited_at) || ((typeof r === 'string' ? r : '').match(/as of ([0-9T:.\-Z]+)/) || [])[1] || p.ts;
+    const out = { md: txt, edited, model: xModel(txt) }; XT.cache.set(p.id, out); return out;
+  }
+  function renderX(fresh) {
+    const host = document.getElementById('v-x'); if (!host) return;
+    const st = XT.st || (XT.st = { list: '', sig: '', q: '', newOnly: false });
+    const top = head('𝕏 Feed', 'Twitter / X', 'Only what your X List Monitor agent pulls from your curated X lists, read live from its Notion pages each time you open this tab. Refreshes as the agent runs (up to four times a day).');
+    const paint = () => {
+      const pg = XT.sel, data = pg && XT.cache.get(pg.id), prev = XT.pages && XT.pages[XT.pages.indexOf(pg) + 1], pdata = prev && XT.cache.get(prev.id);
+      let h = top + `<section class="panel"><div class="ctl">` +
+        `<label for="x-run">Run <select id="x-run">${arr(XT.pages).slice(0, 20).map(p => `<option value="${esc(p.id)}"${pg && p.id === pg.id ? ' selected' : ''}>${esc((p.title || '').replace(/^📡\s*/, ''))}</option>`).join('')}</select></label>` +
+        `<button type="button" id="x-ref" class="btn">↻ Refresh</button>` +
+        (pg ? `<a href="${esc(pg.url)}" target="_blank" rel="noopener" class="sub">Open in Notion →</a>` : '') +
+        `<span class="count">${XT.busy ? 'Loading…' : data ? 'Page last edited ' + esc(new Date(data.edited).toLocaleString()) : ''}</span></div>` +
+        (XT.err ? `<p class="sub c-neg">${esc(XT.err)}</p>` : '') + `</section>`;
+      if (!data) { host.innerHTML = h + (XT.busy || !XT.err ? `<section class="panel"><p class="sub">Loading the latest X run from Notion…</p></section>` : ''); wire(); return; }
+      const M = data.model, prevKeys = new Set(pdata ? pdata.model.dps.map(d => d.key) : []);
+      M.dps.forEach(d => d.isNew = pdata ? !prevKeys.has(d.key) : false);
+      // 1) callouts
+      h += M.callouts.map(c => `<section class="panel x-call"><span class="eyebrow">${esc(c.icon || '📣')} Callouts</span><h2>${xInline(xPlain(c.title) || 'Top ideas')}</h2><ul class="x-cl">${c.items.map(t => `<li class="x-s-${xSig(t)}">${xInline(t)}</li>`).join('')}</ul></section>`).join('');
+      // 2) hot topics
+      const hot = M.topics.slice().sort((a, b) => (/vp|vn/.test(b.sig) - /vp|vn/.test(a.sig)) || (b.n - a.n));
+      h += `<section class="panel"><span class="eyebrow">🔥 Hot topics of the day</span><div class="x-hot">${hot.map(t => `<button type="button" class="x-topic x-s-${t.sig}" data-topic="${esc(xPlain(t.title).replace(/[🟢🔴🔵🟠🟡]/gu, '').trim())}"><b>${xInline(xPlain(t.title))}</b><span class="sub">${t.n} datapoints · ${t.srcs.size} handles · ${esc(t.list)}</span>${t.tick.size ? `<span class="x-tks">${[...t.tick].slice(0, 8).map(x => tk(x)).join(' ')}</span>` : ''}</button>`).join('') || none('No topics in this run.')}</div></section>`;
+      // 3) tickers in the feed (recommended)
+      const tc = new Map(); M.dps.forEach(d => d.tks.forEach(t => { const o = tc.get(t) || { t, n: 0, p: 0, ng: 0 }; o.n++; if (/p/.test(d.sig) && !/n/.test(d.sig)) o.p++; if (/n/.test(d.sig)) o.ng++; tc.set(t, o); }));
+      const tl = [...tc.values()].sort((a, b) => b.n - a.n);
+      if (tl.length) h += `<section class="panel"><span class="eyebrow">🏷️ Tickers in the feed</span><p class="sub">Covered names mentioned in this run. Click one to filter the datapoints; 🟢/🔴 count the tone of its datapoints.</p><div class="x-tklist">${tl.map(o => `<button type="button" class="x-tkb" data-tk="${esc(o.t)}">${tk(o.t)} <span class="sub">${o.n}${o.p ? ' · 🟢' + o.p : ''}${o.ng ? ' · 🔴' + o.ng : ''}</span></button>`).join('')}</div></section>`;
+      // 4) datapoints
+      const lists = [...new Set(M.dps.map(d => d.list))];
+      let rows = M.dps.filter(d => (!st.list || d.list === st.list) && (!st.sig || (st.sig === 'pos' ? /p/.test(d.sig) && !/n/.test(d.sig) : st.sig === 'neg' ? /n/.test(d.sig) : d.sig === 'w')) && (!st.newOnly || d.isNew) && (!st.topic || d.topic === st.topic) && (!st.tk || d.tks.includes(st.tk)) && (!st.q || xPlain(d.text + ' ' + d.topic).toLowerCase().includes(st.q.toLowerCase())));
+      h += `<section class="panel"><span class="eyebrow">📌 Datapoints</span><div class="ctl">` +
+        `<label for="x-q">Search <input type="search" id="x-q" value="${esc(st.q)}" placeholder="Ticker or word"></label>` +
+        `<label for="x-l">List <select id="x-l"><option value="">All</option>${lists.map(l => `<option${st.list === l ? ' selected' : ''}>${esc(l)}</option>`).join('')}</select></label>` +
+        `<label for="x-s">Tone <select id="x-s"><option value="">All</option><option value="pos"${st.sig === 'pos' ? ' selected' : ''}>🟢 Positive</option><option value="neg"${st.sig === 'neg' ? ' selected' : ''}>🔴 Negative</option><option value="w"${st.sig === 'w' ? ' selected' : ''}>🔵 Watch</option></select></label>` +
+        (pdata ? `<label><input type="checkbox" id="x-new"${st.newOnly ? ' checked' : ''}> New since the previous run</label>` : '') +
+        (st.topic || st.tk ? `<button type="button" class="btn" id="x-clr">Clear ${esc(st.topic || st.tk)} ✕</button>` : '') +
+        `<span class="count">${rows.length} of ${M.dps.length}</span></div>` +
+        `<div class="tbl-wrap"><table class="x-dp"><thead><tr><th>Topic</th><th>Tone</th><th>Datapoint</th><th>Source</th></tr></thead><tbody>${rows.map(d => `<tr><td>${esc(d.topic)}<div class="sub">${esc(d.list)}</div></td><td class="x-s-${d.sig}" style="white-space:nowrap">${esc((XSIGL[d.sig] || '').split(' ')[0])}${d.isNew ? ' <span class="chip">New</span>' : ''}</td><td class="ev-wrap">${xInline(d.text.replace(/\s*(?:Sources?:\s*)?\(?\[@[^\]]+\]\([^)]+\)\)?[,.\s]*/g, ' ').replace(/[🟢🔴🔵🟠🟡]/gu, '').trim())}</td><td class="ev-src">${d.src.map(z => `<a href="${esc(z.u)}" target="_blank" rel="noopener">${esc(z.h)}</a>`).join('<br>')}</td></tr>`).join('') || `<tr><td colspan="4">${none('No datapoints match.')}</td></tr>`}</tbody></table></div></section>`;
+      // 5) handle scorecards + housekeeping (recommended)
+      if (M.scores.length) h += `<section class="panel"><span class="eyebrow">📊 Handle scorecards</span><p class="sub">Which accounts produce usable datapoints. Use it to prune or add to your lists.</p>${M.scores.map(b => `<details class="fr-sec"><summary>${xInline(b.title)}</summary>${xHtml(b.kids)}</details>`).join('')}</section>`;
+      if (M.notes.length || M.foot.length) h += `<section class="panel"><span class="eyebrow">🧹 What the agent read and cut</span>${M.notes.map(n => `<p class="sub">${esc(n.icon)} ${xInline(n.text)}</p>`).join('')}${M.foot.map(t => `<p class="sub">${xInline(t)}</p>`).join('')}</section>`;
+      h += `<section class="panel"><details class="fr"><summary>Full page as written</summary><div class="fr-html">${xHtml(xParse(data.md))}</div></details></section>`;
+      host.innerHTML = h; wire(); dedupeNames(host);
+    };
+    function wire() {
+      const $ = id => document.getElementById(id);
+      $('x-ref') && $('x-ref').addEventListener('click', () => { XT.cache.clear(); go(true); });
+      $('x-run') && $('x-run').addEventListener('change', e => { XT.sel = XT.pages.find(p => p.id === e.target.value); loadSel(false); });
+      $('x-q') && $('x-q').addEventListener('input', e => { st.q = e.target.value; const p = e.target.selectionStart; paint(); const n = $('x-q'); n.focus(); n.setSelectionRange(p, p); });
+      $('x-l') && $('x-l').addEventListener('change', e => { st.list = e.target.value; paint(); });
+      $('x-s') && $('x-s').addEventListener('change', e => { st.sig = e.target.value; paint(); });
+      $('x-new') && $('x-new').addEventListener('change', e => { st.newOnly = e.target.checked; paint(); });
+      $('x-clr') && $('x-clr').addEventListener('click', () => { st.topic = ''; st.tk = ''; paint(); });
+      host.querySelectorAll('.x-topic').forEach(b => b.addEventListener('click', () => { st.topic = st.topic === b.dataset.topic ? '' : b.dataset.topic; st.tk = ''; paint(); document.querySelector('.x-dp') && document.querySelector('.x-dp').scrollIntoView({ block: 'start' }); }));
+      host.querySelectorAll('.x-tkb').forEach(b => b.addEventListener('click', () => { st.tk = st.tk === b.dataset.tk ? '' : b.dataset.tk; st.topic = ''; paint(); }));
+    }
+    function loadSel(fresh) {
+      const pg = XT.sel; if (!pg) { XT.busy = false; paint(); return; }
+      XT.busy = true; paint();
+      const prev = XT.pages[XT.pages.indexOf(pg) + 1];
+      Promise.all([xLoadPage(pg, fresh), prev ? xLoadPage(prev, false).catch(() => null) : null])
+        .then(() => { XT.busy = false; XT.err = ''; paint(); })
+        .catch(e => { XT.busy = false; XT.err = 'Could not read the page from Notion: ' + (e && (e.message || e.code) || e); paint(); });
+    }
+    function go(fresh) {
+      XT.busy = true; paint();
+      xLoadList(fresh).then(ps => { XT.pages = ps; if (!ps.length) { XT.busy = false; XT.err = 'No "X List Monitor" pages found in Notion yet.'; paint(); return; }
+        XT.sel = fresh || !XT.sel ? ps[0] : (ps.find(p => p.id === XT.sel.id) || ps[0]); loadSel(fresh); })
+        .catch(e => { XT.busy = false; XT.err = e && e.code === 'not_granted' ? 'Allow this page to use your Notion connector (artifact Permissions menu) to see the X feed.' : 'Could not search Notion: ' + (e && (e.message || e.code) || e); paint(); });
+    }
+    if (XT.pages && !fresh) { paint(); return; }
+    const ready = XT.mcp ? Promise.resolve(XT.mcp) : (window.claude && typeof window.claude.use === 'function' ? window.claude.use('mcp').catch(() => null) : Promise.resolve(null));
+    paint();
+    ready.then(m => { XT.mcp = m; if (!m) { XT.err = 'The live X feed needs this page open on claude.ai with your Notion connector.'; paint(); return; } go(!!fresh); });
+  }
+
   // ================= ROUTER =================
-  const VIEWS = ['today', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'x', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
