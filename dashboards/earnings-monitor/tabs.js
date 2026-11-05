@@ -1876,7 +1876,10 @@
   const MG = { st: { co: '', q: '', sec: '', isort: 'net', iq: '' } };
   function renderMgmt() {
     const host = document.getElementById('v-mgmt'); if (!host) return;
-    const M = D.mgmt || {}, Q = M.questions || {}, I = M.insiders || {}, st = MG.st;
+    const M = D.mgmt || {}, I = M.insiders || {}, st = MG.st;
+    let Q = MG.Q || M.questions || {};
+    if (!MG.Q && Q.file && !arr(Q.companies).length && !MG.loading) { MG.loading = true;
+      fetch(Q.file).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(j => { MG.Q = j; renderMgmt(); }).catch(e => { MG.err = 'Could not load the questions file: ' + (e && e.message || e); renderMgmt(); }); }
     const money = v => { if (v == null || !isFinite(v)) return '–'; const a = Math.abs(v); const s = a >= 1e9 ? (a / 1e9).toFixed(1) + 'bn' : a >= 1e6 ? (a / 1e6).toFixed(1) + 'm' : a >= 1e3 ? (a / 1e3).toFixed(0) + 'k' : a.toFixed(0); return (v < 0 ? '−$' : '$') + s; };
     const sub = (location.hash.split('/')[1] || '');
     const paint = () => {
@@ -1888,14 +1891,14 @@
       const secs = [...new Set(cos.map(c => c.sector).filter(Boolean))].sort();
       const vis = cos.filter(c => (!st.sec || c.sector === st.sec) && (!st.co || c.t === st.co) && (!st.q || JSON.stringify(c).toLowerCase().includes(st.q.toLowerCase())));
       h += `<section class="panel" id="mg-questions"><div class="panel-h"><h2>Questions for management</h2><span class="sub">${esc(Q.source || 'Canary super analyst')}${Q.as_of ? ' · ' + esc(fmtD(Q.as_of)) : ''} · ${cos.length} companies</span></div>` +
-        (!cos.length ? none('No questions loaded yet.') :
+        (!cos.length ? (MG.err ? `<p class="sub c-neg">${esc(MG.err)}</p>` : `<p class="sub">${Q.file ? 'Loading questions…' : 'No questions loaded yet.'}</p>`) :
         `<div class="ctl"><label for="mg-co">Company <select id="mg-co"><option value="">All</option>${cos.slice().sort((a, b) => (a.tier - b.tier) || String(a.t).localeCompare(b.t)).map(c => `<option value="${esc(c.t)}"${st.co === c.t ? ' selected' : ''}>${esc(c.t)} · ${esc(c.name || '')}</option>`).join('')}</select></label>` +
         `<label for="mg-sec">Sector <select id="mg-sec"><option value="">All</option>${secs.map(s => `<option${st.sec === s ? ' selected' : ''}>${esc(s)}</option>`).join('')}</select></label>` +
         `<label for="mg-q">Search <input type="search" id="mg-q" value="${esc(st.q)}" placeholder="Word or theme"></label><span class="count">${vis.length} companies</span></div>` +
         vis.map(c => { const qs = arr(c.questions), th = [...new Set(qs.map(x => x.theme || 'Questions'))];
           const preps = prepRuns.filter(r => new RegExp('\\b' + String(c.t).split(' ')[0].replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b').test(r.title || ''));
           return `<details class="fr-sec"${vis.length <= 3 ? ' open' : ''}><summary>${tk(c.t)} ${esc(c.name || '')} <span class="sub">· Tier ${esc(c.tier)} · ${qs.length} questions${arr(c.debates).length ? ' · ' + arr(c.debates).length + ' debates' : ''}</span></summary>` +
-            th.map(t => `<h4>${esc(t)}</h4><ol class="mg-q">${qs.filter(x => (x.theme || 'Questions') === t).map(x => `<li>${esc(x.q)}${x.why ? `<div class="sub">${esc(x.why)}</div>` : ''}</li>`).join('')}</ol>`).join('') +
+            th.map(t => `<h4>${esc(t)}</h4><ol class="mg-q">${qs.filter(x => (x.theme || 'Questions') === t).map(x => `<li>${String(x.q || '').length > 380 ? `<details class="mg-long"><summary>${esc(String(x.q).slice(0, 300).replace(/\s+\S*$/, ''))}…</summary>${esc(x.q)}</details>` : esc(x.q)}${x.why ? `<div class="sub">${esc(x.why)}</div>` : ''}</li>`).join('')}</ol>`).join('') +
             (arr(c.debates).length ? `<h4>Open debates</h4><ul class="b">${arr(c.debates).map(d => `<li><b>${esc(d.title)}</b>${d.summary ? ' · ' + esc(d.summary) : ''}${d.bull ? `<div class="sub c-pos">Bull: ${esc(d.bull)}</div>` : ''}${d.bear ? `<div class="sub c-neg">Bear: ${esc(d.bear)}</div>` : ''}</li>`).join('')}</ul>` : '') +
             (c.monitoring ? `<p class="sub"><b>What to monitor:</b> ${esc(c.monitoring)}</p>` : '') +
             (preps.length ? `<p class="sub">Your management-prep pages: ${preps.map(r => `<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.title)}</a>`).join(' · ')}</p>` : '') +

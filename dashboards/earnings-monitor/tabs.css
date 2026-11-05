@@ -305,3 +305,4 @@ tr.ai-t5 > td:first-child { box-shadow: inset 3px 0 0 #e35d5d; } tr.ai-t4 > td:f
 /* Mgmt & insiders */
 ol.mg-q { margin: 4px 0 8px; padding-left: 22px; display: flex; flex-direction: column; gap: 5px; max-width: 110ch; font-size: 13px; }
 #v-mgmt h4 { margin: 10px 0 2px; font-size: 13px; }
+details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 400; color: var(--ink); }
