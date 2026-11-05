@@ -282,3 +282,13 @@ table.dt td.ev-src { white-space: normal; max-width: 220px; }
 .upd b { color: var(--ink); font-weight: 650; }
 .upd-live { color: var(--pos); }
 .upd-sep { color: var(--rule-2); }
+/* X feed: what's new */
+.x-new { border-left: 3px solid var(--pos); }
+.x-upd { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12.5px; color: var(--muted); }
+.x-ut { border: 1px solid var(--rule-2); border-radius: 999px; background: var(--surface); padding: 2px 9px; font: inherit; font-size: 12.5px; color: var(--ink); cursor: pointer; }
+.x-ut.on { background: var(--ink); color: var(--surface); }
+tr.x-isnew > td { background: var(--pos-wash); } tr.x-isnew > td:first-child { background: var(--pos-wash); }
+li.x-isnew { font-weight: 560; }
+.chip.x-nchip { background: var(--pos); color: var(--surface); }
+.x-ncount { color: var(--pos); }
+.x-at { font-size: 12px; color: var(--muted); }
