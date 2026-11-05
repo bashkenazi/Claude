@@ -12,6 +12,7 @@ insert), which is retired.
 | Diff every PDF against the ledger; queue new, changed and retryable files | Supabase `sellside_file_ledger` |
 | Read PDFs and propose rows (JSON + exact quotes) | `sellside-pdf-extractor` subagents, Sonnet 5.5, read-only |
 | Validate, re-map, stored-evidence check, admission and load gate | main session + installed **datapoint-filter** skill + `validate_rows.py` |
+| Flag notable analysis (frameworks, bottom-up models, proprietary data, deep dives) for the page only | subagents propose, main session ranks (≤ 8 per run) |
 | Publish digest, then insert, then read back and annotate `SB #id` | Notion (Openclaw Output) → Supabase `research_evidence` |
 | Close out file and run records | Supabase `sellside_file_ledger`, `sellside_runs` |
 

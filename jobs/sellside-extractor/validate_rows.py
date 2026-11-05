@@ -19,9 +19,12 @@ FIELD_KEYS = {"growth_driver", "margin_driver", "competition", "shareholder_retu
 IMPACTS = {"positive", "negative", "mixed"}
 SOURCE_TYPES = {"sell_side", "independent_research", "company", "news"}
 CONFIDENCE = {"high", "medium", "low"}
+NOTABLE_KINDS = {"framework", "bottom_up_model", "proprietary_data", "deep_dive", "contrarian"}
+NOTABLE_FIELDS = ("title", "broker", "analyst", "scope", "tickers", "kind", "summary", "key_findings",
+                  "why_notable", "source_quotes", "page_hint")
 NUMBER = re.compile(r"\d+(?:[.,]\d+)*")
 # Period labels, dates and names that carry no figure of their own: 3Q26, F2Q27, FY27, 1H26, 2026E,
-# 2026/27/28E, 2026-10-26, F-35. They are context, so they need no quote.
+# 2026/27/28E, 2026-10-26, F-35, and product names such as HBM4, GB200, N3. They are context, so they need no quote.
 PERIOD = re.compile(
     r"\b\d{4}-\d{2}-\d{2}\b"
     r"|\b(?:[1-4]Q|Q[1-4]|[12]H|H[12]|F[1-4]Q|FY|CY|F)\d{2,4}[EF]?\b"
@@ -29,7 +32,8 @@ PERIOD = re.compile(
     r"|\b(?:YE|FYE)?20[1-3]\d(?:/\d{2})*[EF]?\b"
     r"|\b(?:[1-4]Q|[12]H|F[1-4]Q)\b"
     r"|\b\d{1,2}-[KQ]\b"
-    r"|\b[A-Z]{1,3}-\d+\b")
+    r"|\b[A-Z]{1,3}-\d+\b"
+    r"|\b[A-Z]{1,5}\d{1,4}[A-Z]?\b")
 
 
 def norm_numbers(text):
@@ -87,6 +91,30 @@ def check_row(row, today):
     return errors
 
 
+def check_notable(item):
+    errors = []
+    missing = [f for f in NOTABLE_FIELDS if f not in item]
+    if missing:
+        errors.append(f"missing keys: {missing}")
+    if item.get("kind") not in NOTABLE_KINDS:
+        errors.append(f"bad kind: {item.get('kind')!r}")
+    for key in ("title", "broker", "summary", "why_notable"):
+        if not (item.get(key) or "").strip():
+            errors.append(f"empty {key}")
+    findings = item.get("key_findings") or []
+    if not isinstance(findings, list) or not findings:
+        errors.append("no key_findings")
+        findings = []
+    quotes = item.get("source_quotes") or []
+    if not quotes or not all(isinstance(q, str) and q.strip() for q in quotes):
+        errors.append("no source_quotes")
+    claimed = " ".join([item.get("summary") or ""] + [f for f in findings if isinstance(f, str)])
+    unsupported = norm_numbers(claimed) - norm_numbers(" ".join(q for q in quotes if isinstance(q, str)))
+    if unsupported:
+        errors.append(f"numbers not found in quotes: {sorted(unsupported)}")
+    return errors
+
+
 def check_file(entry, today):
     rows = entry.get("rows") or []
     pages_read, page_count = entry.get("pages_read"), entry.get("page_count")
@@ -100,6 +128,8 @@ def check_file(entry, today):
         "rows": [{"index": i, "errors": check_row(r, today)} for i, r in enumerate(rows)],
         "row_count": len(rows),
         "cut_count": len(entry.get("cuts") or []),
+        "notable": [{"index": i, "errors": check_notable(n)}
+                    for i, n in enumerate(entry.get("notable_analysis") or [])],
     }
 
 
@@ -122,7 +152,10 @@ def main(out_path, in_paths):
     bad_rows = sum(1 for r in report for f in r.get("files", []) for row in f["rows"] if row["errors"])
     parse_errors = sum(1 for r in report if "parse_error" in r)
     incomplete = sum(1 for r in report for f in r.get("files", []) if not f["complete_read"])
-    print(f"inputs={len(report)} parse_errors={parse_errors} incomplete_files={incomplete} rows_with_errors={bad_rows}")
+    notable = sum(len(f["notable"]) for r in report for f in r.get("files", []))
+    bad_notable = sum(1 for r in report for f in r.get("files", []) for n in f["notable"] if n["errors"])
+    print(f"inputs={len(report)} parse_errors={parse_errors} incomplete_files={incomplete} "
+          f"rows_with_errors={bad_rows} notable={notable} notable_with_errors={bad_notable}")
 
 
 if __name__ == "__main__":

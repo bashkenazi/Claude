@@ -170,6 +170,21 @@ types register only when a session starts, so a type added mid-session is not vi
    number not in the quotes reverts to the extractor's wording and is held. Then read the kept rows yourself; you
    stay the final judge and may cut more, never re-admit a filter-pass cut.
 
+8. **Notable analysis.** Each file entry also carries `notable_analysis`: broker work flagged as unusually thorough
+   or as a new way to look at an industry (frameworks, bottom-up models, proprietary data, value-chain deep dives,
+   evidenced contrarian views). It is shown on the page only; it never becomes a `research_evidence` row and never
+   goes through the filter pass or the load gate. Review each item yourself:
+   - Drop items with validator errors you cannot clear against the quotes (a number the quotes do not support is
+     removed from the item; if that leaves no substance, drop the item). Drop items from files with
+     `complete_read: false`.
+   - Hold the bar: drop routine updates, recaps, previews and rating changes that slipped through, and anything
+     whose `why_notable` would apply to any note on the topic.
+   - Merge items for the same report across re-filed copies; when two brokers did the same work, keep both only if
+     their methods or conclusions differ, and say how.
+   - Rank by how much they change how you would look at the industry; keep at most **8** per run. List the rest
+     by title only under "Also flagged".
+   Save the kept list to `$WORK/notable.json`. An empty list is a normal result.
+
 ## 8. Stored-evidence check and admission
 
 Follow datapoint-filter Auto-load **§A** exactly: one 60-day / 60-rows-per-ID query for all resolved IDs (save to
@@ -202,7 +217,7 @@ One `UPDATE sellside_file_ledger ... FROM (VALUES ...)` setting per file: `statu
 `held_only` if rows were kept but none loaded; `no_datapoints` if zero kept; `failed` as above), `page_count`,
 `kept`, `held`, `cut`, `evidence_ids`, `hold_reasons`, `last_error`, `updated_at = now()`. Then close the run row:
 `finished_at`, `status` (`completed`, or `partial` when files remain pending or failed), counts, `notion_url`,
-`notes` (unresolved tickers, drift notes, stored-evidence check scope).
+`notes` (unresolved tickers, drift notes, stored-evidence check scope, `notable_analysis` count kept).
 
 The last line of the session is exactly:
 
@@ -225,12 +240,16 @@ dates as YYYY-MM-DD. Sections, omitting any that would be empty except contradic
 1. **Callouts** (Daily Callout Block order): biggest datapoint; up to 5 most positive; up to 5 most negative; up to 5
    inflections; up to 5 themes; contradictions (or "no thesis stress today"); supply/demand state changes;
    revisions (≤ 5); new names or gaps (≤ 3). Numbers first.
-2. **Ticker summary:** ticker | loaded | held | top datapoint.
-3. **Ticker toggles** (alphabetical): per row, header `dot **TICKER** | field_key | confidence`, the evidence text,
+2. **Notable analysis** (omit when empty): one toggle per kept item, ranked, header `kind · **title** — broker
+   (analyst) · scope`. Inside: the summary, key findings as bullets (numbers bold), "Why it matters: …", tickers it
+   bears on, source PDF file name and folder with `page_hint`, and the publication date. Then "Also flagged:"
+   titles, if any. Mark the section "Analyst work — not loaded to Supabase".
+3. **Ticker summary:** ticker | loaded | held | top datapoint.
+4. **Ticker toggles** (alphabetical): per row, header `dot **TICKER** | field_key | confidence`, the evidence text,
    event date, primary/secondary source, source PDF file name and folder, then `SB #id` or `Held: reason`.
-4. **Held, cut and duplicates:** each with its reason; duplicates name the stored ID.
-5. **Coverage:** files listed / new / changed / processed / pending / failed / re-filed copies skipped / non-PDF
+5. **Held, cut and duplicates:** each with its reason; duplicates name the stored ID.
+6. **Coverage:** files listed / new / changed / processed / pending / failed / re-filed copies skipped / non-PDF
    skipped, per date folder; any incomplete reads with pages.
-6. **Inputs and run summary:** datapoint-filter version or Notion master date and any drift note; stored-evidence
+7. **Inputs and run summary:** datapoint-filter version or Notion master date and any drift note; stored-evidence
    check scope (window, rows read, unresolved tickers); 📤 Supabase load block; run ID, mode, trigger, start/end
    time PT; subagent count.

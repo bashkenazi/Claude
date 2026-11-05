@@ -75,6 +75,33 @@ appear in a quote. Add a quote for any limiting condition or opposing fact you p
 Use `disposition: "hold"` with a `hold_reason` when the evidence qualifies but mapping, direction, date or support
 is uncertain. Do not use hold for items that fail admission; those are cuts.
 
+## Notable analysis
+
+Separately from rows, flag work in the report that is unusually thorough or offers a new way to look at an industry
+or company. This is the analyst's own work, so it is **not** a datapoint and never becomes a row; it is shown to the
+reader as research worth reading. The datapoint rules on analyst forecasts do not apply here.
+
+Flag it only when the report does at least one of these, with real substance behind it:
+
+- A **framework or lens** for an industry that is not the standard one (e.g. sizing AI capex by power availability
+  instead of GPU shipments; tracking a cycle by inventory days at a specific tier of the supply chain).
+- A **bottom-up build** from primary inputs: a supply/demand or capacity model, a cost curve, a unit-economics or
+  BOM teardown, a TAM built from units × content × price.
+- **Proprietary or hard-to-get data**: surveys, channel-check panels, supply-chain maps, pricing trackers, patent or
+  hiring analysis, an expert panel with structured findings.
+- A **deep dive** that maps who wins and loses across a value chain, or a well-argued contrarian view with evidence.
+
+Do not flag routine company updates, earnings recaps, previews, initiations that only restate the story, or a note
+whose only content is a rating or target change. Most files have none; leave the list empty rather than lowering the
+bar. At most 2 per file.
+
+For each item give: `title` (the report or section title), `broker`, `analyst` (names on the cover, or null),
+`scope` (the industry or theme), `tickers` (covered names it bears on), `kind` (`framework | bottom_up_model |
+proprietary_data | deep_dive | contrarian`), `summary` (2–4 sentences: what they did and how, in plain language),
+`key_findings` (2–5 numbers-first bullets), `why_notable` (one sentence: what it lets the reader see that the usual
+approach does not), `source_quotes` (exact excerpts supporting every number in `summary` and `key_findings`) and
+`page_hint` (the pages the work sits on, e.g. `pp. 4-11`).
+
 ## Output
 
 Return **only** this JSON object, no prose before or after:
@@ -98,10 +125,16 @@ Return **only** this JSON object, no prose before or after:
       "source_quotes": ["exact excerpt", "…"], "page_hint": "p. 3",
       "disposition": "keep|hold", "hold_reason": null
     }],
-    "cuts": [{"what": "…", "reason": "…"}]
+    "cuts": [{"what": "…", "reason": "…"}],
+    "notable_analysis": [{
+      "title": "…", "broker": "…", "analyst": null, "scope": "…", "tickers": ["…"],
+      "kind": "framework|bottom_up_model|proprietary_data|deep_dive|contrarian",
+      "summary": "…", "key_findings": ["…"], "why_notable": "…",
+      "source_quotes": ["exact excerpt", "…"], "page_hint": "pp. 4-11"
+    }]
   }]
 }
 ```
 
-One `files` entry per assigned file, in the order given, even when it has zero rows (explain with cuts). Never invent
-IDs, dates, numbers or quotes.
+One `files` entry per assigned file, in the order given, even when it has zero rows (explain with cuts).
+`notable_analysis` is always present and usually empty. Never invent IDs, dates, numbers or quotes.
