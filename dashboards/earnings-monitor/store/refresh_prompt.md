@@ -188,6 +188,9 @@ Then:
   kind='stock'; on conflict do nothing), and upsert one public.tech_daily_snapshots row per tab
   (snapshot_date = today; split any payload over ~15KB into parts named tab.part.N).
 - Publish the built file to that same url. Do not create a new artifact. Do not commit built HTML or JSON.
+- AI thesis tab (#thesis): its content lives only in the page database (collection "thesis", doc "ai", and collection
+  "thesis_updates"), written by the "AI thesis tracker" scheduled task. The code comes from tabs.js/template.html; never
+  write, rebuild or delete those database documents from this refresh.
 
 Finish with a short summary: mode, routines read (and any missed), new prints, stories written / not found,
 rows written to each history table, which comps workbook/sheets were used, and any source that failed.

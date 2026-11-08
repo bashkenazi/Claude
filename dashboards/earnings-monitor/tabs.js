@@ -1775,6 +1775,7 @@
     prep: () => ({ t: runMax((D.prep || {}).runs), src: 'latest prep page' }),
     health: () => ({ t: D.built_at, src: 'skill outputs' }),
     sources: () => ({ t: (D.sources || {}).built, src: 'Tech Coverage Monitor' }),
+    thesis: () => ({ t: (TH.doc || {}).updated_at, src: 'SRS AI Update, Oct 2026, plus flagged datapoints', live: 'Live: the thesis and flags read from this page’s database' }),
     ai: () => ({ t: (D.dp_index || {}).as_of, src: 'datapoints' + (AI_DC.asof ? '; state GW as of ' + AI_DC.asof : ''), live: 'ALAB quarterly numbers are live from Visible Alpha' }),
     mgmt: () => ({ t: updMax([((D.mgmt || {}).questions || {}).as_of, ((D.mgmt || {}).insiders || {}).as_of]), src: 'Canary super analysts, Insider Score' }),
     notes: () => ({ live: 'Live: notes save to this page’s database as you write them' }),
@@ -1965,6 +1966,87 @@
     if (!AI.rows) getDP().then(({ SRC, ROWS }) => { AI.SRC = SRC; AI.rows = ROWS; paint(); }).catch(e => { AI.err = 'Could not load the datapoint files: ' + (e && e.message || e); paint(); });
   }
 
+  // ================= AI THESIS: SRS AI Update (Oct 2026) baseline + what has changed since =================
+  // Content lives in this page's database, not in the code, so rebuilds never touch it:
+  //   collection "thesis", doc "ai"            the thesis (baseline from the deck + current status, signposts, changelog)
+  //   collection "thesis_updates", one doc each datapoint flagged as strengthening / weakening / changing the thesis
+  // The "AI thesis tracker" scheduled task writes both; Bobby marks flags reviewed or dismissed here.
+  const TH = { doc: null, ups: [], err: '', started: false, db: null, show: 'open' };
+  const TH_ST = { strengthening: ['s-positive', 'Strengthening'], intact: ['a-aligned', 'Intact'], watch: ['s-mixed', 'Watch'], weakening: ['s-negative', 'Weakening'], broken: ['s-very_negative', 'Broken'], ahead: ['s-positive', 'Ahead of deck'], on_track: ['a-aligned', 'On track'], behind: ['s-negative', 'Behind deck'], no_read: ['out', 'No new read'] };
+  const TH_DIR = { strengthens: ['s-positive', 'Strengthens'], weakens: ['s-negative', 'Weakens'], changes: ['a-split', 'Changes'], neutral: ['out', 'Context'] };
+  const thChip = (k, map) => { const m = (map || TH_ST)[k] || ['out', k || '–']; return `<span class="chip ${m[0]}">${esc(m[1])}</span>`; };
+  const thList = xs => arr(xs).length ? `<ul class="b">${arr(xs).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+  const thTable = t => !t || !arr(t.rows).length ? '' : `<div class="tbl-wrap"><table class="dt th-t"><thead><tr>${arr(t.cols).map((c, i) => `<th${i ? ' class="n"' : ''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${arr(t.rows).map(r => `<tr${String(r[0]).startsWith('**') ? ' class="th-b"' : ''}>${arr(r).map((c, i) => `<td${i ? ' class="n"' : ''}>${esc(String(c).replace(/^\*\*/, ''))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${t.note ? `<p class="sub">${esc(t.note)}</p>` : ''}`;
+  function thStart() {
+    if (TH.started) return; TH.started = true;
+    if (!(window.claude && typeof window.claude.use === 'function')) { TH.err = 'The thesis is kept in this page’s database; open the page on claude.ai to see it.'; return; }
+    window.claude.use('db').then(db => {
+      TH.db = db;
+      db.collection('thesis').onSnapshot(snap => { const d = snap.docs.find(x => x.id === 'ai'); TH.doc = d ? JSON.parse(JSON.stringify(d.data())) : null; if (!TH.doc) TH.err = 'No thesis saved yet.'; thPaint(); },
+        e => { TH.err = 'The thesis could not load: ' + ((e && e.code) || 'error'); thPaint(); });
+      db.collection('thesis_updates').onSnapshot(snap => {
+        TH.ups = snap.docs.map(d => ({ id: d.id, ...JSON.parse(JSON.stringify(d.data())) })).sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.created || '').localeCompare(String(a.created || '')));
+        const c = document.getElementById('th-count'), n = TH.ups.filter(u => (u.status || 'open') === 'open').length; if (c) c.textContent = n ? n : ''; thPaint();
+      }, () => {});
+    }).catch(() => { TH.err = 'The thesis is not available in this view.'; thPaint(); });
+  }
+  const thPaint = () => { if ((location.hash || '').startsWith('#thesis')) renderThesis(); };
+  function renderThesis() {
+    const host = document.getElementById('v-thesis'); if (!host) return;
+    thStart();
+    const T = TH.doc;
+    let h = head('AI thesis', T ? esc(T.title || 'AI thesis') : 'AI thesis', T ? esc(T.subtitle || '') : '');
+    if (!T) { host.innerHTML = h + `<section class="panel">${none(esc(TH.err || 'Loading the thesis…'))}</section>`; return; }
+    h += `<nav class="sk-tabs" aria-label="Thesis sections"><a href="#thesis" data-th="th-now">Where we stand</a><a href="#thesis" data-th="th-flags">Flagged datapoints</a><a href="#thesis" data-th="th-sign">Signposts</a><a href="#thesis" data-th="th-pil">Pillars</a><a href="#thesis" data-th="th-cases">Bull / bear</a><a href="#thesis" data-th="th-roi">ROI math</a><a href="#thesis" data-th="th-risk">Risks</a><a href="#thesis" data-th="th-next">Next steps</a><a href="#thesis" data-th="th-log">Changelog</a></nav>`;
+    // 1) where we stand
+    const S = T.stance || {}, N = T.now || {};
+    h += `<section class="panel th-now" id="th-now"><div class="panel-h"><h2>Where we stand</h2><span class="muted">Baseline: ${esc((T.deck || {}).name || '')} · last reviewed ${esc(fmtD(T.updated_at))}</span></div>` +
+      `<div class="th-verdict">${thChip(N.status)}<b>${esc(S.headline || '')}</b></div>${thList(S.points)}` +
+      (N.summary ? `<h3>Since the deck</h3><p class="lede">${esc(N.summary)}</p>` : '') + thList(N.points) +
+      (N.recommendation_check ? `<p class="th-rec"><b>Recommendation check:</b> ${esc(N.recommendation_check)}</p>` : '') + `</section>`;
+    // 2) flagged datapoints
+    const open = TH.ups.filter(u => (u.status || 'open') === 'open'), shown = TH.show === 'open' ? open : TH.ups;
+    h += `<section class="panel" id="th-flags"><div class="panel-h"><h2>Flagged datapoints <span class="muted">${open.length} to review</span></h2>` +
+      `<div class="seg" role="group" aria-label="Show"><button type="button" data-ths="open" aria-pressed="${TH.show === 'open'}">To review</button><button type="button" data-ths="all" aria-pressed="${TH.show === 'all'}">All (${TH.ups.length})</button></div></div>` +
+      `<p class="sub">Datapoints from your digests that strengthen, weaken or change a part of the thesis. Mark each one reviewed once you have read it; the tracker folds reviewed items into the signposts and changelog.</p>` +
+      (shown.length ? `<div class="list">${shown.map(u => `<div class="li"><span class="stripe ${u.direction === 'strengthens' ? 'pos' : u.direction === 'weakens' ? 'neg' : u.direction === 'changes' ? 'mix' : ''}"></span><div class="body">` +
+        `<div class="chips">${thChip(u.direction, TH_DIR)}${u.pillar ? `<span class="chip">${esc(u.pillar)}</span>` : ''}${u.signpost ? `<span class="chip out">${esc(u.signpost)}</span>` : ''}${(u.status || 'open') !== 'open' ? `<span class="chip out">${esc(u.status)}</span>` : ''}</div>` +
+        `<div><b>${esc(u.headline || '')}</b> ${esc(u.text || '')}</div>${u.why ? `<div class="sub">Why it matters: ${esc(u.why)}</div>` : ''}${u.proposed_change ? `<div class="sub th-prop">Proposed thesis change: ${esc(u.proposed_change)}</div>` : ''}` +
+        `<div class="srcl"><span>Source</span>${esc(u.source || '')}${u.ev_id ? ` · datapoint #${esc(u.ev_id)}` : ''}</div></div>` +
+        `<div class="side">${esc(fmtD(u.date))}${(u.status || 'open') === 'open' ? `<div class="th-act"><button type="button" class="btn" data-thu="${esc(u.id)}" data-st="reviewed">Reviewed</button><button type="button" class="btn" data-thu="${esc(u.id)}" data-st="dismissed">Dismiss</button></div>` : ''}</div></div>`).join('')}</div>` : none(TH.show === 'open' ? 'Nothing waiting for review.' : 'No datapoints flagged yet.')) + `</section>`;
+    // 3) signposts
+    const SG = arr(T.signposts);
+    h += `<section class="panel" id="th-sign"><h2>Signposts</h2><p class="sub">What the deck assumed, what would confirm or break it, and the latest read from your datapoints.</p>` +
+      `<div class="tbl-wrap"><table class="dt th-sg"><thead><tr><th>Signpost</th><th>Deck baseline</th><th>Bull if</th><th>Bear if</th><th>Latest read</th><th>Status</th></tr></thead><tbody>${SG.map(s => `<tr><td><b>${esc(s.metric)}</b></td><td class="wrap">${esc(s.deck)}</td><td class="wrap c-pos">${esc(s.bull)}</td><td class="wrap c-neg">${esc(s.bear)}</td>` +
+      `<td class="wrap">${s.latest ? `${esc(s.latest.value)}<div class="sub">${esc(fmtD(s.latest.date))}${s.latest.source ? ' · ' + esc(s.latest.source) : ''}</div>` : '<span class="muted">–</span>'}</td><td>${thChip(s.status)}</td></tr>`).join('')}</tbody></table></div></section>`;
+    // 4) pillars
+    h += `<section class="panel" id="th-pil"><h2>Why we are bullish on OpenAI and Anthropic</h2><div class="grid3">${arr(T.pillars).map(p => `<div class="theme"><div class="chips">${thChip(p.status)}</div><h3>${esc(p.title)}</h3><p>${esc(p.claim)}</p>${p.since ? `<p class="sub"><b>Since the deck:</b> ${esc(p.since)}</p>` : ''}</div>`).join('')}</div></section>`;
+    // 5) cases
+    const C = T.cases || {};
+    h += `<section class="panel" id="th-cases"><h2>Bull, uber-bull and bear cases</h2><p class="sub">Probabilities are unassigned in the deck.</p><div class="grid3">` +
+      [['Bull case', C.bull], ['Uber-bull case', C.uber], ['Bear case', C.bear]].map(([t, xs]) => `<div class="theme"><h3>${t}</h3>${thList(xs)}</div>`).join('') + `</div>` +
+      (C.tam ? `<h3>TAM math</h3>${thTable(C.tam)}` : '') + (C.downside ? `<h3>Downside in the stocks</h3>${thList(C.downside)}` : '') + `</section>`;
+    // 6) ROI math
+    const R0 = T.roi || {};
+    h += `<section class="panel" id="th-roi"><h2>Capex ROI math</h2>${thList(R0.points)}` + arr(R0.tables).map(t => `<h3>${esc(t.title)}</h3>${thTable(t)}`).join('') + `</section>`;
+    // 7) risks
+    h += `<section class="panel" id="th-risk"><h2>Risks</h2><div class="grid2">${arr(T.risks).map(r => `<div class="theme"><div class="chips">${thChip(r.status)}</div><h3>${esc(r.title)}</h3>${thList(r.points)}${r.since ? `<p class="sub"><b>Since the deck:</b> ${esc(r.since)}</p>` : ''}</div>`).join('')}</div></section>`;
+    // 8) next steps + questions
+    h += `<section class="panel" id="th-next"><div class="grid2"><div><h2>Next steps</h2>${thList(T.next_steps)}</div><div><h2>Questions for OpenAI / Anthropic</h2>${thList(T.questions)}</div></div></section>`;
+    // 9) changelog
+    const LG = arr(T.changelog).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+    h += `<section class="panel" id="th-log"><h2>Changelog</h2>${LG.length ? `<div class="list">${LG.map(l => `<div class="li"><div class="body"><b>${esc(l.change)}</b>${l.why ? ` <span class="sub">${esc(l.why)}</span>` : ''}</div><div class="side">${esc(fmtD(l.date))}</div></div>`).join('')}</div>` : none('No changes yet.')}</section>`;
+    host.innerHTML = h;
+    host.querySelectorAll('[data-th]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = document.getElementById(a.dataset.th); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
+    host.querySelectorAll('[data-ths]').forEach(b => b.addEventListener('click', () => { TH.show = b.dataset.ths; renderThesis(); }));
+    host.querySelectorAll('[data-thu]').forEach(b => b.addEventListener('click', async () => {
+      const u = TH.ups.find(x => x.id === b.dataset.thu); if (!u || !TH.db) return; b.disabled = true;
+      const { id, ...rest } = u;
+      try { await TH.db.collection('thesis_updates').doc(id).set({ ...rest, status: b.dataset.st, reviewed_at: new Date().toISOString() }); } catch (x) { b.disabled = false; alert('Could not save: ' + ((x && x.message) || 'error')); }
+    }));
+  }
+  thStart();
+
   // ================= MANAGEMENT & INSIDERS: questions for management, insider transactions, Canary =================
   const MG = { st: { co: '', q: '', sec: '', isort: 'net', iq: '' } };
   function renderMgmt() {
@@ -2028,8 +2110,8 @@
   }
 
   // ================= ROUTER =================
-  const VIEWS = ['today', 'x', 'ai', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { mgmt: renderMgmt, ai: renderAI, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'x', 'ai', 'thesis', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { mgmt: renderMgmt, ai: renderAI, thesis: renderThesis, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -2070,6 +2152,7 @@
     if (v === 'notes' && done[v]) { renderNotes(); }
     if (v === 'ai' && done[v]) { renderAI(); }
     if (v === 'mgmt' && done[v]) { renderMgmt(); }
+    if (v === 'thesis' && done[v]) { renderThesis(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     paintUpd(v);
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
