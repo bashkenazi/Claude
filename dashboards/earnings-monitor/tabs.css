@@ -338,3 +338,44 @@ ol.mg-callouts { border-left: 3px solid var(--accent); }
 .mg-q { margin: 4px 0 8px; padding-left: 22px; display: flex; flex-direction: column; gap: 5px; max-width: 110ch; font-size: 13px; }
 #v-mgmt h4 { margin: 10px 0 2px; font-size: 13px; }
 details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 400; color: var(--ink); }
+/* dc-risk report tab v1: DC permits & financing research report (content in the page database, dc_risk/report) */
+#v-dcrisk .dcr-nav { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--mast-h, 53px)); z-index: 9; margin: -8px 0; padding-block: 6px; background: var(--bg); border-bottom: 1px solid var(--rule); flex-wrap: nowrap; overflow-x: auto; scrollbar-width: thin; }
+#v-dcrisk .dcr-nav a { flex: none; white-space: nowrap; font-size: 13px; }
+#v-dcrisk .dcr-nav a:hover:not([aria-current]) { background: var(--surface-2); }
+#v-dcrisk .dcr-nav a[aria-current] { background: var(--ink); color: var(--surface); }
+#v-dcrisk .dcr-sec { gap: 10px; scroll-margin-top: calc(env(safe-area-inset-top, 0px) + var(--mast-h, 53px) + 58px); }
+#v-dcrisk .dcr-sec > p { margin: 0; max-width: 92ch; color: var(--ink-2); line-height: 1.55; }
+#v-dcrisk .dcr-sec > h3 { margin-top: 6px; }
+#v-dcrisk .dcr-sec b { color: var(--ink); font-weight: 650; }
+#v-dcrisk .dcr-sec ul.b { max-width: 92ch; gap: 6px; line-height: 1.5; }
+#v-dcrisk ol.dcr-ol { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 6px; max-width: 92ch; color: var(--ink-2); line-height: 1.5; }
+#v-dcrisk a.dcr-a { color: var(--accent); text-decoration: none; }
+#v-dcrisk a.dcr-a:hover { text-decoration: underline; }
+#v-dcrisk .tbl-wrap { max-height: none; }
+#v-dcrisk table.dcr-t th, #v-dcrisk table.dcr-t td { white-space: normal; }
+#v-dcrisk table.dcr-t td { min-width: 120px; max-width: 380px; color: var(--ink-2); line-height: 1.4; }
+#v-dcrisk table.dcr-t td:first-child { min-width: 110px; color: var(--ink); font-weight: 600; }
+#v-dcrisk table.dcr-t th.n, #v-dcrisk table.dcr-t td.n { min-width: 0; white-space: nowrap; }
+#v-dcrisk .dcr-fig { margin: 4px 0; display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 8px; min-width: 0; }
+#v-dcrisk .dcr-fh { display: flex; flex-direction: column; gap: 2px; }
+#v-dcrisk .dcr-fh b { font-size: 14px; }
+#v-dcrisk .dcr-svgw { overflow-x: auto; }
+#v-dcrisk .dcr-svg { display: block; width: 100%; max-width: 860px; min-width: 600px; height: auto; }
+#v-dcrisk .dcr-svg text { font-family: var(--f-ui); font-size: 11.5px; fill: var(--ink-2); }
+#v-dcrisk .dcr-svg text.t { fill: var(--ink); font-weight: 650; }
+#v-dcrisk .dcr-svg text.lbl { fill: var(--ink); font-weight: 560; }
+#v-dcrisk .dcr-svg text.s { fill: var(--ink-2); font-size: 11px; }
+#v-dcrisk .dcr-svg text.sm { fill: var(--muted); font-size: 10.5px; }
+#v-dcrisk .dcr-svg text.v { fill: var(--ink); font-family: var(--f-mono); font-size: 11px; font-weight: 600; }
+#v-dcrisk .dcr-svg text.acc { fill: var(--accent); font-size: 11px; font-weight: 600; }
+#v-dcrisk .dcr-svg .grid { stroke: var(--rule); stroke-width: 1; }
+#v-dcrisk .dcr-svg .ax { stroke: var(--rule-2); stroke-width: 1; }
+#v-dcrisk .dcr-svg .cn { stroke: var(--rule-2); stroke-width: 1; stroke-dasharray: 2 2; }
+#v-dcrisk .dcr-svg .ref { stroke: var(--ink-2); stroke-width: 1.25; stroke-dasharray: 5 3; }
+#v-dcrisk .dcr-svg .today { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 3; }
+#v-dcrisk .dcr-svg rect.tot { fill: var(--muted); fill-opacity: .5; }
+#v-dcrisk .dcr-svg rect.neg { fill: var(--neg); fill-opacity: .7; }
+#v-dcrisk .dcr-svg rect.pos { fill: var(--pos); fill-opacity: .75; }
+#v-dcrisk .dcr-svg .early { fill: var(--neg); fill-opacity: .75; }
+#v-dcrisk .dcr-svg .later { fill: var(--muted); fill-opacity: .55; }
+#v-dcrisk .dcr-svg .key { fill: var(--accent); }

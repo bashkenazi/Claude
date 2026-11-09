@@ -1779,6 +1779,7 @@
     thesis: () => ({ t: (TH.doc || {}).updated_at, src: 'SRS AI Update, Oct 2026, plus flagged datapoints', live: 'Live: the thesis and flags read from this page’s database' }),
     ai: () => ({ t: (D.dp_index || {}).as_of, src: 'datapoints' + (AI_DC.asof ? '; state GW as of ' + AI_DC.asof : ''), live: 'ALAB quarterly numbers are live from Visible Alpha' }),
     mgmt: () => ({ t: updMax([((D.mgmt || {}).questions || {}).as_of, ((D.mgmt || {}).insiders || {}).as_of]), src: 'Canary super analysts, Insider Score' }),
+    dcrisk: () => ({ t: (DCR.doc || {}).as_of, src: 'snapshot of the research doc; the doc itself may have later edits' }),
     notes: () => ({ live: 'Live: notes save to this page’s database as you write them' }),
     method: () => ({})
   };
@@ -2321,9 +2322,129 @@
       (!sells.length && !buys.length ? '<p class="sub">No Canary insider flags in this universe for the window.</p>' : '');
   }
 
+  // ================= DC PERMITS & FINANCING: research report kept in this page's database =================
+  /* dc-risk report tab v1 */
+  // The report lives in the page database (collection "dc_risk", doc "report"), not in the code, so page rebuilds leave it in place.
+  // Doc shape: {title, lede, as_of, updated_at, doc_url, source, sections:[{id, nav, title, blocks:[...]}], charts:{<id>: {...}}}
+  // Blocks: {t:'p'|'h3', md} | {t:'ul'|'ol', items:[md]} | {t:'table', head:[md], rows:[[md]], num:[bool]} | {t:'chart', id}
+  // md keeps only **bold**, *italic* and [label](https://...) links; everything else is escaped.
+  // Charts: {type:'waterfall', rows:[{l1, l2, kind:'start'|'delta'|'end', gw}], refs:[{name, gw}]} | {type:'timeline', ref_date, ref_label, rows:[{label, start, end, kind:'span'|'milestone', strong}]}
+  const DCR = { doc: null, err: '', started: false, timer: 0, io: null };
+  function dcrStart() {
+    if (DCR.started) return; DCR.started = true;
+    if (!(window.claude && typeof window.claude.use === 'function')) { DCR.err = 'The report is kept in this page’s database; open the page on claude.ai to see it.'; return; }
+    const stop = msg => { clearTimeout(DCR.timer); if (msg) DCR.err = msg; dcrPaint(); };
+    DCR.timer = setTimeout(() => { if (!DCR.doc && !DCR.err) { DCR.err = 'The report has not loaded yet; it will appear here when it does.'; dcrPaint(); } }, 10000);
+    window.claude.use('db').then(db => {
+      if (!db) { stop('The report is not available in this view.'); return; }
+      db.collection('dc_risk').doc('report').onSnapshot(s => {
+        DCR.doc = s && s.exists ? JSON.parse(JSON.stringify(s.data())) : null;
+        DCR.err = DCR.doc ? '' : 'No report saved yet.'; stop();
+      }, e => stop('The report could not load: ' + ((e && e.code) || 'error')));
+    }).catch(() => stop('The report is not available in this view.'));
+  }
+  const dcrPaint = () => { if ((location.hash || '').startsWith('#dcrisk')) renderDcr(); };
+  const dcrInline = s => esc(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?!\*)/g, '$1<i>$2</i>');
+  const dcrMd = s => {
+    const L = [];
+    const t = String(s == null ? '' : s).replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (m, lab, url) => { L.push([lab, url]); return '\u0001' + (L.length - 1) + '\u0002'; });
+    return dcrInline(t).replace(/\u0001(\d+)\u0002/g, (m, k) => `<a class="dcr-a" href="${esc(L[+k][1])}" target="_blank" rel="noopener">${dcrInline(L[+k][0])}</a>`);
+  };
+  const dcrN = v => (Math.round((+v || 0) * 10) / 10).toFixed(1);
+  const dcrSigned = v => (v > 0 ? '+' : v < 0 ? '−' : '') + dcrN(Math.abs(v));
+  const dcrMon = s => { const d = new Date(String(s || '').slice(0, 10) + 'T12:00:00Z'); return isNaN(d) ? esc(s) : d.toLocaleDateString('en-US', { month: 'short', year: 'numeric', timeZone: 'UTC' }); };
+  // waterfall: a start total, signed steps, an end total; dashed reference lines (sell-side forecasts) across the end bar
+  function dcrWaterfall(c) {
+    let run = 0;
+    const bars = arr(c.rows).map(r => {
+      const v = +r.gw || 0;
+      if (r.kind === 'start') { run = v; return { r, lo: 0, hi: run, v: run, cls: 'tot', total: true, lvl: run }; }
+      if (r.kind === 'end') return { r, lo: 0, hi: run, v: run, cls: 'tot', total: true, lvl: run };
+      const a = run; run += v; return { r, lo: Math.min(a, run), hi: Math.max(a, run), v, cls: v < 0 ? 'neg' : 'pos', lvl: run };
+    });
+    if (!bars.length) return '';
+    const refs = arr(c.refs).filter(f => isFinite(+f.gw)).sort((a, b) => b.gw - a.gw), unit = esc(c.unit || '');
+    const top = Math.ceil(Math.max(...bars.map(b => b.hi), ...refs.map(f => +f.gw)) / 10) * 10 || 10;
+    const W = 760, H = 362, x0 = 46, x1 = refs.length ? 628 : 744, y0 = 26, y1 = 318;
+    const band = (x1 - x0) / bars.length, bw = Math.min(54, band * 0.64);
+    const Y = v => y1 - (v / top) * (y1 - y0), X = i => x0 + band * i + band / 2, f1 = n => n.toFixed(1);
+    let g = '';
+    for (let t = 0; t <= top + 1e-9; t += 10) g += `<line class="grid" x1="${x0}" x2="${x1}" y1="${f1(Y(t))}" y2="${f1(Y(t))}"/><text class="sm" x="${x0 - 8}" y="${f1(Y(t) + 3.5)}" text-anchor="end">${t}</text>`;
+    g += `<text class="sm" x="${x0 - 8}" y="${y0 - 14}" text-anchor="end">${unit}</text>`;
+    bars.forEach((b, i) => {
+      const cx = X(i), xl = cx - bw / 2, lab = b.total ? dcrN(b.v) : dcrSigned(b.v);
+      if (i < bars.length - 1) g += `<line class="cn" x1="${f1(xl + bw)}" x2="${f1(X(i + 1) - bw / 2)}" y1="${f1(Y(b.lvl))}" y2="${f1(Y(b.lvl))}"/>`;
+      g += `<rect class="${b.cls}" x="${f1(xl)}" y="${f1(Y(b.hi))}" width="${f1(bw)}" height="${f1(Math.max(1, Y(b.lo) - Y(b.hi)))}" rx="2"><title>${esc([b.r.l1, b.r.l2].filter(Boolean).join(' '))}: ${lab} ${unit}</title></rect>`;
+      g += `<text class="v" x="${f1(cx)}" y="${f1(b.cls === 'neg' ? Y(b.lo) + 15 : Y(b.hi) - 6)}" text-anchor="middle">${lab}</text>`;
+      g += `<text class="lbl" x="${f1(cx)}" y="${y1 + 18}" text-anchor="middle">${esc(b.r.l1 || '')}</text><text class="sm" x="${f1(cx)}" y="${y1 + 33}" text-anchor="middle">${esc(b.r.l2 || '')}</text>`;
+    });
+    const xs = X(bars.length - 1) - bw / 2 - 8, xe = x1 + 6;
+    refs.forEach((f, k) => { const y = Y(+f.gw); g += `<line class="ref" x1="${f1(xs)}" x2="${f1(xe)}" y1="${f1(y)}" y2="${f1(y)}"/><text class="s" x="${f1(xe + 4)}" y="${f1(k % 2 ? y + 13 : y - 5)}">${esc(f.name || '')} ${dcrN(f.gw)}</text>`; });
+    g += `<line class="ax" x1="${x0}" x2="${x1}" y1="${y1}" y2="${y1}"/>`;
+    return `<svg class="dcr-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(c.title || 'Waterfall chart')}">${g}</svg>`;
+  }
+  // timeline: one bar per step from its latest start to its finish; red when the latest start is before the reference date
+  function dcrTimeline(c) {
+    const rows = arr(c.rows); if (!rows.length) return '';
+    const M = s => { const d = new Date(String(s || '').slice(0, 10) + 'T12:00:00Z'); return d.getUTCFullYear() * 12 + d.getUTCMonth() + (d.getUTCDate() - 1) / 30.5; };
+    const lo = Math.floor(Math.min(...rows.map(r => M(r.start))) / 6) * 6, hi = Math.ceil((Math.max(...rows.map(r => M(r.end || r.start))) + 1) / 6) * 6;
+    const W = 760, L = 252, R0 = 736, top = 34, rh = 26, H = top + rows.length * rh + 28, f1 = n => n.toFixed(1);
+    const X = m => L + (m - lo) / Math.max(1, hi - lo) * (R0 - L), MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const ref = c.ref_date ? M(c.ref_date) : null, yb = top + rows.length * rh + 4;
+    let g = '';
+    for (let m = lo; m <= hi; m += 6) g += `<line class="grid" x1="${f1(X(m))}" x2="${f1(X(m))}" y1="${top - 4}" y2="${yb}"/><text class="sm" x="${f1(X(m))}" y="${yb + 16}" text-anchor="middle">${MON[m % 12]} ’${String(Math.floor(m / 12)).slice(2)}</text>`;
+    rows.forEach((r, i) => {
+      const y = top + i * rh + rh / 2, s = M(r.start), e = M(r.end || r.start), cls = r.strong ? 'key' : ref != null && s < ref ? 'early' : 'later';
+      g += `<text class="${r.strong ? 't' : 'lbl'}" x="16" y="${f1(y + 4)}">${esc(r.label || '')}</text>`;
+      if (r.kind === 'milestone' || e <= s) g += `<path class="${cls}" d="M${f1(X(s))} ${f1(y - 7)}l7 7-7 7-7-7z"><title>${esc(r.label || '')}: ${dcrMon(r.start)}</title></path>`;
+      else g += `<rect class="${cls}" x="${f1(X(s))}" y="${f1(y - 6)}" width="${f1(X(e) - X(s))}" height="12" rx="2"><title>${esc(r.label || '')}: start by ${dcrMon(r.start)}, done ${dcrMon(r.end)}</title></rect>`;
+    });
+    if (ref != null) { const x = X(ref); g += `<line class="today" x1="${f1(x)}" x2="${f1(x)}" y1="${top - 10}" y2="${yb}"/><text class="acc" x="${f1(x + 5)}" y="${top - 14}">${esc(c.ref_label || 'Today')}</text>`; }
+    return `<svg class="dcr-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(c.title || 'Timeline chart')}">${g}</svg>`;
+  }
+  function dcrChart(c) {
+    if (!c) return '';
+    const svg = c.type === 'waterfall' ? dcrWaterfall(c) : c.type === 'timeline' ? dcrTimeline(c) : ''; if (!svg) return '';
+    const cap = [c.note, c.caption].filter(Boolean).join(' · ');
+    return `<figure class="dcr-fig"><div class="dcr-fh"><b>${esc(c.title || '')}</b>${c.sub ? `<span class="sub">${esc(c.sub)}</span>` : ''}</div><div class="dcr-svgw">${svg}</div>${cap ? `<figcaption class="sub">${esc(cap)}</figcaption>` : ''}</figure>`;
+  }
+  function dcrBlock(b, C) {
+    if (!b) return '';
+    if (b.t === 'h3') return `<h3>${dcrMd(b.md)}</h3>`;
+    if (b.t === 'p') return `<p>${dcrMd(b.md)}</p>`;
+    if (b.t === 'ul' || b.t === 'ol') return `<${b.t} class="${b.t === 'ul' ? 'b' : 'dcr-ol'}">${arr(b.items).map(x => `<li>${dcrMd(x)}</li>`).join('')}</${b.t}>`;
+    if (b.t === 'table') { const n = arr(b.num); return `<div class="tbl-wrap"><table class="dt dcr-t"><thead><tr>${arr(b.head).map((x, i) => `<th${n[i] ? ' class="n"' : ''}>${dcrMd(x)}</th>`).join('')}</tr></thead><tbody>${arr(b.rows).map(r => `<tr>${arr(r).map((x, i) => `<td${n[i] ? ' class="n"' : ''}>${dcrMd(x)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`; }
+    if (b.t === 'chart') return dcrChart((C || {})[b.id]);
+    return '';
+  }
+  function renderDcr() {
+    const host = document.getElementById('v-dcrisk'); if (!host) return;
+    dcrStart();
+    const T = DCR.doc;
+    if (DCR.io) { DCR.io.disconnect(); DCR.io = null; }
+    const link = T && T.doc_url ? ` <a class="ext" href="${esc(T.doc_url)}" target="_blank" rel="noopener">Open the editable doc ↗</a>` : '';
+    let h = head('Research report' + (T && T.as_of ? ' · as of ' + updFmt(T.as_of) : ''), T ? esc(T.title || 'Data center permits and financing') : 'Data center permits and financing', T ? esc(T.lede || '') + link : '');
+    if (!T) { host.innerHTML = h + `<section class="panel">${none(esc(DCR.err || 'Loading the report…'))}</section>`; return; }
+    const S = arr(T.sections);
+    h += `<nav class="sk-tabs dcr-nav" aria-label="Report sections">${S.map(s => `<a href="#dcrisk" data-dcr="dcr-${esc(s.id)}">${esc(s.nav || s.title)}</a>`).join('')}</nav>`;
+    h += S.map(s => `<section class="panel dcr-sec" id="dcr-${esc(s.id)}"><h2>${dcrMd(s.title)}</h2>${arr(s.blocks).map(b => dcrBlock(b, T.charts)).join('')}</section>`).join('');
+    if (T.source) h += `<p class="sub">${esc(T.source)}${T.updated_at ? ' · added to this page ' + updFmt(T.updated_at) : ''}</p>`;
+    host.innerHTML = h;
+    const smooth = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    const links = [...host.querySelectorAll('.dcr-nav a')], nav = host.querySelector('.dcr-nav');
+    links.forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = document.getElementById(a.dataset.dcr); if (t) t.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' }); }));
+    if ('IntersectionObserver' in window) {
+      DCR.io = new IntersectionObserver(es => es.forEach(e => {
+        if (!e.isIntersecting) return;
+        links.forEach(a => { if (a.dataset.dcr === e.target.id) { a.setAttribute('aria-current', 'location'); if (nav && (a.offsetLeft < nav.scrollLeft || a.offsetLeft + a.offsetWidth > nav.scrollLeft + nav.clientWidth)) nav.scrollLeft = Math.max(0, a.offsetLeft - 16); } else a.removeAttribute('aria-current'); });
+      }), { rootMargin: '-25% 0px -65% 0px' });
+      host.querySelectorAll('.dcr-sec').forEach(s => DCR.io.observe(s));
+    }
+  }
+
   // ================= ROUTER =================
-  const VIEWS = ['today', 'x', 'ai', 'thesis', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { mgmt: renderMgmt, ai: renderAI, thesis: renderThesis, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'x', 'ai', 'thesis', 'dcrisk', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { mgmt: renderMgmt, ai: renderAI, thesis: renderThesis, dcrisk: renderDcr, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -2365,6 +2486,7 @@
     if (v === 'ai' && done[v]) { renderAI(); }
     if (v === 'mgmt' && done[v]) { renderMgmt(); }
     if (v === 'thesis' && done[v]) { renderThesis(); }
+    if (v === 'dcrisk' && done[v]) { renderDcr(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     paintUpd(v);
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
