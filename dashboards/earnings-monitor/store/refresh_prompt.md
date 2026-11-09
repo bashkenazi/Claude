@@ -89,7 +89,8 @@ A. Master comps = prices, daily moves, valuation, screens. Read it straight from
    closes only: FactSet GlobalPrices on universe.json ids.
 B. Companies DB (Notion collection://54e1fc28-0c99-43cf-9d42-a6aa7de55d87; columns Company, Ticker, BBG Ticker,
    Sector, Sub-sector, Tier, In Master Comps) = the names Bobby follows closely: earnings, prep, idea and
-   today-tab focus. Tier 1–2 for upcoming prints.
+   today-tab focus. Upcoming prints (Prep & calendar, and the Earnings tab's "Reported, review not run yet" panel):
+   every Companies DB row with Tier 1–3 or In Master Comps checked (Bobby, 2026-11-09), each carrying its tier.
 C. Supabase public.research / research_evidence = companies we collect data on; signals and datapoints tabs.
 
 Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
@@ -126,7 +127,7 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    Consensus Revisions and Idea Generator also feed tabs/screens.json and tabs/ideas.json (EVENING) as before,
    with thesis-builder, industry-cycle, operating-comps; tabs/datapoints.json from research_evidence last 21 days;
    tabs/prep.json from management-prep, analyst-day, print-tables, quarterly-review plus next-4-weeks prints from
-   FactSet for Companies DB Tier 1–2 names.
+   FactSet for Companies DB names with Tier 1–3 or In Master Comps checked (same set as B).
 5. tabs/daily.json — only after step 4 (the day's digests are the first source of reasons):
    prices from universe A (MIDDAY: Live sheet; EVENING: closes). Shape: as_of, universe_n, summary[] (connect
    the moves into themes, most important first), sectors[] (group, n, median_1d, best, worst, why — a why for
