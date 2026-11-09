@@ -194,6 +194,11 @@ Then:
   write, rebuild or delete those database documents from this refresh.
 - DC permits & financing tab (#dcrisk): a research report kept only in the page database (collection "dc_risk", doc
   "report"). The code comes from tabs.js/template.html; never write, rebuild or delete that document from this refresh.
+- AI tab › SRS models (#ai/models): the numbers from SRS's AI industry models (AI Master Model, AI Economics Master,
+  AI Financings) live only in the page database (collection "ai_models", docs meta, capex, revisions, compute, econ,
+  labs, fin, supply). The code comes from tabs.js; never write, rebuild or delete those documents from this refresh.
+  They change only when Bobby shares new model versions: run store/build_ai_models.py on the new workbooks and write
+  each output JSON to its document (ArtifactData update with file_path).
 
 Finish with a short summary: mode, routines read (and any missed), new prints, stories written / not found,
 rows written to each history table, which comps workbook/sheets were used, and any source that failed.

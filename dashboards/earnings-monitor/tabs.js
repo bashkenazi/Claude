@@ -1871,13 +1871,388 @@
       `<p class="sub">Every $/GPU-hour price quoted in your Supabase datapoints, placed on the datapoint's date. Price types and providers differ (spot, on-demand list, 1–6 year contracts), so compare like with like using the filter; ranges are plotted at their midpoint. Hover a point for its source. Canary's own GPU Rentals Tracker isn't available through its tools; its latest figures (week of Oct 26: neocloud on-demand index $8.10, H100 $4.01, GB300 $12.55) appear only in Canary's super-analyst notes.</p>` +
       `<details class="fr"><summary>All ${show.length} prices with sources</summary><div class="tbl-wrap"><table class="dt"><thead><tr><th>Date</th><th>GPU</th><th class="n">$/hr</th><th>Type</th><th>Datapoint</th><th>Source</th></tr></thead><tbody>${show.slice().reverse().map(p => `<tr><td class="nowrap">${esc(p.d)}</td><td style="color:${GPU_COL[p.fam]}"><b>${esc(p.fam)}</b></td><td class="n">${p.hi ? `${p.lo}–${p.hi}` : p.v.toFixed(2)}</td><td>${esc(p.basis)}</td><td class="ev-wrap">${esc(p.t)}</td><td class="ev-src">${esc((AI.SRC || [])[p.r[7]] || '')}</td></tr>`).join('')}</tbody></table></div></details>`;
   }
+  // ================= AI › SRS models: the team's AI industry models (AI Master Model, AI Economics Master, AI Financings) =================
+  // The numbers live in this page's database, collection "ai_models" (docs meta, capex, revisions, compute, econ, labs, fin, supply),
+  // written by store/build_ai_models.py from the workbooks. Rebuilds never touch them; a new model version is loaded by re-running that script.
+  const AIM = { docs: null, err: '', loaded: false, view: 'capex', cmp: 'gw', cmpMode: 'share', revCo: 'Total', cfg: {}, tips: {}, ro: null, w: 0 };
+  try { const v0 = localStorage.getItem('td-aim-view'); if (v0) AIM.view = v0; } catch (e) {}
+  const AIM_VIEWS = [['capex', 'Capex & capacity'], ['revisions', 'Street capex revisions'], ['compute', 'Accelerator share'], ['econ', 'AI economics'], ['labs', 'OpenAI & Anthropic'], ['fin', 'Financing'], ['supply', 'Semis supply chain']];
+  const AIM_C = [1, 2, 3, 4, 5, 6].map(i => `var(--mv${i})`);
+  const aimDoc = k => (AIM.docs || {})[k] || {};
+  const aimT = (k, id) => arr(aimDoc(k).tables).find(t => t.id === id) || null;
+  const aimR = (t, re) => t ? arr(t.rows).find(r => re.test(r.l)) || null : null;
+  const aimN = v => typeof v === 'number' && isFinite(v) ? v : null;
+  const aimEst = t => !t || t.est_from == null ? -1 : arr(t.cols).findIndex(c => parseInt(c, 10) >= +t.est_from);
+  const aimCats = t => { const e = aimEst(t); return arr(t.cols).map((c, i) => e >= 0 && i >= e ? c + 'E' : String(c)); };
+  const aimAt = (t, re, year) => { const r = aimR(t, re), i = t ? arr(t.cols).indexOf(String(year)) : -1; return r && i >= 0 ? aimN(r.v[i]) : null; };
+  const aimISO = s => { const m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(String(s || '')); return m ? `${m[3]}-${m[1].padStart(2, '0')}-${m[2].padStart(2, '0')}` : String(s == null ? '' : s); };
+  function aimF(v, f) {
+    if (v == null || v === '') return '';
+    if (typeof v !== 'number') return String(v);
+    if (!isFinite(v)) return '';
+    const a = Math.abs(v), g = (x, d) => x.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+    let s;
+    if (f === 'pct') { const p = a * 100; s = g(p, p >= 100 ? 0 : 1) + '%'; }
+    else if (f === 'int') s = g(a, 0);
+    else if (f === 'num1') s = g(a, 1);
+    else if (f === 'num2') s = g(a, 2);
+    else if (f === 'usd2') s = '$' + g(a, 2);
+    else if (f === 'x') s = g(a, 2) + 'x';
+    else s = g(a, a >= 100 ? 0 : a >= 1 ? 1 : 2); // bn, gw, num
+    return (v < 0 && /[1-9]/.test(s) ? '−' : '') + s;
+  }
+  const aimAx = (v, f) => f === 'share' ? v + '%' : f === 'pct' ? +(v * 100).toFixed(1) + '%' : Math.abs(v) >= 1000 ? v.toLocaleString('en-US') : String(+v.toFixed(2));
+  function aimTicks(lo, hi, n) {
+    if (!(hi > lo)) hi = lo + 1;
+    const raw = (hi - lo) / (n || 4), mag = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / mag;
+    const step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * mag, out = [];
+    for (let v = Math.floor(lo / step) * step; v <= Math.ceil(hi / step) * step + step / 2; v += step) out.push(+v.toFixed(10));
+    return out;
+  }
+  const aimPath = pts => { let d = '', pen = false; pts.forEach(p => { if (!p) { pen = false; return; } d += (pen ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1); pen = true; }); return d; };
+  // a column from its baseline side (y0) to its data end (y1); only the data end is rounded
+  function aimBar(x, y0, y1, w, r) {
+    const h = Math.abs(y0 - y1); r = Math.min(r, h, w / 2); const s = y1 < y0 ? 1 : -1, f = n => n.toFixed(1);
+    return `M${f(x)},${f(y0)}V${f(y1 + s * r)}Q${f(x)},${f(y1)} ${f(x + r)},${f(y1)}H${f(x + w - r)}Q${f(x + w)},${f(y1)} ${f(x + w)},${f(y1 + s * r)}V${f(y0)}Z`;
+  }
+  // stacked (or single-series) columns, optional 100% share mode and an overlay line on the same axis
+  function aimCols(cfg, W) {
+    const H = cfg.h || 240, L = 46, R = 10, T = 22, B = 24, S = cfg.series, n = cfg.cats.length;
+    const pos = i => S.reduce((a, s) => a + Math.max(0, aimN(s.v[i]) || 0), 0);
+    const val = (s, i) => { const v = aimN(s.v[i]) || 0; if (!cfg.share) return v; const t = pos(i); return t ? 100 * Math.max(0, v) / t : 0; };
+    let hi = 0, lo = 0;
+    for (let i = 0; i < n; i++) {
+      if (S.length === 1) { const v = val(S[0], i); hi = Math.max(hi, v); lo = Math.min(lo, v); } else hi = Math.max(hi, cfg.share ? 100 : pos(i));
+      if (cfg.line) { const v = aimN(cfg.line.v[i]); if (v != null) { hi = Math.max(hi, v); lo = Math.min(lo, v); } }
+    }
+    if (lo < 0) lo *= 1.15;
+    const tk = cfg.share ? [0, 25, 50, 75, 100] : aimTicks(lo, hi, 4), y0 = tk[0], y1 = tk[tk.length - 1];
+    const Y = v => T + (H - T - B) * (1 - (v - y0) / (y1 - y0)), band = (W - L - R) / n, bw = Math.max(6, Math.min(24, band * 0.6)), X = i => L + band * (i + 0.5);
+    let g = '';
+    if (cfg.est > 0 && cfg.est < n) g += `<rect class="aim-estb" x="${(L + band * cfg.est).toFixed(1)}" y="${T - 20}" width="${(band * (n - cfg.est)).toFixed(1)}" height="${H - B - T + 20}"/><text class="aim-estl" x="${(L + band * cfg.est + 5).toFixed(1)}" y="${T - 9}">Estimates</text>`;
+    tk.forEach(v => { const y = Y(v); g += `<line class="aim-grid${v === 0 ? ' z' : ''}" x1="${L}" x2="${W - R}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"/><text x="${L - 6}" y="${(y + 3.5).toFixed(1)}" text-anchor="end">${esc(aimAx(v, cfg.share ? 'share' : cfg.ax))}</text>`; });
+    const every = Math.max(1, Math.ceil(44 / band));
+    cfg.cats.forEach((c, i) => { if ((n - 1 - i) % every === 0) g += `<text x="${X(i).toFixed(1)}" y="${H - 7}" text-anchor="middle">${esc(c)}</text>`; });
+    const tips = AIM.tips[cfg.name] = [];
+    for (let i = 0; i < n; i++) {
+      let m = '', up = 0, dn = 0;
+      const vs = S.map((s, k) => [k, val(s, i)]), top = (vs.filter(o => o[1] > 0).pop() || [])[0], x = X(i) - bw / 2;
+      vs.forEach(([k, v]) => {
+        if (!v) return;
+        if (v > 0) { const yb = Y(up) - (up > 0 ? 2 : 0), yt = Y(up + v); up += v; if (yb - yt < 0.75) return; m += `<path d="${k === top ? aimBar(x, yb, yt, bw, 4) : `M${x.toFixed(1)},${yb.toFixed(1)}V${yt.toFixed(1)}h${bw.toFixed(1)}V${yb.toFixed(1)}Z`}" style="fill:${S[k].c}"/>`; }
+        else { const yb = Y(dn) + (dn < 0 ? 2 : 0), yt = Y(dn + v); dn += v; if (yt - yb < 0.75) return; m += `<path d="${aimBar(x, yb, yt, bw, 4)}" style="fill:${S[k].c}"/>`; }
+      });
+      const tip = { h: cfg.tipH ? cfg.tipH[i] : cfg.cats[i], rows: [] };
+      S.forEach(s => { const v = aimN(s.v[i]); if (v != null) tip.rows.push({ c: s.c, n: s.n, v: cfg.share ? `${Math.round(val(s, i))}% · ${aimF(v, cfg.f)}` : aimF(v, cfg.f) }); });
+      if (S.length > 1) { const t = cfg.tot ? aimN(cfg.tot[i]) : pos(i); if (t != null) tip.rows.push({ n: cfg.totName || 'Total', v: aimF(t, cfg.f), b: 1 }); }
+      if (cfg.line && aimN(cfg.line.v[i]) != null) tip.rows.push({ c: cfg.line.c || 'var(--ink)', n: cfg.line.n, v: aimF(cfg.line.v[i], cfg.f), b: 1 });
+      arr(cfg.extra).forEach(xr => { const v = aimN(xr.v[i]); if (v != null) tip.rows.push({ n: xr.n, v: aimF(v, xr.f || cfg.f) }); });
+      tips.push(tip);
+      g += `<g class="aim-h" data-tip="${cfg.name}:${i}" tabindex="0" aria-label="${esc(tip.h + ': ' + tip.rows.map(r => r.n + ' ' + r.v).join(', '))}"><rect class="aim-hr" x="${(L + band * i).toFixed(1)}" y="${T - 4}" width="${band.toFixed(1)}" height="${H - B - T + 4}"/>${m}</g>`;
+    }
+    if (!cfg.share) {
+      let labs = arr(cfg.labels).filter((i, k, a) => i >= 0 && i < n && a.indexOf(i) === k);
+      if (band < 34 && labs.length > 2) labs = [labs[0], labs[labs.length - 1]];
+      labs.forEach(i => {
+        const t = S.length > 1 ? (cfg.tot ? aimN(cfg.tot[i]) : pos(i)) : aimN(S[0].v[i]); if (t == null) return;
+        const y = S.length === 1 && t < 0 ? Y(t) + 13 : Y(S.length > 1 ? pos(i) : t) - 6;
+        g += `<text class="aim-vl" x="${X(i).toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle">${esc(aimF(t, cfg.f))}</text>`;
+      });
+    }
+    if (cfg.line) { const pts = cfg.line.v.map((v, i) => aimN(v) == null ? null : [X(i), Y(v)]), c = cfg.line.c || 'var(--ink)'; g += `<path class="aim-ln" d="${aimPath(pts)}" style="stroke:${c}"/>` + pts.map(p => p ? `<circle class="aim-dot" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4" style="fill:${c}"/>` : '').join(''); }
+    return `<svg class="aim-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="group" aria-label="${esc(cfg.aria || '')}">${g}</svg>`;
+  }
+  // lines over categories with a snapping crosshair; optional dashed tail (model path) and point marks
+  function aimLines(cfg, W) {
+    const H = cfg.h || 240, S = cfg.series, n = cfg.cats.length, ends = W >= 520 && cfg.ends !== false;
+    const L = 46, R = ends ? (cfg.endW || 100) : 16, T = 14, B = 24;
+    let lo = Infinity, hi = -Infinity;
+    S.forEach(s => s.v.forEach(v => { if (aimN(v) != null) { lo = Math.min(lo, v); hi = Math.max(hi, v); } }));
+    arr(cfg.marks).forEach(m => { lo = Math.min(lo, m.v); hi = Math.max(hi, m.v); });
+    if (!isFinite(lo)) return none('No data to chart.');
+    if (cfg.zero !== false) lo = Math.min(0, lo);
+    const tk = aimTicks(lo, hi, 4), y0 = tk[0], y1 = tk[tk.length - 1], step = (W - L - R) / Math.max(1, n - 1);
+    const Y = v => T + (H - T - B) * (1 - (v - y0) / (y1 - y0)), X = i => L + (n > 1 ? step * i : (W - L - R) / 2);
+    let g = '';
+    tk.forEach(v => { const y = Y(v); g += `<line class="aim-grid${v === 0 ? ' z' : ''}" x1="${L}" x2="${W - R}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"/><text x="${L - 6}" y="${(y + 3.5).toFixed(1)}" text-anchor="end">${esc(aimAx(v, cfg.ax))}</text>`; });
+    const every = Math.max(1, Math.ceil((ends ? 52 : 62) / step));
+    cfg.cats.forEach((c, i) => { if ((n - 1 - i) % every === 0) g += `<text x="${X(i).toFixed(1)}" y="${H - 7}" text-anchor="${i === n - 1 && !ends ? 'end' : i === 0 ? 'start' : 'middle'}">${esc(c)}</text>`; });
+    const tips = AIM.tips[cfg.name] = [], half = n > 1 ? step / 2 : (W - L - R) / 2;
+    for (let i = 0; i < n; i++) {
+      const tip = { h: cfg.tipH ? cfg.tipH[i] : cfg.cats[i], rows: [] };
+      S.forEach(s => { const v = aimN(s.v[i]); if (v != null) tip.rows.push({ c: s.c, n: s.n + (s.dash != null && i >= s.dash ? ' (model path)' : ''), v: aimF(v, cfg.f) }); });
+      arr(cfg.marks).filter(m => m.i === i).forEach(m => tip.rows.push({ c: m.c, n: m.n, v: aimF(m.v, cfg.f), b: 1 }));
+      tips.push(tip);
+      const x = X(i);
+      g += `<g class="aim-h" data-tip="${cfg.name}:${i}" tabindex="0" aria-label="${esc(tip.h + ': ' + tip.rows.map(r => r.n + ' ' + r.v).join(', '))}"><rect class="aim-hr" x="${(x - half).toFixed(1)}" y="${T}" width="${(2 * half).toFixed(1)}" height="${H - B - T}"/><line class="aim-xh" x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${T}" y2="${H - B}"/></g>`;
+    }
+    S.forEach(s => {
+      const pts = s.v.map((v, i) => aimN(v) == null ? null : [X(i), Y(v)]);
+      if (s.dash != null && s.dash > 0 && s.dash < n) g += `<path class="aim-ln" d="${aimPath(pts.map((p, i) => i < s.dash ? p : null))}" style="stroke:${s.c}"/><path class="aim-ln dash" d="${aimPath(pts.map((p, i) => i >= s.dash - 1 ? p : null))}" style="stroke:${s.c}"/>`;
+      else g += `<path class="aim-ln" d="${aimPath(pts)}" style="stroke:${s.c}"/>`;
+      const li = pts.map((p, i) => p ? i : -1).filter(i => i >= 0).pop();
+      if (li != null) g += `<circle class="aim-dot" cx="${pts[li][0].toFixed(1)}" cy="${pts[li][1].toFixed(1)}" r="4" style="fill:${s.c}"/>`;
+    });
+    arr(cfg.marks).forEach(m => { const x = X(m.i), y = Y(m.v); g += `<path class="aim-dot" d="M${x.toFixed(1)},${(y - 6).toFixed(1)}l6,6l-6,6l-6,-6Z" style="fill:${m.c}"/>`; });
+    if (ends) {
+      const lab = [], kept = [];
+      S.forEach(s => { const v = aimN(s.v[n - 1]); if (v != null) lab.push({ y: Y(v), t: `${s.short || s.n} ${aimF(v, cfg.f)}` }); });
+      arr(cfg.marks).forEach(m => { if (m.l) lab.push({ y: Y(m.v), t: m.l }); });
+      lab.forEach(o => { if (kept.every(k => Math.abs(k.y - o.y) >= 11)) kept.push(o); });
+      kept.forEach(o => { g += `<text class="aim-el" x="${(W - R + 10).toFixed(1)}" y="${(o.y + 3.5).toFixed(1)}">${esc(o.t)}</text>`; });
+    }
+    return `<svg class="aim-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="group" aria-label="${esc(cfg.aria || '')}">${g}</svg>`;
+  }
+  // a stored model table (id, title, cols, rows [{l, v, f, b, ind}], src, unit, note, est_from); open = shown, otherwise collapsed under its title
+  function aimTable(t, open) {
+    if (!t || !arr(t.rows).length) return '';
+    const e = aimEst(t), cols = arr(t.cols), ec = i => e >= 0 && i >= e ? ' aim-e' : '';
+    const tbl = `<div class="tbl-wrap"><table class="dt aim-t"><thead><tr><th>${esc(t.unit || '')}</th>${cols.map((c, i) => `<th class="n${ec(i)}">${esc(c)}${ec(i) ? 'E' : ''}</th>`).join('')}</tr></thead><tbody>` +
+      t.rows.map(r => `<tr class="${r.b ? 'aim-b' : ''}${r.ind ? ' aim-i' : ''}"><td>${esc(r.l)}${r.note ? ` <span class="sub">${esc(r.note)}</span>` : ''}</td>${cols.map((c, i) => `<td class="n${ec(i)}">${esc(aimF(arr(r.v)[i], r.f))}</td>`).join('')}</tr>`).join('') +
+      `</tbody></table></div>${t.note ? `<p class="sub">${esc(t.note)}</p>` : ''}<p class="aim-src">${esc(t.src || '')}</p>`;
+    return open ? `<div class="aim-tb"><h3>${esc(t.title)}</h3>${tbl}</div>` : `<details class="aim-more"><summary>${esc(t.title)}</summary>${tbl}</details>`;
+  }
+  // a list of records; cols: [key, header, format] where format is an aimF format, 'd' (date), 'w' (wrapping text) or '' (text)
+  function aimList(title, src, cols, rows, open, note, bold) {
+    if (!arr(rows).length) return '';
+    const num = f => f && f !== 'd' && f !== 'w';
+    const tbl = `<div class="tbl-wrap"><table class="dt aim-t"><thead><tr>${cols.map(([, h, f]) => `<th${num(f) ? ' class="n"' : ''}>${esc(h)}</th>`).join('')}</tr></thead><tbody>` +
+      rows.map(r => `<tr${bold && bold(r) ? ' class="aim-b"' : ''}>${cols.map(([k, , f], j) => { const v = r[k]; return f === 'w' ? `<td class="aim-w">${esc(v)}</td>` : f === 'd' ? `<td class="nowrap">${esc(aimISO(v))}</td>` : num(f) ? `<td class="n">${esc(aimF(v, f))}</td>` : `<td${j === 0 && String(v == null ? '' : v).length <= 28 ? ' class="aim-k"' : ''}>${esc(v)}</td>`; }).join('')}</tr>`).join('') +
+      `</tbody></table></div>${note ? `<p class="sub">${esc(note)}</p>` : ''}<p class="aim-src">${esc(src || '')}</p>`;
+    return open ? `<div class="aim-tb"><h3>${esc(title)}</h3>${tbl}</div>` : `<details class="aim-more"><summary>${esc(title)}</summary>${tbl}</details>`;
+  }
+  const aimByDate = xs => arr(xs).slice().sort((a, b) => aimISO(b.date).localeCompare(aimISO(a.date)));
+  const aimLeg = (S, line) => (S.length > 1 || line) ? `<div class="legend">${S.map(s => `<span><i style="background:${s.c}"></i>${esc(s.n)}</span>`).join('')}${line ? `<span><i class="aim-lk" style="background:${line.c || 'var(--ink)'}"></i>${esc(line.n)}</span>` : ''}</div>` : '';
+  const aimLegL = (S, extra) => `<div class="legend">${S.map(s => `<span><i class="aim-lk" style="background:${s.c}"></i>${esc(s.n)}</span>`).join('')}${extra || ''}</div>`;
+  const aimSeg = (label, key, opts, cur) => `<div class="seg" role="group" aria-label="${esc(label)}">${opts.map(([v, l]) => `<button type="button" data-aim="${key}:${esc(v)}" aria-pressed="${cur === v}">${esc(l)}</button>`).join('')}</div>`;
+  function aimFig(name, title, sub, cfg, legend) {
+    AIM.cfg[name] = Object.assign({ name }, cfg);
+    return `<figure class="aim-fig"><figcaption><b>${esc(title)}</b>${sub ? ` <span class="sub">${esc(sub)}</span>` : ''}</figcaption><div class="aim-chart" data-ch="${name}" style="height:${cfg.h || 240}px"></div>${legend || ''}</figure>`;
+  }
+  const AIM_V = {
+    capex() {
+      const t = aimT('capex', 'capex_build'); if (!t) return none('The capex build is not in the stored model data.');
+      const e = aimEst(t), cats = aimCats(t), last = cats.length - 1, i1 = Math.min(e + 1, last);
+      const S = [[/^Merchant GPUs/, 'Merchant GPUs'], [/^ASICs/, 'ASICs'], [/^HBM bought direct/, 'HBM bought direct'], [/^Networking/, 'Networking'], [/^Other IT/, 'Other IT'], [/^Data center/, 'Data center']]
+        .map(([re, nm], k) => { const r = aimR(t, re); return r && { n: nm, v: r.v, c: AIM_C[k] }; }).filter(Boolean);
+      const tot = aimR(t, /^Total AI capex/), yy = aimR(t, /^y\/y/), comp = aimR(t, /^Compute$/);
+      let h = tot && e > 0 ? `<p class="aim-lede">SRS models total AI capex of <b>$${aimF(tot.v[i1], 'bn')}bn in ${esc(cats[i1])}</b>${yy && aimN(yy.v[i1]) != null ? ` (${aimF(yy.v[i1], 'pct')} y/y)` : ''}, up from $${aimF(tot.v[e - 1], 'bn')}bn in ${esc(cats[e - 1])}${comp && tot.v[i1] ? `. Compute (merchant GPUs and ASICs) is ${aimF(comp.v[i1] / tot.v[i1], 'pct')} of it` : ''}.</p>` : '';
+      h += `<div class="aim-g2">` + aimFig('capex', 'AI capex by component', '$bn', { cats, est: e, series: S, f: 'bn', ax: 'bn', tot: tot && tot.v, totName: 'Total AI capex', labels: [e - 1, e, i1, last], aria: 'AI capex by component in $bn by year' }, aimLeg(S));
+      const cap = aimT('capex', 'capacity'), inc = aimR(cap, /^Incremental GW/), cum = aimR(cap, /^Cumulative GW \(SRS/), sa = aimR(cap, /SemiAnalysis/);
+      if (inc) { const ce = aimEst(cap), cc = aimCats(cap); h += aimFig('gw', 'AI compute deployed each year', 'GW of critical IT', { cats: cc, est: ce, series: [{ n: 'GW deployed', v: inc.v, c: AIM_C[0] }], f: 'gw', ax: 'num', labels: [ce - 1, ce, Math.min(ce + 1, cc.length - 1), cc.length - 1], extra: [cum && { n: 'Cumulative GW (SRS)', v: cum.v }, sa && { n: 'Cumulative GW (SemiAnalysis)', v: sa.v }].filter(Boolean), aria: 'GW of AI compute deployed each year' }); }
+      h += `</div>`;
+      return h + aimTable(t, true) + aimTable(aimT('capex', 'spenders'), true) + ['capacity', 'capex_per_mw', 'hs_chip_share', 'hs_capex_gw', 'lab_gw'].map(id => aimTable(aimT('capex', id))).join('') + aimTable(aimHosts());
+    },
+    revisions() {
+      const d = aimDoc('revisions'), snaps = arr(d.snapshots), ser = arr(d.series); if (!snaps.length || !ser.length) return none('The capex revision history is not in the stored model data.');
+      const cos = Object.keys(ser[0].cos || {}), co = cos.includes(AIM.revCo) ? AIM.revCo : 'Total', use = ser.slice(-4);
+      // the latest fiscal year gets the first (strongest) color
+      const S = use.map((s, k) => ({ n: s.fy, short: s.fy.replace('CY20', "CY'"), v: arr((s.cos || {})[co]), c: AIM_C[use.length - 1 - k] }));
+      const sv = aimT('revisions', 'srs_vs_street'), srs = aimR(sv, /^SRS Big-5 capex/), se = aimEst(sv), il = snaps.length - 1;
+      const marks = co !== 'Total' || !srs ? [] : use.map((s, k) => { const ci = arr(sv.cols).indexOf(s.fy.replace(/\D/g, '')), v = ci >= 0 && ci >= se ? aimN(srs.v[ci]) : null; return v == null ? null : { i: il, v, c: S[k].c, n: 'SRS estimate, ' + s.fy, l: `SRS '${s.fy.slice(-2)} ${aimF(v, 'bn')}` }; }).filter(Boolean);
+      const lt = S[S.length - 1], lv = aimN(lt.v[il]), i4 = il - 4, pv = i4 >= 0 ? aimN(lt.v[i4]) : null, sm = marks.find(m => m.n.endsWith(lt.n));
+      let h = lv != null ? `<p class="aim-lede">Street consensus for ${esc(lt.n)} capex${co === 'Total' ? ' at the Big-5' : ' at ' + esc(co)} is <b>$${aimF(lv, 'bn')}bn</b>${pv ? `, up ${aimF(lv / pv - 1, 'pct')} in four quarters (from $${aimF(pv, 'bn')}bn at ${esc(snaps[i4])})` : ''}${sm ? `. SRS is at $${aimF(sm.v, 'bn')}bn, <b>${aimF(sm.v / lv - 1, 'pct')} vs Street</b>` : ''}.</p>` : '';
+      h += `<div class="aim-ctl">${aimSeg('Company', 'co', ['Total', 'MSFT', 'GOOGL', 'AMZN', 'META', 'ORCL'].filter(c => cos.includes(c)).map(c => [c, c === 'Total' ? 'Big-5 total' : c]), co)}</div>`;
+      h += aimFig('rev', 'Street capex estimate for each year, as it stood at each quarter-end', '$bn · ' + (co === 'Total' ? 'MSFT + GOOGL + AMZN + META + ORCL' : co), { kind: 'lines', h: 270, cats: snaps, tipH: snaps.map((s, i) => `${s} · ${fmtD(arr(d.dates)[i])}, ${String(arr(d.dates)[i] || '').slice(0, 4)}`), series: S, marks, f: 'bn', ax: 'bn', endW: 104, aria: 'Street consensus capex by fiscal year at each quarter-end' }, aimLegL(S, marks.length ? '<span><i class="aim-dk"></i>SRS estimate for that year</span>' : ''));
+      const twin = { id: 'rev_twin', title: `Street capex estimates at each quarter-end (${co === 'Total' ? 'Big-5 total' : co})`, cols: snaps, rows: ser.map(s => ({ l: s.fy, v: arr((s.cos || {})[co]), f: 'bn' })), src: d.src, unit: '$bn' };
+      return h + aimTable(sv, true) + aimTable(twin) + aimTable(aimT('revisions', 'street_by_co'));
+    },
+    compute() {
+      const M = { gw: ['xpu_gw', 'GW deployed', 'gw', 'GW'], rev: ['xpu_rev', 'Revenue', 'bn', '$bn'], units: ['xpu_units', 'Units shipped', 'num2', 'mm units'] }, m = M[AIM.cmp] || M.gw, t = aimT('compute', m[0]);
+      if (!t) return none('The accelerator model is not in the stored model data.');
+      const e = aimEst(t), cats = aimCats(t), last = cats.length - 1, share = AIM.cmpMode === 'share';
+      const S = ['NVDA', 'AMD', 'Google TPU', 'AWS Trainium', 'OpenAI ASIC', 'Other ASICs'].map((nm, k) => { const r = arr(t.rows).find(x => x.l === nm); return r && { n: nm, v: r.v, c: AIM_C[k] }; }).filter(Boolean);
+      const tot = aimR(t, /^Total/), g = aimT('compute', 'xpu_gw'), as = aimR(g, /^ASIC share/), ms = aimR(g, /^Merchant/), ge = aimEst(g), g2 = g ? Math.min(ge + 2, g.cols.length - 1) : -1;
+      let h = as && ge >= 0 ? `<p class="aim-lede">ASICs go from <b>${aimF(as.v[ge], 'pct')} of GW deployed in ${esc(aimCats(g)[ge])} to ${aimF(as.v[g2], 'pct')} in ${esc(aimCats(g)[g2])}</b>${ms ? `; NVIDIA and AMD fall from ${aimF(ms.v[ge], 'pct')} to ${aimF(ms.v[g2], 'pct')}` : ''}. Merchant GPUs earn far more revenue per GW than ASICs, so their revenue share stays higher than their GW share.</p>` : '';
+      h += `<div class="aim-ctl">${aimSeg('Measure', 'cmp', [['gw', 'GW deployed'], ['rev', 'Revenue'], ['units', 'Units']], AIM.cmp)}${aimSeg('Scale', 'mode', [['share', 'Share of total'], ['abs', 'Absolute']], AIM.cmpMode)}</div>`;
+      h += aimFig('xpu', `${m[1]} by accelerator`, share ? 'share of total' : m[3], { cats, est: e, series: S, share, f: m[2], ax: 'num', tot: tot && tot.v, labels: share ? [] : [e - 1, e, Math.min(e + 1, last), last], aria: `${m[1]} by accelerator vendor` }, aimLeg(S));
+      return h + aimTable(t, true) + ['xpu_gw', 'xpu_rev', 'xpu_units', 'xpu_rpg'].filter(id => id !== m[0]).map(id => aimTable(aimT('compute', id))).join('');
+    },
+    econ() {
+      const ar = aimT('econ', 'ai_revenue'), by = aimT('econ', 'econ_buyer');
+      let h = '', figs = '';
+      if (ar) {
+        const pick = re => aimR(ar, re), oth = [pick(/^Coding apps/), pick(/^Other model hosts/)].filter(Boolean);
+        let S = [[/^OpenAI$/, 'OpenAI'], [/^Anthropic$/, 'Anthropic'], [/^AWS Bedrock/, 'AWS Bedrock'], [/^Google/, 'Google'], [/^Microsoft Foundry/, 'Microsoft Foundry']].map(([re, nm], k) => { const r = pick(re); return r && { n: nm, v: r.v, c: AIM_C[k] }; }).filter(Boolean);
+        if (oth.length) S.push({ n: 'Coding apps & other hosts', v: ar.cols.map((c, i) => oth.reduce((a, r) => aimN(r.v[i]) == null ? a : (a || 0) + r.v[i], null)), c: AIM_C[5] });
+        let cats = aimCats(ar), e = aimEst(ar), tot = aimR(ar, /^Total$/), k0 = 0;
+        while (k0 < cats.length - 1 && S.every(s => aimN(s.v[k0]) == null)) k0++;
+        if (k0) { cats = cats.slice(k0); e -= k0; S = S.map(s => Object.assign({}, s, { v: s.v.slice(k0) })); }
+        const tv = tot ? tot.v.slice(k0) : null, i1 = Math.min(e + 1, cats.length - 1), lab = S.slice(0, 2).reduce((a, s) => a + (aimN(s.v[i1]) || 0), 0);
+        if (tv && aimN(tv[i1])) h += `<p class="aim-lede">AI revenue (model and platform layer, no double counting) reaches <b>$${aimF(tv[i1], 'bn')}bn in ${esc(cats[i1])}</b>, with OpenAI and Anthropic ${aimF(lab / tv[i1], 'pct')} of it.`;
+        figs += aimFig('airev', 'AI revenue by company', '$bn', { cats, est: e, series: S, f: 'bn', ax: 'bn', tot: tv, labels: [e - 1, e, i1, cats.length - 1], aria: 'AI revenue by company in $bn' }, aimLeg(S));
+      }
+      const irr = aimR(by, /^Unlevered IRR/);
+      if (irr) {
+        const e = aimEst(by), cats = aimCats(by), vs = irr.v.map(aimN), mn = vs.indexOf(Math.min(...vs.filter(v => v != null)));
+        if (h && e >= 0) h += ` A GPU bought in ${esc(cats[e])} earns an unlevered IRR of <b>${aimF(vs[e], 'pct')}</b>, against ${aimF(vs[0], 'pct')} for the ${esc(cats[0])} vintage.`;
+        figs += aimFig('irr', 'GPU rental: unlevered IRR by vintage', 'each column is the year the GPUs were bought', { cats, est: e, series: [{ n: 'Unlevered IRR', v: irr.v, c: AIM_C[0] }], f: 'pct', ax: 'pct', labels: [0, e, mn, cats.length - 1], aria: 'GPU rental unlevered IRR by vintage' });
+      }
+      if (h) h += '</p>';
+      h += `<div class="aim-g2">${figs}</div>`;
+      const dl = aimByDate(aimDoc('econ').deals);
+      h += aimList('Compute rental deals: what the contracts imply', aimDoc('econ').deals_src, [['deal', 'Deal', ''], ['date', 'Announced', 'd'], ['value_bn', '$bn', 'bn'], ['years', 'Years', 'num1'], ['annual_bn', '$bn / yr', 'num2'], ['chip', 'Chip', ''], ['mw', 'MW', 'int'], ['gpus', 'GPUs', 'int'], ['rev_mw', '$mm rev / MW', 'num1'], ['gpu_hr', '$ / GPU-hr', 'usd2'], ['prepay', 'Prepay', 'pct'], ['irr', 'IRR', 'pct'], ['ebitda', 'EBITDA margin', 'pct']], dl, true, 'Revenue per MW, $/GPU-hour, IRR and EBITDA margin are the model’s estimates for each contract.');
+      return h + aimTable(by, true) + ['rental_pricing', 'econ_hw', 'econ_provider', 'econ_user', 'ai_revenue', 'hyperscaler_ai_rev', 'fleet_return'].map(id => aimTable(aimT('econ', id))).join('');
+    },
+    labs() {
+      const d = aimDoc('labs'), A = d.arr || {}, keys = Object.keys(A);
+      let h = '';
+      if (keys.length) {
+        const mk = s => String(s).slice(0, 7), months = [...new Set(keys.flatMap(k => arr(A[k]).map(p => mk(p[0]))))].filter(m => m >= '2025-01').sort();
+        const now = new Date().toISOString().slice(0, 7), dash = months.findIndex(m => m >= now);
+        const S = keys.map((k, j) => { const mp = new Map(arr(A[k]).map(p => [mk(p[0]), aimN(p[1])])); return { n: k, v: months.map(m => mp.has(m) ? mp.get(m) : null), c: AIM_C[j], dash: dash > 0 ? dash : null }; });
+        const lbl = m => new Date(m + '-15T12:00:00').toLocaleDateString('en-US', { month: 'short', year: '2-digit' }), lblL = m => new Date(m + '-15T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+        const o = S.find(s => s.n === 'OpenAI'), a = S.find(s => s.n === 'Anthropic');
+        const x = o && a ? months.findIndex((m, i) => aimN(a.v[i]) != null && aimN(o.v[i]) != null && a.v[i] > o.v[i]) : -1;
+        const lastBoth = o && a ? months.map((m, i) => aimN(a.v[i]) != null && aimN(o.v[i]) != null ? i : -1).filter(i => i >= 0).pop() : null;
+        if (x >= 0) h += `<p class="aim-lede">In the model, Anthropic’s run-rate revenue passed OpenAI’s in <b>${esc(lblL(months[x]))}</b>${lastBoth != null ? `; by ${esc(lblL(months[lastBoth]))} it was $${aimF(a.v[lastBoth], 'bn')}bn against $${aimF(o.v[lastBoth], 'bn')}bn` : ''}.</p>`;
+        h += aimFig('arr', 'Annualized revenue run-rate, by month', '$bn · later months are the model’s path, not reported; the dashed segment starts at the current month', { kind: 'lines', h: 250, cats: months.map(lbl), tipH: months.map(lblL), series: S, f: 'bn', ax: 'bn', endW: 100, aria: 'OpenAI and Anthropic annualized revenue run-rate by month' }, aimLegL(S, dash > 0 ? '<span><i class="aim-lk dash"></i>Model path</span>' : ''));
+      }
+      const ar = d.anth_rev;
+      if (ar && arr(ar.rows).length) h += aimTable({ title: 'Anthropic revenue forecasts, by version of the model', cols: arr(ar.dates).map(x => 'Model of ' + fmtD(x) + ', ' + String(x).slice(0, 4)), rows: ar.rows.map(r => ({ l: String(r[0]), v: r.slice(1), f: 'bn' })), src: ar.src, unit: '$bn' }, true);
+      h += aimTable(aimT('labs', 'oai_pl'), true) + aimTable(aimT('labs', 'anth_pl'), true);
+      const cm = d.commitments, og = d.oai_gw;
+      const yrsT = (o, f, title, src) => o && arr(o.rows).length ? { title, cols: arr(o.years).map(String).concat('Total'), rows: o.rows.map(r => ({ l: `${r.who} · ${r.how}`, v: arr(r.y).concat(r.total), f })).concat([{ l: 'Total', b: 1, f, v: arr(o.years).map((y, i) => o.rows.reduce((s, r) => s + (aimN(arr(r.y)[i]) || 0), 0)).concat(o.rows.reduce((s, r) => s + (aimN(r.total) || 0), 0)) }]), src: src || o.src, unit: f === 'gw' ? 'GW' : '$bn' } : null;
+      h += aimTable(yrsT(cm, 'bn', 'OpenAI compute commitments, by counterparty and year')) + aimTable(yrsT(og, 'gw', 'OpenAI compute commitments in GW', cm && cm.src));
+      const su = d.sources_uses;
+      if (su) h += aimList('OpenAI sources of capital', su.src, [['item', 'Source', ''], ['date', 'Date', 'd'], ['bn', '$bn', 'bn'], ['val', 'Valuation ($bn)', 'int'], ['who', 'From', 'w']], aimByDate(su.sources)) +
+        aimList('OpenAI uses of capital', su.src, [['item', 'Use', ''], ['bn', '$bn', 'bn']], arr(su.uses), false, aimN(su.gap) != null ? `The model’s funding gap (sources less uses): −$${aimF(Math.abs(su.gap), 'bn')}bn.` : '', r => /commitments$/i.test(r.item));
+      return h + ['oai_projections', 'oai_cash', 'anth_gw'].map(id => aimTable(aimT('labs', id))).join('');
+    },
+    fin() {
+      const ms = aimT('fin', 'market_su'), sp = aimT('fin', 'spreads'), ig = aimT('fin', 'ig_share'), f = aimDoc('fin');
+      let h = '', figs = '';
+      if (ms) {
+        const e = aimEst(ms), cats = aimCats(ms);
+        const S = [[/^Hyperscaler cash flow/, 'Hyperscaler cash flow'], [/^AI-related public credit/, 'Public credit (IG + HY)'], [/^Equity/, 'Equity, converts, preferred'], [/^Project financing/, 'Project financing'], [/^Private credit/, 'Private credit']].map(([re, nm], k) => { const r = aimR(ms, re); return r && { n: nm, v: r.v, c: AIM_C[k] }; }).filter(Boolean);
+        const use = aimR(ms, /^Total AI capex \(uses\)/), gap = aimR(ms, /^Sources minus uses/), tot = aimR(ms, /^Total sources/);
+        const gi = gap ? gap.v.findIndex((v, i) => i >= e && aimN(v) != null && v < 0) : -1;
+        if (gi >= 0) h += `<p class="aim-lede">Funding covers AI capex until ${esc(cats[gi - 1] || '')}; in <b>${esc(cats[gi])} the model shows a gap of −$${aimF(Math.abs(gap.v[gi]), 'bn')}bn</b>${gap.v[gi + 1] != null ? `, widening to −$${aimF(Math.abs(gap.v[gi + 1]), 'bn')}bn in ${esc(cats[gi + 1])}` : ''}.`;
+        figs += aimFig('su', 'Sources of AI funding vs AI capex', '$bn · columns = sources, line = capex', { cats, est: e, series: S, f: 'bn', ax: 'bn', tot: tot && tot.v, totName: 'Total sources', line: use && { n: 'Total AI capex (uses)', v: use.v }, aria: 'Sources of AI funding against AI capex' }, aimLeg(S, use && { n: 'AI capex (uses)' }));
+      }
+      const igs = aimR(ig, /^Hyperscaler share of IG/);
+      if (h && igs) h += ` Hyperscalers were <b>${aimF(igs.v[igs.v.length - 1], 'pct')} of investment-grade issuance in ${esc(ig.cols[ig.cols.length - 1])}</b>, from ${aimF(igs.v[igs.v.length - 2], 'pct')} in ${esc(ig.cols[ig.cols.length - 2])}.`;
+      if (sp) {
+        const hs = aimR(sp, /^Hyperscaler average/), im = aimR(sp, /^IG market$/), df = aimR(sp, /^IG market minus/), n = sp.cols.length;
+        if (h && df && aimN(df.v[n - 1]) != null) h += ` Their 10-year spreads now sit ${df.v[n - 1] < 0 ? `<b>${aimF(-df.v[n - 1], 'int')}bp wide of</b>` : `<b>${aimF(df.v[n - 1], 'int')}bp inside</b>`} the IG market${aimN(df.v[n - 2]) != null ? ` (${df.v[n - 2] < 0 ? aimF(-df.v[n - 2], 'int') + 'bp wide' : aimF(df.v[n - 2], 'int') + 'bp inside'} at the end of ${esc(sp.cols[n - 2])})` : ''}.`;
+        if (hs && im) { const S2 = [{ n: 'Hyperscaler average', short: 'Hyperscalers', v: hs.v, c: AIM_C[0] }, { n: 'IG market', short: 'IG market', v: im.v, c: AIM_C[1] }]; figs += aimFig('spr', '10-year Z-spread: hyperscalers vs the IG market', 'bp · year-end, latest year to date', { kind: 'lines', cats: sp.cols.map(String), series: S2, f: 'int', ax: 'num', zero: false, endW: 112, aria: '10-year Z-spreads of hyperscalers and the IG market' }, aimLegL(S2)); }
+      }
+      if (h) h += '</p>';
+      h += `<div class="aim-g2">${figs}</div>` + aimTable(ms, true) + aimTable(aimT('fin', 'hyper_su'), true);
+      h += aimList('30-year hyperscaler bonds: new-issue concession', f.bonds_src, [['bond', 'Bond', ''], ['date', 'Priced', 'd'], ['size_bn', '$bn', 'bn'], ['z', 'New-issue Z (bp)', 'int'], ['pre', 'Curve before (bp)', 'int'], ['nic', 'Concession (bp)', 'num1']], aimByDate(f.bonds), true);
+      const c = f.circular || {};
+      h += aimList('Circular financing: who funds whom', c.src, [['from', 'From', ''], ['to', 'To', ''], ['eco', 'Ecosystem', ''], ['date', 'Date', 'd'], ['type', 'Type', ''], ['bn', '$bn', 'bn'], ['deal', 'Deal', 'w']], aimByDate(c.mega), false, arr(c.sources).length ? 'Funders: ' + arr(c.sources).filter(x => aimN(x.bn)).map(x => `${x.who} $${aimF(x.bn, 'bn')}bn`).join(', ') + '. Recipients: ' + arr(c.uses).filter(x => aimN(x.bn)).map(x => `${x.who} $${aimF(x.bn, 'bn')}bn`).join(', ') + '.' : '');
+      h += aimList('Supply-chain investments by the chip vendors', c.src, [['from', 'From', ''], ['to', 'To', ''], ['eco', 'Area', ''], ['date', 'Date', 'd'], ['type', 'Type', ''], ['bn', '$bn', 'bn'], ['deal', 'Deal', 'w']], aimByDate(c.supply_chain));
+      h += aimList('Project financing deals', f.project_src, [['who', 'Borrower', ''], ['what', 'Structure', ''], ['bn', '$bn', 'bn'], ['date', 'Year', 'd'], ['detail', 'Detail', 'w']], arr(f.project));
+      h += aimList('Private debt financings', f.debt_src, [['who', 'Borrower', ''], ['investors', 'Lenders', 'w'], ['date', 'Date', 'd'], ['bn', '$bn', 'bn'], ['pricing', 'Pricing', ''], ['structure', 'Structure', ''], ['notes', 'Notes', 'w']], aimByDate(f.debt));
+      return h + ['ai_capex_co', 'leverage', 'ig_share', 'spreads', 'ai_wfe'].map(id => aimTable(aimT('fin', id))).join('');
+    },
+    supply() {
+      const t = aimT('supply', 'wfe'); let h = '';
+      if (t) {
+        const e = aimEst(t), cats = aimCats(t), last = cats.length - 1, i1 = Math.min(e + 1, last);
+        const S = [[/^Foundry/, 'Foundry / logic'], [/^DRAM/, 'DRAM'], [/^NAND/, 'NAND']].map(([re, nm], k) => { const r = aimR(t, re); return r && { n: nm, v: r.v, c: AIM_C[k] }; }).filter(Boolean);
+        const tot = aimR(t, /^SRS base-case WFE/), st = aimR(t, /^Street$/), sa = aimR(t, /^SemiAnalysis/);
+        if (tot && e >= 0) h += `<p class="aim-lede">SRS’s base case has wafer fab equipment at <b>$${aimF(tot.v[e], 'bn')}bn in ${esc(cats[e])} and $${aimF(tot.v[i1], 'bn')}bn in ${esc(cats[i1])}</b>${st && aimN(st.v[e]) != null ? `, against the Street at $${aimF(st.v[e], 'bn')}bn for ${esc(cats[e])}` : ''}${sa && aimN(sa.v[i1]) != null ? ` and SemiAnalysis at $${aimF(sa.v[i1], 'bn')}bn for ${esc(cats[i1])}` : ''}.</p>`;
+        h += aimFig('wfe', 'Wafer fab equipment, SRS base case', '$bn', { cats, est: e, series: S, f: 'bn', ax: 'bn', tot: tot && tot.v, totName: 'SRS base-case WFE', labels: [e - 1, e, i1, last], aria: 'Wafer fab equipment by segment in $bn' }, aimLeg(S));
+      }
+      h += aimTable(t, true);
+      const sc = arr(aimDoc('supply').semicap);
+      h += aimList('Semicap at the SRS WFE numbers: implied EPS and share prices', aimDoc('supply').semicap_src, [['t', 'Ticker', ''], ['year', 'Year', 'd'], ['wfe', 'WFE assumed ($bn)', 'int'], ['px', 'Price in the model', 'usd2'], ['eps_st', 'Street EPS', 'usd2'], ['eps_srs', 'SRS EPS', 'usd2'], ['vs_st', 'SRS vs Street', 'pct'], ['pe', 'P/E (x)', 'int'], ['target', 'Implied price', 'usd2'], ['updown', 'Upside', 'pct']], sc, true, 'Share prices are the ones carried in the model, not live quotes.');
+      return h + ['hbm_balance', 'hbm_rev', 'cowos', 'semi_capex', 'net_tam'].map(id => aimTable(aimT('supply', id))).join('');
+    }
+  };
+  function aimHosts() {
+    const hs = aimDoc('capex').hosts; if (!hs || !arr(hs.rows).length) return null;
+    const rows = [];
+    hs.rows.forEach(r => { rows.push({ l: r.host, v: r.gw, f: 'gw', b: 1 }); if (arr(r.oai).length) rows.push({ l: 'OpenAI share', v: r.oai, f: 'pct', ind: 1 }); if (arr(r.anth).length) rows.push({ l: 'Anthropic share', v: r.anth, f: 'pct', ind: 1 }); });
+    const cb = aimT('capex', 'capex_build');
+    return { title: 'AI data center capacity by host, and the labs’ share of it', cols: arr(hs.years).map(String), rows, src: hs.src, unit: 'GW', est_from: cb ? cb.est_from : null };
+  }
+  function aimNotes() {
+    const m = aimDoc('meta'), cb = aimT('capex', 'capex_build'), y = '2027';
+    const totals = [[aimAt(cb, /^Total AI capex$/, y), 'components (AI Master Model, Overview)'], [aimAt(aimT('capex', 'spenders'), /^Total AI capex \(spender view\)/, y), 'spenders: hyperscalers, neoclouds and China (AI Master Model, Overview)'], [aimAt(aimT('econ', 'econ_hw'), /^Industry AI capex/, y), 'industry capex (AI Economics Master)'], [aimAt(aimT('fin', 'market_su'), /^Total AI capex \(uses\)/, y), 'uses of funds (AI Financings)']].filter(x => x[0] != null);
+    const sv = aimT('revisions', 'srs_vs_street'), srs = aimAt(sv, /^SRS Big-5 capex/, y), st = aimAt(sv, /^Street Big-5 capex/, y), fc = aimAt(aimT('fin', 'ai_capex_co'), /^Total$/, y);
+    const pl = [aimAt(aimT('labs', 'oai_pl'), /^Revenue$/, y), aimAt(aimT('labs', 'anth_pl'), /^Revenue$/, y)], ep = aimAt(aimT('econ', 'econ_provider'), /^Revenue$/, y);
+    const ar = aimT('econ', 'ai_revenue'), ea = [aimAt(ar, /^OpenAI$/, y), aimAt(ar, /^Anthropic$/, y)];
+    const asof = m.asof || {};
+    return `<details class="fr aim-notes"><summary>Model notes and caveats</summary><ul class="b">` +
+      `<li>Loaded from ${arr(m.files).map(x => esc(String(x.name || '').replace(/\.xlsx$/i, '').replace(/_/g, ' '))).join(', ')} on ${esc(fmtD(m.built_at))}.${asof.compute ? ` Accelerator data as of ${esc(asof.compute)}.` : ''}${asof.revisions ? ` Street capex history runs through ${esc(asof.revisions)}.` : ''} Values are as calculated in the workbooks.</li>` +
+      (totals.length > 1 ? `<li>The models carry different totals for ${y}E AI capex: ${totals.map(([v, l]) => `$${aimF(v, 'bn')}bn from ${esc(l)}`).join('; ')}. They are built from different inputs and scopes, so compare numbers within a view rather than across views.</li>` : '') +
+      (srs != null && st != null && fc != null ? `<li>Hyperscaler capex differs by model. The AI Master Model’s SRS estimate for the Big-5 in ${y}E is $${aimF(srs, 'bn')}bn, ${aimF(srs / st - 1, 'pct')} vs the Street’s $${aimF(st, 'bn')}bn. The AI Financings model’s hyperscaler AI capex case, used in the Financing view, is $${aimF(fc, 'bn')}bn.</li>` : '') +
+      (pl.every(v => v != null) && ep != null && ea.every(v => v != null) ? `<li>OpenAI plus Anthropic revenue in ${y}E is $${aimF(pl[0] + pl[1], 'bn')}bn in the AI Master Model’s P&amp;Ls (built on the companies’ own projections), $${aimF(ep, 'bn')}bn in the AI Economics Master summary, and $${aimF(ea[0] + ea[1], 'bn')}bn in its AI revenue by company.</li>` : '') +
+      `<li>Caveats that apply to one table (broken networking rows, the HBM supply placeholder) sit under that table. Bond sizes on the Financings model’s Issuance sheet don’t reconcile and are not used.</li>` +
+      `<li>To load new model versions, run <code>store/build_ai_models.py</code> on the new files and write each output document to this page’s database collection <code>ai_models</code>.</li></ul></details>`;
+  }
+  function aimSectionHtml() {
+    const m = aimDoc('meta'), files = arr(m.files).map(x => String(x.name || '').replace(/\.xlsx$/i, '').replace(/_/g, ' '));
+    let h = `<section class="panel" id="ai-models"><div class="panel-h"><h2>SRS AI models</h2><span class="sub">${files.length ? esc(files.join(' · ')) : 'AI Master Model · AI Economics Master · AI Financings'}${m.built_at ? ' · loaded ' + esc(fmtD(m.built_at)) : ''}</span></div>`;
+    if (!AIM.docs) return h + `<p class="sub${AIM.err ? ' c-neg' : ''}">${esc(AIM.err || 'Loading the SRS model data…')}</p></section>`;
+    if (!AIM_V[AIM.view]) AIM.view = 'capex';
+    const calls = arr(m.calls);
+    if (calls.length) h += `<div class="summary aim-calls">${calls.map(c => `<div class="stat"><button type="button" data-aim="view:${esc(c.view || 'capex')}" title="Open ${esc((AIM_VIEWS.find(v => v[0] === c.view) || [, ''])[1])}"><span class="v${c.tone === 'neg' ? ' c-neg' : c.tone === 'pos' ? ' c-pos' : ''}">${esc(c.v)}</span><span class="l">${esc(c.l)}</span></button></div>`).join('')}</div>`;
+    h += `<div class="seg aim-seg" role="group" aria-label="Model view">${AIM_VIEWS.map(([k, l]) => `<button type="button" data-aim="view:${k}" aria-pressed="${AIM.view === k}">${esc(l)}</button>`).join('')}</div>`;
+    return h + `<div id="aim-body" class="aim-view">${aimViewHtml()}</div>${aimNotes()}<div class="aim-tip" role="presentation" hidden></div></section>`;
+  }
+  function aimViewHtml() {
+    AIM.cfg = {}; AIM.tips = {};
+    try { return AIM_V[AIM.view](); } catch (e) { return none('This view could not be built from the stored model data.'); }
+  }
+  function aimDraw(sec) {
+    sec.querySelectorAll('.aim-chart[data-ch]').forEach(el => {
+      const cfg = AIM.cfg[el.dataset.ch]; if (!cfg) return;
+      const W = Math.max(260, Math.floor(el.clientWidth));
+      try { el.innerHTML = cfg.kind === 'lines' ? aimLines(cfg, W) : aimCols(cfg, W); } catch (e) { el.innerHTML = none('This chart could not be drawn.'); }
+    });
+  }
+  function aimMount() {
+    const sec = document.getElementById('ai-models'); if (!sec || !AIM.docs) return;
+    sec.addEventListener('click', e => {
+      const b = e.target.closest && e.target.closest('[data-aim]'); if (!b || !sec.contains(b)) return;
+      const [k, v] = b.dataset.aim.split(':');
+      if (k === 'view') { AIM.view = v; try { localStorage.setItem('td-aim-view', v); } catch (x) {} } else if (k === 'co') AIM.revCo = v; else if (k === 'cmp') AIM.cmp = v; else if (k === 'mode') AIM.cmpMode = v;
+      const body = sec.querySelector('#aim-body'); if (!body) return;
+      body.innerHTML = aimViewHtml();
+      sec.querySelectorAll('.aim-seg [data-aim]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.aim === 'view:' + AIM.view)));
+      aimDraw(sec);
+      if (k === 'view' && b.closest('.aim-calls')) { const s = sec.querySelector('.aim-seg'); if (s && s.getBoundingClientRect().top < 60) s.scrollIntoView({ block: 'start' }); }
+    });
+    const tip = sec.querySelector('.aim-tip');
+    const show = (g, x, y) => {
+      const [nm, i] = String(g.dataset.tip || '').split(':'), d = (AIM.tips[nm] || [])[+i]; if (!d || !tip) return;
+      tip.textContent = '';
+      const hd = document.createElement('div'); hd.className = 'aim-tip-h'; hd.textContent = d.h; tip.appendChild(hd);
+      d.rows.forEach(r => { const row = document.createElement('div'), k = document.createElement('i'), v = document.createElement('b'), s = document.createElement('span'); row.className = 'aim-tip-r' + (r.b ? ' tot' : ''); if (r.c) k.style.background = r.c; v.textContent = r.v; s.textContent = r.n; row.append(k, v, s); tip.appendChild(row); });
+      tip.hidden = false;
+      const tw = tip.offsetWidth, th = tip.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
+      let lx = x + 14, ly = y + 14; if (lx + tw > vw - 8) lx = x - tw - 14; if (lx < 8) lx = 8; if (ly + th > vh - 8) ly = y - th - 14; if (ly < 8) ly = 8;
+      tip.style.left = lx + 'px'; tip.style.top = ly + 'px';
+    };
+    const hide = () => { if (tip) tip.hidden = true; };
+    const at = e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g && sec.contains(g)) show(g, e.clientX, e.clientY); else hide(); };
+    sec.addEventListener('pointermove', at); sec.addEventListener('pointerdown', at); sec.addEventListener('pointerleave', hide);
+    sec.addEventListener('focusin', e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g) { const r = g.getBoundingClientRect(); show(g, r.left + r.width / 2, r.top + 8); } });
+    sec.addEventListener('focusout', hide);
+    if (!AIM.sc) { AIM.sc = 1; window.addEventListener('scroll', () => { const t = document.querySelector('#ai-models .aim-tip'); if (t) t.hidden = true; }, { passive: true }); }
+    aimDraw(sec);
+    if (window.ResizeObserver) { if (AIM.ro) AIM.ro.disconnect(); AIM.w = sec.clientWidth; AIM.ro = new ResizeObserver(() => { const w = sec.clientWidth; if (Math.abs(w - AIM.w) > 6) { AIM.w = w; requestAnimationFrame(() => aimDraw(sec)); } }); AIM.ro.observe(sec); }
+  }
+  function aimLoad(done) {
+    if (AIM.loaded) return; AIM.loaded = true;
+    const to = setTimeout(() => { if (!AIM.docs) { AIM.err = 'The SRS model data did not load in this view.'; done(); } }, 10000);
+    (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai_models').get() : null)
+      .then(snap => { clearTimeout(to); const o = {}; (snap ? snap.docs : []).forEach(d => { if (d.exists) o[d.id] = JSON.parse(JSON.stringify(d.data())); }); if (Object.keys(o).length) { AIM.docs = o; AIM.err = ''; } else AIM.err = snap ? 'No SRS model data is stored in this page yet.' : 'The SRS model data is not available in this view.'; done(); })
+      .catch(() => { clearTimeout(to); AIM.err = 'The SRS model data could not be read from this page’s database.'; done(); });
+  }
   function renderAI() {
     const host = document.getElementById('v-ai'); if (!host) return;
     const st = AI.st, meta = new Map(arr((D.dp_index || {}).meta).map(m => [m.rid, m]));
     const f1 = v => v == null ? '–' : (+v).toFixed(1);
     const paint = () => {
-      let h = head('AI', 'AI infrastructure', 'Where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
-        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
+      let h = head('AI', 'AI infrastructure', 'SRS’s own AI models (capex, accelerator share, economics, financing, supply chain), where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
+        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
+      // ---- 0) SRS AI models (page database, collection "ai_models") ----
+      h += aimSectionHtml();
       // ---- 1) data centers by state ----
       if (!AI_DC.rows.length) h += `<section class="panel" id="ai-dc"><h2>Data centers: gigawatts by state and political risk</h2><p class="sub">${esc(AI.dcErr || 'Loading the state figures…')}</p><h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
       else {
@@ -1920,7 +2295,7 @@
         `<label for="ai-tone">Read <select id="ai-tone"><option value="">All</option><option value="tight"${st.tone === 'tight' ? ' selected' : ''}>Supply tight / demand ahead</option><option value="loose"${st.tone === 'loose' ? ' selected' : ''}>Loosening / digestion</option></select></label>` +
         `<label for="ai-days">Window <select id="ai-days">${[[30, '1 month'], [90, '3 months'], [180, '6 months'], [100000, 'All']].map(([v, l]) => `<option value="${v}"${+st.days === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>` +
         `<label for="ai-q">Search <input type="search" id="ai-q" value="${esc(st.q)}" placeholder="Ticker or word"></label></div><div id="ai-cmp">${aiRowsHtml('compute')}</div></section>`;
-      host.innerHTML = h; wire();
+      host.innerHTML = h; wire(); aimMount();
       const sub = (location.hash.split('/')[1] || ''); host.querySelectorAll('.sk-tabs a').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#ai/' + sub));
       if (sub) { const el = document.getElementById('ai-' + (sub === 'dc' ? 'dc' : sub)); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); }
       const qh = document.getElementById('ai-qr'); if (qh && window.__qrMount) { const co = (window.__qrFind && window.__qrFind('ALAB')) || { t: 'ALAB', bbg: 'ALAB US', name: 'Astera Labs' }; try { window.__qrMount(qh, co); } catch (e) { qh.innerHTML = none('The Visible Alpha table could not load here.'); } }
@@ -1962,6 +2337,7 @@
       cmpSummary();
     }
     paint();
+    aimLoad(paint);
     if (!AI.dcLoaded) { AI.dcLoaded = true; (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('dc_states').get() : null)
       .then(sn => { if (sn && sn.exists) Object.assign(AI_DC, JSON.parse(JSON.stringify(sn.data()))); else AI.dcErr = 'The state data center figures are not loaded in this view.'; paint(); })
       .catch(() => { AI.dcErr = 'The state data center figures could not be read from this page’s database.'; paint(); }); }

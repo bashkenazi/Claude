@@ -50,3 +50,18 @@ Everything the page shows is also written to Supabase so it can be read back as 
 (see `store/schema.sql`). `store/parse_reviews.py <scratch>` parses the built page plus the review
 markdown into `parsed.json`; `store/reviews_to_sql.py <scratch>` turns that into idempotent upsert batches.
 Full review text (`earnings_prints.review_md`) loads once the Supabase host is reachable from the session.
+
+## SRS AI models (AI tab › SRS models)
+
+The AI tab's first section shows SRS's AI industry models (AI Master Model, AI Economics Master, AI Financings).
+The numbers live in the page database, collection `ai_models` (docs `meta`, `capex`, `revisions`, `compute`, `econ`,
+`labs`, `fin`, `supply`), not in the built HTML, so the scheduled refreshes never touch them. To load new model versions:
+
+```bash
+python3 store/build_ai_models.py --master AI_Master_Model_vNN.xlsx --econ AI_Economics_Master_vNN.xlsx \
+    --fin AI_Financings_vN.xlsx --out <dir>
+```
+
+then write each `<dir>/<doc>.json` to its document in `ai_models` (ArtifactData `set` with `file_path`, pinned to the
+current version). The extractor finds rows by their labels, so it survives inserted rows; it stops with an error if a
+label it needs is renamed.
