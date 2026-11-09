@@ -802,7 +802,7 @@
     if (!cur) body = `<section class="panel"><h2>Pick a company</h2><p class="sub">Each Tier 1–2 name has six views: the Tech Specialist debate, the thesis tenets, a live Visible Alpha quarterly review, every datapoint organized by its drivers, the earnings-review metrics table, and what management has said over time.</p></section>`;
     else {
       const I = idxOf(cur), n = I ? I.c.length - 1 : 0, pl = PL.get(String(cur.t).toUpperCase()) || PL.get(String(cur.bbg).toUpperCase()), mv = MV.get(String(cur.t).toUpperCase()) || MV.get(String(cur.bbg).toUpperCase());
-      const tabs = [['debate', 'Debate'], ['thesis', 'Thesis'], ['qr', 'Quarterly review'], ['datapoints', 'Datapoints'], ['earnings', 'Earnings metrics'], ['management', 'Management'], ['insiders', 'Questions & insiders']];
+      const tabs = [['debate', 'Debate'], ['thesis', 'Thesis'], ['qr', 'Quarterly review'], ['kpis', 'KPIs & guidance'], ['datapoints', 'Datapoints'], ['earnings', 'Earnings metrics'], ['management', 'Management'], ['insiders', 'Questions & insiders']];
       body = `<section class="panel sk-head"><div class="panel-h"><div><span class="eyebrow">Tier ${esc(cur.tier)} · ${esc(cur.sector)} · ${esc(cur.sub)}</span><h2 style="margin-top:4px">${tk(cur.t)} ${esc(cur.name)}</h2></div>
         <div class="sk-kpis">${mv ? `<span><span class="sub">Today</span> <b class="mono ${+mv.c >= 0 ? 'c-pos' : 'c-neg'}">${sgn(+mv.c)}%</b></span>` : ''}${I ? `<span><span class="sub">Index</span> <b class="mono">${sgn(I.c[n])}</b></span><span><span class="sub">vs univ.</span> <b class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}">${sgn(I.x[n])}</b></span><span><span class="sub">30d Δ</span> <b class="mono">${sgn(I.c[n] - I.c[Math.max(0, n - 4)])}</b></span>` : ''}</div></div>
         ${pl ? `<p class="sk-pitch"><span class="chip ${pl.direction === 'short' ? 'dn' : 'up'}">${esc(pl.direction)}</span> <span class="chip out">${esc(pl.status || '')}</span> ${attr(pl.pitch || '')}${pl.upside && (pl.upside.pct_low != null || pl.upside.pct_high != null) ? ` <b class="mono">${sgn(100 * (pl.upside.pct_high ?? pl.upside.pct_low))}% to target</b>` : ''}</p>` : ''}
@@ -818,6 +818,7 @@
     if (!cur) return;
     if (sub === 'earnings') { $('sk-body').innerHTML = earningsView(cur); return; }
     if (sub === 'insiders') { stockMgView(cur, $('sk-body')); return; }
+    if (sub === 'kpis') { stockKpiView(cur, $('sk-body')); return; }
     if (sub === 'qr') { $('sk-body').innerHTML = `<section class="panel"><div class="panel-h"><h2>Quarterly review</h2><span class="muted">Visible Alpha · live</span></div><div class="qr" id="sk-qr"></div></section>`; qrMount($('sk-qr'), cur); return; }
     getDP().then(({ SRC, ROWS }) => {
       const hp = (location.hash || '').split('/'); if (!document.getElementById('sk-body') || decodeURIComponent(hp[1] || '') !== cur.key || (hp[2] || 'debate') !== sub) return;
@@ -1668,7 +1669,7 @@
     const top = head('𝕏 Feed', 'Twitter / X', 'Only what your X List Monitor agent pulls from your curated X lists, read live from its Notion pages each time you open this tab. Refreshes as the agent runs (up to four times a day).');
     const paint = () => {
       const pg = XT.sel, data = pg && XT.cache.get(pg.id), prev = XT.pages && XT.pages[XT.pages.indexOf(pg) + 1], pdata = prev && XT.cache.get(prev.id);
-      let h = top + `<section class="panel"><div class="ctl">` +
+      let h = top + twDigest() + `<section class="panel"><div class="ctl">` +
         `<label for="x-run">Run <select id="x-run">${arr(XT.pages).slice(0, 20).map(p => `<option value="${esc(p.id)}"${pg && p.id === pg.id ? ' selected' : ''}>${esc((p.title || '').replace(/^📡\s*/, ''))}</option>`).join('')}</select></label>` +
         `<button type="button" id="x-ref" class="btn">↻ Refresh</button>` +
         (pg ? `<a href="${esc(pg.url)}" target="_blank" rel="noopener" class="sub">Open in Notion →</a>` : '') +
@@ -2060,6 +2061,7 @@
     const paint = () => {
       let h = head('Management & insiders', 'Questions for management and insider transactions', 'Questions to ask each company (Canary super analysts, plus your own management-prep pages), what insiders are buying and selling, and what the Canary data sets offer.') +
         `<nav class="sk-tabs" aria-label="Sections"><a href="#mgmt/questions">Questions for management</a><a href="#mgmt/insiders">Insider transactions</a><a href="#mgmt/canary">Canary data sets</a></nav>`;
+      h += mgCallouts(M, I, Q);
       // ---- questions ----
       const cos = arr(Q.companies);
       const prepRuns = arr((D.prep || {}).runs).filter(r => /management-prep/i.test(r.skill || ''));
@@ -2109,6 +2111,216 @@
     paint();
   }
 
+  
+  /* twitter-digest tab v2 */
+  const TW = { list: [], ready: false, err: '' };
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('db').then(db => {
+      if (!db) { TW.err = 'Twitter runs need the page open on claude.ai.'; return; }
+      db.collection('twitter_runs').onSnapshot(snap => {
+        TW.list = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => String(b.id).localeCompare(String(a.id)));
+        TW.ready = true; if ((location.hash || '').startsWith('#x')) renderX(false);
+      }, err => { TW.err = 'Could not load digest runs: ' + ((err && err.code) || 'error'); if ((location.hash || '').startsWith('#x')) renderX(false); });
+    }).catch(() => { TW.err = 'Twitter runs are not available in this view.'; });
+  } else TW.err = 'Twitter runs need the page open on claude.ai.';
+  const twDot = i => ({ very_positive: '🟢🟢', positive: '🟢', mixed: '🔵', negative: '🔴', very_negative: '🔴🔴' })[i] || '';
+  const twLinks = xs => (xs || []).filter(Boolean).map(u => { const h = (String(u).match(/x\.com\/([^/]+)/) || [])[1];
+    const lb = h ? '@' + h : /notion\.(so|com)/.test(String(u)) ? 'Notion page' : 'source';
+    return `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(lb)}</a>`; }).join(' ');
+  const twTk = (t, imp) => t ? `<span class="tk-chip ${/positive/.test(imp || '') ? 'up' : /negative/.test(imp || '') ? 'dn' : ''}">${esc(t)}</span>` : '';
+  const twBold = s => esc(s || '').replace(/\*\*(.+?)\*\*/g, '<b class="n">$1</b>');
+  const twLine = x => `<div class="li"><div class="body">${twDot(x.impact)} ${twTk(x.tk, x.impact)} ${twBold(x.text)} ${twLinks(x.urls)}</div><div class="side">${esc(x.date || '')}</div></div>`;
+  function twRun(r, open) {
+    const c = r.callouts || {}, h = r.hot_topic;
+    const sec = (title, inner) => inner ? `<section class="panel tw-sec"><h3>${title}</h3>${inner}</section>` : '';
+    const list = xs => (xs && xs.length) ? `<div class="list">${xs.map(twLine).join('')}</div>` : '';
+    const hot = h ? `<section class="panel tw-hot"><span class="eyebrow">🔥 Hot topic</span><h2>${twBold(h.title)}</h2>
+      <p class="lede">${twBold(h.what)}</p>
+      <div class="tw-sides"><div><b>Bull:</b> ${twBold(h.bull)}</div><div><b>Bear:</b> ${twBold(h.bear)}</div></div>
+      <div>${(h.tickers || []).map(t => twTk(t.tk, t.impact)).join(' ')} <span class="muted">· why now: ${esc(h.why_now || '')} · ${esc(String(h.accounts ?? ''))} accounts${h.accounts_delta != null ? ` (${h.accounts_delta >= 0 ? '+' : ''}${esc(String(h.accounts_delta))} vs last run)` : ''}</span></div>
+      <div>${twLinks(h.urls)}</div></section>` : '';
+    const callouts = [c.biggest ? `<div class="eyebrow">🎯 Biggest datapoint</div>${list([c.biggest])}` : '',
+      c.positive && c.positive.length ? `<div class="eyebrow">🟢 Most positive</div>${list(c.positive)}` : '',
+      c.negative && c.negative.length ? `<div class="eyebrow">🔴 Most negative</div>${list(c.negative)}` : '',
+      c.inflections && c.inflections.length ? `<div class="eyebrow">🔄 Inflections</div>${list(c.inflections)}` : ''].join('');
+    const changing = (r.changing || []).map(x => `<div class="li"><div class="body">${twTk(x.tk, x.impact)} <b>${esc(x.what || '')}</b>: ${twBold(x.was)} → ${twBold(x.now)} ${twLinks(x.urls)}</div><div class="side">${esc(x.date || '')}</div></div>`).join('');
+    const chat = r.chatter || [];
+    const dl = d => d == null ? '<span class="muted">new</span>' : `<span class="tw-delta ${d > 0 ? 'up' : d < 0 ? 'dn' : ''}">${d > 0 ? '+' : ''}${d}</span>`;
+    const chatT = chat.length ? `<div class="tbl-wrap"><table><thead><tr><th>Ticker / topic</th><th class="n">Mentions</th><th class="n">Accounts</th><th class="n">Δ vs last</th><th>Gist</th></tr></thead><tbody>${chat.map(x =>
+      `<tr><td>${x.kind === 'ticker' ? twTk(x.key) : esc(x.key)}</td><td class="n">${esc(String(x.mentions))}</td><td class="n">${esc(String(x.accounts))}</td><td class="n">${dl(x.delta)}</td><td>${esc(x.gist || '')}</td></tr>`).join('')}</tbody></table></div>` : '';
+    const themes = (r.themes || []).map(t => `<details ${open ? 'open' : ''}><summary>${esc(t.title)}</summary>
+      <ul class="b"><li><b>Changing:</b> ${twBold(t.changing)}</li><li><b>Benefits:</b> ${twBold(t.benefits)}</li><li><b>Loses:</b> ${twBold(t.loses)}</li>
+      <li><b>Evidence:</b> ${twBold(t.evidence)} ${twLinks(t.urls)}</li><li><b>Wrong if:</b> ${twBold(t.wrong_if)}</li></ul></details>`).join('');
+    const dps = r.datapoints || [], byTk = {};
+    dps.forEach(d => (byTk[d.tk || '—'] = byTk[d.tk || '—'] || []).push(d));
+    const dpH = Object.keys(byTk).sort().map(t => `<details><summary>${esc(t)} · ${byTk[t].length}</summary><div class="list">${byTk[t].map(d =>
+      `<div class="li"><div class="body">${twDot(d.impact)} <span class="chip">${esc(d.field_key || '')}</span> <span class="chip out">${esc(d.confidence || '')}</span> ${twBold(d.text)}<br><span class="muted">${esc(d.primary_source || '')} via ${twLinks(d.urls)}</span></div>
+       <div class="side">${esc(d.date || '')}<br><span class="tw-sb">${d.sb ? 'SB #' + esc(String(d.sb)) : d.held ? 'Held: ' + esc(d.held) : 'staged'}</span></div></div>`).join('')}</div></details>`).join('');
+    const sb = r.supabase || {}, inp = r.inputs || {};
+    const inputs = `<details><summary>📥 Inputs</summary><ul class="b">
+      ${(inp.pages || []).map(p => `<li><a class="ext" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a> · ${esc(String(p.posts_read ?? '?'))} read · ${esc(String(p.kept ?? '?'))} kept${p.archived ? ' · archived' : ''}</li>`).join('')}
+      ${(inp.skipped || []).map(p => `<li class="muted">Skipped: ${esc(p.title)} (${esc(p.reason || '')})</li>`).join('')}
+      ${(inp.notes || []).map(n => `<li>${esc(n)}</li>`).join('')}
+      <li>📤 Supabase: ${esc(String(sb.loaded ?? 0))} loaded${sb.ids ? ' (' + esc(sb.ids) + ')' : ''} · ${esc(String(sb.held ?? 0))} held · ${esc(String(sb.dups ?? 0))} duplicates · ${esc(String(sb.failed ?? 0))} failed</li>
+      </ul><p class="muted">${esc(r.footer || '')}</p></details>`;
+    return `<div class="tw-runs">${hot}
+      ${sec('📢 Callouts', callouts)}${sec('🔄 What\'s changing', changing ? `<div class="list">${changing}</div>` : '')}
+      ${sec('📈 Most talked about <span class="muted" style="font-size:12px;font-weight:400">mentions in the Grok pages this run, not all of X</span>', chatT)}
+      ${sec('🧵 Key themes', themes)}${sec('📊 Datapoints <span class="muted" style="font-size:12px;font-weight:400">' + dps.length + ' kept</span>', dpH)}
+      <section class="panel">${inputs}</section></div>`;
+  }
+  function twDigest() {
+    const hd = `<div class="vh"><div class="row"><h2>🧵 Twitter digest</h2><span class="src">twitter-digest skill · filtered datapoints, what changed vs the last run, mention leaderboard</span></div></div>`;
+    if (!TW.ready) return hd + `<section class="panel"><p class="sub">${esc(TW.err || 'Loading digest runs…')}</p></section>`;
+    if (!TW.list.length) return hd + '<section class="panel"><p class="sub">No digest runs yet. Say "run twitter" to Claude.</p></section>';
+    const [cur, ...old] = TW.list;
+    const lbl = r => `${esc(String(r.id).replace(/T(\d\d)(\d\d)$/, ' $1:$2'))} ET · ${esc((r.window && r.window.start) || '')} → ${esc((r.window && r.window.end) || '')}`;
+    return hd.replace('</span></div></div>', ` · latest ${lbl(cur)}</span></div></div>`) + twRun(cur, true)
+      + (old.length ? `<section class="panel"><h3>Earlier digest runs</h3>${old.slice(0, 14).map(r => `<details class="tw-old"><summary>${lbl(r)}${r.hot_topic ? ' · 🔥 ' + esc(r.hot_topic.title) : ''}</summary>${twRun(r, false)}</details>`).join('')}</section>` : '')
+      + `<div class="vh"><div class="row"><h2>📡 Raw run</h2><span class="src">the Grok page as written, read live from Notion</span></div></div>`;
+  }
+
+
+  /* mgmt-callouts v1 */
+  // Callouts for the Management & insiders tab: rank what matters out of ~100 companies' insider trades and
+  // the Canary question lists, so the top of the tab says what to look at first.
+  function mgCallouts(M, I, Q) {
+    const DAY = 864e5, now = Date.now();
+    const days = d => (now - new Date(d + 'T12:00:00').getTime()) / DAY;
+    const csuite = s => /\b(CEO|CFO|COO|CTO|Chief|Chair(man|woman)?|President|Founder)\b/i.test(s || '');
+    const sponsor = s => /sponsor|major holder|10% owner|beneficial owner/i.test(s || '');
+    const isBuy = x => /buy|purchase/i.test(x.buy_sell || x.type || '');
+    const m$ = v => { if (v == null || !isFinite(v)) return '–'; const a = Math.abs(v); return (v < 0 ? '−$' : '$') + (a >= 1e9 ? (a / 1e9).toFixed(1) + 'bn' : a >= 1e6 ? (a / 1e6).toFixed(1) + 'm' : (a / 1e3).toFixed(0) + 'k'); };
+    const cos = arr(I.companies);
+    const trades = [];
+    cos.forEach(c => arr(c.notable).forEach(x => { if (x.date) trades.push({ ...x, t: x.t || c.t, name: x.name || c.name, tier: c.tier, co: c }); }));
+    // caveated rows (e.g. possible off-market transfers) never lead; they go to "verify"
+    const seenV = new Set(), verify = trades.concat(arr(I.top_buys), arr(I.top_sells)).filter(x => x.caveat && !seenV.has(x.t + x.insider + x.date) && seenV.add(x.t + x.insider + x.date));
+    const clean = trades.filter(x => !x.caveat);
+    const score = x => (x.value_usd || 0) * (csuite(x.title) ? 3 : 1) * (x.plan_10b5_1 === false ? 1.5 : 1) * (x.tier === 1 ? 1.5 : 1);
+    const buys30 = clean.filter(x => isBuy(x) && days(x.date) <= 30).sort((a, b) => score(b) - score(a));
+    const sells30 = clean.filter(x => !isBuy(x) && days(x.date) <= 30 && x.plan_10b5_1 !== true && !sponsor(x.title) && csuite(x.title)).sort((a, b) => score(b) - score(a));
+    // a buy below the same insider's earlier buy price = adding on weakness
+    const lowerAdd = x => clean.some(y => y !== x && isBuy(y) && y.insider === x.insider && y.t === x.t && y.date < x.date && y.price && x.price && x.price < y.price * 0.9);
+    const tag = x => [csuite(x.title) ? 'C-suite' : (x.title || 'insider'), x.plan_10b5_1 === false ? 'open-market' : x.plan_10b5_1 === true ? '10b5-1 plan' : '', lowerAdd(x) ? 'adding lower' : '', (x.co && x.co.buyers_6m >= 2) ? x.co.buyers_6m + ' buyers in 6M' : ''].filter(Boolean).join(' · ');
+    const line = (dot, x) => `<li>${dot} ${tk(x.t)} <b>${esc(x.insider || '')}</b> ${isBuy(x) ? 'bought' : 'sold'} <b>${m$(x.value_usd)}</b>${x.price ? ' at ' + esc(x.price) : ''} <span class="sub">${esc(fmtD(x.date))} · ${esc(tag(x))}</span></li>`;
+    // inflections: 30-day buying against 6-month net selling, and clusters
+    const turning = cos.filter(c => (c.buys_30d || {}).value_usd > 0 && (c.net_6m_usd || 0) < 0 && !arr(c.notable).some(x => x.caveat));
+    const clusters = cos.filter(c => (c.buyers_6m || 0) >= 2 && !turning.includes(c) && !arr(c.notable).some(x => x.caveat) && !arr(I.top_buys).some(x => x.caveat && x.t === c.t)).sort((a, b) => (b.buyers_6m - a.buyers_6m) || ((b.buys_6m || {}).value_usd - (a.buys_6m || {}).value_usd));
+    // ask this week: covered names reporting in the next 10 days, with their first Canary question
+    const qcos = arr(Q && Q.companies), up = arr((D.prep || {}).upcoming).filter(u => { const d = -days(u.date); return d >= -0.5 && d <= 10 && (u.tier || 9) <= 2; }).sort((a, b) => a.date.localeCompare(b.date));
+    const key = t => String(t || '').toUpperCase().split(' ')[0];
+    const ask = up.map(u => { const c = qcos.find(q => key(q.t) === key(u.ticker)); const q0 = c && arr(c.questions)[0]; return q0 ? { u, q: q0 } : null; }).filter(Boolean).slice(0, 6);
+    const top = buys30.find(x => csuite(x.title)) || buys30[0];
+    const sec = (title, items) => items.length ? `<div class="mg-co-sec"><div class="eyebrow">${title}</div><ul class="b">${items.join('')}</ul></div>` : '';
+    const body = [
+      top ? `<p class="mg-co-top">🎯 <b>Biggest signal:</b> ${tk(top.t)} ${esc(top.name || '')}: <b>${esc(top.insider || '')}</b> (${esc(top.title || 'insider')}) bought <b>${m$(top.value_usd)}</b>${top.price ? ' at ' + esc(top.price) : ''} on ${esc(fmtD(top.date))}${lowerAdd(top) ? ', adding below an earlier buy' : ''}.</p>` : '',
+      sec('🟢 Insider buying, last 30 days', buys30.filter(x => x !== top).slice(0, 5).map(x => line('🟢', x))),
+      sec('🔴 Discretionary C-suite selling, last 30 days', sells30.slice(0, 5).map(x => line('🔴', x))),
+      sec('🔄 Inflections', turning.slice(0, 3).map(c => `<li>🔄 ${tk(c.t)} insiders buying in the last 30 days (<b>${m$((c.buys_30d || {}).value_usd)}</b>) after net selling of <b>${m$(c.net_6m_usd)}</b> over 6 months</li>`)
+        .concat(clusters.slice(0, 3).map(c => `<li>👥 ${tk(c.t)} cluster: <b>${c.buyers_6m}</b> insiders bought <b>${m$((c.buys_6m || {}).value_usd)}</b> in 6 months</li>`))),
+      sec('❓ Ask this week (reporting in the next 10 days)', ask.map(a => `<li>${tk(a.u.ticker)} <span class="sub">${esc(fmtD(a.u.date))}${a.u.time ? ' ' + esc(a.u.time) : ''} · ${esc(a.q.theme || '')}</span><br>${esc(String(a.q.q || '').slice(0, 260))}${String(a.q.q || '').length > 260 ? '…' : ''}</li>`)),
+      sec('⚠️ Verify before acting', verify.slice(0, 3).map(x => `<li>${tk(x.t)} ${esc(x.insider || '')} ${m$(x.value_usd)} on ${esc(fmtD(x.date))}: ${esc(x.caveat)}</li>`))
+    ].join('');
+    const body2 = body + insSignals();
+    if (!body2) return '';
+    return `<section class="panel mg-callouts"><div class="panel-h"><h2>📢 Callouts</h2><span class="sub">ranked from ${cos.length} companies' insider trades${I.as_of ? ' as of ' + esc(fmtD(I.as_of)) : ''}${qcos.length ? ' and ' + qcos.length + ' Canary question sets' : ''}</span></div>${body2}</section>`;
+  }
+
+
+  /* insider-signals v1 */
+  // Universe-wide insider signals from the page database (insider_signals/latest), refreshed by the
+  // "Insider signals" scheduled task: 10b5-1 step-outs, cessation of selling, option skimming, plan changes.
+  const INS = { doc: null, err: '' };
+  if (window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('db').then(db => { if (!db) return;
+      db.collection('insider_signals').doc('latest').onSnapshot(s => { INS.doc = s && s.exists ? s.data() : null; if ((location.hash || '').startsWith('#mgmt')) renderMgmt(); },
+        e => { INS.err = (e && e.code) || 'error'; });
+    }).catch(() => {});
+  }
+  function insSignals() {
+    const S = INS.doc; if (!S) return `<p class="sub">Universe-wide insider signals (10b5-1 step-outs, cessation of selling, option skimming) load from the Insider signals task${INS.err ? ': ' + esc(INS.err) : '…'}</p>`;
+    const m$ = v => { if (v == null || !isFinite(v)) return '–'; const a = Math.abs(v); return (v < 0 ? '−$' : '$') + (a >= 1e9 ? (a / 1e9).toFixed(1) + 'bn' : a >= 1e6 ? (a / 1e6).toFixed(1) + 'm' : (a / 1e3).toFixed(0) + 'k'); };
+    const who = x => `<b>${esc(x.insider || '')}</b>${x.title ? ` <span class="sub">(${esc(x.title)})</span>` : ''}`;
+    const lk = x => x.link ? ` <a class="ext" href="${esc(x.link)}" target="_blank" rel="noopener">filing</a>` : '';
+    const sec = (title, note, items) => items.length ? `<div class="mg-co-sec"><div class="eyebrow">${title}</div>${note ? `<p class="sub" style="margin:2px 0 4px">${note}</p>` : ''}<ul class="b">${items.join('')}</ul></div>` : '';
+    const steps = arr(S.step_outs).slice(0, 8).map(x => `<li>🚪 ${tk(x.t)} ${who(x)} sold <b>${m$(x.value_usd)}</b> outside a 10b5-1 plan on ${esc(fmtD(x.date))}${x.prior_plan_sales_12m ? ` after <b>${esc(x.prior_plan_sales_12m)}</b> plan sales in 12 months` : ''}${x.note ? ` <span class="sub">· ${esc(x.note)}</span>` : ''}${lk(x)}</li>`);
+    const stops = arr(S.cessations).slice(0, 8).map(x => `<li>⏸️ ${tk(x.t)} ${who(x)} has not sold for <b>${esc(x.days_since)} days</b> after <b>${esc(x.sells_prior)}</b> sales (${m$(x.value_prior_usd)}) over the prior 9 months${x.plan_note ? ` <span class="sub">· ${esc(x.plan_note)}</span>` : ''}</li>`);
+    const skim = arr(S.skimming).slice(0, 8).map(x => `<li>${x.kind === 'exercise_hold' ? '🟢' : '🔻'} ${tk(x.t)} ${who(x)} ${x.kind === 'exercise_hold' ? 'exercised and <b>kept</b>' : 'exercised and sold'} ${x.shares != null ? Number(x.shares).toLocaleString() + ' sh' : ''} (<b>${m$(x.value_usd)}</b>) on ${esc(fmtD(x.date))}${x.note ? ` <span class="sub">· ${esc(x.note)}</span>` : ''}${lk(x)}</li>`);
+    const plans = arr(S.plan_changes).slice(0, 8).map(x => `<li>📝 ${tk(x.t)} ${who(x)} ${esc(x.kind === 'terminated' ? 'terminated a 10b5-1 plan' : x.kind === 'modified' ? 'modified a 10b5-1 plan' : 'adopted a new 10b5-1 plan')}${x.date ? ' · ' + esc(fmtD(x.date)) : ''}${x.note ? ` <span class="sub">· ${esc(x.note)}</span>` : ''}</li>`);
+    const buys = arr(S.universe_buys).slice(0, 6).map(x => `<li>🟢 ${tk(x.t)} ${who(x)} bought <b>${m$(x.value_usd)}</b> on ${esc(fmtD(x.date))}${x.note ? ` <span class="sub">· ${esc(x.note)}</span>` : ''}</li>`);
+    const cov = S.coverage || {};
+    return `<div class="mg-co-sec"><div class="eyebrow" style="color:var(--ink)">Across your universe${cov.us != null ? ` · ${esc(cov.us)} US-listed names (Insider Score)${cov.non_us_covered != null ? ` + ${esc(cov.non_us_covered)} of ${esc(cov.non_us)} non-US (Canary)` : ''}` : ''}${S.as_of ? ' · as of ' + esc(fmtD(S.as_of)) : ''}</div></div>` +
+      sec('🚪 Stepping out of 10b5-1 plans', 'Insiders who sell on a pre-set plan and then sell outside it: a discretionary choice, so it says more than plan sales.', steps) +
+      sec('⏸️ Cessation of selling', 'Regular sellers who have stopped. Often read as insiders seeing more upside (or a blackout before news).', stops) +
+      sec('🔻 Option skimming', 'Options exercised and the shares sold at once, often for a small gain or well before expiry. Exercise-and-hold (🟢) is the bullish version.', skim) +
+      sec('📝 10b5-1 plan changes', '', plans) +
+      sec('🟢 Open-market buying beyond Tier 1–2', '', buys) + canaryWide(S);
+  }
+
+
+  /* kpi-tab v1 */
+  // Stocks › KPIs & guidance. Source of record: Supabase kpi_profiles / company_kpis / guidance_history;
+  // the backfill task mirrors each company into page-database doc kpi_profiles/<id> so this tab reads it live.
+  const KP = { db: null, ready: null, cache: new Map() };
+  KP.ready = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('db').then(d => { KP.db = d; }).catch(() => {}) : Promise.resolve();
+  const WHERE_L = { press_release: 'Release', deck: 'Deck', call: 'Call', '10q': '10-Q', '10k': '10-K', investor_day: 'Investor day', shareholder_letter: 'Letter', '8k': '8-K', conference: 'Conference' };
+  function stockKpiView(cur, el) {
+    const id = qrId(cur.t);
+    el.innerHTML = `<section class="panel"><p class="sub">Loading KPIs and guidance…</p></section>`;
+    const paint = doc => {
+      if (!document.body.contains(el)) return;
+      if (!doc) { el.innerHTML = `<section class="panel"><h2>KPIs &amp; guidance</h2>${none('Not built yet for ' + esc(cur.t) + '. The nightly KPI & guidance backfill adds companies Tier 1 first.')}</section>`; return; }
+      const P = doc.profile || {}, K = arr(doc.kpis), G = arr(doc.guidance);
+      const wh = w => `<span class="kp-where">${arr(w).map(x => `<span class="chip">${esc(WHERE_L[x] || x)}</span>`).join('')}</span>`;
+      const seg = arr(P.segmentation).map(s => `<div><b>${esc(s.basis || 'Segments')}</b>: ${arr(s.segments).map(esc).join(' · ')} <span class="sub">· ${wh(s.where)} · ${esc(s.frequency || '')}${s.since ? ' · since ' + esc(s.since) : ''}${s.note ? ' · ' + esc(s.note) : ''}</span></div>`).join('');
+      const cats = [...new Set(K.map(k => k.category || 'other'))];
+      const kt = K.length ? `<div class="tbl-wrap"><table class="dt"><thead><tr><th>Metric</th><th>Unit</th><th>Where disclosed</th><th>How often</th><th>Reported</th><th>Note</th></tr></thead><tbody>${cats.map(c => `<tr class="kp-h"><td colspan="6">${esc(c)}</td></tr>` + K.filter(k => (k.category || 'other') === c).map(k => `<tr><td class="wrap">${esc(k.metric)}${k.definition ? `<div class="sub">${esc(k.definition)}</div>` : ''}</td><td>${esc(k.unit || '')}</td><td>${wh(k.where_disclosed)}</td><td>${esc(k.frequency || '')}${k.status && k.status !== 'active' ? ` <span class="chip out">${esc(k.status)}</span>` : ''}</td><td class="nowrap">${esc(k.first_period || '')}${k.last_period ? ' → ' + esc(k.last_period) : ''}</td><td class="wrap">${esc(k.note || '')}${k.source_url ? ` <a class="ext" href="${esc(k.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</td></tr>`).join('')).join('')}</tbody></table></div>` : none('No KPIs recorded.');
+      // guidance: one row per metric + target period, one column per date the guide was given, read left to right
+      const fmtV = g => g.value_text ? esc(g.value_text) : (g.low != null && g.high != null && g.low !== g.high ? `${esc(g.low)}–${esc(g.high)}` : esc(g.mid ?? g.low ?? g.high ?? '')) + (g.unit && !/^\$/.test(g.unit) ? ' ' + esc(g.unit) : '');
+      const cls = c => /raised|up/i.test(c || '') ? 'up' : /lowered|cut|withdrawn/i.test(c || '') ? 'dn' : '';
+      const hz = [['quarter', 'Quarterly guidance'], ['fiscal_year', 'Fiscal-year guidance'], ['long_term', 'Long-term targets (analyst days)']];
+      const gt = hz.map(([h, label]) => {
+        const rows = G.filter(g => g.horizon === h); if (!rows.length) return '';
+        const dates = [...new Set(rows.map(g => g.given_on))].sort();
+        const keys = [...new Set(rows.map(g => g.target_period + '||' + g.metric))].sort((a, b) => b.localeCompare(a));
+        const evt = d => { const r = rows.find(g => g.given_on === d); return r && r.event ? r.event : ''; };
+        return `<h3 style="margin-top:8px">${label}</h3><div class="tbl-wrap"><table class="dt kp-g"><thead><tr><th>Period · metric</th>${dates.map(d => `<th class="n" title="${esc(evt(d))}">${esc(d)}<div class="sub" style="text-transform:none;letter-spacing:0">${esc(evt(d)).slice(0, 28)}</div></th>`).join('')}</tr></thead><tbody>${keys.map(k => { const [tp, m] = k.split('||');
+          return `<tr><td class="wrap"><b>${esc(tp)}</b> · ${esc(m)}</td>${dates.map(d => { const g = rows.find(x => x.given_on === d && x.target_period === tp && x.metric === m); return g ? `<td class="n ${cls(g.change)}" title="${esc([g.change, g.given_at, g.note].filter(Boolean).join(' · '))}">${fmtV(g)}${g.change && !/initial|reiterated/i.test(g.change) ? `<div class="sub">${esc(g.change)}</div>` : ''}</td>` : '<td class="n sub">·</td>'; }).join('')}</tr>`; }).join('')}</tbody></table></div>`;
+      }).join('');
+      el.innerHTML = `<section class="panel"><div class="panel-h"><h2>Revenue segmentation</h2><span class="sub">${P.fiscal_year_end ? 'FY ends ' + esc(P.fiscal_year_end) + ' · ' : ''}checked ${esc(fmtD(String(P.checked_at || '').slice(0, 10)))}</span></div>${P.summary ? `<p style="margin:0">${esc(P.summary)}</p>` : ''}<div class="kp-seg">${seg || none('No segmentation recorded.')}</div></section>` +
+        `<section class="panel"><div class="panel-h"><h2>Reported KPIs</h2><span class="sub">${K.length} metrics · where and how often each is disclosed</span></div>${kt}</section>` +
+        `<section class="panel"><div class="panel-h"><h2>Guidance</h2><span class="sub">each column is a date guidance was given; green raised, red lowered</span></div>${gt || none('No guidance recorded.')}</section>` +
+        (arr(P.sources).length ? `<section class="panel"><details><summary>Sources</summary><ul class="b">${arr(P.sources).map(s => `<li>${s.url ? `<a class="ext" href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title || s.url)}</a>` : esc(s.title || '')}${s.date ? ' · ' + esc(fmtD(s.date)) : ''}</li>`).join('')}</ul></details></section>` : '');
+    };
+    if (KP.cache.has(id)) { paint(KP.cache.get(id)); return; }
+    KP.ready.then(() => {
+      if (!KP.db) { el.innerHTML = `<section class="panel">${none('KPIs and guidance need the page open on claude.ai.')}</section>`; return; }
+      KP.db.collection('kpi_profiles').doc(id).get().then(s => { const d = s && s.exists ? s.data() : null; KP.cache.set(id, d); paint(d); })
+        .catch(e => { el.innerHTML = `<section class="panel">${none('Could not load KPIs: ' + esc((e && e.code) || 'error'))}</section>`; });
+    });
+  }
+
+
+  /* canary-wide v1 */
+  // Canary insider flags across global Tech, Industrials and Materials names over $1bn market cap and
+  // $70mm/day traded (not limited to the Companies DB). Written by the Insider signals task as S.canary_wide.
+  function canaryWide(S) {
+    const W = S && S.canary_wide; if (!W) return '';
+    const m$ = v => { if (v == null || !isFinite(v)) return '–'; const a = Math.abs(v); return (v < 0 ? '−$' : '$') + (a >= 1e9 ? (a / 1e9).toFixed(1) + 'bn' : a >= 1e6 ? (a / 1e6).toFixed(0) + 'm' : (a / 1e3).toFixed(0) + 'k'); };
+    const FL = { insider_selling_large_sale: 'large sale', insider_selling_large_percent: 'large % of holding sold', insider_selling_acceleration: 'selling accelerating',
+      insider_selling_commencement_buyer: 'prior buyer now selling', insider_buying: 'buying', skilled_buyer: 'skilled buyer', insider_selling_cluster: 'cluster selling', insider_buying_cluster: 'cluster buying' };
+    const fl = f => esc(FL[f] || String(f || '').replace(/^insider_/, '').replace(/_/g, ' '));
+    const sevDot = s => s === 'red' ? '🔴' : s === 'orange' ? '🟠' : s === 'yellow' ? '🟡' : '🟢';
+    const row = x => `<li>${sevDot(x.severity)} <b>${esc(x.t || '')}</b> ${esc(x.name || '')} <span class="sub">${esc([x.country, x.sector].filter(Boolean).join(' · '))} · mcap ${m$(x.mcap_usd)} · ${m$(x.advt_usd)}/day</span> · ${arr(x.flags).map(f => `<span class="chip">${fl(f)}</span>`).join(' ')}${x.summary ? `<div class="sub" style="margin-left:22px">${esc(x.summary)}${x.latest_date ? ' · ' + esc(fmtD(x.latest_date)) : ''}</div>` : ''}</li>`;
+    const sells = arr(W.sells).slice(0, 12).map(row), buys = arr(W.buys).slice(0, 10).map(row);
+    const head = `<div class="mg-co-sec"><div class="eyebrow" style="color:var(--ink)">Canary · global Tech, Industrials &amp; Materials · &gt;$1bn mcap · &gt;$70mm/day traded${W.window ? ' · ' + esc(W.window) : ''}${W.as_of ? ' · as of ' + esc(fmtD(W.as_of)) : ''}</div>${W.coverage ? `<p class="sub" style="margin:2px 0 4px">${esc(W.coverage)}</p>` : ''}</div>`;
+    const sec2 = (t, note, items) => items.length ? `<div class="mg-co-sec"><div class="eyebrow">${t}</div>${note ? `<p class="sub" style="margin:2px 0 4px">${note}</p>` : ''}<ul class="b">${items.join('')}</ul></div>` : '';
+    return head + sec2('🔻 Insider selling flagged', 'Canary flags: large sales, large % of holding, accelerating selling, prior buyers turning sellers. Red and orange first.', sells) +
+      sec2('🟢 Insider buying flagged', 'Canary buying and skilled-buyer flags.', buys) +
+      (!sells.length && !buys.length ? '<p class="sub">No Canary insider flags in this universe for the window.</p>' : '');
+  }
+
   // ================= ROUTER =================
   const VIEWS = ['today', 'x', 'ai', 'thesis', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
   const R = { mgmt: renderMgmt, ai: renderAI, thesis: renderThesis, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
@@ -2145,7 +2357,7 @@
   if (gD) gD.addEventListener('change', () => { G.days = +gD.value || null; saveG(); rerender(); });
   if (gA) gA.addEventListener('change', () => { DLY = gA.value === (D.daily || {}).as_of ? (D.daily || {}) : (HIST[gA.value] || D.daily || {}); done.daily = 0; show(); });
   function show() {
-    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes' || v === 'pipeline') v = 'ideas'; if (!VIEWS.includes(v)) v = 'today';
+    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes' || v === 'pipeline') v = 'ideas'; if (v === 'twitter') v = 'x'; if (!VIEWS.includes(v)) v = 'today';
     if (gAL) gAL.hidden = !(v === 'daily' && gA && gA.options.length > 1);
     if (v === 'routines' && done[v]) { renderRoutines(); }
     if (v === 'stocks' && done[v]) { renderStocks(); }
