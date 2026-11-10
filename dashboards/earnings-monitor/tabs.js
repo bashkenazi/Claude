@@ -2350,17 +2350,50 @@
   //   collection "thesis_updates", one doc each datapoint flagged as strengthening / weakening / changing the thesis
   // The "AI thesis tracker" scheduled task writes both; Bobby marks flags reviewed or dismissed here.
   const TH = { doc: null, ups: [], err: '', started: false, db: null, show: 'open' };
-  const TH_ST = { strengthening: ['s-positive', 'Strengthening'], intact: ['a-aligned', 'Intact'], watch: ['s-mixed', 'Watch'], weakening: ['s-negative', 'Weakening'], broken: ['s-very_negative', 'Broken'], ahead: ['s-positive', 'Ahead of deck'], on_track: ['a-aligned', 'On track'], behind: ['s-negative', 'Behind deck'], no_read: ['out', 'No new read'] };
+  const TH_ST = { strengthening: ['s-positive', 'Strengthening'], intact: ['a-aligned', 'Intact'], watch: ['s-mixed', 'Watch'], weakening: ['s-negative', 'Weakening'], broken: ['s-very_negative', 'Broken'], ahead: ['s-positive', 'Ahead of deck'], on_track: ['a-aligned', 'On track'], behind: ['s-negative', 'Behind deck'], no_read: ['out', 'No new read'], new: ['a-split', 'New tenet'] };
   const TH_DIR = { strengthens: ['s-positive', 'Strengthens'], weakens: ['s-negative', 'Weakens'], changes: ['a-split', 'Changes'], neutral: ['out', 'Context'] };
   const thChip = (k, map) => { const m = (map || TH_ST)[k] || ['out', k || '–']; return `<span class="chip ${m[0]}">${esc(m[1])}</span>`; };
   const thList = xs => arr(xs).length ? `<ul class="b">${arr(xs).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
   const thTable = t => !t || !arr(t.rows).length ? '' : `<div class="tbl-wrap"><table class="dt th-t"><thead><tr>${arr(t.cols).map((c, i) => `<th${i ? ' class="n"' : ''}>${esc(c)}</th>`).join('')}</tr></thead><tbody>${arr(t.rows).map(r => `<tr${String(r[0]).startsWith('**') ? ' class="th-b"' : ''}>${arr(r).map((c, i) => `<td${i ? ' class="n"' : ''}>${esc(String(c).replace(/^\*\*/, ''))}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${t.note ? `<p class="sub">${esc(t.note)}</p>` : ''}`;
+
+  /* ai-tenets v1 */
+  // AI thesis › By tenet. Doc thesis/ai_tenets mirrors Supabase thesis_tenets (tenets, Bobby's view, fact checks)
+  // and thesis_tenet_evidence (links to research_evidence rows, with stance supports / challenges / mixed).
+  const TN_V = { confirmed: ['s-positive', 'Confirmed'], supported: ['s-positive', 'Supported'], mostly: ['a-aligned', 'Mostly right'], partly: ['s-mixed', 'Partly right'],
+    reported: ['a-aligned', 'Reported'], unverified: ['out', 'Unverified'], not_supported: ['s-negative', 'Not supported'], inference: ['out', 'SRS inference'] };
+  const TN_SD = { supports: ['pos', 'Supports'], challenges: ['neg', 'Challenges'], mixed: ['mix', 'Mixed'] };
+  const thView = () => { if ((location.hash || '').startsWith('#thesis/tenets')) return 'tenets'; if (TH.view) return TH.view; try { return localStorage.getItem('th-view') || 'overview'; } catch (e) { return 'overview'; } };
+  const thViewSeg = () => { const v = thView(); return `<div class="seg th-vs" role="group" aria-label="Thesis view"><button type="button" data-thv="overview" aria-pressed="${v === 'overview'}">Overview</button><button type="button" data-thv="tenets" aria-pressed="${v === 'tenets'}">By tenet</button></div>`; };
+  function thSegBind(host) {
+    host.querySelectorAll('[data-thv]').forEach(b => b.addEventListener('click', () => { TH.view = b.dataset.thv; try { localStorage.setItem('th-view', TH.view); } catch (e) {} if ((location.hash || '').startsWith('#thesis/')) history.replaceState(null, '', '#thesis'); renderThesis(); }));
+    host.querySelectorAll('[data-tn]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = document.getElementById('tn-' + a.dataset.tn); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
+  }
+  function thTenets() {
+    const D2 = TH.tenets; if (!D2) return `<section class="panel">${none('No tenet breakdown saved yet.')}</section>`;
+    const TS = arr(D2.tenets).slice().sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    const strip = `<section class="panel"><div class="panel-h"><h2>Tenets</h2><span class="muted">updated ${esc(fmtD(String(D2.updated_at || '').slice(0, 10)))}</span></div>` +
+      `<div class="tn-strip">${TS.map(t => { const n = arr(t.dps), c = n.filter(d => d.stance === 'challenges').length, s = n.filter(d => d.stance === 'supports').length; return `<a href="#thesis" data-tn="${esc(t.key)}"><span class="chips">${thChip(t.status)}</span><b>${esc(t.title)}</b><span class="sub">${n.length} datapoints${n.length ? ` · ${s} support · ${c} challenge` : ''}${arr(t.checks).length ? ` · ${arr(t.checks).length} fact check${arr(t.checks).length > 1 ? 's' : ''}` : ''}</span></a>`; }).join('')}</div>` +
+      (D2.storage ? `<p class="sub">${esc(D2.storage)}</p>` : '') + `</section>`;
+    const src = xs => arr(xs).map(([t, u]) => u ? `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t)).join('<br>');
+    const body = TS.map(t => {
+      const FC = arr(t.checks), DP = arr(t.dps).slice().sort((a, b) => String(b.date).localeCompare(String(a.date))), SG = arr(t.staged);
+      return `<section class="panel tn" id="tn-${esc(t.key)}"><div class="panel-h"><h2>${esc(t.title)}</h2><span class="chips">${thChip(t.status)}</span></div>` +
+        (t.claim ? `<p class="lede">${esc(t.claim)}</p>` : '') +
+        (t.srs_view ? `<p class="tn-view"><b>SRS view:</b> ${esc(t.srs_view)}</p>` : '') +
+        (FC.length ? `<h3>Fact check</h3><div class="tbl-wrap"><table class="dt tn-fc"><thead><tr><th>Claim</th><th>Verdict</th><th>What we found</th><th>Sources</th></tr></thead><tbody>${FC.map(f => `<tr><td class="wrap"><b>${esc(f.claim)}</b></td><td>${thChip(f.verdict, TN_V)}</td><td class="wrap">${esc(f.text)}</td><td class="wrap">${src(f.sources)}</td></tr>`).join('')}</tbody></table></div>` : '') +
+        (DP.length ? `<h3>Datapoints <span class="muted">${DP.length}</span></h3><div class="list">${DP.map(d => { const s = TN_SD[d.stance] || ['', '']; return `<div class="li"><span class="stripe ${s[0]}"></span><div class="body"><div class="chips"><span class="tk-chip">${esc(d.t)}</span><span class="chip">${esc(s[1])}</span></div>${esc(d.text)}<div class="srcl"><span>Source</span>${esc(d.src || '')} · SB #${esc(d.id)}</div></div><div class="side">${esc(fmtD(d.date))}</div></div>`; }).join('')}</div>` : (t.note ? `<p class="sub">${esc(t.note)}</p>` : none('No datapoints linked yet.'))) +
+        (SG.length ? `<h3>Staged, not yet in Supabase</h3>${SG.map(g => `<div class="tn-stage"><div class="chips"><span class="tk-chip">${esc(g.t)}</span><span class="chip out">${esc(g.field_key)} · ${esc(g.confidence)}</span><span class="sub">${esc(fmtD(g.date))}</span></div>${esc(g.text)}<div class="srcl"><span>Source</span>${esc(g.primary)}${g.secondary ? ' via ' + esc(g.secondary) : ''}</div>${g.why ? `<div class="sub">${esc(g.why)}</div>` : ''}</div>`).join('')}` : '') +
+        `</section>`;
+    }).join('');
+    return strip + body;
+  }
+
   function thStart() {
     if (TH.started) return; TH.started = true;
     if (!(window.claude && typeof window.claude.use === 'function')) { TH.err = 'The thesis is kept in this page’s database; open the page on claude.ai to see it.'; return; }
     window.claude.use('db').then(db => {
       TH.db = db;
-      db.collection('thesis').onSnapshot(snap => { const d = snap.docs.find(x => x.id === 'ai'); TH.doc = d ? JSON.parse(JSON.stringify(d.data())) : null; if (!TH.doc) TH.err = 'No thesis saved yet.'; thPaint(); },
+      db.collection('thesis').onSnapshot(snap => { const d = snap.docs.find(x => x.id === 'ai'); TH.doc = d ? JSON.parse(JSON.stringify(d.data())) : null; const dt = snap.docs.find(x => x.id === 'ai_tenets'); TH.tenets = dt ? JSON.parse(JSON.stringify(dt.data())) : null; if (!TH.doc) TH.err = 'No thesis saved yet.'; thPaint(); },
         e => { TH.err = 'The thesis could not load: ' + ((e && e.code) || 'error'); thPaint(); });
       db.collection('thesis_updates').onSnapshot(snap => {
         TH.ups = snap.docs.map(d => ({ id: d.id, ...JSON.parse(JSON.stringify(d.data())) })).sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.created || '').localeCompare(String(a.created || '')));
@@ -2375,6 +2408,8 @@
     const T = TH.doc;
     let h = head('AI thesis', T ? esc(T.title || 'AI thesis') : 'AI thesis', T ? esc(T.subtitle || '') : '');
     if (!T) { host.innerHTML = h + `<section class="panel">${none(esc(TH.err || 'Loading the thesis…'))}</section>`; return; }
+    h += thViewSeg();
+    if (thView() === 'tenets') { host.innerHTML = h + thTenets(); thSegBind(host); return; }
     h += `<nav class="sk-tabs" aria-label="Thesis sections"><a href="#thesis" data-th="th-now">Where we stand</a><a href="#thesis" data-th="th-flags">Flagged datapoints</a><a href="#thesis" data-th="th-sign">Signposts</a><a href="#thesis" data-th="th-pil">Pillars</a><a href="#thesis" data-th="th-cases">Bull / bear</a><a href="#thesis" data-th="th-roi">ROI math</a><a href="#thesis" data-th="th-risk">Risks</a><a href="#thesis" data-th="th-next">Next steps</a><a href="#thesis" data-th="th-log">Changelog</a></nav>`;
     // 1) where we stand
     const S = T.stance || {}, N = T.now || {};
@@ -2416,6 +2451,7 @@
     h += `<section class="panel" id="th-log"><h2>Changelog</h2>${LG.length ? `<div class="list">${LG.map(l => `<div class="li"><div class="body"><b>${esc(l.change)}</b>${l.why ? ` <span class="sub">${esc(l.why)}</span>` : ''}</div><div class="side">${esc(fmtD(l.date))}</div></div>`).join('')}</div>` : none('No changes yet.')}</section>`;
     host.innerHTML = h;
     host.querySelectorAll('[data-th]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = document.getElementById(a.dataset.th); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
+    thSegBind(host);
     host.querySelectorAll('[data-ths]').forEach(b => b.addEventListener('click', () => { TH.show = b.dataset.ths; renderThesis(); }));
     host.querySelectorAll('[data-thu]').forEach(b => b.addEventListener('click', async () => {
       const u = TH.ups.find(x => x.id === b.dataset.thu); if (!u || !TH.db) return; b.disabled = true;

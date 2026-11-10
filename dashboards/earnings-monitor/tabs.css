@@ -373,6 +373,16 @@ table.th-sg td.wrap { min-width: 180px; max-width: 320px; }
 table.th-t tr.th-b td { font-weight: 650; }
 #v-thesis section[id] { scroll-margin-top: calc(var(--mast-h, 53px) + 12px); }
 #v-thesis h3 { margin-top: 6px; }
+.th-vs { margin: 2px 0 4px; }
+.tn-strip { display: grid; gap: 6px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.tn-strip a { display: flex; flex-direction: column; gap: 4px; padding: 8px 10px; border: 1px solid var(--rule); border-radius: 6px; text-decoration: none; color: var(--ink); background: var(--surface); font-size: 13px; }
+.tn-strip a:hover { border-color: var(--accent); }
+.tn-view { margin: 0; padding: 8px 10px; background: var(--accent-wash); border-radius: 6px; font-size: 13px; max-width: 110ch; }
+table.tn-fc td.wrap { min-width: 280px; max-width: 640px; }
+table.tn-fc td:first-child { min-width: 180px; }
+.tn-stage { border: 1px dashed var(--rule-2); border-radius: 6px; padding: 8px 10px; font-size: 13px; }
+#v-thesis section.tn[id] { scroll-margin-top: calc(var(--mast-h, 53px) + 12px); }
+
 
 /* Daily moves: as-of banner */
 .dm-asof { flex-direction: row; flex-wrap: wrap; gap: 6px; align-items: baseline; padding: 10px 14px; font-size: 13px; }
