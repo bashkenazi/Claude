@@ -7,7 +7,7 @@ import html, json, re, sys
 
 TAB_MAP = [  # (tab key, label, which '## ' headings go in it, datapoint regex for the live feed under the tab)
     ("sites", "Sites & build", [r"^Key takeaways", r"^1\."], r"(\bMW\b|\bGW\b|campus|site|Abilene|Shackelford|Frontier|Jupiter|Lighthouse|Port Washington|Saline|Michigan|New Mexico|Wisconsin|Stargate|permit|power)"),
-    ("financing", "Financing & guarantees", [r"^2\.", r"^3\."], r"(bond|notes?\b|debt|loan|equity|ATM|convertible|financ|guarant|backstop|letter of credit|lease commit|BYOH|prepay|rating|downgrad|S&P|Moody|CDS|spread|credit)"),
+    ("financing", "Financing & guarantees", [r"^Funding gap", r"^2\.", r"^3\."], r"(bond|notes?\b|debt|loan|equity|ATM|convertible|financ|guarant|backstop|letter of credit|lease commit|BYOH|prepay|rating|downgrad|S&P|Moody|CDS|spread|credit)"),
     ("rpo", "RPO & contracts", [r"^4\.", r"^5\."], r"(\bRPO\b|backlog|remaining performance|OpenAI|contract|booking|prepay|BYOH|customer)"),
 ]
 
