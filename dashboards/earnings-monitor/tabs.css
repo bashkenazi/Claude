@@ -371,6 +371,9 @@ details.aim-more[open] > summary { margin-bottom: 6px; }
 .th-act .btn { padding: 3px 8px; font-size: 12px; }
 table.th-sg td.wrap { min-width: 180px; max-width: 320px; }
 table.th-t tr.th-b td { font-weight: 650; }
+.view[hidden] { display: none !important; }
+#v-aimode { margin-bottom: -6px; }
+.ai-mode { align-self: flex-start; flex-wrap: wrap; }
 #v-thesis section[id] { scroll-margin-top: calc(var(--mast-h, 53px) + 12px); }
 #v-thesis h3 { margin-top: 6px; }
 .th-vs { margin: 2px 0 4px; }

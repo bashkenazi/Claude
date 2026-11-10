@@ -70,7 +70,8 @@
     'consensus-revisions': 'Consensus revisions', 'comps-screen': 'Comps screen', 'idea-generator': 'Idea generator', 'thesis-builder': 'Thesis builder',
     'industry-cycle': 'Industry cycle', 'operating-comps': 'Operating comps', 'management-prep': 'Management prep', 'analyst-day': 'Analyst day',
     'print-tables': 'Print tables', 'quarterly-review': 'Quarterly review', 'earnings-preview': 'Earnings preview / review', 'earnings-recap': 'Earnings recap',
-    'datapoint-filter': 'Supabase loads (Datapoint Filter)'
+    'datapoint-filter': 'Supabase loads (Datapoint Filter)',
+    'universe-sweep': 'Universe sweep', 'ai-build-sweep': 'AI build & financing', 'x-scan': 'X list monitor', 'openclaw-datapoints': 'OpenClaw datapoints'
   };
   const sk = s => SKILL_NAME[s] || s;
   const fresh = a => a == null ? '' : a <= 2 ? 'fresh' : a <= 7 ? 'aging' : 'stale';
@@ -78,6 +79,7 @@
   const none = msg => `<p class="empty-panel">${msg}</p>`;
   // one sentence: the first sentence of a reason, capped at ~30 words; the full text sits in the hover title
   const oneSent = t => { let all = String(t || '').replace(/\s+/g, ' ').trim(); if (!all) return '';
+    /* daily-why-blank v1 */ if (/^(moved with|no catalyst|in line with|traded with|tracked|a move with|move with|broad(er)? market|market[- ]wide)/i.test(all) || /broader market/i.test(all)) return '';
     const mw = all.match(/^Moved with ([^:(]+?)\s*(?:\([^)]*\))?\s*:\s*(.+)$/i); if (mw) { const d = mw[2].split(/;|\s\(|,\s(?=[a-z])/)[0].replace(/[\s.]+$/, ''); return `Moved with ${mw[1].trim()}: ${d}.`; } let x = all.split(/(?<=[.!?])\s+(?=[A-Z("'$])/)[0]; const w = x.split(' '); if (w.length > 30) x = w.slice(0, 30).join(' ').replace(/[\s,;:–—-]+$/, '') + '…'; return x; };
   const whyHtml = t => { const one = oneSent(t); return one ? `<span class="why1" title="${esc(t)}">${attr(one)}</span>` : ''; };
   const attr = t => esc(t).replace(/\s*\[([^\]]{2,90})\]\s*$/, ' <span class="attr">$1</span>');
@@ -117,7 +119,7 @@
     const digs = arr(TODAY.digests).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
     const latestBySkill = new Map();
     digs.forEach(d => { if (!latestBySkill.has(d.skill)) latestBySkill.set(d.skill, d); });
-    const order = ['morning', 'research-folder-digest', 'tech-email-digest-new', 'semianalysis-digest', 'analyst-folder-extractor', 'alphasense-digest', 'sellside-folder-digest'];
+    const order = ['research-folder-digest', 'tech-email-digest-new', 'semianalysis-digest', 'sellside-folder-digest', 'universe-sweep', 'ai-build-sweep', 'x-scan', 'openclaw-datapoints'].concat(['morning', 'analyst-folder-extractor', 'alphasense-digest'].filter(k => latestBySkill.has(k)));
     const strip = order.map(s => {
       const d = latestBySkill.get(s); const a = d ? ageDays(d.date) : null;
       return d ? `<a class="run" href="${esc(d.url)}" target="_blank" rel="noopener"><span class="n">${esc(sk(s))}</span><span class="d"><i class="dot ${fresh(a)}"></i>${fmtD(d.date)}${d.datapoint_count != null ? ' · ' + esc(d.datapoint_count) + ' datapoints' : ''}</span></a>`
@@ -129,7 +131,7 @@
     if (!pool.length) pool = [...latestBySkill.values()];
     const calls = [];
     pool.forEach(d => arr(d.callouts).forEach(c => calls.push(Object.assign({ skill: d.skill, date: d.date, url: d.url }, c))));
-    const kindOf = c => { const k = String(c.kind || '').toLowerCase(); return k.startsWith('pos') ? 'pos' : k.startsWith('neg') ? 'neg' : k.startsWith('infl') ? 'inf' : 'oth'; };
+    const kindOf = c => { /* today-sentiment v1 */ const k = String(c.kind || c.sentiment || c.type || '').toLowerCase().replace(/^(most|very|strongly)[_ -]*/, ''); return k.startsWith('pos') || k.startsWith('bull') ? 'pos' : k.startsWith('neg') || k.startsWith('bear') ? 'neg' : k.startsWith('infl') || k.startsWith('chang') ? 'inf' : 'oth'; };
     const col = (k, title) => {
       const xs = lim(calls.filter(c => kindOf(c) === k), 12);
       return `<div class="panel"><div class="panel-h"><h2>${title}</h2><span class="muted">${xs.length}</span></div>${xs.length ? `<div class="list">${xs.map(c =>
@@ -224,7 +226,7 @@
       up = sorted.filter(m => m.c > 0).slice(0, N).map(mk); dn = sorted.filter(m => m.c < 0).reverse().slice(0, N).map(mk);
     } else { up = up.slice(0, N); dn = dn.slice(0, N); }
     const pct = v => v == null ? '' : ((+v > 0 ? '+' : '') + (+v).toFixed(1) + '%');
-    const mover = (m) => `<div class="li"><span class="stripe ${+m.chg_1d >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(m.ticker)} <b>${esc(m.name || '')}</b>${noteUI('move:' + ntKey(m.ticker) + '|' + (DLY.as_of || ''), m.ticker, (m.name || m.ticker) + ' move ' + (DLY.as_of || ''))} <span class="mono ${+m.chg_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(m.chg_1d)}</span>${m.group ? ` <span class="chip out">${esc(m.group)}</span>` : ''}<div>${m.why ? whyHtml(m.why) : '<span class="sub">No catalyst found in your sources or the news.</span>'}</div>${valLine(m.ticker, true)}${srcLine(m)}</div></div>`;
+    const mover = (m) => `<div class="li"><span class="stripe ${+m.chg_1d >= 0 ? 'pos' : 'neg'}"></span><div class="body">${tk(m.ticker)} <b>${esc(m.name || '')}</b>${noteUI('move:' + ntKey(m.ticker) + '|' + (DLY.as_of || ''), m.ticker, (m.name || m.ticker) + ' move ' + (DLY.as_of || ''))} <span class="mono ${+m.chg_1d >= 0 ? 'c-pos' : 'c-neg'}">${pct(m.chg_1d)}</span>${m.group ? ` <span class="chip out">${esc(m.group)}</span>` : ''}<div>${m.why ? whyHtml(m.why) : ''}</div>${valLine(m.ticker, true)}${srcLine(m)}</div></div>`;
     const W = 900, bar = secs.length ? Math.max(...secs.map(s => Math.abs(+s.median_1d || 0)), 0.5) : 1;
     host.innerHTML = head('Daily moves · ' + esc(DLY.as_of || ''), 'What moved and why',
       `Biggest one-day moves across the ${esc(DLY.universe_n || '')}-name Master comps universe on ${esc(DLY.as_of || 'the last trading day')}, by company and by subsector, with the catalyst from your research flow or the news.`) +
@@ -259,7 +261,7 @@
     names.sort((a, b) => b.c - a.c);
     const why = useStories && sec && sec.why ? `<p style="margin:0 0 6px">${attr(sec.why)}</p>` : (useStories ? '' : `<p class="sub" style="margin:0 0 6px">Reasons are written after the day's tech digest; these are live prices only.</p>`);
     const rows = names.map(x => { const s = useStories ? storyOf(x.t) : null, big = Math.abs(x.c) >= 5;
-      return `<div class="sd-row${big ? ' big' : ''}"><span class="sd-t">${tk(x.t)} <span class="sub">${esc(x.n || '')}</span></span><span class="mono ${x.c >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.c)}</span>${x.c5 != null ? `<span class="sub mono">5d ${p1(x.c5)}</span>` : '<span></span>'}<span class="sd-w">${s && s.why ? whyHtml(s.why) + (arr(s.sources).length ? ` <span class="sub">· ${arr(s.sources).map(esc).join(' · ')}</span>` : '') : (big && useStories ? '<span class="sub">No catalyst found in your sources or the news.</span>' : '')}</span></div>`; }).join('');
+      return `<div class="sd-row${big ? ' big' : ''}"><span class="sd-t">${tk(x.t)} <span class="sub">${esc(x.n || '')}</span></span><span class="mono ${x.c >= 0 ? 'c-pos' : 'c-neg'}">${p1(x.c)}</span>${x.c5 != null ? `<span class="sub mono">5d ${p1(x.c5)}</span>` : '<span></span>'}<span class="sd-w">${s && s.why ? whyHtml(s.why) + (arr(s.sources).length ? ` <span class="sub">· ${arr(s.sources).map(esc).join(' · ')}</span>` : '') : ''}</span></div>`; }).join('');
     return `<div class="sb-det">${why}${rows || '<p class="sub" style="margin:0">No names priced in this group.</p>'}</div>`;
   }
   function wireSectors(host) {
@@ -2244,15 +2246,99 @@
       .then(snap => { clearTimeout(to); const o = {}; (snap ? snap.docs : []).forEach(d => { if (d.exists) o[d.id] = JSON.parse(JSON.stringify(d.data())); }); if (Object.keys(o).length) { AIM.docs = o; AIM.err = ''; } else AIM.err = snap ? 'No SRS model data is stored in this page yet.' : 'The SRS model data is not available in this view.'; done(); })
       .catch(() => { clearTimeout(to); AIM.err = 'The SRS model data could not be read from this page’s database.'; done(); });
   }
+  // ================= AI › Bank forecasts: banks' AI data-center GW and AI capex paths, 2024–2030 =================
+  // The numbers live in this page's database, collection "ai", doc "bank_forecasts":
+  //   {asof, method, years:[2024..2030], est_idx, banks:[{bank, status: ok|partial|unavailable, note,
+  //     gw: {kind: installed|adds, geo, scope, v[7], fl[7], src:[{t, d, u}]} | null, capex: {scope, v[7], fl[7], src[]} | null}]}
+  // Claude refreshes that document with ArtifactData; page rebuilds never touch it.
+  const BF = { doc: null, err: '', loaded: false, m: 'capex', ro: null, w: 0 };
+  try { const v0 = localStorage.getItem('td-bf-m'); if (v0) BF.m = v0; } catch (e) {}
+  const BF_M = [['capex', 'AI capex ($bn)'], ['installed', 'GW installed base'], ['adds', 'GW added per year']];
+  function bfLoad(done) {
+    if (BF.loaded) return; BF.loaded = true;
+    const to = setTimeout(() => { if (!BF.doc) { BF.err = 'The bank forecasts did not load in this view.'; done(); } }, 10000);
+    (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('bank_forecasts').get() : null)
+      .then(sn => { clearTimeout(to); if (sn && sn.exists) { BF.doc = JSON.parse(JSON.stringify(sn.data())); BF.err = ''; } else BF.err = sn ? 'No bank forecasts are stored in this page yet.' : 'The bank forecasts are kept in this page’s database; open the page on claude.ai to see them.'; done(); })
+      .catch(() => { clearTimeout(to); BF.err = 'The bank forecasts could not be read from this page’s database.'; done(); });
+  }
+  const bfMed = xs => { const s = xs.filter(v => aimN(v) != null).sort((a, b) => a - b), n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
+  const bfHas = s => !!s && arr(s.v).some(v => aimN(v) != null);
+  function bfBodyHtml() {
+    const d = BF.doc, Y = arr(d.years), ei = +d.est_idx || 0, B = arr(d.banks);
+    const col = new Map(B.filter(b => bfHas(b.capex) || bfHas(b.gw)).map((b, i) => [b.bank, AIM_C[i % AIM_C.length]]));
+    const pick = b => BF.m === 'capex' ? b.capex : (b.gw && b.gw.kind === BF.m ? b.gw : null);
+    const f = BF.m === 'capex' ? 'int' : 'gw', unit = BF.m === 'capex' ? '$bn' : 'GW';
+    const cats = Y.map((y, i) => i >= ei ? y + 'E' : String(y));
+    const rows = B.map(b => ({ b, s: pick(b) })).filter(x => bfHas(x.s));
+    const S = rows.map(x => ({ n: x.b.bank + (x.s.geo && x.s.geo !== 'Global' ? ' (' + x.s.geo + ')' : ''), short: x.b.bank, v: Y.map((_, i) => aimN(arr(x.s.v)[i])), c: col.get(x.b.bank), dash: ei }));
+    const glob = S.filter((s, k) => !rows[k].s.geo || rows[k].s.geo === 'Global');
+    const med = Y.map((_, i) => bfMed(glob.map(s => s.v[i]))), lo = Y.map((_, i) => { const xs = glob.map(s => s.v[i]).filter(v => v != null); return xs.length ? Math.min(...xs) : null; }), hi = Y.map((_, i) => { const xs = glob.map(s => s.v[i]).filter(v => v != null); return xs.length ? Math.max(...xs) : null; });
+    const SS = glob.length > 2 ? S.concat([{ n: 'Median (global series)', short: 'Median', v: med, c: 'var(--ink)', dash: ei }]) : S;
+    const label = (BF_M.find(m => m[0] === BF.m) || [])[1] || '';
+    let h = '';
+    if (!S.length) h += none('No bank in this set publishes a ' + esc(label) + ' series.');
+    else h += aimFig('bf', label + ' by bank', 'Solid = reported (' + esc(cats.slice(0, ei).join(', ')) + '), dashed = estimates · hover for values', { kind: 'lines', cats, series: SS, f, ax: '', h: 300, endW: 120, aria: label + ' forecasts by bank, ' + Y[0] + ' to ' + Y[Y.length - 1] }, aimLegL(SS));
+    const cell = (s, i) => { const v = aimN(arr(s.v)[i]), fl = arr(s.fl)[i]; return v == null ? '<td class="n sub">–</td>' : `<td class="n${i >= ei ? ' aim-e' : ''}"${fl ? ` title="${esc(fl)}"` : ''}>${esc(aimF(v, f))}${fl ? '<sup>*</sup>' : ''}</td>`; };
+    const srcs = s => arr(s && s.src).map(x => `<a class="ext" href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a> <span class="sub">${esc(x.d)}</span>`).join('<br>');
+    h += `<div class="aim-tb"><h3>${esc(label)}: every bank</h3><div class="tbl-wrap"><table class="dt aim-t"><thead><tr><th>Bank</th><th>Scope</th>${cats.map((c, i) => `<th class="n${i >= ei ? ' aim-e' : ''}">${esc(c)}</th>`).join('')}<th>Source (AlphaSense)</th></tr></thead><tbody>` +
+      B.map(b => { const s = pick(b); if (bfHas(s)) return `<tr><td class="aim-k"><b>${esc(b.bank)}</b>${s.geo && s.geo !== 'Global' ? ` <span class="chip">${esc(s.geo)} only</span>` : ''}</td><td class="aim-w">${esc(s.scope)}${s.note ? `<br><span class="sub">${esc(s.note)}</span>` : ''}</td>${Y.map((_, i) => cell(s, i)).join('')}<td class="aim-w">${srcs(s)}</td></tr>`;
+        const why = b.status === 'unavailable' ? b.note : BF.m === 'capex' ? 'No AI capex series in the notes read.' + (b.note ? ' ' + b.note : '') : (b.gw ? `Its GW series is ${b.gw.kind === 'adds' ? 'annual additions' : 'an installed base'}: switch view.` : 'No GW series in the notes read.' + (b.note ? ' ' + b.note : ''));
+        return `<tr><td class="aim-k"><b>${esc(b.bank)}</b>${b.status === 'unavailable' ? ' <span class="chip out">no access</span>' : ''}</td><td class="aim-w sub" colspan="${Y.length + 2}">${esc(why)}</td></tr>`; }).join('') +
+      (glob.length > 2 ? ['Median', 'Low', 'High'].map((l, k) => `<tr class="aim-b"><td>${l}</td><td class="sub">Global series only</td>${[med, lo, hi][k].map((v, i) => `<td class="n${i >= ei ? ' aim-e' : ''}">${v == null ? '–' : esc(aimF(v, f))}</td>`).join('')}<td></td></tr>`).join('') : '') +
+      `</tbody></table></div><p class="sub">${esc(unit)} · <sup>*</sup> hover the figure: derived from the bank's growth rates or cumulative targets, a range midpoint, or a narrower scope that year. Median, low and high leave out US-only series and need at least three global series.</p></div>`;
+    return h;
+  }
+  function bfSectionHtml() {
+    const top = `<section class="panel" id="ai-banks"><div class="panel-h"><h2>Bank forecasts: AI data-center GW and AI capex, 2024–2030</h2><span class="sub">${BF.doc ? 'As of ' + esc(BF.doc.asof || '') + ' · AlphaSense broker research' : ''}</span></div>`;
+    if (!BF.doc) return top + `<p class="sub">${esc(BF.err || 'Loading the bank forecasts…')}</p></section>`;
+    const B = arr(BF.doc.banks), ok = B.filter(b => bfHas(b.capex) || bfHas(b.gw)), cx = B.filter(b => bfHas(b.capex)).map(b => aimN(arr(b.capex.v)[6])).filter(v => v != null), m30 = bfMed(cx);
+    const gi = B.filter(b => b.gw && b.gw.kind === 'installed' && b.gw.geo === 'Global').map(b => aimN(arr(b.gw.v)[6])).filter(v => v != null);
+    return top + `<p class="aim-lede">${esc(BF.doc.method || '')}</p>` +
+      `<div class="summary"><div class="stat"><span class="v">${ok.length} / ${B.length}</span><span class="l">banks with figures in AlphaSense</span></div>` +
+      `<div class="stat"><span class="v">${m30 == null ? '–' : '$' + esc(aimF(m30, 'int')) + 'bn'}</span><span class="l">median 2030 AI capex (${cx.length} banks${cx.length ? ', $' + esc(aimF(Math.min(...cx), 'int')) + '–' + esc(aimF(Math.max(...cx), 'int')) + 'bn' : ''})</span></div>` +
+      `<div class="stat"><span class="v">${gi.length ? esc(aimF(bfMed(gi), 'num1')) + ' GW' : '–'}</span><span class="l">2030 global installed base (${gi.length} bank${gi.length === 1 ? '' : 's'})</span></div></div>` +
+      `<div class="seg aim-seg" role="group" aria-label="Metric">${BF_M.map(([k, l]) => `<button type="button" data-bf="${k}" aria-pressed="${BF.m === k}">${esc(l)}</button>`).join('')}</div>` +
+      `<div id="bf-body" class="aim-view">${bfBodyHtml()}</div><div class="aim-tip" hidden></div></section>`;
+  }
+  function bfMount() {
+    const sec = document.getElementById('ai-banks'); if (!sec || !BF.doc) return;
+    sec.addEventListener('click', e => {
+      const b = e.target.closest && e.target.closest('[data-bf]'); if (!b || !sec.contains(b)) return;
+      BF.m = b.dataset.bf; try { localStorage.setItem('td-bf-m', BF.m); } catch (x) {}
+      sec.querySelectorAll('[data-bf]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.bf === BF.m)));
+      const body = sec.querySelector('#bf-body'); if (body) { body.innerHTML = bfBodyHtml(); aimDraw(sec); }
+    });
+    const tip = sec.querySelector('.aim-tip');
+    const show = (g, x, y) => {
+      const [nm, i] = String(g.dataset.tip || '').split(':'), d = (AIM.tips[nm] || [])[+i]; if (!d || !tip) return;
+      tip.textContent = '';
+      const hd = document.createElement('div'); hd.className = 'aim-tip-h'; hd.textContent = d.h; tip.appendChild(hd);
+      d.rows.forEach(r => { const row = document.createElement('div'), k = document.createElement('i'), v = document.createElement('b'), s = document.createElement('span'); row.className = 'aim-tip-r' + (r.b ? ' tot' : ''); if (r.c) k.style.background = r.c; v.textContent = r.v; s.textContent = r.n; row.append(k, v, s); tip.appendChild(row); });
+      tip.hidden = false;
+      const tw = tip.offsetWidth, th = tip.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
+      let lx = x + 14, ly = y + 14; if (lx + tw > vw - 8) lx = x - tw - 14; if (lx < 8) lx = 8; if (ly + th > vh - 8) ly = y - th - 14; if (ly < 8) ly = 8;
+      tip.style.left = lx + 'px'; tip.style.top = ly + 'px';
+    };
+    const hide = () => { if (tip) tip.hidden = true; };
+    const at = e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g && sec.contains(g)) show(g, e.clientX, e.clientY); else hide(); };
+    sec.addEventListener('pointermove', at); sec.addEventListener('pointerdown', at); sec.addEventListener('pointerleave', hide);
+    sec.addEventListener('focusin', e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g) { const r = g.getBoundingClientRect(); show(g, r.left + r.width / 2, r.top + 8); } });
+    sec.addEventListener('focusout', hide);
+    if (!BF.sc) { BF.sc = 1; window.addEventListener('scroll', () => { const t = document.querySelector('#ai-banks .aim-tip'); if (t) t.hidden = true; }, { passive: true }); }
+    aimDraw(sec);
+    if (window.ResizeObserver) { if (BF.ro) BF.ro.disconnect(); BF.w = sec.clientWidth; BF.ro = new ResizeObserver(() => { const w = sec.clientWidth; if (Math.abs(w - BF.w) > 6) { BF.w = w; requestAnimationFrame(() => aimDraw(sec)); } }); BF.ro.observe(sec); }
+  }
   function renderAI() {
     const host = document.getElementById('v-ai'); if (!host) return;
     const st = AI.st, meta = new Map(arr((D.dp_index || {}).meta).map(m => [m.rid, m]));
     const f1 = v => v == null ? '–' : (+v).toFixed(1);
     const paint = () => {
       let h = head('AI', 'AI infrastructure', 'SRS’s own AI models (capex, accelerator share, economics, financing, supply chain), where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
-        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
+        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/banks">Bank forecasts</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
       // ---- 0) SRS AI models (page database, collection "ai_models") ----
       h += aimSectionHtml();
+      // ---- 0b) bank forecasts (page database, collection "ai", doc "bank_forecasts") ----
+      h += bfSectionHtml();
       // ---- 1) data centers by state ----
       if (!AI_DC.rows.length) h += `<section class="panel" id="ai-dc"><h2>Data centers: gigawatts by state and political risk</h2><p class="sub">${esc(AI.dcErr || 'Loading the state figures…')}</p><h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
       else {
@@ -2295,7 +2381,7 @@
         `<label for="ai-tone">Read <select id="ai-tone"><option value="">All</option><option value="tight"${st.tone === 'tight' ? ' selected' : ''}>Supply tight / demand ahead</option><option value="loose"${st.tone === 'loose' ? ' selected' : ''}>Loosening / digestion</option></select></label>` +
         `<label for="ai-days">Window <select id="ai-days">${[[30, '1 month'], [90, '3 months'], [180, '6 months'], [100000, 'All']].map(([v, l]) => `<option value="${v}"${+st.days === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>` +
         `<label for="ai-q">Search <input type="search" id="ai-q" value="${esc(st.q)}" placeholder="Ticker or word"></label></div><div id="ai-cmp">${aiRowsHtml('compute')}</div></section>`;
-      host.innerHTML = h; wire(); aimMount();
+      host.innerHTML = h; wire(); aimMount(); bfMount();
       const sub = (location.hash.split('/')[1] || ''); host.querySelectorAll('.sk-tabs a').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#ai/' + sub));
       if (sub) { const el = document.getElementById('ai-' + (sub === 'dc' ? 'dc' : sub)); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); }
       const qh = document.getElementById('ai-qr'); if (qh && window.__qrMount) { const co = (window.__qrFind && window.__qrFind('ALAB')) || { t: 'ALAB', bbg: 'ALAB US', name: 'Astera Labs' }; try { window.__qrMount(qh, co); } catch (e) { qh.innerHTML = none('The Visible Alpha table could not load here.'); } }
@@ -2338,6 +2424,7 @@
     }
     paint();
     aimLoad(paint);
+    bfLoad(paint);
     if (!AI.dcLoaded) { AI.dcLoaded = true; (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('dc_states').get() : null)
       .then(sn => { if (sn && sn.exists) Object.assign(AI_DC, JSON.parse(JSON.stringify(sn.data()))); else AI.dcErr = 'The state data center figures are not loaded in this view.'; paint(); })
       .catch(() => { AI.dcErr = 'The state data center figures could not be read from this page’s database.'; paint(); }); }
@@ -2362,6 +2449,21 @@
   const TN_V = { confirmed: ['s-positive', 'Confirmed'], supported: ['s-positive', 'Supported'], mostly: ['a-aligned', 'Mostly right'], partly: ['s-mixed', 'Partly right'],
     reported: ['a-aligned', 'Reported'], unverified: ['out', 'Unverified'], not_supported: ['s-negative', 'Not supported'], inference: ['out', 'SRS inference'] };
   const TN_SD = { supports: ['pos', 'Supports'], challenges: ['neg', 'Challenges'], mixed: ['mix', 'Mixed'] };
+  /* ai-merge v1 */
+  // One AI tab: #v-aimode holds the switch, #v-ai is Models & data, #v-thesis the thesis (overview or by tenet).
+  const AIMX = { m: null };
+  const aiMode = () => { if (AIMX.m) return AIMX.m; try { const m = localStorage.getItem('ai-mode'); return ['overview', 'tenets', 'data'].includes(m) ? m : 'overview'; } catch (e) { return 'overview'; } };
+  const aiModeSet = m => { AIMX.m = m; try { localStorage.setItem('ai-mode', m); } catch (e) {} };
+  function aiShow() {
+    const m = aiMode(), A = document.getElementById('v-ai'), T = document.getElementById('v-thesis'), B = document.getElementById('v-aimode');
+    if (B) {
+      B.innerHTML = `<div class="seg ai-mode" role="group" aria-label="AI view">${[['overview', 'Thesis'], ['tenets', 'Thesis by tenet'], ['data', 'Models &amp; data']].map(([k, l]) => `<button type="button" data-aim="${k}" aria-pressed="${m === k}">${l}</button>`).join('')}</div>`;
+      B.querySelectorAll('[data-aim]').forEach(b => b.addEventListener('click', () => { aiModeSet(b.dataset.aim); if (location.hash !== '#ai') history.replaceState(null, '', '#ai'); aiShow(); window.scrollTo(0, 0); }));
+    }
+    if (A) A.hidden = m !== 'data'; if (T) T.hidden = m === 'data';
+    const host = m === 'data' ? A : T;
+    try { if (m === 'data') renderAI(); else { TH.view = m; renderThesis(); } } catch (e) { if (host) host.innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; }
+  }
   const thView = () => { if ((location.hash || '').startsWith('#thesis/tenets')) return 'tenets'; if (TH.view) return TH.view; try { return localStorage.getItem('th-view') || 'overview'; } catch (e) { return 'overview'; } };
   const thViewSeg = () => { const v = thView(); return `<div class="seg th-vs" role="group" aria-label="Thesis view"><button type="button" data-thv="overview" aria-pressed="${v === 'overview'}">Overview</button><button type="button" data-thv="tenets" aria-pressed="${v === 'tenets'}">By tenet</button></div>`; };
   function thSegBind(host) {
@@ -2397,7 +2499,7 @@
     const key = `<div class="tn-key">${[[2, 'Strongly supports'], [1, 'Supports'], [0, 'Neutral or mixed'], [-1, 'Weakens'], [-2, 'Strongly weakens']].map(([s, l]) => `<span>${tnDots(s)}${esc(l)}</span>`).join('')}<span class="sub">scored against the AI bull thesis</span></div>`;
     const bal = ds => { const g = ds.filter(d => tnScore(d) > 0).length, r = ds.filter(d => tnScore(d) < 0).length, b = ds.length - g - r, n = ds.length || 1; return `<div class="tn-bal" title="${g} green · ${b} blue · ${r} red"><i class="g" style="width:${g / n * 100}%"></i><i class="b" style="width:${b / n * 100}%"></i><i class="r" style="width:${r / n * 100}%"></i></div>`; };
     const strip = `<section class="panel"><div class="panel-h"><h2>Tenets</h2><span class="muted">updated ${esc(fmtD(asOf))}</span></div>${key}` +
-      `<div class="tn-strip">${TS.map(t => { const n = arr(t.dps), g = n.filter(d => tnScore(d) > 0).length, r = n.filter(d => tnScore(d) < 0).length; return `<a href="#thesis" data-tn="${esc(t.key)}"><span class="chips">${thChip(t.status)}</span><b>${esc(t.title)}</b>${n.length ? bal(n) : ''}<span class="sub">${n.length} datapoints${n.length ? ` · ${g} green · ${r} red` : ''}${arr(t.checks).length ? ` · ${arr(t.checks).length} fact check${arr(t.checks).length > 1 ? 's' : ''}` : ''}</span></a>`; }).join('')}</div>` +
+      `<div class="tn-strip">${TS.map(t => { const n = arr(t.dps), g = n.filter(d => tnScore(d) > 0).length, r = n.filter(d => tnScore(d) < 0).length; return `<a href="#ai" data-tn="${esc(t.key)}"><span class="chips">${thChip(t.status)}</span><b>${esc(t.title)}</b>${n.length ? bal(n) : ''}<span class="sub">${n.length} datapoints${n.length ? ` · ${g} green · ${r} red` : ''}${arr(t.checks).length ? ` · ${arr(t.checks).length} fact check${arr(t.checks).length > 1 ? 's' : ''}` : ''}</span></a>`; }).join('')}</div>` +
       (D2.storage ? `<p class="sub">${esc(D2.storage)}</p>` : '') + `</section>`;
     const src = xs => arr(xs).map(([t, u]) => u ? `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t)).join('<br>');
     const lim = TNF.n ? Number(TNF.n) : Infinity;
@@ -2431,16 +2533,15 @@
       }, () => {});
     }).catch(() => { TH.err = 'The thesis is not available in this view.'; thPaint(); });
   }
-  const thPaint = () => { if ((location.hash || '').startsWith('#thesis')) renderThesis(); };
+  const thPaint = () => { if (/^#(ai|thesis)(\/|$)/.test(location.hash || '') && aiMode() !== 'data') renderThesis(); };
   function renderThesis() {
     const host = document.getElementById('v-thesis'); if (!host) return;
     thStart();
     const T = TH.doc;
     let h = head('AI thesis', T ? esc(T.title || 'AI thesis') : 'AI thesis', T ? esc(T.subtitle || '') : '');
     if (!T) { host.innerHTML = h + `<section class="panel">${none(esc(TH.err || 'Loading the thesis…'))}</section>`; return; }
-    h += thViewSeg();
     if (thView() === 'tenets') { host.innerHTML = h + thTenets(); thSegBind(host); return; }
-    h += `<nav class="sk-tabs" aria-label="Thesis sections"><a href="#thesis" data-th="th-now">Where we stand</a><a href="#thesis" data-th="th-flags">Flagged datapoints</a><a href="#thesis" data-th="th-sign">Signposts</a><a href="#thesis" data-th="th-pil">Pillars</a><a href="#thesis" data-th="th-cases">Bull / bear</a><a href="#thesis" data-th="th-roi">ROI math</a><a href="#thesis" data-th="th-risk">Risks</a><a href="#thesis" data-th="th-next">Next steps</a><a href="#thesis" data-th="th-log">Changelog</a></nav>`;
+    h += `<nav class="sk-tabs" aria-label="Thesis sections"><a href="#ai" data-th="th-now">Where we stand</a><a href="#ai" data-th="th-flags">Flagged datapoints</a><a href="#ai" data-th="th-sign">Signposts</a><a href="#ai" data-th="th-pil">Pillars</a><a href="#ai" data-th="th-cases">Bull / bear</a><a href="#ai" data-th="th-roi">ROI math</a><a href="#ai" data-th="th-risk">Risks</a><a href="#ai" data-th="th-next">Next steps</a><a href="#ai" data-th="th-log">Changelog</a></nav>`;
     // 1) where we stand
     const S = T.stance || {}, N = T.now || {};
     h += `<section class="panel th-now" id="th-now"><div class="panel-h"><h2>Where we stand</h2><span class="muted">Baseline: ${esc((T.deck || {}).name || '')} · last reviewed ${esc(fmtD(T.updated_at))}</span></div>` +
@@ -2886,7 +2987,7 @@
 
   // ================= ROUTER =================
   const VIEWS = ['today', 'x', 'ai', 'thesis', 'dcrisk', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { mgmt: renderMgmt, ai: renderAI, thesis: renderThesis, dcrisk: renderDcr, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const R = { mgmt: renderMgmt, ai: () => {}, thesis: () => {}, dcrisk: renderDcr, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -2920,14 +3021,13 @@
   if (gD) gD.addEventListener('change', () => { G.days = +gD.value || null; saveG(); rerender(); });
   if (gA) gA.addEventListener('change', () => { DLY = gA.value === (D.daily || {}).as_of ? (D.daily || {}) : (HIST[gA.value] || D.daily || {}); done.daily = 0; show(); });
   function show() {
-    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes' || v === 'pipeline') v = 'ideas'; if (v === 'twitter') v = 'x'; if (!VIEWS.includes(v)) v = 'today';
+    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes' || v === 'pipeline') v = 'ideas'; if (v === 'twitter') v = 'x'; if (v === 'thesis') { aiModeSet((location.hash.split('/')[1] || '') === 'tenets' ? 'tenets' : 'overview'); history.replaceState(null, '', '#ai'); v = 'ai'; } else if (v === 'ai' && (location.hash.split('/')[1] || '')) aiModeSet('data'); if (!VIEWS.includes(v)) v = 'today';
     if (gAL) gAL.hidden = !(v === 'daily' && gA && gA.options.length > 1);
     if (v === 'routines' && done[v]) { renderRoutines(); }
     if (v === 'stocks' && done[v]) { renderStocks(); }
     if (v === 'notes' && done[v]) { renderNotes(); }
-    if (v === 'ai' && done[v]) { renderAI(); }
+    if (v === 'ai') { aiShow(); done.ai = 1; }
     if (v === 'mgmt' && done[v]) { renderMgmt(); }
-    if (v === 'thesis' && done[v]) { renderThesis(); }
     if (v === 'dcrisk' && done[v]) { renderDcr(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     paintUpd(v);

@@ -1,0 +1,120 @@
+--- /tmp/claude-0/-home-claude/e7ded53d-acaa-5e77-8f3a-01c717613bbd/scratchpad/head/tabs.js	2026-11-10 18:31:26.936150376 +0000
++++ /tmp/claude-0/-home-claude/e7ded53d-acaa-5e77-8f3a-01c717613bbd/scratchpad/live_tabs.js	2026-11-10 18:31:43.402354894 +0000
+@@ -2244,15 +2244,99 @@
+       .then(snap => { clearTimeout(to); const o = {}; (snap ? snap.docs : []).forEach(d => { if (d.exists) o[d.id] = JSON.parse(JSON.stringify(d.data())); }); if (Object.keys(o).length) { AIM.docs = o; AIM.err = ''; } else AIM.err = snap ? 'No SRS model data is stored in this page yet.' : 'The SRS model data is not available in this view.'; done(); })
+       .catch(() => { clearTimeout(to); AIM.err = 'The SRS model data could not be read from this page’s database.'; done(); });
+   }
++  // ================= AI › Bank forecasts: banks' AI data-center GW and AI capex paths, 2024–2030 =================
++  // The numbers live in this page's database, collection "ai", doc "bank_forecasts":
++  //   {asof, method, years:[2024..2030], est_idx, banks:[{bank, status: ok|partial|unavailable, note,
++  //     gw: {kind: installed|adds, geo, scope, v[7], fl[7], src:[{t, d, u}]} | null, capex: {scope, v[7], fl[7], src[]} | null}]}
++  // Claude refreshes that document with ArtifactData; page rebuilds never touch it.
++  const BF = { doc: null, err: '', loaded: false, m: 'capex', ro: null, w: 0 };
++  try { const v0 = localStorage.getItem('td-bf-m'); if (v0) BF.m = v0; } catch (e) {}
++  const BF_M = [['capex', 'AI capex ($bn)'], ['installed', 'GW installed base'], ['adds', 'GW added per year']];
++  function bfLoad(done) {
++    if (BF.loaded) return; BF.loaded = true;
++    const to = setTimeout(() => { if (!BF.doc) { BF.err = 'The bank forecasts did not load in this view.'; done(); } }, 10000);
++    (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('bank_forecasts').get() : null)
++      .then(sn => { clearTimeout(to); if (sn && sn.exists) { BF.doc = JSON.parse(JSON.stringify(sn.data())); BF.err = ''; } else BF.err = sn ? 'No bank forecasts are stored in this page yet.' : 'The bank forecasts are kept in this page’s database; open the page on claude.ai to see them.'; done(); })
++      .catch(() => { clearTimeout(to); BF.err = 'The bank forecasts could not be read from this page’s database.'; done(); });
++  }
++  const bfMed = xs => { const s = xs.filter(v => aimN(v) != null).sort((a, b) => a - b), n = s.length; return n ? (n % 2 ? s[(n - 1) / 2] : (s[n / 2 - 1] + s[n / 2]) / 2) : null; };
++  const bfHas = s => !!s && arr(s.v).some(v => aimN(v) != null);
++  function bfBodyHtml() {
++    const d = BF.doc, Y = arr(d.years), ei = +d.est_idx || 0, B = arr(d.banks);
++    const col = new Map(B.filter(b => bfHas(b.capex) || bfHas(b.gw)).map((b, i) => [b.bank, AIM_C[i % AIM_C.length]]));
++    const pick = b => BF.m === 'capex' ? b.capex : (b.gw && b.gw.kind === BF.m ? b.gw : null);
++    const f = BF.m === 'capex' ? 'int' : 'gw', unit = BF.m === 'capex' ? '$bn' : 'GW';
++    const cats = Y.map((y, i) => i >= ei ? y + 'E' : String(y));
++    const rows = B.map(b => ({ b, s: pick(b) })).filter(x => bfHas(x.s));
++    const S = rows.map(x => ({ n: x.b.bank + (x.s.geo && x.s.geo !== 'Global' ? ' (' + x.s.geo + ')' : ''), short: x.b.bank, v: Y.map((_, i) => aimN(arr(x.s.v)[i])), c: col.get(x.b.bank), dash: ei }));
++    const glob = S.filter((s, k) => !rows[k].s.geo || rows[k].s.geo === 'Global');
++    const med = Y.map((_, i) => bfMed(glob.map(s => s.v[i]))), lo = Y.map((_, i) => { const xs = glob.map(s => s.v[i]).filter(v => v != null); return xs.length ? Math.min(...xs) : null; }), hi = Y.map((_, i) => { const xs = glob.map(s => s.v[i]).filter(v => v != null); return xs.length ? Math.max(...xs) : null; });
++    const SS = glob.length > 2 ? S.concat([{ n: 'Median (global series)', short: 'Median', v: med, c: 'var(--ink)', dash: ei }]) : S;
++    const label = (BF_M.find(m => m[0] === BF.m) || [])[1] || '';
++    let h = '';
++    if (!S.length) h += none('No bank in this set publishes a ' + esc(label) + ' series.');
++    else h += aimFig('bf', label + ' by bank', 'Solid = reported (' + esc(cats.slice(0, ei).join(', ')) + '), dashed = estimates · hover for values', { kind: 'lines', cats, series: SS, f, ax: '', h: 300, endW: 120, aria: label + ' forecasts by bank, ' + Y[0] + ' to ' + Y[Y.length - 1] }, aimLegL(SS));
++    const cell = (s, i) => { const v = aimN(arr(s.v)[i]), fl = arr(s.fl)[i]; return v == null ? '<td class="n sub">–</td>' : `<td class="n${i >= ei ? ' aim-e' : ''}"${fl ? ` title="${esc(fl)}"` : ''}>${esc(aimF(v, f))}${fl ? '<sup>*</sup>' : ''}</td>`; };
++    const srcs = s => arr(s && s.src).map(x => `<a class="ext" href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a> <span class="sub">${esc(x.d)}</span>`).join('<br>');
++    h += `<div class="aim-tb"><h3>${esc(label)}: every bank</h3><div class="tbl-wrap"><table class="dt aim-t"><thead><tr><th>Bank</th><th>Scope</th>${cats.map((c, i) => `<th class="n${i >= ei ? ' aim-e' : ''}">${esc(c)}</th>`).join('')}<th>Source (AlphaSense)</th></tr></thead><tbody>` +
++      B.map(b => { const s = pick(b); if (bfHas(s)) return `<tr><td class="aim-k"><b>${esc(b.bank)}</b>${s.geo && s.geo !== 'Global' ? ` <span class="chip">${esc(s.geo)} only</span>` : ''}</td><td class="aim-w">${esc(s.scope)}${s.note ? `<br><span class="sub">${esc(s.note)}</span>` : ''}</td>${Y.map((_, i) => cell(s, i)).join('')}<td class="aim-w">${srcs(s)}</td></tr>`;
++        const why = b.status === 'unavailable' ? b.note : BF.m === 'capex' ? 'No AI capex series in the notes read.' + (b.note ? ' ' + b.note : '') : (b.gw ? `Its GW series is ${b.gw.kind === 'adds' ? 'annual additions' : 'an installed base'}: switch view.` : 'No GW series in the notes read.' + (b.note ? ' ' + b.note : ''));
++        return `<tr><td class="aim-k"><b>${esc(b.bank)}</b>${b.status === 'unavailable' ? ' <span class="chip out">no access</span>' : ''}</td><td class="aim-w sub" colspan="${Y.length + 2}">${esc(why)}</td></tr>`; }).join('') +
++      (glob.length > 2 ? ['Median', 'Low', 'High'].map((l, k) => `<tr class="aim-b"><td>${l}</td><td class="sub">Global series only</td>${[med, lo, hi][k].map((v, i) => `<td class="n${i >= ei ? ' aim-e' : ''}">${v == null ? '–' : esc(aimF(v, f))}</td>`).join('')}<td></td></tr>`).join('') : '') +
++      `</tbody></table></div><p class="sub">${esc(unit)} · <sup>*</sup> hover the figure: derived from the bank's growth rates or cumulative targets, a range midpoint, or a narrower scope that year. Median, low and high leave out US-only series and need at least three global series.</p></div>`;
++    return h;
++  }
++  function bfSectionHtml() {
++    const top = `<section class="panel" id="ai-banks"><div class="panel-h"><h2>Bank forecasts: AI data-center GW and AI capex, 2024–2030</h2><span class="sub">${BF.doc ? 'As of ' + esc(BF.doc.asof || '') + ' · AlphaSense broker research' : ''}</span></div>`;
++    if (!BF.doc) return top + `<p class="sub">${esc(BF.err || 'Loading the bank forecasts…')}</p></section>`;
++    const B = arr(BF.doc.banks), ok = B.filter(b => bfHas(b.capex) || bfHas(b.gw)), cx = B.filter(b => bfHas(b.capex)).map(b => aimN(arr(b.capex.v)[6])).filter(v => v != null), m30 = bfMed(cx);
++    const gi = B.filter(b => b.gw && b.gw.kind === 'installed' && b.gw.geo === 'Global').map(b => aimN(arr(b.gw.v)[6])).filter(v => v != null);
++    return top + `<p class="aim-lede">${esc(BF.doc.method || '')}</p>` +
++      `<div class="summary"><div class="stat"><span class="v">${ok.length} / ${B.length}</span><span class="l">banks with figures in AlphaSense</span></div>` +
++      `<div class="stat"><span class="v">${m30 == null ? '–' : '$' + esc(aimF(m30, 'int')) + 'bn'}</span><span class="l">median 2030 AI capex (${cx.length} banks${cx.length ? ', $' + esc(aimF(Math.min(...cx), 'int')) + '–' + esc(aimF(Math.max(...cx), 'int')) + 'bn' : ''})</span></div>` +
++      `<div class="stat"><span class="v">${gi.length ? esc(aimF(bfMed(gi), 'num1')) + ' GW' : '–'}</span><span class="l">2030 global installed base (${gi.length} bank${gi.length === 1 ? '' : 's'})</span></div></div>` +
++      `<div class="seg aim-seg" role="group" aria-label="Metric">${BF_M.map(([k, l]) => `<button type="button" data-bf="${k}" aria-pressed="${BF.m === k}">${esc(l)}</button>`).join('')}</div>` +
++      `<div id="bf-body" class="aim-view">${bfBodyHtml()}</div><div class="aim-tip" hidden></div></section>`;
++  }
++  function bfMount() {
++    const sec = document.getElementById('ai-banks'); if (!sec || !BF.doc) return;
++    sec.addEventListener('click', e => {
++      const b = e.target.closest && e.target.closest('[data-bf]'); if (!b || !sec.contains(b)) return;
++      BF.m = b.dataset.bf; try { localStorage.setItem('td-bf-m', BF.m); } catch (x) {}
++      sec.querySelectorAll('[data-bf]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.bf === BF.m)));
++      const body = sec.querySelector('#bf-body'); if (body) { body.innerHTML = bfBodyHtml(); aimDraw(sec); }
++    });
++    const tip = sec.querySelector('.aim-tip');
++    const show = (g, x, y) => {
++      const [nm, i] = String(g.dataset.tip || '').split(':'), d = (AIM.tips[nm] || [])[+i]; if (!d || !tip) return;
++      tip.textContent = '';
++      const hd = document.createElement('div'); hd.className = 'aim-tip-h'; hd.textContent = d.h; tip.appendChild(hd);
++      d.rows.forEach(r => { const row = document.createElement('div'), k = document.createElement('i'), v = document.createElement('b'), s = document.createElement('span'); row.className = 'aim-tip-r' + (r.b ? ' tot' : ''); if (r.c) k.style.background = r.c; v.textContent = r.v; s.textContent = r.n; row.append(k, v, s); tip.appendChild(row); });
++      tip.hidden = false;
++      const tw = tip.offsetWidth, th = tip.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
++      let lx = x + 14, ly = y + 14; if (lx + tw > vw - 8) lx = x - tw - 14; if (lx < 8) lx = 8; if (ly + th > vh - 8) ly = y - th - 14; if (ly < 8) ly = 8;
++      tip.style.left = lx + 'px'; tip.style.top = ly + 'px';
++    };
++    const hide = () => { if (tip) tip.hidden = true; };
++    const at = e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g && sec.contains(g)) show(g, e.clientX, e.clientY); else hide(); };
++    sec.addEventListener('pointermove', at); sec.addEventListener('pointerdown', at); sec.addEventListener('pointerleave', hide);
++    sec.addEventListener('focusin', e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g) { const r = g.getBoundingClientRect(); show(g, r.left + r.width / 2, r.top + 8); } });
++    sec.addEventListener('focusout', hide);
++    if (!BF.sc) { BF.sc = 1; window.addEventListener('scroll', () => { const t = document.querySelector('#ai-banks .aim-tip'); if (t) t.hidden = true; }, { passive: true }); }
++    aimDraw(sec);
++    if (window.ResizeObserver) { if (BF.ro) BF.ro.disconnect(); BF.w = sec.clientWidth; BF.ro = new ResizeObserver(() => { const w = sec.clientWidth; if (Math.abs(w - BF.w) > 6) { BF.w = w; requestAnimationFrame(() => aimDraw(sec)); } }); BF.ro.observe(sec); }
++  }
+   function renderAI() {
+     const host = document.getElementById('v-ai'); if (!host) return;
+     const st = AI.st, meta = new Map(arr((D.dp_index || {}).meta).map(m => [m.rid, m]));
+     const f1 = v => v == null ? '–' : (+v).toFixed(1);
+     const paint = () => {
+       let h = head('AI', 'AI infrastructure', 'SRS’s own AI models (capex, accelerator share, economics, financing, supply chain), where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
+-        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
++        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/banks">Bank forecasts</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
+       // ---- 0) SRS AI models (page database, collection "ai_models") ----
+       h += aimSectionHtml();
++      // ---- 0b) bank forecasts (page database, collection "ai", doc "bank_forecasts") ----
++      h += bfSectionHtml();
+       // ---- 1) data centers by state ----
+       if (!AI_DC.rows.length) h += `<section class="panel" id="ai-dc"><h2>Data centers: gigawatts by state and political risk</h2><p class="sub">${esc(AI.dcErr || 'Loading the state figures…')}</p><h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
+       else {
+@@ -2295,7 +2379,7 @@
+         `<label for="ai-tone">Read <select id="ai-tone"><option value="">All</option><option value="tight"${st.tone === 'tight' ? ' selected' : ''}>Supply tight / demand ahead</option><option value="loose"${st.tone === 'loose' ? ' selected' : ''}>Loosening / digestion</option></select></label>` +
+         `<label for="ai-days">Window <select id="ai-days">${[[30, '1 month'], [90, '3 months'], [180, '6 months'], [100000, 'All']].map(([v, l]) => `<option value="${v}"${+st.days === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>` +
+         `<label for="ai-q">Search <input type="search" id="ai-q" value="${esc(st.q)}" placeholder="Ticker or word"></label></div><div id="ai-cmp">${aiRowsHtml('compute')}</div></section>`;
+-      host.innerHTML = h; wire(); aimMount();
++      host.innerHTML = h; wire(); aimMount(); bfMount();
+       const sub = (location.hash.split('/')[1] || ''); host.querySelectorAll('.sk-tabs a').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#ai/' + sub));
+       if (sub) { const el = document.getElementById('ai-' + (sub === 'dc' ? 'dc' : sub)); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); }
+       const qh = document.getElementById('ai-qr'); if (qh && window.__qrMount) { const co = (window.__qrFind && window.__qrFind('ALAB')) || { t: 'ALAB', bbg: 'ALAB US', name: 'Astera Labs' }; try { window.__qrMount(qh, co); } catch (e) { qh.innerHTML = none('The Visible Alpha table could not load here.'); } }
+@@ -2338,6 +2422,7 @@
+     }
+     paint();
+     aimLoad(paint);
++    bfLoad(paint);
+     if (!AI.dcLoaded) { AI.dcLoaded = true; (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('dc_states').get() : null)
+       .then(sn => { if (sn && sn.exists) Object.assign(AI_DC, JSON.parse(JSON.stringify(sn.data()))); else AI.dcErr = 'The state data center figures are not loaded in this view.'; paint(); })
+       .catch(() => { AI.dcErr = 'The state data center figures could not be read from this page’s database.'; paint(); }); }

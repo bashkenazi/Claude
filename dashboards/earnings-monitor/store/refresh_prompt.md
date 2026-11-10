@@ -130,14 +130,15 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    FactSet for Companies DB names with Tier 1–3 or In Master Comps checked (same set as B).
 5. tabs/daily.json — only after step 4 (the day's digests are the first source of reasons):
    prices from universe A (MIDDAY: Live sheet; EVENING: closes). Shape: as_of, universe_n, summary[] (connect
-   the moves into themes, most important first), sectors[] (group, n, median_1d, best, worst, why — a why for
-   every sector), up[]/down[] (top 12 each), moves[] (every priced name: t, n, g, c), and stories{} keyed by
+   the moves into themes, most important first), sectors[] (group, n, median_1d, best, worst, why — empty when no driver is found), up[]/down[] (top 12 each), moves[] (every priced name: t, n, g, c), and stories{} keyed by
    ticker ({why, sources, confidence}) for every name that moved >=5% AND >=3 points away from its sector median
    (most extreme first, cap 60). Sources for each story, in order: the routine pages from step 4, then desk mail
    since the prior trading day (Outlook search by ticker/name), today's Daily Research PDFs (OneDrive, folder named
    like 11.2.26), AlphaSense (alphasense_genai; ignore its price figures), srs_documents for names that just
-   reported, then the web. A story is ONE sentence (≤ 30 words; Bobby, 2026-11-03) on why it moved: the catalyst with its key figure, "moved with <group>: <driver>", or "No catalyst
-   found in your sources or the news." If no digest has run today, keep the previous daily.json.
+   reported, then the web. A story is ONE sentence (≤ 30 words; Bobby, 2026-11-03) on why it moved: the
+   specific catalyst with its key figure. If no source gives a company-specific reason, leave why EMPTY ("") —
+   never write "moved with the market/sector/group", "in line with peers" or "No catalyst found" (Bobby, 2026-11-10).
+   The same rule applies to sectors[].why: name the driver or leave it empty. If no digest has run today, keep the previous daily.json.
 6. tabs/sources.json (EVENING) — rebuild only if its inputs changed. (The Signals tab was removed 2026-11-03; skip
    tabs/signals.json. Pipeline now shows inside the "Pipeline, ideas & themes" tab; tabs/pipeline.json is unchanged.)
 6b. tabs/stocks.json (EVENING): Companies DB Tier 1–2 rows (Ticker, BBG Ticker, Company, Sector, Sub-sector, Tier),
