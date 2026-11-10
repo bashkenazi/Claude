@@ -244,6 +244,15 @@ table.dt td.ev-src { white-space: normal; max-width: 220px; }
 .qr-cands button { cursor: pointer; }
 .qr-foot { margin-top: 6px; font-size: 11.5px; }
 .qr-det > summary a { font-weight: 400; margin-left: 6px; }
+.sd h3 { margin-top: 10px; }
+.sk-main, .sk-wrap > * { min-width: 0; }
+.sd .panel-h a.ext { white-space: normal; overflow-wrap: anywhere; }
+.sd .sd-p { margin: 0; font-size: 13px; color: var(--ink-2); max-width: 120ch; }
+.sd .sd-ul { font-size: 13px; max-width: 120ch; } .sd .sd-d1 { margin-left: 18px; } .sd .sd-d2 { margin-left: 36px; } .sd .sd-d3 { margin-left: 54px; }
+table.sd-t td { white-space: normal; min-width: 90px; max-width: 360px; font-size: 12px; line-height: 1.4; }
+table.sd-t td:first-child { min-width: 150px; }
+.sd-tog > summary { font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--ink); font-weight: 650; }
+.sd-tog .sd-in { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
 /* Thesis tab */
 .sk-tenets { padding-left: 20px; margin: 6px 0; }
 .sk-tenets > li { margin: 0 0 12px; }

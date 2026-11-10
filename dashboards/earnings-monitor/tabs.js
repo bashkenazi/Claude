@@ -777,7 +777,49 @@
   }
 
   // ================= STOCKS: one page per Tier 1-2 company =================
+  /* stock-deep v1 */
+  const SDP = { docs: {}, started: false, err: '' };
+  function sdStart() {
+    if (SDP.started) return; SDP.started = true;
+    (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => {
+      if (!db) return;
+      db.collection('stock_deep').onSnapshot(snap => {
+        SDP.docs = {}; snap.docs.forEach(d => { SDP.docs[String(d.id).toUpperCase()] = JSON.parse(JSON.stringify(d.data())); });
+        if ((location.hash || '').startsWith('#stocks/')) renderStocks();
+      }, () => { SDP.err = 'The deep-dive tabs could not be read from this page’s database.'; });
+    }).catch(() => {});
+  }
+  const sdDoc = cur => cur ? (SDP.docs[String(cur.t).toUpperCase()] || SDP.docs[String(cur.bbg || '').toUpperCase()] || null) : null;
+  const sdTabs = cur => { const d = sdDoc(cur); return d ? arr(d.tabs).map(t => ['dd-' + t.key, t.label]) : []; };
+  // block html was escaped by the builder (bold and http links only); anything else is escaped here
+  function sdBlocks(bs) {
+    return arr(bs).map(b => {
+      if (b.k === 'h') return `<h3>${b.h}</h3>`;
+      if (b.k === 'p') return `<p class="sd-p">${b.h}</p>`;
+      if (b.k === 'note') return `<p class="tn-view">${b.h}</p>`;
+      if (b.k === 'ul') return `<ul class="b sd-ul">${arr(b.items).map(i => `<li class="sd-d${Math.min(+i.d || 0, 3)}">${i.h}</li>`).join('')}</ul>`;
+      if (b.k === 'table') return `<div class="tbl-wrap"><table class="dt sd-t"><thead><tr>${arr(b.cols).map(c => `<th>${c}</th>`).join('')}</tr></thead><tbody>${arr(b.rows).map(r => `<tr>${arr(r).map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+      if (b.k === 'toggle') return `<details class="fr-sec sd-tog"><summary>${b.title}</summary><div class="sd-in">${sdBlocks(b.b)}</div></details>`;
+      return '';
+    }).join('');
+  }
+  function sdView(cur, sub, host) {
+    const d = sdDoc(cur), t = d && arr(d.tabs).find(x => 'dd-' + x.key === sub);
+    if (!t) { host.innerHTML = `<section class="panel">${none('This tab has no content yet.')}</section>`; return; }
+    const src = d.source || {}, asOf = d.as_of || '';
+    host.innerHTML = `<section class="panel sd"><div class="panel-h"><h2>${esc(t.label)}</h2><span class="muted">${src.url ? `<a class="ext" href="${esc(src.url)}" target="_blank" rel="noopener">Notion: ${esc(d.title || 'deep dive')}</a>` : esc(d.title || '')}${asOf ? ` · as of ${esc(fmtD(asOf))}` : ''}</span></div>${sdBlocks(t.blocks)}</section>` +
+      `<section class="panel"><div class="panel-h"><h2>Latest datapoints</h2><span class="muted" id="sd-dpn">Supabase, newest first</span></div><div class="list" id="sd-dp"><p class="sub">Loading…</p></div></section>`;
+    getDP().then(({ SRC, ROWS }) => {
+      const box = document.getElementById('sd-dp'); if (!box) return;
+      let rx; try { rx = new RegExp(t.dp_rx || '.', 'i'); } catch (e) { rx = /./; }
+      const rs = new Set(cur.rids), xs = ROWS.filter(r => rs.has(r[1]) && rx.test(String(r[9] || ''))).sort((a, b) => String(b[2]).localeCompare(String(a[2]))).slice(0, 25);
+      const nw = xs.filter(r => asOf && String(r[2]) > asOf).length;
+      box.innerHTML = xs.length ? xs.map(r => { const h = rowHtml(r, SRC); return asOf && String(r[2]) > asOf ? h.replace('<span class="mono sub">', '<span class="chip x-nchip">new since page</span> <span class="mono sub">') : h; }).join('') : none('No matching datapoints.');
+      const n = document.getElementById('sd-dpn'); if (n) n.textContent = `Supabase, newest first · ${xs.length} shown${nw ? ` · ${nw} newer than the Notion page` : ''}`;
+    }).catch(() => { const box = document.getElementById('sd-dp'); if (box) box.innerHTML = none('The datapoint files did not load.'); });
+  }
   function renderStocks() {
+    sdStart();
     const ST = arr((D.stocks || {}).companies), host = document.getElementById('v-stocks');
     const parts = (location.hash || '').split('/'), key = decodeURIComponent(parts[1] || ''), sub = parts[2] || 'debate';
     const cur = ST.find(c => c.key === key) || null;
@@ -804,7 +846,7 @@
     if (!cur) body = `<section class="panel"><h2>Pick a company</h2><p class="sub">Each Tier 1–2 name has six views: the Tech Specialist debate, the thesis tenets, a live Visible Alpha quarterly review, every datapoint organized by its drivers, the earnings-review metrics table, and what management has said over time.</p></section>`;
     else {
       const I = idxOf(cur), n = I ? I.c.length - 1 : 0, pl = PL.get(String(cur.t).toUpperCase()) || PL.get(String(cur.bbg).toUpperCase()), mv = MV.get(String(cur.t).toUpperCase()) || MV.get(String(cur.bbg).toUpperCase());
-      const tabs = [['debate', 'Debate'], ['thesis', 'Thesis'], ['qr', 'Quarterly review'], ['kpis', 'KPIs & guidance'], ['datapoints', 'Datapoints'], ['earnings', 'Earnings metrics'], ['management', 'Management'], ['insiders', 'Questions & insiders']];
+      const tabs = [['debate', 'Debate'], ['thesis', 'Thesis'], ['qr', 'Quarterly review'], ['kpis', 'KPIs & guidance'], ['datapoints', 'Datapoints'], ['earnings', 'Earnings metrics'], ['management', 'Management'], ['insiders', 'Questions & insiders']]; sdTabs(cur).forEach((x, i) => tabs.splice(2 + i, 0, x));
       body = `<section class="panel sk-head"><div class="panel-h"><div><span class="eyebrow">Tier ${esc(cur.tier)} · ${esc(cur.sector)} · ${esc(cur.sub)}</span><h2 style="margin-top:4px">${tk(cur.t)} ${esc(cur.name)}</h2></div>
         <div class="sk-kpis">${mv ? `<span><span class="sub">Today</span> <b class="mono ${+mv.c >= 0 ? 'c-pos' : 'c-neg'}">${sgn(+mv.c)}%</b></span>` : ''}${I ? `<span><span class="sub">Index</span> <b class="mono">${sgn(I.c[n])}</b></span><span><span class="sub">vs univ.</span> <b class="mono ${I.x[n] >= 0 ? 'c-pos' : 'c-neg'}">${sgn(I.x[n])}</b></span><span><span class="sub">30d Δ</span> <b class="mono">${sgn(I.c[n] - I.c[Math.max(0, n - 4)])}</b></span>` : ''}</div></div>
         ${pl ? `<p class="sk-pitch"><span class="chip ${pl.direction === 'short' ? 'dn' : 'up'}">${esc(pl.direction)}</span> <span class="chip out">${esc(pl.status || '')}</span> ${attr(pl.pitch || '')}${pl.upside && (pl.upside.pct_low != null || pl.upside.pct_high != null) ? ` <b class="mono">${sgn(100 * (pl.upside.pct_high ?? pl.upside.pct_low))}% to target</b>` : ''}</p>` : ''}
@@ -818,6 +860,7 @@
     $('sk-sec').addEventListener('change', e => { fs.sec = e.target.value; fs.sub = ''; renderStocks(); });
     $('sk-sub').addEventListener('change', e => { fs.sub = e.target.value; renderStocks(); });
     if (!cur) return;
+    if (String(sub).startsWith('dd-')) { sdView(cur, sub, $('sk-body')); return; }
     if (sub === 'earnings') { $('sk-body').innerHTML = earningsView(cur); return; }
     if (sub === 'insiders') { stockMgView(cur, $('sk-body')); return; }
     if (sub === 'kpis') { stockKpiView(cur, $('sk-body')); return; }
