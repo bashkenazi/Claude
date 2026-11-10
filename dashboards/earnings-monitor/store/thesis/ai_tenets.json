@@ -1,0 +1,1448 @@
+{
+ "built_by": "tenet build 2026-11-10",
+ "scale": "Dots score each datapoint against the AI bull thesis: two green = strongly supports, one green = supports, blue = neutral or mixed, one red = weakens, two red = strongly weakens.",
+ "storage": "Datapoints: Supabase research_evidence (one row per datapoint, via the Datapoint Filter). Tenets: Supabase thesis_tenets. Links: thesis_tenet_evidence (tenet, evidence id, stance). This document mirrors them for the page.",
+ "tenets": [
+  {
+   "checks": [
+    {
+     "claim": "Morgan Stanley has 5GW pushed into 2029, making 2028 net adds flat",
+     "sources": [
+      [
+       "SB #67062 (MS US Thematic Research)",
+       ""
+      ],
+      [
+       "BigGo Finance on the MS note, 2026-11-08",
+       "https://finance.biggo.com/news/7b7c2bee-7f97-4b76-aed2-f75ed42127ec"
+      ]
+     ],
+     "text": "Morgan Stanley (2026-11-08/09) moved ~5GW of US data-center IT load from 2028 into 2029, about 20% of the 2028 slate. It now models 19.9GW of 2028 additions vs 27.6GW in 2029, which leaves 2028 flat vs 2027 (about −4% y/y). MS calls these postponements, not cancellations, with 2027 unchanged.",
+     "verdict": "confirmed"
+    },
+    {
+     "claim": "This could be a problem for all bottleneck companies",
+     "sources": [
+      [
+       "BigGo Finance on the MS note",
+       "https://finance.biggo.com/news/7b7c2bee-7f97-4b76-aed2-f75ed42127ec"
+      ],
+      [
+       "SB #66332, #65561",
+       ""
+      ]
+     ],
+     "text": "MS itself flags a possible temporary 2028 slowdown, with upstream suppliers facing slower orders, rising inventories and margin pressure. Offsets: Bernstein sees only a 2–4% realistic US capacity hit; SemiAnalysis says ~75% of 2027 capacity in the top 20 states is already under construction.",
+     "verdict": "supported"
+    }
+   ],
+   "claim": "Post-midterm politics is getting more difficult for US data centers (TX/OH/GA/PA governors, the Texas permit freeze, stricter large-load tariffs). The Street models a 2028 GW ramp; some of it is already moving into 2029, which would leave 2028 net adds flat and hit every bottleneck supplier priced for that ramp.",
+   "dps": [
+    {
+     "date": "2026-11-09",
+     "id": 67062,
+     "score": -2,
+     "src": "MS US Thematic Research",
+     "t": "NVDA",
+     "text": "MS est.: ~5GW of US data-center capacity shifted from 2028 to 2029; 19.9GW incremental in 2028 vs 27.6GW in 2029, so 2028 additions are flat vs 2027 and down y/y."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66331,
+     "score": -1,
+     "src": "Morgan Stanley Research",
+     "t": "NVDA",
+     "text": "MS est. (McVeigh): ~12GW of the US pipeline at risk through 2030 from tighter TX/OH legislation (4.9GW 2028, 3.8GW 2029, 3.7GW 2030); no impact on 2027 capacity under construction."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66102,
+     "score": -1,
+     "src": "SemiAnalysis Datacenter Industry Model",
+     "t": "VRT",
+     "text": "SemiAnalysis: 13 election states hold 43.5GW (70%) of 62.2GW of 2028 US net adds (Texas ~18GW); a 2028 delivery needs its power permit 12–15 months earlier."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 67096,
+     "score": -2,
+     "src": "Wells Fargo Securities",
+     "t": "CAT US",
+     "text": "Texas DC permits halted since the 9/21 TCEQ directive pending the ERCOT audit, incl. behind-the-meter generation; governor-elect pledges a hold until the legislature acts (session 1/12–5/31/27)."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66101,
+     "score": -1,
+     "src": "SemiAnalysis / WFS",
+     "t": "VST",
+     "text": "Texas pause could run 6–9 months into 2027 under Hinojosa vs Dec-26 under Abbott: ERCOT audit due 12/10, PUCT review 12/17."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66252,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "NVDA",
+     "text": "SemiAnalysis est.: 5.8GW of US capacity could be delayed assuming a ~2Q permitting pause; only ~600MW is TPU, so the delay falls mostly on Nvidia GPU capacity."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66219,
+     "score": -1,
+     "src": "WSJ Tech Conference",
+     "t": "META",
+     "text": "Meta president: new US data-center projects will be 'very challenging' after the midterms; considering building outside the US."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66265,
+     "score": -1,
+     "src": "Brad Gerstner, All-In",
+     "t": "CRWV",
+     "text": "Gerstner (forecast, widely repeated): 10–15GW of the ~43GW of US capacity expected online in 2027 may not come online."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66332,
+     "score": 1,
+     "src": "Bernstein",
+     "t": "NVDA",
+     "text": "Bernstein est.: midterms raise execution/cost risk, not cancellation risk; realistic US capacity hit 2–4% vs 9% worst case."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65561,
+     "score": 1,
+     "src": "SemiAnalysis DC model",
+     "t": "VRT",
+     "text": "SemiAnalysis: ~75% of the 33.8GW due in 2027 across the top 20 states is already under construction; global +50GW year intact."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66220,
+     "score": 1,
+     "src": "CoreWeave CEO",
+     "t": "CRWV",
+     "text": "CoreWeave CEO: no anticipated impact on existing commitments or backlog from the midterms."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66099,
+     "score": -2,
+     "src": "Bloomberg; Morgan Stanley",
+     "t": "NVDA",
+     "text": "Democratic wins in TX/GA/OH/PA put ~50% of proposed US AI DC additions at risk of pushback (Bloomberg); MS: 24GW of Texas builds at risk through 2030 (~20% of US GW)."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66615,
+     "score": -1,
+     "src": "Wolfe Research",
+     "t": "VST",
+     "text": "Texas governor-elect ran on a moratorium on new data centers until guardrails are set; ERCOT Batch Zero report 12/10, PUCT 12/17."
+    },
+    {
+     "date": "2026-11-03",
+     "id": 65921,
+     "score": -1,
+     "src": "Talen Energy management",
+     "t": "TLN",
+     "text": "Talen: \"'29 is becoming the new '28\" for data-center site development (~1-year slip); new CCGT all-in cost >$120/MWh and rising."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66334,
+     "score": -1,
+     "src": "TrendForce",
+     "t": "ORCL",
+     "text": "TrendForce cuts 2027 capacity at Vantage's Lighthouse campus (Oracle/OpenAI, WI) to 310MW from 650MW on power approval; 2028 kept at 1.3GW."
+    },
+    {
+     "date": "2026-11-09",
+     "id": 66438,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "ORCL",
+     "text": "SemiAnalysis: Lighthouse (~900MW IT) first AI ops slip to 3Q28, ~3–4 quarters behind Oracle's 2H27 guide."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66251,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "OpenAI",
+     "text": "SemiAnalysis: Vantage Stargate Texas may have 700MW delayed from 4Q27; SB Energy Ohio phase 2 (800MW, 3Q28) at risk depending on pause length."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66249,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "MSFT",
+     "text": "SemiAnalysis: Crusoe Stargate Abilene Buildings 9/10 (672MW, Microsoft) likely delayed from 3Q27; onsite-generation permit pending under the TCEQ pause."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66246,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "GOOGL",
+     "text": "SemiAnalysis: Nexus Hubbard (800MW TPU for Anthropic) permitted for only ~470MW IT; Goodnight may see ~275MW delayed from 4Q27."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66377,
+     "score": 0,
+     "src": "Vistra 3Q26 call",
+     "t": "VST",
+     "text": "Vistra: Texas permit hold could lift ~mid-December when audits finish; PUCT drafting a stricter large-load tariff; a moratorium needs legislation and is 'a bridge too far'."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66100,
+     "score": 0,
+     "src": "BofA research",
+     "t": "AMZN",
+     "text": "BofA: moratoria and the end of tax breaks raise build cost and permitting risk, but incumbent permitted capacity (e.g. AMZN) gains scarcity value."
+    },
+    {
+     "date": "2026-11-03",
+     "id": 66103,
+     "score": 1,
+     "src": "SemiAnalysis",
+     "t": "SPCX",
+     "text": "SemiAnalysis: SpaceX can deploy ~13GW of DC capacity in 2027 vs a 10GW plan (3.6GW under construction)."
+    }
+   ],
+   "gw": {
+    "cols": [
+     "Source",
+     "Date",
+     "2027",
+     "2028",
+     "2029",
+     "Read"
+    ],
+    "note": "Forecasts, not actuals. SB = Supabase research_evidence id.",
+    "rows": [
+     [
+      "Morgan Stanley US Thematic",
+      "2026-11-09",
+      "unchanged",
+      "19.9GW incremental (~5GW moved out); flat vs 2027",
+      "27.6GW",
+      "Postponement, not cancellation"
+     ],
+     [
+      "Morgan Stanley (McVeigh)",
+      "2026-11-06",
+      "no impact",
+      "4.9GW at risk",
+      "3.8GW at risk",
+      "~12GW at risk through 2030 from TX/OH rules"
+     ],
+     [
+      "SemiAnalysis DC model",
+      "2026-11-04",
+      "33.8GW due, ~75% under construction",
+      "62.2GW US net adds; 43.5GW in 13 election states",
+      "–",
+      "30.3GW exposed in a pro-pause case vs 5.7GW otherwise"
+     ],
+     [
+      "SemiAnalysis",
+      "2026-11-04",
+      "5.8GW could be delayed (mostly Nvidia, mostly TX)",
+      "–",
+      "–",
+      "Assumes a ~2-quarter permitting pause"
+     ],
+     [
+      "Bernstein",
+      "2026-11-06",
+      "–",
+      "–",
+      "–",
+      "Realistic US capacity hit 2–4% vs 9% worst case"
+     ],
+     [
+      "Talen Energy mgmt",
+      "2026-11-03",
+      "–",
+      "'29 is becoming the new '28",
+      "–",
+      "~1-year slip in site development"
+     ]
+    ],
+    "title": "GW deployed: who says what"
+   },
+   "key": "politics_gw",
+   "sort": 1,
+   "srs_view": "The Street is assuming for '28, but some has clearly been pushed out. Morgan Stanley has 5GW pushed into 2029, making 2028 net adds flat. This could be a problem for all bottleneck companies.",
+   "staged": [],
+   "status": "weakening",
+   "title": "Political environment: getting more difficult"
+  },
+  {
+   "checks": [
+    {
+     "claim": "OpenAI is falling off",
+     "sources": [
+      [
+       "SoftBank 2Q FY3/27 results (SB #67052)",
+       ""
+      ],
+      [
+       "24/7 Wall St., 2026-11-07",
+       "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/"
+      ]
+     ],
+     "text": "Losing share and raising less, not shrinking. SoftBank discloses OpenAI ARR of ~$50bn at Sep-26 vs Anthropic above $80bn in October. OpenAI's raise came in at ~$11bn on first close against $30bn+ first sought. But OpenAI ARR still grew 70%+ in Jul–Sep and enterprise doubled (CFO Friar).",
+     "verdict": "partly"
+    }
+   ],
+   "claim": "The two labs scale ARR fast enough to stay the incremental buyer of compute (deck: 7x in a year to ~$140bn by Sep-26).",
+   "dps": [
+    {
+     "date": "2026-11-10",
+     "id": 67052,
+     "score": 0,
+     "src": "SoftBank 2Q FY3/27 results",
+     "t": "9984 JP",
+     "text": "SoftBank: OpenAI ARR ~$50bn at Sep-26, up 70%+ in Jul–Sep; enterprise 50% of revenue; ads ARR $1bn."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66353,
+     "score": 2,
+     "src": "WSJ",
+     "t": "ANTH",
+     "text": "Anthropic annualized revenue topped $80bn in October; ~$8bn net new vs September (TMTB calc), back to the Jun–Jul pace."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64181,
+     "score": 0,
+     "src": "Anthropic S-1 via SemiAnalysis",
+     "t": "ANTH",
+     "text": "Anthropic net new ARR ~$10bn/month in 2Q vs ~$4bn in 3Q; $8–10bn expected in 4Q after Opus 5.5."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65875,
+     "score": 2,
+     "src": "Anthropic amended S-1",
+     "t": "ANTH",
+     "text": "Anthropic Q3 revenue nearly $17bn, ~12x y/y, +47% q/q (amended S-1)."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65531,
+     "score": -1,
+     "src": "FT via The Bear Cave / TMTB",
+     "t": "OpenAI",
+     "text": "OpenAI cut its fundraising target to $20bn from $30bn after some investors reduced commitments."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65838,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "CBRS",
+     "text": "SemiAnalysis drops Cerebras' 1.25GW OpenAI tranche: OpenAI unlikely to upsize to 2GW; capacity plateaus ~750MW by end-2028."
+    },
+    {
+     "date": "2026-11-09",
+     "id": 67065,
+     "score": 1,
+     "src": "OpenAI CFO Sarah Friar, CNBC",
+     "t": "OpenAI",
+     "text": "OpenAI ads reached a $1bn run rate by Aug-26, <200 days after launch; revenue now ~50/50 consumer/enterprise."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 67190,
+     "score": -1,
+     "src": "OpenAI CFO Sarah Friar; 24/7 Wall St.",
+     "t": "OpenAI",
+     "text": "OpenAI received ~$11bn as the first part of a round at a $1.25tn pre-money valuation (CFO Friar), vs ~$1.4tn and $30bn+ first sought; may total up to ~$20bn; SoftBank and MGX participated."
+    },
+    {
+     "date": "2026-11-03",
+     "id": 66108,
+     "score": 1,
+     "src": "OpenAI internal data (Big Technology)",
+     "t": "GOOGL",
+     "text": "OpenAI: ChatGPT search volume ~1/5 of Google's; ChatGPT at 1.2bn WAUs, +200m in two months."
+    },
+    {
+     "date": "2026-10-28",
+     "id": 62414,
+     "score": 1,
+     "src": "OpenAI / ServiceNow",
+     "t": "OpenAI",
+     "text": "All ServiceNow employees slated for ChatGPT Work and Codex; OpenAI models picked for more ServiceNow app-dev and security workflows."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65692,
+     "score": 1,
+     "src": "Anthropic amended S-1",
+     "t": "ANTH",
+     "text": "Anthropic compute/infra expense 57% of revenue in 9M26 vs 172% in 9M25: revenue +1,206% y/y vs compute +329%."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 66266,
+     "score": -1,
+     "src": "Anthropic S-1/A",
+     "t": "ANTH",
+     "text": "Anthropic 3Q compute & infrastructure $9.86bn = 58% of revenue vs 48% in 2Q, incl. $5.0bn of short-term commitments that cost significantly more."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 66267,
+     "score": -1,
+     "src": "Anthropic S-1/A",
+     "t": "ANTH",
+     "text": "Anthropic estimates 5–7% of 9M26 revenue came from customers violating usage policies or commercial terms."
+    },
+    {
+     "date": "2026-11-03",
+     "id": 65893,
+     "score": -1,
+     "src": "New York Times",
+     "t": "ANTH",
+     "text": "Investors urging a $1.5–1.6tn Anthropic IPO valuation vs earlier hopes near $2tn: a ~20–25% reset in expected IPO value."
+    }
+   ],
+   "key": "lab_arr",
+   "sort": 2,
+   "srs_view": "OpenAI is falling off.",
+   "staged": [],
+   "status": "weakening",
+   "title": "OpenAI + Anthropic revenue keeps compounding"
+  },
+  {
+   "key": "use_cases",
+   "title": "Use cases expanding",
+   "status": "strengthening",
+   "claim": "Demand broadens beyond coding. Cyber (Mythos-class vulnerability discovery driving security budgets and a network-gear refresh) and knowledge work (Copilot/Cowork, ChatGPT Work, Claude in enterprise apps) add new token demand. The October deck's bear case was that knowledge work ramps slowly and cyber is not a needle-mover.",
+   "srs_view": null,
+   "checks": [],
+   "dps": [
+    {
+     "id": 66401,
+     "date": "2026-11-09",
+     "t": "CSCO",
+     "score": 1,
+     "text": "Cyber: Partners say enterprises are cutting network-gear useful lives to ~5 years from 6–7, citing Mythos-found vulnerabilities; one sees ~24 months of refresh.",
+     "src": "Cleveland Research channel checks"
+    },
+    {
+     "id": 66092,
+     "date": "2026-11-03",
+     "t": "ANET",
+     "score": 1,
+     "text": "Cyber: Arista guides campus +60% to ~$2bn in FY27, tied to AI-driven vulnerability discovery (87 EOS CVEs since 2019 vs 634–848 at two large peers).",
+     "src": "Arista 3Q26 call"
+    },
+    {
+     "id": 64211,
+     "date": "2026-10-30",
+     "t": "ANET",
+     "score": 1,
+     "text": "Cyber: A large bank pulled forward a 9-figure Arista switch refresh from 2H27 to address Mythos security concerns.",
+     "src": "Cleveland Research channel checks"
+    },
+    {
+     "id": 64331,
+     "date": "2026-10-23",
+     "t": "MOONSHOT",
+     "score": -1,
+     "text": "Cyber: Kimi K3.1 scores 64% on the AA Cyber Index at $2.81/task, near restricted GPT-6 Sol (69%): cyber capability reaching cheap open models.",
+     "src": "Artificial Analysis"
+    },
+    {
+     "id": 64301,
+     "date": "2026-10-29",
+     "t": "2513 HK",
+     "score": 0,
+     "text": "Cyber: Epoch: GLM-5.3 compromised 6 recent Firefox releases at ~$1,000 API cost each after >$100k setup; no provider refusals.",
+     "src": "Epoch AI"
+    },
+    {
+     "id": 62411,
+     "date": "2026-10-28",
+     "t": "GOOGL",
+     "score": 1,
+     "text": "Cyber: Gemini 4 Carbon launches first to selected cyber defenders (AA Index 59), at $2/$10 per m tokens intro pricing.",
+     "src": "Google DeepMind"
+    },
+    {
+     "id": 65756,
+     "date": "2026-10-21",
+     "t": "FTNT",
+     "score": 1,
+     "text": "Cyber: A global partner has 9 figures of Mythos-related business YTD plus a 9-figure pipeline, mostly firewall refresh of end-of-support gear.",
+     "src": "Cleveland Research channel checks"
+    },
+    {
+     "id": 63198,
+     "date": "2026-10-16",
+     "t": "PANW",
+     "score": 1,
+     "text": "Cyber: CIOs suggest 2027 security budgets could grow near double digits vs low-to-mid single digits; AI budgets carve out 3–5% for security.",
+     "src": "Deutsche Bank"
+    },
+    {
+     "id": 63181,
+     "date": "2026-10-16",
+     "t": "RBRK",
+     "score": -1,
+     "text": "Cyber: Rubrik sees no meaningful pipeline inflection since cyber-capable models launched, unlike CrowdStrike.",
+     "src": "Deutsche Bank"
+    },
+    {
+     "id": 60554,
+     "date": "2026-10-06",
+     "t": "ANTH",
+     "score": 1,
+     "text": "Cyber: Anthropic adds three Cyber Verification tiers (Defense, Red Team, Specialized), widening vetted access to Opus 5.5, Sonnet 5.5 and Mythos 5.1.",
+     "src": "Anthropic"
+    },
+    {
+     "id": 56965,
+     "date": "2026-09-23",
+     "t": "ZS",
+     "score": -1,
+     "text": "Cyber: Zscaler AI security has limited traction and is sometimes given away at renewal; little partner awareness of Agentic SOC.",
+     "src": "Cleveland Research partner checks"
+    },
+    {
+     "id": 54756,
+     "date": "2026-09-17",
+     "t": "CSCO",
+     "score": 1,
+     "text": "Cyber: Cisco partners tracking low-double-digit to 20%+ bookings growth; Mythos-driven refresh urgency is the highest they have seen.",
+     "src": "Cleveland Research channel checks"
+    },
+    {
+     "id": 54411,
+     "date": "2026-09-16",
+     "t": "INDUSTRY_SOFTWARE",
+     "score": 2,
+     "text": "Cyber: GSIs report $200–300m of Mythos-related business closed (patching, remediation); one GSI's Mythos pipeline reached $1bn.",
+     "src": "Cleveland Research IT services checks"
+    },
+    {
+     "id": 53746,
+     "date": "2026-09-15",
+     "t": "INDUSTRY_AI_CAPEX",
+     "score": 1,
+     "text": "Cyber: Barclays: lab monitoring of advanced cyber models adds ~18% to industry compute from CY27; inference cost +20% for GPT-5.6 Sol-class cyber models.",
+     "src": "Barclays"
+    },
+    {
+     "id": 49025,
+     "date": "2026-08-26",
+     "t": "CRWD",
+     "score": 2,
+     "text": "Cyber: CrowdStrike calls it a 'Mythos moment': AIDR ending ARR nearly tripled q/q; Kurtz says AIDR could be bigger than EDR.",
+     "src": "CrowdStrike Q2 FY27 call"
+    },
+    {
+     "id": 43059,
+     "date": "2026-08-13",
+     "t": "PANW",
+     "score": 2,
+     "text": "Cyber: Partners cite $200m+ of Mythos business closed against an $800m+ pipeline (4x); boards unlocking incremental security budget.",
+     "src": "Cleveland Research channel checks"
+    },
+    {
+     "id": 65509,
+     "date": "2026-11-02",
+     "t": "ANTH",
+     "score": 1,
+     "text": "Knowledge work: Opus 5.5 tops SemiAnalysis GDPx at 12.0% across 11 professional domains (Gemini 4 Carbon 10.9%, GPT-6 Astra 9.6%): capability, not revenue.",
+     "src": "SemiAnalysis GDPx"
+    },
+    {
+     "id": 62414,
+     "date": "2026-10-28",
+     "t": "OpenAI",
+     "score": 1,
+     "text": "Knowledge work: All ServiceNow employees slated for ChatGPT Work and Codex, beyond engineering.",
+     "src": "OpenAI / ServiceNow"
+    },
+    {
+     "id": 64360,
+     "date": "2026-10-28",
+     "t": "MSFT",
+     "score": -1,
+     "text": "Knowledge work: Hood: M365 Copilot consumption monetization 'will be a slower move' than GitHub's usage-billing shift.",
+     "src": "Microsoft FQ1 FY27 call"
+    },
+    {
+     "id": 63735,
+     "date": "2026-10-26",
+     "t": "MSFT",
+     "score": 1,
+     "text": "Knowledge work: Microsoft has >30m paid M365 Copilot seats.",
+     "src": "Morgan Stanley"
+    },
+    {
+     "id": 63602,
+     "date": "2026-10-22",
+     "t": "MSFT",
+     "score": 1,
+     "text": "Knowledge work: Copilot added ~5m and ~10m seats in the past two quarters; 57% of VARs see seat expansion at renewal.",
+     "src": "KeyBanc VAR survey"
+    },
+    {
+     "id": 63030,
+     "date": "2026-10-14",
+     "t": "BOX",
+     "score": 0,
+     "text": "Knowledge work: Typical Box AI deployments reach only ~15% of knowledge workers; NRR 106% on higher user penetration.",
+     "src": "BofA"
+    },
+    {
+     "id": 62795,
+     "date": "2026-10-07",
+     "t": "MSFT",
+     "score": 1,
+     "text": "Knowledge work: 88% of CIOs expect to use M365 Copilot in the next 12 months vs 72% a year ago.",
+     "src": "Morgan Stanley CIO survey"
+    },
+    {
+     "id": 62696,
+     "date": "2026-10-06",
+     "t": "MSFT",
+     "score": 0,
+     "text": "Knowledge work: Almost half of Copilot power users already prompt Cowork, but default usage billing slipped to December on governance and cost-control concerns.",
+     "src": "J.P. Morgan partner call"
+    },
+    {
+     "id": 64793,
+     "date": "2026-09-28",
+     "t": "REL LN",
+     "score": 1,
+     "text": "Knowledge work: Law firms fund Harvey/Legora in 2026 budgets by cutting overlapping legacy modules.",
+     "src": "Third Bridge expert call"
+    },
+    {
+     "id": 54760,
+     "date": "2026-09-17",
+     "t": "MSFT",
+     "score": -1,
+     "text": "Knowledge work: MSFT Cowork can run 30–40% cheaper than Claude via model routing; an SI cut an $80m lab bill by moving off Opus to open-weight models.",
+     "src": "Cleveland Research"
+    },
+    {
+     "id": 54759,
+     "date": "2026-09-17",
+     "t": "MSFT",
+     "score": 1,
+     "text": "Knowledge work: Copilot/Cowork usage inflecting: customers burning through monthly Cowork credits; M365 ACV expansion ~15%.",
+     "src": "Cleveland Research"
+    },
+    {
+     "id": 54412,
+     "date": "2026-09-16",
+     "t": "ANTH",
+     "score": 2,
+     "text": "Knowledge work: Anthropic enterprise spend accelerating through 3Q: deal sizes up 5x on renewal, customers raising commits 3–5 months in.",
+     "src": "Cleveland Research SI checks"
+    },
+    {
+     "id": 59860,
+     "date": "2026-09-15",
+     "t": "SNOW",
+     "score": 1,
+     "text": "Knowledge work: Snowflake: >5,000 accounts on CoWork and ~9,100 on Cortex Code; AI adopters consume ~11% more.",
+     "src": "Snowflake (Piper Sandler conf.)"
+    },
+    {
+     "id": 59603,
+     "date": "2026-09-10",
+     "t": "CRM",
+     "score": 1,
+     "text": "Knowledge work: Slackbot, an Anthropic-based knowledge-worker agent, is bundled in Slack's top tier with Salesforce absorbing the token cost.",
+     "src": "Salesforce (GS conf.)"
+    },
+    {
+     "id": 48993,
+     "date": "2026-08-26",
+     "t": "CRM",
+     "score": 0,
+     "text": "Knowledge work: Only 5% of sales/service knowledge workers have upgraded to AI editions; agentic customers reach ~2x AOV.",
+     "src": "Salesforce Q2 FY27 call"
+    }
+   ],
+   "staged": [],
+   "sort": 3
+  },
+  {
+   "checks": [
+    {
+     "claim": "Anthropic's acceleration is not enough for combined ARR to justify the return on spend",
+     "sources": [
+      [
+       "SRS AI Update, Oct 2026, slides 9–10",
+       ""
+      ],
+      [
+       "SB #66353, #67052, #64181",
+       ""
+      ]
+     ],
+     "text": "SRS calc on the deck's own model. Combined ARR is ~$130bn today: Anthropic above $80bn in October plus OpenAI ~$50bn in September. At ~$15bn/month of combined net new ARR (Anthropic ~$8bn in October, OpenAI ~+70% q/q in Q3), the labs exit 2026 at ~$165–175bn vs the model's $195bn. Reaching $452bn in 2027 needs ~$21bn/month all year. Anthropic is back at its Jun–Jul pace, but that alone does not close the gap.",
+     "verdict": "supported"
+    }
+   ],
+   "claim": "Deck ROIC model: oAI+ANTH need ~$195bn combined ARR exiting 2026, ~$452bn in 2027 and ~$737bn in 2028 at ~70% GM for the industry to earn 15% on capex.",
+   "dps": [
+    {
+     "date": "2026-10-29",
+     "id": 64181,
+     "score": 1,
+     "src": "Anthropic S-1 via SemiAnalysis",
+     "t": "ANTH",
+     "text": "Anthropic 2Q gross margin ~88% excl. training and non-GAAP EBIT margin +11%, vs the deck's ~70% GM assumption (definitions may differ)."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66353,
+     "score": 0,
+     "src": "WSJ / TMTB",
+     "t": "ANTH",
+     "text": "Anthropic ~$8bn net new ARR in October: back to the Jun–Jul pace, but below the ~$21bn/month combined pace the 2027 ROIC path needs."
+    },
+    {
+     "date": "2026-11-10",
+     "id": 67052,
+     "score": -1,
+     "src": "SoftBank 2Q FY3/27 results",
+     "t": "9984 JP",
+     "text": "OpenAI ~$50bn ARR at Sep-26 (SoftBank) vs deck assumptions; combined ~$130bn vs $195bn needed exiting 2026."
+    },
+    {
+     "date": "2026-10-28",
+     "id": 65687,
+     "score": 1,
+     "src": "Oracle Investor Day",
+     "t": "ORCL",
+     "text": "Oracle illustrative 1GW AI project: ~$37bn capex, ~$16bn revenue/yr fully ramped (vs ~$10bn/GW cited in 2025); cost-plus contracts at ~35% GM."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 66850,
+     "score": -1,
+     "src": "Microsoft 1Q27 results",
+     "t": "MSFT",
+     "text": "Microsoft D&A 12.7% of revenue in 1Q27 vs 11.6% FY26; 75% of $45.2bn capex went to shorter-lived CPUs/GPUs."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65691,
+     "score": -1,
+     "src": "Anthropic amended S-1",
+     "t": "ANTH",
+     "text": "Anthropic $895.4bn of purchase/lease commitments, substantially all compute: $69.8bn due in the next 12 months, $447.5bn before end-2030."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 66887,
+     "score": -1,
+     "src": "Microsoft 1Q27 results",
+     "t": "MSFT",
+     "text": "Microsoft future lease commitments $364bn (>$133bn added in 4Q26), 54% of $677bn commercial RPO."
+    },
+    {
+     "date": "2026-10-30",
+     "id": 65541,
+     "score": -1,
+     "src": "S&P Global Ratings",
+     "t": "META",
+     "text": "S&P: Meta capex $140bn (2026), >$225bn (2027), $252bn (2028) with free operating cash flow deficits of $22bn/$71bn/$39bn; outlook cut to negative."
+    },
+    {
+     "date": "2026-11-09",
+     "id": 66691,
+     "score": -1,
+     "src": "Deutsche Bank",
+     "t": "ORCL",
+     "text": "DB est.: OpenAI still 40%+ of Oracle's backlog."
+    }
+   ],
+   "key": "roi",
+   "sort": 4,
+   "srs_view": "Anthropic's acceleration is not enough to get our combined new ARR to justify return on spend.",
+   "staged": [],
+   "status": "weakening",
+   "title": "Lab ARR justifies the spend (15% ROIC)"
+  },
+  {
+   "checks": [
+    {
+     "claim": "SoftBank didn't even want to invest",
+     "sources": [
+      [
+       "24/7 Wall St., 2026-11-07",
+       "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/"
+      ],
+      [
+       "FourWeekMBA headline (unverified)",
+       "https://fourweekmba.com/ai-softbank-said-to-weigh-adding-under-1b-to-64-6b-openai-bet/"
+      ],
+      [
+       "SB #67052",
+       ""
+      ]
+     ],
+     "text": "SoftBank and Abu Dhabi's MGX took part in the ~$11bn first close (people familiar with the deal). A separate headline says SoftBank weighed adding under $1bn to its $64.6bn position, but we could not verify it. Either way the participation is small next to its existing stake. SoftBank still carries OpenAI at a $730bn pre-money mark.",
+     "verdict": "not_supported"
+    },
+    {
+     "claim": "Valuation cut from $1.4tn to $1.2tn and only raising $11bn",
+     "sources": [
+      [
+       "24/7 Wall St., 2026-11-07",
+       "https://247wallst.com/investing/2026/11/07/openai-just-raised-11-billion-at-a-1-25-trillion-valuation-below-the-1-4-trillion-it-first-sought/"
+      ],
+      [
+       "SB #65531",
+       ""
+      ]
+     ],
+     "text": "The round is at $1.25tn pre-money (CFO Friar confirmed on TV), vs ~$1.4tn first sought. ~$11bn had reached OpenAI by 2026-11-06 as the first part; the round could total up to ~$20bn, vs $30bn+ first sought and the cut $20bn target.",
+     "verdict": "mostly"
+    },
+    {
+     "claim": "SoftBank is cancelling turbines",
+     "sources": [
+      [
+       "The Deep Dive, 2026-11-10",
+       "https://thedeepdive.ca/softbank-denies-elon-musks-turbine-default-claim-amid-3-7-billion-loss/"
+      ],
+      [
+       "SB #67053",
+       ""
+      ]
+     ],
+     "text": "SoftBank took a ¥597.2bn (~$3.7bn) 2Q FY3/27 charge for realigning its power-generation equipment purchases: $2.9bn of non-refundable deposits on purchases dropped from the revised plan, plus ~$0.9bn of contract modifications and settlements. $6.6bn stays allocated (PORTS-Pike, Ohio, which the CFO says is not being downsized). The CFO called Musk's 'defaulting on turbine orders' claim incorrect ('There is no such default'). The supplier was not named.",
+     "verdict": "partly"
+    }
+   ],
+   "claim": "Hyperscaler shortfalls are covered by credit and equity markets; neocloud gaps are backstopped by AVGO/NVDA guarantees.",
+   "dps": [
+    {
+     "date": "2026-11-10",
+     "id": 67053,
+     "score": -1,
+     "src": "SoftBank 2Q FY3/27 results",
+     "t": "9984 JP",
+     "text": "SoftBank ¥597.2bn ($3.7bn) loss on realigning power-generation equipment for US AI data centers: ¥457.0bn non-refundable advances plus ¥140.2bn contract modifications/settlements."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66244,
+     "score": -2,
+     "src": "Nebius CEO, GTC Berlin",
+     "t": "NBIS",
+     "text": "Nebius CEO: asset-backed and debt markets 'temporarily closed' for some sources of capital."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66295,
+     "score": -2,
+     "src": "SemiAnalysis (Bloomberg data)",
+     "t": "ORCL",
+     "text": "Oracle's five new tranches priced 35–41bp wide of its curve; the 2046s yield 8.67%, spread roughly level with the US HY index."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66229,
+     "score": -1,
+     "src": "Oracle 8-K",
+     "t": "ORCL",
+     "text": "Oracle closed 86.2m shares plus $10bn of notes (7.000–8.650% coupons, 2029–2046)."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65566,
+     "score": -2,
+     "src": "Financial Times",
+     "t": "AVGO",
+     "text": "Blackstone now expects Anthropic to be rated junk after its IPO, affecting the $63bn TPU package (>$42bn senior debt Broadcom-guaranteed)."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66296,
+     "score": -1,
+     "src": "SemiAnalysis (Bloomberg)",
+     "t": "META",
+     "text": "Meta's $15bn USD and debut €9bn bonds priced ~18–39bp wide of its curve, days after S&P moved its outlook to negative."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66221,
+     "score": -2,
+     "src": "Bloomberg; WSJ; Evercore ISI",
+     "t": "CRWV",
+     "text": "CoreWeave 2031 unsecured bonds traded as low as 79.5 after TX, GA and OH elected governors who campaigned on slowing construction."
+    },
+    {
+     "date": "2026-11-07",
+     "id": 66417,
+     "score": -1,
+     "src": "American Compute data",
+     "t": "CRWV",
+     "text": "Lenders committed $48.4bn to GPU-backed loans in 2026 vs $6.6bn in 2025; now ~47% of AI-infra debt; collateral and repayment both hinge on GPU rental rates."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66359,
+     "score": -1,
+     "src": "@DeItaone",
+     "t": "9984 JP",
+     "text": "SoftBank 5-yr CDS ~466bp; debt +$40.4bn over 12 months."
+    },
+    {
+     "date": "2026-11-10",
+     "id": 67049,
+     "score": 1,
+     "src": "SoftBank 2Q FY3/27 results",
+     "t": "9984 JP",
+     "text": "SoftBank raised a record $56.5bn in 2Q FY3/27 and repaid the $40bn bridge ~6 months early."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66594,
+     "score": 1,
+     "src": "TeraWulf 3Q26",
+     "t": "WULF",
+     "text": "Google IG credit support for project financing of a ~$19bn AI lab lease at TeraWulf."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66298,
+     "score": 0,
+     "src": "SemiAnalysis",
+     "t": "AMD",
+     "text": "AMD disclosed $7.7bn of data-center lease guarantees and $750m of partner debt guarantees; the TensorWave/Fermi lease missed its 31-Oct closing."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66291,
+     "score": 0,
+     "src": "SemiAnalysis (Bloomberg)",
+     "t": "SPCX",
+     "text": "Goldman and Apollo selling the $40bn SpaceX GPU SPV lease ($8.3bn senior loan plus bonds; with $7bn prepayment funds ~$47.3bn of GPUs)."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66364,
+     "score": -1,
+     "src": "IREN Q1 FY27 results",
+     "t": "IREN",
+     "text": "IREN: $15bn of FY27 capex remaining, $6bn still to be financed."
+    },
+    {
+     "date": "2026-10-28",
+     "id": 65684,
+     "score": -1,
+     "src": "Alphabet 3Q26 10-Q",
+     "t": "GOOGL",
+     "text": "Alphabet issued $12.4bn of ATM equity and $28.7bn of notes in 3Q as FCF was −$9.1bn."
+    },
+    {
+     "date": "2026-11-10",
+     "id": 67187,
+     "score": 2,
+     "src": "Anthropic S-1/A2",
+     "t": "ANTH",
+     "text": "Anthropic S-1/A2: $26.0bn concurrent placement at the IPO price from suppliers: NVDA $10bn, GOOGL $10bn, AMD $2.5bn, AVGO/MU/MSFT $1bn each, TSMC $0.5bn."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66300,
+     "score": 1,
+     "src": "Anthropic amended S-1",
+     "t": "ANTH",
+     "text": "Anthropic amended S-1: $15bn secured revolver and $77bn of undrawn note-purchase lines from Google, Amazon and Broadcom."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65719,
+     "score": 1,
+     "src": "Oracle pricing release",
+     "t": "ORCL",
+     "text": "Oracle priced $20bn: $10bn of stock at $116 plus $10bn of notes at 7.000–8.650% (2029–2046)."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66239,
+     "score": 1,
+     "src": "TeraWulf 8-K",
+     "t": "WULF",
+     "text": "Google credit support backstops Anthropic on $19bn of leases at TeraWulf's Justified (KY) campus."
+    },
+    {
+     "date": "2026-11-10",
+     "id": 67051,
+     "score": 1,
+     "src": "SoftBank 2Q FY3/27 results",
+     "t": "9984 JP",
+     "text": "Nvidia committed $3.0bn to SB Energy and gave credit support for 4.25GW at PORTS-Pike (Ohio), leased to OpenAI for 20 years."
+    },
+    {
+     "date": "2026-11-09",
+     "id": 66472,
+     "score": -2,
+     "src": "CNBC",
+     "t": "CRWV",
+     "text": "Some CoreWeave 2031 bonds yield >16%; 5-yr CDS >1,240bp, up ~50% in a month."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65568,
+     "score": -2,
+     "src": "WSJ",
+     "t": "NBIS",
+     "text": "WSJ: neocloud high-yield issuance has effectively stalled; Nebius dropped a HY bond and is using customer prepayments."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65850,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "APLD US",
+     "text": "Goldman paused premarketing of a $3.5bn HY bond for Applied Digital's Delta Forge 1; DC capital markets 'gummed up' without offtake."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65848,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "NBIS",
+     "text": "Nebius took a $3.5bn 364-day secured bridge from Citi at S+275, stepping up to S+350, secured on substantially all assets."
+    },
+    {
+     "date": "2026-10-30",
+     "id": 65801,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "INDUSTRY_DATACENTER",
+     "text": "Banks shelved the bond takeout of a $15bn bridge for the Google-backed Nexus (Anthropic) campus in Hubbard, TX, amid the Texas permit freeze."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65845,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "ANTH",
+     "text": "Unwrapped $18bn North Star TPU second lien (Anthropic credit) priced ~10% (~12% at 95 OID)."
+    },
+    {
+     "date": "2026-10-31",
+     "id": 65422,
+     "score": -1,
+     "src": "SemiAnalysis interviews",
+     "t": "ANTH",
+     "text": "Developers say they cannot currently finance projects directly on Anthropic credit; direct contracting post-IPO hinges on IG ratings."
+    },
+    {
+     "date": "2026-11-03",
+     "id": 65868,
+     "score": -1,
+     "src": "Morgan Stanley credit",
+     "t": "ORCL",
+     "text": "MS credit: Oracle's ~$5bn/$4.75bn/$6.25bn FY27–29 refinancing and possible tens of $bn of vendor financing sit outside the '$20bn and done' framing."
+    }
+   ],
+   "key": "financing",
+   "sort": 5,
+   "srs_view": "SoftBank didn't even want to invest: OpenAI's valuation went from $1.4 trillion to $1.2 trillion and it is only raising $11 billion. SoftBank is cancelling turbines.",
+   "staged": [],
+   "status": "weakening",
+   "title": "Financing holds up"
+  },
+  {
+   "checks": [],
+   "claim": "Rising GPU rental prices and ~30% rental IRRs show demand exceeds supply.",
+   "dps": [
+    {
+     "date": "2026-11-09",
+     "id": 66397,
+     "score": 2,
+     "src": "RBC Capital Markets",
+     "t": "NVDA",
+     "text": "RBC GPU rental tracker (Oct-26, 65+ providers): median on-demand price +5.7% m/m; 2025-generation GPUs +9.5% m/m."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66361,
+     "score": 2,
+     "src": "IREN Q1 FY27 results",
+     "t": "IREN",
+     "text": "IREN contract pricing +11% (3-yr) and +12% (5-yr); H100s re-contracted at double prior pricing; short-term deal at $40m revenue per IT-MW."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66362,
+     "score": 1,
+     "src": "IREN Q1 FY27 results",
+     "t": "IREN",
+     "text": "IREN 5-yr contract at ~$22m/IT-MW with the customer prepaying 90% of GPU capex (vs 45–55% in recent deals)."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65673,
+     "score": 1,
+     "src": "GetDeploying data",
+     "t": "NVDA",
+     "text": "B300 median on-demand rental $9.15/GPU-hr, +14% over 90 days; reserved $5.99, spot $5.53."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66250,
+     "score": 1,
+     "src": "SemiAnalysis",
+     "t": "CRWV",
+     "text": "CoreWeave mostly sold out for 2027; offering mid-tier labs only small slots."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65967,
+     "score": 0,
+     "src": "SemiAnalysis",
+     "t": "CRWV",
+     "text": "NVDA reportedly cutting neocloud Vera Rubin allocations by up to 50%, reallocating racks to SpaceX, which is selling >1GW into the rental market: rental-price pressure for neoclouds without IG offtakers."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66394,
+     "score": 2,
+     "src": "BofA HY credit (Ana Goshko)",
+     "t": "CRWV",
+     "text": "Very short-term GPU contracts reportedly pricing at ~4x CoreWeave's existing contract base; near-term capacity sold out."
+    },
+    {
+     "date": "2026-11-09",
+     "id": 66724,
+     "score": 1,
+     "src": "RBC Capital Markets",
+     "t": "NVDA",
+     "text": "GPU rental prices rose ~6% m/m in October; A100, H100 and H200 all up."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66363,
+     "score": 1,
+     "src": "IREN Q1 FY27 results",
+     "t": "IREN",
+     "text": "IREN backlog $20.3bn (+22% q/q), ~2/3 with investment-grade counterparties."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65836,
+     "score": 1,
+     "src": "SemiAnalysis Accelerator Model",
+     "t": "NVDA",
+     "text": "4–5k Vera Rubin racks (~1GW) ordered across SpaceX, xAI and Tesla, up to 11–12k racks (~2.8GW) on demand."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66218,
+     "score": -1,
+     "src": "Financial Times",
+     "t": "MSFT",
+     "text": "Microsoft declined an option worth tens of billions to more than double its Texas business with Nscale (~500MW)."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66386,
+     "score": -1,
+     "src": "Bloomberg (via Reuters)",
+     "t": "ORCL",
+     "text": "Microsoft declined to renew its 2023 OCI AI-capacity rental (older Nvidia GPUs) and has been turning it off."
+    }
+   ],
+   "key": "compute_tight",
+   "sort": 6,
+   "srs_view": "",
+   "staged": [],
+   "status": "strengthening",
+   "title": "Compute is constrained (GPU rental prices and IRR)"
+  },
+  {
+   "checks": [],
+   "claim": "The best-informed executives at Amazon, Microsoft, Google and Meta keep putting massive capital behind AI.",
+   "dps": [
+    {
+     "date": "2026-11-04",
+     "id": 66113,
+     "score": 2,
+     "src": "Hyperscaler 3Q26 reported capex",
+     "t": "NVDA",
+     "text": "Hyperscaler capex +87% y/y in 3Q to ~$217bn."
+    },
+    {
+     "date": "2026-10-28",
+     "id": 63479,
+     "score": 1,
+     "src": "Alphabet 3Q26 call",
+     "t": "GOOGL",
+     "text": "Alphabet 3Q capex $51.4bn; FY26 $195–205bn vs $91bn in 2025; 2027 to 'increase significantly'; FCF −$9.1bn."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64142,
+     "score": 1,
+     "src": "Amazon 3Q26 call",
+     "t": "AMZN",
+     "text": "Amazon 2026 cash capex ~$220bn after $75.9bn in 3Q; 'meaningfully more' in 2027."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64059,
+     "score": 1,
+     "src": "Microsoft FQ1 FY27 call",
+     "t": "MSFT",
+     "text": "Microsoft calendar-2026 capex ~$170bn; Q2 FY27 >$50bn; delayed third-party capacity shifts into fiscal H2."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66216,
+     "score": -1,
+     "src": "The Information",
+     "t": "MSFT",
+     "text": "Microsoft spent ~$5bn less capex than planned in the Sep-Q because third-party data centers were late (IREN Childress a contributor)."
+    },
+    {
+     "date": "2026-11-05",
+     "id": 66389,
+     "score": -1,
+     "src": "Bloomberg",
+     "t": "MSFT",
+     "text": "Microsoft tightening oversight of some Nebius, IREN and Nscale projects and debating whether to sign new neocloud deals."
+    },
+    {
+     "date": "2026-10-30",
+     "id": 65891,
+     "score": 0,
+     "src": "Amazon 10-Q",
+     "t": "AMZN",
+     "text": "Amazon 10-Q: secured supplier-financing facility of up to ~$80bn for infrastructure, drawable 1Q27–3Q28."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65793,
+     "score": 0,
+     "src": "Press reports",
+     "t": "META",
+     "text": "Meta seeking ≥$20bn of bonds a week after announcing stock sales to fund capex; FCF −$2.1bn last quarter."
+    }
+   ],
+   "key": "capex",
+   "sort": 7,
+   "srs_view": "",
+   "staged": [],
+   "status": "intact",
+   "title": "Hyperscalers are all-in"
+  },
+  {
+   "checks": [
+    {
+     "claim": "25% of Nvidia revenue went to Singapore and Malaysia",
+     "sources": [
+      [
+       "Nvidia 10-Q, quarter ended 2026-07-26",
+       "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000075/nvda-20260726.htm"
+      ],
+      [
+       "Tom's Hardware (Bloomberg), 2025-02-18",
+       "https://www.tomshardware.com/tech-industry/deepseek-gpu-smuggling-probe-shows-nvidias-singapore-gpu-sales-are-28-percent-of-its-revenue-but-only-1-percent-are-delivered-to-the-country-report"
+      ]
+     ],
+     "text": "Not verifiable from current filings. Since FY27 Nvidia reports revenue by customer headquarters: Q2 FY27 US $60.1bn, Taiwan $27.0bn, China incl. HK $7.9bn, Other $1.3bn of $96.2bn, with no Singapore or Malaysia line. Under the old billing-location basis Singapore was ~18–28% (about 28% in CY24). But Nvidia said most Singapore-billed shipments went elsewhere, and Singapore's government said <1% of revenue was physically delivered there. Need the source for 25%.",
+     "verdict": "unverified"
+    },
+    {
+     "claim": "Jensen Huang hired a crisis PR firm a year ago",
+     "sources": [
+      [
+       "TechCrunch, 2026-11-09",
+       "https://techcrunch.com/2026/11/09/jensen-huang-reportedly-engaged-a-pr-firm-with-a-history-of-handling-high-profile-sex-scandals-a-year-ago/"
+      ]
+     ],
+     "text": "Wired (via TechCrunch, 2026-11-09): Heller Inc. was engaged around Oct-2025, after the NYT report; Nvidia's comms team was told to copy Heller on press inquiries about Huang. Nvidia had not commented.",
+     "verdict": "reported"
+    },
+    {
+     "claim": "He lied to the board about how much Megaspeed actually shipped",
+     "sources": [
+      [
+       "Fortune, 2026-11-09",
+       "https://fortune.com/2026/11/09/nvidia-board-probe-jensen-huang-affair-suspected-china-spy-statements/"
+      ],
+      [
+       "Tech Times UK, 2026-11-10",
+       "https://www.techtimes.co.uk/megaspeed-nvidia-hardware-imports-chip-scrutiny-1809823"
+      ],
+      [
+       "SB #67185 (The Information)",
+       ""
+      ]
+     ],
+     "text": "No report says this. Reported so far: the board opened an independent investigation on 2026-11-08. The Business Times reports a ~50,000-unit gap between Nvidia's initial accounting to US officials of hardware supplied to Megaspeed and Bloomberg's customs data (~136k GPUs, ≥$4.6bn, 2023–Nov-25). Two of eight data-center operators Nvidia said it visited reportedly did not host Megaspeed hardware. The Information reports ≥$7.5bn / ~240k GPUs moved into China through a linked network, which Reuters could not verify. Fortune says the probe 'could look at' questionable public statements. The reported gap concerns statements to US officials, not the board.",
+     "verdict": "not_supported"
+    },
+    {
+     "claim": "Nvidia orders could be cut",
+     "sources": [],
+     "text": "An SRS inference, not a datapoint. The nearest reported item runs the other way: Nvidia itself is reportedly cutting neocloud Vera Rubin allocations by up to 50% and reallocating to SpaceX (SB #65967).",
+     "verdict": "inference"
+    }
+   ],
+   "claim": "Nvidia's demand is end-demand from labs and hyperscalers, not diverted or financed demand, and management is credible.",
+   "dps": [
+    {
+     "date": "2026-11-10",
+     "id": 67185,
+     "score": -2,
+     "src": "The Information",
+     "t": "NVDA",
+     "text": "The Information (two people): a network tied to Alice Huang (Shanghai Century Litong, Megaspeed) moved ≥$7.5bn / ~240k H100/H200 GPUs into China. Unverified; Reuters could not confirm."
+    },
+    {
+     "date": "2026-11-06",
+     "id": 66297,
+     "score": -1,
+     "src": "SemiAnalysis",
+     "t": "NVDA",
+     "text": "Nvidia told cloud partners at least 51% of services on new contracts must go to non-Chinese customers; APAC banks avoiding GPU project finance with Chinese offtakers while the RASA bill is pending."
+    },
+    {
+     "date": "2026-11-08",
+     "id": 67191,
+     "score": -2,
+     "src": "Nvidia board statement; Business Times; Bloomberg",
+     "t": "NVDA",
+     "text": "Nvidia's board opened an independent investigation after Huang disclosed an affair with a former Megaspeed executive; ~50k-unit gap between Nvidia's initial accounting to US officials and Bloomberg customs data (~136k GPUs, ≥$4.6bn)."
+    },
+    {
+     "date": "2026-11-04",
+     "id": 66104,
+     "score": -1,
+     "src": "Financial Times",
+     "t": "ORCL",
+     "text": "Oracle reportedly scrapped a ~$7bn five-year deal to lease ~100k AI chips to Tencent under US administration pressure."
+    },
+    {
+     "date": "2026-10-31",
+     "id": 65425,
+     "score": -1,
+     "src": "SemiAnalysis InferenceX",
+     "t": "NVDA",
+     "text": "MI355X reportedly delivers up to 2x B200 performance per dollar on Kimi K3 agentic inference (memory per server)."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65690,
+     "score": 0,
+     "src": "@jukan05 (unsourced)",
+     "t": "NVDA",
+     "text": "RMB16m for an eight-GPU Blackwell server in China, prices reportedly tripled in four months (secondary-market scarcity, not Nvidia ASP)."
+    }
+   ],
+   "key": "nvda",
+   "sort": 8,
+   "srs_view": "Concern: a large share of revenue billed through Singapore/Malaysia, and the Huang/Megaspeed fact pattern (crisis PR engagement, questions over how much Megaspeed received) raises credibility and export-control risk that could lead to Nvidia order cuts. See fact checks; the board-misstatement point is not supported by reporting so far.",
+   "staged": [],
+   "status": "watch",
+   "title": "Nvidia: demand quality, export exposure and governance"
+  },
+  {
+   "checks": [],
+   "claim": "Enterprises will not trust Chinese models, and the frontier gap holds.",
+   "dps": [
+    {
+     "date": "2026-10-29",
+     "id": 64067,
+     "score": 2,
+     "src": "Xplore AI benchmark",
+     "t": "MOONSHOT",
+     "text": "Kimi K3.1 Pro ~5% pass@5 vs ~70% Opus 5.5 and ~60% GPT-6 Astra on Real World Engineering Bench."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64293,
+     "score": 1,
+     "src": "Artificial Analysis",
+     "t": "MOONSHOT",
+     "text": "Kimi K3.1 Pro 37% on HLE-Diamond vs 69% Gemini 4 Carbon and 68% Opus 5.5."
+    },
+    {
+     "date": "2026-11-02",
+     "id": 65515,
+     "score": 1,
+     "src": "SemiAnalysis GDPx",
+     "t": "2513 HK",
+     "text": "GLM 5.3 2.7% GDPx vs DeepSeek 4.1 Flash 5.4% and Opus 5.5 12.0%."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64298,
+     "score": -1,
+     "src": "Artificial Analysis",
+     "t": "MOONSHOT",
+     "text": "Kimi K3.1 Pro 341 on the AA Progress Index vs frontier leader Gemini 4 Carbon 352: roughly two months behind."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64297,
+     "score": -1,
+     "src": "Artificial Analysis",
+     "t": "DEEPSEEK",
+     "text": "DeepSeek V4.1 Flash 324 on the AA Progress Index, the top released-weights model, above the leading US open-weight model (307)."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64096,
+     "score": -1,
+     "src": "Microsoft FQ1 FY27 call",
+     "t": "MSFT",
+     "text": "Microsoft Foundry revenue from open-source models up 10x; multi-model agent customers up 5x."
+    },
+    {
+     "date": "2026-10-29",
+     "id": 64109,
+     "score": 0,
+     "src": "The Information",
+     "t": "MOONSHOT",
+     "text": "Kimi K3.1 Pro reportedly trained extensively on GPT-6 Astra outputs (distillation), per The Information."
+    },
+    {
+     "date": "2026-10-31",
+     "id": 64340,
+     "score": 0,
+     "src": "Apple China Newsroom",
+     "t": "BABA",
+     "text": "Qwen integrated into Apple Intelligence in China (Siri, Writing Tools, Visual Intelligence); commercial terms undisclosed."
+    }
+   ],
+   "key": "china_models",
+   "sort": 9,
+   "srs_view": "",
+   "staged": [],
+   "status": "watch",
+   "title": "Chinese and open-weight models stay behind"
+  }
+ ],
+ "thesis": "ai",
+ "updated_at": "2026-11-10T21:00:00Z"
+}
