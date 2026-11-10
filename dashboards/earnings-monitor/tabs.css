@@ -381,6 +381,17 @@ table.th-t tr.th-b td { font-weight: 650; }
 table.tn-fc td.wrap { min-width: 280px; max-width: 640px; }
 table.tn-fc td:first-child { min-width: 180px; }
 .tn-stage { border: 1px dashed var(--rule-2); border-radius: 6px; padding: 8px 10px; font-size: 13px; }
+.tn-dots { display: inline-flex; gap: 2px; align-items: center; flex: none; min-width: 20px; }
+.tn-dots i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.tn-dots.g i { background: var(--pos); } .tn-dots.r i { background: var(--neg); } .tn-dots.b i { background: var(--accent); }
+.tn-bar { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 12.5px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--mast-h, 53px)); z-index: 8; background: var(--bg); padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.tn-bar label { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); min-width: 0; max-width: 100%; }
+.tn-bar select { min-width: 0; max-width: min(100%, 320px); }
+table.tn-gw td { white-space: normal; min-width: 90px; max-width: 280px; }
+.tn-key { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--ink-2); }
+.tn-key span { display: inline-flex; gap: 5px; align-items: center; }
+.tn-bal { display: flex; height: 6px; border-radius: 3px; overflow: hidden; background: var(--surface-2); }
+.tn-bal i { display: block; height: 100%; } .tn-bal i.g { background: var(--pos); } .tn-bal i.b { background: var(--accent); } .tn-bal i.r { background: var(--neg); }
 #v-thesis section.tn[id] { scroll-margin-top: calc(var(--mast-h, 53px) + 12px); }
 
 

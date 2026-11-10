@@ -2368,24 +2368,54 @@
     host.querySelectorAll('[data-thv]').forEach(b => b.addEventListener('click', () => { TH.view = b.dataset.thv; try { localStorage.setItem('th-view', TH.view); } catch (e) {} if ((location.hash || '').startsWith('#thesis/')) history.replaceState(null, '', '#thesis'); renderThesis(); }));
     host.querySelectorAll('[data-tn]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = document.getElementById('tn-' + a.dataset.tn); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
   }
+  /* ai-tenets v2 */
+  const TNF = (() => { let f = {}; try { f = JSON.parse(localStorage.getItem('tn-filt') || '{}'); } catch (e) {} return Object.assign({ tenet: '', sent: '', days: '', n: '10' }, f); })();
+  const tnSave = () => { try { localStorage.setItem('tn-filt', JSON.stringify(TNF)); } catch (e) {} };
+  const tnScore = d => d.score != null ? Number(d.score) : (d.stance === 'supports' ? 1 : d.stance === 'challenges' ? -1 : 0);
+  const tnDots = s => { const c = s > 0 ? 'g' : s < 0 ? 'r' : 'b', n = Math.abs(s) === 2 ? 2 : 1, lab = s === 2 ? 'Strongly supports' : s === 1 ? 'Supports' : s === 0 ? 'Neutral' : s === -1 ? 'Weakens' : 'Strongly weakens'; return `<span class="tn-dots ${c}" title="${lab} the thesis" aria-label="${lab}">${'<i></i>'.repeat(n)}</span>`; };
+  const TN_SENT = [['', 'All sentiment'], ['g', 'All supportive (green)'], ['2', '●● Strongly supports'], ['1', '● Supports'], ['0', '● Neutral (blue)'], ['-1', '● Weakens'], ['-2', '●● Strongly weakens'], ['r', 'All weakening (red)']];
+  const TN_DAYS = [['', 'All dates'], ['7', 'Last week'], ['14', 'Last 2 weeks'], ['30', 'Last month'], ['90', 'Last 3 months']];
+  const TN_N = [['5', '5 per tenet'], ['10', '10 per tenet'], ['25', '25 per tenet'], ['', 'All']];
+  function tnPass(d, asOf) {
+    const s = tnScore(d), f = TNF.sent;
+    if (f === 'g' && !(s > 0)) return false; if (f === 'r' && !(s < 0)) return false;
+    if (f !== '' && f !== 'g' && f !== 'r' && s !== Number(f)) return false;
+    if (TNF.days) { const lim = new Date(asOf); lim.setDate(lim.getDate() - Number(TNF.days)); if (new Date(d.date) < lim) return false; }
+    return true;
+  }
   function thTenets() {
     const D2 = TH.tenets; if (!D2) return `<section class="panel">${none('No tenet breakdown saved yet.')}</section>`;
     const TS = arr(D2.tenets).slice().sort((a, b) => (a.sort || 0) - (b.sort || 0));
-    const strip = `<section class="panel"><div class="panel-h"><h2>Tenets</h2><span class="muted">updated ${esc(fmtD(String(D2.updated_at || '').slice(0, 10)))}</span></div>` +
-      `<div class="tn-strip">${TS.map(t => { const n = arr(t.dps), c = n.filter(d => d.stance === 'challenges').length, s = n.filter(d => d.stance === 'supports').length; return `<a href="#thesis" data-tn="${esc(t.key)}"><span class="chips">${thChip(t.status)}</span><b>${esc(t.title)}</b><span class="sub">${n.length} datapoints${n.length ? ` · ${s} support · ${c} challenge` : ''}${arr(t.checks).length ? ` · ${arr(t.checks).length} fact check${arr(t.checks).length > 1 ? 's' : ''}` : ''}</span></a>`; }).join('')}</div>` +
+    const asOf = String(D2.updated_at || new Date().toISOString()).slice(0, 10);
+    const opt = (xs, v) => xs.map(([k, l]) => `<option value="${esc(k)}"${String(v) === k ? ' selected' : ''}>${esc(l)}</option>`).join('');
+    const bar = `<div class="tn-bar" role="group" aria-label="Datapoint filters">` +
+      `<label>Tenet <select data-tnf="tenet"><option value="">All tenets</option>${TS.map(t => `<option value="${esc(t.key)}"${TNF.tenet === t.key ? ' selected' : ''}>${esc(t.title)}</option>`).join('')}</select></label>` +
+      `<label>Sentiment <select data-tnf="sent">${opt(TN_SENT, TNF.sent)}</select></label>` +
+      `<label>How far back <select data-tnf="days">${opt(TN_DAYS, TNF.days)}</select></label>` +
+      `<label>How many <select data-tnf="n">${opt(TN_N, TNF.n)}</select></label>` +
+      `<span class="sub">Newest first</span></div>`;
+    const key = `<div class="tn-key">${[[2, 'Strongly supports'], [1, 'Supports'], [0, 'Neutral or mixed'], [-1, 'Weakens'], [-2, 'Strongly weakens']].map(([s, l]) => `<span>${tnDots(s)}${esc(l)}</span>`).join('')}<span class="sub">scored against the AI bull thesis</span></div>`;
+    const bal = ds => { const g = ds.filter(d => tnScore(d) > 0).length, r = ds.filter(d => tnScore(d) < 0).length, b = ds.length - g - r, n = ds.length || 1; return `<div class="tn-bal" title="${g} green · ${b} blue · ${r} red"><i class="g" style="width:${g / n * 100}%"></i><i class="b" style="width:${b / n * 100}%"></i><i class="r" style="width:${r / n * 100}%"></i></div>`; };
+    const strip = `<section class="panel"><div class="panel-h"><h2>Tenets</h2><span class="muted">updated ${esc(fmtD(asOf))}</span></div>${key}` +
+      `<div class="tn-strip">${TS.map(t => { const n = arr(t.dps), g = n.filter(d => tnScore(d) > 0).length, r = n.filter(d => tnScore(d) < 0).length; return `<a href="#thesis" data-tn="${esc(t.key)}"><span class="chips">${thChip(t.status)}</span><b>${esc(t.title)}</b>${n.length ? bal(n) : ''}<span class="sub">${n.length} datapoints${n.length ? ` · ${g} green · ${r} red` : ''}${arr(t.checks).length ? ` · ${arr(t.checks).length} fact check${arr(t.checks).length > 1 ? 's' : ''}` : ''}</span></a>`; }).join('')}</div>` +
       (D2.storage ? `<p class="sub">${esc(D2.storage)}</p>` : '') + `</section>`;
     const src = xs => arr(xs).map(([t, u]) => u ? `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t)).join('<br>');
-    const body = TS.map(t => {
-      const FC = arr(t.checks), DP = arr(t.dps).slice().sort((a, b) => String(b.date).localeCompare(String(a.date))), SG = arr(t.staged);
+    const lim = TNF.n ? Number(TNF.n) : Infinity;
+    const body = TS.filter(t => !TNF.tenet || t.key === TNF.tenet).map(t => {
+      const FC = arr(t.checks), all = arr(t.dps).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));
+      const pass = all.filter(d => tnPass(d, asOf)), DP = pass.slice(0, lim), G = t.gw;
       return `<section class="panel tn" id="tn-${esc(t.key)}"><div class="panel-h"><h2>${esc(t.title)}</h2><span class="chips">${thChip(t.status)}</span></div>` +
         (t.claim ? `<p class="lede">${esc(t.claim)}</p>` : '') +
         (t.srs_view ? `<p class="tn-view"><b>SRS view:</b> ${esc(t.srs_view)}</p>` : '') +
+        (G && arr(G.rows).length ? `<h3>${esc(G.title || 'GW deployed')}</h3><div class="tbl-wrap"><table class="dt tn-gw"><thead><tr>${arr(G.cols).map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${arr(G.rows).map(r => `<tr>${arr(r).map((c, i) => `<td class="${i > 1 ? 'wrap' : ''}">${i === 1 ? esc(fmtD(c)) : esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${G.note ? `<p class="sub">${esc(G.note)}</p>` : ''}` : '') +
         (FC.length ? `<h3>Fact check</h3><div class="tbl-wrap"><table class="dt tn-fc"><thead><tr><th>Claim</th><th>Verdict</th><th>What we found</th><th>Sources</th></tr></thead><tbody>${FC.map(f => `<tr><td class="wrap"><b>${esc(f.claim)}</b></td><td>${thChip(f.verdict, TN_V)}</td><td class="wrap">${esc(f.text)}</td><td class="wrap">${src(f.sources)}</td></tr>`).join('')}</tbody></table></div>` : '') +
-        (DP.length ? `<h3>Datapoints <span class="muted">${DP.length}</span></h3><div class="list">${DP.map(d => { const s = TN_SD[d.stance] || ['', '']; return `<div class="li"><span class="stripe ${s[0]}"></span><div class="body"><div class="chips"><span class="tk-chip">${esc(d.t)}</span><span class="chip">${esc(s[1])}</span></div>${esc(d.text)}<div class="srcl"><span>Source</span>${esc(d.src || '')} · SB #${esc(d.id)}</div></div><div class="side">${esc(fmtD(d.date))}</div></div>`; }).join('')}</div>` : (t.note ? `<p class="sub">${esc(t.note)}</p>` : none('No datapoints linked yet.'))) +
-        (SG.length ? `<h3>Staged, not yet in Supabase</h3>${SG.map(g => `<div class="tn-stage"><div class="chips"><span class="tk-chip">${esc(g.t)}</span><span class="chip out">${esc(g.field_key)} · ${esc(g.confidence)}</span><span class="sub">${esc(fmtD(g.date))}</span></div>${esc(g.text)}<div class="srcl"><span>Source</span>${esc(g.primary)}${g.secondary ? ' via ' + esc(g.secondary) : ''}</div>${g.why ? `<div class="sub">${esc(g.why)}</div>` : ''}</div>`).join('')}` : '') +
+        `<h3>Datapoints <span class="muted">${DP.length} of ${pass.length}${pass.length !== all.length ? ` matching (${all.length} total)` : ''}</span></h3>` +
+        (DP.length ? `<div class="list">${DP.map(d => `<div class="li">${tnDots(tnScore(d))}<div class="body"><div class="chips"><span class="tk-chip">${esc(d.t)}</span></div>${esc(d.text)}<div class="srcl"><span>Source</span>${esc(d.src || '')} · SB #${esc(d.id)}</div></div><div class="side">${esc(fmtD(d.date))}</div></div>`).join('')}</div>` : none(all.length ? 'No datapoints match these filters.' : 'No datapoints linked yet.')) +
+        (arr(t.staged).length ? `<h3>Staged, not yet in Supabase</h3>${arr(t.staged).map(g => `<div class="tn-stage"><div class="chips"><span class="tk-chip">${esc(g.t)}</span><span class="sub">${esc(fmtD(g.date))}</span></div>${esc(g.text)}<div class="srcl"><span>Source</span>${esc(g.primary)}${g.secondary ? ' via ' + esc(g.secondary) : ''}</div></div>`).join('')}` : '') +
         `</section>`;
     }).join('');
-    return strip + body;
+    setTimeout(() => document.querySelectorAll('#v-thesis [data-tnf]').forEach(s => s.addEventListener('change', () => { TNF[s.dataset.tnf] = s.value; tnSave(); renderThesis(); })), 0);
+    return strip + bar + body;
   }
 
   function thStart() {
