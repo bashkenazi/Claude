@@ -253,6 +253,17 @@ table.sd-t td { white-space: normal; min-width: 90px; max-width: 360px; font-siz
 table.sd-t td:first-child { min-width: 150px; }
 .sd-tog > summary { font-size: 13px; text-transform: none; letter-spacing: 0; color: var(--ink); font-weight: 650; }
 .sd-tog .sd-in { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+/* Update button */
+.rf { position: relative; }
+.rf-btn { font: inherit; font-size: 12.5px; border: 1px solid var(--rule-2); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 4px 10px; cursor: pointer; white-space: nowrap; }
+.rf-btn:hover { background: var(--surface-2); } .rf-btn.on { border-color: var(--accent); color: var(--accent); }
+.rf-pop { position: absolute; right: 0; top: calc(100% + 6px); z-index: 40; width: min(340px, calc(100vw - 32px)); background: var(--surface); border: 1px solid var(--rule-2); border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.16); padding: 8px; display: flex; flex-direction: column; gap: 4px; }
+.rf-pop .rf-h { margin: 2px 4px 4px; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+.rf-pop button { all: unset; display: flex; flex-direction: column; gap: 2px; padding: 7px 8px; border-radius: 6px; cursor: pointer; font-size: 13px; color: var(--ink); }
+.rf-pop button span { font-size: 12px; color: var(--muted); }
+.rf-pop button:hover:not([disabled]), .rf-pop button:focus-visible { background: var(--surface-2); outline: none; }
+.rf-pop button[disabled] { opacity: .45; cursor: default; }
+.rf-pop .rf-msg { margin: 4px 6px 2px; font-size: 12px; color: var(--ink-2); }
 /* Thesis tab */
 .sk-tenets { padding-left: 20px; margin: 6px 0; }
 .sk-tenets > li { margin: 0 0 12px; }
