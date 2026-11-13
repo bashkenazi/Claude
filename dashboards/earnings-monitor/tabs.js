@@ -3152,7 +3152,7 @@
     };
     box.querySelectorAll('[data-rf]').forEach(b => b.onclick = () => { if (RF.ok === false) return; rfFire(b.dataset.rf); });
   }
-  document.addEventListener('click', e => { if (RF.open && !e.target.closest('#rf')) { RF.open = false; rfPaint(); } });
+  document.addEventListener('click', e => { if (RF.open && e.target.isConnected && !e.target.closest('#rf')) { RF.open = false; rfPaint(); } });
   document.addEventListener('keydown', e => { if (RF.open && e.key === 'Escape') { RF.open = false; rfPaint(); } });
   setTimeout(rfPaint, 0);
   function show() {
