@@ -53,5 +53,8 @@
       "mcp__github__fork_repository",
       "mcp__github__actions_run_trigger"
     ]
+  },
+  "env": {
+    "MCP_TOOL_TIMEOUT": "300000"
   }
 }
