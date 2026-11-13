@@ -1,0 +1,136 @@
+--- old/tabs.js	2026-11-13 16:28:14.188226669 +0000
++++ live_tabs.js	2026-11-13 16:28:24.285568479 +0000
+@@ -2371,17 +2371,105 @@
+     aimDraw(sec);
+     if (window.ResizeObserver) { if (BF.ro) BF.ro.disconnect(); BF.w = sec.clientWidth; BF.ro = new ResizeObserver(() => { const w = sec.clientWidth; if (Math.abs(w - BF.w) > 6) { BF.w = w; requestAnimationFrame(() => aimDraw(sec)); } }); BF.ro.observe(sec); }
+   }
++  // ================= AI › SRS apps data: the AI dashboards on apps.srsinvest.com/ai =================
++  // Kept in this page's database (collection "ai", doc "apps_signals"), not in the code: GPU rental indices, LLM token prices,
++  // OpenRouter token share, lab ARR claims and every dashboard's headline findings, read from the srsinvest-apps S3 bucket.
++  const AP = { doc: null, err: '', loaded: false, gpu: 'H100', w: 0, ro: null };
++  try { const v0 = localStorage.getItem('td-ap-gpu'); if (v0) AP.gpu = v0; } catch (e) {}
++  function apLoad(done) {
++    if (AP.loaded) return; AP.loaded = true;
++    const to = setTimeout(() => { if (!AP.doc) { AP.err = 'The apps data did not load in this view.'; done(); } }, 10000);
++    (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('apps_signals').get() : null)
++      .then(sn => { clearTimeout(to); if (sn && sn.exists) { AP.doc = JSON.parse(JSON.stringify(sn.data())); AP.err = ''; } else AP.err = sn ? 'No apps data is stored in this page yet.' : 'The apps data is kept in this page’s database; open the page on claude.ai to see it.'; done(); })
++      .catch(() => { clearTimeout(to); AP.err = 'The apps data could not be read from this page’s database.'; done(); });
++  }
++  const apWk = iso => { const d = new Date(String(iso).slice(0, 10) + 'T12:00:00'); return isNaN(d) ? String(iso) : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
++  const apWkY = iso => { const d = new Date(String(iso).slice(0, 10) + 'T12:00:00'); return isNaN(d) ? String(iso) : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); };
++  const apPct = v => v == null ? '<span class="sub">–</span>' : `<span class="${v > 0 ? 'c-pos' : v < 0 ? 'c-neg' : ''}">${v > 0 ? '+' : v < 0 ? '−' : ''}${Math.abs(v * 100).toFixed(1)}%</span>`;
++  const apBn = m => m == null ? '–' : '$' + (m >= 1000 ? (m / 1000).toFixed(1) + 'bn' : Math.round(m) + 'm');
++  const apRange = c => c.lo != null && c.hi != null && Math.abs(c.hi - c.lo) > 1 ? apBn(c.lo) + '–' + apBn(c.hi).replace('$', '') : apBn(c.hi != null ? c.hi : c.lo);
++  const apLink = (u, t) => u ? `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t);
++  function apGpuHtml() {
++    const G = AP.doc.gpu || {}, C = (G.charts || {})[AP.gpu] || (G.charts || {}).H100;
++    let h = `<div class="seg aim-seg" role="group" aria-label="GPU">${Object.keys(G.charts || {}).map(k => `<button type="button" data-ap="gpu:${esc(k)}" aria-pressed="${AP.gpu === k}">${esc(k)}</button>`).join('')}</div>`;
++    if (C && arr(C.w).length) {
++      const S = arr(C.s).map((s, i) => ({ n: s.n, short: s.n.replace(/^(Silicon Data|Nebius spot|Ornn) /, (m, a) => a === 'Silicon Data' ? 'SD ' : a === 'Nebius spot' ? 'NBIS ' : 'Ornn '), v: s.v, c: AIM_C[i % AIM_C.length] }));
++      h += aimFig('ap-gpu', AP.gpu + ' rental, $ per GPU-hour', 'weekly, last reading of each week · hover for values', { kind: 'lines', cats: C.w.map(apWk), tipH: C.w.map(w => 'Week ending ' + apWkY(w)), series: S, f: 'usd2', ax: '', h: 260, endW: 120, zero: false, aria: AP.gpu + ' GPU rental price by week' }, aimLegL(S));
++    }
++    h += `<div class="tbl-wrap"><table class="dt aim-t"><thead><tr><th>Series</th><th>GPU</th><th class="n">$/GPU-hr</th><th>As of</th><th class="n">4 weeks</th><th class="n">12 weeks</th><th>Source</th></tr></thead><tbody>` +
++      arr(G.latest).map(x => `<tr><td class="aim-k"><b>${esc(x.n)}</b></td><td>${esc(x.gpu)}</td><td class="n">$${(+x.v).toFixed(2)}</td><td class="nowrap">${esc(fmtD(x.d))}</td><td class="n">${apPct(x.c4)}</td><td class="n">${apPct(x.c12)}</td><td class="aim-w sub">${esc(x.src)}</td></tr>`).join('') +
++      `</tbody></table></div><p class="sub">${esc(G.note || '')}</p>`;
++    return h;
++  }
++  function apSectionHtml() {
++    const top = `<section class="panel" id="ai-apps"><div class="panel-h"><h2>SRS apps data: the AI dashboards on apps.srsinvest.com</h2>${AP.doc ? `<span class="sub">Pulled ${esc(fmtD(AP.doc.asof))} · <a class="ext" href="https://apps.srsinvest.com/ai/" target="_blank" rel="noopener">Open the AI hub →</a></span>` : ''}</div>`;
++    if (!AP.doc) return top + `<p class="sub">${esc(AP.err || 'Loading the apps data…')}</p></section>`;
++    const d = AP.doc, T = d.tok || {}, O = d.or || {}, A = d.arr || {};
++    let h = top + `<p class="aim-lede">The firm’s AI dashboards in one place: GPU rental prices, LLM token prices, OpenRouter token share, lab ARR claims, and the headline findings each dashboard publishes. Figures are copied from each dashboard’s data file on the date shown; open a dashboard for its full history and method.</p>`;
++    h += `<div class="summary">${arr(d.calls).map(c => `<div class="stat"><span class="v${c.tone ? ' c-' + esc(c.tone) : ''}">${esc(c.v)}</span><span class="l">${esc(c.l)}</span><span class="l">${esc(c.s)}</span></div>`).join('')}</div>`;
++    h += `<h3>GPU rental prices: indices and Nebius spot</h3><div id="ap-gpu-body" class="aim-view">${apGpuHtml()}</div>`;
++    // token prices + OpenRouter share
++    const TS = arr(T.s).map((s, i) => ({ n: s.n, short: s.n.replace(/ \(broad\)/, ''), v: s.v, c: AIM_C[i % AIM_C.length] }));
++    const OS = arr(O.s).map((s, i) => ({ n: s.n, v: arr(s.v).map(v => v == null ? null : v / 100), c: AIM_C[i % AIM_C.length] }));
++    h += `<div class="aim-g2">` +
++      (TS.length ? aimFig('ap-tok', 'LLM token prices, $ per million tokens', 'Silicon Data · weekly · as of ' + fmtD(T.asof), { kind: 'lines', cats: arr(T.w).map(apWk), tipH: arr(T.w).map(w => 'Week ending ' + apWkY(w)), series: TS, f: 'usd2', ax: '', h: 240, endW: 120, aria: 'LLM token price indices by week' }, aimLegL(TS) + `<p class="sub">${esc(T.note || '')}</p>`) : '') +
++      (OS.length ? aimFig('ap-or', 'OpenRouter share of weekly tokens', 'Yipit · week starting · data through ' + fmtD(O.asof), { kind: 'lines', cats: arr(O.w).map(apWk), tipH: arr(O.w).map((w, i) => 'Week of ' + apWkY(w) + ' · ' + arr(O.tot)[i] + 'T tokens'), series: OS, f: 'pct', ax: 'pct', h: 240, endW: 120, aria: 'OpenRouter token share by provider by week' }, aimLegL(OS) +
++        `<p class="sub">Spend share, latest week: ${arr(O.spend).map(x => `${esc(x.n)} ${(+x.v).toFixed(1)}%`).join(' · ')}. ${esc(O.note || '')}</p>`) : '') + `</div>`;
++    // ARR
++    const claimRow = c => `<tr><td class="nowrap">${esc(fmtD(c.d))}</td><td class="n"><b>${esc(apRange(c))}</b></td><td>${esc(c.m === 'arr' ? 'ARR' : 'run-rate')}</td><td class="aim-w">${apLink(c.u, c.src)}</td><td><span class="chip">${esc(c.st)}</span></td></tr>`;
++    const labs = A.labs || {};
++    h += `<h3>Lab ARR: every recent claim, by source</h3><div class="aim-g2">${Object.keys(labs).map(l => `<div class="aim-tb"><b>${esc(l)}</b><div class="tbl-wrap"><table class="dt aim-t"><thead><tr><th>As of</th><th class="n">Annualized</th><th>Metric</th><th>Source</th><th>Type</th></tr></thead><tbody>${arr(labs[l]).map(claimRow).join('')}</tbody></table></div></div>`).join('')}</div>`;
++    if (arr(A.vercel).length) { const v = arr(A.vercel).slice(-2); h += `<p class="sub">Vercel AI Gateway share, week ending ${esc(fmtD(v[0].w))}: ${v.map(x => `${esc(x.m)} Anthropic ${(+x.Anthropic).toFixed(1)}% / OpenAI ${(+x.OpenAI).toFixed(1)}%`).join(' · ')} (shares of a cheap-model-heavy pool).</p>`; }
++    h += `<details class="aim-more"><summary>Other labs and AI businesses: latest current claim each (${arr(A.other).length})</summary><div class="tbl-wrap"><table class="dt aim-t"><thead><tr><th>Company</th><th>As of</th><th class="n">Annualized</th><th>Source</th></tr></thead><tbody>${arr(A.other).map(c => `<tr><td class="aim-k"><b>${esc(c.e)}</b></td><td class="nowrap">${esc(fmtD(c.d))}</td><td class="n">${esc(apRange(c))}</td><td class="aim-w">${apLink(c.u, c.src)}</td></tr>`).join('')}</tbody></table></div></details>`;
++    if (arr(A.fc).length) h += `<details class="aim-more"><summary>Anthropic and OpenAI forecasts in the ledger (${arr(A.fc).length} most recent)</summary><div class="tbl-wrap"><table class="dt aim-t"><thead><tr><th>Lab</th><th>Period</th><th class="n">Value</th><th>Metric</th><th>Source</th></tr></thead><tbody>${arr(A.fc).map(c => `<tr><td class="aim-k"><b>${esc(c.e)}</b></td><td class="nowrap">${esc(c.per || c.d)}</td><td class="n">${esc(apRange(c))}</td><td>${esc(String(c.m).replace(/_/g, ' '))}</td><td class="aim-w">${apLink(c.u, c.src)}</td></tr>`).join('')}</tbody></table></div></details>`;
++    h += `<p class="sub">${esc(A.note || '')}</p>`;
++    // every dashboard's headlines
++    h += `<h3>What each dashboard says now</h3><div class="grid3">${arr(d.dash).map(p => `<div class="theme"><div class="panel-h"><h3>${esc(p.title)}</h3><a href="${esc(p.url)}" target="_blank" rel="noopener">Open →</a></div><span class="sub">${esc(p.what)} · data as of ${esc(p.asof || '')}</span><ul class="b">${arr(p.items).map(it => `<li>${it.v ? `<span class="chip">${esc(it.v)}</span> ` : ''}${esc(it.t)}${it.q === 'thin data' ? ' <span class="chip out">thin data</span>' : ''}${it.imp ? `<br><span class="sub">${esc(it.imp)}</span>` : ''}</li>`).join('')}</ul></div>`).join('')}</div>`;
++    if (arr(d.links).length) h += `<p class="sub">Other AI dashboards: ${arr(d.links).map(l => `<a class="ext" href="${esc(l.u)}" target="_blank" rel="noopener">${esc(l.t)}</a>`).join(' · ')}</p>`;
++    h += `<p class="aim-src">Source: ${esc(d.source || '')} · built ${esc(d.built_at || '')}</p>`;
++    return h + `<div class="aim-tip" hidden></div></section>`;
++  }
++  function apMount() {
++    const sec = document.getElementById('ai-apps'); if (!sec || !AP.doc) return;
++    sec.addEventListener('click', e => {
++      const b = e.target.closest && e.target.closest('[data-ap]'); if (!b || !sec.contains(b)) return;
++      const [k, v] = b.dataset.ap.split(':'); if (k !== 'gpu') return;
++      AP.gpu = v; try { localStorage.setItem('td-ap-gpu', v); } catch (x) {}
++      const body = sec.querySelector('#ap-gpu-body'); if (body) { body.innerHTML = apGpuHtml(); aimDraw(sec); }
++    });
++    const tip = sec.querySelector('.aim-tip');
++    const show = (g, x, y) => {
++      const [nm, i] = String(g.dataset.tip || '').split(':'), d = (AIM.tips[nm] || [])[+i]; if (!d || !tip) return;
++      tip.textContent = '';
++      const hd = document.createElement('div'); hd.className = 'aim-tip-h'; hd.textContent = d.h; tip.appendChild(hd);
++      d.rows.forEach(r => { const row = document.createElement('div'), k = document.createElement('i'), v = document.createElement('b'), s = document.createElement('span'); row.className = 'aim-tip-r' + (r.b ? ' tot' : ''); if (r.c) k.style.background = r.c; v.textContent = r.v; s.textContent = r.n; row.append(k, v, s); tip.appendChild(row); });
++      tip.hidden = false;
++      const tw = tip.offsetWidth, th = tip.offsetHeight, vw = window.innerWidth, vh = window.innerHeight;
++      let lx = x + 14, ly = y + 14; if (lx + tw > vw - 8) lx = x - tw - 14; if (lx < 8) lx = 8; if (ly + th > vh - 8) ly = y - th - 14; if (ly < 8) ly = 8;
++      tip.style.left = lx + 'px'; tip.style.top = ly + 'px';
++    };
++    const hide = () => { if (tip) tip.hidden = true; };
++    const at = e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g && sec.contains(g)) show(g, e.clientX, e.clientY); else hide(); };
++    sec.addEventListener('pointermove', at); sec.addEventListener('pointerdown', at); sec.addEventListener('pointerleave', hide);
++    sec.addEventListener('focusin', e => { const g = e.target.closest && e.target.closest('.aim-h'); if (g) { const r = g.getBoundingClientRect(); show(g, r.left + r.width / 2, r.top + 8); } });
++    sec.addEventListener('focusout', hide);
++    if (!AP.sc) { AP.sc = 1; window.addEventListener('scroll', () => { const t = document.querySelector('#ai-apps .aim-tip'); if (t) t.hidden = true; }, { passive: true }); }
++    aimDraw(sec);
++    if (window.ResizeObserver) { if (AP.ro) AP.ro.disconnect(); AP.w = sec.clientWidth; AP.ro = new ResizeObserver(() => { const w = sec.clientWidth; if (Math.abs(w - AP.w) > 6) { AP.w = w; requestAnimationFrame(() => aimDraw(sec)); } }); AP.ro.observe(sec); }
++  }
+   function renderAI() {
+     const host = document.getElementById('v-ai'); if (!host) return;
+     const st = AI.st, meta = new Map(arr((D.dp_index || {}).meta).map(m => [m.rid, m]));
+     const f1 = v => v == null ? '–' : (+v).toFixed(1);
+     const paint = () => {
+-      let h = head('AI', 'AI infrastructure', 'SRS’s own AI models (capex, accelerator share, economics, financing, supply chain), where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
+-        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/banks">Bank forecasts</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
++      let h = head('AI', 'AI infrastructure', 'SRS’s own AI models (capex, accelerator share, economics, financing, supply chain), the firm’s AI dashboards on apps.srsinvest.com (GPU rental and token prices, OpenRouter share, lab ARR), where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
++        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/apps">SRS apps data</a><a href="#ai/banks">Bank forecasts</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
+       // ---- 0) SRS AI models (page database, collection "ai_models") ----
+       h += aimSectionHtml();
+       // ---- 0b) bank forecasts (page database, collection "ai", doc "bank_forecasts") ----
+       h += bfSectionHtml();
++      // ---- 0c) SRS apps data (page database, collection "ai", doc "apps_signals") ----
++      h += apSectionHtml();
+       // ---- 1) data centers by state ----
+       if (!AI_DC.rows.length) h += `<section class="panel" id="ai-dc"><h2>Data centers: gigawatts by state and political risk</h2><p class="sub">${esc(AI.dcErr || 'Loading the state figures…')}</p><h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
+       else {
+@@ -2416,7 +2504,7 @@
+         `<h3>Earnings prints</h3>${alabRev.map(r => `<details class="fr-sec"><summary>${esc(r.quarter || '')} · ${esc(r.report_date || '')} · ${esc(r.source === 'rebecca' ? 'Rebecca recap' : 'Earnings review')}</summary><p>${xInline(r.headline || '')}</p><ul class="b">${arr(r.summary).filter(s => AI_RE.alabRev.test(s)).map(s => `<li>${esc(s)}</li>`).join('')}</ul>${r.url && /^https?:/.test(r.url) ? `<a class="ext" href="${esc(r.url)}" target="_blank" rel="noopener">Open the full page →</a>` : ''}</details>`).join('') || none('No ALAB earnings pages in this build.')}` +
+         `<h3>Every revenue datapoint on ALAB</h3><div class="ctl"><label for="ai-aq">Search <input type="search" id="ai-aq" value="${esc(st.alabQ)}" placeholder="Scorpio, Trainium, guide…"></label></div><div id="ai-alabdp">${aiRowsHtml('alab')}</div></section>`;
+       // ---- GPU rental prices ----
+-      h += `<section class="panel" id="ai-gpu"><div class="panel-h"><h2>GPU rental prices ($ per GPU-hour)</h2><span class="sub">From your datapoints</span></div>${AI.rows ? gpuSectionHtml(gpuPoints(AI.rows), st) : '<p class="sub">Loading datapoints…</p>'}</section>`;
++      h += `<section class="panel" id="ai-gpu"><div class="panel-h"><h2>GPU rental prices ($ per GPU-hour)</h2><span class="sub">From your datapoints · Ornn, Silicon Data and Nebius index levels are in <a href="#ai/apps">SRS apps data</a></span></div>${AI.rows ? gpuSectionHtml(gpuPoints(AI.rows), st) : '<p class="sub">Loading datapoints…</p>'}</section>`;
+       // ---- 3) compute supply / demand ----
+       h += `<section class="panel" id="ai-compute"><div class="panel-h"><h2>Compute supply versus demand</h2><span class="sub">Every datapoint in Supabase that speaks to compute being tight or loose, all companies</span></div>` +
+         `<div id="ai-cmp-sum"></div>` +
+@@ -2424,7 +2512,7 @@
+         `<label for="ai-tone">Read <select id="ai-tone"><option value="">All</option><option value="tight"${st.tone === 'tight' ? ' selected' : ''}>Supply tight / demand ahead</option><option value="loose"${st.tone === 'loose' ? ' selected' : ''}>Loosening / digestion</option></select></label>` +
+         `<label for="ai-days">Window <select id="ai-days">${[[30, '1 month'], [90, '3 months'], [180, '6 months'], [100000, 'All']].map(([v, l]) => `<option value="${v}"${+st.days === v ? ' selected' : ''}>${l}</option>`).join('')}</select></label>` +
+         `<label for="ai-q">Search <input type="search" id="ai-q" value="${esc(st.q)}" placeholder="Ticker or word"></label></div><div id="ai-cmp">${aiRowsHtml('compute')}</div></section>`;
+-      host.innerHTML = h; wire(); aimMount(); bfMount();
++      host.innerHTML = h; wire(); aimMount(); bfMount(); apMount();
+       const sub = (location.hash.split('/')[1] || ''); host.querySelectorAll('.sk-tabs a').forEach(a => a.toggleAttribute('aria-current', a.getAttribute('href') === '#ai/' + sub));
+       if (sub) { const el = document.getElementById('ai-' + (sub === 'dc' ? 'dc' : sub)); if (el) setTimeout(() => el.scrollIntoView({ block: 'start' }), 0); }
+       const qh = document.getElementById('ai-qr'); if (qh && window.__qrMount) { const co = (window.__qrFind && window.__qrFind('ALAB')) || { t: 'ALAB', bbg: 'ALAB US', name: 'Astera Labs' }; try { window.__qrMount(qh, co); } catch (e) { qh.innerHTML = none('The Visible Alpha table could not load here.'); } }
+@@ -2468,6 +2556,7 @@
+     paint();
+     aimLoad(paint);
+     bfLoad(paint);
++    apLoad(paint);
+     if (!AI.dcLoaded) { AI.dcLoaded = true; (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('dc_states').get() : null)
+       .then(sn => { if (sn && sn.exists) Object.assign(AI_DC, JSON.parse(JSON.stringify(sn.data()))); else AI.dcErr = 'The state data center figures are not loaded in this view.'; paint(); })
+       .catch(() => { AI.dcErr = 'The state data center figures could not be read from this page’s database.'; paint(); }); }
