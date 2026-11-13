@@ -33,7 +33,7 @@ Read them from the request; defaults in brackets.
 - `folders`: limit to named date folders, e.g. `10.26.26` [all folders ≥ floor].
 - `floor`: earliest date folder in scope [**2026-10-22**]. Older folders are out of scope; never read or import the
   retired pipeline's ledgers or manifests.
-- `budget`: max PDFs extracted this run [**60**].
+- `budget`: max PDFs extracted this run [**200**].
 - `concurrency`: subagents in flight at once [**4**].
 - `trigger`: `scheduled` when started by the routine, else `manual`.
 

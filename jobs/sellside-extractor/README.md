@@ -63,7 +63,7 @@ Schema: [`migrations/20261027200000_sellside_ledger.sql`](migrations/20261027200
 ## Limits
 
 - The connector reads PDFs as text; numbers that exist only inside chart images are not captured.
-- Default budget is 60 PDFs per run; the rest stay `pending` for the next run and are listed in the digest.
+- Default budget is 200 PDFs per run; the rest stay `pending` for the next run and are listed in the digest.
 
 ## Reference
 
