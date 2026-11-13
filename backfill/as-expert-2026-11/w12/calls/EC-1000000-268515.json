@@ -1,0 +1,102 @@
+{
+ "doc_id": "EC-1000000-268515",
+ "ticker": "CRWD",
+ "tier": 1,
+ "sector": "Software A-L",
+ "title": "Manager at Value-Added IT Reseller Expects CrowdStrike Business to Grow",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268515",
+ "as_company": "CrowdStrike Holdings Inc",
+ "conversation_id": "7093__1794406549086",
+ "expert": "Senior sales leader at a ~GBP5B-turnover UK VAR (3,000 employees), current",
+ "weight": "High",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "CrowdStrike",
+   "score": 5
+  },
+  {
+   "company": "Palo Alto Networks",
+   "score": 3
+  },
+  {
+   "company": "SentinelOne",
+   "score": 3
+  },
+  {
+   "company": "Microsoft",
+   "score": 3
+  }
+ ],
+ "verdict": "A large UK VAR's CrowdStrike business grew about 27% y/y in Aug-Oct, ahead of plan, with renewal contract values about 15% higher and new-implementation deals at least 15% larger.",
+ "summary_variables": {
+  "NNARR vs the buy-side bogey": [
+   "~27% y/y Aug-Oct; ~25% Nov-Jan [14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse17567&hl=fse17567,fse18009,fse18639,fse19653,fse20283,fse21049,fse21446&page=2)",
+   "Renewal ACV ~15% higher; deals >=15% larger [7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse17567&hl=fse17567,fse18009,fse21446&page=2)",
+   "PANW wins bundles [5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse39977&hl=fse39977,fse40016,fse40084&page=2)"
+  ],
+  "Flex utilization / re-Flex cadence": [
+   "Flex in ~15% of deals [14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse17567&hl=fse17567,fse18009,fse18639,fse19653,fse20283,fse21049,fse21446&page=2)"
+  ],
+  "AIDR ARR conversion": [
+   "7.5/10 materiality; AI ROI hard [4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse4235&hl=fse4235,fse7000,fse7117,fse10630,fse17567,fse18639,fse19653,fse20283,fse21049,fse26967,fse28547,fse31048,fse33784,fse39276,fse39977,fse40016,fse40084,fse47567&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "~27% vs Cleveland 30%+ (SB #43076): slightly lower; consistent with SB #66118",
+  "Renewal ACV ~15% vs Citi re-Flex 26% (SB #34627): lower",
+  "First read on Flex share of deals (~15%)"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 4 (core): ↑ — ~27% y/y",
+  "Tenet 1 (Flex): → — renewal ACV +15%, Flex ~15% of deals",
+  "Tenet 2 (AIDR): → — interest rising, ROI hard"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWD",
+   "text": "UK VAR's CrowdStrike business +~27% y/y in Aug-Oct 2026; renewals ~3% above expectations",
+   "kind": "first_hand",
+   "citation": "[14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse17567&hl=fse17567,fse18009,fse18639,fse19653,fse20283,fse21049,fse21446&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Renewal transacted ACV ~15% higher y/y; new implementation deal size at least 15% higher y/y (Aug-Oct 2026)",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse17567&hl=fse17567,fse18009,fse21446&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Falcon Flex in ~15% of UK VAR's CrowdStrike deals (Aug-Oct 2026)",
+   "kind": "first_hand",
+   "citation": "[14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse17567&hl=fse17567,fse18009,fse18639,fse19653,fse20283,fse21049,fse21446&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "UK VAR expects CrowdStrike business ~25% y/y Nov-Jan and ~26% in 2026 and 2027",
+   "kind": "estimate",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse26967&hl=fse26967,fse27867,fse28547,fse31048&page=2)"
+  },
+  {
+   "ticker": "PANW",
+   "text": "Palo Alto most frequent winner vs CrowdStrike in bundled deals via discounted firewall renewals (UK VAR)",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse39977&hl=fse39977,fse40016,fse40084&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Endpoint ~15%-20% of customer security spend; one customer's hardware-refresh budget ~GBP250k -> ~GBP600k on component costs",
+   "kind": "first_hand",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268515&scope=ANYWHERE&stmt=fse4235&hl=fse4235,fse7000,fse7117,fse10630,fse17567,fse18639,fse19653,fse20283,fse21049,fse26967,fse28547,fse31048,fse33784,fse39276,fse39977,fse40016,fse40084,fse47567&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3caa8833-33de-8159-8bc9-c94df18efbf6",
+  "page_title": "CRWD Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

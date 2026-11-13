@@ -1,0 +1,128 @@
+{
+ "doc_id": "EC-1000000-268443",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Executive at AI Company Expects Docusign Business to Grow 7% in 2026 and Retain or Slightly Gain Share",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268443",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794403783992",
+ "expert": "Executive at an AI company; ex-president of two U.S. BPO firms (17+ yrs); manages 38 Docusign deployments across 200+ clients",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Docusign Inc",
+   "score": 4
+  },
+  {
+   "company": "Adobe",
+   "score": 4
+  },
+  {
+   "company": "PandaDoc",
+   "score": 4
+  }
+ ],
+ "verdict": "The expert's own Docusign-related business rose about 5% y/y in Aug\u2013Oct 2026 on 4%\u20136% higher renewal spend, with calendar 2026 tracking ~7%, still short of double digits.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udfe1 **Business up about 5% y/y** in Aug\u2013Oct 2026, deal closures ~5.5% above prior year; first read from a partner on this measure.",
+   "\ud83d\udfe1 **About 7% for calendar 2026** (estimate), above the expert's 5%\u20135.5% initial view but below double digits."
+  ],
+  "IAM adoption": [
+   "\ud83d\udfe2 **About 40% of deals involve AI** vs 15%\u201320% a year ago.",
+   "\ud83d\udfe1 **CLM adoption up about 5%\u20136%**; Cleveland saw net-new CLM deal volume down Y/Y (SB #63588): **conflicting**."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udfe2 **Renewal spend 4%\u20136% higher** as customers add Agreement Manager and ID verification; Cleveland put IAM ACV uplift at the high end of ~5-10% (SB #63574): consistent.",
+   "\ud83d\udfe1 **Net pricing up about 4%\u20135%** (estimate), while terms shorten to 2+1 / 3+1 years from five."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Renewal spend 4%\u20136% higher (expert) vs Cleveland IAM ACV uplift at the high end of ~5-10% (SB #63574): consistent.",
+  "CLM adoption up about 5%\u20136% (expert) vs Cleveland net-new CLM deal volume down Y/Y (SB #63588): conflicting.",
+  "First read on partner-level Docusign business growth (+~5% y/y); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth on the IAM bet): \u2192 \u2014 partner business +~5% and CY26 ~7% (estimate) is not yet double digits.",
+  "Stance (IAM bet): \u2191 \u2014 about 40% of deals involve AI vs 15%\u201320% a year ago; renewals expand 4%\u20136%."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: up about 5% \u2014 Docusign-related business, August\u2013October 2026; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443&scope=ANYWHERE&stmt=fse10609&hl=fse10609,fse12942,fse14431,fse14974,fse15536,fse16933,fse17030,fse17524,fse19213,fse19905,fse22171,fse22240,fse22821,fse25184,fse25255,fse26370,fse27084,fse27158,fse28679,fse34341,fse34518,fse34997,fse36027,fse36074,fse36359,fse37258,fse37850,fse38332,fse41507,fse42150,fse42911,fse42973&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: about 5.5%  above \u2014 Deal closures, August\u2013October 2026; baseline: Prior-year period",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: up about 4%\u20135% \u2014 Customer usage/transactions, August\u2013October 2026; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: up about 2% \u2014 Seat count, August\u2013October 2026; baseline: Portfolio average",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: about 75% \u2014 Existing-client expansion, August\u2013October 2026; baseline: Total business mix",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: 4%\u20136%  higher \u2014 Renewal expansion spend, August\u2013October 2026; baseline: Previous contract",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: up 4%\u20135% \u2014 Business outlook, Nov 2026\u2013Jan 2027; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: about 7% \u2014 Business volume, Calendar 2026; baseline: Calendar 2025",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443&scope=ANYWHERE&stmt=fse26370&hl=fse26370,fse27084,fse27268&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: about 4%\u20135% \u2014 Net pricing increase, 2026; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: up about 5%\u20136% \u2014 CLM adoption, 2026; baseline: Portfolio average",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign Inc: about 40% \u2014 Deals involving AI, 2026; baseline: **15%\u201320%**  a year earlier",
+   "kind": "first_hand",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268443&scope=ANYWHERE&stmt=fse41507&hl=fse41507,fse42150&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

@@ -1,0 +1,129 @@
+{
+ "doc_id": "EC-1000000-269598",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Senior Deputy Manager at Inventec Expects AVC\u2019s AI Server Cooling-System Costs to Rise With Increasing Thermal Demands",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269598",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794404267119",
+ "expert": "Senior Deputy Manager at Inventec (AI-server ODM), 10+ years; sees Inventec's own AVC allocations and procurement",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 3
+  },
+  {
+   "company": "NVIDIA",
+   "score": 4
+  },
+  {
+   "company": "Auras",
+   "score": 3
+  }
+ ],
+ "verdict": "Inventec's <b>own AVC procurement is roughly flat</b> vs the prior two years, even as AVC's China and Vietnam capacity is fully loaded with orders booked 1\u20132 years ahead.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "\ud83d\udd34 <b>Inventec AVC procurement roughly flat</b> vs prior two years (first-hand) vs +4\u20135% q/q in the 2026-11-09 Jabil call: conflicting.",
+   "\ud83d\udd34 <b>Vera Rubin cooling quotes +10\u201325% per rack vs GB200</b> (estimate) vs +50% content per tray (SB #58854): lower. \u2192 Tenet 1 (Rubin content and share) \u2193"
+  ],
+  "Gross margin": [
+   "\ud83d\udfe2 <b>AVC corporate yield 80\u201390%</b> vs ~80% Rubin yield in the 2026-11-06 and 2026-11-07 calls. \u2192 Tenet 3 (GM 34%+) \u2191",
+   "\ud83d\udd34 <b>Rubin backplane 20\u201330% more complex</b> (estimate); margin risk if costs are not passed through, first read."
+  ],
+  "Rubin yield and ramp": [
+   "\ud83d\udfe2 <b>Capacity fully loaded, orders booked 1\u20132 years ahead</b>, consistent with Citi's 2027 demand ahead of supply (SB #54848). \u2192 Tenet 4 (capacity) \u2191"
+  ]
+ },
+ "characterization_changed": "Positive: the expert's own AVC procurement is roughly flat vs the prior two years; the positives (quotes, capacity) are not his purchases.",
+ "changes": [
+  "Inventec procurement roughly flat vs Jabil volume +4-5% q/q (2026-11-09 call): conflicting.",
+  "Rubin cooling quotes +10-25% per rack vs JPM +50% content per tray (SB #58854): lower.",
+  "AVC yield 80-90% vs ~80% Rubin yield (2026-11-07 Delta call, 2026-11-06 calls): higher.",
+  "Orders booked 1-2 years ahead vs Citi: 2027 cold-plate demand ahead of supply (SB #54848): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Rubin content and share): \u2193 \u2014 Rubin quotes +10-25% vs +50% content assumed; Inventec volume flat.",
+  "Tenet 3 (GM 34%+): \u2192 \u2014 80-90% yield offsets 20-30% more complex backplane.",
+  "Tenet 4 (capacity): \u2191 \u2014 capacity fully loaded, orders booked 1-2 years ahead."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "roughly flat \u2014 Current projects and procurement, 2026-11-10, vs vs. prior two years",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "one to two years \u2014 Orders booked ahead, 2026-11-10, vs Current status",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "OTHER:Inventec",
+   "text": "approximately 70% \u2014 Available resources/allocations, 2026-11-10, vs Capacity limit",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "80%\u201390% \u2014 Corporate product-yield rate, 2026-11-10, vs Production standard",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "~30% \u2014 Market share of high-power thermal market, 2026-11-10, vs Total market",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "15%\u201325% \u2014 Quote increase per rack, 2026-11-10, vs Vera Rubin vs. GB200",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "10%\u201320% \u2014 Overall quote increase, 2026-11-10, vs Vera Rubin vs. GB200",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "1,800 W\u20132,300 W \u2014 GPU thermal power, 2026-11-10, vs Vera Rubin",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "~1,000 W \u2014 GPU thermal power, 2026-11-10, vs GB200",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "15%\u201320% \u2014 Heat dissipation via air cooling, 2026-11-10, vs GB200 components",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "20%\u201330% \u2014 Backplane complexity increase, 2026-11-10, vs Vera Rubin",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269598)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed in lean form (Summary, Expert and visibility, What changed, Bull, Bear, Thesis impact); Key numbers, Supply-chain flags, Share shifts, Questions, Sentiment and Q&A are in summaries/<doc_id>.md only, to keep the page update within size limits. New 'Expert Calls' h2 section created before Data Sources."
+}

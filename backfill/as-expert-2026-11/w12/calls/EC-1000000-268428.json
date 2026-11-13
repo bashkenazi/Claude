@@ -1,0 +1,176 @@
+{
+ "doc_id": "EC-1000000-268428",
+ "ticker": "SNOW",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Advisor at Technology Consulting Firm Is Cautiously Positive on Snowflake Growth but Sees Production Delays and Optimization Tempering Near-Term Consumption",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268428",
+ "as_company": "Snowflake Inc",
+ "conversation_id": "7093__1794405670243",
+ "expert": "Strategy and transformation consultant at a global consulting firm advising on Snowflake for Fortune 500 retail, banking and consumer accounts",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Snowflake",
+   "score": 3
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Google BigQuery",
+   "score": 3
+  },
+  {
+   "company": "Amazon Redshift",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert's Snowflake practice grew 20%–25% y/y in Aug–Oct 2026, but new deal sizes are down 10%–20% and the CY26 outlook of 5%–10% is below plan as pilots stall before production.",
+ "summary_variables": {
+  "Demand / orders": [
+   "🟢 <b>Practice +20%–25% y/y</b> in Aug–Oct; below Cleveland's global SI +40% with Snowflake in 1H (SB #45418): lower. → Tenet 1 (core consumption) →",
+   "🔴 <b>New implementation deal size down 10%–20%</b> (estimate), about \\$500,000 to about \\$400,000; first read. → Tenet 1 (core consumption) ↓",
+   "🔴 <b>CY26 practice growth 5%–10%</b> (estimate), below plan, ~10% in CY27; vs 2Q FY27 product revenue +36.8% (SB #65498): <b>conflicting</b>. → Tenet 1 (core consumption) ↓"
+  ],
+  "Pricing & margins": [
+   "🟡 <b>Effective price per credit down about 5%</b>, annual commitments up about 10% (estimates); first read. → Tenet 4 (margins) ↓"
+  ],
+  "AI products": [
+   "🟢 <b>About 30% of clients use Cortex Code</b> (estimate) vs KeyBanc's ~50% of active users (SB #61004): lower, different basis. → Tenet 2 (AI second engine) ↑"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Practice growth: +20%–25% vs Cleveland's global SI +40% with Snowflake in 1H (SB #45418): lower.",
+  "Outlook: CY26 practice growth 5%–10% vs 2Q FY27 product revenue +36.8% (SB #65498): conflicting.",
+  "Cortex Code: ~30% of clients vs KeyBanc ~50% of active users (SB #61004): lower, different basis.",
+  "Pricing: first read on effective price per credit (down about 5%); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core consumption re-accelerating): ↓ — deal sizes down 10%–20% and a CY26 outlook of 5%–10%, below plan.",
+  "Tenet 2 (AI second engine): ↑ — about 30% of clients on Cortex AI and about 30% on Cortex Code.",
+  "Tenet 3 (governed-data control point): → — Snowflake wins on existing governed data; Databricks is the strongest threat for engineering and AI workloads.",
+  "Tenet 4 (margins expand): ↓ — effective price per comparable credit down about 5%."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 20%–25% increase — Expert's Snowflake-related business growth; August–October; vs Prior year",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse4751&hl=fse4751,fse4827&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 5%–10% — Expected Snowflake-related business growth; Calendar 2026; vs 2025",
+   "kind": "estimate",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse13400&hl=fse13400,fse13506,fse13566,fse13566,fse17074,fse20068,fse20122,fse21851,fse25368,fse25368,fse26639,fse27715,fse28177,fse28262,fse29658,fse29770,fse30722,fse30858,fse49565,fse51208,fse51807,fse51864&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: Around 10% — Expected Snowflake-related business growth; Calendar 2027; vs 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268428)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: as low as 5% — Potential Snowflake-related business growth; Calendar 2027; vs 2026",
+   "kind": "estimate",
+   "citation": "[[19 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse29658&hl=fse29658,fse29770,fse29801&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: Down 10%–20% — Average new implementation deal size; Current; vs Prior year",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse19170&hl=fse19170,fse19418,fse20068&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about $500,000 — Illustrative average deal size; Last year; vs N/A",
+   "kind": "estimate",
+   "citation": "[[18 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse20009&hl=fse20009,fse20068,fse20122,fse20212&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about $400,000 — Illustrative average deal size; This year; vs N/A",
+   "kind": "estimate",
+   "citation": "[[18 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse20009&hl=fse20009,fse20068,fse20122,fse20212&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: $50,000–$150,000 — Initial production workload deal size; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268428)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: as high as $500,000 — Mid-market deployment deal size; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268428)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: $500,000–$2 million — Large deployment deal size; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268428)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: $2 million–$5 million — Broad enterprise deployment deal size; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268428)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: Down about 5% — Effective price per comparable credit; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse30722&hl=fse30722,fse30858,fse30979,fse31091&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: Up about 10% — Annual consumption commitments; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse30722&hl=fse30722,fse30858,fse30979,fse31091&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: About 70% — Pipeline in later-stage phase; Next 3 months; vs N/A",
+   "kind": "estimate",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse7643&hl=fse7643,fse14240,fse40111&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: Closer to 40% — Pipeline in later-stage phase; Next 6 months; vs N/A",
+   "kind": "estimate",
+   "citation": "[[21 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse25368&hl=fse25368&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: About 50% — Pipeline with approved budgets/ownership; Next 3 months; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268428)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: About 30% — Clients actively using Cortex AI; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse50267&hl=fse50267,fse50346,fse50399,fse50494,fse50555&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: About 30% — Clients using Cortex Code; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268428&scope=ANYWHERE&stmt=fse50267&hl=fse50267,fse50346,fse50399,fse50494,fse50555&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3dca8833-33de-81ce-bc64-f4e43183cd9b",
+  "page_title": "SNOW Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

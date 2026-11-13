@@ -1,0 +1,110 @@
+{
+ "doc_id": "EC-1000000-269943",
+ "ticker": "SNOW",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Consultant at Technology Consulting Firm Sees Snowflake Growth Slowing and Databricks Leading in AI Opportunities",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269943",
+ "as_company": "Snowflake Inc",
+ "conversation_id": "7093__1794404176862",
+ "expert": "Senior data and AI consultant at a 10,000-person consulting firm (Snowflake deployments since 2017)",
+ "weight": "Medium",
+ "characterization": "Negative",
+ "sentiment": [
+  {
+   "company": "Snowflake",
+   "score": 3
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Google Cloud",
+   "score": 3
+  }
+ ],
+ "verdict": "The consultant's Snowflake business fell about 5% y/y in Aug\u2013Oct and new-implementation deal sizes fell 11% [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2), with ~15% of clients evaluating migrations as Databricks wins AI work [[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse7883&hl=fse7883,fse8051,fse8543,fse8829,fse9334,fse14774,fse17009,fse31362,fse31401,fse32214,fse32299,fse32988,fse33218,fse33310,fse35722,fse35845,fse35900&page=2).",
+ "summary_variables": {
+  "Demand / orders": [
+   "\ud83d\udd34 Snowflake business ~5% lower y/y (Aug\u2013Oct), the first decline in the checks, vs +8%\u201316% (2026-11-05) and single-digit growth (2026-11-06). \ud83d\udd3a Inflection \u2192 Tenet 1 (core re-acceleration) \u2193 [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2)",
+   "\ud83d\udd34 new-implementation deal size \u221211% y/y vs ~+10% (2026-11-06): conflicting. [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2)",
+   "\ud83d\udd34 3\u20136-month pipeline below expectations; growth 10% in 2026 \u2192 5%\u20137% in 2027 (estimate). [[17 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse11332&hl=fse11332,fse11405,fse21254,fse22312&page=2) [[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse19850&hl=fse19850,fse22813,fse25144&page=2)"
+  ],
+  "Competition & share": [
+   "\ud83d\udd34 ~15% of clients evaluating migration; Databricks Genie winning AI-focused work; first read on migration share. \u2192 Tenet 3 (control point) \u2193 [[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse7883&hl=fse7883,fse8051,fse8543,fse8829,fse9334,fse14774,fse17009,fse31362,fse31401,fse32214,fse32299,fse32988,fse33218,fse33310,fse35722,fse35845,fse35900&page=2)"
+  ],
+  "Pricing & margins": [
+   "\ud83d\udfe1 Cortex on ~75% of clients, in line with 70%\u201375% (2026-11-05), but customers now set token/credit-spending limits. \u2192 Tenet 2 (AI second engine) \u2192 [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2) [[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse30552&hl=fse30552,fse30636,fse30812&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Business ~5% lower y/y vs growth at every earlier check: +8%\u20139% and +15%\u201316% (2026-11-05), single-digit (2026-11-06), Cleveland global SI +40% in 1H26 (SB #45418): \ud83d\udd3a Inflection.",
+  "New-implementation deal size \u221211% y/y vs ~+10% (2026-11-06): conflicting.",
+  "Cortex on ~75% of clients vs 70%\u201375% (2026-11-05): consistent."
+ ],
+ "inflection": true,
+ "thesis_impact": [
+  "Tenet 1 (core re-acceleration): \u2193 \u2014 consulting business \u22125% y/y, pipeline below plan, 5%\u20137% in 2027.",
+  "Tenet 2 (AI second engine): \u2192 \u2014 ~75% Cortex adoption, but token/credit caps and ROI scrutiny.",
+  "Tenet 3 (governed-data control point): \u2193 \u2014 ~15% of clients evaluating migration; Databricks leads AI opportunities."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 5% lower \u2014 Consulting business volume, 2026-08-01 to 2026-10-31, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 11% lower \u2014 Average deal size, new implementations, 2026-08-01 to 2026-10-31, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 5% growth \u2014 Forecasted consulting business, 2026-11-01 to 2027-01-31, vs Year over year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 10% growth \u2014 Estimated firm business growth, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 5%\u20137% growth \u2014 Forecasted business growth, Calendar 2027, vs Calendar 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 75% \u2014 Clients using Cortex, Current, vs Preceding 90 days",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 15% \u2014 Clients evaluating platform migration, Current, vs Total client base",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse7883&hl=fse7883,fse8051,fse8543,fse8829,fse9334,fse14774,fse17009,fse31362,fse31401,fse32214,fse32299,fse32988,fse33218,fse33310,fse35722,fse35845,fse35900&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 8/10 \u2014 Materiality of AI initiatives, Next 12\u201324 months, vs N/A",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269943&scope=ANYWHERE&stmt=fse13753&hl=fse13753,fse14774,fse15544,fse15836,fse15872,fse16061,fse16894,fse17009,fse19575,fse19850,fse22531,fse22813,fse23246,fse24373,fse24633,fse25144,fse26659,fse26874,fse26986,fse30552,fse39840,fse39991,fse46194,fse46488&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "SNOW Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

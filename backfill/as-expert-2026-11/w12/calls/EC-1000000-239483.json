@@ -1,0 +1,93 @@
+{
+ "doc_id": "EC-1000000-239483",
+ "ticker": "TCS",
+ "tier": 2,
+ "sector": "Services",
+ "title": "Director of Customer Enterprise Transformation Consulting at Cognizant Technology Solutions Believes AI Is Reshaping IT Services and Talent Dynamics",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239483",
+ "as_company": "Tata Consultancy Services Ltd",
+ "conversation_id": "7093__1794405531408",
+ "expert": "Director of Customer Enterprise Transformation Consulting at Cognizant (competitor; listed as former by GenSearch; 40 years in IT integration); interview 2026-08-07",
+ "short_expert": "Cognizant transformation director (competitor)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Tata Consultancy Services Ltd",
+   "score": 3.0
+  },
+  {
+   "company": "Cognizant Technology Solutions",
+   "score": 4.0
+  },
+  {
+   "company": "Accenture",
+   "score": 3.0
+  },
+  {
+   "company": "Wipro",
+   "score": 3.0
+  }
+ ],
+ "verdict": "A Cognizant transformation director (competitor, interviewed 2026-08-07) gives no TCS figures: he hears TCS staffs projects with juniors and sees 1 in 5 AI efforts failing today, possibly 4 in 5 (estimates), as $112-per-hour billing gives way to outcome pricing.",
+ "summary_variables": {
+  "Non-AI revenue trend": [
+   "🔴 First-level call-centre work \"gone now almost everywhere\" to AI agents; consistent with TCS non-AI revenue -1.5% q/q in 2QFY27 (SB #62834). → Tenet 1 (AI deflates core) ↑ {c12}",
+   "🔴 $112 per person per hour billing expected to disappear for outcome-based pricing (hearsay) vs mgmt \"no pricing pressure\" (SB #62847): conflicting. → Tenet 1 (AI deflates core) ↑ {c4}"
+  ],
+  "EBIT margin and the 25% exit": [
+   "🟡 1 in 5 AI efforts failing today, could become 4 in 5 (estimate): delivery risk on AI work now US$3.1bn annualised (SB #62809). → Tenet 5 (AI-native competition) ↑ {c5}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Call-centre work lost to AI agents vs TCS non-AI revenue -1.5% q/q, US$6,867m (SB #62834): consistent.",
+  "Hourly billing giving way to outcome pricing vs mgmt \"no pricing pressure; portfolio pricing stable\" (SB #62847, 2026-10-09): conflicting.",
+  "First read on AI project failure rates (1 in 5 now); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (AI deflates the non-AI core): ↑ — first-level call-centre work gone to AI agents; $112/hour billing to give way to outcome pricing.",
+  "Tenet 5 (AI-native competition): ↑ — specialist boutiques and onshore regional compounds gain on GSIs; TCS seen deploying juniors without senior leads.",
+  "Tenet 2 (EBIT ~24%): → — talent gap for 0–3 years' experience hires noted, no margin figure."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "IT Services Industry: 1 in every 5 — AI efforts failing; Today; vs Current baseline",
+   "kind": "estimate",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239483&scope=ANYWHERE&stmt=fse20260&hl=fse20260&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "IT Services Industry: 4 out of every 5 — Potential AI effort failure rate; Very shortly; vs vs. today",
+   "kind": "estimate",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239483&scope=ANYWHERE&stmt=fse20260&hl=fse20260&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "IT Services Industry: $112 per person per hour — Standard hourly billing rate; Current; vs Expected to disappear",
+   "kind": "hearsay",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239483&scope=ANYWHERE&stmt=fse41377&hl=fse41377,fse41603,fse41689,fse41782&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "IT Services Industry: roughly three and a half years — Proof-of-concept phase for AI; Past; vs Leading to current scale",
+   "kind": "first_hand",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239483&scope=ANYWHERE&stmt=fse5051&hl=fse5051,fse5284,fse9488&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "IT Services Industry: zero to three years — Experience level of graduates; Current; vs Hard to hire/train",
+   "kind": "first_hand",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239483&scope=ANYWHERE&stmt=fse23154&hl=fse23154,fse23228,fse26903,fse27708&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8158-96fd-cd26171892e6",
+  "page_title": "TCS - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

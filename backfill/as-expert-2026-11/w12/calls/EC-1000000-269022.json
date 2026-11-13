@@ -1,0 +1,106 @@
+{
+ "doc_id": "EC-1000000-269022",
+ "ticker": "TDC",
+ "tier": 3,
+ "sector": "Software M-Z",
+ "title": "Director at IT Services Firm Sees Constructive Teradata Cloud Migration Demand Despite Softer On-Prem Renewals",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269022",
+ "as_company": "Teradata Corp",
+ "conversation_id": "7093__1794405975857",
+ "expert": "Director of AI strategy partnerships at a global IT services firm (current; 10–12 active Teradata enterprise accounts)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Teradata",
+   "score": 3
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  }
+ ],
+ "verdict": "Across 10–12 Teradata accounts, consumption is growing <b>~4% q/q</b> and the software footprint <b>12%–15% y/y</b>, but Q4 renewal dollars ran <b>~10% below Q3</b> and on-prem spend is falling 5%–8%, so cloud gains only partly net out.",
+ "summary_variables": {
+  "Cloud ARR": [
+   "🟢 Consumption ~4% q/q; footprint 12%–15% y/y in the expert's accounts, migration velocity ahead of expectations; first read, no earlier expert call or stored row. [4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse12051&hl=fse12051,fse15475,fse19443,fse22820,fse33376,fse34077,fse34430,fse39599,fse43856,fse44022,fse45985,fse46766,fse48820,fse52383&page=2)",
+   "🟢 Migration + expansion 70%–80% of pipeline, up 10% from 90 days prior (migration 50%–55%, expansion 25%); first read. [7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse5116&hl=fse5116,fse5402,fse5782,fse6803,fse7118,fse7401,fse8024,fse8523,fse9355,fse11351,fse12051,fse12415,fse12735,fse13100,fse13903,fse14112,fse14368,fse14995,fse15475,fse16768,fse17226,fse17579,fse17797,fse18993,fse19146,fse19290,fse19779,fse20423,fse20552,fse20970,fse21725,fse22508,fse22718,fse22934,fse23612,fse23765,fse23798,fse25425,fse26455,fse26987,fse27423,fse28345,fse28665,fse29042,fse29525,fse29710,fse30226,fse30458,fse30525,fse31977,fse32137,fse33376,fse33788,fse34077,fse34266,fse35283,fse35555,fse36231,fse36955,fse37339,fse37425,fse38474,fse39599,fse40006,fse40256,fse40534,fse40639,fse41446,fse41603,fse42811,fse42963,fse43856,fse45985,fse46100,fse46766,fse47305,fse47446,fse48820,fse50609,fse50814,fse52134,fse52383,fse52897,fse53846,fse54159,fse54335&page=2)"
+  ],
+  "On-prem renewals": [
+   "🔴 Q4 renewal dollars ~10% below Q3; on-prem spend down 5%–8% y/y; first read. [4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse12051&hl=fse12051,fse15475,fse19443,fse22820,fse33376,fse34077,fse34430,fse39599,fse43856,fse44022,fse45985,fse46766,fse48820,fse52383&page=2)",
+   "🟡 $200,000 on-prem cut replaced by $300,000 of cloud = $100,000 net (illustrative): cloud is partly cannibalization. [5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse33923&hl=fse33923,fse34266&page=2)"
+  ],
+  "Competition & share": [
+   "🔴 Snowflake and Databricks win new SQL analytics and AI workloads; Teradata keeps established production workloads; only 10% of pipeline is net new; first read. [3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse18993&hl=fse18993,fse19779,fse52897,fse52999,fse53152,fse53365,fse53591,fse53846,fse54159,fse54335&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on Teradata consumption (~4% q/q), footprint growth (12%–15% y/y) and renewal dollars (~10% below Q3); no earlier expert call or stored row (no Supabase research_id for TDC)."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the TDC page (2024 layout); against its pitch (cloud ARR growth funding 75%+ FCF returns): Cloud ARR ↑ — migration + expansion 70%–80% of pipeline and footprint +12%–15% y/y; total ARR ↓ — on-prem spend -5%–8% and renewal dollars ~10% below Q3 dilute net growth ($300,000 cloud for $200,000 on-prem)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TDC",
+   "text": "Teradata consumption up ~4% q/q across 10–12 enterprise accounts at a global IT services firm (Q4 2026)",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse5782&hl=fse5782,fse5879,fse5879,fse5988,fse6803,fse9081,fse11351,fse14995,fse15242,fse15475,fse18993,fse21725,fse22508,fse22718,fse22820,fse25425,fse25425,fse26455,fse26987,fse27423,fse33376,fse34266,fse38474,fse39599,fse44691,fse45467,fse45985,fse48820,fse49059,fse49413,fse50609,fse50814,fse52383&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata software footprint up 12%–15% y/y in Q4 2026 across the expert's accounts",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse5116&hl=fse5116,fse5402,fse5782,fse6803,fse7118,fse7401,fse8024,fse8523,fse9355,fse11351,fse12051,fse12415,fse12735,fse13100,fse13903,fse14112,fse14368,fse14995,fse15475,fse16768,fse17226,fse17579,fse17797,fse18993,fse19146,fse19290,fse19779,fse20423,fse20552,fse20970,fse21725,fse22508,fse22718,fse22934,fse23612,fse23765,fse23798,fse25425,fse26455,fse26987,fse27423,fse28345,fse28665,fse29042,fse29525,fse29710,fse30226,fse30458,fse30525,fse31977,fse32137,fse33376,fse33788,fse34077,fse34266,fse35283,fse35555,fse36231,fse36955,fse37339,fse37425,fse38474,fse39599,fse40006,fse40256,fse40534,fse40639,fse41446,fse41603,fse42811,fse42963,fse43856,fse45985,fse46100,fse46766,fse47305,fse47446,fse48820,fse50609,fse50814,fse52134,fse52383,fse52897,fse53846,fse54159,fse54335&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata pipeline: migration 50%–55%, expansion 25%, renewal/on-prem 10%, net new 10%; migration+expansion 70%–80%, up 10% vs 90 days ago",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse5116&hl=fse5116,fse5402,fse5782,fse6803,fse7118,fse7401,fse8024,fse8523,fse9355,fse11351,fse12051,fse12415,fse12735,fse13100,fse13903,fse14112,fse14368,fse14995,fse15475,fse16768,fse17226,fse17579,fse17797,fse18993,fse19146,fse19290,fse19779,fse20423,fse20552,fse20970,fse21725,fse22508,fse22718,fse22934,fse23612,fse23765,fse23798,fse25425,fse26455,fse26987,fse27423,fse28345,fse28665,fse29042,fse29525,fse29710,fse30226,fse30458,fse30525,fse31977,fse32137,fse33376,fse33788,fse34077,fse34266,fse35283,fse35555,fse36231,fse36955,fse37339,fse37425,fse38474,fse39599,fse40006,fse40256,fse40534,fse40639,fse41446,fse41603,fse42811,fse42963,fse43856,fse45985,fse46100,fse46766,fse47305,fse47446,fse48820,fse50609,fse50814,fse52134,fse52383,fse52897,fse53846,fse54159,fse54335&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata average deal size up 12%–15% vs prior year",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse5782&hl=fse5782,fse5879,fse5879,fse5988,fse6803,fse9081,fse11351,fse14995,fse15242,fse15475,fse18993,fse21725,fse22508,fse22718,fse22820,fse25425,fse25425,fse26455,fse26987,fse27423,fse33376,fse34266,fse38474,fse39599,fse44691,fse45467,fse45985,fse48820,fse49059,fse49413,fse50609,fse50814,fse52383&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata on-prem spending down 5%–8% y/y in 2026",
+   "kind": "first_hand",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse12051&hl=fse12051,fse15475,fse19443,fse22820,fse33376,fse34077,fse34430,fse39599,fse43856,fse44022,fse45985,fse46766,fse48820,fse52383&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata Q4 2026 renewal dollars ~10% lower than Q3",
+   "kind": "first_hand",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse12051&hl=fse12051,fse15475,fse19443,fse22820,fse33376,fse34077,fse34430,fse39599,fse43856,fse44022,fse45985,fse46766,fse48820,fse52383&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Expert expects Teradata growth of 10%–15% y/y and 2%–5% q/q in Q1 2027",
+   "kind": "estimate",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse5116&hl=fse5116,fse5402,fse5782,fse6803,fse7118,fse7401,fse8024,fse8523,fse9355,fse11351,fse12051,fse12415,fse12735,fse13100,fse13903,fse14112,fse14368,fse14995,fse15475,fse16768,fse17226,fse17579,fse17797,fse18993,fse19146,fse19290,fse19779,fse20423,fse20552,fse20970,fse21725,fse22508,fse22718,fse22934,fse23612,fse23765,fse23798,fse25425,fse26455,fse26987,fse27423,fse28345,fse28665,fse29042,fse29525,fse29710,fse30226,fse30458,fse30525,fse31977,fse32137,fse33376,fse33788,fse34077,fse34266,fse35283,fse35555,fse36231,fse36955,fse37339,fse37425,fse38474,fse39599,fse40006,fse40256,fse40534,fse40639,fse41446,fse41603,fse42811,fse42963,fse43856,fse45985,fse46100,fse46766,fse47305,fse47446,fse48820,fse50609,fse50814,fse52134,fse52383,fse52897,fse53846,fse54159,fse54335&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Illustrative migration: $200,000 on-prem reduction replaced by $300,000 cloud = $100,000 net",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269022&scope=ANYWHERE&stmt=fse33923&hl=fse33923,fse34266&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "6836da4f-47f5-40d9-ac7b-a1c908e533bd",
+  "page_title": "TDC Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

@@ -1,0 +1,109 @@
+{
+ "doc_id": "EC-1000000-268732",
+ "ticker": "MRVL",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Director at Semiconductor Assembly and Testing Provider Expects Healthy Marvell Growth From 800G Optical DSPs and AI Custom ASICs",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268732",
+ "as_company": "Marvell Technology Inc",
+ "conversation_id": "7093__1794406897942",
+ "expert": "Director, Marvell NPI at a semiconductor assembly and test provider (OSAT), current",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Marvell",
+   "score": 4
+  },
+  {
+   "company": "Broadcom",
+   "score": 3
+  }
+ ],
+ "verdict": "An OSAT director running Marvell NPI saw Marvell packaging shipments up 38%-48% y/y (8%-12% q/q) in Aug-Oct 2026, about 5% above plan, on 800G optical DSPs and AI custom ASICs, but expects growth to slow to 15%-25% y/y in Nov-Jan.",
+ "summary_variables": {
+  "Custom program roster and scope": [
+   "Shipments +38-48% y/y [21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse7776&hl=fse7776,fse8247,fse8544,fse8720,fse8876,fse9032&page=2)",
+   "AI custom ~50% of adv-pkg demand [13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse15355&hl=fse15355,fse18284&page=2)",
+   "Nov-Jan 15-25% vs SB #62115 conflicting [22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse14083&hl=fse14083,fse14357&page=2)"
+  ],
+  "Interconnect growth rate": [
+   "Optical pkg +35-45% next year [26 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse40796&hl=fse40796,fse41418,fse41614,fse41771,fse41900,fse42171&page=2)"
+  ],
+  "Margins": [
+   "Adv-pkg prices +5-10% [25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse29433&hl=fse29433,fse29743,fse29852,fse30083&page=2)",
+   "8-15% capacity gap; lead times flat [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse11487&hl=fse11487,fse11548,fse11916,fse20954,fse21130&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "+38-48% y/y vs BlueFin +36% Sept-Q (SB #62115): consistent",
+  "Nov-Jan 15-25% vs BlueFin Dec-Q >40% (SB #62115): conflicting",
+  "Capacity gap with flat lead times vs mgmt acutely constrained (SB #59559): consistent",
+  "First read on adv-pkg price +5-10%"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (custom): ↑ — +38-48% y/y, custom ~50%",
+  "Tenet 2 (interconnect): → — optical pkg +35-45%",
+  "Tenet 4 (margins): ↓ — pkg prices +5-10%",
+  "Tenet 5 (bear flank): → — Broadcom lead 10-15%"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "MRVL",
+   "text": "Marvell packaging shipments at OSAT +38%-48% y/y and +8%-12% q/q in Aug-Oct 2026, ~5% above expectations",
+   "kind": "first_hand",
+   "citation": "[21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse7776&hl=fse7776,fse8247,fse8544,fse8720,fse8876,fse9032&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell NPI/pre-production activity at OSAT +18%-25% q/q in Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse7776&hl=fse7776,fse8247,fse8544,fse8720,fse8876,fse9032&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "AI/custom compute ~50% and traditional networking ~20% of Marvell advanced-packaging demand at OSAT",
+   "kind": "first_hand",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse15355&hl=fse15355,fse18284&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Advanced-packaging prices for Marvell +5%-10% y/y; wire-bond networking packaging flat",
+   "kind": "first_hand",
+   "citation": "[25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse29433&hl=fse29433,fse29743,fse29852,fse30083&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Advanced-packaging capacity gap 8%-15% (CoWoS/2.5D, ABF); lead times flat vs 90 days ago; capacity booked ~half a year ahead",
+   "kind": "estimate",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse11487&hl=fse11487,fse11548,fse11916,fse20954,fse21130&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "OSAT expects Marvell growth 15%-25% y/y in Nov 2026-Jan 2027 and 15%-25% in 2027",
+   "kind": "estimate",
+   "citation": "[22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse14083&hl=fse14083,fse14357&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell optical packaging growth 35%-45% next 12 months, 25%-35% in 2027 depending on 1.6T",
+   "kind": "estimate",
+   "citation": "[26 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse40796&hl=fse40796,fse41418,fse41614,fse41771,fse41900,fse42171&page=2)"
+  },
+  {
+   "ticker": "AVGO",
+   "text": "Broadcom leads Marvell by 10%-15% share in traditional large DC and some top CSP custom AI chips; Marvell design-win share +5%-8% over two quarters",
+   "kind": "hearsay",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268732&scope=ANYWHERE&stmt=fse37518&hl=fse37518,fse37752,fse37807,fse37969,fse38129&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3cda8833-33de-812e-ac9e-c4297b0bc638",
+  "page_title": "MRVL Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

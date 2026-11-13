@@ -1,0 +1,109 @@
+{
+ "doc_id": "EC-1000000-269985",
+ "ticker": "VRT",
+ "tier": 2,
+ "sector": "Hardware N-Z",
+ "title": "Director of North America Customer Solution Centers and Global Data Center Ops at Dell Technologies Sees Liquid Cooling as a Growth Opportunity but Believes Vertiv Faces Pricing and Delivery Risks",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269985",
+ "as_company": "Vertiv Holdings Co",
+ "conversation_id": "7093__1794406178756",
+ "expert": "Director of North America Customer Solution Centers and Global Data Center Ops at Dell (current; buys power and cooling for five data centers of 200 racks each); interview 2026-11-10",
+ "short_expert": "Dell DC ops director (buyer)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Vertiv Holdings Co",
+   "score": 4.0
+  },
+  {
+   "company": "Schneider Electric",
+   "score": 3.0
+  }
+ ],
+ "verdict": "A Dell data-center director who buys power and cooling for five 200-rack sites got a Vertiv delivery quote of six months vs nine months at Schneider, though one Vertiv part scheduled for nine months took 12.",
+ "summary_variables": {
+  "Orders / backlog conversion": [
+   "🟢 Vertiv quoted six months vs Schneider nine months (first-hand), winning delivery-sensitive AI work; shorter than the 18–24 month power-gear lead times a Google architect cited (SB #64676). → Tenet 5 (share) ↑ {c3}",
+   "🔴 A part scheduled for nine months arrived in 12 (first-hand); consistent with mgmt's $100–150M of 2Q shipments slipping into 3Q (SB #64026). → Tenet 5 (execution) ↓ {c3}",
+   "🟢 Customers ordering a year in advance to secure production; consistent with mgmt's 12–18 month order-to-delivery (SB #65171). → Tenet 1 (order-led growth) ↑ {c4}"
+  ],
+  "Share in the converged and 800V transition": [
+   "🟢 Racks moving from 20 kW to 100 kW over the next 12–18 months (first-hand plan), requiring liquid cooling. → Tenet 2 (content per MW) ↑ {c5}"
+  ],
+  "Incremental margin vs 30-35% framework": [
+   "🟢 A modest premium is acceptable for faster delivery on AI projects (first-hand); first read on delivery-linked pricing. → Tenet 3 (margin) ↑ {c16}",
+   "🔴 Facility power delayed one project 18 months regardless of equipment lead times (first-hand). → Tenet 1 (order-led growth) → {c3}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Vertiv delivery quote six months (first-hand) vs power-gear lead times ~18–24 months from a Google architect (SB #64676): shorter here.",
+  "Part slipping from nine to 12 months vs mgmt ~$100–150M of 3Q revenue was 2Q shipments pushed out by supply delays (SB #64026): consistent.",
+  "Orders placed a year in advance vs mgmt order-to-delivery still ~12–18 months (SB #65171): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (order-led growth): ↑ — customers order a year ahead; site power, not equipment, is the binding delay (18 months on one project).",
+  "Tenet 2 (content per MW): ↑ — racks moving from 20 kW to 100 kW over the next 12–18 months need liquid cooling.",
+  "Tenet 3 (margin and cash): ↑ — a modest premium accepted for faster delivery.",
+  "Tenet 5 (share and execution): → — wins on a six- vs nine-month quote, but one part slipped three months."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "OTHER:Dell",
+   "text": "Dell (Expert's lab): 5–20 kW — Conventional rack power; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269985&scope=ANYWHERE&stmt=fse8566&hl=fse8566,fse9463,fse9580&page=2)"
+  },
+  {
+   "ticker": "OTHER:Dell",
+   "text": "Dell (Expert's lab): 20 kW — Current rack power draw; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269985&scope=ANYWHERE&stmt=fse8566&hl=fse8566,fse9463,fse9580&page=2)"
+  },
+  {
+   "ticker": "OTHER:Dell",
+   "text": "Dell (Expert's lab): 100 kW — Target rack power draw; Next 12–18 months; vs 20 kW",
+   "kind": "first_hand",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269985&scope=ANYWHERE&stmt=fse19062&hl=fse19062,fse19217,fse19592,fse19715,fse19856&page=2)"
+  },
+  {
+   "ticker": "VRT",
+   "text": "Vertiv: six months — Delivery time; Current; vs Schneider (nine months)",
+   "kind": "first_hand",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269985&scope=ANYWHERE&stmt=fse29609&hl=fse29609,fse37109&page=2)"
+  },
+  {
+   "ticker": "OTHER:Schneider Electric",
+   "text": "Schneider: nine months — Delivery time; Current; vs Vertiv (six months)",
+   "kind": "hearsay",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269985&scope=ANYWHERE&stmt=fse29609&hl=fse29609,fse37109&page=2)"
+  },
+  {
+   "ticker": "VRT",
+   "text": "Vertiv (Supplier): 12 months — Actual component arrival; Previous project; vs nine months scheduled",
+   "kind": "first_hand",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269985&scope=ANYWHERE&stmt=fse29609&hl=fse29609,fse37109&page=2)"
+  },
+  {
+   "ticker": "VRT",
+   "text": "Vertiv (Supplier): 24 hours — Expected service response; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269985)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Project site: 18 months — Delay for facility electricity; Previous project; vs N/A",
+   "kind": "first_hand",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269985&scope=ANYWHERE&stmt=fse29609&hl=fse29609,fse37109&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8161-b97b-cf0f77afc815",
+  "page_title": "Vertiv - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

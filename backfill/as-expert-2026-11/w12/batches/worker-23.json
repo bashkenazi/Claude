@@ -1,0 +1,74 @@
+[
+ {
+  "doc_id": "EC-1000000-266042",
+  "title": "Senior Business Program Manager at Microsoft Sees CDW as a Capable Partner but Slow to Shift Beyond Hardware",
+  "released": "2026-11-10",
+  "url": "https://research.alpha-sense.com?docid=EC-1000000-266042",
+  "as_company": "CDW Corp",
+  "as_company_id": "TK528956",
+  "ticker": "CDW",
+  "tier": 3,
+  "sector": "Hardware A-M",
+  "company": "CDW"
+ },
+ {
+  "doc_id": "EC-1000000-270176",
+  "title": "Principal Director, Media Technology at Professional Services Firm Sees Canva Gaining Share Despite AI Adoption Hurdles",
+  "released": "2026-11-10",
+  "url": "https://research.alpha-sense.com?docid=EC-1000000-270176",
+  "as_company": "Canva",
+  "as_company_id": "0001556314",
+  "ticker": "CNVA",
+  "tier": 3,
+  "sector": "Software A-L",
+  "company": "Canva"
+ },
+ {
+  "doc_id": "EC-1000000-269319",
+  "title": "Technology Partner at Major Technology Consultancy Sees Continued Growth for Dassault Syst\u00e8mes\u2019 3DEXPERIENCE in Automotive",
+  "released": "2026-11-09",
+  "url": "https://research.alpha-sense.com?docid=EC-1000000-269319",
+  "as_company": "Dassault Systemes SE",
+  "as_company_id": "TK471173",
+  "ticker": "DSY FP",
+  "tier": 3,
+  "sector": "Software A-L",
+  "company": "Dassault"
+ },
+ {
+  "doc_id": "EC-1000000-266090",
+  "title": "Head of Business Development at Endava Sees Client Approvals Recovering as AI Adoption Requires Workflow Transformation",
+  "released": "2026-11-10",
+  "url": "https://research.alpha-sense.com?docid=EC-1000000-266090",
+  "as_company": "EPAM Systems Inc",
+  "as_company_id": "TK557176",
+  "ticker": "EPAM",
+  "tier": 3,
+  "sector": "Services",
+  "company": "EPAM"
+ },
+ {
+  "doc_id": "EC-1000000-240632",
+  "title": "Former Senior Lead Design Engineer at Cadence Optimistic About Advancements in High-Speed Interconnects for AI Applications",
+  "released": "2026-11-10",
+  "url": "https://research.alpha-sense.com?docid=EC-1000000-240632",
+  "as_company": "Synopsys Inc",
+  "as_company_id": "TK747552",
+  "ticker": "SNPS",
+  "tier": 3,
+  "sector": "Software M-Z",
+  "company": "Synopsys"
+ },
+ {
+  "doc_id": "EC-1000000-240781",
+  "title": "Former Territory Manager at Trane Technologies Plc Believes Liquidation Channels Prioritize Speed Over Recovery Value in HVAC Inventory Management",
+  "released": "2026-11-10",
+  "url": "https://research.alpha-sense.com?docid=EC-1000000-240781",
+  "as_company": "Trane Technologies PLC",
+  "as_company_id": "TK479902",
+  "ticker": "TT",
+  "tier": 3,
+  "sector": "Power",
+  "company": "Trane Technologies"
+ }
+]

@@ -1,0 +1,133 @@
+{
+ "doc_id": "EC-1000000-268306",
+ "ticker": "TWLO",
+ "tier": 1,
+ "sector": "Unassigned",
+ "title": "Vice President of Product Management at RingCentral Sees Deliverability Risks for Twilio and Believes Its AI Products Need to Prove Their Value",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268306",
+ "as_company": "Twilio Inc",
+ "conversation_id": "7093__1794403934156",
+ "expert": "VP Product Management, Platforms & Integrations at RingCentral (current)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Twilio",
+   "score": 2.5
+  },
+  {
+   "company": "Infobip",
+   "score": 4.0
+  },
+  {
+   "company": "LiveKit",
+   "score": 4.0
+  },
+  {
+   "company": "Sinch",
+   "score": 3.0
+  },
+  {
+   "company": "Bird",
+   "score": 3.0
+  }
+ ],
+ "verdict": "A RingCentral product VP estimates Twilio's North American messaging share has fallen to roughly 60% from roughly 80% as Infobip and Sinch win on onboarding (estimate; no first-hand volume figure given).",
+ "summary_variables": {
+  "Messaging organic growth (ex-fees)": [
+   "\ud83d\udd34 **NA messaging share roughly 60%, down from roughly 80%** (estimate); conflicts with mgmt messaging organic +17% in 3Q26 (SB #64363). \u2192 Tenet 5 (carrier moat) \u2193 {c2}",
+   "\ud83d\udd34 **Infobip gained a double-digit % of NA usage** (estimate) on better onboarding; first read. \u2192 Tenet 5 (carrier moat) \u2193 {c9}"
+  ],
+  "Voice AI minutes \u00d7 ConversationRelay attach": [
+   "\ud83d\udfe1 **Twilio all-in Voice AI $0.079/min vs $0.063 \u00e0 la carte**; one cent matters at tens of millions of minutes; first read. \u2192 Tenet 1 (AI agent layer) \u2193 {c12}",
+   "\ud83d\udd34 **\u226420% of Voice AI customers pair LiveKit with Twilio**, but many large-volume users do (estimate); first read. \u2192 Tenet 1 (AI agent layer) \u2193 {c23}"
+  ],
+  "Gross profit dollar growth vs organic revenue": [
+   "\ud83d\udfe2 **Multi-product customers +~26% y/y** (hearsay) vs software add-ons +25%+ in 3Q26 (SB #67665): consistent. \u2192 Tenet 3 (gross profit vs revenue) \u2191 {c10}",
+   "\ud83d\udfe1 **Verizon A2P fees +~33% passed through at zero margin** vs 3Q26 carrier fees \\$53M cutting GM 90bp (SB #64364): consistent. \u2192 Tenet 3 (gross profit vs revenue) \u2192 {c7}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "NA messaging share **roughly 60% vs roughly 80%** earlier (expert estimate) vs mgmt messaging organic +17% in 3Q26, +18% in 2Q26 (SB #64363): **conflicting**.",
+  "Multi-product customers **+~26% y/y** (hearsay) vs software add-ons +25%+ in 3Q26 (SB #67665): consistent.",
+  "Carrier pass-through: Verizon A2P fees **+~33%** at zero margin vs 3Q26 incremental fees \\$53M (2Q \\$71M), GM \u221290bp y/y (SB #64364): consistent.",
+  "First read on Voice AI price per minute (\\$0.079 all-in); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 5 (carrier moat): \u2193 \u2014 share roughly 60% from roughly 80% (estimate); Infobip +double-digit % of NA usage.",
+  "Tenet 1 (AI agent layer): \u2193 \u2014 large voice-agent users pair LiveKit to avoid lock-in; \\$0.079 vs \\$0.063 per minute matters at scale.",
+  "Tenet 3 (gross profit vs revenue): \u2192 \u2014 ~33% Verizon fee rise is passed through at zero margin, diluting GM % but not gross profit dollars.",
+  "Tenet 2 (organic growth \u226510%): \u2192 \u2014 the share-loss estimate conflicts with 17% messaging organic growth (SB #64363)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: roughly 60% \u2014 North American messaging share; Current; vs roughly 80%",
+   "kind": "estimate",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse37555&hl=fse37555,fse37947&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: ~5% \u2014 Outbound U.S. messaging price increase; Mid-2025; vs Prior prices",
+   "kind": "hearsay",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse8997&hl=fse8997,fse9298,fse9389,fse9480&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 89% \u2014 Outbound SIP trunking price increase (Zone 1); August 2025; vs Prior prices",
+   "kind": "hearsay",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse8997&hl=fse8997,fse9298,fse9389,fse9480&page=2)"
+  },
+  {
+   "ticker": "OTHER:Infobip",
+   "text": "Infobip: double-digit \u2014 North American usage gain; Past year; vs Prior usage",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse13458&hl=fse13458,fse14613,fse15484,fse15723&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 20% or less \u2014 Customers pairing Voice AI with LiveKit; Current; vs Total Voice AI base",
+   "kind": "estimate",
+   "citation": "[23 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse17412&hl=fse17412,fse17607,fse17686&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: $0.079 \u2014 All-in Voice AI cost per minute; Current; vs $0.063 (\u00e0-la-carte)",
+   "kind": "hearsay",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse19665&hl=fse19665,fse19968,fse20094,fse20211&page=2)"
+  },
+  {
+   "ticker": "OTHER:Verizon",
+   "text": "Verizon: ~33% \u2014 A2P messaging fee increase; June 2025; vs Prior fees",
+   "kind": "hearsay",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse24190&hl=fse24190,fse24471,fse25050&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: ~26% \u2014 Multi-product customer growth; Year-over-year; vs Prior year",
+   "kind": "hearsay",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse28460&hl=fse28460,fse28726&page=2)"
+  },
+  {
+   "ticker": "OTHER:Bird",
+   "text": "Bird: ~40% \u2014 Cost reduction via SMS offer; Current; vs Twilio pricing",
+   "kind": "hearsay",
+   "citation": "[16 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse5047&hl=fse5047,fse5749,fse5917,fse13096,fse13458,fse14064,fse14613,fse15484,fse16641,fse17067,fse17909,fse32675,fse32882,fse32959,fse39653&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Market: $18.5 billion \u2014 Global CPaaS market size; 2026; vs $15.7 billion (2025)",
+   "kind": "hearsay",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268306&scope=ANYWHERE&stmt=fse33364&hl=fse33364,fse34552,fse34632&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Twilio - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

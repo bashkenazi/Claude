@@ -1,0 +1,114 @@
+{
+ "doc_id": "EC-1000000-268409",
+ "ticker": "MRVL",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Former Vice President of Software Engineering at Intel Believes Marvell\u2019s Lumentum Deal Strengthens Its Growth Prospects Despite Execution and Supply Risks",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268409",
+ "as_company": "Marvell Technology Inc",
+ "conversation_id": "7093__1794404260924",
+ "expert": "Former VP of Software Engineering at Intel (left mid-2025; Gaudi programs)",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Marvell Technology Inc",
+   "score": 4
+  },
+  {
+   "company": "Broadcom",
+   "score": 4
+  },
+  {
+   "company": "NVIDIA",
+   "score": 5
+  },
+  {
+   "company": "Lumentum",
+   "score": 3
+  }
+ ],
+ "verdict": "A former Intel VP (no direct Marvell view) expects no DSP share loss to Broadcom before 2028 and repeats a $30 billion custom-XPU trajectory, but sees HBM4 and CoWoS limits in 2027 delaying XPU revenue conversion.",
+ "summary_variables": {
+  "Custom program roster and scope": [
+   "$30 billion custom XPU within the next five years (hearsay), in line with the Investor Day custom \\$30B FY31 (SB #64484). \u2192 Tenet 1 (custom) \u2191"
+  ],
+  "Interconnect growth rate": [
+   "no DSP switch to Broadcom before 2028 (estimate); qualification takes years. \u2192 Tenet 2 (1.6T duopoly) \u2192"
+  ],
+  "Margins": [
+   "laser fabs cut GM by a few points from around 57% (estimate), pressuring the low end of the 56\u201359% FY31 GM model (SB #64519). \u2192 Tenet 4 (GM dilution) \u2193"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Custom XPU $30 billion within five years (hearsay) vs Investor Day custom $30B FY31 (SB #64484): consistent (echo of management).",
+  "GM down a few points from around 57% with fab ownership (estimate) vs FY31 GM model 56\u201359% (SB #64519) and Semtech call 2026-11-05 margin-dilution warning: consistent (lower).",
+  "Indium-phosphide laser supply \"more manageable\" later next year (estimate) vs 2026-11-05 Lightmatter and Semtech calls, Lumentum booked through early-to-late 2029: conflicting.",
+  "DSP customers unlikely to move to Broadcom before 2028 (estimate) vs Lightmatter call 2026-11-05 expecting customers to diversify to Broadcom/Credo: conflicting on timing."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (custom $10B+ FY29): \u2191 \u2014 $30 billion custom-XPU trajectory; second-sourcing a generation needs about 1,000 people, so wins are sticky.",
+  "Tenet 2 (1.6T duopoly): \u2192 \u2014 no DSP switch to Broadcom before 2028, but 1.6T\u21923.2T is a competitive window in the next six to nine months.",
+  "Tenet 4 (opex leverage > GM dilution): \u2193 \u2014 laser fabs could take GM a few points below around 57%.",
+  "Tenet 5 (bear flank): \u2191 \u2014 Broadcom holds 60%\u201370% of custom compute; MediaTek and Alchip add competition."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "AVGO",
+   "text": "Broadcom: 60%\u201370% \u2014 Share of custom-compute activity; period Current; baseline Market total",
+   "kind": "estimate",
+   "citation": "[[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268409&scope=ANYWHERE&stmt=fse12787&hl=fse12787&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell Technology Inc: $30 billion \u2014 Custom-XPU revenue projection; period Next five years; baseline Current revenue",
+   "kind": "hearsay",
+   "citation": "[[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268409&scope=ANYWHERE&stmt=fse5794&hl=fse5794,fse6206,fse9156,fse9556,fse9633,fse9793,fse9868,fse12787,fse14788,fse14930,fse16307,fse16410,fse17855,fse18056,fse18141,fse18177,fse18358,fse18441,fse18557,fse19064,fse19118,fse20205,fse20493,fse20557,fse26616,fse29062,fse30126,fse30796&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell Technology Inc: 55%\u201360% \u2014 Gross margin; period Current; baseline Historical levels",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268409)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell Technology Inc: a few points \u2014 Potential gross margin decline; period Post-fab ownership; baseline Current margins",
+   "kind": "estimate",
+   "citation": "[[12 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268409&scope=ANYWHERE&stmt=fse15861&hl=fse15861,fse16138,fse16410&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell Technology Inc: $80 billion or something \u2014 Remembered company projection; period 2031; baseline Not specified",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268409)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscalers: up to 60% \u2014 Potential cost savings vs. NVIDIA; period Current; baseline NVIDIA solutions",
+   "kind": "estimate",
+   "citation": "[[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268409&scope=ANYWHERE&stmt=fse25235&hl=fse25235,fse25391,fse25551,fse26083,fse26362,fse26616,fse27011,fse27463,fse27663&page=2)"
+  },
+  {
+   "ticker": "INTC",
+   "text": "Intel: About 1,000 people \u2014 Staff for Gaudi design/productization; period Per program; baseline Industry average",
+   "kind": "first_hand",
+   "citation": "[[13 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268409&scope=ANYWHERE&stmt=fse19625&hl=fse19625,fse19717,fse20012,fse20205,fse20493,fse21114,fse21250,fse21798&page=2)"
+  },
+  {
+   "ticker": "LITE",
+   "text": "Lumentum / Coherent: $2 billion each \u2014 NVIDIA investment amount; period Past; baseline Not specified",
+   "kind": "hearsay",
+   "citation": "[[18 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268409&scope=ANYWHERE&stmt=fse9324&hl=fse9324,fse9556,fse9633,fse9793,fse9868,fse11284&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "MRVL Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

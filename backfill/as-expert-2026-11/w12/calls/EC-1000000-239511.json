@@ -1,0 +1,141 @@
+{
+ "doc_id": "EC-1000000-239511",
+ "ticker": "AMZN",
+ "tier": 2,
+ "sector": "Internet",
+ "title": "Former Strategic Alliances Manager at Amazon Believes Affiliate Marketing Contributes Less to GMV in India Than in Mature Markets",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239511",
+ "as_company": "Amazon.com Inc",
+ "conversation_id": "7093__1794404327954",
+ "expert": "Former Strategic Alliances Manager, Amazon India (headed affiliates and partnerships)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Amazon",
+   "score": 3.0
+  },
+  {
+   "company": "Meta",
+   "score": 3.0
+  },
+  {
+   "company": "YouTube",
+   "score": 3.0
+  }
+ ],
+ "verdict": "Direct-link affiliates drive 2.4% of Amazon India GMV (first-hand, former role) vs an estimated 6.5% in the U.S., held back by fraud screening and a young creator ecosystem.",
+ "summary_variables": {
+  "Advertising": [
+   "\ud83d\udfe1 **Affiliates 2.4% of Amazon India GMV vs ~6.5% in the U.S.** (estimate for U.S.); first read. \u2192 Thesis (advertising) \u2192 {c8}",
+   "\ud83d\udfe1 **Meta drives ~1.2% of India GMV (1% direct ads), YouTube ~0.6%** (estimates); first read. \u2192 Thesis (advertising) \u2192 {c9}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on affiliate share of GMV; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the page. Thesis pitch (advertising, NA retail margins): \u2192 \u2014 India affiliate economics do not bear on AWS, NA retail margins or ads revenue."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: 2.4% \u2014 Affiliate GMV contribution; Former tenure; vs Total GMV",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse1413&hl=fse1413,fse1957&page=1)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: 60\u201365% \u2014 Non-content share of affiliate GMV; Former tenure; vs Total affiliate GMV",
+   "kind": "estimate",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse11425&hl=fse11425,fse11858,fse12317,fse12715,fse12841&page=2)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: 25% \u2014 Content share of affiliate GMV; Former tenure; vs Total affiliate GMV",
+   "kind": "estimate",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse25714&hl=fse25714,fse26246,fse26650,fse26783&page=2)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: 10% \u2014 Long tail share of affiliate GMV; Former tenure; vs Total affiliate GMV",
+   "kind": "estimate",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse1413&hl=fse1413,fse12317,fse12715,fse12841&page=1)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: 0.24% \u2014 Long tail contribution; Former tenure; vs Total GMV",
+   "kind": "estimate",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse1413&hl=fse1413,fse12317,fse12715,fse12841&page=1)"
+  },
+  {
+   "ticker": "META",
+   "text": "Meta: 1.2% \u2014 GMV contribution; Former tenure; vs Total Amazon India GMV",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse1413&hl=fse1413,fse18416,fse18545&page=1)"
+  },
+  {
+   "ticker": "META",
+   "text": "Meta: 1% \u2014 Direct advertising share; Former tenure; vs Total Amazon India GMV",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511)"
+  },
+  {
+   "ticker": "META",
+   "text": "Meta: 0.2% \u2014 Influencer partnership share; Former tenure; vs Total Amazon India GMV",
+   "kind": "estimate",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse665&hl=fse665,fse3887,fse4053,fse4150&page=1)"
+  },
+  {
+   "ticker": "GOOGL",
+   "text": "YouTube: 0.6% \u2014 GMV contribution; Former tenure; vs Total Amazon India GMV",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse1413&hl=fse1413,fse18416,fse18545&page=1)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon (U.S.): 6.5% \u2014 Affiliate GMV contribution; Current; vs Broader definition",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511&scope=ANYWHERE&stmt=fse2040&hl=fse2040,fse25517,fse26650&page=1)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: > 50% \u2014 Performance marketing allocation; Former tenure; vs Total marketing spend",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: < 50% \u2014 Fixed marketing allocation; Former tenure; vs Total marketing spend",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon India: < 20% \u2014 Direct influencer spend; Former tenure; vs Influencer marketing budget",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511)"
+  },
+  {
+   "ticker": "OTHER:IRCTC",
+   "text": "IRCTC: 84 million \u2014 Total downloads; Current; vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511)"
+  },
+  {
+   "ticker": "OTHER:Virat Kohli",
+   "text": "Virat Kohli: 18\u201320 million \u2014 Followers; Current; vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239511)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "AMZN Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

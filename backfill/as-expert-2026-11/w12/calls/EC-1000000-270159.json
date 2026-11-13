@@ -1,0 +1,150 @@
+{
+ "doc_id": "EC-1000000-270159",
+ "ticker": "Databricks",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Sales Manager at Cloud Computing Company Expects Databricks-Related Business to Grow 20%–30% Next Quarter",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270159",
+ "as_company": "Databricks",
+ "conversation_id": "7093__1794406365636",
+ "expert": "Sales manager, cloud-computing software company co-selling on Databricks with Fortune 500 accounts",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Sigma",
+   "score": 4
+  },
+  {
+   "company": "ClickHouse",
+   "score": 2
+  },
+  {
+   "company": "Microsoft",
+   "score": 3
+  }
+ ],
+ "verdict": "This co-sell partner's Databricks-related business grew about 20% in Aug-Oct with commitments up 15%-20% (often $20 million-$25 million) and customer consumption costs up 5%-10%, while Genie went live at about 50% of its customers from about 20%.",
+ "summary_variables": {
+  "Demand / orders": [
+   "🟢 **Databricks-related business +about 20% (Aug-Oct); 20%-30% next quarter (estimate)** vs +24%-26% at a global SI (2026-11-05): consistent, lower end. → Thesis (re-acceleration) ↑ [19 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse13440&hl=fse13440,fse13550,fse13754,fse13847,fse14179&page=2)",
+   "🟢 **Commitments +15%-20%, often $20 million-$25 million** vs deal sizes +25%-30% (2026-11-05 SI): consistent. → Thesis (re-acceleration) ↑ [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse17280&hl=fse17280,fse17312,fse17400&page=2)",
+   "🟢 **Genie live at about 50% of customers vs about 20% in May-Jul**; about 50% of expansion deals include new products vs about 15% at a reseller (2026-11-05): **higher**. → Thesis (Agent Bricks/AI) ↑ [10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse39470&hl=fse39470,fse39617,fse39816,fse40641&page=2)"
+  ],
+  "Pricing & margins": [
+   "🟢 **Customer consumption cost +5%-10% y/y; pricing \"similar or more rigid\"** vs Lakebase/SQL +12%-14% (2026-11-05 SI): same direction. → Thesis (re-acceleration) ↑ [3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse34221&hl=fse34221,fse35117,fse35358&page=2)"
+  ],
+  "Competition & share": [
+   "🟡 **Cloud-native competition in about 10% of deals, unchanged y/y** vs about 15% at a reseller (2026-11-05): consistent. → Thesis (multi-cloud/open) → [22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse48598&hl=fse48598,fse49068,fse49722&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Business +about 20% vs +24%-26% at a global SI and +30%, 35%-40% commercial at a reseller (2026-11-05 calls): consistent, lower end.",
+  "Consumption cost +5%-10% y/y vs 12%-14% (Lakebase/SQL) and 4%-6% (newer products) price increases (2026-11-05 SI): consistent direction.",
+  "Genie live at about 50% of customers vs under 5% (2026-11-05 SI) and about 20% commercial (2026-11-05 reseller): higher.",
+  "Cloud-native competition about 10% of deals vs about 15% (2026-11-05 reseller, hearsay): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the Databricks Thesis page; measured against its thesis bullets (2025-09-10).",
+  "Thesis (run-rate re-acceleration): ↑ — business +about 20%, commitments +15%-20%, consumption cost +5%-10%.",
+  "Thesis (Agent Bricks/AI): ↑ — Genie live at about 50% of customers, though only 5%-10% of commitments (estimate).",
+  "Thesis (multi-cloud/open): → — cloud-native competition steady at about 10%; Databricks taking more partner business in-house."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "Databricks",
+   "text": "Co-sell partner Databricks-related business +about 20% y/y, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[19 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse13440&hl=fse13440,fse13550,fse13754,fse13847,fse14179&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Co-sell partner Databricks business +20%-30% expected Nov 2026-Jan 2027 y/y",
+   "kind": "estimate",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse23144&hl=fse23144,fse23428,fse23750,fse24185&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Databricks commitment deal sizes +15%-20% y/y, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse17280&hl=fse17280,fse17312,fse17400&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Typical commitment for migrating accounts $20 million-$25 million",
+   "kind": "first_hand",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse17280&hl=fse17280,fse17312,fse17400&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Customer Databricks consumption cost +5%-10% y/y",
+   "kind": "first_hand",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse34221&hl=fse34221,fse35117,fse35358&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Genie agents live at about 50% of customers, Aug-Oct 2026, vs about 20% in May-Jul",
+   "kind": "first_hand",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse39470&hl=fse39470,fse39617,fse39816,fse40641&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "About 60% of Genie users exceed the $10 monthly credit",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse39470&hl=fse39470,fse39617,fse39816,fse40641&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Genie usage 5%-10% of total commitments",
+   "kind": "estimate",
+   "citation": "[11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse36061&hl=fse36061,fse36212,fse36308&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "About 50% of expansion deals include newer products (Genie, Agent Bricks, apps) vs guessed 20% in May-Jul",
+   "kind": "estimate",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse52717&hl=fse52717,fse53190,fse53258&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Cloud-native competition in about 10% of deals, unchanged y/y",
+   "kind": "first_hand",
+   "citation": "[22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse48598&hl=fse48598,fse49068,fse49722&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sigma",
+   "text": "Sigma-related Databricks business +5%-10% in calendar 2026",
+   "kind": "estimate",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse29026&hl=fse29026,fse29264,fse29889,fse30319&page=2)"
+  },
+  {
+   "ticker": "OTHER:Anthropic/OpenAI",
+   "text": "Claude and OpenAI deal sizes $5 million-$10 million",
+   "kind": "hearsay",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse13440&hl=fse13440,fse14513,fse17280,fse17312,fse17400,fse24185,fse29026,fse30319,fse31994,fse32126,fse34221,fse36061,fse36159,fse36212,fse39470,fse39617,fse40641,fse40869,fse42664,fse43269,fse48598,fse49068,fse52717,fse53190,fse53258&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Cloud providers growing about 10% or 20% y/y",
+   "kind": "hearsay",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270159&scope=ANYWHERE&stmt=fse13440&hl=fse13440,fse14513,fse17280,fse17312,fse17400,fse24185,fse29026,fse30319,fse31994,fse32126,fse34221,fse36061,fse36159,fse36212,fse39470,fse39617,fse40641,fse40869,fse42664,fse43269,fse48598,fse49068,fse52717,fse53190,fse53258&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "12ea8833-33de-81bd-8549-e1429e4ebd6e",
+  "page_title": "Databricks Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

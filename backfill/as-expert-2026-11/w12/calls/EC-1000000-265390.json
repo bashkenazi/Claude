@@ -1,0 +1,152 @@
+{
+ "doc_id": "EC-1000000-265390",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Manager at Dell Sees AVC as a Key Thermal-Solution Partner as Second Sources Gain Share in AI Servers",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-265390",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794405454007",
+ "expert": "Development manager at Dell overseeing thermal supplier qualification and production quality",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  }
+ ],
+ "verdict": "AVC supplies <b>more than 70% of Dell's thermal solution</b> and its scope grew 20% in the past year, but Dell expects second sources to reach 40%–50% of allocation on lead-time concerns.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "🟢 <b>More than 70% of Dell's thermal solution from AVC</b> (first-hand), above JPM's ~50% AVC share per AI project (SB #58861). → Tenet 1 (Nvidia content and share) ↑",
+   "🔴 <b>Second sources expected at 40%–50% of allocation</b> (estimate), starting at 20%–30% after a 100-PO pilot, vs JPM's view that a 2–3 supplier preference limits share shift (SB #58861): <b>conflicting</b>. → Tenet 1 (Nvidia content and share) ↓",
+   "🟢 <b>AVC thermal scope at Dell +20% in the past year</b> (first-hand) vs AVC 3Q26 revenue +52% y/y (SB #63806): Dell growing slower than AVC overall."
+  ],
+  "Gross margin": [
+   "🟢 <b>10%–20% premium for high-quality liquid cooling</b>; liquid lifts total solution cost 20%–30%, 10%–20% from raw materials, consistent with AVC's cold-plate ASP raises (SB #58857). → Tenet 3 (GM 34%+) ↑"
+  ],
+  "Rubin yield and ramp": [
+   "🟡 <b>First-pass cold-plate yield must exceed 95%</b> in mass production vs AVC VR200 yield ~60% in May (SB #64479): the bar AVC must clear.",
+   "🟢 <b>Dell liquid-cooling business +70% next year</b> (estimate), first read on Dell liquid growth."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "AVC >70% of Dell's thermal solution vs JPM's ~50% AVC share per AI project (SB #58861, 2026-09-29): higher at this OEM.",
+  "Second-source allocation expected at 40%–50% vs JPM's view that 2–3 supplier preference limits share shift (SB #58861): conflicting.",
+  "AVC thermal scope at Dell +20% y/y vs AVC company revenue +52% y/y in 3Q26 (SB #63806): slower at Dell.",
+  "Required first-pass yield >95% vs AVC VR200 yield ~60% in May (SB #64479): gap still to close."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Nvidia content and share): ↓ — >70% share today but Dell plans second sources at 40%–50% of allocation.",
+  "Tenet 3 (Margin and EPS): ↑ — Dell would pay a 10%–20% premium for quality; liquid adds 20%–30% to solution cost.",
+  "Tenet 4 (Capacity and execution): ↓ — lead time is the stated reason for second-sourcing; mass production needs >95% first-pass yield."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: more than 70% — Share of thermal solution supplied to expert's company, Current; vs Not specified",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse31493&hl=fse31493,fse35019,fse35222&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: 20% — Increase in thermal-solution business scope, Over the past year; vs Previous year",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse28092&hl=fse28092,fse28283,fse28417,fse28534,fse28653,fse28723,fse28891,fse29045,fse29179,fse29249,fse29279&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: 50% — Increase in overall business, Over the past year; vs Previous year",
+   "kind": "hearsay",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse31493&hl=fse31493,fse35019,fse35222&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 20%–30% — Increase in total solution cost (air to liquid cooling), Move to liquid cooling; vs Air cooling solution",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse28092&hl=fse28092,fse28283,fse28417,fse28534,fse28653,fse28723,fse28891,fse29045,fse29179,fse29249,fse29279&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 10%–20% — Cost increase attributed to raw materials, Recent; vs Prior pricing",
+   "kind": "first_hand",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse7848&hl=fse7848,fse8033,fse8118,fse8251&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: more than one year — Normal qualification time for customized liquid design, Standard practice; vs Standard design",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse12348&hl=fse12348,fse12531,fse12677,fse12735,fse12797&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: eight to nine months — Shortened validation timeframe, Accelerated project; vs Normal qualification",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse12348&hl=fse12348,fse12531,fse12677,fse12735,fse12797&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Second Source: 20%–30% — Initial target allocation for a new source, Start of ramp; vs Main source",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse28092&hl=fse28092,fse28283,fse28417,fse28534,fse28653,fse28723,fse28891,fse29045,fse29179,fse29249,fse29279&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Second Source: 100 first purchase orders — Pilot-run volume for quality assessment, Qualification; vs Full production",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: two or three months — Pilot-run duration before allocation increase, Post-pilot; vs Initial ramp",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse28092&hl=fse28092,fse28283,fse28417,fse28534,fse28653,fse28723,fse28891,fse29045,fse29179,fse29249,fse29279&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Second Source: 40% — Potential allocation after pilot assessment, Post-pilot; vs Initial 20%–30%",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse31493&hl=fse31493,fse35019,fse35222&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Second Source: 40%–50% — Expected second-source allocation share, Forward-looking; vs Current share",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse31493&hl=fse31493,fse35019,fse35222&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: more than 95% — Expected first-pass yield for cold plates, Mass production; vs N/A",
+   "kind": "first_hand",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse24411&hl=fse24411,fse24595,fse24700,fse24820&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 70% — Forecasted business growth in liquid cooling, Next year; vs Current year",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse31493&hl=fse31493,fse35019,fse35222&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 50%–60% — Portion of standard designs used in hybrid solutions, Current practice; vs Premium designs",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 10%–20% — Price premium for high-quality products, Current; vs Standard product",
+   "kind": "first_hand",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265390&scope=ANYWHERE&stmt=fse7848&hl=fse7848,fse8033,fse8118,fse8251&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8138-a495-d71f03b8a87b",
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

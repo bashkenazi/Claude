@@ -1,0 +1,144 @@
+{
+ "doc_id": "EC-1000000-268799",
+ "ticker": "TCS",
+ "tier": 2,
+ "sector": "Services",
+ "title": "Senior Director at Capgemini Sees TCS Gaining Share Through Aggressive Pricing, With AI Margins Likely to Compress",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268799",
+ "as_company": "Tata Consultancy Services Ltd",
+ "conversation_id": "7093__1794405616346",
+ "expert": "Senior Director at Capgemini (competitor; bid against TCS on multi-year deals above $5 million); interview 2026-11-04",
+ "short_expert": "Capgemini senior director (competitor)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "TCS",
+   "score": 3.0
+  },
+  {
+   "company": "Infosys/HCL",
+   "score": 3.0
+  },
+  {
+   "company": "GCCs",
+   "score": 2.0
+  }
+ ],
+ "verdict": "A Capgemini senior director lost a large bank deal to TCS, which bid 12%–14% margins on multi-year deals above $5 million vs his firm's 20%+ target: TCS is buying share at thin deal margins.",
+ "summary_variables": {
+  "EBIT margin and the 25% exit": [
+   "🔴 TCS bid 12%–14% margins vs 20%+ at the competitor on multi-year deals above $5 million (first-hand), fitting 2QFY27 EBIT 24.0%, -120bp y/y (SB #62837). → Tenet 2 (EBIT ~24%) ↑ {c6}",
+   "🟡 AI-led work earns 25%–35% margins, an 18%–25% premium (estimate), in line with mgmt's higher-margin AI (SB #62847), but expected to compress as it commoditizes. → Tenet 2 (EBIT ~24%) → {c8}"
+  ],
+  "Non-AI revenue trend": [
+   "🔴 Clients demand 15%–25% efficiency at application-maintenance renewals; 60% of savings returned to their P&L (estimate) vs mgmt \"no pricing pressure\" (SB #62847): conflicting. → Tenet 1 (AI deflates core) ↑ {c11}",
+   "🔴 AI deals carry smaller teams and deal sizes, so AI revenue may not replace traditional scale; consistent with non-AI -1.5% q/q (SB #62834). → Tenet 1 (AI deflates core) ↑ {c10}"
+  ],
+  "TCV / book-to-bill and BFSI momentum": [
+   "🟡 Outcome-based ~30% of deals today, ~50% within 1 to 18 months; ~20% of relationships reviewed every 3 to 5 years (estimates); first read. → Tenet 3 (order intake) → {c16}",
+   "🔴 Infosys and HCL bid as low as 10% or 11% (hearsay) to undercut TCS. → Tenet 5 (competition) ↑ {c8}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Deal margins 12%–14% (first-hand) vs company EBIT 24.0%, -120bp y/y in 2QFY27 (SB #62837): consistent with margin pressure.",
+  "AI margin premium 18%–25% vs mgmt \"AI revenues at higher margins than company average\" (SB #62847): consistent.",
+  "Renewal efficiency demands 15%–25% vs mgmt \"no pricing pressure\" (SB #62847): conflicting.",
+  "Subcontractors kept for niche skills and visas for one to two years vs subcon 6.8% of sales, +190bp y/y (SB #62837): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (AI deflates the non-AI core): ↑ — 15%–25% renewal efficiency demands with 60% returned to clients; AI deals smaller.",
+  "Tenet 2 (EBIT stays near 24%): ↑ — TCS wins at 12%–14% deal margins vs 20%+ at peers.",
+  "Tenet 3 (order intake): → — share gains at low margins support TCV, but ~20% of relationships face review every 3 to 5 years.",
+  "Tenet 5 (competition): ↑ — Infosys/HCL bid 10%–11%; GCCs and niche players take share."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TCS",
+   "text": "TCS: 12%–14% — Net margin on large deals; Current; vs vs. 20%+ for expert's firm",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse7810&hl=fse7810,fse8103&page=2)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: ~30% — Outcome-based deals share; Current; vs vs. 70% T&M",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268799)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: ~50% — Outcome-based deals share; 1 to 18 months; vs vs. 30% today",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268799)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: 15%–25% — Cost efficiency gains; Renewal; vs Application maintenance",
+   "kind": "estimate",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse14607&hl=fse14607,fse15909,fse16126,fse16686,fse16827&page=2)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: 7%–10% — Cost savings; Renewal; vs Specialist team processes",
+   "kind": "estimate",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse14607&hl=fse14607,fse15909,fse16126,fse16686,fse16827&page=2)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: 60% — Savings returned to P&L; Post-renewal; vs 100% total savings",
+   "kind": "estimate",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse14607&hl=fse14607,fse15909,fse16126,fse16686,fse16827&page=2)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: 40% — Savings reinvested; Post-renewal; vs 100% total savings",
+   "kind": "estimate",
+   "citation": "[[15 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse18918&hl=fse18918,fse19000&page=2)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: 25%–35% — AI-led service margins; Current; vs Local market experience",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse10508&hl=fse10508,fse10757,fse10885,fse11016,fse14607,fse15575,fse15629,fse16126,fse16827,fse18918,fse18918,fse19000,fse24482,fse24482,fse26237,fse26237,fse29350,fse29544,fse29806,fse29917,fse30291,fse30690,fse30997,fse30997,fse36180,fse37578,fse38402,fse42240,fse42240,fse43199,fse43515,fse43515,fse43515,fse43952,fse44305,fse44366,fse45530,fse49568,fse49833,fse49833,fse50972,fse51494,fse51494,fse54168,fse54168,fse54505,fse57182,fse57642,fse57955,fse59038,fse59105,fse60777,fse60777,fse61345,fse61691&page=2)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: 18%–25% — AI margin premium; Current; vs vs. traditional services",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse10508&hl=fse10508,fse10757,fse10885,fse11016,fse14607,fse15575,fse15629,fse16126,fse16827,fse18918,fse18918,fse19000,fse24482,fse24482,fse26237,fse26237,fse29350,fse29544,fse29806,fse29917,fse30291,fse30690,fse30997,fse30997,fse36180,fse37578,fse38402,fse42240,fse42240,fse43199,fse43515,fse43515,fse43515,fse43952,fse44305,fse44366,fse45530,fse49568,fse49833,fse49833,fse50972,fse51494,fse51494,fse54168,fse54168,fse54505,fse57182,fse57642,fse57955,fse59038,fse59105,fse60777,fse60777,fse61345,fse61691&page=2)"
+  },
+  {
+   "ticker": "TCS",
+   "text": "TCS: 20% — Relationship churn/renewal; 3 to 5 years; vs Local area experience",
+   "kind": "estimate",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse10508&hl=fse10508,fse10757,fse10885,fse11016&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Tier-1 Clients: 5%–10% — IT spend growth; 3 years; vs Clients with $50 million–$70 million+ spend",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse10508&hl=fse10508,fse10757,fse10885,fse11016,fse14607,fse15575,fse15629,fse16126,fse16827,fse18918,fse18918,fse19000,fse24482,fse24482,fse26237,fse26237,fse29350,fse29544,fse29806,fse29917,fse30291,fse30690,fse30997,fse30997,fse36180,fse37578,fse38402,fse42240,fse42240,fse43199,fse43515,fse43515,fse43515,fse43952,fse44305,fse44366,fse45530,fse49568,fse49833,fse49833,fse50972,fse51494,fse51494,fse54168,fse54168,fse54505,fse57182,fse57642,fse57955,fse59038,fse59105,fse60777,fse60777,fse61345,fse61691&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Tier-2 Clients: 20%–22% — IT spend growth; 3 years; vs High-growth ( $20 million–$50 million spend)",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268799&scope=ANYWHERE&stmt=fse10508&hl=fse10508,fse10757,fse10885,fse11016,fse14607,fse15575,fse15629,fse16126,fse16827,fse18918,fse18918,fse19000,fse24482,fse24482,fse26237,fse26237,fse29350,fse29544,fse29806,fse29917,fse30291,fse30690,fse30997,fse30997,fse36180,fse37578,fse38402,fse42240,fse42240,fse43199,fse43515,fse43515,fse43515,fse43952,fse44305,fse44366,fse45530,fse49568,fse49833,fse49833,fse50972,fse51494,fse51494,fse54168,fse54168,fse54505,fse57182,fse57642,fse57955,fse59038,fse59105,fse60777,fse60777,fse61345,fse61691&page=2)"
+  },
+  {
+   "ticker": "OTHER:Infosys/HCL",
+   "text": "Infosys/HCL: 10% or 11% — Bid margins; Current; vs vs. TCS 12%–14%",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268799)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8158-96fd-cd26171892e6",
+  "page_title": "TCS - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

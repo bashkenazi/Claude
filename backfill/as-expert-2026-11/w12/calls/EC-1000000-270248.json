@@ -1,0 +1,134 @@
+{
+ "doc_id": "EC-1000000-270248",
+ "ticker": "Databricks",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Executive at Professional Services Firm Expects Databricks Business to Grow 30% in 2026",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270248",
+ "as_company": "Databricks",
+ "conversation_id": "7093__1794406269915",
+ "expert": "Senior leader, professional services firm serving enterprise and upper mid-market clients ($1B-$50B+ revenue; current)",
+ "weight": "Medium",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "Databricks",
+   "score": 5
+  },
+  {
+   "company": "Snowflake",
+   "score": 3
+  },
+  {
+   "company": "BigQuery",
+   "score": 3
+  },
+  {
+   "company": "Redshift",
+   "score": 2
+  }
+ ],
+ "verdict": "This services firm's Databricks business grew ~30% y/y in Aug-Oct, 10%-15% above plan, with ~90% renewals and deal sizes up ~15%-20%, though effective pricing is flat to down up to 5% as Databricks answers Snowflake discounting.",
+ "summary_variables": {
+  "Demand / orders": [
+   "🟢 **Databricks business +~30% y/y (Aug-Oct), 10%-15% above plan**; vs +24%-26% at a global SI and +30%, 35%-40% commercial at a reseller (2026-11-05 calls): **consistent**. → Thesis (re-acceleration) ↑ [20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse8281&hl=fse8281,fse8628,fse8685,fse8917,fse9129,fse9169&page=2)",
+   "🟢 **~90% renewals; deal sizes +~15%-20%** vs +25%-30% at a global SI (2026-11-05): consistent, slightly smaller. → Thesis (re-acceleration) ↑ [21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse9984&hl=fse9984,fse10277,fse10368&page=2)",
+   "🟢 **Genie live at 20% or more of customers, adoption +~30%-40% q/q (estimate)** vs under 5% at a global SI (2026-11-05): **higher**. → Thesis (Agent Bricks/AI) ↑ [24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse18665&hl=fse18665,fse18954,fse19009&page=2)"
+  ],
+  "Pricing & margins": [
+   "🔴 **Effective pricing flat to down up to 5% (estimate)** on Snowflake discounting vs Lakebase/SQL +12%-14% at a global SI (2026-11-05): **conflicting**. → Thesis (re-acceleration) ↓ [23 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse16110&hl=fse16110,fse16397,fse16463,fse16505,fse16599&page=2)"
+  ],
+  "Competition & share": [
+   "🟢 **Databricks wins more against cloud-native analytics than a year earlier**; Redshift seen losing share; losses in BI-heavy deals. → Thesis (multi-cloud/open) ↑ [25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse22533&hl=fse22533,fse22830,fse22863,fse23044,fse23206&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Business +~30% y/y vs +24%-26% Q3 practice growth at a global SI (2026-11-05 call): consistent to slightly higher.",
+  "Deal sizes +~15%-20% vs +25%-30% (2026-11-05 SI) and +about 15%-20% (2026-11-05 reseller): consistent.",
+  "Effective pricing flat to down up to 5% vs 12%-14% (Lakebase/SQL) and 4%-6% (newer products) increases at a global SI (2026-11-05): conflicting.",
+  "Genie live at 20% or more of customers vs under 5% (2026-11-05 SI) and about 20% of commercial customers (2026-11-05 reseller): higher."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the Databricks Thesis page; measured against its thesis bullets (2025-09-10).",
+  "Thesis (run-rate re-acceleration): ↑ — partner business +~30% with ~90% renewals; pricing flat to down up to 5% caps the upside.",
+  "Thesis (Agent Bricks/AI): ↑ — AI is 30%-40% of the next 3-6 month pipeline (estimate); Genie adoption +~30%-40% q/q.",
+  "Thesis (multi-cloud/open): ↑ — winning more vs cloud-native analytics on open formats."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "Databricks",
+   "text": "Services firm Databricks business +~30% y/y, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse8281&hl=fse8281,fse8628,fse8685,fse8917,fse9129,fse9169&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Deal closures/workload wins ~10%-15% above expectations, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse8281&hl=fse8281,fse8628,fse8685,fse8917,fse9129,fse9169&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Average Databricks deal size ~15%-20% higher y/y, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse9984&hl=fse9984,fse10277,fse10368&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "~90% of expiring Databricks contracts renewed, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse9984&hl=fse9984,fse10277,fse10368&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Services firm Databricks business +~30% expected Nov 2026-Jan 2027 y/y",
+   "kind": "estimate",
+   "citation": "[22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse12457&hl=fse12457,fse12772,fse12860,fse12945,fse12985,fse13136&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "AI initiatives 30%-40% of next 3-6 month Databricks pipeline",
+   "kind": "estimate",
+   "citation": "[22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse12457&hl=fse12457,fse12772,fse12860,fse12945,fse12985,fse13136&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Services firm Databricks business +~30% expected in calendar 2026",
+   "kind": "estimate",
+   "citation": "[22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse12457&hl=fse12457,fse12772,fse12860,fse12945,fse12985,fse13136&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Effective Databricks pricing/consumption cost flat to down no more than 5% y/y",
+   "kind": "estimate",
+   "citation": "[23 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse16110&hl=fse16110,fse16397,fse16463,fse16505,fse16599&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Genie live at at least 20% of firm customers, Aug-Oct 2026",
+   "kind": "estimate",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse18665&hl=fse18665,fse18954,fse19009&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Genie adoption +~30%-40% q/q, Aug-Oct vs May-Jul 2026",
+   "kind": "estimate",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse18665&hl=fse18665,fse18954,fse19009&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Expansion deals including Genie, Agent Bricks or Lakebase +~15%-20% q/q",
+   "kind": "estimate",
+   "citation": "[28 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270248&scope=ANYWHERE&stmt=fse27319&hl=fse27319,fse27616&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "12ea8833-33de-81bd-8549-e1429e4ebd6e",
+  "page_title": "Databricks Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

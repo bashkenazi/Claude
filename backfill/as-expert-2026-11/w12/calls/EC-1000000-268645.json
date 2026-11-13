@@ -1,0 +1,117 @@
+{
+ "doc_id": "EC-1000000-268645",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Account Manager at IT Consultancy Sees AI Dash Cams Driving Samsara-Related Growth Despite Budget Headwinds",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268645",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794405379252",
+ "expert": "Account manager at a VAR/systems integrator selling and implementing Samsara for mid-market and enterprise fleets (500+ seats)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert's Samsara channel business grew about 25% y/y in Aug–Oct 2026 on 97%–98% retention and 15%–18% expansion, with a 10%–12% price increase sticking.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "🟢 <b>Channel business about 25% y/y, retention 97%–98%, expansion 15%–18%</b>; partner slower than company \\$100K+ cohort ARR +38% (SB #50486), in line with core NRR ~115% (SB #62603). → Tenet 1 (enterprise expansion) ↑",
+   "🟡 <b>Fewer multi-year contracts, more one-year deals</b> on constrained IT budgets; Jefferies saw license cost scrutinised at renewals (SB #62601): consistent. → Tenet 1 (enterprise expansion) ↓"
+  ],
+  "GM/FCF through component cycle": [
+   "🟢 <b>Price increase 10%–12% in 2026</b>, above the up to 10% customers expected; first read on price realization, helps offset the ~50bps FY27 GM cut on components (SB #62580). → Tenet 3 (op leverage vs hardware cost) ↑",
+   "🟢 <b>AI dash cams add at least around 20% to customer spend</b> and are the largest pipeline driver; first read. → Tenet 2 (emerging products) ↑"
+  ],
+  "Revenue-to-ARR conversion": [
+   "🟡 <b>Nov 2026–Jan 2027 pipeline at least 20% above expectations</b>, but closes only in line and the FY26 outlook stays ~25% (estimate). → Tenet 5 (Street FY28 too low) →"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Expansion and retention: 97%–98% retention and 15%–18% expansion vs core NRR ~115% (SB #62603): consistent.",
+  "Growth: channel +~25% y/y vs company \\$100K+ cohort ARR +38% (SB #50486): partner slower than the company aggregate.",
+  "Contract length: shift to one-year deals vs Jefferies check that license cost is a focus at renewals (SB #62601): consistent.",
+  "Pricing: first read on Samsara price realization (10%–12% increase); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): ↑ — 97%–98% retention and 15%–18% expansion, tempered by the shift to one-year contracts.",
+  "Tenet 2 (emerging products): ↑ — AI dash cams lift customer spend at least around 20%.",
+  "Tenet 3 (op leverage vs hardware cost): ↑ — 10%–12% price increase against the ~50bps component-driven GM cut (SB #62580).",
+  "Tenet 4 (platform moat): → — expert expects share to stay stable; wins come from vendor consolidation.",
+  "Tenet 5 (Street FY28 too low): → — pipeline at least 20% above expectations but closes only in line."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara: about 25% — Channel business revenue; August–October 2026; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse7662&hl=fse7662,fse10186,fse10440,fse10996,fse11151,fse11873,fse12475,fse13371,fse13423,fse13978,fse16545,fse16713,fse16934,fse19265,fse19386,fse19941,fse20329,fse20516,fse20623,fse20745,fse21808,fse21899,fse22002,fse22131,fse24301,fse24454,fse29989,fse30181,fse31776&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 97%–98% — Customer retention rate; August–October 2026; vs Historical",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse7662&hl=fse7662,fse10186,fse10440,fse10996,fse11151,fse11873,fse12475,fse13371,fse13423,fse13978,fse16545,fse16713,fse16934,fse19265,fse19386,fse19941,fse20329,fse20516,fse20623,fse20745,fse21808,fse21899,fse22002,fse22131,fse24301,fse24454,fse29989,fse30181,fse31776&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 15%–18% — Expansion among existing customers; August–October 2026; vs Historical",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse7662&hl=fse7662,fse10186,fse10440,fse10996,fse11151,fse11873,fse12475,fse13371,fse13423,fse13978,fse16545,fse16713,fse16934,fse19265,fse19386,fse19941,fse20329,fse20516,fse20623,fse20745,fse21808,fse21899,fse22002,fse22131,fse24301,fse24454,fse29989,fse30181,fse31776&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 13%–15% — Net-new customer growth; August–October 2026; vs Historical",
+   "kind": "first_hand",
+   "citation": "[[16 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse10186&hl=fse10186,fse10440&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 10%–12% — Price increase; 2026; vs Prior year",
+   "kind": "first_hand",
+   "citation": "[[3 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse21808&hl=fse21808,fse21899,fse22131&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: at least 20% — Opportunity pipeline; Nov 2026–Jan 2027; vs Internal expectations",
+   "kind": "first_hand",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse10440&hl=fse10440&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: at least around 20% — Increase to customers from AI/Dash cams; 2026; vs Prior period",
+   "kind": "first_hand",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse13244&hl=fse13244,fse24301,fse24454&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: around 25% — Forecasted business growth; Full Year 2026; vs Full Year 2025",
+   "kind": "estimate",
+   "citation": "[[19 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse19048&hl=fse19048,fse19265,fse19386&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 26%–27% — Potential upper-end growth; Full Year 2026; vs Full Year 2025",
+   "kind": "estimate",
+   "citation": "[[19 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268645&scope=ANYWHERE&stmt=fse19048&hl=fse19048,fse19265,fse19386&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: minimum of 20%–25% — Committed pipeline growth floor; Full Year 2026; vs Full Year 2025",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268645)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8165-90f5-d8386c085478",
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed to child page Samsara - Thesis Revised - 2026-11-05."
+}

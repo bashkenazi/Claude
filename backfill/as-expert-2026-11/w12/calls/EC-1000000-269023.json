@@ -1,0 +1,144 @@
+{
+ "doc_id": "EC-1000000-269023",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Executive at Professional Services Automation Company Expects DocuSign-Related Business to Decline 2%\u20133% in 2026",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269023",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794403865604",
+ "expert": "COO at a technology company that integrates and distributes Docusign to enterprise professional-services firms; Docusign 40% of its business",
+ "weight": "Medium",
+ "characterization": "Negative",
+ "sentiment": [
+  {
+   "company": "DocuSign Inc",
+   "score": 4
+  },
+  {
+   "company": "Adobe",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 3
+  },
+  {
+   "company": "Standalone providers",
+   "score": 2
+  }
+ ],
+ "verdict": "The expert's Docusign-related business was flat (0%) y/y in Aug\u2013Oct 2026, a 2%\u20133% decline ex-inflation escalators, with seats down 5%\u20137% as professional-services clients cut staff.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udd34 **Business flat (0%) y/y**, -2%\u20133% ex-inflation, vs +~5% and +~20% from the 2026-11-05 calls: **conflicting**.",
+   "\ud83d\udd34 **-2%\u20133% expected for calendar 2026** (estimate); enterprise decisions delayed 12\u201318 months."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udd34 **Seats down 5%\u20137%** (estimate) on staffing cuts and AI vs +~2% from the 2026-11-05 AI-co exec call: **conflicting**.",
+   "\ud83d\udd34 **Renewal spend down 1%\u20132%** as customers challenge escalators vs +4%\u20136% from the 2026-11-05 AI-co exec call: **conflicting**."
+  ],
+  "IAM adoption": [
+   "\ud83d\udfe1 **CLM and AI tool adoption broadly unchanged** vs ~40% of deals involving AI on the 2026-11-05 AI-co exec call: **conflicting**."
+  ]
+ },
+ "characterization_changed": "Characterization changed from Mixed: the expert's own Docusign business is flat (0%, a 2%\u20133% decline ex-inflation), seats are down 5%\u20137% and renewal spend down 1%\u20132%; only share durability is positive.",
+ "changes": [
+  "Business flat (0%; -2%\u20133% ex-inflation) vs +~5% (2026-11-05, AI-co exec) and +~20% (2026-11-05, consulting PMO): conflicting.",
+  "Seats -5%\u20137% vs +~2% (2026-11-05, AI-co exec) and roughly flat (2026-11-05, consulting PMO): conflicting.",
+  "Renewal spend -1%\u20132% vs +4%\u20136% (2026-11-05, AI-co exec): conflicting.",
+  "Contract pricing +~3% via escalators vs net pricing +4%\u20135% (2026-11-05, AI-co exec): consistent direction, lower."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth): \u2193 \u2014 the expert's Docusign business flat, -2%\u20133% expected for CY26 (estimate).",
+  "Stance (very competitive legacy e-sign): \u2193 \u2014 seats -5%\u20137%, Adobe (~20% share, hearsay) and Microsoft winning via bundling."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 40% \u2014 Share of expert's business, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse6602&hl=fse6602&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 0% \u2014 DocuSign-related business change, **August\u2013October 2026**; baseline: **August\u2013October 2025**",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse6602&hl=fse6602&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 3% increase \u2014 Contract pricing, Current; baseline: Prior levels",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 2%\u20133% decline \u2014 DocuSign-related business (ex-inflation), **August\u2013October 2026**; baseline: **August\u2013October 2025**",
+   "kind": "estimate",
+   "citation": "[25 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse10525&hl=fse10525,fse11307,fse11370,fse11908,fse12115,fse12355,fse25641,fse26209&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 2%\u20133% increase \u2014 Document volume, Current; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 5%\u20137% decline \u2014 Platform users/seats, Current; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 1%\u20132% reduction \u2014 Renewal spend, Current; baseline: Prior levels",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 2%\u20133% decline \u2014 Expected business, **November 2026\u2013January 2027**; baseline: **November 2025\u2013January 2026**",
+   "kind": "estimate",
+   "citation": "[25 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse10525&hl=fse10525,fse11307,fse11370,fse11908,fse12115,fse12355,fse25641,fse26209&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 2%\u20133% decline \u2014 Expected business, **Calendar 2026**; baseline: **Calendar 2025**",
+   "kind": "estimate",
+   "citation": "[25 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse10525&hl=fse10525,fse11307,fse11370,fse11908,fse12115,fse12355,fse25641,fse26209&page=2)"
+  },
+  {
+   "ticker": "ADBE",
+   "text": "Adobe: about 20% \u2014 Market share, Current; baseline: N/A",
+   "kind": "hearsay",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse29127&hl=fse29127,fse29149,fse31509,fse31636&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "N/A: 12\u201318 months \u2014 Delay in enterprise decisions, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[15 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse7516&hl=fse7516,fse7807&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "N/A: 18 months \u2014 Delay for specific seat-based deal, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[15 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023&scope=ANYWHERE&stmt=fse7516&hl=fse7516,fse7807&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "N/A: 12 to 14 months \u2014 Sales-funnel timeline forecast, Current; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269023)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

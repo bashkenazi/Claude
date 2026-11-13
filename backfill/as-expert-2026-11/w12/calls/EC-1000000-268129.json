@@ -1,0 +1,153 @@
+{
+ "doc_id": "EC-1000000-268129",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Business and Supply Chain Manager at Jabil Inc. Sees AVC Volume Growing Amid Sustained Data Center Demand",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268129",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794404258590",
+ "expert": "Business and Supply Chain Manager at Jabil (current); buys AVC GPU/ASIC thermal solutions since ~2024",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  },
+  {
+   "company": "Auras",
+   "score": 3
+  },
+  {
+   "company": "Cooler Master",
+   "score": 3
+  },
+  {
+   "company": "Delta",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert's <b>AVC volume has grown 4\u20135% q/q</b> over the past year, AVC holds 40\u201345% of his Rubin cold-plate volume and new-gen prices are up 5\u201312% since 2024, though supply assurance slipped to 75\u201380%.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "\ud83d\udfe2 <b>40\u201345% of his Rubin cold-plate volume</b>, none lost to Auras, Cooler Master or Delta, vs ~30% GB share (SB #64467). \u2192 Tenet 1 (Rubin content and share) \u2191"
+  ],
+  "Gross margin": [
+   "\ud83d\udfe2 <b>New-gen cold-plate and manifold prices +5\u201312% since 2024</b>, mature -5% (first-hand), vs reference -40\u201350% in the 2026-11-06 Dell call: conflicting. \u2192 Tenet 3 (GM 34%+) \u2191",
+   "\ud83d\udd34 <b>5\u201315% price cut expected after ramp</b> (estimate)."
+  ],
+  "Rubin yield and ramp": [
+   "\ud83d\udd34 <b>Supply assurance 75\u201380% vs 80\u201387% a year ago</b>; incoming rejects 1\u20132% (first-hand). \u2192 Tenet 4 (capacity) \u2193"
+  ],
+  "ASIC liquid-cooling start": [
+   "\u26aa <b>Next-gen ASIC share loss single digits</b> as alternatives qualify (estimate), first read."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "AVC 40-45% of the expert's Rubin cold-plate volume vs ~30% Nvidia GB share (SB #64467) and JPM ~50% per project (SB #58861): holding.",
+  "New-gen prices +5-12% since 2024 vs JPM ASP raises (SB #58857): consistent; vs reference prices -40-50% in the 2026-11-06 Dell call: conflicting (product mix).",
+  "Supply assurance 75-80% vs 80-87% a year ago (expert's own): deteriorating.",
+  "Incoming rejects 1-2% vs leak incidents below 1% in the 2026-11-06 Dell call: slightly worse."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Rubin content and share): \u2191 \u2014 40-45% of the expert's Rubin cold-plate volume; volume +4-5% q/q.",
+  "Tenet 3 (GM 34%+): \u2191 \u2014 new-gen prices +5-12% since 2024; risk of 5-15% cuts after ramp.",
+  "Tenet 4 (capacity): \u2193 \u2014 supply assurance down to 75-80% from 80-87%; rejects 1-2%."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "4%\u20135% quarter over quarter \u2014 Volume growth, Past year, vs Previous quarter",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "40%\u201345% \u2014 Share of Rubin cold-plate volume, Current, vs Total relevant sector volume",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "5%\u201312% increase \u2014 Price change for new-gen cold plates/manifolds, Since 2024, vs Previous pricing",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "About 5% decrease \u2014 Price change for mature cold plates/chassis, Since 2024, vs Previous pricing",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "75%\u201380% \u2014 Assurance of supply in AI sectors, Current, vs Total required supply",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "80%\u201387% \u2014 Assurance of supply in AI sectors, ~Year ago, vs Total required supply",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "1%\u20132% \u2014 Incoming reject rate, Current, vs Total parts received",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "8 out of 10 \u2014 Supply-chain support rating, Current, vs 1\u201310 scale",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "12 weeks \u2014 Forecast review frequency, Current, vs Planning cadence",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "Single digits \u2014 Magnitude of forecast changes, Current, vs Previous forecast",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "5%\u201315% decrease \u2014 Expected price reduction, Post-ramp, vs Current pricing",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "Single digits \u2014 Initial share loss to alternatives, Next-gen ASIC, vs Total program volume",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "9\u201315 months \u2014 Cold-plate qualification timeframe, Industry standard, vs Project lifecycle",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "About 50% price cut \u2014 Claimed Rubin cold-plate price reduction, Not realized, vs Current pricing",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268129)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed in lean form (Summary, Expert and visibility, What changed, Bull, Bear, Thesis impact); Key numbers, Supply-chain flags, Share shifts, Questions, Sentiment and Q&A are in summaries/<doc_id>.md only, to keep the page update within size limits. New 'Expert Calls' h2 section created before Data Sources."
+}

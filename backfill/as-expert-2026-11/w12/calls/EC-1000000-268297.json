@@ -1,0 +1,144 @@
+{
+ "doc_id": "EC-1000000-268297",
+ "ticker": "CRWV",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Vice President at Rescale Sees CoreWeave Facing Pricing Pressure and Refinancing Risks",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268297",
+ "as_company": "CoreWeave Inc",
+ "conversation_id": "7093__1794405463210",
+ "expert": "Former VP of Sales, Americas at Rescale (HPC orchestration partner of CoreWeave, ~2 years)",
+ "weight": "Low",
+ "characterization": "Negative",
+ "sentiment": [
+  {
+   "company": "CoreWeave",
+   "score": 2
+  },
+  {
+   "company": "Nebius",
+   "score": 4
+  },
+  {
+   "company": "Major cloud providers",
+   "score": 4
+  },
+  {
+   "company": "NVIDIA",
+   "score": 4
+  }
+ ],
+ "verdict": "A former Rescale sales VP saw CoreWeave lose almost 100% of the large enterprise GPU deals he worked to the hyperscalers, as its historical 10%-30% discount turned into parity or a premium after a 25% price increase, while reservation lead times stretched to 10-12 months.",
+ "summary_variables": {
+  "GPU pricing": [
+   "Almost 100% of large enterprise opportunities went to cloud providers after CoreWeave moved from 10%-30% cheaper to parity/premium; conflicts with 2026-11-05 call (gaining share, reseller +17.5%-20%). Inflection. Tenet 6 down"
+  ],
+  "Contracted power → active power conversion": [
+   "Reservation lead times 10-12 months vs a week or two (first-hand); consistent with SB #66250. Tenet 1 up"
+  ],
+  "Cost of debt": [
+   "Refinancing $2.3B facility due March 2028 at 13%-15% very risky vs 7% or below (estimate). Tenet 5 down"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Share vs hyperscalers: almost 100% of large enterprise deals lost to cloud providers vs the 2026-11-05 expert call (IT reseller) seeing CoreWeave gaining share and reseller business +17.5%-20% y/y: conflicting 🔺 Inflection.",
+  "Pricing: 25% hike across the SKU lineup (hearsay) vs mgmt's 20%+ increases on older chip models at Citi TMT (SB #67233, 2026-11-03): consistent (prices up), but the expert says it cost large-deal wins.",
+  "Margins: expert sees gross margin about 65% falling to 55% and EBITDA about 59% to the 50% range (estimate) vs Deutsche Bank's contribution margins on 2Q deals 5-10pts above prior (SB #67240, 2026-11-04): conflicting.",
+  "Lead times: reservations 10-12 months vs a week or two (expert's own comparison); SemiAnalysis sees CoreWeave mostly sold out for 2027 (SB #66250, 2026-11-05): consistent."
+ ],
+ "inflection": true,
+ "thesis_impact": [
+  "Tenet 1 (backlog conversion): ↑ — reservation lead times 10-12 months vs a week or two; >$100B backlog as anchor (hearsay).",
+  "Tenet 4 (pricing inflecting): → — the 25% hike stuck, but at parity/premium to hyperscalers CoreWeave lost almost 100% of large enterprise deals the expert saw.",
+  "Tenet 5 (financing moat): ↓ — refinancing the $2.3B March 2028 facility at 13%-15% would be dangerous vs ≤7% manageable.",
+  "Tenet 6 (supply wave / competition): ↓ — hyperscalers winning large enterprise deals, Nebius undercutting, frontier labs reselling excess capacity; enterprise GPU usage -25%-40% (estimate)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave lost almost 100% of large enterprise GPU opportunities seen by a former Rescale sales VP to cloud providers (recent)",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse14931&hl=fse14931,fse15134,fse15997&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave historical price advantage vs major cloud providers 10%-30%, now parity or premium",
+   "kind": "first_hand",
+   "citation": "[18 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse11844&hl=fse11844,fse11986&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave 25% price increase across SKU lineup",
+   "kind": "hearsay",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse13203&hl=fse13203,fse13512,fse13987&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave GPU reservation lead time 10-12 months vs a week or two previously",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse15239&hl=fse15239,fse15477&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave gross margin about 65% (current, expert estimate)",
+   "kind": "estimate",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse35552&hl=fse35552,fse35645&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave EBITDA margin about 59% (current, expert estimate)",
+   "kind": "estimate",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse35552&hl=fse35552,fse35645&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave gross margin could fall to 55% from about 65% (expert estimate)",
+   "kind": "estimate",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse35552&hl=fse35552,fse35645&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave EBITDA margin could fall to the 50% range from about 59% (expert estimate)",
+   "kind": "estimate",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse35552&hl=fse35552,fse35645&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave employee count over 2,000 (expert estimate)",
+   "kind": "estimate",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse11844&hl=fse11844,fse11986,fse12177,fse12595,fse13203,fse13512,fse13987,fse14767,fse15239,fse15477,fse15997,fse16171,fse16484,fse18122,fse20547,fse20984,fse21260,fse21260,fse21426,fse23318,fse25187,fse25354,fse27025,fse29355,fse31881,fse35552,fse35645,fse35750,fse37821,fse38076,fse38320,fse38596,fse39223,fse41010,fse41280,fse41337,fse44461,fse44750,fse45404,fse46036,fse47147,fse47297,fse47789,fse49571,fse51029,fse53676,fse53726,fse55001&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Enterprise GPU usage down 25%-40% on efficiency gains (expert estimate)",
+   "kind": "estimate",
+   "citation": "[11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse27025&hl=fse27025,fse28917&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave refinancing of $2.3B facility due March 2028 at 13%-15% would be dangerous vs manageable 7% or below",
+   "kind": "hearsay",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse46036&hl=fse46036,fse47147,fse47297&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave reported backlog over $100 billion",
+   "kind": "hearsay",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse16484&hl=fse16484,fse16683,fse16823&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave 23% share of specialized neocloud market",
+   "kind": "hearsay",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268297&scope=ANYWHERE&stmt=fse11844&hl=fse11844,fse11986,fse12177,fse12595,fse13203,fse13512,fse13987,fse14767,fse15239,fse15477,fse15997,fse16171,fse16484,fse18122,fse20547,fse20984,fse21260,fse21260,fse21426,fse23318,fse25187,fse25354,fse27025,fse29355,fse31881,fse35552,fse35645,fse35750,fse37821,fse38076,fse38320,fse38596,fse39223,fse41010,fse41280,fse41337,fse44461,fse44750,fse45404,fse46036,fse47147,fse47297,fse47789,fse49571,fse51029,fse53676,fse53726,fse55001&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3baa8833-33de-81a3-bab2-fe34dd216ff6",
+  "page_title": "CRWV Thesis - Revised"
+ },
+ "status": "done",
+ "note": "retry r5; GenSearch ok"
+}

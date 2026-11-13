@@ -1,0 +1,144 @@
+{
+ "doc_id": "EC-1000000-269025",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Director at Accounting Firm Expects Docusign Growth to Be Led by CLM and Intelligent Agreement Management",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269025",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794403938261",
+ "expert": "Director at a top-20 national CPA firm's software advisory, resale and implementation practice; Docusign 25%\u201330% of agreement-platform opportunities",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Docusign",
+   "score": 3.75
+  }
+ ],
+ "verdict": "The expert's Docusign-related business grew 7%\u201312% in Aug\u2013Oct 2026, with CLM/IAM expansions lifting contract value 8%\u201315%, but only 20%\u201330% of IAM pilots converted to paid in the first cycle.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udfe2 **Business up 7%\u201312%** in Aug\u2013Oct 2026, vs +~5% and +~20% from the 2026-11-05 calls: in between.",
+   "\ud83d\udfe2 **9%\u201314% next quarter** (estimate), with qualified pipeline at 108%\u2013115% of target."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udfe2 **NRR 106%\u2013112%, GRR 93%\u201396%** (practice) vs the page's DBNR of 101%: higher.",
+   "\ud83d\udfe2 **CLM/IAM expansions lift ACV 8%\u201315%** vs Cleveland's high end of ~5-10% (SB #63574): higher."
+  ],
+  "IAM adoption": [
+   "\ud83d\udd34 **Only 20%\u201330% of IAM/AI pilots convert to paid** in the first cycle; 15%\u201320% of larger CLM/IAM deals slipping."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "CLM/IAM expansion ACV uplift 8%\u201315% vs Cleveland high end of ~5-10% (SB #63574): higher.",
+  "NRR 106%\u2013112% at the expert's practice vs DBNR 101% (thesis page, FY25 disclosure): higher.",
+  "Business +7%\u201312% vs +~5% (2026-11-05, AI-co exec) and +~20% (2026-11-05, consulting PMO): in between.",
+  "Core e-signature demand +2%\u20135% vs envelopes and seats roughly flat (2026-11-05, consulting PMO): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth): \u2191 \u2014 7%\u201312% now, 9%\u201314% next quarter (estimate), pipeline 108%\u2013115% of target.",
+  "Stance (IAM bet): \u2192 \u2014 IAM interest +25%\u201340% and ACV uplift 8%\u201315%, offset by 20%\u201330% pilot conversion and slipping deals."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 7%\u201312% \u2014 Docusign-related business growth, 2026-08-01 to 2026-10-31; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[18 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse12063&hl=fse12063,fse12448,fse13027,fse13271,fse13421,fse13748,fse13924&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 25%\u201340% \u2014 IAM/AI contract-workflow interest, 2026-08-01 to 2026-10-31; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse7157&hl=fse7157,fse7444,fse8222,fse8963,fse9674,fse10757,fse10990,fse11726&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 2%\u20135% \u2014 Traditional eSignature demand growth, 2026-08-01 to 2026-10-31; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse7157&hl=fse7157,fse7444,fse8222,fse8963,fse9674,fse10757,fse10990,fse11726&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 12%\u201320% \u2014 Expansion opportunity growth, 2026-08-01 to 2026-10-31; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[18 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse12063&hl=fse12063,fse12448,fse13027,fse13271,fse13421,fse13748,fse13924&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 20%\u201330% \u2014 Qualified expansion opportunities delayed, 2026-08-01 to 2026-10-31; baseline: Total qualified",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse48743&hl=fse48743,fse48902&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 20%\u201330% \u2014 IAM pilot-to-paid conversion rate, 2026-08-01 to 2026-10-31; baseline: Initial cycle",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse48743&hl=fse48743,fse48902&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 5%\u20138% \u2014 Completed deal count shortfall, 2026-08-01 to 2026-10-31; baseline: vs. expectations",
+   "kind": "first_hand",
+   "citation": "[19 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse14401&hl=fse14401,fse15129,fse15302,fse16024,fse16113&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 15%\u201320% \u2014 Larger customers optimizing commitments, 2026-08-01 to 2026-10-31; baseline: Total large accounts",
+   "kind": "first_hand",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse15302&hl=fse15302,fse16024&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 4%\u20137% \u2014 Blended effective contract value increase, 2026-08-01 to 2026-10-31; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse44244&hl=fse44244,fse44546,fse44923,fse45114&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 9%\u201314% \u2014 Projected Docusign business growth, 2026-11-01 to 2027-01-31; baseline: Year-over-year",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse30567&hl=fse30567,fse30638,fse30928,fse30980,fse31180&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 107%\u2013110% \u2014 Forecast Net Revenue Retention, 2026-11-01 to 2027-01-31; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[24 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse28156&hl=fse28156,fse28589,fse29014,fse29139,fse29482,fse29654,fse29940,fse30567,fse31180&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 108%\u2013115% \u2014 Qualified pipeline vs. target, 2026-11-06; baseline: vs. plan",
+   "kind": "first_hand",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse30567&hl=fse30567,fse30638,fse30928,fse30980,fse31180&page=2)"
+  },
+  {
+   "ticker": "OTHER:PandaDoc",
+   "text": "PandaDoc: 1\u20132 percentage points \u2014 Market share gain, 2026; baseline: SMB/lower mid-market",
+   "kind": "estimate",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse36251&hl=fse36251,fse36486,fse36779,fse36878,fse37260&page=2)"
+  },
+  {
+   "ticker": "OTHER:Icertis",
+   "text": "Icertis: 1\u20132 percentage points \u2014 Market share gain, 2026; baseline: Complex enterprise CLM",
+   "kind": "estimate",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse36251&hl=fse36251,fse36486,fse36779,fse36878,fse37260&page=2)"
+  },
+  {
+   "ticker": "OTHER:OneSpan",
+   "text": "OneSpan: about 1% \u2014 Market share gain, 2026; baseline: Regulated segments",
+   "kind": "estimate",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269025&scope=ANYWHERE&stmt=fse38221&hl=fse38221,fse38267,fse38292,fse38359,fse38404,fse38482&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

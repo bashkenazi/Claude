@@ -1,0 +1,93 @@
+{
+ "doc_id": "EC-1000000-240771",
+ "ticker": "ORCL",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Global Head of Advanced Analytics at Sanofi Believes Unified AI Strategy Balances Flexibility and Governance",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240771",
+ "as_company": "Oracle Corp",
+ "conversation_id": "7093__1794406865969",
+ "expert": "Global Head of Advanced Analytics at Sanofi (Opella); 30 internal and almost 100 external staff; no Oracle visibility",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Anthropic",
+   "score": 4
+  }
+ ],
+ "verdict": "The call has no Oracle figures: Sanofi's analytics head describes AI projects gated at €150,000 and €500,000 with a three-to-five-year ROI horizon, and an Anthropic Claude allocation of $50 per person used up in three or four days.",
+ "summary_variables": {
+  "Demand / orders": [
+   "🟡 **Sanofi AI projects under €150,000 proceed on intangibles; above €500,000 need CDO approval on a three-to-five-year ROI** (first-hand); first read; no Oracle spend disclosed."
+  ],
+  "Pricing & margins": [
+   "🟡 **Claude allocation of $50 per person consumed in three or four days**, business case rebuilt upward (first-hand); first read; Anthropic, not Oracle."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on enterprise AI approval thresholds; no earlier expert call or stored row covers this measure."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenet moved: the call contains no Oracle content."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "OTHER:Sanofi",
+   "text": "Sanofi: 30 — Internal staff size, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse3298&hl=fse3298,fse3638&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sanofi",
+   "text": "Sanofi: almost 100 — External staff size, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse3298&hl=fse3298,fse3638&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sanofi",
+   "text": "Sanofi: more than 10 — Projects in parallel, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse3298&hl=fse3298,fse3638&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sanofi",
+   "text": "Sanofi: €150,000 — Project cost threshold, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[23 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse12575&hl=fse12575,fse12612,fse12758,fse12932,fse13067,fse13103,fse13284,fse13355,fse13392,fse13511,fse13636&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sanofi",
+   "text": "Sanofi: €500,000 — Approval threshold, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[23 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse12575&hl=fse12575,fse12612,fse12758,fse12932,fse13067,fse13103,fse13284,fse13355,fse13392,fse13511,fse13636&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sanofi",
+   "text": "Sanofi: three to five years — Financial projection period, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[23 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse12575&hl=fse12575,fse12612,fse12758,fse12932,fse13067,fse13103,fse13284,fse13355,fse13392,fse13511,fse13636&page=2)"
+  },
+  {
+   "ticker": "OTHER:Anthropic",
+   "text": "Anthropic: $50 per person — Claude initial allocation, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse20137&hl=fse20137,fse20174,fse20262,fse20302,fse20331,fse20493,fse20598,fse20687,fse20775,fse20825,fse20855&page=2)"
+  },
+  {
+   "ticker": "OTHER:Anthropic",
+   "text": "Anthropic: three or four days — Time to consume $50, Current; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240771&scope=ANYWHERE&stmt=fse20137&hl=fse20137,fse20174,fse20262,fse20302,fse20331,fse20493,fse20598,fse20687,fse20775,fse20825,fse20855&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-81ad-aaee-c23f9d61044c",
+  "page_title": "Oracle - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "GenSearch mixed in passages from other Oracle expert calls (Cerner/Epic, SAP, OCI); those passages and their citations were removed. The call itself has no Oracle content."
+}

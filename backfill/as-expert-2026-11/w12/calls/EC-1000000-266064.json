@@ -1,0 +1,163 @@
+{
+ "doc_id": "EC-1000000-266064",
+ "ticker": "MU",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Former Director at Micron Technology Believes Memory Supply Will Stay Tight Through 2028 Before the Market Levels Out",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-266064",
+ "as_company": "Micron Technology Inc",
+ "conversation_id": "7093__1794404169375",
+ "expert": "Former Marketing Director at Micron (16 years; strategic planning, distribution, go-to-market)",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Micron",
+   "score": 4
+  },
+  {
+   "company": "SanDisk",
+   "score": 4
+  },
+  {
+   "company": "CXMT",
+   "score": 4
+  },
+  {
+   "company": "YMTC",
+   "score": 4
+  },
+  {
+   "company": "Samsung",
+   "score": 3
+  },
+  {
+   "company": "SK hynix",
+   "score": 3
+  }
+ ],
+ "verdict": "A former Micron marketing director sees contract-price visibility out to about 24 months and supply tight through 2028, with contract prices up in the 20% range in 2027 and 2028 (estimate).",
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (supply short through 2028): \u2191 \u2014 tight through 2028; greenfield 2029\u20132030.",
+  "Tenet 3 (SCAs): \u2191 \u2014 about 35% under LTAs with some to 2030/2031 and ~24-month price visibility.",
+  "Tenet 4 (pricing durable, RoC peaked): \u2192 \u2014 +20% range in 2027-28 is slower than 2026 increases.",
+  "Tenet 6 (earnings power): \u2192 \u2014 not addressed directly."
+ ],
+ "changes": [
+  "Contract prices +20% range in 2027-28 (estimate) vs ex-Samsung SVP 2027 +20-30% (SB #62238): consistent.",
+  "Tight through 2028 (expert) vs 2026-11-06 integrator call balance late Q4 2027 or early Q1 2028: slightly longer; SemiAnalysis shortfall through 2030 (SB #65840).",
+  "About 35% of business under LTAs (estimate) vs mgmt >75% of CY27 volume committed (SB #61608): not like for like (business share vs volume commitment)."
+ ],
+ "summary_variables": {
+  "Spot vs contract DRAM pricing": [
+   "\ud83d\udfe2 **Contract prices up in the 20% range in 2027 and 2028** (estimate), consistent with ex-Samsung SVP's 2027 +20-30% (SB #62238). \u2192 Tenet 4 (pricing durable) \u2192 "
+  ],
+  "SCA coverage %": [
+   "\ud83d\udfe2 **About 35% of Micron business under long-term contracts, some to 2030/2031** (estimate) vs ~25% SCA coverage on the What Matters page and mgmt >75% of CY27 volume committed (SB #61608): different measures. \u2192 Tenet 3 (SCAs) \u2191 "
+  ],
+  "Capex discipline": [
+   "\ud83d\udd34 **33%\u201335% supply growth would tip the market to oversupply**; greenfield fabs started in 2026 arrive 2029\u20132030 (estimate), vs Micron FY27 capex >$50B (SB #61618). \u2192 Tenet 1 (supply short) \u2192 "
+  ]
+ },
+ "characterization_changed": null,
+ "new_datapoints": [
+  {
+   "ticker": "MU",
+   "text": "Micron: about 35% \u2014 Business covered by long-term contracts; Current; vs Total business",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse4292&hl=fse4292,fse4622,fse4723,fse4958,fse5439,fse5544,fse6200,fse6423,fse6900,fse7136,fse8429,fse8519,fse8888,fse9218,fse9745,fse11758,fse11879,fse12891,fse13002,fse13166,fse14108,fse14431,fse14550,fse14746,fse15002,fse15290,fse16194,fse17048,fse17848,fse18489,fse18724,fse19223,fse19318,fse19743,fse19856,fse20028,fse20918,fse21976,fse22442,fse23247,fse23574,fse24346,fse24837,fse24900,fse25163,fse25552,fse27556,fse27647,fse28039,fse29500,fse29810,fse30247,fse30908,fse31187,fse31941,fse32146,fse32574,fse33332,fse34173,fse34707,fse35031,fse36054,fse36505,fse39795,fse39980,fse40419,fse41421,fse41983,fse43249,fse43749,fse43883,fse44703,fse44820,fse45487,fse45792,fse46341,fse47864,fse48128,fse49482,fse49850&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Suppliers: 65%\u201380% \u2014 Near-term supply covered by standard contracts; Next roughly one year; vs Total supply",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse4292&hl=fse4292,fse4622,fse4723,fse4958,fse5439,fse5544,fse6200,fse6423,fse6900,fse7136,fse8429,fse8519,fse8888,fse9218,fse9745,fse11758,fse11879,fse12891,fse13002,fse13166,fse14108,fse14431,fse14550,fse14746,fse15002,fse15290,fse16194,fse17048,fse17848,fse18489,fse18724,fse19223,fse19318,fse19743,fse19856,fse20028,fse20918,fse21976,fse22442,fse23247,fse23574,fse24346,fse24837,fse24900,fse25163,fse25552,fse27556,fse27647,fse28039,fse29500,fse29810,fse30247,fse30908,fse31187,fse31941,fse32146,fse32574,fse33332,fse34173,fse34707,fse35031,fse36054,fse36505,fse39795,fse39980,fse40419,fse41421,fse41983,fse43249,fse43749,fse43883,fse44703,fse44820,fse45487,fse45792,fse46341,fse47864,fse48128,fse49482,fse49850&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 12\u201318 months \u2014 Active planning horizon; Standard; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse13166&hl=fse13166,fse13309,fse13479,fse14108,fse15290&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: about 24 months \u2014 Contract-price visibility; Current; vs Standard visibility",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Micron/Industry: through 2030 \u2014 Strategic agreement duration; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Micron/Industry: in the 20% range \u2014 Contract price increase; 2027 and 2028; vs 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse6423&hl=fse6423,fse6542,fse6644,fse6826,fse7401,fse7914,fse9218,fse9349,fse9745,fse11758,fse11879,fse13166,fse13687,fse14108,fse17048,fse19743,fse19856,fse20028,fse20918,fse20918,fse24837,fse24900,fse25163,fse25320,fse25552,fse28256,fse28813,fse32574,fse33332,fse33867,fse34073,fse34173,fse34321,fse34707,fse35828,fse35945,fse36054,fse36505,fse36656,fse36958,fse38766,fse38834,fse39037&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Micron/Industry: 50% \u2014 Possible spot-price increase; By end of 2028; vs Current",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse6423&hl=fse6423,fse6542,fse6644,fse6826,fse7401,fse7914,fse9218,fse9349,fse9745,fse11758,fse11879,fse13166,fse13687,fse14108,fse17048,fse19743,fse19856,fse20028,fse20918,fse20918,fse24837,fse24900,fse25163,fse25320,fse25552,fse28256,fse28813,fse32574,fse33332,fse33867,fse34073,fse34173,fse34321,fse34707,fse35828,fse35945,fse36054,fse36505,fse36656,fse36958,fse38766,fse38834,fse39037&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 10%\u201320% \u2014 Typical gap between spot and contract prices; Steady conditions; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 30%\u201350% \u2014 Gap between spot and contract prices; Extreme supply conditions; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse6423&hl=fse6423,fse6542,fse6644,fse6826,fse7401,fse7914,fse9218,fse9349,fse9745,fse11758,fse11879,fse13166,fse13687,fse14108,fse17048,fse19743,fse19856,fse20028,fse20918,fse20918,fse24837,fse24900,fse25163,fse25320,fse25552,fse28256,fse28813,fse32574,fse33332,fse33867,fse34073,fse34173,fse34321,fse34707,fse35828,fse35945,fse36054,fse36505,fse36656,fse36958,fse38766,fse38834,fse39037&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: about 20% \u2014 Gap threshold for LTA renegotiation pain; Current; vs Contract price",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse6423&hl=fse6423,fse6542,fse6644,fse6826,fse7401,fse7914,fse9218,fse9349,fse9745,fse11758,fse11879,fse13166,fse13687,fse14108,fse17048,fse19743,fse19856,fse20028,fse20918,fse20918,fse24837,fse24900,fse25163,fse25320,fse25552,fse28256,fse28813,fse32574,fse33332,fse33867,fse34073,fse34173,fse34321,fse34707,fse35828,fse35945,fse36054,fse36505,fse36656,fse36958,fse38766,fse38834,fse39037&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 35%\u201340% \u2014 Increase in volume from new process; Post-node shrink; vs Mainstream fab baseline",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse4292&hl=fse4292,fse4622,fse4723,fse4958,fse5439,fse5544,fse6200,fse6423,fse6900,fse7136,fse8429,fse8519,fse8888,fse9218,fse9745,fse11758,fse11879,fse12891,fse13002,fse13166,fse14108,fse14431,fse14550,fse14746,fse15002,fse15290,fse16194,fse17048,fse17848,fse18489,fse18724,fse19223,fse19318,fse19743,fse19856,fse20028,fse20918,fse21976,fse22442,fse23247,fse23574,fse24346,fse24837,fse24900,fse25163,fse25552,fse27556,fse27647,fse28039,fse29500,fse29810,fse30247,fse30908,fse31187,fse31941,fse32146,fse32574,fse33332,fse34173,fse34707,fse35031,fse36054,fse36505,fse39795,fse39980,fse40419,fse41421,fse41983,fse43249,fse43749,fse43883,fse44703,fse44820,fse45487,fse45792,fse46341,fse47864,fse48128,fse49482,fse49850&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 33%\u201335% \u2014 Supply growth forecast; Cycle expansion; vs Demand stability",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse6423&hl=fse6423,fse6542,fse6644,fse6826,fse7401,fse7914,fse9218,fse9349,fse9745,fse11758,fse11879,fse13166,fse13687,fse14108,fse17048,fse19743,fse19856,fse20028,fse20918,fse20918,fse24837,fse24900,fse25163,fse25320,fse25552,fse28256,fse28813,fse32574,fse33332,fse33867,fse34073,fse34173,fse34321,fse34707,fse35828,fse35945,fse36054,fse36505,fse36656,fse36958,fse38766,fse38834,fse39037&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 5% \u2014 Data-center demand decline; Hypothetical; vs Stable demand",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse6423&hl=fse6423,fse6542,fse6644,fse6826,fse7401,fse7914,fse9218,fse9349,fse9745,fse11758,fse11879,fse13166,fse13687,fse14108,fse17048,fse19743,fse19856,fse20028,fse20918,fse20918,fse24837,fse24900,fse25163,fse25320,fse25552,fse28256,fse28813,fse32574,fse33332,fse33867,fse34073,fse34173,fse34321,fse34707,fse35828,fse35945,fse36054,fse36505,fse36656,fse36958,fse38766,fse38834,fse39037&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "PC Market: 20% \u2014 Month-over-month drop in PC demand; August to September; vs Prior month",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse6423&hl=fse6423,fse6542,fse6644,fse6826,fse7401,fse7914,fse9218,fse9349,fse9745,fse11758,fse11879,fse13166,fse13687,fse14108,fse17048,fse19743,fse19856,fse20028,fse20918,fse20918,fse24837,fse24900,fse25163,fse25320,fse25552,fse28256,fse28813,fse32574,fse33332,fse33867,fse34073,fse34173,fse34321,fse34707,fse35828,fse35945,fse36054,fse36505,fse36656,fse36958,fse38766,fse38834,fse39037&page=2)"
+  },
+  {
+   "ticker": "OTHER:CXMT",
+   "text": "CXMT: 30% \u2014 Reduction in cell-layout area; Current; vs Standard design",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266064&scope=ANYWHERE&stmt=fse40419&hl=fse40419&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "MU Thesis - Revised"
+ },
+ "status": "done",
+ "note": "On the thesis page the repeated Q&A citation [12] is linked once at the top of the Q&A toggle; full per-answer links are in summaries/EC-1000000-266064.md"
+}

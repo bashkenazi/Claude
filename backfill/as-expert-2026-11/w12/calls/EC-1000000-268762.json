@@ -1,0 +1,146 @@
+{
+ "doc_id": "EC-1000000-268762",
+ "ticker": "MU",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Leader at AI Server System Integrator Expects Micron-Related Business to Grow 40%\u201345% in 2026 Amid Supply Constraints",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268762",
+ "as_company": "Micron Technology Inc",
+ "conversation_id": "7093__1794403936032",
+ "expert": "Head of memory sourcing and final purchasing decision-maker at an AI server system integrator (Micron ~30% of memory spend)",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Micron",
+   "score": 4
+  },
+  {
+   "company": "SK hynix",
+   "score": 5
+  },
+  {
+   "company": "Samsung",
+   "score": 3
+  }
+ ],
+ "verdict": "An AI server integrator's memory buyer is paying 55%\u201360% more y/y for Micron memory yet still bought about 18% more units in Sept\u2013Nov 2026, with lead times out to 6 to 10 months and LTA coverage up to 85%\u201390%.",
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (supply short through 2028): \u2191 \u2014 lead times 6 to 10 months vs 5 to 8; balance only late Q4 2027 or early Q1 2028.",
+  "Tenet 2 (AI demand outruns supply): \u2191 \u2014 units +18% y/y despite 55%\u201360% higher prices; 15% supply-demand gap.",
+  "Tenet 3 (SCAs): \u2191 \u2014 LTA coverage 85%\u201390% from 65%\u201370%; at least 75% of 2027 buys with down payments.",
+  "Tenet 4 (pricing durable, RoC peaked): \u2191 \u2014 +15%\u201320% q/q, but the pace is moderating, consistent with RoC past peak.",
+  "Tenet 5 (HBM share): \u2193 \u2014 SK hynix gaining some share from Micron and Samsung."
+ ],
+ "changes": [
+  "Contract prices +15%\u201320% q/q (expert) vs Cleveland C4Q contract DRAM +15-20% q/q, MU ~+22% (SB #62062): consistent.",
+  "Lead times 6 to 10 months vs 5 to 8 months in Q2 (expert) vs TrendForce DRAM lead times 19 weeks and easing (SB #65604): **conflicting**.",
+  "LTA coverage 85%\u201390% vs 65%\u201370% 90 days earlier (expert) vs ex-Samsung SVP LTAs ~80-90% of server DRAM contracts (SB #62239): consistent.",
+  "Supply and demand balance late Q4 2027 or early Q1 2028 (expert) vs 2026-11-05 Rambus call relief Q3 2027 or Q4 2027: consistent, slightly later."
+ ],
+ "summary_variables": {
+  "Spot vs contract DRAM pricing": [
+   "\ud83d\udfe2 **Prices paid 55%\u201360% higher y/y and 15%\u201320% higher q/q**, in line with Cleveland's C4Q contract DRAM +15-20% q/q (SB #62062); pace moderating. \u2192 Tenet 4 (pricing durable) \u2191 "
+  ],
+  "SCA coverage %": [
+   "\ud83d\udfe2 **LTA coverage 85%\u201390% vs 65%\u201370% 90 days earlier**, consistent with LTAs at 80-90% of server DRAM contracts (SB #62239). \u2192 Tenet 3 (SCAs) \u2191 ",
+   "\ud83d\udfe2 **At least 75% of 2027 purchases to need down payments vs about half in 2026** (estimate), first read on prepayment share. "
+  ],
+  "Supply & lead times": [
+   "\ud83d\udfe2 **Lead times 6 to 10 months vs 5 to 8 months in Q2**; supply-demand gap 15%, backlog +5%\u20138%, vs TrendForce DRAM lead times easing to 19 weeks (SB #65604): **conflicting**. \u2192 Tenet 1 (supply short) \u2191 ",
+   "\ud83d\udfe2 **Units +18% y/y Sept\u2013Nov**; expects Micron business +40%\u201345% in 2026 and about 35% in 2027 (estimate). \u2192 Tenet 2 (AI demand) \u2191 "
+  ],
+  "HBM4E share + 2027 HBM pricing round": [
+   "\ud83d\udd34 **SK hynix gaining some share from Micron** on earlier launches; China-based suppliers already **7%\u20138%** of DRAM/NAND purchases. \u2192 Tenet 5 (HBM share) \u2193 "
+  ]
+ },
+ "characterization_changed": null,
+ "new_datapoints": [
+  {
+   "ticker": "MU",
+   "text": "Micron: about 30% \u2014 Share of memory purchases; Current; vs Total memory spend",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse4606&hl=fse4606,fse4671&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: about 18% higher \u2014 Unit purchase volume; Sept\u2013Nov 2026; vs Prior-year period",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse6719&hl=fse6719,fse7096,fse7262,fse7834,fse7995&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 55%\u201360% higher \u2014 Memory prices paid; Sept\u2013Nov 2026; vs Prior-year period",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse7096&hl=fse7096,fse7262,fse7995&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 15%\u201320% higher \u2014 Memory prices paid; Sept\u2013Nov 2026; vs June\u2013Aug 2026",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse40881&hl=fse40881,fse41210,fse41517,fse41686&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 6 to 10 months \u2014 Delivery lead times; Current; vs 5 to 8 months in Q2 2026",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse31869&hl=fse31869,fse32242,fse32445,fse32558&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 91%\u201392% \u2014 Recent fill rate; Current; vs 89%\u201390% previously",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse28318&hl=fse28318,fse28949,fse29023&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 5%\u20138% higher \u2014 Backlog volume; Current; vs June\u2013August 2026",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: about 30% higher \u2014 NAND/SSD business volume; Current; vs Prior period",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse66194&hl=fse66194,fse66414,fse66477&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 40%\u201345% more \u2014 Expected business growth; Calendar 2026; vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: about 35% more \u2014 Expected demand growth; Calendar 2027; vs Calendar 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Integrator: 85%\u201390% \u2014 LTA coverage share; Current; vs 65%\u201370% 90 days earlier",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse36742&hl=fse36742,fse36967,fse37477,fse37629&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Integrator: at least 75% \u2014 Purchases using down payments; 2027 Forecast; vs ~50% in 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse34196&hl=fse34196,fse34460,fse34571,fse34713&page=2)"
+  },
+  {
+   "ticker": "OTHER:China memory suppliers",
+   "text": "China suppliers: 7%\u20138% \u2014 Share of memory purchases; Sept\u2013Nov 2026; vs Total memory spend",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268762&scope=ANYWHERE&stmt=fse56251&hl=fse56251,fse56543,fse56646&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "MU Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

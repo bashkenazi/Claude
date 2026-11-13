@@ -1,0 +1,121 @@
+{
+ "doc_id": "EC-1000000-239495",
+ "ticker": "MSFT",
+ "tier": 2,
+ "sector": "Software A-M",
+ "title": "Associate Director at Kyndryl Holdings Inc Believes Sovereignty Solutions Are Essential for Regulated Industries",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239495",
+ "as_company": "Microsoft Corp",
+ "conversation_id": "7093__1794406300465",
+ "expert": "Associate Director, digital workplace services CoE at Kyndryl (Europe, APAC, Middle East); 15-20 clients over 18 months",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Microsoft",
+   "score": 4
+  },
+  {
+   "company": "Kyndryl",
+   "score": 4
+  },
+  {
+   "company": "Unnamed Indian Provider",
+   "score": 4
+  },
+  {
+   "company": "AWS",
+   "score": 3
+  },
+  {
+   "company": "ServiceNow",
+   "score": 3
+  }
+ ],
+ "verdict": "At Kyndryl, 5 of 15–20 clients served over the prior 18 months carried explicit sovereignty mandates that hyperscaler regional hosting mostly meets, but Nordic and Indian government clients moved some work to local providers.",
+ "summary_variables": {
+  "Azure growth (sovereign demand)": [
+   "🟢 **5 of 15–20 Kyndryl clients had explicit sovereignty mandates** over 18 months (first-hand); first read, no earlier expert call or stored row. → Tenet 1 (Azure supply-limited) →",
+   "🟢 **About one-third of recent regulated projects** carry sovereignty requirements (estimate); first read."
+  ],
+  "Competition & share": [
+   "🔴 **Nordic customers shifted away from American providers** over the prior year and Indian government bodies are moving to an Indian provider (no counts given); first read. → Tenet 1 (Azure supply-limited) ↓"
+  ],
+  "Copilot seat adds": [
+   "🟡 **Kyndryl tested Copilot internally for about three years** before broad production; consistent with Morgan Stanley partner checks that broader Copilot usage is still early (SB #63315). → Tenet 3 (Copilot deployment) ↓"
+  ]
+ },
+ "characterization_changed": "Characterization changed from Positive: the expert's own clients include Nordic and Indian government customers who moved work from U.S. hyperscalers to local providers; sovereignty demand is real but not all of it lands on Azure.",
+ "changes": [
+  "First read on the share of managed-services clients with sovereignty mandates (5 of 15–20); no earlier expert call or stored row.",
+  "Copilot adoption pace: Kyndryl's ~3-year internal test before broad production vs Morgan Stanley partner checks that broader Copilot usage remains early, concentrated in tech-oriented customers (SB #63315, 2026-10-19): **consistent**."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Azure supply-limited): → — sovereignty demand is real (5 of 15–20 clients) but some Nordic and Indian government work is going to local providers; no volumes given.",
+  "Tenet 3 (Copilot deployment): ↓ slight — a large SI took about three years of internal testing before broad Copilot production."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscalers/Peers: about one-third — share of projects with sovereignty requirements, recent; baseline: expert's recent project mix",
+   "kind": "estimate",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239495&scope=ANYWHERE&stmt=fse1096&hl=fse1096&page=1)"
+  },
+  {
+   "ticker": "OTHER:Kyndryl",
+   "text": "Kyndryl: 5 of 15 — customers with specific sovereignty requirements, prior **18 months**; baseline: total customers served",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239495)"
+  },
+  {
+   "ticker": "OTHER:Kyndryl",
+   "text": "Kyndryl: 5 of 20 — alternative customer count with sovereignty requirements, prior **18 months**; baseline: total customers served",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239495)"
+  },
+  {
+   "ticker": "MSFT",
+   "text": "Microsoft: about 15% — share of AI-900 syllabus covering sovereignty/Purview, current; baseline: total course content",
+   "kind": "first_hand",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239495&scope=ANYWHERE&stmt=fse37890&hl=fse37890,fse37972&page=2)"
+  },
+  {
+   "ticker": "OTHER:Kyndryl",
+   "text": "Kyndryl/Clients: six or 7 months — duration of responsibility-gap discussions, ongoing; baseline: anecdotal project timeline",
+   "kind": "first_hand",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239495&scope=ANYWHERE&stmt=fse57689&hl=fse57689&page=2)"
+  },
+  {
+   "ticker": "OTHER:Customer",
+   "text": "Customer/Admin: three to four days or longer — historical joiner process completion time, historical; baseline: vs agentic automation",
+   "kind": "first_hand",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239495&scope=ANYWHERE&stmt=fse19261&hl=fse19261&page=2)"
+  },
+  {
+   "ticker": "OTHER:Kyndryl",
+   "text": "Kyndryl: about three years — duration of internal Copilot testing, to date; baseline: project commencement",
+   "kind": "first_hand",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239495&scope=ANYWHERE&stmt=fse42912&hl=fse42912,fse42945&page=2)"
+  },
+  {
+   "ticker": "OTHER:Kyndryl",
+   "text": "Kyndryl/Project: Four or five — internal systems for workflow integration, per project; baseline: illustrative project scale",
+   "kind": "first_hand",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239495&scope=ANYWHERE&stmt=fse56806&hl=fse56806,fse56951,fse57234&page=2)"
+  },
+  {
+   "ticker": "OTHER:Kyndryl",
+   "text": "Kyndryl/Project: one or two — external systems for workflow integration, per project; baseline: illustrative project scale",
+   "kind": "first_hand",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239495&scope=ANYWHERE&stmt=fse56806&hl=fse56806,fse56951,fse57234&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3d4a8833-33de-81b8-a7dd-f453cff3ede4",
+  "page_title": "MSFT Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

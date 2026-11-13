@@ -1,0 +1,128 @@
+{
+ "doc_id": "EC-1000000-270243",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Executive at Professional Services Firm Expects DocuSign Services to Grow 10%\u201315% in 2026 as AI Workflow Demand Rises",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270243",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794404016708",
+ "expert": "Senior leader at a professional-services consulting firm; Docusign at least 30% of relevant platform activity; sees implementation billings first-hand",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "DocuSign Inc",
+   "score": 4
+  },
+  {
+   "company": "Adobe",
+   "score": 3
+  },
+  {
+   "company": "Ironclad",
+   "score": 4
+  },
+  {
+   "company": "PandaDoc",
+   "score": 4
+  },
+  {
+   "company": "Icertis",
+   "score": 4
+  },
+  {
+   "company": "Dropbox",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert's Docusign-related services revenue grew about 10% y/y in Aug\u2013Oct 2026 on AI and document-automation projects, while customer spend at renewal is generally flat to up no more than 5% as seat cuts offset higher tiers.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udfe2 **Services up about 10% y/y**, 10%\u201315% expected for CY26 (estimate); in line with +~10.2% on the 2026-11-09 VAR AE call."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udfe1 **Customer spend flat to up no more than 5%** at renewal (estimate); seats flat or slightly down vs +~11% on the 2026-11-09 call: **conflicting**.",
+   "\ud83d\udd34 **Downgrades up around 5%** (estimate) as some customers consolidate onto Adobe, vs no meaningful churn on 2026-11-09: **conflicting**."
+  ],
+  "IAM adoption": [
+   "\ud83d\udfe2 **CLM and AI workflow adoption up 30%\u201340%** (estimate) vs close to 15% on the 2026-11-06 consulting call and Cleveland's soft CLM read (SB #63588): **conflicting**.",
+   "\ud83d\udfe2 **Usage up an estimated 15%-20%** as AI runs higher-volume workflows; matches 15%\u201320% on the 2026-11-05 consulting PMO call."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Services +~10% and CY26 10%\u201315% (estimate) vs +~10.2% and ~10% CY26 (2026-11-09, VAR AE): consistent.",
+  "Seats flat to slightly down vs +~11% (2026-11-09, VAR AE): conflicting.",
+  "CLM adoption +30%\u201340% (estimate) vs close to 15% (2026-11-06, consulting strategist) and Cleveland net-new CLM down Y/Y (SB #63588): conflicting.",
+  "Downgrades up around 5% (estimate) vs no meaningful churn (2026-11-09, VAR AE): conflicting."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth): \u2191 \u2014 services +~10% now, 10%\u201315% for CY26 (estimate).",
+  "Stance (IAM bet): \u2191 \u2014 CLM/AI workflow adoption +30%\u201340% (estimate), customers moving to higher tiers; seat pressure persists."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 10% \u2014 Consulting services growth, **August-October 2026**; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse9776&hl=fse9776,fse10291&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 15%-20% \u2014 Estimated customer usage, **August-October 2026**; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse12366&hl=fse12366,fse12821,fse13399,fse13432&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 10% \u2014 Share of growth from new logos, **August-October 2026**; baseline: Total growth",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse9776&hl=fse9776,fse10291&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: no more than 5% \u2014 Customer spending increase, **August-October 2026**; baseline: Prior levels",
+   "kind": "estimate",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse14831&hl=fse14831,fse15817,fse15971&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: around 5% \u2014 Usage reductions/downgrades, **August-October 2026**; baseline: Not stated",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse17449&hl=fse17449&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 10% \u2014 Expected services growth, **November 2026-January 2027**; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse9776&hl=fse9776,fse10291&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 10%-15% \u2014 Expected services growth, **Calendar 2026**; baseline: Calendar 2025",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse9776&hl=fse9776,fse10291&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 30%-40% \u2014 CLM adoption growth, **August-October 2026**; baseline: Not stated",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse26244&hl=fse26244,fse26715,fse28124&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 30%-40% \u2014 AI workflow tool adoption growth, **August-October 2026**; baseline: Not stated",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270243&scope=ANYWHERE&stmt=fse26244&hl=fse26244,fse26715,fse28124&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

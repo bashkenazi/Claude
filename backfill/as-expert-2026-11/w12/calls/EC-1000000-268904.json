@@ -1,0 +1,15 @@
+{
+ "doc_id": "EC-1000000-268904",
+ "ticker": "MU",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Manager at Premium Automaker Sees Memory Supply Tightness Worsening and Micron Spending Rising",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268904",
+ "as_company": "Micron Technology Inc",
+ "conversation_id": null,
+ "status": "failed",
+ "note": "timeout-no-conv-id (retry r2: alphasense_genai timed out after 60s, no conversation_id; not re-asked)",
+ "new_datapoints": [],
+ "filed": null
+}

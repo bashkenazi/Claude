@@ -1,0 +1,134 @@
+{
+ "doc_id": "EC-1000000-265396",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Global Commodity Manager (Senior Advisor) at Dell Technologies Sees Asia Vital Components as a Strong Partner for Custom AI-Server Cold Plates",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-265396",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794404006391",
+ "expert": "Global Commodity Manager (Senior Advisor) at Dell Technologies; managed the AVC account for three years and made cold-plate price awards",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  },
+  {
+   "company": "Cooler Master",
+   "score": 4
+  },
+  {
+   "company": "Hon Hai",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert, who awarded Dell's cold-plate business, saw <b>reference cold-plate prices fall 40\u201350%</b> as GB volumes scaled while custom ASIC cooling carries a ~40% premium and the first qualified supplier takes up to 100% of launch volume.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "\ud83d\udfe2 <b>Up to 100% of launch volume</b> to the first qualified supplier, then 50/50 (his allocation rule), consistent with JPM's ~50% per project (SB #58861)."
+  ],
+  "ASIC liquid-cooling start": [
+   "\ud83d\udfe2 <b>Custom ASIC cooling content ~40% above reference designs</b> (first-hand), first read. \u2192 Tenet 2 (ASIC >50% of liquid revenue) \u2191",
+   "\ud83d\udfe2 <b>At least 80% of the custom ASIC servers he sourced were liquid-cooled</b> (estimate)."
+  ],
+  "Gross margin": [
+   "\ud83d\udd34 <b>Reference cold-plate prices down 40\u201350%</b> as GB200/GB300 volume scaled (first-hand) vs JPM's ASP raises on switch trays (SB #58857): conflicting. \u2192 Tenet 3 (GM 34%+) \u2193",
+   "\ud83d\udd34 <b>2\u20133% (up to 5%) quarterly cost-down targets</b>; copper is 30\u201340% of cost."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Reference cold-plate prices -40-50% (first-hand) vs JPM: AVC raised ASPs on Nvidia/Mellanox switch-tray cold plates (SB #58857): conflicting (different products).",
+  "Launch allocation 100% then 50/50 vs JPM ~50% share in each AI project (SB #58861): consistent.",
+  "First read on AVC field quality: leak incidents below 1% of units; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Rubin content and share): \u2192 \u2014 dual sourcing drives toward 50/50 once a second source qualifies.",
+  "Tenet 2 (ASIC >50% of liquid revenue): \u2191 \u2014 at least 80% of custom ASIC servers liquid-cooled; content ~40% above reference.",
+  "Tenet 3 (GM 34%+): \u2193 \u2014 reference prices -40-50% and 2-3% quarterly cost-downs; copper 30-40% of cost."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "2%\u20133% \u2014 Quarterly savings targets, Sustaining programs, vs Quarter-over-quarter",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "5% \u2014 Savings target, High-volume projects, vs Quarter-over-quarter",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "50/50 \u2014 Sourcing allocation, Standard split, vs Dual-sourced programs",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "80/20 \u2014 Launch allocation, Initial ramp split, vs Second supplier ramping",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "100% \u2014 Initial allocation, Single-source launch, vs Before second source ready",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "30%\u201340% \u2014 Cost of metals/copper, Cold plate cost, vs Total unit cost",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "less than 1% \u2014 Leak incidents, Quality failure rate, vs Total units shipped",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "4-6 months \u2014 Qualification time, AI-server projects, vs Start to mass production",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "40%\u201350% \u2014 Price reduction, Reference cold plates, vs As volume/automation rose",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "10%\u201320% to 100% \u2014 Custom design premium, Unit price, vs Reference designs",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "40% \u2014 Custom ASIC premium, Cooling content cost, vs Reference designs",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "at least 80% \u2014 Manufacturing capacity, Industry cold plate split, vs Custom designs (20%)",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265396)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed in lean form (Summary, Expert and visibility, What changed, Bull, Bear, Thesis impact); Key numbers, Supply-chain flags, Share shifts, Questions, Sentiment and Q&A are in summaries/<doc_id>.md only, to keep the page update within size limits. New 'Expert Calls' h2 section created before Data Sources."
+}

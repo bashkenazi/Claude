@@ -1,0 +1,117 @@
+{
+ "doc_id": "EC-1000000-268902",
+ "ticker": "GEV",
+ "tier": 2,
+ "sector": "Power",
+ "title": "Chief Executive Officer and Energy Consultant at Atem Sees Significant Opportunity for SMRs, While First-of-a-Kind Costs and Timelines Remain Uncertain",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268902",
+ "as_company": "GE Vernova Inc",
+ "conversation_id": "7093__1794403760775",
+ "expert": "CEO of energy consultancy Atem; former GE Hitachi and Westinghouse nuclear engineer (20+ yrs)",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "GE Hitachi (GEV)",
+   "score": 5
+  },
+  {
+   "company": "Rolls-Royce",
+   "score": 3
+  },
+  {
+   "company": "NuScale",
+   "score": 2
+  }
+ ],
+ "verdict": "A former GE Hitachi engineer ranks the BWRX-300 first among SMRs, with construction in less than four years and COD in less than five, versus seven to eight years for Rolls-Royce and Holtec; first-of-a-kind cost overruns of 5X or 10X are the main risk.",
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 4 (hyperscaler broadening): \u2192 \u2014 about 25 GW of data-center demand is the expert's estimate and not tied to GEV orders.",
+  "Tenets 1\u20133, 5, 6: not addressed (call covers nuclear only)."
+ ],
+ "changes": [
+  "First read on SMR construction timelines, FOAK cost risk and nuclear data-center demand; no earlier expert call on the page and no stored GEV row on nuclear (stored GEV rows cover gas turbines, e.g. SB #62250)."
+ ],
+ "summary_variables": {
+  "GW contract adds cadence": [
+   "\ud83d\udfe2 **about 25 GW of AI data-center demand on the table over the next two, three years** (estimate), first read on nuclear-addressable DC demand; no earlier expert call or stored row. \u2192 Tenet 4 (hyperscaler broadening) \u2192 "
+  ],
+  "Competition & share": [
+   "\ud83d\udfe2 **GE Hitachi construction less than four years, COD less than five** vs **seven years, eight years** for Rolls-Royce/Holtec; GE Hitachi the only SMR with a construction license, first read. "
+  ],
+  "Pricing & margins": [
+   "\ud83d\udd34 **FOAK $100 million estimate can reach $500 million\u2013$1 billion**; repeat units cut equipment cost **10%-15%** by the sixth unit (estimate), first read. "
+  ]
+ },
+ "characterization_changed": null,
+ "new_datapoints": [
+  {
+   "ticker": "GEV",
+   "text": "GE Hitachi: tens of reactors \u2014 Signed orders; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse11598&hl=fse11598&page=2)"
+  },
+  {
+   "ticker": "GEV",
+   "text": "GE Hitachi: less than four years \u2014 Construction timeline; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse11252&hl=fse11252,fse11598,fse11707,fse12017,fse12116,fse12265&page=2)"
+  },
+  {
+   "ticker": "GEV",
+   "text": "GE Hitachi: less than five years \u2014 Time to COD; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse11252&hl=fse11252,fse11598,fse11707,fse12017,fse12116,fse12265&page=2)"
+  },
+  {
+   "ticker": "OTHER:AI Data Centers",
+   "text": "AI Data Centers: about 25 GW \u2014 Projected electricity demand; **next two, three years**; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse6213&hl=fse6213,fse6498,fse8123&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "SMR Market: 10%-15% \u2014 Equipment cost reduction; **first unit to the sixth unit**; vs Unit 1",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse6036&hl=fse6036,fse6213,fse6498,fse7606,fse8123,fse11598,fse11707,fse11862,fse12017,fse12265,fse15401,fse15489,fse15518,fse15724,fse15768,fse15985,fse17174,fse17307,fse18157,fse18249,fse19876,fse19941,fse20114,fse20153,fse20286,fse20433,fse20870,fse23433,fse23546,fse25758,fse28050,fse28515,fse28515,fse28941,fse29576,fse31014&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "SMR Market: at least 25% \u2014 Construction improvement; **first unit to the sixth unit**; vs Unit 1",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902)"
+  },
+  {
+   "ticker": "OTHER:Rolls-Royce / Holtec",
+   "text": "Rolls-Royce / Holtec: seven years, eight years \u2014 Time to see reactors; Future; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse9754&hl=fse9754&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 5X or 10X \u2014 Potential cost overrun; Current; vs **$100 million**  estimate",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse11598&hl=fse11598&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 80\u2013100 years \u2014 Plant operating life; Current; vs **less than 25\u201340 years**  for gas",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902&scope=ANYWHERE&stmt=fse14429&hl=fse14429,fse15219,fse15401,fse15518,fse15724,fse15768,fse15985&page=2)"
+  },
+  {
+   "ticker": "OTHER:Westinghouse",
+   "text": "Westinghouse: over $10 billion \u2014 AP1000 project cost; Historical; vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268902)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "GEV Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

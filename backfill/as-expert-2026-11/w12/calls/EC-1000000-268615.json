@@ -1,0 +1,109 @@
+{
+ "doc_id": "EC-1000000-268615",
+ "ticker": "SNOW",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Vice President at a Hybrid Cloud Services Firm Sees Modest Snowflake Growth Amid Partner, Cost, and AI Challenges",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268615",
+ "as_company": "Snowflake Inc",
+ "conversation_id": "7093__1794403982078",
+ "expert": "VP leading the North American AI/data practice and Snowflake relationship at a global hybrid-cloud services firm",
+ "weight": "High",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Snowflake",
+   "score": 2
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Google Cloud Platform",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 4
+  }
+ ],
+ "verdict": "The firm's North American Snowflake practice grew only 8%\u20139% y/y in Aug\u2013Oct, below its Microsoft, AWS and Databricks practices [[2 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse14354&hl=fse14354,fse14837&page=2), and the 3\u20136-month pipeline is below plan as clients weigh cost-driven migrations [[13 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse19156&hl=fse19156,fse19498&page=2).",
+ "summary_variables": {
+  "Demand / orders": [
+   "\ud83d\udd34 practice +8%\u20139% y/y (Aug\u2013Oct), below its Microsoft/AWS/Databricks growth, vs Cleveland global SI +40% in 1H26 (SB #45418): slower. \u2192 Tenet 1 (core re-acceleration) \u2193 [[2 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse14354&hl=fse14354,fse14837&page=2)",
+   "\ud83d\udd34 3\u20136-month pipeline somewhat below expectations; 2027 goal 8% vs 15% for the whole practice (estimate). [[13 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse19156&hl=fse19156,fse19498&page=2) [[12 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse21244&hl=fse21244,fse21478,fse22419,fse23331,fse23366&page=2)",
+   "\ud83d\udd34 Cortex AI on only 25%\u201330% of clients vs KeyBanc's ~50% CoCo adoption (SB #61004): lower (different product). \u2192 Tenet 2 (AI second engine) \u2193 [[14 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse20564&hl=fse20564,fse32065&page=2)"
+  ],
+  "Pricing & margins": [
+   "\ud83d\udfe1 project sizes high six to low seven figures, pricing flat to slightly lower over 2\u20133 years; first read. [[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse10244&hl=fse10244,fse10423,fse10541&page=2)"
+  ],
+  "Competition & share": [
+   "\ud83d\udd34 Databricks quoted software 25% cheaper plus a consumption-rate guarantee to win one client; first read. \u2192 Tenet 3 (control point) \u2193 [[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse27704&hl=fse27704,fse27957,fse28160,fse28280,fse28431&page=2)",
+   "\ud83d\udd34 Databricks and Google Cloud gaining on AI capabilities, vs Cleveland's both-win view (SB #45419): more negative. [[7 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse26662&hl=fse26662,fse26868,fse26982,fse27098&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Practice +8%\u20139% y/y (Aug\u2013Oct) vs Cleveland global SI +40% in 1H26 (SB #45418): slower.",
+  "Cortex AI on 25%\u201330% of clients vs KeyBanc CoCo ~50% of active users (SB #61004): lower (different product).",
+  "First read on a Databricks price undercut (25% cheaper plus consumption guarantee); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core re-acceleration): \u2193 \u2014 practice +8%\u20139%, pipeline below plan, 2027 goal 8%.",
+  "Tenet 2 (AI second engine): \u2193 \u2014 Cortex AI on 25%\u201330% of clients; experience seen as below marketing claims.",
+  "Tenet 3 (governed-data control point): \u2193 \u2014 Databricks undercut by 25% with a consumption guarantee; Databricks and GCP gaining on AI."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 8%\u20139% \u2014 Practice revenue growth, August\u2013October 2026, vs Same period 2025",
+   "kind": "first_hand",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse14354&hl=fse14354,fse14837&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 80% \u2014 Share of business from migrations, August\u2013October 2026, vs Total Snowflake practice",
+   "kind": "first_hand",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse6014&hl=fse6014,fse6135,fse22838&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: high six figures to low seven figures \u2014 Typical project size, 2026-11-05, vs Previous 2-3 years",
+   "kind": "first_hand",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse10423&hl=fse10423,fse14837&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 25%\u201330% \u2014 Share of clients using Cortex AI, 2026-11-05, vs Total Snowflake clients",
+   "kind": "first_hand",
+   "citation": "[14 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse20564&hl=fse20564,fse32065&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Databricks: 25% cheaper \u2014 Software price quote, One competitive deal, vs Snowflake bid",
+   "kind": "hearsay",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse27704&hl=fse27704,fse27957,fse28160,fse28280,fse28431&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: below double digits \u2014 Forecasted practice growth, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse21244&hl=fse21244,fse21478,fse22419,fse23331,fse23366&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 8% \u2014 Internal growth goal, 2027, vs 15% overall practice goal",
+   "kind": "estimate",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268615&scope=ANYWHERE&stmt=fse14354&hl=fse14354,fse14837&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "SNOW Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

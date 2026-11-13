@@ -1,0 +1,139 @@
+{
+ "doc_id": "EC-1000000-268750",
+ "ticker": "MU",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Manager at Cloud Infrastructure Provider Expects Micron Demand to Rise 24% in 2026 Amid AI Growth",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268750",
+ "as_company": "Micron Technology Inc",
+ "conversation_id": "7093__1794405909523",
+ "expert": "Senior materials manager for memory, NAND and HDD at a global cloud infrastructure provider (current); Micron 25%-40% of memory spend",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Micron",
+   "score": 4
+  },
+  {
+   "company": "Samsung",
+   "score": 4
+  },
+  {
+   "company": "SK hynix",
+   "score": 4
+  }
+ ],
+ "verdict": "A cloud provider's memory buyer raised <b>Micron spend 20% y/y in Sept–Nov 2026</b> at prices 5%–10% higher, with 95%–96% fill rates and ~90% of volume under 2–3 year LTAs, but is sending upside volume to Samsung and SK hynix.",
+ "summary_variables": {
+  "Spot vs contract DRAM pricing": [
+   "🟡 <b>Prices paid +5%–10% y/y</b>, pace moderating under LTAs (first-hand), far below Cleveland's C4Q contract DRAM +15–20% q/q (SB #62062): <b>conflicting</b>; LTA pricing lags the market. → Tenet 4 (pricing durable, RoC peaked) ↓"
+  ],
+  "SCA coverage %": [
+   "🟢 <b>~90% of volume under 2–3 year LTAs, 100% of HBM</b> (first-hand) vs ex-Samsung SVP's LTAs at 80–90% of server DRAM contracts (SB #62239): consistent. → Tenet 3 (SCAs) ↑"
+  ],
+  "Supply & lead times": [
+   "🟢 <b>Fill rates 95%–96%, lead time ~4 weeks, inventory under 2 weeks</b> (first-hand) vs TrendForce DRAM lead times 19 weeks (SB #65604): LTA buyers well served. → Tenet 1 (supply short) →",
+   "🟢 <b>Micron spend +20% y/y Sept–Nov</b>; demand +24% in 2026 and +28%–29% in 2027 (estimate). → Tenet 2 (AI demand) ↑"
+  ],
+  "HBM4E share + 2027 HBM pricing round": [
+   "🔴 <b>Samsung and SK hynix gaining share</b> with supply outside LTAs and faster quality support (first-hand, unquantified), first read at this buyer. → Tenet 5 (HBM share) ↓"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Prices paid +5%–10% y/y vs Cleveland's C4Q contract DRAM +15–20% q/q (SB #62062, 2026-10-27): conflicting; LTA pricing lagging.",
+  "LTA coverage ~90% of volume (100% HBM) vs ex-Samsung SVP's 80–90% of server DRAM contracts (SB #62239, 2026-10-22): consistent.",
+  "Lead time ~4 weeks vs TrendForce DRAM lead times 19 weeks (SB #65604, 2026-11-02): far shorter for this LTA buyer.",
+  "Share shift to Samsung/SK hynix: first read at buyer level; no earlier expert call on this page before 2026-11-05."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (supply short through 2028): → — 95%–96% fill rates and ~4-week lead times for an LTA buyer; NAND most constrained, DDR5 slightly.",
+  "Tenet 2 (AI demand outruns supply): ↑ — spend +20% y/y; demand +24% in 2026 and +28%–29% in 2027 (estimate).",
+  "Tenet 3 (SCAs): ↑ — ~90% of volume under 2–3 year LTAs, 100% of HBM.",
+  "Tenet 4 (pricing durable, RoC peaked): ↓ — only +5%–10% y/y under LTAs, pace moderating.",
+  "Tenet 5 (HBM share): ↓ — Samsung and SK hynix gaining on supply outside LTAs."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "MU",
+   "text": "Micron: 20% — Year-over-year spend, Sep-Nov 2026; vs Sep-Nov 2025",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse6912&hl=fse6912,fse45245&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 20% — NAND/SSD spending, Sep-Nov 2026; vs Sep-Nov 2025",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse6912&hl=fse6912,fse45245&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 5%-10% — Aggregate price increase, Sep-Nov 2026; vs Sep-Nov 2025",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse31747&hl=fse31747,fse32386,fse32760&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 95%-96% — Order fill rates, Sep-Nov 2026; vs Prior quarter",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse24736&hl=fse24736,fse24880,fse29986,fse30076&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: roughly four weeks — Average lead time, Sep-Nov 2026; vs Prior quarter",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse24736&hl=fse24736,fse24880,fse29986,fse30076&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: less than two weeks — Inventory cover, Sep-Nov 2026; vs Prior quarter",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse24736&hl=fse24736,fse24880,fse29986,fse30076&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 90% — Volume covered by LTAs, 2026-11-04; vs 90 days earlier",
+   "kind": "first_hand",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse27180&hl=fse27180,fse27302,fse27877,fse28512&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 100% — HBM volume under LTA, 2026-11-04; vs Current",
+   "kind": "first_hand",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse27180&hl=fse27180,fse27302,fse27877,fse28512&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 15% — Expected business increase, Dec 2026-Feb 2027; vs Dec 2025-Feb 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 24% — Expected full-year demand, Full-year 2026; vs Full-year 2025",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse16345&hl=fse16345,fse20171,fse21081,fse21992&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 28%-29% — Expected full-year demand, Full-year 2027; vs Full-year 2026",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse16345&hl=fse16345,fse20171,fse21081,fse21992&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 7/10 — Supply assurance rating, 2027-2028; vs 90 days earlier",
+   "kind": "estimate",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268750&scope=ANYWHERE&stmt=fse24736&hl=fse24736,fse24880,fse29986,fse30076&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3c5a8833-33de-8174-bef7-eab615667fd5",
+  "page_title": "MU Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

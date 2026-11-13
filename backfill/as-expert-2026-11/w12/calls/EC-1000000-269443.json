@@ -1,0 +1,131 @@
+{
+ "doc_id": "EC-1000000-269443",
+ "ticker": "GEV",
+ "tier": 2,
+ "sector": "Power",
+ "title": "Strategic Business Development Manager, U.S. Nuclear at Tetra Tech Expects Consolidation Among Advanced Reactor Developers",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269443",
+ "as_company": "GE Vernova Inc",
+ "conversation_id": "7093__1794406128140",
+ "expert": "Strategic business development manager, U.S. nuclear, at Tetra Tech (current; ~16 years in power and nuclear)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "GE Vernova",
+   "score": 4
+  },
+  {
+   "company": "Westinghouse",
+   "score": 4
+  },
+  {
+   "company": "X-energy",
+   "score": 3
+  }
+ ],
+ "verdict": "A Tetra Tech nuclear BD manager ranks GE Vernova's 300 MW BWRX-300 the SMR frontrunner but sees <b>no major plant purchase orders yet</b>, long-lead equipment at 4 to 5 years and commercial construction only from 2029–2030.",
+ "summary_variables": {
+  "Competition & share": [
+   "🟢 <b>BWRX-300 and AP1000 the likely frontrunners; only 10 of roughly 50 advanced-reactor efforts survive</b> the next 2–4 years (estimate), consistent with the ex-GE Hitachi engineer ranking BWRX-300 first (2026-11-06 call)."
+  ],
+  "GW contract adds cadence": [
+   "🔴 <b>No major nuclear purchase orders; commercial construction 2029–2030, generation 2030–2032</b> (estimate) vs ex-GE Hitachi engineer's construction in less than four years (2026-11-06 call): later. → Tenet 4 (hyperscaler broadening) →"
+  ],
+  "Big-3 supply response": [
+   "🟢 <b>Long-lead nuclear equipment 4 to 5 years; workforce averages 55–60</b> (first-hand), in line with GEV gas-turbine lead times of 5.0 years (SB #63265). → Tenet 2 (industry supply short) ↑"
+  ]
+ },
+ "characterization_changed": "Positive: the expert is slightly more pessimistic on nuclear, with no major plant purchase orders and commercial construction not before 2029–2030; GEV's frontrunner status is opinion.",
+ "changes": [
+  "Commercial nuclear construction 2029–2030 (estimate) vs ex-GE Hitachi engineer's BWRX-300 construction in less than four years (2026-11-06 call): later timeline.",
+  "BWRX-300 ranked frontrunner vs the same ranking in the 2026-11-06 call and TVA Clinch River construction permit (SB #59084, 2026-09-29): consistent.",
+  "Long-lead nuclear equipment 4 to 5 years vs GEV gas-turbine lead times 5.0 years (SB #63265, 2026-10-16): similar tightness across power equipment."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (industry supply short through the decade): ↑ — long-lead nuclear equipment 4 to 5 years; workforce averaging 55–60.",
+  "Tenet 4 (hyperscaler demand broadening): → — no major nuclear orders yet; construction starts 2029–2030 (estimate)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "OTHER:Duke Energy",
+   "text": "Duke Energy: 300 MW — Fleet uprate capacity, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse1270&hl=fse1270,fse10163,fse10163,fse11475,fse11635,fse12076,fse14508,fse14655,fse14748,fse14967,fse16629,fse21043,fse21354,fse21811,fse22844,fse22930,fse23757,fse24967,fse25034,fse25180,fse25242,fse27370,fse27455,fse27527,fse27589,fse27706,fse30199,fse30279,fse39164,fse39197,fse46414,fse47231&page=1)"
+  },
+  {
+   "ticker": "GEV",
+   "text": "GE Vernova: 300 MW — BWRX-300 output, Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse1270&hl=fse1270,fse10163,fse10163,fse11475,fse11635,fse12076,fse14508,fse14655,fse14748,fse14967,fse16629,fse21043,fse21354,fse21811,fse22844,fse22930,fse23757,fse24967,fse25034,fse25180,fse25242,fse27370,fse27455,fse27527,fse27589,fse27706,fse30199,fse30279,fse39164,fse39197,fse46414,fse47231&page=1)"
+  },
+  {
+   "ticker": "OTHER:X-energy",
+   "text": "X-energy: 80 MW — Output per unit, Current; vs N/A",
+   "kind": "hearsay",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse28253&hl=fse28253,fse30152,fse30199,fse30279&page=2)"
+  },
+  {
+   "ticker": "OTHER:X-energy",
+   "text": "X-energy: 320 MW — Four-unit configuration output, Current; vs N/A",
+   "kind": "hearsay",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse28253&hl=fse28253,fse30152,fse30199,fse30279&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 4 to 5 years — Lead time for long-lead equipment, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse11475&hl=fse11475,fse11635&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 2030-2032 — Start of commercial generation, 2030-2032; vs Current",
+   "kind": "estimate",
+   "citation": "[18 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse21043&hl=fse21043,fse21354,fse21811,fse22930&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 2029-2030 — Start of commercial construction, 2029-2030; vs Current",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse36915&hl=fse36915,fse56530&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 10 of roughly 50 — Surviving advanced-reactor efforts, Next 2-4 years; vs ~50 efforts",
+   "kind": "estimate",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse1270&hl=fse1270,fse9972,fse10163,fse23757&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 55-60 — Average workforce age, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse11890&hl=fse11890,fse12076,fse12885&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: $80 billion — Federal support, Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443&scope=ANYWHERE&stmt=fse1270&hl=fse1270,fse10163,fse10163,fse11475,fse11635,fse12076,fse14508,fse14655,fse14748,fse14967,fse16629,fse21043,fse21354,fse21811,fse22844,fse22930,fse23757,fse24967,fse25034,fse25180,fse25242,fse27370,fse27455,fse27527,fse27589,fse27706,fse30199,fse30279,fse39164,fse39197,fse46414,fse47231&page=1)"
+  },
+  {
+   "ticker": "OTHER:Westinghouse",
+   "text": "Westinghouse: $18 billion — Additional cost for AP1000 units, Current; vs Original budget",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Nuclear Industry: 2 to 3 or 4 years — Market consolidation timeline, Next 2-4 years; vs Current",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269443)"
+  }
+ ],
+ "filed": {
+  "page_id": "3a5a8833-33de-81fe-b7cf-caa35a9b3695",
+  "page_title": "GEV Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

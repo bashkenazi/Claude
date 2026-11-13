@@ -1,0 +1,156 @@
+{
+ "doc_id": "EC-1000000-269033",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Director at a Global Consulting Firm Sees Steady Docusign Growth Driven by IAM Expansion as eSignature Matures",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269033",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794403874257",
+ "expert": "Strategy consultant at a global consulting firm advising mid-market to Fortune 500 clients on agreement-platform evaluation and implementation",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Docusign",
+   "score": 4
+  },
+  {
+   "company": "Ironclad",
+   "score": 4
+  },
+  {
+   "company": "PandaDoc",
+   "score": 3
+  },
+  {
+   "company": "Icertis",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert's Docusign-related consulting business rose about 3% y/y in Q3, modestly ahead of plan on IAM, with calendar 2026 seen at 5%\u20136% and the next quarter at only 2%\u20133%.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udfe1 **Practice up about 3% y/y** in Q3 vs +~5% and +~20% from the 2026-11-05 calls: lower.",
+   "\ud83d\udd34 **2%\u20133% next quarter, 5%\u20136% CY26** (estimate); 5% to 10% for 2027."
+  ],
+  "IAM adoption": [
+   "\ud83d\udfe2 **CLM up close to 15%** (estimate) vs 8%\u201310% from the 2026-11-05 consulting PMO call and Cleveland's soft CLM read (SB #63588): **conflicting**."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udfe1 **5% and 7% of renewals downgraded** (estimate); first read on downgrade rates.",
+   "\ud83d\udfe1 **Blended pricing up around 3%** (estimate) vs +4%\u20135% from the 2026-11-05 AI-co exec call: slightly lower; core e-signature pressured."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Practice +~3% y/y vs +~5% (2026-11-05, AI-co exec) and +~20% (2026-11-05, consulting PMO): lower.",
+  "CLM growth close to 15% (estimate) vs 8%\u201310% (2026-11-05, consulting PMO) and Cleveland CLM net-new deals down Y/Y (SB #63588): conflicting.",
+  "Blended pricing +~3% vs net pricing +4%\u20135% (2026-11-05, AI-co exec): consistent direction, lower.",
+  "First read on renewal downgrade rate (5% and 7%); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth): \u2193 \u2014 CY26 5%\u20136% and next quarter 2%\u20133% (estimates), well short of double digits.",
+  "Stance (IAM bet): \u2191 \u2014 IAM/AI drove the modest Q3 beat; AI contract value up to 25% in 2027 (estimate)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: about 3% increase \u2014 Consulting business growth, Q3 2026; baseline: year-over-year",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: about 5% \u2014 Paying customers, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 3%-4% \u2014 Customer spending, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse12430&hl=fse12430,fse13256,fse14475,fse14536,fse14635,fse16422,fse16972,fse16972,fse17058,fse17112,fse17770,fse17872,fse19692,fse22394,fse25069,fse25759,fse25904,fse28228,fse29162,fse29472,fse29952,fse30035,fse37634,fse41198,fse42724,fse45361,fse45971,fse46195&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 4% or 5% \u2014 Envelope volume, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 3%-5% \u2014 Paid seats, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[19 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse17273&hl=fse17273,fse17770&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 2%-5% \u2014 Higher renewal spend, Q3 2026; baseline: versus last year",
+   "kind": "estimate",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse12430&hl=fse12430,fse13256,fse14475,fse14536,fse14635,fse16422,fse16972,fse16972,fse17058,fse17112,fse17770,fse17872,fse19692,fse22394,fse25069,fse25759,fse25904,fse28228,fse29162,fse29472,fse29952,fse30035,fse37634,fse41198,fse42724,fse45361,fse45971,fse46195&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 5% and 7% \u2014 Customers downgraded, Q3 2026; baseline: total renewals",
+   "kind": "estimate",
+   "citation": "[13 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse24500&hl=fse24500,fse25069&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 2%-3% \u2014 Revenue growth, Next quarter; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse25759&hl=fse25759,fse25904&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 5%-6% \u2014 Revenue growth, Calendar 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 5% to 10% \u2014 Revenue growth, 2027; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: close to 15% \u2014 CLM growth, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse41198&hl=fse41198,fse42724&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: as much as 15% \u2014 Business-workflow growth, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse41198&hl=fse41198,fse42724&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: as much as 25% \u2014 AI contract value, 2027; baseline: next year",
+   "kind": "estimate",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse45361&hl=fse45361&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: around 3% \u2014 Blended pricing growth, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse37634&hl=fse37634,fse38118,fse38399&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 9% \u2014 Total paying customers, Q3 2026; baseline: year-over-year",
+   "kind": "estimate",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269033&scope=ANYWHERE&stmt=fse12430&hl=fse12430,fse13256,fse14475,fse14536,fse14635,fse16422,fse16972,fse16972,fse17058,fse17112,fse17770,fse17872,fse19692,fse22394,fse25069,fse25759,fse25904,fse28228,fse29162,fse29472,fse29952,fse30035,fse37634,fse41198,fse42724,fse45361,fse45971,fse46195&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

@@ -1,0 +1,15 @@
+{
+ "doc_id": "EC-1000000-262969",
+ "ticker": "MRVL",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Manager at Telecommunications Company Expects Marvell-Related Business to Grow Double Digits in 2026 and 30%–40% in 2027",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-262969",
+ "as_company": "Marvell Technology Inc",
+ "conversation_id": null,
+ "status": "failed",
+ "note": "timeout-no-conv-id (worker r3 retry: GenSearch ask timed out after 60s with no conversation_id; not re-asked per backfill rule 2)",
+ "filed": null,
+ "new_datapoints": []
+}

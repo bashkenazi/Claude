@@ -1,0 +1,124 @@
+{
+ "doc_id": "EC-1000000-269836",
+ "ticker": "SNOW",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Field Account Executive at Global IT Solutions Provider Sees Snowflake-Related Business Growing Through Customer Expansion",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269836",
+ "as_company": "Snowflake Inc",
+ "conversation_id": "7093__1794404240441",
+ "expert": "Field account executive at a global IT solutions provider (VAR), 2\u20133 enterprise accounts",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Snowflake Inc",
+   "score": 4
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Google Cloud",
+   "score": 3
+  },
+  {
+   "company": "AWS",
+   "score": 3
+  },
+  {
+   "company": "Oracle",
+   "score": 2
+  }
+ ],
+ "verdict": "The account executive's Snowflake business grew about 14% y/y in Aug\u2013Oct with zero churn [[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse18756&hl=fse18756,fse18865,fse19100,fse19165&page=2), all from existing-customer expansion and no new logos.",
+ "summary_variables": {
+  "Demand / orders": [
+   "\ud83d\udfe2 Snowflake business ~14% y/y, zero churn (Aug\u2013Oct), above plan, vs +15%\u201316% (2026-11-05): similar. \u2192 Tenet 1 (core re-acceleration) \u2192 [[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse18756&hl=fse18756,fse18865,fse19100,fse19165&page=2) [[12 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse20577&hl=fse20577,fse20640,fse20875&page=2)",
+   "\ud83d\udd34 zero new logos in Aug\u2013Oct; growth entirely from the installed base; first read. [[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse18756&hl=fse18756,fse18865,fse19100,fse19165&page=2)",
+   "\ud83d\udfe2 ~18% in 2027 (estimate) vs 14%\u201315% (2026-11-05): higher. [[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse28869&hl=fse28869,fse28945,fse29135,fse29626,fse29866&page=2)"
+  ],
+  "Pricing & margins": [
+   "\ud83d\udfe2 ACV +14%\u201315% and list price +~3% (estimates) vs ACV +7%\u20138% (2026-11-05): higher. \u2192 Tenet 4 (margins expand) \u2191 [[2 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse30545&hl=fse30545,fse30650,fse30699,fse30769&page=2)"
+  ],
+  "Competition & share": [
+   "\ud83d\udfe1 Databricks gets the most attention for engineering-led AI; BigQuery and Redshift not taking broad share. \u2192 Tenet 3 (control point) \u2192 [[17 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse34383&hl=fse34383,fse34448,fse34535,fse34587&page=2) [[18 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse35083&hl=fse35083,fse35265,fse35436,fse35898,fse35971&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Business ~14% y/y vs +15%\u201316% (2026-11-05, global integrator): similar.",
+  "ACV +14%\u201315% vs +7%\u20138% (2026-11-05): higher.",
+  "First read on new-logo flow (zero new logos in Aug\u2013Oct); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core re-acceleration): \u2192 \u2014 ~14% growth from expansion only; zero churn but no new logos.",
+  "Tenet 3 (governed-data control point): \u2192 \u2014 Databricks gets attention for engineering-led AI; hyperscalers not taking broad share.",
+  "Tenet 4 (margins expand): \u2191 \u2014 list price +~3%, ACV +14%\u201315%."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: about 14% year over year \u2014 Expert's Snowflake-related business growth, August\u2013October 2026, vs August\u2013October 2025",
+   "kind": "first_hand",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse18756&hl=fse18756,fse18865,fse19100,fse19165&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: zero churn \u2014 Renewal rate among expert's customers, August\u2013October 2026, vs Expectations",
+   "kind": "first_hand",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse18756&hl=fse18756,fse18865,fse19100,fse19165&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: up about 12%\u201314% year over year \u2014 Deal-size growth, August\u2013October 2026, vs August\u2013October 2025",
+   "kind": "estimate",
+   "citation": "[13 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse15902&hl=fse15902,fse15958,fse16028&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: 14%\u201315% \u2014 Average contract value (ACV) growth, August\u2013October 2026, vs August\u2013October 2025",
+   "kind": "estimate",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse30545&hl=fse30545,fse30650,fse30699,fse30769&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: about 3% year over year \u2014 List pricing increase, August\u2013October 2026, vs August\u2013October 2025",
+   "kind": "estimate",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse30545&hl=fse30545,fse30650,fse30699,fse30769&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: about 17% year over year \u2014 Forecasted business growth, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[14 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse23522&hl=fse23522,fse23628,fse23730,fse23780&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: about 18% growth \u2014 Forecasted business growth, Calendar 2027, vs Calendar 2026",
+   "kind": "estimate",
+   "citation": "[14 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse23522&hl=fse23522,fse23628,fse23730,fse23780&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: 16%\u201318% year-over-year \u2014 Forecasted business growth, Nov 2026\u2013Jan 2027, vs Nov 2025\u2013Jan 2026",
+   "kind": "estimate",
+   "citation": "[14 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse23522&hl=fse23522,fse23628,fse23730,fse23780&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake Inc: about six months \u2014 Typical sales cycle length, Current, vs Historical standard",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269836&scope=ANYWHERE&stmt=fse13110&hl=fse13110,fse13178,fse13440,fse20110&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "SNOW Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

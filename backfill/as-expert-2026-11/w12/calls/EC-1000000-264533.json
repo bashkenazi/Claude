@@ -1,0 +1,129 @@
+{
+ "doc_id": "EC-1000000-264533",
+ "ticker": "MRVL",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Manager at Independent Distributor Expects Marvell Demand to Remain Strong Amid AI and Networking Growth",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-264533",
+ "as_company": "Marvell Technology Inc",
+ "conversation_id": "7093__1794403972285",
+ "expert": "Manager at an independent (open-market) electronic-component distributor; own Marvell purchases and sales",
+ "weight": "Medium",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "Marvell",
+   "score": 4
+  },
+  {
+   "company": "Broadcom",
+   "score": 3
+  },
+  {
+   "company": "Qualcomm",
+   "score": 3
+  }
+ ],
+ "verdict": "An independent distributor's own Marvell business reached almost 300,000 last quarter vs a typical 50,000-100,000, with fill rates only about 50% and quoted lead times doubled to 12-24 weeks.",
+ "summary_variables": {
+  "Custom program roster and scope": [
+   "almost 300,000 Marvell business last quarter vs 50,000-100,000 typical, first-hand (small open-market view); consistent with BlueFin MRVL TSMC production +36% y/y (SB #62115). \u2192 Tenet 1 (custom) \u2191",
+   "AI/ML and compute added a 50%-60% increment to demand last quarter, first-hand; Marvell seen gaining at the custom-compute level."
+  ],
+  "Interconnect growth rate": [
+   "networking/telecom 30%-40% of the mix (estimate); requirements moving 800 Gb \u2192 1.6 Tb \u2192 3.2 Tb. \u2192 Tenet 2 (interconnect) \u2192"
+  ],
+  "Supply & lead times": [
+   "lead times doubled to 12-24 weeks, first-hand; consistent with management's acutely constrained supply (SB #59559).",
+   "fill rate about 50%, somewhat higher than 90 days ago, first-hand; first read on fill rate."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Distributor Marvell business almost 300,000 last quarter vs 50,000-100,000 typical (first-hand) vs BlueFin MRVL TSMC production Sept-Q +36% y/y, Dec-Q >40% y/y (SB #62115): consistent.",
+  "Lead times doubled to 12-24 weeks (first-hand) vs management saying supply remains acutely constrained (SB #59559): consistent (tightening).",
+  "Expected 2026 growth 20%-25% for the distributor's Marvell business (estimate) vs company FY27 revenue +45% (SB #65482): conflicting (channel grows slower).",
+  "First read on open-market fill rate (about 50%, up from 90 days ago); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (custom multi-customer): \u2191 \u2014 AI/ML and compute added a 50%-60% increment; Marvell gaining at the custom-compute level.",
+  "Tenet 2 (interconnect >70%): \u2192 \u2014 networking/telecom 30%-40% of the mix; no growth figure for interconnect.",
+  "Tenet 5 (bear flank): \u2192 \u2014 Broadcom demand similar and its allocation smoother; no share figure."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: almost 300,000 \u2014 distributor revenue; period Recent quarter; baseline 50,000-100,000",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse7854&hl=fse7854,fse8654&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 150,000-100,000 \u2014 typical quarterly revenue; period Recurring; baseline N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264533)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: about 50% \u2014 fill rate on requests; period Current; baseline Somewhat lower 90 days ago",
+   "kind": "first_hand",
+   "citation": "[[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse10160&hl=fse10160,fse10448,fse12150,fse12987&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 12-24 weeks \u2014 quoted lead times; period Current; baseline Double prior levels",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse32588&hl=fse32588,fse32652&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 30% to 100% \u2014 open-market price increase; period Year over year; baseline Prior year",
+   "kind": "first_hand",
+   "citation": "[[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse31005&hl=fse31005,fse31642&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: double \u2014 price paid for short quantities; period Current; baseline Standard pricing",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse32588&hl=fse32588,fse32652&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 50%-60% increment \u2014 AI/ML/compute demand growth; period Last quarter; baseline Prior quarter",
+   "kind": "first_hand",
+   "citation": "[[10 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse16212&hl=fse16212,fse18200&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 70% \u2014 AI compute revenue mix; period Last quarter; baseline Total distributor Marvell revenue",
+   "kind": "estimate",
+   "citation": "[[13 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse18050&hl=fse18050,fse18200&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 30%-40% \u2014 networking/telecom mix; period Last quarter; baseline Total distributor Marvell revenue",
+   "kind": "estimate",
+   "citation": "[[20 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse17622&hl=fse17622,fse18050,fse19064&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 20%-25% \u2014 annual revenue growth; period 2026 vs 2025; baseline 2025",
+   "kind": "estimate",
+   "citation": "[[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse26799&hl=fse26799,fse27664,fse28598&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 25%-30% \u2014 share of components in open market; period Current; baseline Total market",
+   "kind": "estimate",
+   "citation": "[[2 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264533&scope=ANYWHERE&stmt=fse302&hl=fse302,fse802,fse4902&page=1)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "MRVL Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

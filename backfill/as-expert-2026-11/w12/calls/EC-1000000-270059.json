@@ -1,0 +1,146 @@
+{
+ "doc_id": "EC-1000000-270059",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Executive at Global Logistics Firm Expects Samsara Business to Grow 3%\u20135% in 2026 and Gain Share",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270059",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794404056263",
+ "expert": "CIO and chief supply chain officer at a global logistics firm that is a Samsara customer and reseller (carriers of 275\u2013500 vehicles)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 5
+  },
+  {
+   "company": "Geotab",
+   "score": 3
+  },
+  {
+   "company": "Verizon Connect",
+   "score": 3
+  },
+  {
+   "company": "Motive",
+   "score": 3
+  },
+  {
+   "company": "Platform Science",
+   "score": 1
+  },
+  {
+   "company": "Trimble",
+   "score": 3
+  }
+ ],
+ "verdict": "Samsara business through the firm grew 10%\u201312% y/y in Aug\u2013Oct, but renewal spend fell 10% on multi-solution and 5% on single-solution deals as customers buy fewer modules.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "\ud83d\udd34 Renewal spend down 10% (multi-solution) and 5% (single) (estimate), vs 2026-11-06 MSP director (+15%\u201325%): conflicting; matches Jefferies license-cost scrutiny (SB #62601). \u2192 Tenet 1 (enterprise expansion) \u2193",
+   "\ud83d\udfe1 CY26 outlook +3%\u20135% (estimate), vs 2026-11-06 VP +8%\u201311%: lower."
+  ],
+  "GM/FCF through component cycle": [
+   "\ud83d\udfe2 3-year contracts with 3%\u20136% escalators; 360\u00b0 camera $560 vs $200 dual-camera buy-in, vs 2026-11-09 consultant +3%\u20135%: in line. \u2192 Tenet 3 (op leverage vs hardware cost) \u2191"
+  ],
+  "Competition & share": [
+   "\ud83d\udfe2 At least 15%\u201320% share gain in 2026 (estimate), Platform Science 'lost the market'; Motive gaining faster than Geotab and Verizon; vs 2026-11-09 consultant (modest share gains): more bullish. \u2192 Tenet 4 (platform moat) \u2191"
+  ]
+ },
+ "characterization_changed": "Characterization changed from Positive: renewal spend is down 5%\u201310% and the 2026 outlook is only +3%\u20135%, offsetting a 10%\u201312% Aug\u2013Oct quarter.",
+ "changes": [
+  "Renewal spend: down 5%\u201310% vs 2026-11-06 MSP director +15%\u201325%: conflicting; vs Jefferies license-cost scrutiny (SB #62601): confirming.",
+  "Growth outlook: CY26 +3%\u20135% vs 2026-11-06 VP +8%\u201311%: lower.",
+  "Pricing: 3%\u20136% escalators vs 2026-11-09 consultant +3%\u20135%: consistent.",
+  "Share: at least 15%\u201320% gain (estimate) vs 2026-11-09 consultant's modest share gains: more bullish."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): \u2193 \u2014 renewal spend down 5%\u201310% as customers buy fewer modules.",
+  "Tenet 3 (op leverage vs hardware cost): \u2191 \u2014 3%\u20136% escalators; 360\u00b0 camera $560.",
+  "Tenet 4 (platform moat): \u2191 \u2014 share gain of at least 15%\u201320% (estimate)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 10%\u201312% \u2014 Reseller business growth, 2026-08-01 to 2026-10-31, vs vs. same period 2025",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse8007&hl=fse8007,fse8311,fse8750,fse8978,fse9118&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 8%\u201310% \u2014 Performance vs. plan, 2026-08-01 to 2026-10-31, vs vs. expectations",
+   "kind": "estimate",
+   "citation": "[[10 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse9567&hl=fse9567,fse9775,fse10131,fse10297,fse10537&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 5%\u201310% \u2014 New-customer wins, 2026-08-01 to 2026-10-31, vs vs. expectations",
+   "kind": "estimate",
+   "citation": "[[10 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse9567&hl=fse9567,fse9775,fse10131,fse10297,fse10537&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: about 5.5% \u2014 Renewal rate, 2026-08-01 to 2026-10-31, vs vs. 2%\u20135%\u00b1 sidebar",
+   "kind": "estimate",
+   "citation": "[[19 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse13106&hl=fse13106,fse13128,fse13600,fse13790,fse14475&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: down 10% \u2014 Multi-solution renewal spend, 2026-08-01 to 2026-10-31, vs vs. prior renewals",
+   "kind": "estimate",
+   "citation": "[[12 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse15334&hl=fse15334,fse16473,fse16916&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: down 5% \u2014 Single-solution renewal spend, 2026-08-01 to 2026-10-31, vs vs. prior renewals",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270059)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20135% \u2014 Reseller business outlook, Calendar 2026, vs vs. 2025",
+   "kind": "estimate",
+   "citation": "[[20 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse19733&hl=fse19733,fse19929,fse20062&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 2%\u20133% \u2014 Outlook vs. original plan, Calendar 2026, vs vs. original expectations",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270059)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: at least 15%\u201320% \u2014 Expected share gain, 2026, vs Not specified",
+   "kind": "estimate",
+   "citation": "[[7 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse20062&hl=fse20062,fse22641,fse23002,fse23363&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20136% \u2014 Contract escalators, 3-year contracts, vs vs. prior contract years",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse28638&hl=fse28638,fse28687&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: $560 \u2014 360\u00b0 camera price, Current, vs vs. $200 dual-camera buy-in",
+   "kind": "first_hand",
+   "citation": "[[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270059&scope=ANYWHERE&stmt=fse23893&hl=fse23893,fse23971,fse24032,fse24096,fse24295&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: $800\u2013$1,200 \u2014 EPA module cost per truck, Jan 2027 (expected), vs No prior baseline",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270059)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources). No \"Samsara Thesis - Revised\" page exists; filed to the thesis-builder child page \"Samsara - Thesis Revised - 2026-11-05\" (has What Matters and tenets)."
+}

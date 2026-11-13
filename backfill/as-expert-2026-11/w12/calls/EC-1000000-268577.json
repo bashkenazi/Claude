@@ -1,0 +1,139 @@
+{
+ "doc_id": "EC-1000000-268577",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Director at Digital Consulting Firm Expects DocuSign Business to Grow 10% in 2026 as It Gains Share",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268577",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794403857153",
+ "expert": "PMO Director, Salesforce business unit at a mid-market digital consulting firm; Docusign ~60%\u201365% of its document-workflow implementations",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "DocuSign Inc",
+   "score": 4
+  },
+  {
+   "company": "Adobe",
+   "score": 4
+  },
+  {
+   "company": "Conga",
+   "score": 2
+  }
+ ],
+ "verdict": "The expert's Docusign-related practice grew roughly 20% y/y in Aug\u2013Oct 2026, but envelopes and seats were roughly flat, so the growth is implementation work and IAM pricing rather than core volume.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udfe2 **Practice up roughly 20% y/y** in Aug\u2013Oct 2026, deal closures +~20%; first read from this partner.",
+   "\ud83d\udfe1 **Envelopes and seats roughly flat**: high-tech growth offset by manufacturing and physical goods."
+  ],
+  "IAM adoption": [
+   "\ud83d\udfe2 **IAM-related price rise of approximately 20%** on lower plans, perhaps 10% on business plans; Cleveland saw 20-40%+ IAM ACV uplift on some deals (SB #45920): consistent.",
+   "\ud83d\udfe2 **Intelligent-management tools growing 20%\u201330%** (estimate), IAM penetration 10%\u201315% of observed base."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udfe1 **CLM growth 8%\u201310%** (estimate) vs Cleveland CLM net-new deal volume down Y/Y (SB #63588): **conflicting**."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "IAM price increase ~20% on lower plans (expert) vs Cleveland 20-40%+ ACV uplift on some IAM deals (SB #45920) and ~5-10% typical (SB #63574): consistent with the upper end.",
+  "CLM growth 8%\u201310% (expert estimate) vs Cleveland net-new CLM deal volume down Y/Y (SB #63588): conflicting.",
+  "First read on envelope and seat volume (roughly flat); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth on the IAM bet): \u2191 \u2014 practice +~20% y/y; CY26 ~10% expected (estimate), but core volume flat.",
+  "Stance (IAM bet): \u2191 \u2014 ~20% IAM price uplift and 20%\u201330% intelligent-tool growth (estimate)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: roughly 60%\u201365% \u2014 Share of firm's document implementations, Current; baseline: vs. Conga/Salesforce-native",
+   "kind": "first_hand",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse4250&hl=fse4250,fse4383&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: roughly 20% \u2014 Year-over-year business growth, August\u2013October 2026; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse5757&hl=fse5757,fse5849,fse8653,fse9701,fse10718,fse10796,fse11265,fse11372,fse11802,fse13107,fse15187,fse15958,fse18106,fse19053,fse19132,fse21510,fse22151,fse22393,fse22996,fse28424,fse28526,fse28571,fse28651,fse28758,fse32832,fse33112,fse34728,fse36446&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: about 20% \u2014 Deal closure growth, August\u2013October 2026; baseline: vs. expected 15%\u201325%",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: 10%\u201315% \u2014 Expected business growth, Nov 2026\u2013Jan 2027; baseline: Year-over-year",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse19053&hl=fse19053,fse19132&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: about 10% \u2014 Expected business growth, Calendar 2026; baseline: Year-over-year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: 8%\u201310% \u2014 CLM growth, Past year; baseline: Year-over-year",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse34728&hl=fse34728,fse36446&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: 10%\u201315% \u2014 IAM tool penetration, Current; baseline: Observed customer base",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse19053&hl=fse19053,fse19132&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: 15%\u201320% \u2014 Increase in usage, Current; baseline: Among existing customers",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse34728&hl=fse34728,fse36446&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: 20%\u201330% \u2014 Intelligent-management tool growth, Current; baseline: Across IAM/CLM/Workflow",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse34728&hl=fse34728,fse36446&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: 10%\u201315% \u2014 Share of deals led by AI tools, Current; baseline: Total deals",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse19053&hl=fse19053,fse19132&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: approximately 20% \u2014 Price increase for IAM, Current; baseline: vs. prior pricing",
+   "kind": "estimate",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse6872&hl=fse6872,fse28526,fse28651&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign: perhaps 10% \u2014 Price increase for standard/business, Current; baseline: vs. prior pricing",
+   "kind": "estimate",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577&scope=ANYWHERE&stmt=fse6872&hl=fse6872,fse28526,fse28651&page=2)"
+  },
+  {
+   "ticker": "CRM",
+   "text": "Salesforce: approximately 5%\u20136% \u2014 Price increase, Current; baseline: vs. prior pricing",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268577)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

@@ -1,0 +1,90 @@
+{
+ "doc_id": "EC-1000000-240837",
+ "ticker": "AMZN",
+ "tier": 2,
+ "sector": "Internet",
+ "title": "Global Product Strategy Manager at Cummins Inc. Sees Growing Role of Third-Party Packagers in Data Center Power Solutions",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240837",
+ "as_company": "Amazon.com Inc",
+ "conversation_id": "7093__1794404441161",
+ "expert": "Former Global Product Strategy Manager, Cummins (15 years; 20+ in power generation)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [],
+ "verdict": "A former Cummins product strategist quotes 18-month lead times for natural-gas reciprocating gensets and 5 years for turbines, so Amazon's time to power leans on third-party packagers and standard in-house specs.",
+ "summary_variables": {
+  "AWS growth": [
+   "\ud83d\udd34 **Natural-gas reciprocating engines 18 months, turbines 5 years lead time** (first-hand) vs Jassy: 2027 capacity 'largely' sold out (SB #62035): consistent. \u2192 Thesis ('Huge AI winner') \u2192 {c1}"
+  ],
+  "AWS margins": [
+   "\ud83d\udfe1 **Genset OEM margins 20%\u201335%** (first-hand); first read on backup-power cost. \u2192 Thesis (AWS margins) \u2192 {c11}",
+   "\ud83d\udfe2 **Amazon standardizes 1\u20134 MW genset specs and trains staff for in-house maintenance**; first read. \u2192 Thesis (AWS margins) \u2191 {c10}"
+  ]
+ },
+ "characterization_changed": "Characterization changed from Positive: the call is about genset supply; for Amazon it signals 18-month to 5-year lead times on power equipment, a capacity constraint rather than a positive.",
+ "changes": [
+  "Power-equipment lead times **18 months to 5 years** vs Jassy (2026-10-27): 2026 capacity fully committed, 2027 largely sold out (SB #62035): consistent.",
+  "First read on genset OEM margins (20%\u201335%); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the page. Thesis pitch ('Huge AI winner', AWS ~20% bogey): \u2192 \u2014 power equipment lead times cap how fast capacity lands, consistent with 2027 'largely sold out' (SB #62035)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 18 months \u2014 Lead time for natural-gas reciprocating engines; 2026-08-12; vs vs 5 years for turbines",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837&scope=ANYWHERE&stmt=fse21014&hl=fse21014,fse21091,fse21125&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 5 years \u2014 Lead time for natural-gas turbines; 2026-08-12; vs vs 18 months for engines",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837&scope=ANYWHERE&stmt=fse21014&hl=fse21014,fse21091,fse21125&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 20%-35% \u2014 OEM margins for gensets; 2026-08-12; vs Vary by customer/unit",
+   "kind": "first_hand",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837&scope=ANYWHERE&stmt=fse24945&hl=fse24945,fse24975,fse25038,fse25128,fse25164,fse25344&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: up to 25% \u2014 Potential margin under demand-based pricing; 2026-08-12; vs Market condition",
+   "kind": "first_hand",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837&scope=ANYWHERE&stmt=fse24945&hl=fse24945,fse24975,fse25038,fse25128,fse25164,fse25344&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: double-digit \u2014 Power demand growth rate; Through 2030; vs Post-2030 stability",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837&scope=ANYWHERE&stmt=fse23174&hl=fse23174,fse23279,fse23378&page=2)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon/Hyperscalers: 99.9% \u2014 Preferred level of uptime/reliability; 2026-08-12; vs Industry standard",
+   "kind": "hearsay",
+   "citation": "[13 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837&scope=ANYWHERE&stmt=fse18003&hl=fse18003&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 500 units \u2014 Volume for a large custom order; 2026-08-12; vs One-time project example",
+   "kind": "first_hand",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837&scope=ANYWHERE&stmt=fse16749&hl=fse16749&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Engines: 30 L all the way up to 95 L \u2014 Displacement of high-horsepower engines; 2026-08-12; vs Reciprocating engines",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240837)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "AMZN Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

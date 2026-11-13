@@ -1,0 +1,173 @@
+{
+ "doc_id": "EC-1000000-268544",
+ "ticker": "Databricks",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Director at Systems Integrator Sees Databricks Gaining Enterprise Share Amid Strong Growth and Expanding AI Adoption",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268544",
+ "as_company": "Databricks",
+ "conversation_id": "7093__1794406164821",
+ "expert": "Director, global systems integrator and Databricks partner serving large enterprises (current)",
+ "weight": "High",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "Databricks",
+   "score": 5
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 4
+  },
+  {
+   "company": "Google",
+   "score": 4
+  },
+  {
+   "company": "AWS",
+   "score": 2
+  },
+  {
+   "company": "Cloudera",
+   "score": 2
+  },
+  {
+   "company": "Teradata",
+   "score": 2
+  },
+  {
+   "company": "Palantir",
+   "score": 3
+  }
+ ],
+ "verdict": "This global SI's Databricks practice grew 24%-26% in Q3 with deal sizes 25%-30% larger and Lakebase/SQL warehouse prices up 12%-14%, and it expects 28%-30% in Q4 as Databricks wins share in enterprise deals.",
+ "summary_variables": {
+  "Demand / orders": [
+   "🟢 **Practice +24%-26% in Q3; Q4 seen at 28%-30% (estimate)**. First read from a global SI; no earlier expert call. → Thesis (re-acceleration) ↑ [25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse11990&hl=fse11990,fse12077,fse12152,fse12491,fse12961&page=2)",
+   "🟢 **Deal sizes +25%-30% y/y; pipeline 70%-75% expansion, 20%-25% net new**. → Thesis (re-acceleration) ↑ [27 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse15339&hl=fse15339,fse15625,fse18290,fse18461,fse19394,fse19606&page=2)"
+  ],
+  "Pricing & margins": [
+   "🟢 **Lakebase and SQL warehouse prices +12%-14%, newer products +4%-6%**; first read on price. → Thesis (Lakebase) ↑ [31 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse27950&hl=fse27950,fse28193,fse28787,fse29150&page=2)",
+   "🟢 **30%-35% of customers spend beyond core compute vs 15%-20% a year ago**; Genie still live at under 5%. → Thesis (Agent Bricks/Lakebase) ↑ [29 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse29837&hl=fse29837,fse30480,fse31091,fse31175,fse31553&page=2)"
+  ],
+  "Competition & share": [
+   "🟢 **Competitive in 80% of enterprise deals vs 70% a year ago**, taking share from AWS, Cloudera and Teradata; Fabric and BigQuery gain in pockets. → Thesis (multi-cloud/open) ↑ [30 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse42390&hl=fse42390,fse42487,fse43143,fse43319&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Practice +24%-26% in Q3 (first-hand); first read from a global SI. Earlier stored evidence is usage-based: >3x serverless usage in the past year (SB #64115), consistent direction.",
+  "Price increases of 12%-14% (Lakebase/SQL) and 4%-6% (newer products): first read on pricing; no earlier expert call or stored row.",
+  "Spend beyond core compute at 30%-35% of customers vs 15%-20% a year earlier (expert's own comparison)."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the Databricks Thesis page; measured against its thesis bullets (2025-09-10).",
+  "Thesis (run-rate re-acceleration): ↑ — practice growth accelerating from 24%-26% to 28%-30%.",
+  "Thesis (Agent Bricks/Lakebase): ↑ — 80% of expansion deals include a new product; Lakebase priced up 12%-14%.",
+  "Thesis (multi-cloud/open): ↑ — present in 80% of competitive enterprise deals vs 70%."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "Databricks",
+   "text": "Global SI Databricks practice revenue +24%-26% in Q3 2026",
+   "kind": "first_hand",
+   "citation": "[25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse11990&hl=fse11990,fse12077,fse12152,fse12491,fse12961&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Global SI Databricks practice revenue +28%-30% expected in Q4 2026",
+   "kind": "estimate",
+   "citation": "[26 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse21072&hl=fse21072,fse21991,fse22035,fse24210,fse24251,fse24768&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Global SI Databricks practice revenue +27%-28% expected for calendar 2026",
+   "kind": "estimate",
+   "citation": "[26 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse21072&hl=fse21072,fse21991,fse22035,fse24210,fse24251,fse24768&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Average Databricks deal sizes +25%-30% vs a year earlier",
+   "kind": "first_hand",
+   "citation": "[27 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse15339&hl=fse15339,fse15625,fse18290,fse18461,fse19394,fse19606&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Pipeline 70%-75% existing-customer expansion",
+   "kind": "first_hand",
+   "citation": "[27 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse15339&hl=fse15339,fse15625,fse18290,fse18461,fse19394,fse19606&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Pipeline 20%-25% net new business",
+   "kind": "first_hand",
+   "citation": "[27 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse15339&hl=fse15339,fse15625,fse18290,fse18461,fse19394,fse19606&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "80% of enterprise deals competitive in Q3 vs 70% a year earlier",
+   "kind": "first_hand",
+   "citation": "[30 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse42390&hl=fse42390,fse42487,fse43143,fse43319&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Core product usage +15%-20% q/q in Q3",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse11990&hl=fse11990,fse12961&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Expansion deals +20%-25% q/q in Q3",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse11990&hl=fse11990,fse12961&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "80% of expansion deals include at least one new product (Genie, Agent Bricks, Lakebase)",
+   "kind": "first_hand",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse48232&hl=fse48232,fse49418&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "30%-35% of customers spend beyond core compute vs 15%-20% a year earlier",
+   "kind": "first_hand",
+   "citation": "[29 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse29837&hl=fse29837,fse30480,fse31091,fse31175,fse31553&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Genie live with business users at under 5% of customers",
+   "kind": "first_hand",
+   "citation": "[28 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse32540&hl=fse32540,fse32691,fse33121,fse33563&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "25%-30% of Genie users exceed the $10 credit",
+   "kind": "first_hand",
+   "citation": "[28 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse32540&hl=fse32540,fse32691,fse33121,fse33563&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Price increase of 4%-6% on newer Databricks products",
+   "kind": "first_hand",
+   "citation": "[31 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse27950&hl=fse27950,fse28193,fse28787,fse29150&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Price increase of 12%-14% on Lakebase and SQL data warehouse",
+   "kind": "first_hand",
+   "citation": "[31 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268544&scope=ANYWHERE&stmt=fse27950&hl=fse27950,fse28193,fse28787,fse29150&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "12ea8833-33de-81bd-8549-e1429e4ebd6e",
+  "page_title": "Databricks Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

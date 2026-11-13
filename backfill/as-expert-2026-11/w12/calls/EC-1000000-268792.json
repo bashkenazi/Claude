@@ -1,0 +1,144 @@
+{
+ "doc_id": "EC-1000000-268792",
+ "ticker": "CRWD",
+ "tier": 1,
+ "sector": "Software A-L",
+ "title": "Director at Systems Integrator Sees CrowdStrike-Related Business Growing 15%–20% in 2026, With SIEM and Falcon Flex Driving Expansion",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268792",
+ "as_company": "CrowdStrike Holdings Inc",
+ "conversation_id": "7093__1794406197007",
+ "expert": "Director at a global systems integrator, cyber transformation for 20+ active CrowdStrike accounts (EMEA/Middle East)",
+ "weight": "High",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "CrowdStrike",
+   "score": 5
+  },
+  {
+   "company": "Microsoft",
+   "score": 3
+  },
+  {
+   "company": "Palo Alto",
+   "score": 4
+  },
+  {
+   "company": "SentinelOne",
+   "score": 2
+  }
+ ],
+ "verdict": "An SI director across 20+ active CrowdStrike accounts saw CrowdStrike-related business accelerate to 18%-22% y/y in Aug-Oct from 15%-20% the prior quarter, on SIEM displacement and larger Flex deals.",
+ "summary_variables": {
+  "NNARR vs the buy-side bogey": [
+   "18%-22% y/y vs 15%-20% prior quarter [1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse15036&hl=fse15036,fse15259&page=2)"
+  ],
+  "Flex utilization / re-Flex cadence": [
+   "Flex deals $600k-$1.1M vs $300k-$700k [12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse30451&hl=fse30451,fse30647,fse30786,fse30925&page=2)",
+   "60%-70% year-one pool use vs SB #59367 [14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse28706&hl=fse28706,fse28985,fse29157,fse29426,fse29538,fse29628&page=2)"
+  ],
+  "NG-SIEM displacement pace": [
+   "SIEM 1/3 of pipeline vs 1/5 [23 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse20472&hl=fse20472,fse21196,fse21876,fse21914,fse22045&page=2)",
+   "Two, three points share gain [9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse39213&hl=fse39213,fse39264,fse39359,fse39582,fse39764,fse40029,fse40204&page=2)"
+  ],
+  "AIDR ARR conversion": [
+   "<10% pay for AI security [15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse45622&hl=fse45622,fse45887,fse45947,fse46013,fse46205&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Inflection: 18%-22% y/y vs 15%-20% prior quarter; below Cleveland 30%+ (SB #43076)",
+  "60%-70% year-one pool use vs re-Flex at 8 months (SB #59367): conflicting",
+  "SIEM 1/3 of pipeline consistent with NG-SIEM +60% (SB #49027)",
+  "<10% paying for AI security vs AIDR ~3x q/q (SB #47033): conflicting"
+ ],
+ "inflection": true,
+ "thesis_impact": [
+  "Tenet 1 (Flex): ↑ — Flex deals ~2x non-Flex",
+  "Tenet 2 (AIDR): → — <10% pay",
+  "Tenet 3 (emerging platform): ↑ — SIEM 1/3 of pipeline",
+  "Tenet 4 (core): ↑ — 18%-22% y/y, 2-3 pts share",
+  "Tenet 6 (multiple): → — 2027 slows to 12%-18%"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWD",
+   "text": "SI's CrowdStrike-related business +18%-22% y/y (+4%-6% q/q) in Aug-Oct 2026 vs +15%-20% prior quarter",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse15036&hl=fse15036,fse15259&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "SI closed six to nine CrowdStrike deals in Aug-Oct 2026 vs five to seven expected",
+   "kind": "first_hand",
+   "citation": "[21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse15851&hl=fse15851,fse15938,fse16079,fse16206&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "New implementation size $500,000-$1.2 million vs $500,000-$1 million; average deal size +20%-25% y/y",
+   "kind": "first_hand",
+   "citation": "[22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse16745&hl=fse16745,fse16918,fse16995,fse17199,fse17348,fse17794&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Flex credit-based deals $600,000-$1.1 million vs $300,000-$700,000 non-Flex; Flex accounts 5-7 modules vs 3-4",
+   "kind": "first_hand",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse30451&hl=fse30451,fse30647,fse30786,fse30925&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Some clients use only 60%-70% of year-one Falcon Flex pools; 15%-25% of Flex accounts spend credits on AI",
+   "kind": "first_hand",
+   "citation": "[14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse28706&hl=fse28706,fse28985,fse29157,fse29426,fse29538,fse29628&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "SIEM 1/3 of SI's CrowdStrike pipeline value (Nov-26) vs 1/5 six months earlier",
+   "kind": "first_hand",
+   "citation": "[23 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse20472&hl=fse20472,fse21196,fse21876,fse21914,fse22045&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "CrowdStrike discounts typically 10%-15%, up to 20% vs Microsoft/Palo Alto; renewal uplift 5%-10%; effective unit pricing flat to +5%",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse27773&hl=fse27773,fse27829,fse27900,fse28145&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Fewer than 10% of customers pay for dedicated AI security; AI demand 20%-25% of pipeline",
+   "kind": "first_hand",
+   "citation": "[15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse45622&hl=fse45622,fse45887,fse45947,fse46013,fse46205&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "SI forecasts CrowdStrike business +15%-20% Nov-Jan, +15%-20% FY2026 (vs 12%-15% plan), +12%-18% FY2027",
+   "kind": "estimate",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse24531&hl=fse24531,fse24662,fse25071,fse25203,fse25333,fse25420&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "CrowdStrike gained two, three points share in endpoint/SecOps in Aug-Oct 2026 from legacy, SentinelOne, Splunk",
+   "kind": "estimate",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse39213&hl=fse39213,fse39264,fse39359,fse39582,fse39764,fse40029,fse40204&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Falcon SIEM ingestion 30%-50% cheaper than Splunk and 20%-35% cheaper than Microsoft Sentinel",
+   "kind": "hearsay",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse35257&hl=fse35257,fse35320,fse35383,fse35579,fse35688&page=2)"
+  },
+  {
+   "ticker": "S",
+   "text": "SentinelOne typical discounts 25%-35%; CrowdStrike 15%-25% pricier than SentinelOne",
+   "kind": "hearsay",
+   "citation": "[26 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268792&scope=ANYWHERE&stmt=fse34192&hl=fse34192,fse34322,fse34484,fse34821,fse34905,fse34981,fse35175&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3caa8833-33de-8159-8bc9-c94df18efbf6",
+  "page_title": "CRWD Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

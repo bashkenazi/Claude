@@ -1,0 +1,73 @@
+{
+ "doc_id": "EC-1000000-240824",
+ "ticker": "PLTR",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Former Product Lead at Palantir Technologies Discusses Evolution and Strategic Role of Forward Deployed Engineering Teams",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240824",
+ "as_company": "Palantir Technologies Inc",
+ "conversation_id": "7093__1794407114041",
+ "expert": "Former Product Lead and FDE Lead at Palantir (13 years); now CTO and co-founder of an FDE consultancy doing outsourced FDE work for Palantir customers",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Palantir Technologies Inc",
+   "score": 3
+  }
+ ],
+ "verdict": "A 13-year Palantir FDE lead, now running a partner consultancy, says Palantir is handing long-term implementation to partners as customers are priced out at a few million dollars per FDE a year.",
+ "summary_variables": {
+  "Delivery capacity": [
+   "🟡 **Long-term implementation moving to partners; customers \"priced out\" at a few million dollars per FDE per year** (estimate); consistent with Cleveland SI checks that customers complain Palantir leaves after initial deployment (SB #62491). → Tenet 5 (delivery capacity) →",
+   "🔴 **FDE resources not guaranteed under consumption-based contracts**, risking friction on complex implementations; first read. → Tenet 5 (delivery capacity) ↓"
+  ],
+  "Adj OM vs 60%": [
+   "🟢 **Consumption pricing decouples platform revenue from FDE headcount**; first read. → Tenet 3 (adj OM ≥60%) ↑"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Partner share of delivery: Palantir handing long-term work to partners vs Cleveland SI checks of Palantir practices growing ~3x and ~7x (SB #62489, 2026-10-29) and customers complaining Palantir leaves after initial deployment (SB #62491, 2026-10-29): **consistent**.",
+  "Entry cost: a few million dollars per FDE per year vs an ex-Palantir sales exec saying mid-market won't accept US$1.5m-plus to get started (SB #64789, 2026-09-05): **consistent** (high cost limits mid-market)."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 5 (delivery capacity): → — partners absorb long-term delivery, but FDE support is no longer guaranteed under consumption contracts.",
+  "Tenet 3 (adj OM ≥60%): ↑ — consumption pricing scales revenue without FDE headcount.",
+  "Tenet 1 (US commercial growth): ↓ slight — a few million dollars per FDE prices out smaller customers."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "PLTR",
+   "text": "Palantir: 13 years — Tenure at company, Career; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240824&scope=ANYWHERE&stmt=fse3865&hl=fse3865,fse3922&page=2)"
+  },
+  {
+   "ticker": "PLTR",
+   "text": "Palantir: second hire — Global hiring rank, Career; baseline: outside the U.S.",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240824&scope=ANYWHERE&stmt=fse3865&hl=fse3865,fse3922,fse4131&page=2)"
+  },
+  {
+   "ticker": "PLTR",
+   "text": "Palantir: one to three months — FDE domain rotation, Career; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240824&scope=ANYWHERE&stmt=fse5503&hl=fse5503,fse11632&page=2)"
+  },
+  {
+   "ticker": "PLTR",
+   "text": "Palantir: a few million dollars — Cost per FDE, Annual; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240824&scope=ANYWHERE&stmt=fse12017&hl=fse12017,fse12198,fse12220,fse12248&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40da8833-33de-81e7-a2df-ecd917644ac3",
+  "page_title": "Palantir - Thesis Revised - 2026-11-03"
+ },
+ "status": "done",
+ "note": ""
+}

@@ -1,0 +1,15 @@
+{
+ "doc_id": "EC-1000000-268714",
+ "ticker": "MRVL",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Sr. Director of IC and Packaging at Socionext Believes Mature Co-Packaged Optics Products Remain Years Away",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268714",
+ "as_company": "Marvell Technology Inc",
+ "conversation_id": null,
+ "status": "failed",
+ "note": "timeout-no-conv-id (worker r3 retry: GenSearch ask timed out after 60s with no conversation_id; not re-asked per backfill rule 2)",
+ "filed": null,
+ "new_datapoints": []
+}

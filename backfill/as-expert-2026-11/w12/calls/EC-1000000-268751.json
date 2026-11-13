@@ -1,0 +1,144 @@
+{
+ "doc_id": "EC-1000000-268751",
+ "ticker": "Unimicron",
+ "tier": 1,
+ "sector": "Hardware N-Z",
+ "title": "Commodity Manager at Inventec Data Center Solutions Believes Unimicron Will Retain AI ABF Business Despite Rising Competition",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268751",
+ "as_company": "Unimicron Technology Corp",
+ "conversation_id": "7093__1794406136536",
+ "expert": "Commodity manager at a large Taiwan AI data-center ODM (PCB/PCBA sourcing since 2018); sees Unimicron lead times, yields and capacity reservations on hyperscaler projects",
+ "weight": "High",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Unimicron",
+   "score": 4
+  },
+  {
+   "company": "Shinko",
+   "score": 4
+  },
+  {
+   "company": "Victory Giant",
+   "score": 3
+  },
+  {
+   "company": "Samsung Electro-Mechanics",
+   "score": 3
+  },
+  {
+   "company": "Kinsus",
+   "score": 3
+  }
+ ],
+ "verdict": "A large AI-server ODM gets Unimicron AI ABF boards in 16–20 weeks, stable y/y, and sees only 1%–3% pricing room next year, while its Unimicron volumes grow more than 25% a year.",
+ "summary_variables": {
+  "ABF supply/demand gap": [
+   "🔴 <b>AI ABF lead time 16–20 weeks, stable y/y</b> (first-hand) vs TrendForce and Citi at 48–56 weeks (SB #61055, SB #65968): <b>conflicting</b>. → Tenet 1 (ABF oligopoly) ↓",
+   "🟢 <b>ODM's Unimicron ABF volume growing more than 25% a year</b> (estimate); fits Unimicron's +30-40% ABF output plan for 2027 (SB #54455). → Tenet 1 (ABF oligopoly) ↑"
+  ],
+  "ASP trajectory": [
+   "🔴 <b>Pricing room only 1%–3% next year</b> (estimate) vs Edgewater's +10–15% on LTSA customers (SB #65932) and Citi's 10–15% in 4Q (SB #65968): <b>conflicting</b>. → Tenet 2 (ASP inflation) ↓",
+   "🟡 <b>Capacity reserved on forecasts, paid after delivery</b> (first-hand), no prepayment at this ODM vs >NT\\$100bn prepaid by Intel, NVIDIA and AMD (SB #62027): different customer tier. → Tenet 2 (ASP inflation) →"
+  ],
+  "NVDA/ASIC share retention": [
+   "🔴 <b>SEMCO could dilute share about 3 points</b> on new NVIDIA platforms (estimate); NVIDIA named SEMCO alongside Unimicron in its 2.5x capacity plan (SB #61556): consistent. → Tenet 1 (ABF oligopoly) ↓",
+   "🟢 <b>Yield 1%–3 points above Victory Giant</b> on HDI, ASIC share +~1 point per generation (estimates). → Tenet 1 (ABF oligopoly) ↑"
+  ]
+ },
+ "characterization_changed": "Positive: stable 16–20 week lead times and only 1%–3% pricing room cut against the tightness and ASP case, offsetting >25% volume growth.",
+ "changes": [
+  "Lead times: 16–20 weeks and stable y/y vs TrendForce 48–56 weeks from ~12 previously (SB #61055) and Citi 48–56 weeks (SB #65968): conflicting.",
+  "Pricing: 1%–3% room next year vs Edgewater +10–15% on LTSA customers (SB #65932) and Citi 10–15% in 4Q (SB #65968): conflicting.",
+  "Prepayment: none at this ODM (payment after delivery) vs Fubon checks that KF Fab 2 reservation fees are fully paid (SB #61148): conflicting, likely a different customer tier.",
+  "Share: ~3-point SEMCO dilution on new platforms vs NVIDIA's 2.5x plan with IBIDEN, SEMCO and Unimicron (SB #61556): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (ABF oligopoly, capacity-gated share): → — >25% volume growth and a 1%–3 point yield lead vs ~3-point SEMCO dilution and stable lead times.",
+  "Tenet 2 (cyclical/contractual ASP inflation): ↓ — 1%–3% pricing room next year vs 10–15% in Street checks.",
+  "Tenet 4 (GM inflection): ↓ — less price means mix and utilization must carry the margin ramp."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3037 TT",
+   "text": "Unimicron: 16–20 weeks — Lead time for AI ABF boards; Current; vs Stable vs a year ago",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse11291&hl=fse11291,fse12136,fse12452&page=2)"
+  },
+  {
+   "ticker": "3037 TT",
+   "text": "Unimicron: more than 25% — Annual growth in expert's procurement volume; Annual; vs Year-over-year",
+   "kind": "estimate",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse10643&hl=fse10643&page=2)"
+  },
+  {
+   "ticker": "3037 TT",
+   "text": "Unimicron: approximately 25% or more — Growth in AI ABF participation/business; Annual; vs Prior two years",
+   "kind": "estimate",
+   "citation": "[[10 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse4767&hl=fse4767,fse4921,fse5125,fse5489,fse5789,fse6046,fse6261,fse6314,fse6568,fse6784,fse6827,fse7018,fse7417,fse7662,fse7965,fse8222,fse8425,fse8669,fse8883,fse8936,fse9079,fse9242,fse9454,fse9552,fse9679,fse9743,fse9996,fse10106,fse10237,fse10391,fse10643,fse10964,fse11208,fse11291,fse11499,fse11891,fse12136,fse12281,fse12452,fse12845,fse12979,fse13066,fse13293,fse13582,fse13673,fse14198,fse14400,fse14523,fse14742,fse14967,fse15177,fse15457,fse15757,fse16235,fse16561,fse17217,fse17403,fse17527,fse17757,fse17914,fse18008,fse18150,fse18420,fse18611,fse18867,fse19276,fse19509,fse19750,fse19969,fse20023,fse20172,fse20328,fse20432,fse20686,fse20871,fse20924,fse21185,fse21478,fse21543,fse21632,fse21737,fse21927,fse22233,fse22277,fse22502,fse22653,fse22847,fse23168,fse23344,fse23589,fse23799,fse23948,fse24309,fse24716,fse24986,fse25025,fse25074,fse25121,fse25357,fse25571,fse25735,fse25945,fse26118,fse26274,fse26940,fse27214,fse27344,fse27646,fse27750,fse27916,fse27995,fse28200,fse28269,fse28400,fse28458,fse28614,fse28886,fse29277,fse29485,fse29621,fse29987,fse30393,fse30644,fse30909,fse31145,fse31220,fse31372,fse31786,fse31970,fse32210,fse32269,fse32558,fse32925,fse33169,fse33438,fse33794,fse34115,fse34461,fse34599,fse34798,fse35052,fse35259,fse35656,fse35910,fse36097,fse36257,fse36365,fse36695,fse36972,fse37281,fse37460,fse37675,fse37942,fse38151,fse38411,fse38683,fse39037,fse39279,fse39469,fse39558,fse39724,fse39849,fse39964,fse40043,fse40373,fse40470,fse40628&page=2)"
+  },
+  {
+   "ticker": "3037 TT",
+   "text": "Unimicron: 1%–3% — Potential pricing increase; Next year; vs Current prices",
+   "kind": "estimate",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse38411&hl=fse38411&page=2)"
+  },
+  {
+   "ticker": "3037 TT",
+   "text": "Unimicron: 1 percentage point — Share increase in ASIC projects; Generationally; vs Previous generation",
+   "kind": "estimate",
+   "citation": "[[10 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse4767&hl=fse4767,fse4921,fse5125,fse5489,fse5789,fse6046,fse6261,fse6314,fse6568,fse6784,fse6827,fse7018,fse7417,fse7662,fse7965,fse8222,fse8425,fse8669,fse8883,fse8936,fse9079,fse9242,fse9454,fse9552,fse9679,fse9743,fse9996,fse10106,fse10237,fse10391,fse10643,fse10964,fse11208,fse11291,fse11499,fse11891,fse12136,fse12281,fse12452,fse12845,fse12979,fse13066,fse13293,fse13582,fse13673,fse14198,fse14400,fse14523,fse14742,fse14967,fse15177,fse15457,fse15757,fse16235,fse16561,fse17217,fse17403,fse17527,fse17757,fse17914,fse18008,fse18150,fse18420,fse18611,fse18867,fse19276,fse19509,fse19750,fse19969,fse20023,fse20172,fse20328,fse20432,fse20686,fse20871,fse20924,fse21185,fse21478,fse21543,fse21632,fse21737,fse21927,fse22233,fse22277,fse22502,fse22653,fse22847,fse23168,fse23344,fse23589,fse23799,fse23948,fse24309,fse24716,fse24986,fse25025,fse25074,fse25121,fse25357,fse25571,fse25735,fse25945,fse26118,fse26274,fse26940,fse27214,fse27344,fse27646,fse27750,fse27916,fse27995,fse28200,fse28269,fse28400,fse28458,fse28614,fse28886,fse29277,fse29485,fse29621,fse29987,fse30393,fse30644,fse30909,fse31145,fse31220,fse31372,fse31786,fse31970,fse32210,fse32269,fse32558,fse32925,fse33169,fse33438,fse33794,fse34115,fse34461,fse34599,fse34798,fse35052,fse35259,fse35656,fse35910,fse36097,fse36257,fse36365,fse36695,fse36972,fse37281,fse37460,fse37675,fse37942,fse38151,fse38411,fse38683,fse39037,fse39279,fse39469,fse39558,fse39724,fse39849,fse39964,fse40043,fse40373,fse40470,fse40628&page=2)"
+  },
+  {
+   "ticker": "3037 TT",
+   "text": "Unimicron: 3 percentage points — Potential share dilution on new platforms; Future; vs Current share",
+   "kind": "estimate",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse33794&hl=fse33794,fse34115,fse34319,fse35052&page=2)"
+  },
+  {
+   "ticker": "3037 TT",
+   "text": "Unimicron: 1%–3 percentage points — Yield advantage over Victory Giant; Current; vs Victory Giant yield",
+   "kind": "estimate",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse33794&hl=fse33794,fse34115,fse34319,fse35052&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: six months to one year — Time from certification to mass production; Per project; vs New supplier entry",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse7018&hl=fse7018,fse26274&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: more than 12 months — Time for optical-process re-verification; Per cycle; vs 4-phase transition",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268751)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 12–24 months — Time for architecture changes to hit orders; Future; vs Design shift",
+   "kind": "estimate",
+   "citation": "[[14 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse40470&hl=fse40470,fse40628&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: more than 5%–8% — Price gap required to consider switching; Per project; vs Current pricing",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268751)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: exceed two or three years — Tech gap between Unimicron/Shinko and China; Long-term; vs Chinese competitors",
+   "kind": "estimate",
+   "citation": "[[10 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268751&scope=ANYWHERE&stmt=fse4767&hl=fse4767,fse4921,fse5125,fse5489,fse5789,fse6046,fse6261,fse6314,fse6568,fse6784,fse6827,fse7018,fse7417,fse7662,fse7965,fse8222,fse8425,fse8669,fse8883,fse8936,fse9079,fse9242,fse9454,fse9552,fse9679,fse9743,fse9996,fse10106,fse10237,fse10391,fse10643,fse10964,fse11208,fse11291,fse11499,fse11891,fse12136,fse12281,fse12452,fse12845,fse12979,fse13066,fse13293,fse13582,fse13673,fse14198,fse14400,fse14523,fse14742,fse14967,fse15177,fse15457,fse15757,fse16235,fse16561,fse17217,fse17403,fse17527,fse17757,fse17914,fse18008,fse18150,fse18420,fse18611,fse18867,fse19276,fse19509,fse19750,fse19969,fse20023,fse20172,fse20328,fse20432,fse20686,fse20871,fse20924,fse21185,fse21478,fse21543,fse21632,fse21737,fse21927,fse22233,fse22277,fse22502,fse22653,fse22847,fse23168,fse23344,fse23589,fse23799,fse23948,fse24309,fse24716,fse24986,fse25025,fse25074,fse25121,fse25357,fse25571,fse25735,fse25945,fse26118,fse26274,fse26940,fse27214,fse27344,fse27646,fse27750,fse27916,fse27995,fse28200,fse28269,fse28400,fse28458,fse28614,fse28886,fse29277,fse29485,fse29621,fse29987,fse30393,fse30644,fse30909,fse31145,fse31220,fse31372,fse31786,fse31970,fse32210,fse32269,fse32558,fse32925,fse33169,fse33438,fse33794,fse34115,fse34461,fse34599,fse34798,fse35052,fse35259,fse35656,fse35910,fse36097,fse36257,fse36365,fse36695,fse36972,fse37281,fse37460,fse37675,fse37942,fse38151,fse38411,fse38683,fse39037,fse39279,fse39469,fse39558,fse39724,fse39849,fse39964,fse40043,fse40373,fse40470,fse40628&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "38fa8833-33de-8113-bd94-dde5e735c0e0",
+  "page_title": "Unimicron Thesis - Revised (Clean)"
+ },
+ "status": "done",
+ "note": "Ticker 3037 TT (batch label Unimicron). Q&A condensed to one shared citation [10] (same passage set for every answer). Expert Calls section created before Data Sources."
+}

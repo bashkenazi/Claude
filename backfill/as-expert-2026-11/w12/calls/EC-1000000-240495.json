@@ -1,0 +1,123 @@
+{
+ "doc_id": "EC-1000000-240495",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "AI Accelerators & GPUs Expert at Anthropic Believes Established Players Will Dominate the Growing Inference Silicon Market",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240495",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794403846160",
+ "expert": "AI compute specialist at Anthropic (current; ex-Tenstorrent); oversees compute procurement and optimization; no NVIDIA order or fill-rate data; interview 2026-08-12",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 3
+  },
+  {
+   "company": "AMD",
+   "score": 4
+  },
+  {
+   "company": "Google",
+   "score": 4
+  },
+  {
+   "company": "Amazon",
+   "score": 4
+  },
+  {
+   "company": "Cerebras",
+   "score": 2
+  },
+  {
+   "company": "Groq",
+   "score": 2
+  },
+  {
+   "company": "SambaNova",
+   "score": 2
+  },
+  {
+   "company": "Tenstorrent",
+   "score": 3
+  }
+ ],
+ "verdict": "An Anthropic compute specialist sees NVIDIA GPU rental at almost 2x the cost of TPU/Trainium for comparable inference and expects workloads to reach 80% inference / 20% training within ~3 years, where NVIDIA faces the steepest price competition (interview dated 2026-08-12).",
+ "summary_variables": {
+  "Compute share vs. XPU/ASIC": [
+   "\ud83d\udd34 **NVIDIA GPU rental \"almost double\" TPU/Trainium cost** (observed platform pricing); first read on GPU-vs-ASIC rental ratio. \u2192 Tenet 3 (~75% share) \u2193",
+   "\ud83d\udd34 **2.8T-parameter Kimi K3 fits on eight AMD chips but not eight GB200** (estimate); matches MI355X ~2x B200 perf/\\$ on Kimi K3 (SB #65425). \u2192 Tenet 3 (~75% share) \u2193"
+  ],
+  "Duration of the AI capex cycle": [
+   "\ud83d\udfe2 **Inference/training ~50/50 now, heading to 80/20 in ~3 years** (estimate), vs 60%-70% inference in the 2026-11-05 IT-services call. \u2192 Tenet 2 (inference-led) \u2191"
+  ],
+  "Inference scale (GPU vs specialised chips)": [
+   "\ud83d\udfe1 **Frontier labs at 100 million users/day still suit GPUs**; specialised inference chips may get only 5% or a few single-digit % of lab fleets (estimate). \u2192 Tenet 3 (~75% share) \u2192"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Inference share: ~50/50 now (expert, as of 2026-08-12) vs inference 60%-70% of deployments in the 2026-11-05 IT-services call: levels differ, same direction (rising).",
+  "AMD: 2.8T-parameter model fits on 8 AMD chips but not 8 GB200 vs MI355X up to 2x B200 perf/\\$ on Kimi K3 (SB #65425, 2026-10-31): consistent.",
+  "First read on GPU-vs-ASIC rental price ratio (~2x); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 3 (~75% share): \u2193 \u2014 TPU/Trainium rent at half or less the GPU price; AMD fits a 2.8T model on eight chips where GB200 cannot.",
+  "Tenet 2 (inference-led demand): \u2191 \u2014 workload mix moving to 80% inference / 20% training in ~3 years.",
+  "Tenet 4 (new TAM: Groq): \u2192 \u2014 NVIDIA pursuing inference via the Groq license; unquantified."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "AI workload ~50/50 inference/training (2026-08-12), from 5% inference at the start; 80% inference / 20% training expected in ~3 years",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240495&scope=ANYWHERE&stmt=fse5881&hl=fse5881,fse6124,fse6340,fse7810,fse11481,fse12154,fse13478,fse13629,fse13822,fse13948,fse16591,fse19720,fse20938,fse21051,fse21426,fse24675,fse26373,fse28638,fse28638,fse28751,fse30661,fse39437,fse50113&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA GPU cloud rental almost double the cost of Google TPUs / Amazon Trainiums for comparable inference",
+   "kind": "hearsay",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240495&scope=ANYWHERE&stmt=fse13478&hl=fse13478,fse13822,fse13948&page=2)"
+  },
+  {
+   "ticker": "OTHER:Google/Amazon ASICs",
+   "text": "TPU/Trainium rental at half or sometimes less than half NVIDIA GPU price",
+   "kind": "hearsay",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240495&scope=ANYWHERE&stmt=fse13629&hl=fse13629,fse13822,fse49292,fse49448&page=2)"
+  },
+  {
+   "ticker": "OTHER:OpenAI/Cerebras",
+   "text": "Cerebras a fraction of a percent of OpenAI total compute",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240495&scope=ANYWHERE&stmt=fse5881&hl=fse5881,fse6124,fse6340,fse7810,fse11481,fse12154,fse13478,fse13629,fse13822,fse13948,fse16591,fse19720,fse20938,fse21051,fse21426,fse24675,fse26373,fse28638,fse28638,fse28751,fse30661,fse39437,fse50113&page=2)"
+  },
+  {
+   "ticker": "OTHER:AMD",
+   "text": "2.8T-parameter Kimi K3 fits on eight AMD chips but not eight GB200",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240495&scope=ANYWHERE&stmt=fse5881&hl=fse5881,fse6124,fse6340,fse7810,fse11481,fse12154,fse13478,fse13629,fse13822,fse13948,fse16591,fse19720,fse20938,fse21051,fse21426,fse24675,fse26373,fse28638,fse28638,fse28751,fse30661,fse39437,fse50113&page=2)"
+  },
+  {
+   "ticker": "OTHER:SambaNova",
+   "text": "SambaNova claims 356 tokens/s vs 122 TPS for B200; prefill 4.8s vs 16.5s (vendor claims)",
+   "kind": "hearsay",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240495&scope=ANYWHERE&stmt=fse3707&hl=fse3707,fse3861,fse3978,fse4056,fse6885,fse7132,fse8125,fse8303,fse8898,fse9300,fse9355,fse10555,fse11481,fse11905,fse12841,fse13096,fse13629,fse15911,fse16366,fse17904,fse18211,fse18849,fse21853,fse22840,fse23250,fse24045,fse24420,fse25731,fse25911,fse26717,fse27197,fse27442,fse28069,fse28375,fse28851,fse29402,fse30551,fse31368,fse32075,fse33070,fse34259,fse34759,fse34910,fse35557,fse36442,fse36670,fse36851,fse37160,fse37984,fse38329,fse38707,fse39437,fse39798,fse40719,fse41303,fse41415,fse41676,fse42691,fse43191,fse43851,fse44299,fse44888,fse46340,fse46840,fse47326,fse48311,fse48571,fse49292,fse49448&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Frontier labs may allocate 5% or a few single-digit percent of fleet to specialised inference chips",
+   "kind": "estimate",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240495&scope=ANYWHERE&stmt=fse3707&hl=fse3707,fse3861,fse3978,fse4056,fse6885,fse7132,fse8125,fse8303,fse8898,fse9300,fse9355,fse10555,fse11481,fse11905,fse12841,fse13096,fse13629,fse15911,fse16366,fse17904,fse18211,fse18849,fse21853,fse22840,fse23250,fse24045,fse24420,fse25731,fse25911,fse26717,fse27197,fse27442,fse28069,fse28375,fse28851,fse29402,fse30551,fse31368,fse32075,fse33070,fse34259,fse34759,fse34910,fse35557,fse36442,fse36670,fse36851,fse37160,fse37984,fse38329,fse38707,fse39437,fse39798,fse40719,fse41303,fse41415,fse41676,fse42691,fse43191,fse43851,fse44299,fse44888,fse46340,fse46840,fse47326,fse48311,fse48571,fse49292,fse49448&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

@@ -1,0 +1,151 @@
+{
+ "doc_id": "EC-1000000-264849",
+ "ticker": "META",
+ "tier": 2,
+ "sector": "Internet",
+ "title": "Former Director of Data Science at Meta Believes Advantage+ and Outcome-Focused Measurement Are Durable Advertising Advantages",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-264849",
+ "as_company": "Meta Platforms Inc",
+ "conversation_id": "7093__1794404155483",
+ "expert": "Former Director of Data Science at Meta (led ~50 data scientists on ads delivery and Advantage+); now at another company; interview 2026-10-22",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Meta",
+   "score": 4
+  },
+  {
+   "company": "Google / Alphabet",
+   "score": 3
+  },
+  {
+   "company": "X",
+   "score": 2
+  },
+  {
+   "company": "TikTok",
+   "score": 3
+  }
+ ],
+ "verdict": "A former Meta data-science director says a 10% gain in value-weighted conversions translated into ~10% advertiser revenue over 3\u201310 months, supporting Advantage+ durability, while Europe ad growth reportedly slowed to 18% in Q3 from 40% in Q1 (hearsay).",
+ "summary_variables": {
+  "Ad price per ad + impression growth": [
+   "10% more value-weighted conversions \u2192 10% more revenue over 3\u201310 months (from tenure); fits 3Q26 GEM gains of +9.6% app-ad conversions (SB #65096). \u2192 Tenet 1 (core ads) \u2191",
+   "Europe ad growth 18% in Q3 vs 40% in Q1 (hearsay) vs total 3Q26 revenue +26% (SB #61735): Europe lagging. \u2192 Tenet 1 (core ads) \u2193"
+  ],
+  "Muse/agent monetization": [
+   "agent fees such as 1% on a $6,000 insurance saving (hypothetical); Oppenheimer found only 19% of consumers would pay for an agent (SB #51221). \u2192 Tenet 3 (Muse $5B+) \u2192"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "10% conversion \u2192 10% revenue link vs 3Q26 GEM +9.6% app-ad conversions and +1.7% off-site (SB #65096): consistent (conversion gains feed revenue).",
+  "Europe ad growth 18% in Q3 (hearsay) vs total 3Q26 revenue +26%, price per ad +14% (SB #61735): Europe below group.",
+  "Agent monetization via transaction fees (hypothetical) vs Oppenheimer survey: 19% would pay for an AI agent (SB #51221): unresolved."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core ads): \u2191 \u2014 conversion gains convert ~1:1 to revenue over 3\u201310 months; offset by Europe 18% vs 40% (hearsay).",
+  "Tenet 3 (Muse $5B+): \u2192 \u2014 monetization models are hypothetical (1% transaction fee); 2\u20133 agent winners expected."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "META",
+   "text": "about 50 data scientists \u2014 Size of expert's team, When expert left; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse677&hl=fse677,fse897,fse4561,fse4640,fse4705,fse4799&page=1)"
+  },
+  {
+   "ticker": "META",
+   "text": "six, seven, eight years \u2014 Duration of strategy moving to down-funnel campaigns, Strategy tenure; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse677&hl=fse677,fse897,fse4561,fse4640,fse4705,fse4799&page=1)"
+  },
+  {
+   "ticker": "META",
+   "text": "10% \u2014 Increase in value-weighted conversions, Illustrative; baseline: 10% revenue increase",
+   "kind": "first_hand",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse14686&hl=fse14686,fse14901,fse15105,fse15227&page=2)"
+  },
+  {
+   "ticker": "META",
+   "text": "three, six, 10-month period \u2014 Time to translate value into revenue, Illustrative; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse14686&hl=fse14686,fse14901,fse15105,fse15227&page=2)"
+  },
+  {
+   "ticker": "META",
+   "text": "in a matter of hours \u2014 Time for ad system to narrow targeting, Campaign start; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849)"
+  },
+  {
+   "ticker": "META",
+   "text": "more than three seconds \u2014 Early engagement signal for ad system, Feed interaction; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse30046&hl=fse30046,fse30515,fse31531,fse31627,fse32524&page=2)"
+  },
+  {
+   "ticker": "META",
+   "text": "billions of users \u2014 Potential audience scale, Current; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse30046&hl=fse30046,fse30515,fse31531,fse31627,fse32524&page=2)"
+  },
+  {
+   "ticker": "META",
+   "text": "90% \u2014 Relevant hedge-fund managers on Instagram, Illustrative; baseline: 20% on X",
+   "kind": "estimate",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse32696&hl=fse32696,fse32910,fse33118,fse33229&page=2)"
+  },
+  {
+   "ticker": "OTHER:X",
+   "text": "20% \u2014 Relevant hedge-fund managers on X, Illustrative; baseline: 90% on Instagram",
+   "kind": "estimate",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse32696&hl=fse32696,fse32910,fse33118,fse33229&page=2)"
+  },
+  {
+   "ticker": "META",
+   "text": "18% \u2014 Q3 European ad-revenue growth, 2026-09-30; baseline: 40% in Q1",
+   "kind": "hearsay",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse52128&hl=fse52128,fse52520,fse52617,fse53082,fse53194&page=2)"
+  },
+  {
+   "ticker": "META",
+   "text": "40% \u2014 Q1 European ad-revenue growth, 2026-03-31; baseline: N/A",
+   "kind": "hearsay",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse52128&hl=fse52128,fse52520,fse52617,fse53082,fse53194&page=2)"
+  },
+  {
+   "ticker": "META",
+   "text": "24% \u2014 Q2 European ad-revenue growth, 2026-06-30; baseline: N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849)"
+  },
+  {
+   "ticker": "META",
+   "text": "90% less data \u2014 Data use under EU privacy limitation, Current; baseline: N/A",
+   "kind": "hearsay",
+   "citation": "[15 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849&scope=ANYWHERE&stmt=fse4312&hl=fse4312,fse4561,fse4640,fse4705,fse4799,fse5001,fse5293,fse5405,fse5464,fse5585,fse5852,fse6189,fse6363,fse6690,fse6854,fse6982,fse7135,fse7320,fse7380,fse7556,fse7698,fse7932,fse8606,fse8860,fse9621,fse9890,fse10321,fse10898,fse11392,fse11425,fse11550,fse11842,fse12381,fse12601,fse12872,fse13539,fse13605,fse14055,fse14352,fse18336,fse18749,fse18977,fse19226,fse19436,fse20422,fse20747,fse20852,fse21787,fse22257,fse22775,fse22970,fse23129,fse24100,fse24815,fse24858,fse25285,fse25495,fse25658,fse26396,fse26775,fse27571,fse27764,fse27943,fse28024,fse28203,fse29342,fse30046,fse30202,fse30515,fse30848,fse31627,fse32070,fse32524,fse32910,fse33118,fse36409,fse37811,fse38055,fse38294,fse38468,fse38940,fse39123,fse39600,fse39790,fse39954,fse40526,fse40708,fse41072,fse42373,fse42590,fse42818,fse43129,fse43209,fse43872,fse44302,fse44559,fse46049,fse46491,fse46986,fse47102,fse47497,fse47992,fse48342,fse48860,fse49097,fse49311,fse49847,fse50038,fse50783,fse50783,fse50832,fse51219,fse51356,fse52128,fse52772,fse53082,fse53194,fse53538,fse53931,fse54132,fse55672,fse56391,fse56517,fse56736,fse57012,fse57410,fse57685,fse57865,fse58245,fse58580,fse58702,fse58921,fse59051,fse59076,fse59294,fse59380,fse59417,fse59591,fse60432,fse60635,fse60964,fse61140,fse61824,fse61850,fse62040,fse62238,fse62537,fse62688,fse62985,fse63046,fse63276,fse63412,fse63662,fse63931,fse64035,fse64170,fse64293,fse64583,fse64908,fse64998,fse65076,fse65680,fse65717,fse65873,fse66220,fse66680,fse66858,fse67750,fse68572,fse68789,fse68998,fse69311,fse69396,fse69621,fse69707,fse69818&page=2)"
+  },
+  {
+   "ticker": "OTHER:OpenAI/Llama",
+   "text": "six months \u2014 Lag of open-source behind leading models, Current; baseline: N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "six companies \u2014 Entities capable of building frontier models, Current; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264849)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Meta - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

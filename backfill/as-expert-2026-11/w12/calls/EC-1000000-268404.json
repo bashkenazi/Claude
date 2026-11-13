@@ -1,0 +1,28 @@
+{
+ "doc_id": "EC-1000000-268404",
+ "ticker": "INTU",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "CEO at Bookkeeping and Payroll Company Sees Intuit Gaining Share Near Term but Risks Losing Ground to Lower-Cost AI Alternatives",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268404",
+ "as_company": "Intuit Inc",
+ "conversation_id": null,
+ "expert": null,
+ "weight": null,
+ "characterization": null,
+ "sentiment": [],
+ "verdict": null,
+ "summary_variables": {},
+ "characterization_changed": null,
+ "changes": [],
+ "inflection": false,
+ "thesis_impact": [],
+ "new_datapoints": [],
+ "filed": {
+  "page_id": null,
+  "page_title": "Intuit - Thesis Revised - 2026-11-05"
+ },
+ "status": "failed",
+ "note": "GenSearch ask timed out at the 60s MCP client limit with no conversation_id; not re-asked (backfill rule 2). timeout-no-conv-id"
+}

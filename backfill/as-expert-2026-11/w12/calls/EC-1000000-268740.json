@@ -1,0 +1,129 @@
+{
+ "doc_id": "EC-1000000-268740",
+ "ticker": "MU",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "VP of Sales Operations at Rambus Sees Strong Memory Demand and Limited Near-Term Price Relief, With CXMT Pressuring Future Price Increases",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268740",
+ "as_company": "Micron Technology Inc",
+ "conversation_id": "7093__1794403919363",
+ "expert": "VP of Sales Operations at Rambus (memory-interface IP; works with Micron, Samsung, SK hynix on HBM)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Micron",
+   "score": 4
+  },
+  {
+   "company": "SK hynix",
+   "score": 4
+  },
+  {
+   "company": "CXMT",
+   "score": 4
+  },
+  {
+   "company": "Rambus",
+   "score": 4
+  }
+ ],
+ "verdict": "A Rambus VP who works with all three HBM makers relays that Micron is sold out for the next three to four years (hearsay) and sees no memory price relief before Q3 2027 or Q4 2027, with CXMT the main share risk.",
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 3 (SCAs): \u2191 \u2014 sold out for three to four years (hearsay) extends visibility beyond FY27.",
+  "Tenet 4 (pricing durable, RoC peaked): \u2192 \u2014 no relief for 12 months, relief possible Q3/Q4 2027.",
+  "Tenet 5 (HBM share 20\u201325%): \u2192 \u2014 Micron wins non-NVIDIA standard HBM, but SK hynix holds NVIDIA.",
+  "Tenet 1 (supply short through 2028): \u2193 \u2014 relief from new capacity in Q3/Q4 2027 is earlier than the tenet's 2028."
+ ],
+ "changes": [
+  "Sold out for three to four years (hearsay) vs Micron mgmt >75% of FY27 shipments committed (SB #62928): consistent, longer horizon.",
+  "Price relief Q3 2027 or Q4 2027 (estimate) vs Kingston shortage persisting through 2027-28 (SB #64446): **conflicting** on timing.",
+  "Incumbent share toward 1/4 in 24 months as CXMT grows vs Apple leading CXMT DRAM evaluation (SB #62438): consistent direction.",
+  "Micron strong in non-NVIDIA HBM vs ex-CXMT engineer's Micron HBM share <20% (SB #64465): no like-for-like share figure."
+ ],
+ "summary_variables": {
+  "SCA coverage %": [
+   "\ud83d\udfe2 **Sold out for the next three to four years** (hearsay), a longer horizon than Micron's own >75% of FY27 shipments committed (SB #62928). \u2192 Tenet 3 (SCAs) \u2191 "
+  ],
+  "Spot vs contract DRAM pricing": [
+   "\ud83d\udfe2 **No major price reductions for the next 12 months; relief Q3 2027 or Q4 2027** (estimate), earlier than Kingston's shortage through 2027-28 (SB #64446): **conflicting** on timing. \u2192 Tenet 4 (pricing durable) \u2192 "
+  ],
+  "HBM4E share + 2027 HBM pricing round": [
+   "\ud83d\udfe1 **Micron wins standard HBM at Broadcom, AMD, Amazon, Meta, Google**; SK hynix locked in at NVIDIA (relationship of the last three, four years), vs ex-CXMT engineer's Micron HBM share <20% (SB #64465). \u2192 Tenet 5 (HBM share) \u2192 "
+  ],
+  "CXMT/YMTC trajectory + US policy": [
+   "\ud83d\udd34 **Incumbent share roughly 1/3 each could fall toward 1/4 in 24 months** as CXMT prices aggressively in HBM3 (estimate), consistent with Apple leading CXMT DRAM qualification (SB #62438). "
+  ]
+ },
+ "characterization_changed": null,
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Micron, Samsung, SK hynix: sold out for the next three to four years \u2014 Capacity status; Forward from 2026-11-04; vs Current capacity",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740&scope=ANYWHERE&stmt=fse15003&hl=fse15003,fse15095&page=2)"
+  },
+  {
+   "ticker": "OTHER:TSMC",
+   "text": "TSMC: sold out \u2014 Wafer-production capacity; 2026-11-04; vs Total capacity",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740&scope=ANYWHERE&stmt=fse15003&hl=fse15003,fse15095&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: $1,250 or something like that \u2014 Approximate peak share price; Prior to interview; vs Relative to current $850",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: $850 \u2014 Approximate share price; 2026-11-04; vs Relative to $1,250 peak",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740&scope=ANYWHERE&stmt=fse33884&hl=fse33884,fse34032,fse34124,fse34331,fse34353&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: $100 \u2014 Approximate share price; **18 months ago**; vs Historical baseline",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740&scope=ANYWHERE&stmt=fse33884&hl=fse33884,fse34032,fse34124,fse34331,fse34353&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Memory Market: Q3 2027 or Q4 2027 \u2014 Timing for price relief; Future quarters; vs Current constrained market",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740&scope=ANYWHERE&stmt=fse14845&hl=fse14845,fse15208,fse15530,fse15641&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "HBM: 3X the area \u2014 Die area requirement; Current; vs Standard server DIMMs",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740&scope=ANYWHERE&stmt=fse4711&hl=fse4711,fse7480,fse7693,fse7920,fse7920,fse8139,fse8747,fse11902,fse12824,fse13873,fse14007,fse14168,fse15003,fse15095,fse15208,fse15641,fse24790,fse24905,fse26715,fse27307,fse27413,fse27491,fse31620,fse31748,fse32049,fse32143,fse32329,fse33015,fse33080,fse34032,fse34124&page=2)"
+  },
+  {
+   "ticker": "OTHER:Rambus",
+   "text": "Rambus: 99% market share \u2014 Share of HBM4 in chip designs; 2026-11-04; vs Total HBM4 designs",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Memory Market: 1/3 for all these three players \u2014 Incumbent market share; Current; vs Samsung, Micron, SK hynix",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Memory Market: a quarter rather than a third \u2014 Potential future market share; **24 months**; vs Impact of CXMT entry",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268740)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "MU Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

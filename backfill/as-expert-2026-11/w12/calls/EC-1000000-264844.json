@@ -1,0 +1,81 @@
+{
+ "doc_id": "EC-1000000-264844",
+ "ticker": "META",
+ "tier": 2,
+ "sector": "Internet",
+ "title": "Director of Marketplace at Walmart eCommerce Sees Muse as a Potential Source of Incremental Demand but Expects Retailers to Protect Checkout and Customer Relationships",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-264844",
+ "as_company": "Meta Platforms Inc",
+ "conversation_id": "7093__1794404239638",
+ "expert": "Director, Marketplace at Walmart eCommerce (current; retailer view of agent integrations, Meta fee intentions second-hand); interview 2026-10-22",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Meta",
+   "score": 3
+  },
+  {
+   "company": "Walmart",
+   "score": 4
+  },
+  {
+   "company": "Amazon",
+   "score": 3
+  },
+  {
+   "company": "TikTok",
+   "score": 4
+  }
+ ],
+ "verdict": "A Walmart marketplace director sees Muse as incremental discovery but expects retailers to protect checkout; Meta direct checkout carries no additional channel fee today, and planned transaction fees risk deterring thin-margin merchants.",
+ "summary_variables": {
+  "Muse/agent monetization": [
+   "no additional channel fee today on Meta direct checkout (hearsay), so Muse transaction revenue is still ahead; Muse >10M US/Canada users, >25% shopping weekly (SB #62031). \u2192 Tenet 3 (Muse $5B+) \u2193",
+   "retailers have spent years optimizing checkout and will not cede it, consistent with ~1/3 of tested US sites blocking Muse (SB #60946). \u2192 Tenet 3 (Muse $5B+) \u2193",
+   "Amazon absence could shift Muse shoppers to Walmart, consistent with Amazon reportedly blocking Muse (SB #60946). \u2192 Tenet 3 (Muse $5B+) \u2192"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Retailers protecting checkout vs Jefferies: ~1/3 of tested US websites block Muse, Amazon included (SB #60946): consistent.",
+  "No additional channel fee on direct checkout today vs Muse >10M US/Canada users and >25% of weekly users shopping (SB #62031): usage without monetization yet."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 3 (Muse $5B+): \u2193 \u2014 no channel fee yet, planned fees could deter thin-margin merchants, and retailers resist instant checkout."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "OTHER:Shopify",
+   "text": "no additional channel fee \u2014 Current guidance for eligible merchants using Meta direct checkout, October 2026; baseline: vs Meta's planned transaction fees",
+   "kind": "hearsay",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264844&scope=ANYWHERE&stmt=fse9258&hl=fse9258,fse9453,fse23382,fse23494,fse23933,fse24361,fse26938,fse27308&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "years \u2014 Time spent optimizing checkout conversion, As of 2026-11-05; baseline: No numeric baseline",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264844&scope=ANYWHERE&stmt=fse16492&hl=fse16492,fse16565,fse20001&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "\u201cHundreds\u201d  of product pages \u2014 Illustrative volume of data requests, Per task; baseline: vs individual shopper activity",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264844)"
+  },
+  {
+   "ticker": "OTHER:Walmart",
+   "text": "Three  key points \u2014 Factors limiting instant-checkout adoption, As of 2026-11-05; baseline: No numeric baseline",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264844)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Meta - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

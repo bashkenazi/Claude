@@ -1,0 +1,104 @@
+{
+ "doc_id": "EC-1000000-269197",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Account Executive at IT Services Provider Expects DocuSign Growth to Be Driven by Renewals and Expansion",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269197",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794403946512",
+ "expert": "Field account executive at an international IT services provider (VAR), enterprise and upper-mid-market accounts in the Northeast; Docusign ~47%\u201348% of his document-workflow business",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "DocuSign Inc",
+   "score": 4
+  },
+  {
+   "company": "Adobe",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert's Docusign-related business rose about 10.2% y/y in Aug\u2013Oct 2026 with no meaningful churn, almost all from the installed base; new logos remain hard against cheaper Adobe and Dropbox.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udfe2 **Business up about 10.2% y/y**, vs 0% and +~3% from two 2026-11-06 calls and +7%\u201312% from the third: above most.",
+   "\ud83d\udfe2 **10%\u201312% next quarter, about 10% CY26** (estimate)."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udfe2 **No meaningful churn**; every renewal held or expanded, vs 5% and 7% downgrades on the 2026-11-06 consulting call: **conflicting**.",
+   "\ud83d\udfe2 **Seats up about 11%** (estimate) vs -5%\u20137% on the 2026-11-06 PSA-software COO call: **conflicting**.",
+   "\ud83d\udfe1 **Like-for-like pricing up about 4%** (estimate), in line with ~3% on two 2026-11-06 calls."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Business +~10.2% vs 0% (2026-11-06, PSA-software COO), +~3% (2026-11-06, consulting strategist) and +7%\u201312% (2026-11-06, CPA-firm director): above most.",
+  "Seats +~11% vs -5%\u20137% (2026-11-06, PSA-software COO) and +3%\u20135% (2026-11-06, consulting strategist): conflicting.",
+  "No meaningful churn vs 5% and 7% of renewals downgraded (2026-11-06, consulting strategist): conflicting.",
+  "Like-for-like pricing +~4% vs +~3% (2026-11-06, two calls): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth): \u2191 \u2014 +~10.2% now and ~10% CY26 (estimate) from the installed base.",
+  "Stance (very competitive legacy e-sign): \u2192 \u2014 renewals solid, but Adobe and Dropbox make new-logo wins harder."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 10.2% \u2014 DocuSign-related business growth, August\u2013October 2026; baseline: Same period in 2025",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197&scope=ANYWHERE&stmt=fse8440&hl=fse8440,fse8631,fse8925,fse9113,fse16827,fse17234,fse17419,fse17794,fse17860,fse20130,fse20368,fse20459,fse21679,fse21845,fse21941,fse22806,fse22897,fse22949,fse23475,fse24009,fse24040,fse24525,fse26367,fse26427,fse29052,fse29413,fse29837,fse31509,fse31716,fse32343,fse32667,fse34348,fse34457&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 47%\u201348% \u2014 Share of expert's document workflow business, Current; baseline: Total business mix",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197&scope=ANYWHERE&stmt=fse33151&hl=fse33151,fse33208&page=2)"
+  },
+  {
+   "ticker": "ADBE",
+   "text": "Adobe: low-double-digit percentage \u2014 Share of expert's document workflow business, Current; baseline: Total business mix",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 8% \u2014 Envelope usage at a primary renewal account, August\u2013October 2026; baseline: Prior period",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197&scope=ANYWHERE&stmt=fse8440&hl=fse8440,fse8631,fse8925,fse9113,fse16827,fse17234,fse17419,fse17794,fse17860,fse20130,fse20368,fse20459,fse21679,fse21845,fse21941,fse22806,fse22897,fse22949,fse23475,fse24009,fse24040,fse24525,fse26367,fse26427,fse29052,fse29413,fse29837,fse31509,fse31716,fse32343,fse32667,fse34348,fse34457&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 11% \u2014 Increase in seats/users across managed customers, August\u2013October 2026; baseline: Prior period",
+   "kind": "estimate",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197&scope=ANYWHERE&stmt=fse21679&hl=fse21679,fse24009&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 4% \u2014 Like-for-like pricing increase, August\u2013October 2026; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197&scope=ANYWHERE&stmt=fse34348&hl=fse34348,fse34592,fse34670&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 10%\u201312% \u2014 Expected DocuSign-related business growth, November 2026\u2013January 2027; baseline: Year-earlier period",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197&scope=ANYWHERE&stmt=fse8440&hl=fse8440,fse8631,fse8925,fse9113,fse16827,fse17234,fse17419,fse17794,fse17860,fse20130,fse20368,fse20459,fse21679,fse21845,fse21941,fse22806,fse22897,fse22949,fse23475,fse24009,fse24040,fse24525,fse26367,fse26427,fse29052,fse29413,fse29837,fse31509,fse31716,fse32343,fse32667,fse34348,fse34457&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 10% \u2014 Expected full-calendar-year growth, 2026; baseline: 2025",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269197&scope=ANYWHERE&stmt=fse8440&hl=fse8440,fse8631,fse8925,fse9113,fse16827,fse17234,fse17419,fse17794,fse17860,fse20130,fse20368,fse20459,fse21679,fse21845,fse21941,fse22806,fse22897,fse22949,fse23475,fse24009,fse24040,fse24525,fse26367,fse26427,fse29052,fse29413,fse29837,fse31509,fse31716,fse32343,fse32667,fse34348,fse34457&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

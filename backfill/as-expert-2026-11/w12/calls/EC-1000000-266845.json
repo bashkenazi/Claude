@@ -1,0 +1,132 @@
+{
+ "doc_id": "EC-1000000-266845",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Director of Business Development at Delta Electronics, Inc. Believes Asia Vital Components Is Gaining Data-Center Cooling Share",
+ "released": "2026-11-07",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-266845",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794404146774",
+ "expert": "Director of Business Development at Delta Electronics (thermal competitor); sees AVC in direct OEM bids",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  },
+  {
+   "company": "Delta Electronics",
+   "score": 5
+  },
+  {
+   "company": "Auras",
+   "score": 4
+  }
+ ],
+ "verdict": "Delta <b>beat AVC in a hyperscaler air-cooling bid ~6 months ago</b> (first-hand), yet the expert sees AVC gaining share to a solid #3 with ~15% of data-center cooling and leading on Vera Rubin cold plates.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "\ud83d\udfe2 <b>~15% of data-center cooling, solid #3 near #2</b> (estimate), first read on overall share.",
+   "\ud83d\udd34 <b>Auras over 10% cold-plate share</b> (hearsay) vs 5\u201310% (SB #64467), matching the 2026-11-06 nVent call. \u2192 Tenet 1 (Rubin content and share) \u2193"
+  ],
+  "Rubin yield and ramp": [
+   "\ud83d\udfe2 <b>Rubin cold-plate yield 60\u201370% to 80%</b> (hearsay), same as the 2026-11-06 calls, vs ~60% in May (SB #64479)."
+  ],
+  "Gross margin": [
+   "\ud83d\udd34 <b>Standardization price erosion of 10% or 15%</b> (estimate) vs high-single-digit a year in the 2026-11-06 nVent call. \u2192 Tenet 3 (GM 34%+) \u2193",
+   "\u26aa <b>AVC GM 32%</b> (hearsay) vs 32.57% in 2Q26 (thesis page): unchanged."
+  ],
+  "ASIC liquid-cooling start": [
+   "\u26aa <b>Custom ASICs 35\u201340% of 2027 accelerator liquid-cooling volume</b> (estimate), first read. \u2192 Tenet 2 (ASIC >50% of liquid revenue) \u2192"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Auras >10% cold-plate share vs 5-10% (SB #64467); same as 2026-11-06 nVent call: confirming Auras gains.",
+  "Rubin yield 80% matches the 2026-11-06 calls; vs ~60% in May (SB #64479).",
+  "Standardization price erosion 10% or 15% vs high-single-digit a year in the 2026-11-06 nVent call: same direction.",
+  "AVC GM 32% (hearsay) vs 32.57% 2Q26 (thesis page): unchanged."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Rubin content and share): \u2192 \u2014 AVC gaining overall (~15%, #3) but Auras >10% in cold plates and a lost Delta bid.",
+  "Tenet 2 (ASIC >50% of liquid revenue): \u2192 \u2014 ASICs 35-40% of 2027 accelerator liquid volume (industry, not AVC mix).",
+  "Tenet 3 (GM 34%+): \u2193 \u2014 10-15% standardization erosion, partly offset by the yield gain."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "about 15% \u2014 Data-center cooling market share, Current, vs Market total",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "60%-70% to 80% \u2014 Cold-plate yield improvement, Current, vs Previous yields",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "25%-30% \u2014 Gross-margin contribution from yield, Current, vs No baseline",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "32% \u2014 Overall company gross margin, Current, vs No baseline",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "20%-25% \u2014 Liquid-cooling CAGR, 2027-2028, vs 12%-15% current CAGR",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "40%-50% \u2014 Liquid-cooling capacity share, Current, vs 50% air cooling",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "60%-70% \u2014 Liquid-cooling capacity share, 2027-2028, vs Current capacity",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "14-18 months \u2014 Qualification lead time, Current, vs No baseline",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "10% or 15% \u2014 Price erosion from standardization, Future, vs Current pricing",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "8%-9% \u2014 Cold-plate volume brought in-house, Future, vs Total volume",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "35%-40% \u2014 Accelerator liquid-cooling volume, 2027, vs Total accelerators",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266845)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed in lean form (Summary, Expert and visibility, What changed, Bull, Bear, Thesis impact); Key numbers, Supply-chain flags, Share shifts, Questions, Sentiment and Q&A are in summaries/<doc_id>.md only, to keep the page update within size limits. New 'Expert Calls' h2 section created before Data Sources."
+}

@@ -1,0 +1,96 @@
+{
+ "doc_id": "EC-1000000-268685",
+ "ticker": "CRWD",
+ "tier": 1,
+ "sector": "Software A-L",
+ "title": "Chief Information Security Officer & Associate CIO at Geisinger Health System Sees AI Boosting Security Efficiency Amid Flat Budgets and Vendor Consolidation",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268685",
+ "as_company": "CrowdStrike Holdings Inc",
+ "conversation_id": "7093__1794406398880",
+ "expert": "CISO & Associate CIO, Geisinger Health System (current)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "CrowdStrike",
+   "score": 4
+  },
+  {
+   "company": "Palo Alto Networks",
+   "score": 4
+  },
+  {
+   "company": "Zscaler",
+   "score": 4
+  },
+  {
+   "company": "Microsoft (Entra)",
+   "score": 4
+  },
+  {
+   "company": "Okta",
+   "score": 3
+  },
+  {
+   "company": "Qualys / Tenable",
+   "score": 2
+  }
+ ],
+ "verdict": "Geisinger's CISO is cutting core security vendors from 10 to 12 to eight to 10 on a flat-to-down budget, a consolidation he expects incumbents CrowdStrike and Palo Alto to win, while AI spend must come from reallocated dollars.",
+ "summary_variables": {
+  "NNARR vs the buy-side bogey": [
+   "Vendors 10-12 -> 8-10; CRWD/PANW winners [1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse16063&hl=fse16063,fse16130&page=2)",
+   "Budget flat/down [10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse4196&hl=fse4196,fse4437,fse5000,fse5363,fse5475,fse5803,fse6014&page=2)"
+  ],
+  "AIDR ARR conversion": [
+   "AI bought embedded; auto-remediation 25-30% -> 50-75% [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse22948&hl=fse22948,fse24031,fse24317,fse24505,fse25215,fse25305,fse25654,fse25749,fse26059,fse26303&page=2)"
+  ],
+  "NG-SIEM displacement pace": [
+   "SIEM -> AI data lake theoretical [12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse15873&hl=fse15873,fse16063,fse16130,fse16795,fse17354,fse17415,fse18235,fse18444,fse18527&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Consolidation consistent with VAR share-gain view (SB #66118)",
+  "First read on customer budget and auto-remediation"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 4 (core): ↑ — consolidation favors CRWD",
+  "Tenet 2 (AIDR): → — reallocated budgets",
+  "Tenet 3 (emerging platform): → — SIEM data-lake watch item"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWD",
+   "text": "Geisinger CISO consolidating core security vendors from 10-12 to target 8-10; CrowdStrike and Palo Alto seen as consolidation winners",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse16063&hl=fse16063,fse16130&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Healthcare security budget flat or trending down (Nov-26); AI spend from reallocation; a 10% cut would hit services first",
+   "kind": "first_hand",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse4196&hl=fse4196,fse4437,fse5000,fse5363,fse5475,fse5803,fse6014&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Healthcare SOC auto-remediates 25%-30% of incidents now; expected 50%-75%, if not more, in next year or two",
+   "kind": "estimate",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse22948&hl=fse22948,fse24031,fse24317,fse24505,fse25215,fse25305,fse25654,fse25749,fse26059,fse26303&page=2)"
+  },
+  {
+   "ticker": "OKTA",
+   "text": "CISO ranks Microsoft Entra ahead of Okta in Microsoft-oriented organizations",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268685&scope=ANYWHERE&stmt=fse30488&hl=fse30488,fse30769,fse30981,fse31158,fse31540,fse31868,fse32069,fse32534,fse32734,fse32912,fse33043,fse33097,fse33228,fse33265&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3caa8833-33de-8159-8bc9-c94df18efbf6",
+  "page_title": "CRWD Thesis - Revised"
+ },
+ "status": "done",
+ "note": "Characterization kept Positive; sentiment score for CRWD lowered from GenSearch's 5 to 4 (qualitative support only)."
+}

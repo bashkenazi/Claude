@@ -1,0 +1,15 @@
+{
+ "doc_id": "EC-1000000-267925",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Former Assistant Manager, Global Corporate Strategy at Flex Ltd. Sees Asia Vital Components’ Liquid-Cooling Purchases Rising Amid Pricing Pressure",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-267925",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": null,
+ "status": "failed",
+ "note": "timeout-no-conv-id (retry r2: alphasense_genai timed out after 60s, no conversation_id; not re-asked)",
+ "new_datapoints": [],
+ "filed": null
+}

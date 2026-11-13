@@ -1,0 +1,95 @@
+{
+ "doc_id": "EC-1000000-261988",
+ "ticker": "CRWV",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Account Executive at IT Reseller Sees CoreWeave Gaining Share as AI Workloads and GPU Demand Grow",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-261988",
+ "as_company": "CoreWeave Inc",
+ "conversation_id": "7093__1794403933203",
+ "expert": "Field account executive at a large value-added IT reseller (customers with 1,000-10,000 employees); current; first-hand CoreWeave evaluations and practice revenue; commercial, not operational, view; interview 2026-10-15",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "CoreWeave",
+   "score": 4
+  },
+  {
+   "company": "Azure/AWS/Google",
+   "score": 3
+  },
+  {
+   "company": "Smaller GPU Clouds",
+   "score": 3
+  }
+ ],
+ "verdict": "A large IT reseller's account executive saw CoreWeave-related business grow about 20%, maybe 17.5% y/y in Q3 2026, with clusters handed over on schedule and effective pricing up an estimated 5%-7%.",
+ "summary_variables": {
+  "Backlog / RPO (demand)": [
+   "\ud83d\udfe2 **Reseller CoreWeave business +17.5%-20% y/y in Q3 2026** (first-hand), with Q4 seen at 18%-20% and CY26 ~20% (estimate); first expert read on this page. \u2192 Tenet 1 (backlog conversion) \u2191"
+  ],
+  "GPU pricing": [
+   "\ud83d\udfe1 **Effective pricing +5%-7% y/y** (estimate), well below mgmt's 20%+ increases on older chips (SB #67233) and the ~25% July hike: **conflicting**. \u2192 Tenet 4 (pricing) \u2192"
+  ],
+  "Contracted power \u2192 active power conversion": [
+   "\ud83d\udfe2 **Cluster handoffs \"generally on schedule\"**; delays came from customer readiness, not CoreWeave delivery. \u2192 Tenet 3 (power ramp) \u2191",
+   "\ud83d\udd34 **Customers not running at full utilization**, optimizing usage (unquantified), which may slow expansion revenue."
+  ],
+  "Competition & share": [
+   "\ud83d\udfe2 **Gaining share in specialised GPU cloud** on GPU availability and performance; hyperscalers remain incumbents for standardised enterprise workloads. \u2192 Tenet 6 (supply wave) \u2191"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Pricing: expert estimates +5%-7% effective y/y vs mgmt's 20%+ increases on older chip models at Citi TMT (SB #67233, 2026-11-03): **conflicting** (lower).",
+  "Pricing vs margins: Deutsche Bank understands contribution margins on 2Q deals rose 5-10pts (SB #67240, 2026-11-04): consistent direction (pricing up).",
+  "First read on reseller-channel CoreWeave growth (17.5%-20% y/y); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (backlog conversion): \u2191 \u2014 reseller CoreWeave business +17.5%-20% y/y as evaluations convert to capacity.",
+  "Tenet 3 (power conversion): \u2191 \u2014 cluster handoffs generally on schedule.",
+  "Tenet 4 (pricing inflecting): \u2192 \u2014 +5%-7% effective y/y, below the ~25% July hike on the page.",
+  "Tenet 6 (supply wave / competition): \u2191 \u2014 gaining share against smaller GPU clouds; hyperscalers still incumbents."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWV",
+   "text": "IT reseller's CoreWeave-related business up about 20%, maybe 17.5% y/y, Q3 2026",
+   "kind": "first_hand",
+   "citation": "[20 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261988&scope=ANYWHERE&stmt=fse12745&hl=fse12745,fse13173,fse13715,fse14019,fse14659,fse15117&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "Reseller expects CoreWeave business +18%-20% y/y in Q4 2026",
+   "kind": "estimate",
+   "citation": "[21 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261988&scope=ANYWHERE&stmt=fse28175&hl=fse28175,fse28325,fse28367,fse28826&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "Reseller expects CoreWeave business ~20% y/y growth in calendar 2026",
+   "kind": "estimate",
+   "citation": "[21 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261988&scope=ANYWHERE&stmt=fse28175&hl=fse28175,fse28325,fse28367,fse28826&page=2)"
+  },
+  {
+   "ticker": "CRWV",
+   "text": "CoreWeave effective pricing +5%-7% y/y, Q3 2026 (reseller estimate)",
+   "kind": "estimate",
+   "citation": "[23 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261988&scope=ANYWHERE&stmt=fse37233&hl=fse37233,fse37318,fse37422&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Server purchase price over $350,000 in June 2026 vs $200,000 last year",
+   "kind": "hearsay",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261988&scope=ANYWHERE&stmt=fse37233&hl=fse37233,fse37318&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "CRWV Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

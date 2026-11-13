@@ -1,0 +1,76 @@
+{
+ "doc_id": "EC-1000000-240841",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Senior AI Research Engineer at Agility Robotics Believes NVIDIA Ecosystem Leads in Embodied AI Hardware Solutions",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240841",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794403862923",
+ "expert": "Senior AI Research Engineer at Agility Robotics (current); one of three hardware decision-makers for a ~20-person embodied-AI team; interview 2026-08-12",
+ "weight": "Medium",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 5
+  },
+  {
+   "company": "Agility Robotics",
+   "score": 4
+  }
+ ],
+ "verdict": "An Agility Robotics senior AI engineer, one of three hardware decision-makers, says a rival needs >20% better inference latency and ~10% more VRAM just to be considered, and the team is moving to NVIDIA Jetson (likely Thor).",
+ "summary_variables": {
+  "Compute share vs. XPU/ASIC": [
+   "\ud83d\udfe2 **Switching bar: >20% latency gain plus ~10% more VRAM**; porting is the \"very biggest hidden cost\"; first read on edge switching thresholds. \u2192 Tenet 3 (~75% share) \u2191",
+   "\ud83d\udfe2 **Agility moving from older NVIDIA GPUs to Jetson, likely Thor**; no other vendor seriously considered. \u2192 Tenet 4 (new TAM vectors) \u2191"
+  ],
+  "Demand / orders (edge AI)": [
+   "\ud83d\udfe2 **World models now 10-20 billion parameters** vs VLAs under 1B to a couple of billion, too big for one edge device, pushing work to cloud and lab GPUs (5090/4090).",
+   "\ud83d\udfe2 **Inference is 90% of end-to-end robot latency** (sensors ~7%, actuation 3%), so compute is the binding constraint."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on edge-AI switching thresholds and robot latency split; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 3 (~75% share): \u2191 \u2014 at the edge, a rival needs >20% latency and ~10% VRAM gains plus equal tooling to be considered.",
+  "Tenet 4 (new TAM vectors): \u2191 \u2014 Agility moving to Jetson Thor; world models scaling to 10-20B parameters."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "NVDA",
+   "text": "Edge robotics: rival needs above 20% better inference latency and around 10% more VRAM to be considered vs NVIDIA",
+   "kind": "first_hand",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240841&scope=ANYWHERE&stmt=fse21887&hl=fse21887,fse21945,fse21982,fse22080,fse22123,fse22158,fse22294,fse22353,fse22384,fse22501&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "Agility Robotics switching from older NVIDIA GPUs to NVIDIA Jetson, likely Jetson Thor",
+   "kind": "first_hand",
+   "citation": "[14 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240841&scope=ANYWHERE&stmt=fse4157&hl=fse4157,fse4215,fse4252,fse4464,fse4602,fse4759&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Robot end-to-end latency: inference 90%, sensors maybe 7%, actuation 3%",
+   "kind": "first_hand",
+   "citation": "[15 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240841&scope=ANYWHERE&stmt=fse14053&hl=fse14053,fse14111,fse14148,fse14299,fse14352,fse14386&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Robotics world models 10-20 billion parameters vs VLA under one billion to a couple of billions",
+   "kind": "first_hand",
+   "citation": "[16 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240841&scope=ANYWHERE&stmt=fse6499&hl=fse6499,fse6557,fse6594,fse6613,fse6821,fse6934,fse6976,fse7214,fse7362,fse7526,fse7663&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

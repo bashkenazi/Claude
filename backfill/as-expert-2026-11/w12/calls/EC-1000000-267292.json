@@ -1,0 +1,28 @@
+{
+ "doc_id": "EC-1000000-267292",
+ "ticker": "Databricks",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Manager at Global IT Solutions Provider Expects Databricks Business to Grow 30% and Gain Enterprise Market Share",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-267292",
+ "as_company": "Databricks",
+ "conversation_id": null,
+ "expert": null,
+ "weight": null,
+ "characterization": null,
+ "sentiment": [],
+ "verdict": null,
+ "summary_variables": {},
+ "characterization_changed": null,
+ "changes": [],
+ "inflection": false,
+ "thesis_impact": [],
+ "new_datapoints": [],
+ "filed": {
+  "page_id": null,
+  "page_title": "Databricks Thesis"
+ },
+ "status": "failed",
+ "note": "GenSearch ask timed out at the 60s MCP client limit with no conversation_id; not re-asked (backfill rule 2). timeout-no-conv-id"
+}

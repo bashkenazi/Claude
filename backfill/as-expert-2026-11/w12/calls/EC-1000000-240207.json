@@ -1,0 +1,65 @@
+{
+ "doc_id": "EC-1000000-240207",
+ "ticker": "MSFT",
+ "tier": 2,
+ "sector": "Software A-M",
+ "title": "Vice President at Barclays PLC Sees Sovereign AI Becoming Increasingly Important for Banks",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240207",
+ "as_company": "Microsoft Corp",
+ "conversation_id": "7093__1794406384722",
+ "expert": "Vice President at a global bank (Barclays), enterprise data, AI platforms and sovereign cloud; no own spend disclosed",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Microsoft / Azure",
+   "score": 4
+  },
+  {
+   "company": "Amazon / AWS",
+   "score": 4
+  },
+  {
+   "company": "Google Cloud",
+   "score": 3
+  }
+ ],
+ "verdict": "A global-bank VP with no spend or contract figures sees Azure as 'extremely relevant' for regional and sovereign bank deployments, but concentration-risk rules keep banks splitting workloads across providers.",
+ "summary_variables": {
+  "Azure growth (sovereign demand)": [
+   "🟢 **Azure \"extremely relevant\"** for regional and increasingly sovereign bank deployments, with AI sovereignty requirements expected to matter over the **next two years** (estimate); first read. → Tenet 1 (Azure supply-limited) →"
+  ],
+  "Competition & share": [
+   "🟡 **Concentration risk rules out a single provider**: banks pick Azure or AWS by workload and jurisdiction, and Google Cloud wins specific data and AI workloads; first read."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on bank sovereign-cloud provider selection; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Azure supply-limited): → — qualitative support for sovereign demand, no figures; multi-cloud rules cap any single-provider share."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscalers: next two years — Period for substantial sovereign AI developments, Future; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-240207&scope=ANYWHERE&stmt=fse17054&hl=fse17054,fse17568,fse17719&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Banks: next few years — Period for AI sovereignty significance, Future; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240207)"
+  }
+ ],
+ "filed": {
+  "page_id": "3d4a8833-33de-81b8-a7dd-f453cff3ede4",
+  "page_title": "MSFT Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

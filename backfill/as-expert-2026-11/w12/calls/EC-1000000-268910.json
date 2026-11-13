@@ -1,0 +1,130 @@
+{
+ "doc_id": "EC-1000000-268910",
+ "ticker": "HPE",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Senior Advisor at Wasp Barcode Technologies Believes HPE Needs a More Aggressive Sales Approach to Defend AI Infrastructure Share",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268910",
+ "as_company": "Hewlett Packard Enterprise Co",
+ "conversation_id": "7093__1794405503792",
+ "expert": "Senior Advisor at Wasp Barcode Technologies; former CEO of a $1.3B networking VAR (~30 years IT sales)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Dell",
+   "score": 5
+  },
+  {
+   "company": "Cisco",
+   "score": 4
+  },
+  {
+   "company": "Arista",
+   "score": 4
+  },
+  {
+   "company": "HPE",
+   "score": 2
+  },
+  {
+   "company": "Supermicro",
+   "score": 2
+  }
+ ],
+ "verdict": "From the channel, a customer's server order was repriced <b>20% higher two weeks after acceptance</b> on component costs, HPE's 30-day price hold (orders up to $1 million) only matches Dell and Lenovo, and the expert ranks Dell 1st on lead times while HPE loses share.",
+ "summary_variables": {
+  "Supply, not demand, sets FY27 revenue": [
+   "🔴 Revenue rising on component cost \"without the unit count increasing\"; revenue could drop significantly if memory prices fall; consistent with mgmt saying FY26 growth was ASP-driven with units supply-limited (SB #58666). → Tenet 2 (C&AI supply-secured) ↓ [15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse5714&hl=fse5714,fse5736,fse5841,fse6152,fse6331&page=2)"
+  ],
+  "Cloud & AI margin vs Networking margin": [
+   "🟡 Order repriced 20% higher two weeks after acceptance (first-hand); HPE's 30-day hold up to $1 million is \"me-too\"; matches mgmt's view that LTAs assure supply, not price (SB #59919). → Tenet 3 (C&AI margin) ↓ [5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse26512&hl=fse26512,fse26700,fse26797&page=2)"
+  ],
+  "Share vs Dell": [
+   "🔴 Dell ranked 1st with the shortest lead times; HPE ~6% DC switching vs Cisco ~28% (hearsay); same direction as HPE trad servers +59% vs Dell +122% last quarter (SB #50228). → Tenet 4 (share vs Dell) ↓ [7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse28811&hl=fse28811,fse28852&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Pricing: customer order repriced 20% higher two weeks after acceptance (expert) vs mgmt saying >$30B purchase commitments assure supply, not price (SB #59919): consistent, input-cost exposure persists.",
+  "Revenue mix: component cost lifting revenue without unit growth (expert) vs mgmt saying FY26 growth was ASP-driven with units supply-limited (SB #58666): consistent.",
+  "Share: Dell ranked 1st with shortest lead times (expert) vs HPE trad servers +59% / AI -6% vs Dell +122% / +100% in the July quarter (SB #50228): consistent, share loss continuing.",
+  "Memory: +20%-30% in 2027 (estimate) vs Citi on mgmt seeing memory relief unlikely before 2028 (SB #51463): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (C&AI supply-secured): ↓ — expert says revenue growth is component-price driven without matching unit growth, so a memory price fall would cut revenue.",
+  "Tenet 3 (FY27 EPS / C&AI margin): ↓ — order repriced 20% two weeks after acceptance; 30-day hold up to $1 million shifts cost risk onto HPE on held quotes.",
+  "Tenet 4 (share vs Dell): ↓ — Dell ranked 1st on lead times and direct sales; HPE ~6% DC switching share vs Cisco ~28% (hearsay).",
+  "Tenet 1 (Networking compounds): → — Juniper seen as path to grow from ~6% DC switching share, but no figures on HPE networking orders."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "HPE",
+   "text": "HPE ~6% data-center switching share vs Cisco ~28% (expert hearsay, 2026-11-04)",
+   "kind": "hearsay",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse17618&hl=fse17618,fse17898,fse18221,fse18468,fse18564,fse18740,fse18796,fse18836,fse26398,fse28852,fse31451,fse31647,fse31764,fse32354,fse32828,fse33220,fse33220,fse33325,fse33452,fse33556,fse34189,fse34245,fse34389&page=2)"
+  },
+  {
+   "ticker": "HPE",
+   "text": "HPE 30-day price hold on compute/storage quotes for orders up to $1 million; Dell and Lenovo already offer similar",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse25048&hl=fse25048,fse26152,fse27065&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Customer server order repriced 20% higher two weeks after acceptance, mid-shipment, on component costs",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse26512&hl=fse26512,fse26700,fse26797&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Server memory prices expected up a further 20%-30% in 2027 (expert estimate)",
+   "kind": "estimate",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse21257&hl=fse21257&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Lead times: standard servers one week, configured-to-order four to six weeks, high-end AI systems four to five months",
+   "kind": "estimate",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse27886&hl=fse27886,fse28010,fse28119,fse28418,fse28500&page=2)"
+  },
+  {
+   "ticker": "ANET",
+   "text": "Arista 19% data-center Ethernet share vs Cisco 18%",
+   "kind": "hearsay",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse17618&hl=fse17618,fse17898,fse18221,fse18468,fse18564,fse18740,fse18796,fse18836,fse26398,fse28852,fse31451,fse31647,fse31764,fse32354,fse32828,fse33220,fse33220,fse33325,fse33452,fse33556,fse34189,fse34245,fse34389&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "IDC/Gartner see 2027 IT budget growth of 4% or less",
+   "kind": "hearsay",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse4831&hl=fse4831,fse4980,fse5841,fse7066,fse7886,fse10313,fse10995,fse11292,fse12458,fse12693,fse14881,fse16865,fse17618,fse17657,fse17855,fse18468,fse18564,fse19738,fse21257,fse24240,fse24601,fse25048,fse25282,fse26512,fse26700,fse26797,fse27065,fse27886,fse27941,fse28010,fse28119,fse28418,fse28500,fse31764,fse31764,fse34389,fse34389,fse34927&page=2)"
+  },
+  {
+   "ticker": "HPE",
+   "text": "Enterprise demand for HPE AI systems more than doubled last quarter (as reported)",
+   "kind": "hearsay",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse7066&hl=fse7066&page=2)"
+  },
+  {
+   "ticker": "HPE",
+   "text": "Vultr Helios order a little over $1 billion",
+   "kind": "hearsay",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse4831&hl=fse4831,fse4980,fse5841,fse7066,fse7886,fse10313,fse10995,fse11292,fse12458,fse12693,fse14881,fse16865,fse17618,fse17657,fse17855,fse18468,fse18564,fse19738,fse21257,fse24240,fse24601,fse25048,fse25282,fse26512,fse26700,fse26797,fse27065,fse27886,fse27941,fse28010,fse28119,fse28418,fse28500,fse31764,fse31764,fse34389,fse34389,fse34927&page=2)"
+  },
+  {
+   "ticker": "DELL",
+   "text": "Dell ranked 1st among packaged AI offerings on supply chain and lead times (expert view)",
+   "kind": "estimate",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268910&scope=ANYWHERE&stmt=fse28811&hl=fse28811,fse28852&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8159-9974-ec02d5b47c0c",
+  "page_title": "HPE - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

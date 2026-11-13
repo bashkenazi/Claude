@@ -1,0 +1,15 @@
+{
+ "doc_id": "EC-1000000-264428",
+ "ticker": "GEV",
+ "tier": 2,
+ "sector": "Power",
+ "title": "Former CTO at GE Vernova Inc Believes GridOS Adoption Will Drive Growth for Utility Consulting Firms",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-264428",
+ "as_company": "GE Vernova Inc",
+ "conversation_id": null,
+ "status": "failed",
+ "note": "timeout-no-conv-id (retry r2: alphasense_genai timed out after 60s, no conversation_id; not re-asked)",
+ "new_datapoints": [],
+ "filed": null
+}

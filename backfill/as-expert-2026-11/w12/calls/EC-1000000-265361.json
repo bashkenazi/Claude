@@ -1,0 +1,118 @@
+{
+ "doc_id": "EC-1000000-265361",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Former GM, Worldwide Business Development at Super Micro Computer Inc. Sees Asia Vital Components Maintaining Share Through Rubin Amid Growing Liquid-Cooling Demand",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-265361",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794403908919",
+ "expert": "Head of AI Infrastructure at Global AI (AI-server buyer, ~20,000 GPUs/yr); former GM, Worldwide BD at Super Micro",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  },
+  {
+   "company": "Auras",
+   "score": 3
+  }
+ ],
+ "verdict": "AVC parts sit in <b>~70% of the ~20,000 GPUs</b> the expert deploys a year (his own BOM audits), often picked when default vendors would slip weeks to a quarter.",
+ "summary_variables": {
+  "Rubin yield and ramp": [
+   "\ud83d\udfe2 <b>Rubin yield ~80% now vs 60\u201370% early 2026</b> (hearsay), up from ~60% in May (SB #64479). \u2192 Tenet 1 (Rubin content and share) \u2191",
+   "\ud83d\udfe2 <b>Field cold-plate failure rate below 2%</b> (first-hand), first read; quality is the share risk he names."
+  ],
+  "Nvidia content and share": [
+   "\ud83d\udfe2 <b>AVC in ~70% of ~20,000 GPUs a year</b> (first-hand presence, not share), consistent with JPM's ~50% per AI project (SB #58861). \u2192 Tenet 1 (Rubin content and share) \u2191",
+   "\ud83d\udfe2 <b>Liquid cooling 80% on GB300 to >90% on Rubin</b> (estimate), first read."
+  ],
+  "Gross margin": [
+   "\u26aa <b>No cold-plate price declines seen</b>; OEMs absorb any switch premium, consistent with JPM's ASP raises (SB #58857). \u2192 Tenet 3 (GM 34%+) \u2192"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Rubin cold-plate yield ~80% (hearsay) vs ~60% in May (SB #64479) and 40-45% end-April (thesis page): improving.",
+  "AVC present in ~70% of the expert's GPUs vs ~30% Nvidia GB cold-plate share (SB #64467): different measures; consistent with JPM's ~50% per project (SB #58861).",
+  "No cold-plate price declines seen vs JPM: AVC raised ASPs on switch-tray cold plates (SB #58857): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Rubin content and share): \u2191 \u2014 AVC in ~70% of ~20,000 GPUs a year; Rubin liquid adoption >90% vs 80% on GB300.",
+  "Tenet 3 (GM 34%+): \u2192 \u2014 no price declines seen; standardization pressure flagged but unquantified.",
+  "Tenet 4 (capacity): \u2192 \u2014 only allocation mismatches could move volume; no numbers."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "70% \u2014 Presence in firm's GPU deployments, Annual, vs Total deployments",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "OTHER:Global AI",
+   "text": "20,000 \u2014 GPUs deployed, Annual, vs Not stated",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "less than 2% \u2014 Field cold-plate failure rate, Current, vs Not stated",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "80% \u2014 GB300 liquid cooling adoption, Current, vs Total GB300",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "more than 90% \u2014 Rubin liquid cooling adoption, Future, vs Total Rubin",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "30% \u2014 Data centers meeting liquid-cooling needs, Current, vs Total sites",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "25% or possibly still 30% \u2014 Data centers meeting Rubin requirements, Future, vs Total sites",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "$4 million \u2014 GB300 price per rack, Current, vs Not stated",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "OTHER:NVIDIA",
+   "text": "$8 million \u2014 Rubin price per rack, Future, vs Not stated",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "80% \u2014 Rubin manufacturing yield, 2026-10-23, vs 60\u201370% early 2026",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265361)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed in lean form (Summary, Expert and visibility, What changed, Bull, Bear, Thesis impact); Key numbers, Supply-chain flags, Share shifts, Questions, Sentiment and Q&A are in summaries/<doc_id>.md only, to keep the page update within size limits. New 'Expert Calls' h2 section created before Data Sources."
+}

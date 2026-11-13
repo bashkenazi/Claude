@@ -1,0 +1,102 @@
+{
+ "doc_id": "EC-1000000-268595",
+ "ticker": "SPCX",
+ "tier": 2,
+ "sector": "Other Sectors",
+ "title": "Former Vice President of Flight and Test Operations and Chief Pilot at Virgin Galactic Sees SpaceX Well Positioned Despite Starlink Trust Concerns",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268595",
+ "as_company": "Space Exploration Technologies Corp",
+ "conversation_id": "7093__1794405457923",
+ "expert": "Former VP of Flight and Test Operations and Chief Pilot at Virgin Galactic (left a couple of years ago; consultant); interview 2026-11-03",
+ "short_expert": "Ex-VP flight ops, Virgin Galactic",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "SpaceX",
+   "score": 5.0
+  },
+  {
+   "company": "Starlink",
+   "score": 5.0
+  },
+  {
+   "company": "Chinese Launch",
+   "score": 4.0
+  },
+  {
+   "company": "Blue Origin",
+   "score": 3.0
+  },
+  {
+   "company": "Ariane 6",
+   "score": 3.0
+  }
+ ],
+ "verdict": "A former Virgin Galactic flight-operations VP (left about two years ago, no SpaceX internal data) sees SpaceX dominant in launch and Starlink (about 11,000 satellites in orbit, estimate) but flags government trust in Starlink after Ukraine and urban direct-to-device bandwidth limits.",
+ "summary_variables": {
+  "Starlink net adds and ARPU": [
+   "🔴 Direct-to-device bandwidth limits in dense cities (tens of thousands of simultaneous users) confine Starlink Mobile to remote areas; first read. → Tenet 4 (Starlink compounds) ↓ {c13}",
+   "🔴 Governments may seek sovereign systems after Ukraine service disruptions; first read on Starshield/Starlink trust risk. → Tenet 4 (Starlink compounds) ↓ {c14}"
+  ],
+  "Starship reuse and launch cost (Tenet 5)": [
+   "🟡 Falcon 9 retirement by 2028 doubted (estimate): a fleet likely kept for ISS, Dragon and Axiom; Starship lowers Starlink's cost basis, in line with mgmt's Flight 14 progress (SB #65090). → Tenet 5 (Starship reuse) ↑ {c21}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Falcon 9 possible retirement 2028 (estimate) vs mgmt: Starship Flight 14 reached orbit and cadence target is moving up (SB #65090): consistent with the Starship ramp.",
+  "Starlink Mobile: expert sees a Boost-type deal as a way to buy telecom expertise; SpaceX already agreed to buy 100% of Grain's 800MHz spectrum (SB #60667): consistent direction.",
+  "First read on Starlink constellation size (about 11,000 satellites, estimate); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 4 (Starlink to ~$30B FY27): ↓ — urban direct-to-device bandwidth limits and sovereign-system risk after Ukraine; no subscriber figure.",
+  "Tenet 5 (Starship reuse cuts launch cost): ↑ — Starship expected to lower launch costs and Starlink's cost basis; Falcon 9 retained for crewed and DoD missions."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SPCX",
+   "text": "SpaceX (Starlink): 11,000 — Satellites in orbit; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268595)"
+  },
+  {
+   "ticker": "SPCX",
+   "text": "SpaceX (Falcon 9): 2028 — Potential retirement date; Estimated; vs Transition to Starship",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268595)"
+  },
+  {
+   "ticker": "SPCX",
+   "text": "SpaceX (Starfall): one-metric-ton — Payload capacity; Current; vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268595)"
+  },
+  {
+   "ticker": "SPCX",
+   "text": "SpaceX (Starfall): twice — Number of flights; Cumulative; vs To date",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268595)"
+  },
+  {
+   "ticker": "OTHER:Sceye",
+   "text": "Sceye: 60,000 feet — Operating altitude; Current; vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268595)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "ISS: 2030 — Phase-out date; Scheduled; vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268595)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8129-bbe3-f72a689c2c96",
+  "page_title": "SpaceX - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

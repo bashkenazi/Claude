@@ -1,0 +1,126 @@
+{
+ "doc_id": "EC-1000000-268294",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Director of Sales Engineering at Celestica Expects ODMs and Rack Integrators to Gain Ground as AI Rack Integration Grows More Complex",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268294",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794405371323",
+ "expert": "Director of Sales Engineering at Celestica (ODM/rack integrator), current",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 4
+  },
+  {
+   "company": "Broadcom",
+   "score": 4
+  },
+  {
+   "company": "Marvell",
+   "score": 3
+  },
+  {
+   "company": "Coherent",
+   "score": 3
+  },
+  {
+   "company": "Lumentum",
+   "score": 3
+  }
+ ],
+ "verdict": "A current Celestica sales-engineering director sees very strong NVL72/Blackwell demand under supply pressure, with GPUs at 60%-70% of total system cost, but rack integration/test capacity and pay-in-advance terms gate adoption.",
+ "summary_variables": {
+  "Lead times / air-pocket risk": [
+   "Merchant GPU lead times 'like 48 weeks' (hearsay) vs T+90 to T+100+ days in 2026-11-05 call: conflicting [6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse32181&hl=fse32181,fse34547,fse35718,fse36367,fse36609&page=2)",
+   "1.6T XPO lead times 60-70+ weeks (up to 96) vs 400G/800G within a week [5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse19787&hl=fse19787,fse19848,fse20826,fse21016,fse25926,fse26258&page=2)"
+  ],
+  "Rubin ramp execution": [
+   "1.6T yields 20%-25%; 1.6T adoption gradual toward 2028 vs Semtech 2H next year: conflicting [13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse22905&hl=fse22905,fse23062,fse23437&page=2)",
+   "Few integrators can validate racks; pay in advance [10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse12227&hl=fse12227,fse12345&page=2)"
+  ],
+  "Compute share vs. XPU/ASIC": [
+   "Custom ASICs need >2-3 years of engineering; better for inference [14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse30987&hl=fse30987,fse31079,fse31512,fse31654,fse33133,fse33235,fse33332&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "GPU lead time 'like 48 weeks' (hearsay) vs T+90 to T+100+ days in 2026-11-05 IT-services call: conflicting",
+  "1.6T yields 20%-25% vs 'very limited yield' for CPO in 2026-11-06 Semtech call: consistent",
+  "1.6T adoption gradual toward 2028 vs Semtech (2026-11-06) mass volume from 2H next year: conflicting",
+  "First read on Broadcom 80%-90% vs Marvell 10%-20% in 800G"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 6 (supply executes Rubin ramp): ↓ — integration/test capacity and 20%-25% 1.6T yields are bottlenecks",
+  "Tenet 1 (capex duration): ↑ — NVL72 demand very strong; ODM revenue maybe +50% q/q",
+  "Tenet 3 (~75% share): → — ASICs need >2-3 years engineering",
+  "Tenet 4 (networking TAM): → — 800G 40%-50% of networking revenue; Broadcom leads"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "NVDA",
+   "text": "Merchant GPU lead time 'like 48 weeks or maybe', current (Nov-26)",
+   "kind": "hearsay",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse32181&hl=fse32181,fse34547,fse35718,fse36367,fse36609&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "GPUs 60%-70% of total AI system cost, current",
+   "kind": "estimate",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse7480&hl=fse7480,fse7564&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "ODM/rack-integrator revenue growth 'maybe 50%' quarter by quarter, current",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse7480&hl=fse7480,fse8248,fse8638,fse8729,fse8844,fse10092,fse10804,fse10953,fse11016,fse13332,fse14057,fse15359,fse19734,fse19787,fse19848,fse20922,fse22250,fse22384,fse23366,fse23437,fse25926,fse26258,fse27708,fse27786,fse31654,fse31985,fse32181,fse35932&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "ODM/integrator profit margin around 10% or lower vs OEMs more than 20%, current",
+   "kind": "estimate",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse5593&hl=fse5593,fse5822,fse6590,fse7863,fse8638,fse8729,fse8844&page=2)"
+  },
+  {
+   "ticker": "AVGO",
+   "text": "Broadcom used by 80%-90% of 800G players vs Marvell 10%-20%, current",
+   "kind": "estimate",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse27337&hl=fse27337,fse27402,fse27708,fse27786,fse27872,fse28177,fse28297&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell used by 10%-20% of 800G players (second source in supply crunches), current",
+   "kind": "estimate",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse27337&hl=fse27337,fse27402,fse27708,fse27786,fse27872,fse28177,fse28297&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "1.6T XPO lead times 96 weeks / more than 60 or 70 weeks from leading suppliers vs 400G/800G optics previously within a week",
+   "kind": "hearsay",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse19787&hl=fse19787,fse19848,fse20826,fse21016,fse25926,fse26258&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "1.6T optics/packaging manufacturing yields 20%-25%, current",
+   "kind": "hearsay",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse19787&hl=fse19787,fse19848,fse20826,fse21016,fse25926,fse26258&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "800G at 40%-50% of networking revenue for players the expert monitors; 1.6T adoption gradual toward 2028",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268294&scope=ANYWHERE&stmt=fse7480&hl=fse7480,fse8248,fse8638,fse8729,fse8844,fse10092,fse10804,fse10953,fse11016,fse13332,fse14057,fse15359,fse19734,fse19787,fse19848,fse20922,fse22250,fse22384,fse23366,fse23437,fse25926,fse26258,fse27708,fse27786,fse31654,fse31985,fse32181,fse35932&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3bfa8833-33de-8116-ab07-ddcc0fcfad2b",
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

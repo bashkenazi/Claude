@@ -1,0 +1,147 @@
+{
+ "doc_id": "EC-1000000-270090",
+ "ticker": "CRWD",
+ "tier": 1,
+ "sector": "Software A-L",
+ "title": "Director at a Value-Added Reseller Is Optimistic About CrowdStrike Growth, Renewals, and Falcon Flex Adoption",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270090",
+ "as_company": "CrowdStrike Holdings Inc",
+ "conversation_id": "7093__1794403839228",
+ "expert": "Sales Director at a value-added reseller, 9+ years selling CrowdStrike (current; own deals and renewals)",
+ "weight": "High",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "CrowdStrike",
+   "score": 5
+  },
+  {
+   "company": "Seraphic",
+   "score": 4
+  },
+  {
+   "company": "Palo Alto Networks",
+   "score": 3
+  },
+  {
+   "company": "SentinelOne",
+   "score": 3
+  },
+  {
+   "company": "Wiz",
+   "score": 2
+  }
+ ],
+ "verdict": "The expert's own CrowdStrike business grew about 20% y/y in Aug\u2013Oct, with renewal spend up 10%\u201315% on 5%\u201310% annual price increases and about 60% of deals on Falcon Flex.",
+ "summary_variables": {
+  "NNARR vs bogey (channel growth)": [
+   "CrowdStrike business ~20% y/y (Aug\u2013Oct), below the 30%+ partner growth in Aug channel checks (SB #43076). \u2192 Tenet 1 (Flex/NNARR) \u2191",
+   "renewal spend +10%\u201315% y/y, consistent with 100% of the original Flex cohort renewing (SB #44215). \u2192 Tenet 1 (Flex/NNARR) \u2191"
+  ],
+  "Flex utilization": [
+   "~60% of deals on Flex with ~10% deal-size uplift vs management's 40% ending-ARR uplift on Flex conversion (SB #59489): smaller uplift in this channel. \u2192 Tenet 1 (Flex/NNARR) \u2192"
+  ],
+  "FY29 model / margins": [
+   "5%\u201310% annual subscription price increases vs Bernstein's 25\u201335% Flex discount on like-for-like SKUs (SB #66649): conflicting. \u2192 Tenet 5 (margin/FCF) \u2191"
+  ],
+  "AIDR ARR conversion": [
+   "recent AI-security deal lost to Palo Alto even as Falcon Guardian demand rises; Cleveland had AIDR becoming a standard Flex attach (SB #43077): mixed. \u2192 Tenet 2 (AIDR cycle) \u2193"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Own CRWD business ~20% y/y vs partners citing 30%+ growth in Aug (SB #43076): slower.",
+  "Renewal spend +10%\u201315% y/y vs 100% of the original Flex cohort renewing (SB #44215): consistent.",
+  "Flex deal-size uplift ~10% vs management's 40% ending-ARR uplift on Flex conversion (SB #59489): lower.",
+  "Annual price increases 5%\u201310% vs Bernstein 25\u201335% Flex discount on like-for-like SKUs (SB #66649): conflicting."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Flex/NNARR): \u2191 \u2014 ~20% growth, renewals +10%\u201315%, ~60% of deals on Flex.",
+  "Tenet 2 (AIDR cycle): \u2193 \u2014 lost an AI-security deal to Palo Alto; Guardian demand rising but unquantified.",
+  "Tenet 3 (emerging platform): \u2191 \u2014 Falcon Cloud Security taking share from Wiz; NG-SIEM and Cloud lead the pipeline.",
+  "Tenet 4 (core endpoint): \u2191 \u2014 \"isn't losing endpoint share\"; SentinelOne discounting has not stopped CRWD wins.",
+  "Tenet 5 (margin/FCF): \u2191 \u2014 5%\u201310% annual price increases."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWD",
+   "text": "about 20% \u2014 Expert's CrowdStrike business growth, August\u2013October; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse12329&hl=fse12329&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "10%\u201315% \u2014 Increase in renewal spending, August\u2013October; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse26388&hl=fse26388&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "5%\u201310% \u2014 Annual subscription price increase, Per year; baseline: Prior year",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse12366&hl=fse12366&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "10%\u201320% \u2014 Increase in average deal size, August\u2013October; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "about 60% \u2014 Share of deals using Falcon Flex, August\u2013October; baseline: Total deals",
+   "kind": "first_hand",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse16407&hl=fse16407&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "about 10% \u2014 Expansion in deal size via Flex, August\u2013October; baseline: Standard contracts",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "$300,000 to $3 million \u2014 Average new deal size per year, August\u2013October; baseline: Annual value",
+   "kind": "first_hand",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse14391&hl=fse14391&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "up to $10 million \u2014 Multi-year contract value, August\u2013October; baseline: 3-year term",
+   "kind": "first_hand",
+   "citation": "[24 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse13945&hl=fse13945,fse14391,fse14506,fse14674&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "a couple weeks to a month \u2014 Faster deal closure via Flex, August\u2013October; baseline: Standard procurement",
+   "kind": "first_hand",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse17434&hl=fse17434,fse17474,fse17621,fse17840&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "about 10% \u2014 Forecasted business growth, November\u2013January; baseline: Year-over-year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "10%\u201315% \u2014 Forecasted business growth, Calendar 2026; baseline: Calendar 2025",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090&scope=ANYWHERE&stmt=fse26388&hl=fse26388&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "at least 10% \u2014 Forecasted business growth, Calendar 2027; baseline: Calendar 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270090)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "CRWD Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

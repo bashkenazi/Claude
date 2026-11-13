@@ -1,0 +1,106 @@
+{
+ "doc_id": "EC-1000000-269070",
+ "ticker": "MRVL",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Former Associate Vice President at Marvell Technology Sees Strategic Value in Lumentum Deal Despite Transaction Risks",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269070",
+ "as_company": "Marvell Technology Inc",
+ "conversation_id": "7093__1794404180470",
+ "expert": "Former Associate Vice President at Marvell (now at AMD); custom devices and M&A integration",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Marvell",
+   "score": 4
+  },
+  {
+   "company": "Lumentum",
+   "score": 4
+  },
+  {
+   "company": "Broadcom",
+   "score": 3
+  },
+  {
+   "company": "Coherent",
+   "score": 2
+  }
+ ],
+ "verdict": "A former Marvell AVP backs the Lumentum deal as the copper-to-fiber move for 2030 but says the all-stock 4.5 MRVL shares per LITE share is dilutive and will not fix supply, with Lumentum sold out through early 2029 (hearsay).",
+ "summary_variables": {
+  "Greenfield legs": [
+   "TIAs and DSPs plus Lumentum optics for a 2030 copper-to-fiber shift (estimate), a one-stop shop for hyperscalers. \u2192 Tenet 3 (scale-up optics) \u2191"
+  ],
+  "Margins": [
+   "4.5 shares per Lumentum share, all-stock, matches deal terms (SB #65699); value falls with MRVL stock and invites a rival bid. \u2192 Tenet 5 (bear flank) \u2191"
+  ],
+  "Interconnect growth rate": [
+   "Coherent may move away from Marvell, but that business volume is \"not large\" (first read). \u2192 Tenet 2 (1.6T duopoly) \u2192"
+  ]
+ },
+ "characterization_changed": "Characterization changed from Positive: the expert's only Marvell figures are the dilutive 4.5-share all-stock ratio and a supply sell-out the deal does not fix; the upside is strategic opinion.",
+ "changes": [
+  "Lumentum sold out through early 2029 and \"only able to meet about 70%\" of demand next year (hearsay) vs the 2026-11-05 Lightmatter and Semtech calls, which said Lumentum is unable to meet ~70% of demand: conflicting on the 70% (met vs unmet); same early-2029 sell-out.",
+  "Exchange ratio 4.5 shares, over $1,000 per LITE share at announcement (expert) vs 4.500 MRVL shares per LITE share, ~$1,132/share (SB #65699): consistent.",
+  "Executive retention two or three years post-close (estimate) vs Lightmatter 2026-11-05 integration one or two years: consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 3 (scale-up optics greenfield): \u2191 \u2014 combining Marvell TIAs/DSPs with Lumentum optics for the 2030 copper-to-fiber shift.",
+  "Tenet 2 (1.6T duopoly): \u2192 \u2014 Coherent may diversify away, but its Marvell volume is not large.",
+  "Tenet 5 (bear flank): \u2191 \u2014 4.5-share all-stock ratio is dilutive and exposes the deal to a competing bid if MRVL falls."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 4.5 shares \u2014 Exchange ratio for offer; period Current; baseline Per Lumentum share",
+   "kind": "first_hand",
+   "citation": "[[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269070&scope=ANYWHERE&stmt=fse32431&hl=fse32431,fse32669,fse32755,fse32991,fse33286&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: three-quarters of a year \u2014 Duration of leadership program; period Ongoing; baseline Standard program length",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269070)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: two or three years \u2014 Executive transition period; period Future; baseline Post-acquisition",
+   "kind": "estimate",
+   "citation": "[[15 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269070&scope=ANYWHERE&stmt=fse22295&hl=fse22295,fse22631,fse23061,fse23314,fse24055,fse24338&page=2)"
+  },
+  {
+   "ticker": "LITE",
+   "text": "Lumentum: over $1,000 \u2014 Deal value per share; period 2026-11-06; baseline At deal announcement",
+   "kind": "first_hand",
+   "citation": "[[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269070&scope=ANYWHERE&stmt=fse32431&hl=fse32431,fse32669,fse32755,fse32991,fse33286&page=2)"
+  },
+  {
+   "ticker": "LITE",
+   "text": "Lumentum: early 2029 \u2014 Order book sell-out date; period Future; baseline Current visibility",
+   "kind": "hearsay",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269070&scope=ANYWHERE&stmt=fse3884&hl=fse3884,fse3996,fse11303,fse11434,fse14943,fse14991,fse23601,fse25054,fse32755,fse32755,fse32991&page=2)"
+  },
+  {
+   "ticker": "LITE",
+   "text": "Lumentum: about 70% \u2014 Demand fulfillment rate; period Next year; baseline Total market demand",
+   "kind": "hearsay",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269070&scope=ANYWHERE&stmt=fse3884&hl=fse3884,fse3996,fse11303,fse11434,fse14943,fse14991,fse23601,fse25054,fse32755,fse32755,fse32991&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 2030 \u2014 Copper-to-fiber transition; period Future; baseline Current data center builds",
+   "kind": "estimate",
+   "citation": "[[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269070&scope=ANYWHERE&stmt=fse5995&hl=fse5995,fse6299,fse11303,fse11434&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "MRVL Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

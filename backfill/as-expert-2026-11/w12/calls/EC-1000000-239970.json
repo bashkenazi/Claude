@@ -1,0 +1,76 @@
+{
+ "doc_id": "EC-1000000-239970",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Lead at Cohere AI Believes Multi-Cloud GPU Strategies Are Essential for AI Inference Optimization",
+ "released": "2026-11-08",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239970",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794405608814",
+ "expert": "Director of Inference at Cohere (foundation-model company), interview 2026-08-10",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 4
+  }
+ ],
+ "verdict": "Cohere's director of inference (interview 2026-08-10) says H100, B200, B300 and GB200 are all difficult to obtain, forcing inference providers to stitch together capacity across hyperscalers and neoclouds in a seller-led market.",
+ "summary_variables": {
+  "Lead times / air-pocket risk": [
+   "Blackwell harder to get than H100; all scarce [30 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse4871&hl=fse4871,fse4903,fse4963,fse5126,fse5275,fse5553,fse5656&page=2)",
+   "Neocloud terms seller-led [33 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse8000&hl=fse8000,fse8150,fse8231,fse8341,fse8536,fse8573,fse8658,fse8802,fse9059,fse9146,fse9384&page=2)"
+  ],
+  "Duration of the AI capex cycle": [
+   "Tens of thousands of GPUs per region needed [3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse8802&hl=fse8802,fse9146&page=2)"
+  ],
+  "Compute share vs. XPU/ASIC": [
+   "Multi-cloud latency tens to hundreds of ms [34 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse9815&hl=fse9815,fse9990,fse10041&page=2)"
+  ]
+ },
+ "characterization_changed": "Very Positive -> Positive: no order or price figures in the call; GenSearch's supporting numbers came from broker research outside the call and were excluded.",
+ "changes": [
+  "GPU scarcity consistent with 'supply as tight as 90 days ago' in 2026-11-05 IT-services call",
+  "First read on multi-cloud aggregation and neocloud terms"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (inference leads): ↑ — tens of thousands of GPUs per region",
+  "Tenet 6 (supply execution): → — Blackwell still scarce",
+  "Tenet 5 (margins): ↑ — seller-led market"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "NVDA",
+   "text": "H100, B200, B300 and GB200 all difficult to obtain; H100 relatively more available than Blackwell (Cohere, 2026-08-10)",
+   "kind": "first_hand",
+   "citation": "[30 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse4871&hl=fse4871,fse4903,fse4963,fse5126,fse5275,fse5553,fse5656&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Inference providers need capacity in the tens of thousands of GPUs per region; no single cloud can meet it (2026-08-10)",
+   "kind": "first_hand",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse8802&hl=fse8802,fse9146&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscaler on-demand quotas e.g. 1,000 L4 GPUs; committed contracts fix capacity and price",
+   "kind": "first_hand",
+   "citation": "[32 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse5824&hl=fse5824,fse6308,fse6350,fse6382,fse6409,fse6538,fse6584,fse6786,fse6867,fse6970&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Multi-cloud GPU routing adds tens to hundreds of milliseconds latency vs real-time need under 50 ms",
+   "kind": "first_hand",
+   "citation": "[34 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239970&scope=ANYWHERE&stmt=fse9815&hl=fse9815,fse9990,fse10041&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3bfa8833-33de-8116-ab07-ddcc0fcfad2b",
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": "GenSearch answer mixed in broker research from other documents; only this call's own citations used."
+}

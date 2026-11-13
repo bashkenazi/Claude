@@ -1,0 +1,82 @@
+{
+ "doc_id": "EC-1000000-240523",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Former Chief Executive Officer and Founder at Arkona Home Robotics Believes Broadly Capable Humanoid Robots Are Still Three to Five Years Away",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240523",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794403854494",
+ "expert": "Former CEO and founder of Arkona Home Robotics, now consultant; hands-on with robotics models on small arms; no NVIDIA purchase data; interview 2026-11-10",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 4
+  },
+  {
+   "company": "Harmonic Drive",
+   "score": 3
+  },
+  {
+   "company": "Nabtesco",
+   "score": 3
+  },
+  {
+   "company": "Unitree",
+   "score": 2
+  }
+ ],
+ "verdict": "A former home-robotics founder sees NVIDIA's Cosmos 3 as a generic starting model, with broadly capable humanoids still three to five years away; the call gives no near-term NVIDIA revenue signal.",
+ "summary_variables": {
+  "Demand / orders (physical AI)": [
+   "\ud83d\udfe1 **Broadly capable humanoids 3-5 years away** (estimate), gated by tactile sensing and precise actuators; first read on humanoid timing. \u2192 Tenet 4 (new TAM vectors) \u2192",
+   "\ud83d\udfe1 **Biggest Cosmos models need 32 GB RAM or two GPUs; on-site fine-tuning runs on a single GPU** (estimate): modest per-site compute."
+  ],
+  "Competition & share": [
+   "\ud83d\udfe2 **NVIDIA is the \"primary enabler\"** via chips and Cosmos; learning does not transfer across sites, so value sits in local fine-tuning."
+  ]
+ },
+ "characterization_changed": "Characterization changed from Positive: the expert quantifies no NVIDIA demand and puts broadly capable humanoids 3-5 years out; NVIDIA is an enabler only.",
+ "changes": [
+  "First read on humanoid-robot timing and Cosmos compute needs; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 4 (new TAM vectors): \u2192 \u2014 physical AI is 3-5 years from broad capability; NVIDIA is the enabler (Cosmos, chips) but no revenue is quantified."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Broadly capable humanoid robots three to five years away",
+   "kind": "estimate",
+   "citation": "[18 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240523&scope=ANYWHERE&stmt=fse30197&hl=fse30197,fse30256,fse30580,fse31781&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "Largest Cosmos 3 model needs 32 GB RAM or two GPUs",
+   "kind": "estimate",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240523&scope=ANYWHERE&stmt=fse15750&hl=fse15750&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Task fine-tuning needs a minimum of 50 clips; up to 400 clips captured for some demos",
+   "kind": "first_hand",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240523&scope=ANYWHERE&stmt=fse20896&hl=fse20896,fse21187,fse21609&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Identical robots reach 95% accuracy but may need retraining for motor variation",
+   "kind": "first_hand",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-240523&scope=ANYWHERE&stmt=fse43862&hl=fse43862,fse44363&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

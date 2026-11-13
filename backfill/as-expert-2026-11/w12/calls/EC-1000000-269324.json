@@ -1,0 +1,104 @@
+{
+ "doc_id": "EC-1000000-269324",
+ "ticker": "INTU",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Executive Director at Business Consultancy Expects Intuit to Gain Share Modestly as QuickBooks Automation Remains Incremental",
+ "released": "2026-11-08",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269324",
+ "as_company": "Intuit Inc",
+ "conversation_id": "7093__1794405461151",
+ "expert": "Executive Director, North American small-business consultancy (5 ongoing + 5-8 occasional clients; current)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Intuit",
+   "score": 4
+  },
+  {
+   "company": "Xero",
+   "score": 3
+  },
+  {
+   "company": "Zoho Books",
+   "score": 3
+  }
+ ],
+ "verdict": "99% of this small consultancy's SMB clients run QuickBooks and it expects 5%-10% annual price increases to be absorbed on switching costs; its roughly 50% rise in Intuit work reflects a firm pivot to bookkeeping, not market demand.",
+ "summary_variables": {
+  "Paid-customer and platform growth vs 13-14% guide": [
+   "🟡 **Intuit-related activity up roughly 50%**, driven by the firm's pivot to bookkeeping with no 2025 comparable; not a read on QBO demand. First read; no earlier expert call. [23 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse14118&hl=fse14118,fse14686&page=2)"
+  ],
+  "Pricing and ARPC (Tenet 2)": [
+   "🟢 **5%-10% annual price increases (estimate)** expected to stick on switching costs; below the 2026-08-01 list increases of +13%/+22%/+24% (thesis page). → Tenet 2 (core funnel and pricing) ↑ [25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse27067&hl=fse27067,fse27112,fse27205,fse28257&page=2)",
+   "🔴 **Clients resisting add-ons and QBO Advanced** when the value of increases is unclear. → Tenet 1 (mid-market) ↓ [13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse27112&hl=fse27112,fse28668,fse28987&page=2)"
+  ],
+  "Competition and retention (Tenet 5)": [
+   "🟢 **99% of SMB clients on QuickBooks**, under 1% elsewhere; consistent with Cleveland's AI-native vendors under 1% share (SB #63132). → Tenet 5 (disruption contained) ↑ [24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse16046&hl=fse16046,fse16209,fse17129&page=2)",
+   "🔴 **20%, 30% of QuickBooks \"makes work harder\" (estimate)**; AI only incremental. → Tenet 5 (disruption contained) ↓ [26 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse42578&hl=fse42578,fse42763,fse42947,fse43405,fse43805&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Price increases of 5%-10% (estimate) vs 2026-08-01 QBO list increases of +13% Essentials / +22% Plus / +24% Advanced (thesis page data point): expert expects smaller effective increases.",
+  "99% QuickBooks share of clients vs AI-native vendors under 1% share (SB #63132): consistent.",
+  "First read on consultancy Intuit activity; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (core funnel and pricing): ↑ — 5%-10% increases expected to be absorbed, though below list-price moves.",
+  "Tenet 5 (disruption contained): → — 99% QuickBooks penetration, but 20%, 30% of workflows seen as friction.",
+  "Tenet 1 (mid-market): ↓ — resistance to QBO Advanced and add-ons when value is unclear (no number)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INTU",
+   "text": "Consultancy Intuit-related activity up roughly 50% (firm pivot to bookkeeping; no 2025 comparable)",
+   "kind": "first_hand",
+   "citation": "[23 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse14118&hl=fse14118,fse14686&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "99% of consultancy SMB clients use QuickBooks",
+   "kind": "first_hand",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse16046&hl=fse16046,fse16209,fse17129&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "QuickBooks subscription price increases 5%-10% per year depending on plan (planning guess)",
+   "kind": "estimate",
+   "citation": "[25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse27067&hl=fse27067,fse27112,fse27205,fse28257&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "20%, 30% of QuickBooks functionality makes work harder (automation errors, complex workflows)",
+   "kind": "estimate",
+   "citation": "[26 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse42578&hl=fse42578,fse42763,fse42947,fse43405,fse43805&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "80% of consultancy activity focused on bookkeeping, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse1116&hl=fse1116,fse14118,fse14686,fse26610,fse28257&page=1)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Consultancy serves Intuit clients with up to 200 employees",
+   "kind": "first_hand",
+   "citation": "[21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse4416&hl=fse4416,fse4494,fse4538,fse4722&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Less than 1% of clients use non-QuickBooks platforms",
+   "kind": "estimate",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269324&scope=ANYWHERE&stmt=fse16046&hl=fse16046,fse16209,fse17129&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8109-bad2-e521daa8697a",
+  "page_title": "Intuit - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

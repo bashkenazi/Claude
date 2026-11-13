@@ -1,0 +1,114 @@
+{
+ "doc_id": "EC-1000000-268620",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Director at Managed Security Firm Sees Samsara Gaining Fleet Share and Accelerating Joint Business Growth",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268620",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794403761210",
+ "expert": "Channel sales director at a large U.S. telecom/managed security provider co-selling Samsara to large enterprises",
+ "weight": "Medium",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 5
+  },
+  {
+   "company": "Geotab",
+   "score": 4
+  },
+  {
+   "company": "Motive",
+   "score": 3
+  },
+  {
+   "company": "Verizon Connect",
+   "score": 2
+  }
+ ],
+ "verdict": "The expert's Samsara-related business grew 20%\u201322% y/y in Aug\u2013Oct 2026 with a 96% renewal rate and a joint pipeline up about 30%.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "\ud83d\udfe2 96% of customers renewed, joint pipeline +30% y/y, 20%\u201325% new logos; vs Jefferies check that license cost is a focus at renewals (SB #62601): conflicting. \u2192 Tenet 1 (enterprise expansion) \u2191",
+   "\ud83d\udfe1 25%\u201327% CY26 growth (estimate), partner practice below company ARR +29.6% and $100K+ cohort +38% (SB #50486); first expert read."
+  ],
+  "GM/FCF through component cycle": [
+   "\ud83d\udfe2 Platform deals +5%\u20137% y/y price, basic GPS no more than 2%\u20133%, first read on price realization; pricing on AI video and asset tracking helps offset the component-cost GM cut (SB #62580). \u2192 Tenet 3 (op leverage vs hardware cost) \u2191"
+  ],
+  "Competition & share": [
+   "\ud83d\udfe2 Number one or two in RFPs, gaining vs Motive and Geotab, matches Jefferies platform wins (SB #62604); complex projects still need aggressive discounts. \u2192 Tenet 4 (platform moat) \u2191"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Renewals: 96% renewal rate vs Jefferies reseller check that license cost is scrutinised at renewal when fleets shrink (SB #62601): conflicting.",
+  "Growth: partner business +20%\u201322% y/y vs company $100K+ cohort ARR +38% (SB #50486): partner slower than company aggregate.",
+  "Pricing: first read on Samsara price realization (+5%\u20137% platform, \u22642%\u20133% basic); no earlier expert call or stored row.",
+  "Competition: platform RFP wins vs Jefferies 'competitors very aggressive on price in larger enterprise deals' (SB #62604): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): \u2191 \u2014 +20%\u201322% practice growth, 96% renewals, pipeline +30%.",
+  "Tenet 3 (op leverage vs hardware cost): \u2191 \u2014 +5%\u20137% price on platform deals.",
+  "Tenet 4 (platform moat): \u2191 \u2014 #1/#2 in RFPs; caveat: aggressive discounts in complex projects."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 20%\u201322% \u2014 Samsara-related business growth, August\u2013October 2026, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268620&scope=ANYWHERE&stmt=fse12157&hl=fse12157,fse12264,fse12336,fse12715,fse12904,fse13093,fse13228,fse13325&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 30% \u2014 Joint deal-pipeline growth, 2026-11-05, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[2 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268620&scope=ANYWHERE&stmt=fse4606&hl=fse4606,fse4858,fse4913&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 96% \u2014 Customer renewal rate, 2026-11-05, vs Previous period",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268620&scope=ANYWHERE&stmt=fse12157&hl=fse12157,fse12264,fse12336,fse12715,fse12904,fse13093,fse13228,fse13325&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 20%\u201325% \u2014 Share of pipeline from new logos, 2026-11-05, vs Total pipeline",
+   "kind": "first_hand",
+   "citation": "[[21 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268620&scope=ANYWHERE&stmt=fse20834&hl=fse20834,fse21250,fse21282,fse21356&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 25%\u201327% \u2014 Expected Samsara-related business growth, Calendar-year 2026, vs Year over year",
+   "kind": "estimate",
+   "citation": "[[9 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268620&scope=ANYWHERE&stmt=fse12336&hl=fse12336,fse12904,fse22511,fse24338&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: no more than 2%\u20133% \u2014 Price increase for basic GPS/telematics, 2026-11-05, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268620&scope=ANYWHERE&stmt=fse29251&hl=fse29251,fse29388,fse29517,fse29613,fse29678,fse29918&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 5%\u20137% \u2014 Price increase for broad-platform offerings, 2026-11-05, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268620&scope=ANYWHERE&stmt=fse29251&hl=fse29251,fse29388,fse29517,fse29613,fse29678,fse29918&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: $20\u2013$40 \u2014 Pricing per vehicle for basic telematics, 2026-11-05, vs Unit price",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268620)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources). No \"Samsara Thesis - Revised\" page exists; filed to the thesis-builder child page \"Samsara - Thesis Revised - 2026-11-05\" (has What Matters and tenets)."
+}

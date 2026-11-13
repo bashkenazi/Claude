@@ -1,0 +1,80 @@
+{
+ "doc_id": "EC-1000000-266923",
+ "ticker": "MRVL",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Senior Architect of AI, Analytics, and High-Performance Computing at Everpure Sees Marvell’s Opportunity in Custom AI Silicon and Optical Connectivity, but Cites Execution Risks",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-266923",
+ "as_company": "Marvell Technology Inc",
+ "conversation_id": "7093__1794407070716",
+ "expert": "Senior Architect, AI/analytics/HPC at Everpure (evaluator, not a Marvell buyer)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Marvell",
+   "score": 3
+  },
+  {
+   "company": "Broadcom",
+   "score": 3
+  },
+  {
+   "company": "NVIDIA",
+   "score": 4
+  }
+ ],
+ "verdict": "An AI-infrastructure architect at Everpure puts Marvell at around 25% of custom AI ASICs vs Broadcom's around 60% (estimate), but flags cheaper Taiwan design houses and six to nine month respin risk.",
+ "summary_variables": {
+  "Custom program roster and scope": [
+   "Marvell ~25% vs Broadcom ~60% [22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266923&scope=ANYWHERE&stmt=fse22564&hl=fse22564,fse22886,fse23052,fse23098,fse23184,fse23249,fse23300&page=2)",
+   "Respin costs 6-9 months [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266923&scope=ANYWHERE&stmt=fse32759&hl=fse32759,fse34849&page=2)"
+  ],
+  "Margins": [
+   "Alchip/MediaTek/Faraday undercut [24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266923&scope=ANYWHERE&stmt=fse26253&hl=fse26253,fse26471,fse26588,fse26931,fse27200,fse27263&page=2)"
+  ]
+ },
+ "characterization_changed": "Positive -> Mixed: no first-hand Marvell orders or prices; risks weighed as heavily as opportunity.",
+ "changes": [
+  "First read on custom-ASIC share and respin risk"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (custom): → — ~25% share, distant second",
+  "Tenet 4 (margins): ↓ — cheaper design houses",
+  "Tenet 5 (bear flank): ↓ — concentration, respin risk"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "MRVL",
+   "text": "Marvell ~25% vs Broadcom ~60% share of custom AI ASIC design (architect estimate, Oct-26)",
+   "kind": "estimate",
+   "citation": "[22 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266923&scope=ANYWHERE&stmt=fse22564&hl=fse22564,fse22886,fse23052,fse23098,fse23184,fse23249,fse23300&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Custom ASIC silicon respin costs six to nine months of delay",
+   "kind": "estimate",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266923&scope=ANYWHERE&stmt=fse32759&hl=fse32759,fse34849&page=2)"
+  },
+  {
+   "ticker": "OTHER:Alchip",
+   "text": "Alchip, MediaTek and Faraday quote below Marvell and Broadcom for custom AI ASIC sockets; Broadcom most expensive",
+   "kind": "first_hand",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266923&scope=ANYWHERE&stmt=fse26253&hl=fse26253,fse26471,fse26588,fse26931,fse27200,fse27263&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "AI infrastructure supply constrained for last 12-18 months (HBM, advanced packaging, optical-module qualification)",
+   "kind": "estimate",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266923&scope=ANYWHERE&stmt=fse12114&hl=fse12114,fse19967,fse20004,fse22886,fse23014,fse23052,fse34619,fse34849,fse35856&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3cda8833-33de-812e-ac9e-c4297b0bc638",
+  "page_title": "MRVL Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

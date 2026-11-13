@@ -1,0 +1,120 @@
+{
+ "doc_id": "EC-1000000-269515",
+ "ticker": "CRWD",
+ "tier": 1,
+ "sector": "Software A-L",
+ "title": "Senior Leader Partner at Global Systems Integrator Sees Continued CrowdStrike Growth Amid Rising AI Security Interest",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269515",
+ "as_company": "CrowdStrike Holdings Inc",
+ "conversation_id": "7093__1794406005852",
+ "expert": "Senior partnership/alliance leader with P&L for a security practice at a global SI/VAR, current",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "CrowdStrike",
+   "score": 4
+  },
+  {
+   "company": "Palo Alto",
+   "score": 3
+  },
+  {
+   "company": "SentinelOne",
+   "score": 3
+  },
+  {
+   "company": "Microsoft",
+   "score": 4
+  },
+  {
+   "company": "Trellix",
+   "score": 1
+  }
+ ],
+ "verdict": "A global SI's CrowdStrike practice grew 13%-15% y/y in Aug-Oct 2026, in line with plan, and expects ~20% in Nov-Jan, but renewals capture only 3%-5% of a 5%-8% list-price rise.",
+ "summary_variables": {
+  "NNARR vs the buy-side bogey": [
+   "Partner revenue +13%-15% y/y; ~20% next qtr (est.) vs SB #43076 conflicting [1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)",
+   "List +5%-8% vs renewal +3%-5% [1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  ],
+  "Flex utilization / re-Flex cadence": [
+   "40%-50% of deals on Flex; adds maybe 5-6% vs SB #59489 conflicting [1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)",
+   "Existing-customer revenue +7%-8%; renewals well above 90% [1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  ],
+  "AIDR ARR conversion": [
+   "AI-agent/identity interest not yet qualified pipeline [7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse46042&hl=fse46042,fse46118,fse48427,fse48519&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Partner growth 13%-15% vs Cleveland partner checks doubling/30%+ (SB #43076): conflicting",
+  "Flex adds maybe 5-6% to deal size vs mgmt 40% ARR uplift (SB #59489): conflicting",
+  "AI pipeline not qualified vs AIDR standard Flex attach (SB #43077): conflicting",
+  "Slight edge consistent with VAR share gain (SB #66118)"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Flex compounding): ↓ — Flex adds only maybe 5-6% to deal size",
+  "Tenet 2 (AIDR): ↓ — no qualified pipeline yet",
+  "Tenet 4 (core accelerating): → — 13-15% growth, ~20% next qtr",
+  "Tenet 5 (margin/FCF): → — list +5-8%, realized +3-5%"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWD",
+   "text": "GSI practice CrowdStrike revenue +13%-15% y/y in Aug-Oct 2026, meeting expectations",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "GSI expects CrowdStrike practice revenue ~20% y/y in Nov 2026-Jan 2027; 15%-17% CY2026; upwards of 15% CY2027",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Renewal deal size +4%-5% y/y and net-new deal size +5%-6% y/y, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "40%-50% of GSI's CrowdStrike deals on Falcon Flex (Aug-Oct 2026); Flex adds maybe 5%-6% to deal size",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Existing-customer CrowdStrike revenue +7%-8% y/y, Aug-Oct 2026; renewals well above 90% of volume",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "CrowdStrike list prices +5%-8% in 2026 but contract value at renewal only +3%-5%",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse6273&hl=fse6273,fse11606,fse11788,fse13567,fse13635,fse14383,fse15044,fse15419,fse15970,fse16059,fse16574,fse17049,fse17108,fse17773,fse18234,fse18340,fse18507,fse19010,fse19108,fse19238,fse23472,fse23911,fse24013,fse24823,fse24880,fse25940,fse27250,fse29630,fse31241,fse31317,fse33494,fse33559,fse33599,fse46925,fse48795,fse49040&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "AI-agent and identity security interest not yet a qualified pipeline at GSI; Charlotte AI not yet driving retention/upsell",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse46042&hl=fse46042,fse46118,fse48427,fse48519&page=2)"
+  },
+  {
+   "ticker": "MSFT",
+   "text": "Microsoft gaining in mid-market endpoint security via bundled pricing (GSI view, Nov-26)",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269515&scope=ANYWHERE&stmt=fse37728&hl=fse37728,fse38361,fse38451,fse38560&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3caa8833-33de-8159-8bc9-c94df18efbf6",
+  "page_title": "CRWD Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

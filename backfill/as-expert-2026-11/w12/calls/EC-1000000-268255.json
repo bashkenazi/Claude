@@ -1,0 +1,138 @@
+{
+ "doc_id": "EC-1000000-268255",
+ "ticker": "TWLO",
+ "tier": 1,
+ "sector": "Unassigned",
+ "title": "Former Global Onboarding Marketing Manager at Twilio Sees Onboarding Complexity as a Bigger Adoption Barrier Than Pricing and AI as a Growth Risk",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268255",
+ "as_company": "Twilio Inc",
+ "conversation_id": "7093__1794403833834",
+ "expert": "Former Global Onboarding Marketing Manager at Twilio (left ~18 months ago)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Twilio",
+   "score": 3.0
+  },
+  {
+   "company": "Bird",
+   "score": 2.0
+  }
+ ],
+ "verdict": "A former onboarding manager (left ~18 months ago) saw about 27 onboarding steps per product and double-digit trial-to-paid drop-off: adoption friction, not price, was the barrier.",
+ "summary_variables": {
+  "Messaging organic growth (ex-fees)": [
+   "\ud83d\udd34 **20%\u201330% of customers trended toward churn each year, only ~30% re-engaged** (estimate, dated tenure); first read, and at odds with 3Q26 organic +15.7% (SB #64174). \u2192 Tenet 2 (organic \u226510%) \u2192 {c11}",
+   "\ud83d\udd34 **~27 onboarding steps per product, double-digit trial-to-paid drop-off**; first read. \u2192 Tenet 5 (carrier moat) \u2193 {c2}"
+  ],
+  "Voice AI minutes \u00d7 ConversationRelay attach": [
+   "\ud83d\udfe2 **~20% of trial sign-ups were for voice AI** (estimate); first read on sign-up mix (mgmt: voice AI ~1% of voice minutes, SB #64365, a different measure). \u2192 Tenet 1 (AI agent layer) \u2191 {c9}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Self-serve revenue **>30% y/y** (hearsay, quoting mgmt) vs mgmt 3Q26 self-serve 30%+ (SB #67665): consistent.",
+  "Existing-customer spend **+16% y/y** (hearsay) vs 3Q26 organic +15.7% (SB #64174): consistent.",
+  "First read on churn (20%\u201330% of customers a year trending to churn); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (AI agent layer): \u2191 \u2014 ~20% of trial sign-ups were for voice AI.",
+  "Tenet 2 (organic growth \u226510%): \u2192 \u2014 20%\u201330% annual churn risk is from a tenure ending ~18 months ago and is not visible in 3Q26 organic +15.7% (SB #64174).",
+  "Tenet 5 (carrier moat): \u2192 \u2014 a double-digit share of customers evaluated alternatives such as Bird, but the expert rated Twilio more reliable."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: about 27 steps per product \u2014 Onboarding steps; Tenure; vs Per product average",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse4723&hl=fse4723,fse8104,fse8301,fse8930,fse9070,fse9121,fse9570,fse15807,fse17455,fse17788,fse17843,fse17896,fse22433,fse23618,fse23753,fse24262,fse24695,fse24763,fse25291,fse26769,fse27334,fse27334,fse27749,fse27928,fse29453,fse29797,fse29847,fse30186,fse32157,fse32302,fse32503,fse32613,fse34710,fse35279,fse36746&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: double-digit \u2014 Trial-to-paid drop-off; Tenure; vs Total sign-ups",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse4723&hl=fse4723,fse8104,fse8301,fse8930,fse9070,fse9121,fse9570,fse15807,fse17455,fse17788,fse17843,fse17896,fse22433,fse23618,fse23753,fse24262,fse24695,fse24763,fse25291,fse26769,fse27334,fse27334,fse27749,fse27928,fse29453,fse29797,fse29847,fse30186,fse32157,fse32302,fse32503,fse32613,fse34710,fse35279,fse36746&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: around one and a half months \u2014 Time to complete onboarding; Tenure; vs From sign-up",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse4723&hl=fse4723,fse8104,fse8301,fse8930,fse9070,fse9121,fse9570,fse15807,fse17455,fse17788,fse17843,fse17896,fse22433,fse23618,fse23753,fse24262,fse24695,fse24763,fse25291,fse26769,fse27334,fse27334,fse27749,fse27928,fse29453,fse29797,fse29847,fse30186,fse32157,fse32302,fse32503,fse32613,fse34710,fse35279,fse36746&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: up to three months \u2014 Time to live production use; Tenure; vs From sign-up",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse24513&hl=fse24513,fse24695,fse24763&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: at least 50% \u2014 Decline in product usage; Tenure; vs Previous usage levels",
+   "kind": "estimate",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse27579&hl=fse27579,fse27749&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 20%\u201330% \u2014 Customers trending toward churn; Annual; vs Total customer base",
+   "kind": "estimate",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse29261&hl=fse29261,fse29453&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: about 30% \u2014 At-risk customers re-engaged; Tenure; vs Customers trending toward churn",
+   "kind": "first_hand",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse29261&hl=fse29261,fse29453&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: about 80% self-serve / 20% enterprise \u2014 Customer mix; Tenure; vs Total accounts",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse5320&hl=fse5320,fse5669,fse30855&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: about 20% \u2014 Sign-ups for voice AI; Tenure; vs Total trial sign-ups",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse15608&hl=fse15608,fse15807&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 3x \u2014 Likelihood of trial-to-paid upgrade; 2025; vs With AI assistant vs without",
+   "kind": "hearsay",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse8301&hl=fse8301,fse9070&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 16% \u2014 Existing customer spend growth; 2026-11-06; vs Year-over-year",
+   "kind": "hearsay",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse27928&hl=fse27928,fse28012,fse28177,fse28216,fse28312&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: more than 30% \u2014 Self-service revenue growth; 2026-11-06; vs Year-over-year",
+   "kind": "hearsay",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse32302&hl=fse32302,fse32613,fse32686&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 2%\u20135% \u2014 Enterprise pricing decline; 2026-11-06; vs Net effective pricing YoY",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: double digits \u2014 Customers evaluating alternatives; Tenure; vs Total customers",
+   "kind": "estimate",
+   "citation": "[22 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268255&scope=ANYWHERE&stmt=fse33454&hl=fse33454,fse33994,fse34059,fse34257&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Twilio - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

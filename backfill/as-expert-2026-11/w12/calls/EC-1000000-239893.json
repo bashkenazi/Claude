@@ -1,0 +1,126 @@
+{
+ "doc_id": "EC-1000000-239893",
+ "ticker": "AMZN",
+ "tier": 2,
+ "sector": "Internet",
+ "title": "Chief Operations Officer at State Bank of India Sees Digital-Sovereignty Spending Rising as Localization Requirements Expand",
+ "released": "2026-11-08",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239893",
+ "as_company": "Amazon Web Services",
+ "conversation_id": "7093__1794406072815",
+ "expert": "Former Chief Operations Officer at State Bank of India (530M+ customers); saw technology procurement and cloud partnerships including AWS",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "AWS",
+   "score": 4
+  },
+  {
+   "company": "Google Cloud",
+   "score": 4
+  },
+  {
+   "company": "Microsoft Azure",
+   "score": 4
+  },
+  {
+   "company": "NVIDIA",
+   "score": 5
+  }
+ ],
+ "verdict": "SBI's IT and digital-sovereignty spend rises from $1–$2 billion in FY2026 to $2–$3 billion in FY2027, with AWS one of four clouds and the provider for Mumbai and Hyderabad.",
+ "summary_variables": {
+  "AWS growth": [
+   "🟢 <b>SBI IT spend \\$1–\\$2 billion to \\$2–\\$3 billion</b> (FY2026 to FY2027 plan), cloud and data engineering +15%–20% a year (estimate); fits Jassy's 2026 capacity fully committed (SB #62035). → Thesis ('Huge AI winner') ↑",
+   "🟡 <b>AWS one of four clouds</b> (Mumbai and Hyderabad; Azure in South India) and Tier 1–3 banking workloads must stay in-country; first read. → Thesis (AWS growth) →"
+  ],
+  "AWS margins": [
+   "🟡 <b>80% of budget goes direct to OEMs, 20% to integrators</b>, while the bank targets a 20%–30% lower operating-cost model; first read. → Thesis (AWS margins) →"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Demand: SBI cloud and data engineering +15%–20% in FY2027 vs Jassy (2026-10-27): 2026 capacity fully committed, 2027 largely sold out (SB #62035): consistent.",
+  "First read on an Indian bank's cloud and sovereignty budget; the 2026-11-05 AMZN calls covered marketplace and India affiliates, not cloud spend."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Thesis ('Huge AI winner', 20% AWS growth bogey): ↑ — a large AWS customer plans IT spend of \\$2–\\$3 billion in FY2027 from \\$1–\\$2 billion, cloud +15%–20%.",
+  "Thesis (AWS margins): → — multi-cloud by design (AWS, Google, Azure, Oracle) and a 20%–30% lower operating-cost target limit pricing leverage."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: $1-$2 billion — Total IT/Digital sovereignty spending; FY2026; vs Current",
+   "kind": "first_hand",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse6606&hl=fse6606,fse6688,fse6770&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: $2-$3 billion — Total IT/Digital sovereignty spending; FY2027; vs Stated expectation",
+   "kind": "first_hand",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse6606&hl=fse6606,fse6688,fse6770&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 20%-25% — Share of IT budget for data centers/cloud; FY2026; vs Current",
+   "kind": "first_hand",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse5813&hl=fse5813,fse5976,fse6069,fse6113&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 80% — Share of IT budget for hardware/software (OEM); FY2026; vs Current",
+   "kind": "first_hand",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse20171&hl=fse20171,fse20233,fse20380&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 20% — Share of IT budget for SIs and maintenance; FY2026; vs Current",
+   "kind": "first_hand",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse20171&hl=fse20171,fse20233,fse20380&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 15%-20% — Expected annual growth in cloud/data engineering; FY2027; vs Year-on-year",
+   "kind": "estimate",
+   "citation": "[[10 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse9365&hl=fse9365,fse9503,fse9725,fse9842,fse9897&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 30%-35% — Expected annual growth in GenAI/Agentic AI; FY2027; vs Year-on-year",
+   "kind": "estimate",
+   "citation": "[[10 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse9365&hl=fse9365,fse9503,fse9725,fse9842,fse9897&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 99.99% — Operational resilience of data-center environment; FY2026; vs Current",
+   "kind": "first_hand",
+   "citation": "[[14 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse11609&hl=fse11609,fse15637&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 4 hours — Issue resolution target for critical cloud infra; FY2026; vs Standard target",
+   "kind": "first_hand",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239893&scope=ANYWHERE&stmt=fse26513&hl=fse26513,fse26702,fse26795,fse26884&page=2)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: 30 minutes — Normal Recovery Point Objective (RPO); FY2026; vs Domestic standard",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239893)"
+  },
+  {
+   "ticker": "OTHER:SBI",
+   "text": "SBI: < 5 minutes — European RPO requirement; FY2026; vs International standard",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239893)"
+  }
+ ],
+ "filed": {
+  "page_id": "1a58bee0-ab93-4fda-9429-deb12c8092f2",
+  "page_title": "AMZN Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

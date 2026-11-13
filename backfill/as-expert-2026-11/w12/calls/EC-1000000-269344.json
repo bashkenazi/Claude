@@ -1,0 +1,129 @@
+{
+ "doc_id": "EC-1000000-269344",
+ "ticker": "VRT",
+ "tier": 2,
+ "sector": "Hardware N-Z",
+ "title": "Data Center Operations Manager and Metro Leader at Microsoft Sees 800 VDC Pressuring Vertiv’s UPS Business but Creating Sidecar Opportunities",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269344",
+ "as_company": "Vertiv Holdings Co",
+ "conversation_id": "7093__1794406037869",
+ "expert": "Data center procurement program manager at Microsoft (current, 3 years; global remit over power and cooling; 12 years incl. AWS long-lead procurement); interview 2026-11-09",
+ "short_expert": "Microsoft DC procurement manager",
+ "weight": "High",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Vertiv",
+   "score": 3.0
+  },
+  {
+   "company": "Trane",
+   "score": 4.0
+  },
+  {
+   "company": "York",
+   "score": 4.0
+  },
+  {
+   "company": "Eaton",
+   "score": 4.0
+  },
+  {
+   "company": "Delta Electronics",
+   "score": 4.0
+  },
+  {
+   "company": "LITEON",
+   "score": 4.0
+  },
+  {
+   "company": "Foxconn",
+   "score": 4.0
+  }
+ ],
+ "verdict": "A Microsoft data-center procurement manager with a global power-and-cooling remit sees Vertiv air-cooled chillers failing at a low-double-digit annualized rate vs low single digits at Trane and York, and native 800 VDC removing the UPS by 2030 or the early 2030s.",
+ "summary_variables": {
+  "Share in the converged and 800V transition": [
+   "🔴 Vertiv air-cooled chillers fail at low double digits annualized vs low single digits at Trane and York, losing share; consistent with SemiAnalysis quality checks (SB #64027). → Tenet 5 (share) ↓ {c1}",
+   "🔴 Native 800 VDC could eliminate the conventional UPS by 2030 or early 2030s, consistent with SemiAnalysis LV UPS displacement (SB #65942). → Tenet 5 (share) ↓ {c11}",
+   "🟡 800 VDC sidecars widespread by late 2027 or early 2028, lasting at least four years; Delta and LITEON lead unless Vertiv builds one, vs Vertiv 800VDC vetted by YE26 (SB #64670): conflicting. → Tenet 2 (content per MW) → {c19}"
+  ],
+  "Orders / backlog conversion": [
+   "🟢 AI build growth 16-30% y/y over the past couple of years (estimate) with racks heading to 300 kW and 400 kW; open whether it holds into the 2030s. → Tenet 1 (order-led growth) ↑ {c25}"
+  ],
+  "Services (Tenet 4)": [
+   "🟢 King Environmental and PurgeRite add wetted-loop performance testing for 100 kW cluster pain points; first read. → Tenet 4 (services) ↑ {c10}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Chiller failure rate low double digits vs SemiAnalysis checks still pointing to Vertiv product-quality issues (SB #64027): consistent.",
+  "Vertiv CDUs lag CoolIT and Schneider vs a former Vertiv manager's ≥60% CDU share on NVL72 (SB #64606): conflicting.",
+  "Sidecar timing late 2027/early 2028 with Vertiv progress unclear vs Google architect: Vertiv 800VDC solution fully vetted by YE26 (SB #64670): conflicting.",
+  "UPS displacement by native 800 VDC vs SemiAnalysis LV UPS (~20–25% of revenue) displaced by MV UPS (SB #65942): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 5 (share and execution): ↓ — chiller failure rates low double digits vs low single digits at Trane/York; UPS at risk from native 800 VDC.",
+  "Tenet 2 (content per MW): → — sidecar upside described as \"exponential\" if Vertiv builds one, against UPS content loss.",
+  "Tenet 4 (services compounding): ↑ — King/PurgeRite wetted-loop testing addresses 100 kW cluster pain points.",
+  "Tenet 1 (order-led growth): ↑ — AI build growth 16-30% y/y; racks to 300 kW and 400 kW."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "VRT",
+   "text": "Vertiv: low double digits — Annualized failure rate, air-cooled chillers; Current; vs vs. low single digits for Trane/York",
+   "kind": "estimate",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269344&scope=ANYWHERE&stmt=fse19508&hl=fse19508,fse19636&page=2)"
+  },
+  {
+   "ticker": "OTHER:Trane",
+   "text": "Trane: low single digits — Annualized failure rate, air-cooled chillers; Current; vs vs. Vertiv",
+   "kind": "hearsay",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269344&scope=ANYWHERE&stmt=fse19508&hl=fse19508,fse19636,fse20879,fse20987&page=2)"
+  },
+  {
+   "ticker": "OTHER:York",
+   "text": "York: low single digits — Annualized failure rate, air-cooled chillers; Current; vs vs. Vertiv",
+   "kind": "hearsay",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269344&scope=ANYWHERE&stmt=fse19508&hl=fse19508,fse19636,fse20879,fse20987&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 16-30% — Year-over-year build and growth rate; Past couple of years; vs Prior period",
+   "kind": "estimate",
+   "citation": "[[25 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269344&scope=ANYWHERE&stmt=fse38749&hl=fse38749,fse39031,fse39211,fse39389&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 300 kW and 400 kW — AI rack power density; Near future; vs Current density",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269344)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: at least four years — Sidecar architecture interim lifespan; Future; vs Until native 800 VDC",
+   "kind": "estimate",
+   "citation": "[[19 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269344&scope=ANYWHERE&stmt=fse7917&hl=fse7917,fse8108,fse9153,fse9913&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 2030 or early 2030s — Native facility-level 800 VDC adoption; Future; vs Current AC architecture",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269344)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: late 2027 or early 2028 — Widespread 800 VDC sidecar adoption; Future; vs Current",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269344)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8161-b97b-cf0f77afc815",
+  "page_title": "Vertiv - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

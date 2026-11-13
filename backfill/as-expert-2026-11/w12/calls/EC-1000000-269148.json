@@ -1,0 +1,134 @@
+{
+ "doc_id": "EC-1000000-269148",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Manager at Technology Services Provider Expects Samsara Business to Grow 32% in 2026 but Sees a Need for Faster AI Improvements",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269148",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794403831704",
+ "expert": "Manager at a value-added reseller/systems integrator serving U.S. retail and delivery fleets of 50\u2013500 trucks",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 4
+  },
+  {
+   "company": "Geotab",
+   "score": 3
+  },
+  {
+   "company": "Motive",
+   "score": 3
+  }
+ ],
+ "verdict": "The reseller's Samsara business grew 5% y/y in Aug\u2013Oct (vs a 4% target) as customers raised devices per truck to 3\u20133.5 from 2\u20132.5.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "\ud83d\udfe2 Devices per truck 3\u20133.5 vs 2\u20132.5, typical order 20 sets vs 15\u201317, first read on device density; supports multi-product attach. \u2192 Tenet 1 (enterprise expansion) \u2191",
+   "\ud83d\udfe1 Business +5% y/y Aug\u2013Oct, vs 2026-11-05 call's +20%\u201322%: much slower (small-fleet VAR); FY26 +32% outlook (estimate) is not reconciled."
+  ],
+  "GM/FCF through component cycle": [
+   "\ud83d\udfe2 Prices +2%\u20133% per quarter (estimate), on Asian component and shipping costs; faster than 2026-11-05 call's +5%\u20137% y/y on platform deals; cost pass-through matches mgmt's component-cost GM cut (SB #62580). \u2192 Tenet 3 (op leverage vs hardware cost) \u2192"
+  ],
+  "Competition & share": [
+   "\ud83d\udd34 Loses deals when discount flexibility is limited, and Samsara must improve AI safety quickly vs Geotab and Motive; vs 2026-11-05 call (#1/#2 in RFPs): conflicting. \u2192 Tenet 4 (platform moat) \u2193"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Growth: +5% y/y vs 2026-11-05 call's +20%\u201322%: slower (small-fleet reseller).",
+  "Pricing: +2%\u20133% per quarter (estimate) vs 2026-11-05 call's \u22642%\u20133% y/y basic and +5%\u20137% platform: faster pace, conflicting.",
+  "Device density: first read on devices per truck (3\u20133.5 vs 2\u20132.5); no earlier expert call or stored row.",
+  "Competition: AI-safety gap vs 2026-11-05 call's #1/#2 RFP ranking: conflicting."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): \u2191 \u2014 devices per truck 3\u20133.5 vs 2\u20132.5; orders 20 sets vs 15\u201317.",
+  "Tenet 3 (op leverage vs hardware cost): \u2192 \u2014 +2%\u20133% per quarter price is cost pass-through and limits discounts.",
+  "Tenet 4 (platform moat): \u2193 \u2014 AI safety needs faster improvement vs Motive and Geotab."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 5% \u2014 Reseller business growth, August\u2013October 2026, vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse9400&hl=fse9400,fse9681,fse9802,fse10557&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 4% \u2014 Reseller growth target, August\u2013October 2026, vs N/A",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse9400&hl=fse9400,fse9681,fse9802,fse10557&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 32% year over year \u2014 Reseller business outlook, Full-calendar-year 2026, vs 2025",
+   "kind": "estimate",
+   "citation": "[[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse4780&hl=fse4780,fse9681,fse10493,fse10557,fse11883,fse11952,fse12559,fse12626,fse13349,fse13413,fse14007,fse14476,fse14718,fse14940,fse15410,fse16538,fse17058,fse17194,fse19731,fse19980,fse24218,fse24395,fse31652,fse31828&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 20 sets \u2014 Typical customer purchase, Current, vs 15\u201317 sets",
+   "kind": "first_hand",
+   "citation": "[[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse4780&hl=fse4780,fse9681,fse10493,fse10557,fse11883,fse11952,fse12559,fse12626,fse13349,fse13413,fse14007,fse14476,fse14718,fse14940,fse15410,fse16538,fse17058,fse17194,fse19731,fse19980,fse24218,fse24395,fse31652,fse31828&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 15\u201317 \u2014 Typical customer purchase, Prior year, vs N/A",
+   "kind": "first_hand",
+   "citation": "[[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse4780&hl=fse4780,fse9681,fse10493,fse10557,fse11883,fse11952,fse12559,fse12626,fse13349,fse13413,fse14007,fse14476,fse14718,fse14940,fse15410,fse16538,fse17058,fse17194,fse19731,fse19980,fse24218,fse24395,fse31652,fse31828&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 3\u20133.5 \u2014 Average devices per truck, Current, vs 2\u20132.5 devices",
+   "kind": "first_hand",
+   "citation": "[[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse12489&hl=fse12489,fse12559,fse13349,fse14007&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 2\u20132.5 \u2014 Average devices per truck, Prior baseline, vs N/A",
+   "kind": "first_hand",
+   "citation": "[[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse12489&hl=fse12489,fse12559,fse13349,fse14007&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 70% \u2014 Share of pipeline for new purchases/programs, Current, vs N/A",
+   "kind": "estimate",
+   "citation": "[[22 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse15225&hl=fse15225,fse15410&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 30% \u2014 Share of pipeline for upgrades/updates, Current, vs N/A",
+   "kind": "estimate",
+   "citation": "[[22 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse15225&hl=fse15225,fse15410&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 2%\u20133% per quarter \u2014 Price change estimate, August\u2013October 2026, vs Prior quarter",
+   "kind": "estimate",
+   "citation": "[[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse19731&hl=fse19731,fse19980,fse20104&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: Two or three years \u2014 Age of devices for upgrade candidacy, Current, vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269148)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 10% \u2014 Hypothetical future price increase, Future year, vs Current price",
+   "kind": "estimate",
+   "citation": "[[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269148&scope=ANYWHERE&stmt=fse4780&hl=fse4780,fse9681,fse10493,fse10557,fse11883,fse11952,fse12559,fse12626,fse13349,fse13413,fse14007,fse14476,fse14718,fse14940,fse15410,fse16538,fse17058,fse17194,fse19731,fse19980,fse24218,fse24395,fse31652,fse31828&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources). No \"Samsara Thesis - Revised\" page exists; filed to the thesis-builder child page \"Samsara - Thesis Revised - 2026-11-05\" (has What Matters and tenets)."
+}

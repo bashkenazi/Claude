@@ -1,0 +1,113 @@
+{
+ "doc_id": "EC-1000000-270225",
+ "ticker": "ORCL",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Director at IT Services Firm Expects Oracle Business to Grow 25% in 2026, Driven by OCI and AI Demand",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270225",
+ "as_company": "Oracle Corp",
+ "conversation_id": "7093__1794406951670",
+ "expert": "Practice director at an IT services firm and Oracle partner (advisory, implementation, resale); clients ~80% SMB/mid-market, ~20% large enterprise",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Oracle",
+   "score": 4
+  },
+  {
+   "company": "Workday",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 2
+  },
+  {
+   "company": "SAP",
+   "score": 2
+  },
+  {
+   "company": "AWS",
+   "score": 3
+  }
+ ],
+ "verdict": "A mid-market Oracle partner's Oracle activity grew 25% y/y in Sep–Nov and OCI demand rose 5% q/q, but OCI AI demand exceeds available capacity and is delaying project starts.",
+ "summary_variables": {
+  "IaaS growth vs consensus": [
+   "🟢 **Oracle activity +25% y/y in Sep–Nov; OCI demand +5% vs Jun–Aug** (first-hand); first read from this practice. → Tenet 1 (OCI RPO conversion) ↑",
+   "🔴 **OCI AI demand exceeds available capacity, delaying project starts and cutting scope** vs UBS checks of no systemic delays (SB #66105): **conflicting**. → Tenet 4 (build-out on time) ↓",
+   "🟢 **Production AI use rose from about 10% to 20% of clients** Jun–Aug → Sep–Nov (first-hand); first read."
+  ],
+  "Pricing & margins": [
+   "🟡 **Average price increases no more than 2% y/y** (estimate) vs Deutsche Bank checks of 10–40% cloud-service increases (SB #63354): **conflicting**. → Tenet 4 (margins) ↓"
+  ],
+  "Competition & share": [
+   "🔴 **Oracle most often loses to Microsoft in cloud; lost enterprise HCM deals to Workday despite a cheaper bid**, while winning SAP on-prem migrations; conflicts with UBS relay of Dell cutting Workday for Fusion (SB #67339). → Tenet 5 (apps & database) ↓"
+  ]
+ },
+ "characterization_changed": "Characterization changed from Very Positive: practice growth is strong (+25% y/y) but the expert also reports enterprise HCM losses to Workday, Oracle most often losing to Microsoft in cloud, capacity delays and price increases of no more than 2%.",
+ "changes": [
+  "Capacity: OCI AI demand exceeding capacity and delaying starts vs UBS checks with 23 customers/partners showing no systemic delays (SB #66105, 2026-11-04): **conflicting**.",
+  "Pricing: increases of no more than 2% y/y vs Deutsche Bank checks of 10–40% on cloud services (SB #63354, 2026-10-19): **conflicting**.",
+  "HCM competition: losses to Workday in enterprise HCM vs UBS partner relay that Dell consolidated on Fusion and cut Workday (SB #67339, 2026-11-04): **conflicting**.",
+  "First read on share of partner clients running AI in production (about 10% → 20%)."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (OCI RPO conversion): ↑ — practice Oracle activity +25% y/y, OCI demand +5% q/q and pipeline above expectations.",
+  "Tenet 4 (build-out on time / margins): ↓ — demand exceeds capacity with project delays and scope cuts; price increases of no more than 2%.",
+  "Tenet 5 (apps & database): ↓ slight — enterprise HCM losses to Workday and cloud losses to Microsoft, partly offset by SAP migration wins."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 25% year over year — Firm's Oracle-related activity, September–November; baseline: Prior year",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270225&scope=ANYWHERE&stmt=fse1024&hl=fse1024,fse1225,fse1874&page=1)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 5% — OCI demand increase, September–November; baseline: June–August",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270225&scope=ANYWHERE&stmt=fse1024&hl=fse1024,fse1225,fse1874&page=1)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: Up to 2% on average — Pricing increase, Year over year; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270225)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 25% — Forecasted growth in firm's Oracle revenue, Calendar 2026; baseline: 2025",
+   "kind": "estimate",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270225&scope=ANYWHERE&stmt=fse1024&hl=fse1024,fse1225,fse1874&page=1)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: At least 10% year over year — Forecasted growth in firm's Oracle activity, December–February; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270225)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: At least 20% — Forecasted growth in firm's Oracle business, 2027; baseline: 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270225)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: About 10% to 20% — Share of firm's clients using AI in production, September–November; baseline: June–August",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270225)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-81ad-aaee-c23f9d61044c",
+  "page_title": "Oracle - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

@@ -1,0 +1,15 @@
+{
+ "doc_id": "EC-1000000-240160",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Former Strategic Procurement and SCM Manager at Meta Sees Gradual Scaling of Microfluidic Cooling as AI Chip Power Rises",
+ "released": "2026-11-08",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-240160",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": null,
+ "status": "failed",
+ "note": "timeout-no-conv-id (worker r3 retry: GenSearch ask timed out after 60s with no conversation_id; not re-asked per backfill rule 2)",
+ "filed": null,
+ "new_datapoints": []
+}

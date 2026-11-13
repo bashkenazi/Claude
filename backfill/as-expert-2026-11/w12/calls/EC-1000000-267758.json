@@ -1,0 +1,112 @@
+{
+ "doc_id": "EC-1000000-267758",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Senior Director of Site Operations at nVent Electric Sees Standardization as AVC\u2019s Biggest Long-Term Competitive Risk",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-267758",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794404015111",
+ "expert": "Senior Director of Site Operations at nVent Electric (CDU and manifold competitor); AVC view is mostly market hearsay",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  },
+  {
+   "company": "Auras",
+   "score": 4
+  },
+  {
+   "company": "nVent",
+   "score": 4
+  },
+  {
+   "company": "Hon Hai",
+   "score": 3
+  }
+ ],
+ "verdict": "A manifold competitor sees <b>2027 liquid-cooling volume already booked</b> and manifold prices not falling, but names standardization (high-single-digit annual cost-downs) as AVC's biggest long-term risk.",
+ "summary_variables": {
+  "Rubin yield and ramp": [
+   "\ud83d\udfe2 <b>Rubin yield 60\u201370% to ~80%</b> (hearsay) vs ~60% in May (SB #64479). \u2192 Tenet 1 (Rubin content and share) \u2191"
+  ],
+  "Nvidia content and share": [
+   "\ud83d\udd34 <b>Auras ~4% to over 10%</b> cold-plate share (hearsay) vs 5\u201310% on GB (SB #64467). \u2192 Tenet 1 (Rubin content and share) \u2193"
+  ],
+  "Gross margin": [
+   "\ud83d\udd34 <b>High-single-digit annual cost-downs</b> under standardization, ~50% over several years (estimate), first read. \u2192 Tenet 3 (GM 34%+) \u2193"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Auras cold-plate share >10% (hearsay) vs 5-10% on Nvidia GB (SB #64467): Auras gaining.",
+  "Rubin yield ~80% (hearsay) vs ~60% in May (SB #64479): improving.",
+  "First read on manifold pricing (not dropped over prior few years); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Rubin content and share): \u2192 \u2014 hard to displace for 6-12 months, but Auras >10% share.",
+  "Tenet 3 (GM 34%+): \u2193 \u2014 standardization could bring high-single-digit annual cost-downs.",
+  "Tenet 4 (capacity): \u2191 \u2014 required cooling capacity doubling and tripling; 2027 volume booked."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "50% to 100% \u2014 Annual volume growth, 2025\u20132027, vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "not dropped \u2014 Pricing, Prior few years, vs Historical",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  },
+  {
+   "ticker": "OTHER:Hon Hai / Assemblers",
+   "text": "25% or less \u2014 Component supply share, Current, vs Total market",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "high-single-digit \u2014 Annual cost reduction, Future, vs Comparable devices",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "~10% \u2014 Unit cost reduction, Future, vs 20-point yield gain",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "50% \u2014 Plausible cost reduction, Multi-year, vs Historical",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  },
+  {
+   "ticker": "OTHER:Auras",
+   "text": "roughly 4% to over 10% \u2014 Cold-plate share, 2026, vs After GB300 AVL slot",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "60%-70% to about 80% \u2014 Vera Rubin yield, Early 2026, vs Reported improvement",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-267758)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed in lean form (Summary, Expert and visibility, What changed, Bull, Bear, Thesis impact); Key numbers, Supply-chain flags, Share shifts, Questions, Sentiment and Q&A are in summaries/<doc_id>.md only, to keep the page update within size limits. New 'Expert Calls' h2 section created before Data Sources."
+}

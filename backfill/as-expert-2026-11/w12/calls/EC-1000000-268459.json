@@ -1,0 +1,28 @@
+{
+ "doc_id": "EC-1000000-268459",
+ "ticker": "Samsung",
+ "tier": 2,
+ "sector": "Semis N-Z",
+ "title": "Sales Director at Super Micro Computer Inc. Sees DRAM Prices Rising Amid Persistent Supply Constraints",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268459",
+ "as_company": "Samsung Electronics Co Ltd",
+ "conversation_id": null,
+ "expert": null,
+ "weight": null,
+ "characterization": null,
+ "sentiment": [],
+ "verdict": null,
+ "summary_variables": {},
+ "characterization_changed": null,
+ "changes": [],
+ "inflection": false,
+ "thesis_impact": [],
+ "new_datapoints": [],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsung Thesis - Revised"
+ },
+ "status": "failed",
+ "note": "GenSearch ask timed out at the 60s MCP client limit with no conversation_id; not re-asked (backfill rule 2). timeout-no-conv-id"
+}

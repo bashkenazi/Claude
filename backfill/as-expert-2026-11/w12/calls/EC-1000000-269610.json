@@ -1,0 +1,131 @@
+{
+ "doc_id": "EC-1000000-269610",
+ "ticker": "TDC",
+ "tier": 3,
+ "sector": "Software M-Z",
+ "title": "Executive at IT Services Provider Expects Teradata-Related Business to Grow 8% in 2026 and 10% in 2027",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269610",
+ "as_company": "Teradata Corp",
+ "conversation_id": "7093__1794406074629",
+ "expert": "Head of cloud and software practice at a large Europe/UK IT services provider (current; $15–20M Teradata-related revenue, 20–25 enterprise customers)",
+ "weight": "High",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Teradata",
+   "score": 3
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 4
+  }
+ ],
+ "verdict": "A $15–20 million Teradata practice grew <b>about 8% y/y in Q4 2026 but finished about 6% below plan</b> on deal slippage and competitive evaluations, with cloud +13% offset by on-prem subscription -4% and maintenance -15%.",
+ "summary_variables": {
+  "Cloud ARR": [
+   "🟢 Cloud spend about 13% y/y in Q4 2026, 15%–18% expected for 2027 (estimate); in line with the 2026-11-09 call's footprint +12%–15% y/y. [15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse18385&hl=fse18385,fse19064,fse19132&page=2)",
+   "🟡 On-prem subscription about -4%, maintenance -15% y/y; milder on subscription than the 2026-11-09 call's on-prem -5%–8%. [15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse18385&hl=fse18385,fse19064,fse19132&page=2)"
+  ],
+  "Pricing & renewals": [
+   "🔴 Maintenance list +7% but effective only about 2% after discounts; pricing pressure 8/10 with 50%–60% of renewals carrying Snowflake/Databricks quotes; first read on Teradata pricing. [3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse32894&hl=fse32894,fse32961,fse33014&page=2)",
+   "🟢 Renewal spend about 5% higher y/y, 1/3 of customers expanding scope; different measure from the 2026-11-09 call's Q4 renewal dollars ~10% below Q3. [11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse22277&hl=fse22277,fse22884,fse23026&page=2)"
+  ],
+  "Competition & share": [
+   "🔴 New-logo pipeline 10%–15% vs 15%–20% a year ago; 75%–80% of customers weighing alternatives move new workloads to Snowflake/Databricks while keeping the core; consistent with the 2026-11-09 call (net new 10% of pipeline). [9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse27999&hl=fse27999,fse28108&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Cloud: cloud spend +13% y/y (expert) vs the 2026-11-09 call's software footprint +12%–15% y/y: consistent.",
+  "On-prem: subscription -4% and maintenance -15% y/y (expert) vs the 2026-11-09 call's on-prem spend -5%–8% y/y: similar direction, maintenance decline steeper.",
+  "Deal size: new implementations up ~10% y/y vs the 2026-11-09 call's average deal size +12%–15%: slightly slower.",
+  "Competition: new-logo pipeline share 10%–15% (from 15%–20%) vs the 2026-11-09 call's net-new 10% of pipeline: consistent, new logos scarce."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the TDC page; against its pitch (cloud ARR growth, total ARR 8–12%, 75%+ FCF to buybacks): Cloud ARR ↑ — cloud +13% now, 15%–18% expected in 2027; total ARR → — practice +8% y/y but 6% below plan, on-prem -4% and maintenance -15%; pricing ↓ — effective maintenance uplift ~2% vs 7% list under 8/10 pressure, a margin headwind for FCF."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TDC",
+   "text": "EU/UK IT services practice ($15–20M Teradata revenue) grew about 8% y/y in Q4 2026, about 6% below plan",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse14865&hl=fse14865,fse15623,fse15699,fse15787&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata cloud spend about +13%, on-prem subscription about -4%, maintenance -15% y/y in Q4 2026 (expert's book)",
+   "kind": "first_hand",
+   "citation": "[15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse18385&hl=fse18385,fse19064,fse19132&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata maintenance list price up about 7%, effective about 2% after discounts; cloud subscription quoted up about 4%, on-prem subscription up 5%",
+   "kind": "first_hand",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse32894&hl=fse32894,fse32961,fse33014&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata pricing pressure 8/10; 50%–60% of renewals involve Snowflake/Databricks competitive quotes",
+   "kind": "first_hand",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse35906&hl=fse35906,fse36025&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata new implementation deals around $1.5 million (up about 10%); renewals about $1 million (up about 4%)",
+   "kind": "first_hand",
+   "citation": "[21 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse16418&hl=fse16418,fse16567&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata sales cycles 10%–15% longer; complex migrations nine to 18 months",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse14318&hl=fse14318&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "New-logo share of Teradata pipeline 10%–15% in 2026 vs 15%–20% a year ago",
+   "kind": "first_hand",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse27999&hl=fse27999,fse28108&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata renewal spend about 5% higher y/y; 1/3 of customers expanding scope",
+   "kind": "first_hand",
+   "citation": "[11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse22277&hl=fse22277,fse22884,fse23026&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Customers planning to evaluate Teradata Tera 30%–35% vs 15%–20% in August; Tera production 2%–3%; AI Studio 6% or 7% active",
+   "kind": "first_hand",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse45879&hl=fse45879&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Expert expects 2027 Teradata-related growth about 10%, cloud 15%–18%, on-prem -7%",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse31707&hl=fse31707,fse31790,fse31877&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Qualified pipeline 5% above plan",
+   "kind": "first_hand",
+   "citation": "[16 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269610&scope=ANYWHERE&stmt=fse26434&hl=fse26434,fse26520,fse27041,fse27596&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "6836da4f-47f5-40d9-ac7b-a1c908e533bd",
+  "page_title": "TDC Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

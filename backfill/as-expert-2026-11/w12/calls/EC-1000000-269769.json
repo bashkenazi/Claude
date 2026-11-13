@@ -1,0 +1,123 @@
+{
+ "doc_id": "EC-1000000-269769",
+ "ticker": "CRWD",
+ "tier": 1,
+ "sector": "Software A-L",
+ "title": "Cybersecurity Consultant at a UK Value-Added Reseller Expects CrowdStrike Growth From Platform Expansion and AI Security",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269769",
+ "as_company": "CrowdStrike Holdings Inc",
+ "conversation_id": "7093__1794403964753",
+ "expert": "Cybersecurity consultant at a UK value-added reseller (current; advisory on deals, no company-wide view)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "CrowdStrike",
+   "score": 5
+  },
+  {
+   "company": "SentinelOne",
+   "score": 4
+  },
+  {
+   "company": "Palo Alto Networks",
+   "score": 3
+  },
+  {
+   "company": "Microsoft",
+   "score": 3
+  },
+  {
+   "company": "Darktrace",
+   "score": 2
+  }
+ ],
+ "verdict": "The UK VAR's CrowdStrike business grew about 10% y/y in Aug\u2013Oct on platform upsell, with renewals priced flat to +5% and about 30% of deals on Falcon Flex.",
+ "summary_variables": {
+  "NNARR vs bogey (channel growth)": [
+   "CrowdStrike business ~10% y/y (Aug\u2013Oct), well below the 30%+ partner growth in Aug channel checks (SB #43076). \u2192 Tenet 1 (Flex/NNARR) \u2193"
+  ],
+  "Flex utilization": [
+   "~30% of deals on Flex vs Bernstein's \"nearly all contracts Flex\" (SB #66649): conflicting. \u2192 Tenet 1 (Flex/NNARR) \u2192"
+  ],
+  "Competition / pricing": [
+   "Palo Alto quoted ~20% cheaper in one deal and CRWD discounted to match (renewals flat to +5%); same direction as Bernstein's Flex discounts (SB #66649). \u2192 Tenet 5 (margin/FCF) \u2193",
+   "Palo Alto won a deal by saving the customer six figures on a Darktrace renewal, SentinelOne growing faster off a smaller base; consistent with Needham's CRWD loss to SentinelOne (SB #34240). \u2192 Tenet 4 (core endpoint) \u2193"
+  ],
+  "AIDR ARR conversion": [
+   "AI-monitoring demand spiked in the last 90 days, consistent with Cleveland's board-level AIDR demand (SB #43077). \u2192 Tenet 2 (AIDR cycle) \u2191"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "VAR CRWD business ~10% y/y vs partners citing 30%+ growth in Aug (SB #43076): slower.",
+  "Flex in ~30% of deals vs Bernstein \"nearly all contracts Flex since end of FY26\" (SB #66649): conflicting.",
+  "Renewal pricing flat to +5% and a discount to match Palo Alto vs Bernstein 25\u201335% Flex discount on like-for-like SKUs (SB #66649): same direction, milder.",
+  "AI-monitoring demand spike in the last 90 days vs Cleveland board-level AIDR demand (SB #43077): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Flex/NNARR): \u2192 \u2014 ~10% growth and ~30% Flex penetration in this UK channel; FY27 ~20% (estimate).",
+  "Tenet 2 (AIDR cycle): \u2191 \u2014 AI-monitoring interest spiked in the last 90 days; Charlotte AI adoption limited.",
+  "Tenet 3 (emerging platform): \u2191 \u2014 renewals adding SIEM and identity modules.",
+  "Tenet 4 (core endpoint): \u2193 \u2014 Palo Alto win on firewall estate; SentinelOne may outgrow CRWD at this VAR.",
+  "Tenet 5 (margin/FCF): \u2193 \u2014 CRWD discounted to match a ~20% cheaper Palo Alto quote."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWD",
+   "text": "about 10% \u2014 Reseller's business growth, August\u2013October; baseline: Year-over-year",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "roughly 30% \u2014 Deals using Falcon Flex, August\u2013October; baseline: Total observed deals",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "5%\u201310% \u2014 Expected business growth, November\u2013January; baseline: Year-over-year",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "about 20% \u2014 Expected business growth, FY27; baseline: FY26",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "Flat to about 5% \u2014 Renewal pricing change, Current; baseline: Prior contract",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  },
+  {
+   "ticker": "PANW",
+   "text": "about 20% cheaper \u2014 Quote price difference, One competitive deal; baseline: CrowdStrike quote",
+   "kind": "hearsay",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "15%\u201320% \u2014 Renewal price increases, Current; baseline: Prior contract",
+   "kind": "hearsay",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "five to 10 GB \u2014 SIEM data ingestion allowance, Per day; baseline: Standard license",
+   "kind": "first_hand",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269769&scope=ANYWHERE&stmt=fse5805&hl=fse5805,fse6039,fse16278,fse16563,fse16636,fse16636,fse17775,fse18748,fse21283,fse21492,fse21595,fse21681,fse22524,fse25737,fse25962,fse26439,fse26590,fse26875,fse27041,fse27152,fse30449,fse30692,fse30876,fse30987,fse31255,fse31513,fse31783,fse31817,fse31919,fse33658,fse34487,fse34642,fse35019,fse35066,fse35171,fse35462,fse35712,fse36553,fse36652,fse36821,fse38295,fse38423,fse38539,fse38693,fse41751,fse44822,fse44980,fse45256,fse45382,fse46309,fse47977,fse48029,fse55775,fse56032,fse56384,fse56420,fse56525,fse58450,fse58576&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "CRWD Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

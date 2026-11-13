@@ -1,0 +1,132 @@
+{
+ "doc_id": "EC-1000000-261946",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Director of AI at IT Services Provider Sees NVIDIA-Related Business Growing 40%\u201360% in 2026",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-261946",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794403759891",
+ "expert": "Director of AI at a global IT services provider (88,000 staff); current; first-hand allocation, lead times, quoted pricing and deployments",
+ "weight": "High",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 5
+  },
+  {
+   "company": "AMD",
+   "score": 4
+  },
+  {
+   "company": "Dell / HPE",
+   "score": 4
+  }
+ ],
+ "verdict": "An IT-services AI director (88,000-staff integrator) saw NVIDIA-related business grow 60%-100% y/y in Aug\u2013Oct 2026, with supply still allocation-bound and customers placing deposits for 2028 slots.",
+ "summary_variables": {
+  "Duration of the AI capex cycle": [
+   "\ud83d\udfe2 **60%-100% y/y NVIDIA-related growth in Aug\u2013Oct 2026** (first-hand), ahead of the expert's own 40%-60% CY26 forecast; first expert read on this page. \u2192 Tenet 1 (capex duration) \u2191",
+   "\ud83d\udfe2 **Customers placing 2028 pre-allocation requests with deposits**; consistent with hyperscaler 3Q capex +87% y/y (SB #66113). \u2192 Tenet 1 (capex duration) \u2191"
+  ],
+  "Lead times / air-pocket risk": [
+   "\ud83d\udfe2 **Lead times T+90 to T+100+ days; supply \"as tight as 90 days ago\"**, with NVIDIA meeting but not exceeding allocation; consistent with reported neocloud Vera Rubin allocation cuts of up to 50% (SB #65967). \u2192 Tenet 6 (supply execution) \u2191"
+  ],
+  "Rubin ramp execution": [
+   "\ud83d\udfe2 **B300-class at 55%-65% of new Q3 nodes**; Vera Rubin gives ~2x tokens for a **20%-30% premium** (hearsay), in line with Edgewater's 17-20% rack price rises (SB #62065). \u2192 Tenet 5 (margins) \u2191"
+  ],
+  "Compute share vs. XPU/ASIC": [
+   "\ud83d\udfe1 **AMD Helios: \"hundreds of racks\" ordered by neoclouds** for inference since Q2 2026 software parity (hearsay); consistent with MI355X ~2x B200 perf/\\$ on Kimi K3 (SB #65425). \u2192 Tenet 3 (~75% share) \u2193"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Vera Rubin 20%-30% price premium (hearsay) vs Edgewater's expected 17-20% GB300/VR200 rack price rises in Apr-27 (SB #62065, 2026-10-27): consistent.",
+  "Supply \"as tight as 90 days ago\", allocation met exactly, vs reported NVIDIA cuts of up to 50% to neocloud Vera Rubin allocations (SB #65967, 2026-11-02): consistent (tight supply).",
+  "AMD neocloud orders of hundreds of racks (hearsay) vs MI355X up to 2x B200 perf/\\$ on Kimi K3 (SB #65425, 2026-10-31): consistent (AMD gaining in inference).",
+  "Site-readiness delays <3% of the expert's orders vs SemiAnalysis's estimate that 5.8GW of US capacity could be delayed (SB #66252, 2026-11-04): **conflicting** (today's sites vs a forward estimate)."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (capex duration): \u2191 \u2014 60%-100% y/y growth in Aug\u2013Oct; customers placing 2028 pre-allocation deposits.",
+  "Tenet 3 (~75% share): \u2193 \u2014 AMD has hundreds of neocloud inference racks on order (hearsay).",
+  "Tenet 5 (margins mid-70s): \u2191 \u2014 Vera Rubin ~2x tokens at a 20%-30% premium; offset risk from storage/memory input costs +60%.",
+  "Tenet 6 (supply executes Rubin): \u2192 \u2014 supply tight with T+90 day lead times, site delays <3%; Vera Rubin enterprise shipments start late November."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA-related business at a large IT services provider +60%-100% y/y, Aug\u2013Oct 2026",
+   "kind": "first_hand",
+   "citation": "[19 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse11297&hl=fse11297,fse11489,fse11693,fse11853&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "B300-class systems 55%-65% of new nodes deployed, Q3 2026",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse19055&hl=fse19055,fse19174&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "Blackwell 70% of mix by end of 2026 (expert forecast)",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse19055&hl=fse19055,fse19174&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA-related business expected +30%-40% y/y, Nov 2026\u2013Jan 2027 (expert forecast)",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse21336&hl=fse21336,fse25391&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA-related business expected +40%-60% y/y, calendar 2026 (expert forecast)",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse21336&hl=fse21336,fse25391&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "Vera Rubin priced at a 20%-30% premium to Blackwell Ultra for almost double token production",
+   "kind": "hearsay",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse13992&hl=fse13992&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA order lead times T plus 90 days to T plus over 100 days; supply as tight as 90 days ago",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse24427&hl=fse24427,fse24457&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "Site-readiness delays affect less than 3% of NVIDIA orders",
+   "kind": "first_hand",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse56320&hl=fse56320&page=2)"
+  },
+  {
+   "ticker": "OTHER:AMD",
+   "text": "AMD Helios: neoclouds ordered hundreds of racks for inference, Q3 2026",
+   "kind": "hearsay",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse61398&hl=fse61398,fse64631&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "PCB resin prices more than doubled since 2026-01-01",
+   "kind": "hearsay",
+   "citation": "[25 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse35777&hl=fse35777,fse36029,fse36179,fse36405&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Storage and memory costs in systems +60%; total equipment +10%/20%/30%",
+   "kind": "first_hand",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-261946&scope=ANYWHERE&stmt=fse36179&hl=fse36179,fse36405&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

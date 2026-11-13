@@ -1,0 +1,124 @@
+{
+ "doc_id": "EC-1000000-268974",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Director at IT Provider Sees Samsara Gaining Share as Asset Tracking and Renewals Drive Growth",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268974",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794403912079",
+ "expert": "Director at a very large managed service provider running Samsara for large enterprises (oil and gas, utilities, transport)",
+ "weight": "High",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 5
+  },
+  {
+   "company": "Motive",
+   "score": 4
+  },
+  {
+   "company": "Geotab",
+   "score": 4
+  }
+ ],
+ "verdict": "The expert's Samsara book grew 10%\u201315% y/y in Aug\u2013Oct, with renewal spend 15%\u201325% higher and asset-tag ARR more than tripled.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "\ud83d\udfe2 Renewal spend 15%\u201325% higher; expansion over one-half of book vs about one-third a year ago, vs 2026-11-05 call (96% renewals): confirming; vs Jefferies license-cost scrutiny (SB #62601): conflicting. \u2192 Tenet 1 (enterprise expansion) \u2191",
+   "\ud83d\udfe2 Asset-tag ARR more than tripled, one deployment of as many as 250,000 assets, vs mgmt emerging >20% of NNACV (SB #50487): confirming. \u2192 Tenet 2 (emerging products) \u2191"
+  ],
+  "GM/FCF through component cycle": [
+   "\ud83d\udfe2 Same-product prices 15%\u201320% higher y/y (estimate), vs 2026-11-05 call's +5%\u20137% on platform deals: higher. \u2192 Tenet 3 (op leverage vs hardware cost) \u2191",
+   "\ud83d\udd34 Longer hardware lead times slowed a couple of multi-country rollouts, consistent with mgmt's component and supply costs through F2H27 (SB #62580); may defer revenue. \u2192 Tenet 3 \u2193"
+  ],
+  "Competition & share": [
+   "\ud83d\udfe1 Motive wins SMB/mid-market on 12-month minimum terms, while Samsara gains in large enterprise; vs Jefferies aggressive-price competitors (SB #62604): consistent."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Renewals: spend 15%\u201325% higher vs 2026-11-05 call's 96% renewal rate: confirming; vs Jefferies license-cost scrutiny at renewal (SB #62601): conflicting.",
+  "Emerging products: asset-tag ARR more than tripled vs mgmt emerging >20% of NNACV for 3 quarters (SB #50487): confirming.",
+  "Pricing: same-product +15%\u201320% y/y (estimate) vs 2026-11-05 call's +5%\u20137% platform: higher.",
+  "Supply: hardware lead times lengthened, slowing rollouts; vs mgmt component/supply costs persisting through F2H27 (SB #62580): confirming."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): \u2191 \u2014 renewal spend +15%\u201325%, expansion over half of book (one-third a year ago).",
+  "Tenet 2 (emerging products): \u2191 \u2014 asset-tag ARR more than tripled; 250,000-asset deployment.",
+  "Tenet 3 (op leverage vs hardware cost): \u2191 on price (+15%\u201320%), \u2193 on lead-time-driven rollout delays.",
+  "Tenet 4 (platform moat): \u2191 \u2014 share gains in large enterprise via consolidation."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 10%\u201315% \u2014 Business growth, August\u2013October 2026, vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[[18 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse9492&hl=fse9492,fse9627,fse9843,fse10033,fse10192,fse10754&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: comfortably over 20% \u2014 Expected business growth, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268974)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: over one-half \u2014 Expansion share of book, Current quarter, vs about one-third  a year earlier",
+   "kind": "first_hand",
+   "citation": "[[18 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse9492&hl=fse9492,fse9627,fse9843,fse10033,fse10192,fse10754&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 15%\u201325% higher \u2014 Renewal spend, August\u2013October 2026, vs Prior year",
+   "kind": "first_hand",
+   "citation": "[[19 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse12535&hl=fse12535,fse12770&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: more than tripled \u2014 Asset-tag ARR, August\u2013October 2026, vs Unspecified baseline",
+   "kind": "first_hand",
+   "citation": "[[10 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse15238&hl=fse15238,fse33700,fse33759&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: as many as 250,000 \u2014 Assets in one deployment, August\u2013October 2026, vs N/A",
+   "kind": "first_hand",
+   "citation": "[[10 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse15238&hl=fse15238,fse33700,fse33759&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 15%\u201320% \u2014 Price increase (same product), August\u2013October 2026, vs Year-over-year",
+   "kind": "estimate",
+   "citation": "[[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse22280&hl=fse22280,fse35026,fse35207&page=2)"
+  },
+  {
+   "ticker": "OTHER:Geotab",
+   "text": "Geotab: more than one million \u2014 EMEA subscriptions, August\u2013October 2026, vs Post-Verizon Connect acquisition",
+   "kind": "hearsay",
+   "citation": "[[7 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse26979&hl=fse26979,fse29805,fse30252,fse30703&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: four weeks \u2014 Voice agent adoption speed, Post-June 2026 release, vs Overtook chat usage",
+   "kind": "first_hand",
+   "citation": "[[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268974&scope=ANYWHERE&stmt=fse21146&hl=fse21146,fse27029,fse28325,fse28870,fse28998&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Market: more than 30% \u2014 Rise in strategic theft, August\u2013October 2026, vs Unspecified baseline",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268974)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources). No \"Samsara Thesis - Revised\" page exists; filed to the thesis-builder child page \"Samsara - Thesis Revised - 2026-11-05\" (has What Matters and tenets)."
+}

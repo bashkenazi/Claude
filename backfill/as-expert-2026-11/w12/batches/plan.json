@@ -1,0 +1,239 @@
+{
+ "week": 12,
+ "start": "2026-11-05",
+ "end": "2026-11-10",
+ "calls": 270,
+ "workers": [
+  {
+   "worker": 1,
+   "n": 12,
+   "tickers": [
+    "2383 TT",
+    "SNOW"
+   ]
+  },
+  {
+   "worker": 2,
+   "n": 12,
+   "tickers": [
+    "000660 KS",
+    "IOT"
+   ]
+  },
+  {
+   "worker": 3,
+   "n": 12,
+   "tickers": [
+    "3017 TT",
+    "Unimicron"
+   ]
+  },
+  {
+   "worker": 4,
+   "n": 12,
+   "tickers": [
+    "AAPL",
+    "MRVL"
+   ]
+  },
+  {
+   "worker": 5,
+   "n": 12,
+   "tickers": [
+    "CRDO",
+    "DOCU"
+   ]
+  },
+  {
+   "worker": 6,
+   "n": 12,
+   "tickers": [
+    "CRWV",
+    "NVDA"
+   ]
+  },
+  {
+   "worker": 7,
+   "n": 12,
+   "tickers": [
+    "CRWD",
+    "META"
+   ]
+  },
+  {
+   "worker": 8,
+   "n": 12,
+   "tickers": [
+    "GEV",
+    "MU"
+   ]
+  },
+  {
+   "worker": 9,
+   "n": 12,
+   "tickers": [
+    "HPE",
+    "TDC"
+   ]
+  },
+  {
+   "worker": 10,
+   "n": 12,
+   "tickers": [
+    "AMZN",
+    "TWLO"
+   ]
+  },
+  {
+   "worker": 11,
+   "n": 12,
+   "tickers": [
+    "Databricks",
+    "INTU",
+    "Samsung"
+   ]
+  },
+  {
+   "worker": 12,
+   "n": 12,
+   "tickers": [
+    "SPCX",
+    "TCS",
+    "VRT"
+   ]
+  },
+  {
+   "worker": 13,
+   "n": 12,
+   "tickers": [
+    "MSFT",
+    "ORCL",
+    "PLTR"
+   ]
+  },
+  {
+   "worker": 14,
+   "n": 12,
+   "tickers": [
+    "APH",
+    "PATH",
+    "TXN"
+   ]
+  },
+  {
+   "worker": 15,
+   "n": 12,
+   "tickers": [
+    "AVGO",
+    "CSCO",
+    "MNDY"
+   ]
+  },
+  {
+   "worker": 16,
+   "n": 12,
+   "tickers": [
+    "CRM",
+    "S",
+    "TITN"
+   ]
+  },
+  {
+   "worker": 17,
+   "n": 12,
+   "tickers": [
+    "2382 TT",
+    "ADI",
+    "WIX",
+    "ZS"
+   ]
+  },
+  {
+   "worker": 18,
+   "n": 12,
+   "tickers": [
+    "ADSK",
+    "AMAT",
+    "ANTH",
+    "P",
+    "SMCI",
+    "TTMI"
+   ]
+  },
+  {
+   "worker": 19,
+   "n": 12,
+   "tickers": [
+    "ADBE",
+    "ENTG",
+    "FIG",
+    "HUBS",
+    "INTC",
+    "TEAM"
+   ]
+  },
+  {
+   "worker": 20,
+   "n": 12,
+   "tickers": [
+    "BE",
+    "CIEN",
+    "ENR GY",
+    "IBM",
+    "NTAP",
+    "NTNX",
+    "Nanya",
+    "RBRK",
+    "TSLA"
+   ]
+  },
+  {
+   "worker": 21,
+   "n": 12,
+   "tickers": [
+    "Accton",
+    "CBRS",
+    "CTSH",
+    "GOOGL",
+    "HPQ",
+    "LRCX",
+    "OAI",
+    "Softbank",
+    "Sumco",
+    "VST",
+    "WDC",
+    "WPRO"
+   ]
+  },
+  {
+   "worker": 22,
+   "n": 12,
+   "tickers": [
+    "8046 TT",
+    "AKAM",
+    "BESI",
+    "GLBE",
+    "GTLB",
+    "IT",
+    "KVYO",
+    "LITE",
+    "NOW",
+    "PANW",
+    "PCOR",
+    "SAP"
+   ]
+  },
+  {
+   "worker": 23,
+   "n": 6,
+   "tickers": [
+    "CDW",
+    "CNVA",
+    "DSY FP",
+    "EPAM",
+    "SNPS",
+    "TT"
+   ]
+  }
+ ]
+}

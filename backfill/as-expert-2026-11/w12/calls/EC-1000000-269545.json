@@ -1,0 +1,130 @@
+{
+ "doc_id": "EC-1000000-269545",
+ "ticker": "TWLO",
+ "tier": 1,
+ "sector": "Unassigned",
+ "title": "Account Executive for HubSpot, Salesforce, and Zoho Ecosystems at Sinch Believes Twilio\u2019s Compliance and Support Challenges Create Openings for Competitors",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269545",
+ "as_company": "Twilio Inc",
+ "conversation_id": "7093__1794404085959",
+ "expert": "Account Executive at Sinch, HubSpot/Salesforce/Zoho ecosystems (current)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Twilio Inc",
+   "score": 3.0
+  },
+  {
+   "company": "Sinch",
+   "score": 4.0
+  },
+  {
+   "company": "Infobip",
+   "score": 3.0
+  },
+  {
+   "company": "Bird",
+   "score": 3.0
+  }
+ ],
+ "verdict": "A current Sinch AE says 40% of his new deals involve customers on or familiar with Twilio, and he wins some on registration and support despite charging $0.01 per message vs Twilio's $0.0083.",
+ "summary_variables": {
+  "Messaging organic growth (ex-fees)": [
+   "\ud83d\udd34 **40% of the expert's new deals involve Twilio users** (first-hand), e.g. LeoSource Insurance lost on number shutdowns and support; same direction as the 2026-11-06 RingCentral call. \u2192 Tenet 5 (carrier moat) \u2193 {c1}",
+   "\ud83d\udfe1 **WhatsApp 10%\u201315% of Sinch account volume** (estimate), same direction as 2FA moving off SMS (SB #64480). \u2192 Tenet 2 (organic \u226510%) \u2193 {c3}",
+   "\ud83d\udfe1 **Short codes take 6\u20138 weeks, toll-free 5\u20136 business days to migrate** (first-hand); first read. \u2192 Tenet 5 (carrier moat) \u2192 {c5}"
+  ],
+  "Gross profit dollar growth vs organic revenue": [
+   "\ud83d\udfe2 **Twilio SMS ~\\$0.0078\u2013\\$0.0083/message; Sinch at \\$0.01 matches only at 1\u20133M messages/month** (first-hand), with room above \\$0.0083. \u2192 Tenet 3 (gross profit vs revenue) \u2191 {c10}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "40% of new deals involve Twilio users vs 2026-11-09 Expert Call (former AE: 80% strategic win rate vs Sinch): **conflicting**.",
+  "Twilio long-code SMS **\\$0.0079 \u2192 \\$0.0083** vs 2026-11-06 Expert Call (RingCentral VP: ~5% messaging price rise in mid-2025): consistent.",
+  "WhatsApp **10%\u201315%** of Sinch volume vs Third Bridge: 2FA moving to push and passkeys (SB #64480): consistent direction.",
+  "First read on number-migration lead times; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 5 (carrier moat): \u2193 \u2014 Sinch wins on registration and support at a higher price (\\$0.01 vs \\$0.0083).",
+  "Tenet 3 (gross profit vs revenue): \u2191 \u2014 the expert sees room to price above \\$0.0083 before churn.",
+  "Tenet 2 (organic growth \u226510%): \u2192 \u2014 share loss is anecdotal; Twilio still wins developer-led enterprises on price."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "OTHER:Sinch",
+   "text": "Sinch: About 14 years \u2014 Expert's software sales experience; As of **2026-11-10**; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio Inc: $0.0078 per message \u2014 Standard messaging rate observed; Not specified; vs Competitive rates",
+   "kind": "first_hand",
+   "citation": "[19 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545&scope=ANYWHERE&stmt=fse7690&hl=fse7690,fse7900,fse8124,fse8194,fse8312&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sinch",
+   "text": "Sinch: One to three million messages per month \u2014 Volume required to match Twilio pricing; Current; vs Standard pricing",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545)"
+  },
+  {
+   "ticker": "OTHER:Sinch",
+   "text": "Sinch: $0.01 per message \u2014 Price for supported packages; Current; vs Twilio's $0.0083 rate",
+   "kind": "first_hand",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545&scope=ANYWHERE&stmt=fse6495&hl=fse6495,fse6592,fse6790,fse7008,fse7274&page=2)"
+  },
+  {
+   "ticker": "OTHER:Sinch",
+   "text": "Sinch: 10%\u201315% \u2014 WhatsApp share of account volume; Current; vs SMS volume",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio Inc: 40% of new deals \u2014 Share of expert's deals involving Twilio network; Current; vs Total pipeline",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545&scope=ANYWHERE&stmt=fse18741&hl=fse18741&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio Inc: 23% \u2014 Global CPaaS market share; **2025**; vs Sinch's 13% share",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio Inc: $0.0079 to $0.0083 per message \u2014 Long-code SMS rate increase; **Mid-2025**; vs Prior pricing",
+   "kind": "hearsay",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545&scope=ANYWHERE&stmt=fse19444&hl=fse19444,fse36218,fse36268,fse36420,fse36714,fse36838&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio Inc: 89% \u2014 Pay-as-you-go SIP trunking price increase; **2026-08-01**; vs Prior pricing",
+   "kind": "hearsay",
+   "citation": "[16 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545&scope=ANYWHERE&stmt=fse32858&hl=fse32858,fse32943,fse33488&page=2)"
+  },
+  {
+   "ticker": "OTHER:Verizon",
+   "text": "Verizon: 33% \u2014 Increase in A2P fees; **2025-06-01**; vs Prior fees",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "CPaaS Market: $18.5 billion \u2014 Global market size; **2026**; vs $15.7 billion in 2025",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269545)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Twilio - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

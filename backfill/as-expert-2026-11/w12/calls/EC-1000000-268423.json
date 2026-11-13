@@ -1,0 +1,113 @@
+{
+ "doc_id": "EC-1000000-268423",
+ "ticker": "INTU",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Manager at Fund Administration Firm Is Bullish on Intuit Growth as AI and Cloud Migration Drive Adoption",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268423",
+ "as_company": "Intuit Inc",
+ "conversation_id": "7093__1794405632379",
+ "expert": "Client service manager, fund administration firm (Gen II Fund Services), 50-100 HNW clients (current)",
+ "weight": "Medium",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "Intuit",
+   "score": 5
+  }
+ ],
+ "verdict": "This fund administrator's QuickBooks client count rose about 50% (about 50 to 66-75) with per-client prices up 25%-33% and 80%-85% of clients holding or growing spend, driven by AI-led cloud migration.",
+ "summary_variables": {
+  "Paid-customer and platform growth vs 13-14% guide": [
+   "🟢 **QuickBooks clients about 50 to 66-75 (+about 50%)**, Intuit activity +about 50% Aug-Oct; vs +5%-10% at a 55-client advisory firm (2026-11-08 call) and company +3% online paid customers (SB #48888): far above, small base. → Tenet 2 (core funnel) ↑ [14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse9379&hl=fse9379,fse9637,fse9689,fse9725&page=2)",
+   "🟢 **Pipeline was 25%-33% lower a year ago**; full-year 2026 activity +about 50% (estimate). → Tenet 2 (core funnel) ↑ [15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse13209&hl=fse13209,fse13442,fse13485,fse13575&page=2)"
+  ],
+  "Pricing and ARPC (Tenet 2)": [
+   "🟢 **Per-client prices +25%-33%, complex clients +66%-75%** (unclear whether Intuit list price or the firm's billing); vs 5%-10% and 1%-5% acceptable at two consultancies (2026-11-08 calls): **higher**. → Tenet 2 (pricing) ↑ [17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse19631&hl=fse19631,fse19823,fse19908&page=2)"
+  ],
+  "Competition and retention (Tenet 5)": [
+   "🟢 **80%-85% of clients maintained or increased business**; consistent with Intuit's stable 83% retention (SB #59455). → Tenet 5 (retention 82%+) ↑ [18 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse20700&hl=fse20700,fse20971,fse21021,fse21263&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "QuickBooks clients +about 50% (first-hand) vs Intuit activity +5%-10% at a 55-client advisory firm (2026-11-08 call): much stronger.",
+  "Per-client prices +25%-33% vs 5%-10% (2026-11-08 consultancy) and 1%-5% acceptable (2026-11-08 advisory firm): conflicting; vs 2026-08-01 list increases of +13% to +24% (thesis page): higher.",
+  "80%-85% of clients holding or growing spend vs company retention stable at 83% (SB #59455): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (core funnel and pricing): ↑ — client count +about 50% and per-client prices +25%-33% in this channel.",
+  "Tenet 5 (disruption contained): ↑ — 80%-85% hold or grow spend; occasional downgrades from pricing and AI not quantified.",
+  "Tenet 1 (mid-market): → — complex clients pay +66%-75% more, but no IES-specific figure."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INTU",
+   "text": "Fund administrator supports 50-100 active HNW clients on Intuit products",
+   "kind": "first_hand",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse3734&hl=fse3734,fse4035&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Intuit-related activity +about 50% Aug-Oct 2026 vs Aug-Oct 2025 (expected 25%-33%)",
+   "kind": "first_hand",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse8281&hl=fse8281,fse8526&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "QuickBooks client count +about 50% (about 50 to 66-75) y/y",
+   "kind": "first_hand",
+   "citation": "[14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse9379&hl=fse9379,fse9637,fse9689,fse9725&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Per-client price +25%-33% y/y in 2026",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse19631&hl=fse19631,fse19823,fse19908&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Per-client price +66%-75% y/y for complex clients in 2026",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse19631&hl=fse19631,fse19823,fse19908&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Business pipeline was 25%-33% lower one year ago",
+   "kind": "first_hand",
+   "citation": "[15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse13209&hl=fse13209,fse13442,fse13485,fse13575&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Per-client tier amount less than $2,000 in 2026",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse19631&hl=fse19631,fse19823,fse19908&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "80%-85% of clients maintained or increased business with the firm",
+   "kind": "first_hand",
+   "citation": "[18 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse20700&hl=fse20700,fse20971,fse21021,fse21263&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Intuit-related activity +about 50% for full-year 2026 vs 2025",
+   "kind": "estimate",
+   "citation": "[16 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse16049&hl=fse16049,fse16233&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Business development to double or triple in 2027 vs 2026",
+   "kind": "estimate",
+   "citation": "[16 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268423&scope=ANYWHERE&stmt=fse16049&hl=fse16049,fse16233&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8109-bad2-e521daa8697a",
+  "page_title": "Intuit - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

@@ -1,0 +1,112 @@
+{
+ "doc_id": "EC-1000000-268999",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Principal Engineer at Semtech Corporation Sees Pluggable Optics Staying Dominant as NPO Ramps and CPO Adoption Remains Limited",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268999",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794403776709",
+ "expert": "Principal Product Definition Specialist at Semtech (current); first-hand on optical/electrical IC orders; NVIDIA's EML contracts are second-hand",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 4
+  },
+  {
+   "company": "Coherent",
+   "score": 4
+  },
+  {
+   "company": "Lumentum",
+   "score": 4
+  },
+  {
+   "company": "Broadcom",
+   "score": 3
+  }
+ ],
+ "verdict": "A current Semtech optics engineer sees hyperscaler optical orders running in the millions and 200G EML with no free stock for 2-3 years, a bottleneck NVIDIA has locked up through Coherent and Lumentum contracts.",
+ "summary_variables": {
+  "Rubin ramp execution": [
+   "\ud83d\udfe2 **200G EML: no stock for the next 2-3 years**, but NVIDIA has secured supply through Coherent and Lumentum contracts (contracts second-hand); first read on EML supply. \u2192 Tenet 6 (supply execution) \u2191",
+   "\ud83d\udfe1 **CPO packaging and 3D assembly at \"very limited yield\"**, vs NVIDIA's plan for 15x SPIL CPO optical-engine capacity by mid-'27 (SB #63558): **conflicting**. \u2192 Tenet 4 (networking) \u2192"
+  ],
+  "Lead times / air-pocket risk": [
+   "\ud83d\udfe2 **1.6T mass-volume deployment from 2H next year**; CW lasers tight this year, next year and the year after (first read)."
+  ],
+  "Compute share vs. XPU/ASIC": [
+   "\ud83d\udfe1 **Copper reach drops to ~1.5 m at 200G/lane (from ~3 m at 100G)**, lifting optical attach; hyperscalers still prefer multi-vendor NPO over turnkey CPO from NVIDIA or Broadcom. \u2192 Tenet 4 (networking) \u2191"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "CPO capacity: expert sees very limited CPO packaging yield vs NVIDIA's GTC Berlin target of 15x SPIL CPO optical-engine capacity by mid-'27 (SB #63558, 2026-10-21): **conflicting**.",
+  "Component supply: 200G EML sold out for 2-3 years vs the 2026-11-05 IT-services call's \"supply as tight as 90 days ago\": consistent (tight supply).",
+  "First read on 1.6T transceiver timing; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 6 (supply executes Rubin): \u2191 \u2014 NVIDIA secured 200G EML while the open market has no stock for 2-3 years.",
+  "Tenet 4 (networking/CPO TAM): \u2192 \u2014 optical attach rises as copper reach falls to ~1.5 m at 200G/lane, but CPO yield is very limited and hyperscalers resist turnkey CPO lock-in."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "200G EML: no stock expected for the next two to three years; NVIDIA secured supply via Coherent and Lumentum contracts",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse7325&hl=fse7325,fse9244,fse9345,fse10259,fse10612,fse10612,fse10859,fse11341,fse12332,fse12332,fse12526,fse12560,fse13607,fse14190,fse14483,fse14697,fse14829,fse17663,fse17770,fse20374,fse21237,fse21283,fse21409,fse21409,fse21467,fse21825,fse21926,fse22133,fse22160,fse22160,fse22223,fse22425,fse22536,fse22625,fse22694,fse23000,fse23521,fse23605,fse23761,fse24067,fse25395,fse25507,fse25685,fse25717,fse26814&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscaler orders for optical/electrical IC components in the millions, current",
+   "kind": "first_hand",
+   "citation": "[2 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse4594&hl=fse4594,fse4675,fse4856,fse4917&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Single data-center building power roughly 100 MW vs gigawatt requirements",
+   "kind": "first_hand",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse8586&hl=fse8586,fse8776,fse8859&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Interconnects more than 15% of data-center power (estimate)",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse7325&hl=fse7325,fse9244,fse9345,fse10259,fse10612,fse10612,fse10859,fse11341,fse12332,fse12332,fse12526,fse12560,fse13607,fse14190,fse14483,fse14697,fse14829,fse17663,fse17770,fse20374,fse21237,fse21283,fse21409,fse21409,fse21467,fse21825,fse21926,fse22133,fse22160,fse22160,fse22223,fse22425,fse22536,fse22625,fse22694,fse23000,fse23521,fse23605,fse23761,fse24067,fse25395,fse25507,fse25685,fse25717,fse26814&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Pluggable transceiver ~24 W vs ~10 W with LPO; target ~7 W",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse7325&hl=fse7325,fse9244,fse9345,fse10259,fse10612,fse10612,fse10859,fse11341,fse12332,fse12332,fse12526,fse12560,fse13607,fse14190,fse14483,fse14697,fse14829,fse17663,fse17770,fse20374,fse21237,fse21283,fse21409,fse21409,fse21467,fse21825,fse21926,fse22133,fse22160,fse22160,fse22223,fse22425,fse22536,fse22625,fse22694,fse23000,fse23521,fse23605,fse23761,fse24067,fse25395,fse25507,fse25685,fse25717,fse26814&page=2)"
+  },
+  {
+   "ticker": "OTHER:Lumentum",
+   "text": "Lumentum supplies 400 mW CW lasers for CPO",
+   "kind": "hearsay",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse7325&hl=fse7325,fse9244,fse9345,fse10259,fse10612,fse10612,fse10859,fse11341,fse12332,fse12332,fse12526,fse12560,fse13607,fse14190,fse14483,fse14697,fse14829,fse17663,fse17770,fse20374,fse21237,fse21283,fse21409,fse21409,fse21467,fse21825,fse21926,fse22133,fse22160,fse22160,fse22223,fse22425,fse22536,fse22625,fse22694,fse23000,fse23521,fse23605,fse23761,fse24067,fse25395,fse25507,fse25685,fse25717,fse26814&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Copper reach ~3 m at 100G per lane, ~1.5 m at 200G per lane",
+   "kind": "first_hand",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse24998&hl=fse24998,fse25065&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "1.6T mass-volume deployment expected in 2H of next year",
+   "kind": "estimate",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268999&scope=ANYWHERE&stmt=fse17068&hl=fse17068,fse17206,fse17275,fse17432&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

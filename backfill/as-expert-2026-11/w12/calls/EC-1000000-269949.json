@@ -1,0 +1,123 @@
+{
+ "doc_id": "EC-1000000-269949",
+ "ticker": "GEV",
+ "tier": 2,
+ "sector": "Power",
+ "title": "North America Sales Director, Energy Services at Caterpillar Sees GE Vernova as a Strong Incumbent in Utility Markets",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269949",
+ "as_company": "GE Vernova Inc",
+ "conversation_id": "7093__1794403769074",
+ "expert": "North America Sales Director, Energy Services at Caterpillar (competitor; ex-Schneider ~13 yrs, ex-Siemens)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "GE Vernova",
+   "score": 4
+  },
+  {
+   "company": "Schweitzer",
+   "score": 5
+  },
+  {
+   "company": "Caterpillar",
+   "score": 3
+  }
+ ],
+ "verdict": "A Caterpillar sales director who competes with GEV sees it as the default utility incumbent, but says shortages of large units (50 MW) are pushing some customers to 100 kW\u2013500 kW units from unfamiliar or Asian suppliers.",
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (supply short): \u2191 \u2014 50 MW shortages and lengthening lead times push buyers to alternatives.",
+  "Tenet 5 (electrification): \u2191 \u2014 incumbency wins utility work even at a higher price; GEV breadth less compartmentalized than Caterpillar.",
+  "Tenet 6 (order air pocket): \u2191 \u2014 backlog carries revenue for the next year or two through order delays.",
+  "Tenet 1 (gas sold out): \u2192 \u2014 supports tightness, but share leaks at the small-unit end."
+ ],
+ "changes": [
+  "Equipment lead times moving further out (expert, unquantified) vs SemiAnalysis 63\u201380 months (SB #65944): consistent.",
+  "Customers sourcing smaller units from new suppliers vs Jereh DC orders Rmb10.2B 3Q26 vs Rmb4.5B 2Q26 (SB #65781): consistent, share leak at the small end.",
+  "Backlog cushions an order pause (expert) vs 3Q26 backlog $197B and gas contracts 11GW vs ~20GW prior quarters (SB #62249, #62250): consistent with Tenet 6.",
+  "First read on utility switching behaviour; the 2026-11-06 expert call covered nuclear only."
+ ],
+ "summary_variables": {
+  "Big-3 supply response": [
+   "\ud83d\udd34 **Shortages of 50 MW units push customers to 100 kW or 500 kW units from unfamiliar suppliers**, consistent with competitor Jereh DC orders Rmb10.2B in 3Q26 vs Rmb4.5B in 2Q26 (SB #65781): share-leak risk. \u2192 Tenet 2 (supply short) \u2191 ",
+   "\ud83d\udfe2 **Interconnection studies a couple of years, then three years to connect**; equipment lead times moving further out (unquantified), consistent with SemiAnalysis 63\u201380 month lead times (SB #65944). "
+  ],
+  "GW contract adds cadence": [
+   "\ud83d\udfe2 **Backlog sustains revenue for the next year or two** even if delays of half a year or a year pause orders (estimate), consistent with 3Q26 backlog $197B (SB #62249) despite gas contracts 11GW vs ~20GW in 1Q/2Q (SB #62250). \u2192 Tenet 6 (air pocket is sentiment) \u2191 "
+  ],
+  "Electrification": [
+   "\ud83d\udfe2 **Incumbent wins even when a challenger is cheaper** on switching risk for utilities with a billion-dollar budget; Trench deal (SB #62252) flagged as securing bushings and instrument transformers. \u2192 Tenet 5 (electrification) \u2191 "
+  ]
+ },
+ "characterization_changed": null,
+ "new_datapoints": [
+  {
+   "ticker": "OTHER:Schneider Electric",
+   "text": "Schneider Electric: about 13 years \u2014 Expert tenure; Historical; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949&scope=ANYWHERE&stmt=fse1&hl=fse1,fse8855)"
+  },
+  {
+   "ticker": "OTHER:Schweitzer",
+   "text": "Schweitzer: 80%\u201390% \u2014 Utility protective-relay market share; Current; vs Market total",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949&scope=ANYWHERE&stmt=fse21748&hl=fse21748,fse21957,fse22131&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Regulated Utility: 6% \u2014 Illustrative regulated return; Current; vs N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Utility Customer: a billion-dollar budget \u2014 Illustrative division budget; Current; vs N/A",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949&scope=ANYWHERE&stmt=fse6681&hl=fse6681,fse20418,fse21957,fse38763,fse38885,fse40357,fse40433,fse42488,fse48265,fse48506,fse49456,fse50107,fse52710,fse53565,fse59357,fse59450,fse59854&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Utility Customer: three, five, and seven years \u2014 Integrated resource planning horizons; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Grid/Utility: a couple of years , then  three years \u2014 Interconnection study time; time to connect; Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949)"
+  },
+  {
+   "ticker": "OTHER:Software Provider",
+   "text": "Software Provider: six MW \u2014 Hypothetical capacity identified; 4:00\u20135:00 p.m.; vs Territory total",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949)"
+  },
+  {
+   "ticker": "GEV",
+   "text": "GEV/Competitors: half a year or a year \u2014 Illustrative project delay; Current; vs Original schedule",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949&scope=ANYWHERE&stmt=fse39096&hl=fse39096,fse39723,fse42170,fse42996&page=2)"
+  },
+  {
+   "ticker": "GEV",
+   "text": "GEV/Competitors: next year or two ;  three quarters later \u2014 Timing of order pause vs. revenue impact; Future; vs Current period",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949&scope=ANYWHERE&stmt=fse53394&hl=fse53394,fse53530,fse54154&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Generator Mkt: 50 MW ;  100 kW ;  500 kW \u2014 Large unit size vs. smaller alternatives; Current; vs Unit capacity",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269949&scope=ANYWHERE&stmt=fse59074&hl=fse59074,fse59357,fse59450,fse59587&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "GEV Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

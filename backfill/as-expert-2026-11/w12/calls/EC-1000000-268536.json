@@ -1,0 +1,138 @@
+{
+ "doc_id": "EC-1000000-268536",
+ "ticker": "Databricks",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Account Specialist at Regional IT Reseller Expects Databricks-Related Business to Grow 20%–25% in 2026",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268536",
+ "as_company": "Databricks",
+ "conversation_id": "7093__1794405892129",
+ "expert": "Account specialist, large regional IT reseller (65%-70% public sector customers; current)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Palantir",
+   "score": 4
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "AWS/Microsoft",
+   "score": 3
+  }
+ ],
+ "verdict": "This regional reseller's Databricks practice grew 15%-18% in public sector and 30%, 35%-40% in commercial in Aug-Oct, with consumption up around 20% on usage rather than price, though only about 15% of expansion deals include newer products.",
+ "summary_variables": {
+  "Demand / orders": [
+   "🟢 **Practice revenue +15%-18% public sector, +30%, 35%-40% commercial (Aug-Oct)**. First expert read; no earlier expert call or stored row on partner growth. → Thesis (re-acceleration) ↑ [16 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse4575&hl=fse4575,fse4694,fse4773&page=2)",
+   "🟢 **Consumption up around 20% y/y on usage, not price**; slower than Databricks' >3x serverless usage growth (SB #64115). → Thesis (re-acceleration) ↑ [3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse28486&hl=fse28486,fse28767,fse29763,fse30193&page=2)",
+   "🟢 **New implementation deal size +about 15%, possibly up to 20%** as customers fund governance and AI readiness. [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse15713&hl=fse15713,fse16004,fse16208,fse16607&page=2)"
+  ],
+  "Pricing & margins": [
+   "🔴 **Only about 15% of expansion deals include Genie, Agent Bricks or Lakeflow**, unchanged q/q; Genie live at about 20% of commercial and 5% of public customers. → Thesis (Agent Bricks/Lakebase) → [10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse46133&hl=fse46133,fse46432,fse46759,fse46900&page=2)"
+  ],
+  "Competition & share": [
+   "🟡 **Cloud-native (Redshift, Fabric) competes in about 15% of deals** (hearsay); Palantir \"coming on like gangbusters\". → Thesis (multi-cloud/open) → [13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse41595&hl=fse41595,fse41947,fse42286,fse42384&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Consumption +around 20% y/y vs >3x serverless compute usage in the past year (SB #64115): slower, same direction.",
+  "First read on partner practice growth, deal size and new-product attach; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the Databricks Thesis page; measured against its thesis bullets (2025-09-10).",
+  "Thesis (run-rate re-acceleration, $1bn AI revenue): ↑ — practice +30%, 35%-40% commercial, consumption +around 20%.",
+  "Thesis (Agent Bricks/Lakebase new products): → — only about 15% of expansion deals include newer products.",
+  "Thesis (multi-cloud/open): → — cloud-native competition in about 15% of deals."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "Databricks",
+   "text": "Reseller Databricks practice revenue +15%-18% y/y in public sector, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[16 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse4575&hl=fse4575,fse4694,fse4773&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Reseller Databricks practice revenue +30%, 35%-40% y/y in commercial, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[16 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse4575&hl=fse4575,fse4694,fse4773&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Databricks-related business to grow 20%, maybe even 25% in calendar 2026 vs 2025",
+   "kind": "estimate",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse24422&hl=fse24422,fse24729,fse24931&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Databricks-related business to grow about 20% Nov 2026-Jan 2027 y/y",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse5654&hl=fse5654,fse5654,fse5773,fse11187,fse11187,fse11582,fse12226,fse12226,fse13680,fse13680,fse15967,fse16004,fse16004,fse17908,fse17908,fse18730,fse18730,fse18830,fse21405,fse21474,fse21543,fse24729,fse24729,fse24931,fse29117,fse29763,fse29763,fse30008,fse31390,fse31703,fse31703,fse33963,fse33963,fse33997,fse33997,fse34539,fse35319,fse35319,fse36761,fse36761,fse39400,fse39478,fse39478,fse41595,fse42384,fse46759,fse46759&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "New implementation deal size +about 15%, possibly up to 20% y/y, Aug-Oct 2026",
+   "kind": "first_hand",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse15713&hl=fse15713,fse16004,fse16208,fse16607&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Overall Databricks consumption +around 20% y/y, Aug-Oct 2026, usage not unit price",
+   "kind": "first_hand",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse28486&hl=fse28486,fse28767,fse29763,fse30193&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Genie live at about 20% of commercial customers",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse33577&hl=fse33577,fse33963,fse33997,fse34539&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "Genie live at 5% of public sector customers",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse33577&hl=fse33577,fse33963,fse33997,fse34539&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "About 15% of expansion deals include Genie, Agent Bricks or Lakeflow, unchanged q/q",
+   "kind": "first_hand",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse46133&hl=fse46133,fse46432,fse46759,fse46900&page=2)"
+  },
+  {
+   "ticker": "Databricks",
+   "text": "10%, 15% of Genie users exceed the $10 free credit",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse33577&hl=fse33577,fse33963,fse33997,fse34539&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Cloud-native platforms (Redshift, Fabric) compete in about 15% of Databricks deals",
+   "kind": "hearsay",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse41595&hl=fse41595,fse41947,fse42286,fse42384&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Police/fire consume 60%-65% of city budgets, constraining public-sector consumption spend",
+   "kind": "first_hand",
+   "citation": "[9 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268536&scope=ANYWHERE&stmt=fse7271&hl=fse7271,fse7347,fse7541,fse7925&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "12ea8833-33de-81bd-8549-e1429e4ebd6e",
+  "page_title": "Databricks Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

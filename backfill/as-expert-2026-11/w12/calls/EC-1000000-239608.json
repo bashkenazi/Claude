@@ -1,0 +1,61 @@
+{
+ "doc_id": "EC-1000000-239608",
+ "ticker": "AMZN",
+ "tier": 2,
+ "sector": "Internet",
+ "title": "Former Vice President at Amazon Believes External Service Providers Are Key to Chinese Sellers' Success on E-Commerce Marketplaces",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239608",
+ "as_company": "Amazon.com Inc",
+ "conversation_id": "7093__1794404225914",
+ "expert": "Former Vice President at Amazon, 3P/1P operations and China seller relationships",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Amazon",
+   "score": 3.0
+  }
+ ],
+ "verdict": "A former Amazon VP puts the 3P business at more than $500B (estimate), mostly Chinese brand-owner sellers who lean on outside service providers that can as easily list them on Walmart and Target.",
+ "summary_variables": {
+  "NA retail margins - cost to serve": [
+   "\ud83d\udfe1 **3P business >\\$500B, the majority sourced from China** (estimate); first read. \u2192 Thesis ('unique supply is a moat') \u2192 {c4}",
+   "\ud83d\udd34 **Seller support sits with outside agencies that also activate Walmart and Target**; Amazon has not built in-house tools; first read. \u2192 Thesis ('logistics is a moat') \u2193 {c6}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on 3P GMV scale and China seller mix; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the page. Thesis pitch ('Unique supply is a moat'): \u2192 \u2014 the China seller base is mostly brand owners, but outside agencies make multi-homing to Walmart and Target easy."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "AMZN",
+   "text": "Amazon: more than $500 billion \u2014 3P business GMV; Unspecified; vs Total Amazon 3P",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239608&scope=ANYWHERE&stmt=fse13658&hl=fse13658&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "China Export Industry: literally trillion \u2014 Total export industry scale to U.S./Europe; Current; vs Global trade context",
+   "kind": "estimate",
+   "citation": "[16 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239608&scope=ANYWHERE&stmt=fse13251&hl=fse13251,fse13309,fse13346,fse13454,fse13634,fse13658,fse13709,fse13759,fse13814,fse13918&page=2)"
+  },
+  {
+   "ticker": "AMZN",
+   "text": "Amazon (Sellers): 15 years ago \u2014 Historical relevance of brand registration; 2011; vs Current registration requirements",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239608)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "AMZN Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

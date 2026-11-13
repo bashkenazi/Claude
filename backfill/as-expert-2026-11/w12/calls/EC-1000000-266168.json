@@ -1,0 +1,117 @@
+{
+ "doc_id": "EC-1000000-266168",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Director of Engineering at nVent Electric plc Is Positive on Asia Vital Components’ Growth and Competitive Position in Data Center Cooling",
+ "released": "2026-11-07",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-266168",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794405602502",
+ "expert": "Director of engineering (data-center thermal R&D) at nVent Electric, an AVC competitor (current)",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  },
+  {
+   "company": "Auras Technology",
+   "score": 3
+  }
+ ],
+ "verdict": "A competitor's engineering director (no view of AVC's books) estimates AVC's <b>55% blended cold-plate share settles at 40%–50% on Vera Rubin</b> and expects 5%–10% price declines once Nvidia standardizes cold plates.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "🔴 <b>AVC 55% blended share to 40%–50% on Vera Rubin</b> (estimate) as Auras qualifies, vs Celestica's 60/40–50/50 production splits (2026-11-06 call): consistent. → Tenet 1 (Nvidia content and share) ↓"
+  ],
+  "Gross margin": [
+   "🔴 <b>Cold-plate prices to fall 5%–10%</b> on Nvidia standardization (estimate; up to 50% heard), vs Dell commodity manager's 40–50% reference-price fall (2026-11-06 call): smaller. → Tenet 3 (GM 34%+) ↓"
+  ],
+  "ASIC liquid-cooling start": [
+   "🟢 <b>Custom-ASIC vs GPU liquid revenue about 50/50 by 2027</b> (estimate), consistent with mgmt's ASIC >50% of liquid revenue in 2027 (SB #54848). → Tenet 2 (ASIC ramp) ↑"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "AVC share 55% blended to 40%–50% on Vera Rubin (estimate) vs Celestica's planned 60/40–50/50 production splits (2026-11-06 call): consistent.",
+  "Cold-plate price decline 5%–10% (estimate) vs Dell commodity manager's reference prices down 40–50% (2026-11-06 call): smaller cut expected.",
+  "Rubin yields 60%–70% rising to about 80% (hearsay) vs ex-SMCI GM's ~80% (2026-11-06 call): same read; up from ~60% in May (SB #64479).",
+  "Auras ~4% to over 10% share (hearsay) vs nVent site-ops director's identical read (2026-11-06 call): repeated hearsay, not new evidence."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Nvidia content and share): ↓ — share estimated at 40%–50% on Vera Rubin from 55% blended.",
+  "Tenet 2 (ASIC ramp): ↑ — ASIC vs GPU liquid revenue about 50/50 by 2027 (estimate).",
+  "Tenet 3 (Margin and EPS): → — yield and optimization worth about 4–5 points of margin (estimate) offset by 5%–10% standardization price cuts."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: 32.6% — Gross margin, Prior quarter; vs Not stated",
+   "kind": "hearsay",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168&scope=ANYWHERE&stmt=fse14916&hl=fse14916,fse15045,fse50528&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: 60%–70% rising to around 80% — Cold-plate yields, Current; vs Previous",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: four to five percentage points — Contribution of optimization to margin, Not stated; vs Previous margins",
+   "kind": "estimate",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168&scope=ANYWHERE&stmt=fse14916&hl=fse14916,fse15226,fse15475&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: 5%–10% — Price decline for standardized cold plates, Future; vs Current",
+   "kind": "estimate",
+   "citation": "[15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168&scope=ANYWHERE&stmt=fse18747&hl=fse18747,fse19799,fse20345&page=2)"
+  },
+  {
+   "ticker": "OTHER:Auras Technology",
+   "text": "Auras: 4% to over 10% — Cold-plate market share, Future; vs 4%",
+   "kind": "hearsay",
+   "citation": "[11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168&scope=ANYWHERE&stmt=fse38793&hl=fse38793,fse39074&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: 40%–50% — Projected share of Vera Rubin cold plates, Future; vs 55% blended share",
+   "kind": "estimate",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168&scope=ANYWHERE&stmt=fse41850&hl=fse41850,fse43550,fse43924,fse44309&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: About 50/50 — Custom-ASIC vs GPU liquid-cooling revenue, By 2027; vs Current mix",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "AVC: About 5% — Yield improvement contribution to margin, Not stated; vs Base margin",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: Around 150 kW — Capacity limit for air-assisted liquid cooling, Current; vs Not stated",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 100% — AI data centers that will be liquid-cooled, Future; vs Current builds",
+   "kind": "estimate",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266168&scope=ANYWHERE&stmt=fse28382&hl=fse28382,fse28563,fse28795&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8138-a495-d71f03b8a87b",
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "GenSearch answer mixed in passages from other AVC calls (EC-1000000-265396, -268129, -269598, -265382); those passages and the Verdict built on them were removed."
+}

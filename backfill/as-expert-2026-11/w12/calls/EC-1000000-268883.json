@@ -1,0 +1,15 @@
+{
+ "doc_id": "EC-1000000-268883",
+ "ticker": "MU",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Manager at Major Cloud Hyperscaler Is Positive on Micron Purchases Amid HBM Supply Constraints",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268883",
+ "as_company": "Micron Technology Inc",
+ "conversation_id": null,
+ "status": "failed",
+ "note": "timeout-no-conv-id (retry r2: alphasense_genai timed out after 60s, no conversation_id; not re-asked)",
+ "new_datapoints": [],
+ "filed": null
+}

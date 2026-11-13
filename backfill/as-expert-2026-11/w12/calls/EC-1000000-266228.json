@@ -1,0 +1,109 @@
+{
+ "doc_id": "EC-1000000-266228",
+ "ticker": "SNOW",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Lead at Large Software Partner Sees Snowflake AI Driving Adoption Despite Open Formats Potentially Tempering Growth",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-266228",
+ "as_company": "Snowflake Inc",
+ "conversation_id": "7093__1794403766378",
+ "expert": "Lead at a large software partner designing data architectures (six-person team; Snowflake its largest base)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Snowflake",
+   "score": 3
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "BigQuery",
+   "score": 4
+  }
+ ],
+ "verdict": "The partner's own Snowflake business was flat (<1% change) y/y in Aug\u2013Oct [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse17896&hl=fse17896,fse18266,fse20603,fse22058&page=2), and the expert sees open formats and cheaper engines easing SNOW growth from ~30% to 25% in 2027 [[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse24557&hl=fse24557,fse24699,fse31269&page=2).",
+ "summary_variables": {
+  "Demand / orders": [
+   "\ud83d\udd34 partner Snowflake business  (Aug\u2013Oct), vs the Cleveland global SI's +40% in 1H26 (SB #45418): slower. \u2192 Tenet 1 (core re-acceleration) \u2193 [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse17896&hl=fse17896,fse18266,fse20603,fse22058&page=2)",
+   "\ud83d\udfe2 Cortex adds $500,000 to a flat $1 million warehouse contract (example); first read on per-contract AI uplift. \u2192 Tenet 2 (AI second engine) \u2191 [[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse33155&hl=fse33155,fse33292,fse33410,fse33474&page=2)",
+   "\ud83d\udfe1 growth ~30% \u2192 25% in CY27 (estimate) vs 2Q FY27 product growth of +36.8% (SB #65498). [[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse24557&hl=fse24557,fse24699,fse31269&page=2)"
+  ],
+  "Competition & share": [
+   "\ud83d\udd34 open formats avoid ingestion = ~40% of compute (estimate); BigQuery and Databricks gaining on cloud-storage-native data; first read. \u2192 Tenet 3 (governed-data control point) \u2193 [[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse37501&hl=fse37501,fse37780&page=2) [[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse40309&hl=fse40309,fse40419,fse40521,fse40805,fse40934,fse40966&page=2)",
+   "\ud83d\udd34 only 400 of 720 workloads may stay on Snowflake as transforms move to cheaper engines (estimate); first read. \u2192 Tenet 5 (architecture shift) \u2193 [[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse11448&hl=fse11448,fse11633,fse12971,fse13118,fse13318&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Partner Snowflake business <1% y/y (Aug\u2013Oct) vs Cleveland global SI +40% in 1H26 (SB #45418): slower.",
+  "Migrations now \"a couple of months or less\" vs mgmt's ~6 months with Cortex Code (SB #59861): faster, same direction.",
+  "First read on workload diversion to open formats and cheaper engines (400 of 720 workloads); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core re-acceleration): \u2193 \u2014 partner business <1% y/y; expert sees ~30% growth easing to 25% in CY27.",
+  "Tenet 2 (AI second engine): \u2191 \u2014 Cortex adds $500,000 to a $1 million contract; AI materiality rated 8\u20139/10.",
+  "Tenet 3 (governed-data control point): \u2193 \u2014 BigQuery and Databricks gaining on open formats; $20 million+ contracts vulnerable to gradual reductions.",
+  "Tenet 5 (architecture shift manageable): \u2193 \u2014 multi-compute model could leave 400 of 720 workloads on Snowflake."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: less than 1% \u2014 Partner's Snowflake business growth, August\u2013October, vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse17896&hl=fse17896,fse18266,fse20603,fse22058&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: $1 million\u2013$3 million \u2014 Typical contract values, Current, vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: roughly 30% \u2014 Recent quarterly revenue growth, Recent quarters, vs Prior periods",
+   "kind": "hearsay",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse24557&hl=fse24557,fse24699,fse31269&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 25% \u2014 Potential revenue growth rate, Calendar 2027, vs Calendar 2026",
+   "kind": "estimate",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse24557&hl=fse24557,fse24699,fse31269&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: $30 million \u2014 Individual customer contract value, Current, vs $22 million",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 40% \u2014 Ingestion share of compute spend, Current, vs Total compute",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse37501&hl=fse37501,fse37780&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 8 or 9 out of 10 \u2014 Materiality of AI initiatives, Next 12\u201324 months, vs N/A",
+   "kind": "estimate",
+   "citation": "[21 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse54044&hl=fse54044,fse54297&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 50% \u2014 Data receiving downstream analytics, Current, vs 100 TB or 1,000 TB  ingested",
+   "kind": "estimate",
+   "citation": "[4 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266228&scope=ANYWHERE&stmt=fse37501&hl=fse37501,fse37780&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "SNOW Thesis - Revised"
+ },
+ "status": "done",
+ "note": "Expert Calls section created on page"
+}

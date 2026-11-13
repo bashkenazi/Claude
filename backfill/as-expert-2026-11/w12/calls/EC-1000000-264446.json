@@ -1,0 +1,140 @@
+{
+ "doc_id": "EC-1000000-264446",
+ "ticker": "000660 KS",
+ "tier": 1,
+ "sector": "Semis A-M",
+ "title": "Business Development Senior Director at Server Infrastructure Vendor Expects Memory Demand to Grow 20%\u201330% Amid Tight Supply Through 2027",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-264446",
+ "as_company": "SK hynix Inc",
+ "conversation_id": "7093__1794403753164",
+ "expert": "Business development senior director, North American AI server OEM (system-level view; SK hynix ~30%\u201340% of memory content)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "SK hynix",
+   "score": 4
+  },
+  {
+   "company": "Samsung",
+   "score": 4
+  },
+  {
+   "company": "Micron",
+   "score": 4
+  },
+  {
+   "company": "Solidigm",
+   "score": 4
+  }
+ ],
+ "verdict": "Large-volume DRAM lead times stretched to up to 20 weeks from 14\u201316 last quarter and allocation tightened, while Q3 DRAM prices ran about 30% above last year: supply, not demand, is the binding constraint.",
+ "summary_variables": {
+  "Supply": [
+   "\ud83d\udfe2 DRAM lead times up to 20 weeks vs 14\u201316 weeks, last quarter; allocation slightly tighter on HBM and high-capacity DDR5; first read on lead times (no earlier call or stored row). \u2192 Supply pillar \u2191",
+   "\ud83d\udfe2 New capacity not meaningful until late 2027 into 2028, consistent with TrendForce (SB #63891)."
+  ],
+  "Pricing": [
+   "\ud83d\udfe2 Q3 DRAM prices about 30% higher y/y, NAND 10%\u201320%, first-hand y/y; SK hynix reported 3Q26 DRAM ASP +29% q/q (SB #67578), so the basis differs but direction confirms. \u2192 Pricing pillar \u2191",
+   "\ud83d\udd34 5%\u201310% rival cost advantage would shift DDR5/eSSD sourcing, once availability reaches parity (estimate); first read."
+  ],
+  "Demand": [
+   "\ud83d\udfe2 Q3 demand 5%\u201310% above plan, HBM3E 5%\u201310% above, first read on demand vs plan; 2027 demand +20%\u201330% (estimate) vs SK hynix 2027 DRAM bit growth mid-20s% (SB #62470): consistent."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Lead times: up to 20 weeks vs 14\u201316 weeks last quarter (expert's own comparison); first read in stored evidence, no earlier expert call.",
+  "DRAM pricing: about 30% y/y in Q3 (expert) vs SK hynix 3Q26 DRAM ASP +29% q/q (SB #67578): different basis, directionally confirming.",
+  "Allocation: slightly tighter q/q vs Meritz estimate of fulfilment falling from low-to-mid 80s% to ~80% in 2027 (SB #66240): confirming tightening.",
+  "New capacity: late 2027 into 2028 vs TrendForce meaningful capacity unlikely before 2028 (SB #63891): confirming."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No numbered tenets on the page; mapped to the Summary Pitch pillars.",
+  "Supply pillar (DRAM/NAND under-supplied for 2+ years): \u2191 \u2014 lead times up to 20 weeks, new capacity late 2027\u20132028.",
+  "Pricing pillar: \u2191 \u2014 Q3 DRAM about 30% y/y; offset risk: a 5%\u201310% rival cost edge could move DDR5/eSSD sourcing at supply parity.",
+  "Concern 'HBM not an edge anymore': \u2193 slightly \u2014 Samsung and Micron gaining HBM traction through qualifications (no share figure)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 30%\u201340% \u2014 Memory content in systems, Interview time, vs N/A",
+   "kind": "first_hand",
+   "citation": "[[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse4188&hl=fse4188,fse4392&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 20%\u201330% \u2014 Demand growth exposure, Q3 2026, vs Year over year",
+   "kind": "estimate",
+   "citation": "[[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse27090&hl=fse27090,fse27311,fse28833&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 5%\u201310% \u2014 Q3 demand vs expectation, Q3 2026, vs Expectation",
+   "kind": "first_hand",
+   "citation": "[[13 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse9555&hl=fse9555,fse9761,fse9849,fse10149,fse10451,fse10914,fse11075,fse11141&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 5%\u201310% \u2014 HBM3E demand vs expectation, Q3 2026, vs Expectation",
+   "kind": "first_hand",
+   "citation": "[[13 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse9555&hl=fse9555,fse9761,fse9849,fse10149,fse10451,fse10914,fse11075,fse11141&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 20%\u201330% \u2014 Expected demand growth, Q4 2026, vs Q4 2025",
+   "kind": "estimate",
+   "citation": "[[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse27090&hl=fse27090,fse27311,fse28833&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 20%\u201330% \u2014 Expected demand growth, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse27090&hl=fse27090,fse27311,fse28833&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 20%\u201330% \u2014 Expected demand growth, 2027, vs 2026",
+   "kind": "estimate",
+   "citation": "[[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse27090&hl=fse27090,fse27311,fse28833&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: up to 20 weeks \u2014 High-volume DRAM lead time, Interview time, vs 8 weeks  (balanced)",
+   "kind": "first_hand",
+   "citation": "[[2 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse30727&hl=fse30727,fse30798,fse31394,fse31627,fse31768&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: about 30% \u2014 DRAM price increase, Q3 2026, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse39369&hl=fse39369,fse39462,fse39557&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 10%\u201320% \u2014 NAND price increase, Q3 2026, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse39369&hl=fse39369,fse39462,fse39557&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: 5%\u201310% \u2014 Cost advantage threshold, N/A, vs Competitor parity",
+   "kind": "estimate",
+   "citation": "[[13 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264446&scope=ANYWHERE&stmt=fse9555&hl=fse9555,fse9761,fse9849,fse10149,fse10451,fse10914,fse11075,fse11141&page=2)"
+  },
+  {
+   "ticker": "000660 KS",
+   "text": "SK hynix: five years \u2014 Discussed HBM commitment, N/A, vs Standard terms",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264446)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "SK Hynix Thesis - Revised"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources)."
+}

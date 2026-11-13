@@ -1,0 +1,119 @@
+{
+ "doc_id": "EC-1000000-269109",
+ "ticker": "SNOW",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Principal Architect - Data & AI Delivery at IT Services Provider Believes Snowflake\u2019s AI Products Will Drive Growth Despite Databricks Gaining Share Faster",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269109",
+ "as_company": "Snowflake Inc",
+ "conversation_id": "7093__1794404045446",
+ "expert": "Go-to-market lead for Snowflake/Databricks/AWS partnerships at a large IT services provider",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Snowflake Inc",
+   "score": 3
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  }
+ ],
+ "verdict": "The provider's Snowflake implementation business grew only at a single-digit rate in Aug\u2013Oct as projects shrank from a year or more to 3\u20136 months [[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse20366&hl=fse20366,fse21079,fse23417,fse23825&page=2), even though new deal sizes rose ~10% [[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse21524&hl=fse21524,fse21878,fse22237&page=2).",
+ "summary_variables": {
+  "Demand / orders": [
+   "\ud83d\udd34 implementation business single-digit growth (Aug\u2013Oct), below plan, vs +15%\u201316% and +8%\u20139% on the 2026-11-05 calls: slower. \u2192 Tenet 1 (core re-acceleration) \u2193 [[3 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse20366&hl=fse20366,fse21079,fse23417,fse23825&page=2)",
+   "\ud83d\udfe1 projects now 3\u20136 months vs one year or more, faster than mgmt's ~6-month migrations (SB #59861). [[4 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse22455&hl=fse22455,fse22674,fse22725,fse22784&page=2)",
+   "\ud83d\udd34 Cortex agent token costs exceeded budgets, keeping customers at MVP; first read. \u2192 Tenet 2 (AI second engine) \u2193 [[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse11311&hl=fse11311,fse11980,fse12087,fse12163,fse12834,fse13365&page=2)"
+  ],
+  "Pricing & margins": [
+   "\ud83d\udfe2 new deal sizes +high single digit, closer to 10% on higher platform costs and bill rates, vs $1\u20131.5 million \u2192 $2\u20132.5 million on the 2026-11-05 integrator call: smaller step-up. [[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse21524&hl=fse21524,fse21878,fse22237&page=2)",
+   "\ud83d\udfe2 program mix 60/40 \u2192 40/60 toward platform consumption (estimate); first read. \u2192 Tenet 2 (AI second engine) \u2191 [[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse31322&hl=fse31322,fse31443&page=2)"
+  ],
+  "Competition & share": [
+   "\ud83d\udd34 Databricks gaining share faster; Snowflake share takes \"a little bit of a dip\" and lost a media company's AI-agent project, vs ~50/50 win rate on the 2026-11-05 SI call: more negative. \u2192 Tenet 3 (control point) \u2193 [[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse34090&hl=fse34090,fse34090,fse34229,fse34502,fse34596,fse34688,fse34688&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Implementation business single-digit growth vs +15%\u201316% (2026-11-05, global integrator) and +8%\u20139% (2026-11-05, hybrid-cloud SI): slower.",
+  "Project length 3\u20136 months vs mgmt's ~6-month migrations with Cortex Code (SB #59861): shorter, same direction.",
+  "Databricks gaining share faster vs ~50/50 head-to-head (2026-11-05, SI managing partner): more negative."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core re-acceleration): \u2193 \u2014 implementation business single-digit growth, below expectations.",
+  "Tenet 2 (AI second engine): \u2192 \u2014 mix shifting 60/40 \u2192 40/60 toward platform, but Cortex token costs exceed budgets at scale.",
+  "Tenet 3 (governed-data control point): \u2193 \u2014 Databricks gaining share faster; two-platform strategies spreading."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: single-digit rate \u2014 Implementation business growth, August\u2013October, vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse20366&hl=fse20366,fse21079,fse23417,fse23825&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: high-single-digit amount, closer to 10% \u2014 New implementation deal size increase, August\u2013October, vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse21524&hl=fse21524,fse21878,fse22237&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: six months or three months \u2014 Current project duration, 2026-11-06, vs Multiyear or one year",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 10% \u2014 Expected business increase, November\u2013January, vs Year-over-year",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse21524&hl=fse21524,fse21878,fse22237&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: high-single-digit \u2014 Expected growth, Calendar 2026, vs Prior expectations",
+   "kind": "estimate",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse21524&hl=fse21524,fse21878,fse22237&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: near 10% \u2014 Target growth, Calendar 2027, vs Prior year",
+   "kind": "estimate",
+   "citation": "[15 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse25679&hl=fse25679,fse26170&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 10%\u201320%, closer to 10% \u2014 Revenue reduction from AI use, 2026-11-06, vs Pre-AI baseline",
+   "kind": "estimate",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse30505&hl=fse30505,fse30646,fse30756&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 20%\u201340% \u2014 AI usage/productivity improvement, 2026-11-06, vs Manual baseline",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 8 out of 10 \u2014 Importance of AI products to clients, 2026-11-06, vs Total portfolio",
+   "kind": "first_hand",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse51415&hl=fse51415,fse52656&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 40/60 \u2014 Program revenue mix (Consulting/Platform), 2026-11-06, vs 60/40 baseline",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269109&scope=ANYWHERE&stmt=fse31322&hl=fse31322,fse31443&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "SNOW Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

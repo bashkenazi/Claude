@@ -1,0 +1,125 @@
+{
+ "doc_id": "EC-1000000-270167",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Executive at IT Reseller Sees DocuSign Revenue Growing 12%\u201313% Across Accounts in 2026 Despite Pricing Pressure",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270167",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794404008191",
+ "expert": "Account executive at a national IT reseller managing seven mid-enterprise accounts; Docusign ~60% of his category revenue",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "DocuSign Inc",
+   "score": 4
+  },
+  {
+   "company": "Adobe",
+   "score": 2
+  },
+  {
+   "company": "Foxit",
+   "score": 3
+  },
+  {
+   "company": "Epic",
+   "score": 3
+  }
+ ],
+ "verdict": "A recent renewal grew roughly 10% on ~10% higher envelope usage, and IAM package prices rose 10%\u201320% with a 5%\u201310% early-adopter discount ended, though one customer is building an in-house API alternative.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "\ud83d\udfe2 **Renewal up roughly 10%** on ~10% envelope growth, in line with +~10.2% on the 2026-11-09 VAR AE call.",
+   "\ud83d\udfe2 **12%\u201313% across his accounts in CY26** (estimate) vs ~10% on the 2026-11-09 call."
+  ],
+  "IAM adoption": [
+   "\ud83d\udfe2 **IAM package prices up 10%\u201320%**, early-adopter discount of 5%\u201310% ended after 2026-01-31; matches ~20% on the 2026-11-05 consulting PMO call."
+  ],
+  "DBNR / renewal expansion": [
+   "\ud83d\udfe1 **Seats up around 10%\u201312%** (estimate), consistent with +~11% on 2026-11-09 but vs -5%\u20137% on 2026-11-06 (PSA-software COO).",
+   "\ud83d\udd34 **One customer building an in-house API alternative** at a fraction of the price to avoid per-envelope fees."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Renewal +~10% and CY26 12%\u201313% (estimate) vs +~10.2% and ~10% CY26 (2026-11-09, VAR AE): consistent.",
+  "IAM package price +10%\u201320% vs ~20% IAM increase (2026-11-05, consulting PMO) and Cleveland ~5-10% ACV uplift (SB #63574): consistent.",
+  "Seats +10%\u201312% vs +~11% (2026-11-09, VAR AE): consistent; vs -5%\u20137% (2026-11-06, PSA-software COO): conflicting."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; DD growth): \u2191 \u2014 12%\u201313% expected across his accounts for CY26 (estimate).",
+  "Stance (IAM bet): \u2191 \u2014 IAM pricing up 10%\u201320% and discounts withdrawn without lost renewals."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: ~60% \u2014 Reseller category revenue, Current; baseline: Expert's portfolio",
+   "kind": "first_hand",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse4603&hl=fse4603,fse4868&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: roughly 10% \u2014 Renewal revenue growth, Aug\u2013Oct 2026; baseline: Prior year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse12240&hl=fse12240,fse12396,fse12419,fse12523&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: around 10% \u2014 Usage (envelope) increase, Aug\u2013Oct 2026; baseline: Prior year",
+   "kind": "first_hand",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse24194&hl=fse24194&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 12%\u201313% \u2014 Forecasted revenue growth, Calendar 2026; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse24194&hl=fse24194&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: within 5% \u2014 Renewal revenue outlook, Jan 2027; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse21512&hl=fse21512,fse22033&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: around 10%\u201312% \u2014 Seat growth, Aug\u2013Oct 2026; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse24194&hl=fse24194&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 10%\u201320% \u2014 Insurance envelope growth, Aug\u2013Oct 2026; baseline: Prior year",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse32400&hl=fse32400,fse32589,fse32712&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: about 20% \u2014 Potential insurance expansion, 6\u20139 months out; baseline: Current account spend",
+   "kind": "estimate",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse23460&hl=fse23460,fse23664&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 10%\u201320% \u2014 IAM package price increase, 2026; baseline: Prior pricing",
+   "kind": "first_hand",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse32400&hl=fse32400,fse32589,fse32712&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "DocuSign Inc: 5%\u201310% \u2014 Early-adopter discount (ended), After 2026-01-31; baseline: Prior period",
+   "kind": "first_hand",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270167&scope=ANYWHERE&stmt=fse32400&hl=fse32400,fse32589,fse32712&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": "Page had no Expert Calls/Data Sources/Old section; appended plain-toggle Expert Calls section at page end (matches page layout), newest first."
+}

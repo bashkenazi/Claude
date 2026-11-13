@@ -1,0 +1,134 @@
+{
+ "doc_id": "EC-1000000-268763",
+ "ticker": "MU",
+ "tier": 2,
+ "sector": "Semis A-M",
+ "title": "Manager at Electronics Component Distributor Expects Micron-Related Business to Grow Amid Supply Constraints",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268763",
+ "as_company": "Micron Technology Inc",
+ "conversation_id": "7093__1794405825809",
+ "expert": "Manager at an independent electronics component distributor (current); Micron >20% of team sales",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Micron",
+   "score": 3
+  },
+  {
+   "company": "Samsung",
+   "score": 3
+  },
+  {
+   "company": "SK hynix",
+   "score": 3
+  },
+  {
+   "company": "YMTC",
+   "score": 3
+  }
+ ],
+ "verdict": "An independent distributor fills only <b>40%–50% of Micron requests</b> while supplier prices are up about 30% y/y and open-market prices up to 100%, with Micron sales +5%–10% y/y.",
+ "summary_variables": {
+  "Spot vs contract DRAM pricing": [
+   "🟢 <b>Supplier prices up about 30% y/y, independent market up to 100%</b> (first-hand) vs the integrator's 55%–60% y/y paid (2026-11-06 call): spread between channels widening. → Tenet 4 (pricing durable) ↑"
+  ],
+  "Supply & lead times": [
+   "🟢 <b>Fill rate 40%–50% on Micron requests</b> (first-hand) vs the integrator's 91%–92% (2026-11-06 call): the open market is far tighter than contract buyers. → Tenet 1 (supply short) ↑",
+   "🟢 <b>HBM lead times 24–30 weeks vs 18–24 previously</b> (first-hand) vs TrendForce DRAM lead times 19 weeks (SB #65604): <b>conflicting</b>. → Tenet 1 (supply short) ↑",
+   "🟡 <b>Micron sales +5%–10% y/y Sept–Nov, backlog down 15%–20%</b> as stock cannot be secured; +15%–20% expected Dec–Feb (estimate). → Tenet 2 (AI demand) ↑"
+  ],
+  "CXMT/YMTC trajectory + US policy": [
+   "🔴 <b>4–5 European customers moved about 10% of business to YMTC/CXMT</b> on cost and supply (first-hand) vs the integrator's China suppliers at 7%–8% of purchases (2026-11-06 call): similar."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Fill rate 40%–50% vs the integrator's 91%–92% (2026-11-06 call): independent channel far tighter than contract buyers.",
+  "HBM lead times 24–30 weeks vs 18–24 previously (expert) and integrator's 6 to 10 months (2026-11-06 call); TrendForce DRAM lead times 19 weeks (SB #65604): conflicting.",
+  "Supplier prices +30% y/y vs integrator's 55%–60% y/y paid (2026-11-06 call): lower at the supplier level; open market up to 100%.",
+  "Share to YMTC/CXMT about 10% for 4–5 customers vs integrator's China suppliers 7%–8% of purchases (2026-11-06 call): similar."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (supply short through 2028): ↑ — 40%–50% fill rates and HBM lead times 24–30 weeks, up from 18–24.",
+  "Tenet 2 (AI demand outruns supply): ↑ — backlog down 15%–20% only because stock cannot be secured; +15%–20% expected Dec–Feb.",
+  "Tenet 3 (SCAs): → — independent channel has no multi-year agreements; allocation is first-come, first-served.",
+  "Tenet 4 (pricing durable, RoC peaked): ↑ — supplier prices +30% y/y and open market up to 100%."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "MU",
+   "text": "Micron: 5%-10% — Team's Micron sales growth, Sept–Nov 2026; vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse37365&hl=fse37365&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 40%-50% — Order fill rate, Current; vs Demand",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse37365&hl=fse37365&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 15%-20% — Backlog decline, Current; vs Prior quarter",
+   "kind": "first_hand",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse20076&hl=fse20076,fse20215&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: ~5% — DDR4 to DDR5 migration, Current; vs Prior quarter",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 15%-20% — Expected sales growth, Dec 2026–Feb 2027; vs Year-over-year",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse20076&hl=fse20076,fse20215&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 50% — Demand exceeding supply, Current; vs Available supply",
+   "kind": "hearsay",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse37365&hl=fse37365&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 30% — Supplier-level price increase, Current; vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse38675&hl=fse38675,fse38767,fse39612&page=2)"
+  },
+  {
+   "ticker": "MU",
+   "text": "Micron: 100% — Independent market price increase, Current; vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse38675&hl=fse38675,fse38767,fse39612&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "HBM (Industry): 24-30 weeks — Lead times, Current; vs Previous 18-24 weeks",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse2268&hl=fse2268,fse28860&page=1)"
+  },
+  {
+   "ticker": "OTHER:Electronics component distributor",
+   "text": "Distributor: 20%-30% — Total sales growth, 2026; vs 2025",
+   "kind": "first_hand",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763&scope=ANYWHERE&stmt=fse24239&hl=fse24239,fse24516,fse24982&page=2)"
+  },
+  {
+   "ticker": "OTHER:Electronics component distributor",
+   "text": "Distributor: 25% — Sales growth target, 2027; vs 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268763)"
+  }
+ ],
+ "filed": {
+  "page_id": "3c5a8833-33de-8174-bef7-eab615667fd5",
+  "page_title": "MU Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

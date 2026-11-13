@@ -1,0 +1,111 @@
+{
+ "doc_id": "EC-1000000-269149",
+ "ticker": "TDC",
+ "tier": 3,
+ "sector": "Software M-Z",
+ "title": "Executive at Systems Integrator Expects Teradata-Related Business to Grow 6%–8% in 2026 and 8%–12% in 2027",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269149",
+ "as_company": "Teradata Corp",
+ "conversation_id": "7093__1794406569091",
+ "expert": "CIO and CISO at a systems integrator (current; ~12 Teradata customers in financial services, healthcare, retail)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Teradata",
+   "score": 4
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 3
+  }
+ ],
+ "verdict": "Across ~12 Teradata customers, Q4 deal closures are running <b>~5%–7% above plan</b> and renewals 2%–5% ahead of forecast, with managed-cloud ACV up 15%–20%, while on-prem maintenance keeps shrinking 5%–8%.",
+ "summary_variables": {
+  "Cloud ARR": [
+   "🟢 Managed-cloud average ACV up 15%–20% y/y on larger capacity commitments; VantageCloud subscription +15%–20% in Q4 (estimate); first read, no earlier expert call or stored row. [11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse25359&hl=fse25359,fse25464,fse25942&page=2)",
+   "🟡 35%–40% of pipeline is migration that often replaces on-prem commitments rather than adding new spend; first read. [11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse25359&hl=fse25359,fse25464,fse25942&page=2)"
+  ],
+  "Demand / pipeline": [
+   "🟢 Q4 deal closures 5%–7% above plan; forward 3-to-6-month pipeline 8%–10% above prior expectations, total value +10%–15% in 90 days; first read. [1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse23975&hl=fse23975,fse24154&page=2)",
+   "🔴 Large deals take 20%–30% longer than two years ago; renewals now 4 or 5, sometimes 6 months vs 2 or 3; first read. [4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse15557&hl=fse15557,fse15693,fse15748,fse15817&page=2)"
+  ],
+  "Pricing & competition": [
+   "🟢 Subscription pricing +4%–6% y/y, maintenance renewals +3%–5%; first read on Teradata pricing. [6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse46848&hl=fse46848,fse47097,fse47223&page=2)",
+   "🔴 ~15% of workload base displaced over the prior couple of years; Snowflake wins warehouse modernization, Databricks new AI workloads; first read. [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse11495&hl=fse11495&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on Teradata deal closures vs plan (+5%–7%), managed-cloud ACV (+15%–20%), pricing (subscription +4%–6%, maintenance +3%–5%) and sales-cycle length (+20%–30%); no expert call or stored row dated before 2026-11-09 (no Supabase research_id for TDC)."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the TDC page; against its pitch (cloud ARR growth, total ARR 8–12%, 75%+ FCF returns): Cloud ARR ↑ — VantageCloud +15%–20% and ACV +15%–20%; total ARR ↑ — expert sees 6%–8% in 2026 and 8%–12% in 2027, near the page's 8–12% target; risk → — 35%–40% of pipeline is migration that replaces on-prem spend and 15% of workloads displaced in two years."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TDC",
+   "text": "Systems integrator (~12 Teradata customers): Q4 2026 deal closures 5%–7% above plan; renewals 2%–5% ahead of forecast",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse23975&hl=fse23975,fse24154&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata managed-cloud average ACV up 15%–20% y/y",
+   "kind": "estimate",
+   "citation": "[11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse25359&hl=fse25359,fse25464,fse25942&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata subscription pricing +4%–6% y/y; maintenance renewals +3%–5%",
+   "kind": "estimate",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse46848&hl=fse46848,fse47097,fse47223&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata large deals take 20%–30% longer to close than two years ago; renewals 4–6 months vs 2–3",
+   "kind": "estimate",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse15557&hl=fse15557,fse15693,fse15748,fse15817&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "About 15% of Teradata workload base displaced over prior couple of years (expert's accounts)",
+   "kind": "estimate",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse11495&hl=fse11495&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata pipeline: 35%–40% migration, 20%–30% renewals, 20%–25% expansion, 10%–15% new; forward pipeline 8%–10% above prior expectations",
+   "kind": "estimate",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse41631&hl=fse41631,fse41915,fse42076,fse42235&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Expert sees Teradata-related growth 7%–10% in Q4 2026 (VantageCloud +15%–20%, on-prem maintenance -5%–8%), 6%–8% CY2026, 8%–12% CY2027",
+   "kind": "estimate",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse21728&hl=fse21728,fse22076,fse22670,fse22915&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "SI's Teradata services opportunity up at least 15%–20% as Teradata shrinks its services footprint",
+   "kind": "first_hand",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269149&scope=ANYWHERE&stmt=fse56421&hl=fse56421&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "6836da4f-47f5-40d9-ac7b-a1c908e533bd",
+  "page_title": "TDC Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

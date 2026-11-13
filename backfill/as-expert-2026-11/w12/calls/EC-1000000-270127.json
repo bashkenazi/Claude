@@ -1,0 +1,125 @@
+{
+ "doc_id": "EC-1000000-270127",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Executive at Technology Firm Sees Samsara Gaining Share Amid Demand for a Unified Operations Platform",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270127",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794404048167",
+ "expert": "Technology sales leader at a large North American systems integrator and reseller (enterprise and mid-market)",
+ "weight": "Medium",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 5
+  },
+  {
+   "company": "Motive",
+   "score": 4
+  },
+  {
+   "company": "Geotab",
+   "score": 3
+  },
+  {
+   "company": "Verizon Connect",
+   "score": 2
+  },
+  {
+   "company": "Lytx",
+   "score": 2
+  }
+ ],
+ "verdict": "The expert's Samsara channel business grew 35% y/y in Aug\u2013Oct 2026, led by expansion, with retention over 100%.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "\ud83d\udfe2 Retention over 100%; 60% of selling time on expansion, vs 2026-11-05 call (96% renewals): higher; vs Jefferies license-cost scrutiny (SB #62601): conflicting. \u2192 Tenet 1 (enterprise expansion) \u2191",
+   "\ud83d\udfe2 CY26 channel revenue at least +25% (estimate), vs 2026-11-06 VP +8%\u201311%: well above."
+  ],
+  "GM/FCF through component cycle": [
+   "\ud83d\udfe2 Pricing about +9% y/y (estimate), on new designs not supply, vs 2026-11-06 VP +3%\u20135% and MSP director +15%\u201320%: mid-range. \u2192 Tenet 3 (op leverage vs hardware cost) \u2191",
+   "\ud83d\udd34 Premium price is the most common reason for lost deals, especially small fleets."
+  ],
+  "Competition & share": [
+   "\ud83d\udfe2 Lytx, Verizon Connect, Trimble, Omnitracs losing share, Samsara and Motive winning, Geotab flat; vs 2026-11-05 call (#1/#2 in RFPs): confirming. \u2192 Tenet 4 (platform moat) \u2191"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Retention: over 100% vs 2026-11-05 call's 96% renewal rate: higher; vs Jefferies license-cost scrutiny (SB #62601): conflicting.",
+  "Growth outlook: CY26 at least +25% vs 2026-11-06 VP +8%\u201311%: higher.",
+  "Pricing: about +9% y/y vs 2026-11-06 VP +3%\u20135% and MSP director +15%\u201320%: mid-range.",
+  "Competition: legacy vendors losing share vs 2026-11-05 call's Samsara #1/#2 in RFPs: confirming."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): \u2191 \u2014 +35% practice growth, retention over 100%, expansion-led.",
+  "Tenet 3 (op leverage vs hardware cost): \u2191 \u2014 about +9% price; caveat: premium price loses small-fleet deals.",
+  "Tenet 4 (platform moat): \u2191 \u2014 share moving from Lytx, Verizon Connect, Trimble, Omnitracs."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 35% increase \u2014 Expert's channel business revenue, August\u2013October 2026, vs Same period in 2025",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270127)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: At least 25% increase \u2014 Expert's expected channel revenue, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270127)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: About 9% increase \u2014 Product pricing, Year-over-year (2026), vs 2025 levels",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270127)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: Over 100% \u2014 Customer retention, Current, vs Unspecified",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270127)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 60% \u2014 Expert's time spent on expansion, Current, vs Total sales time",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270127&scope=ANYWHERE&stmt=fse8782&hl=fse8782,fse12707,fse12822,fse20787,fse21055,fse22296,fse23403,fse23515,fse24902,fse25415,fse29904,fse30046,fse30212,fse30374,fse31985,fse47424,fse47646,fse50640,fse50764,fse51065&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 30% \u2014 Expert's time spent on renewals, Current, vs Total sales time",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270127&scope=ANYWHERE&stmt=fse8782&hl=fse8782,fse12707,fse12822,fse20787,fse21055,fse22296,fse23403,fse23515,fse24902,fse25415,fse29904,fse30046,fse30212,fse30374,fse31985,fse47424,fse47646,fse50640,fse50764,fse51065&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 20% \u2014 Expert's time spent on new logos, Current, vs Total sales time",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270127&scope=ANYWHERE&stmt=fse8782&hl=fse8782,fse12707,fse12822,fse20787,fse21055,fse22296,fse23403,fse23515,fse24902,fse25415,fse29904,fse30046,fse30212,fse30374,fse31985,fse47424,fse47646,fse50640,fse50764,fse51065&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: Once or twice per quarter \u2014 In-person partner visits, Current, vs Ongoing cadence",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270127)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: More than 45 \u2014 Real-time AI safety alerts, Current, vs Product capability",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270127)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources). No \"Samsara Thesis - Revised\" page exists; filed to the thesis-builder child page \"Samsara - Thesis Revised - 2026-11-05\" (has What Matters and tenets)."
+}

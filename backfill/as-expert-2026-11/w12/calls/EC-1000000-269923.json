@@ -1,0 +1,140 @@
+{
+ "doc_id": "EC-1000000-269923",
+ "ticker": "SNOW",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Strategy Leader at Global IT Services Firm Sees Snowflake Growth From AI Workloads and Customer Expansion",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269923",
+ "as_company": "Snowflake Inc",
+ "conversation_id": "7093__1794404095535",
+ "expert": "Strategy leader for the global partner ecosystem at a global IT services firm (>$1bn-revenue clients)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 4
+  }
+ ],
+ "verdict": "The partner's Snowflake practice rose about 7% y/y in Aug\u2013Oct with deal closures only +1.5%\u20132% [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse18353&hl=fse18353,fse18508&page=2), as Databricks and Fabric evaluations added ~30 days to deal cycles [[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse11953&hl=fse11953,fse12311,fse12406,fse12484&page=2).",
+ "summary_variables": {
+  "Demand / orders": [
+   "\ud83d\udfe1 practice ~7% y/y, closures +1.5%\u20132% (Aug\u2013Oct), vs +15%\u201316% and +8%\u20139% (2026-11-05) and single-digit (2026-11-06): in the low cluster. \u2192 Tenet 1 (core re-acceleration) \u2193 [[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse18353&hl=fse18353,fse18508&page=2)",
+   "\ud83d\udfe1 +5% Nov\u2013Jan and +7% in CY27 (estimates). [[22 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse22666&hl=fse22666,fse22772&page=2) [[11 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse26296&hl=fse26296,fse26732,fse26855,fse27025&page=2)",
+   "\ud83d\udfe2 large-account spend ~8% above 2025; first read. [[10 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse13759&hl=fse13759,fse14202&page=2)"
+  ],
+  "Pricing & margins": [
+   "\ud83d\udfe2 higher base and per-credit prices, smaller discounts; commitments moving from 1-year $500,000 to 3-year $1.5 million; first read. \u2192 Tenet 4 (margins expand) \u2191 [[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse27551&hl=fse27551,fse27639&page=2) [[7 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse27639&hl=fse27639,fse28463,fse28576&page=2)"
+  ],
+  "Competition & share": [
+   "\ud83d\udd34 Databricks and Fabric evaluations add ~30 days to closes; first read on cycle length. \u2192 Tenet 3 (control point) \u2193 [[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse11953&hl=fse11953,fse12311,fse12406,fse12484&page=2)"
+  ]
+ },
+ "characterization_changed": "Positive: the practice grew ~7% with deal closures only +1.5%\u20132%, and the expert guides +5% next quarter while competitive evaluations add ~30 days to deal cycles",
+ "changes": [
+  "Practice ~7% y/y vs +15%\u201316% and +8%\u20139% (2026-11-05) and single-digit (2026-11-06): low end of the range.",
+  "Net spending expansion ~26% (hearsay) vs NRR 126% (SB #63203): consistent.",
+  "First read on deal-cycle lengthening (~30 days) from competitive evaluations; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core re-acceleration): \u2193 \u2014 partner practice ~7%, closures +1.5%\u20132%, +5% guided next quarter.",
+  "Tenet 3 (governed-data control point): \u2193 \u2014 Databricks and Fabric evaluations lengthen cycles ~30 days.",
+  "Tenet 4 (margins expand): \u2191 \u2014 higher base and per-credit prices and smaller negotiated discounts."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 7% higher \u2014 Practice business revenue, August\u2013October 2026, vs August\u2013October 2025",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse18353&hl=fse18353,fse18508&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 1.5%\u20132% higher \u2014 Deal closures, August\u2013October 2026, vs 2025 period",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse18353&hl=fse18353,fse18508&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 8% above \u2014 Large-account spending, August\u2013October 2026, vs 2025",
+   "kind": "first_hand",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse13759&hl=fse13759,fse14202&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 27% \u2014 Large-spending customer growth, August\u2013October 2026, vs Not stated",
+   "kind": "hearsay",
+   "citation": "[10 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse13759&hl=fse13759,fse14202&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: approximately 3% higher \u2014 Large deal outcomes, August\u2013October 2026, vs Not stated",
+   "kind": "first_hand",
+   "citation": "[12 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse20069&hl=fse20069,fse20194,fse20298&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about four weeks / 30 days \u2014 Added evaluation time, August\u2013October 2026, vs Prior deal cycles",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 5% increase \u2014 Business outlook, November 2026\u2013January 2027, vs Nov 2025\u2013Jan 2026",
+   "kind": "estimate",
+   "citation": "[22 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse22666&hl=fse22666,fse22772&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 5% above \u2014 Target business growth, Calendar-year 2026, vs 2025",
+   "kind": "estimate",
+   "citation": "[14 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse9909&hl=fse9909,fse10337,fse32490,fse33122&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 7% increase \u2014 Projected business growth, Calendar-year 2027, vs 2026",
+   "kind": "estimate",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse26296&hl=fse26296,fse26732,fse26855,fse27025&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about 26% \u2014 Net spending expansion, August\u2013October 2026, vs Existing customer base",
+   "kind": "hearsay",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse26296&hl=fse26296,fse26732,fse26855,fse27025&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: about $190 million \u2014 Reported net loss, August\u2013October 2026, vs Not stated",
+   "kind": "hearsay",
+   "citation": "[13 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse10056&hl=fse10056,fse10252&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 50% commitment increase \u2014 Illustrative commitment growth, Not stated, vs $500,000 to $750,000",
+   "kind": "estimate",
+   "citation": "[24 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse27867&hl=fse27867,fse28130,fse28305,fse28365,fse28463,fse28576,fse28680,fse28803,fse28895&page=2)"
+  },
+  {
+   "ticker": "SNOW",
+   "text": "Snowflake: 5% more \u2014 Illustrative unit-price hike, Not stated, vs Unchanged purpose",
+   "kind": "estimate",
+   "citation": "[24 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269923&scope=ANYWHERE&stmt=fse27867&hl=fse27867,fse28130,fse28305,fse28365,fse28463,fse28576,fse28680,fse28803,fse28895&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "SNOW Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

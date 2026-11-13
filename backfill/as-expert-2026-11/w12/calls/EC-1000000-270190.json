@@ -1,0 +1,150 @@
+{
+ "doc_id": "EC-1000000-270190",
+ "ticker": "ORCL",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Specialist Leader, AI and Analytics at a Technology Consulting Firm Expects Oracle-Related Business Growth to Accelerate Through 2027",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270190",
+ "as_company": "Oracle Corp",
+ "conversation_id": "7093__1794406796680",
+ "expert": "Specialist Leader, AI and Analytics at a global technology consulting firm and Oracle alliance partner; Fortune 500 and large enterprises in North America",
+ "weight": "High",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Oracle",
+   "score": 4
+  },
+  {
+   "company": "SAP",
+   "score": 3
+  },
+  {
+   "company": "Workday",
+   "score": 3
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Google Cloud",
+   "score": 3
+  }
+ ],
+ "verdict": "In a large Oracle partner practice, OCI business grew 25%–30% and applications 12%–14% y/y in Sep–Nov with renewals at 110%–112% of last year, while deal cycles stretched to 90–120 days from 60–90.",
+ "summary_variables": {
+  "IaaS growth vs consensus": [
+   "🟢 **OCI business +25%–30% y/y in Sep–Nov** in the practice (first-hand); consistent with UBS checks of no systemic capacity delays (SB #66105). → Tenet 1 (OCI RPO conversion) ↑",
+   "🟢 **AI infrastructure adoption +15%–20% q/q; 10%–15% of customers on consumption-based AI** (first-hand); first read. → Tenet 1 (OCI RPO conversion) ↑"
+  ],
+  "Pricing & margins": [
+   "🟡 **Aggregate prices +3%–4% y/y** across licenses, subscriptions and OCI (first-hand) vs Deutsche Bank checks of 10–40% cloud-service increases (SB #63354): **conflicting**. → Tenet 4 (build-out margins) →",
+   "🔴 **Deal cycles 90–120 days vs 60–90 before** (first-hand); first read."
+  ],
+  "Apps & database": [
+   "🟢 **Applications +12%–14% y/y, renewals at 110%–112% of prior year** (first-hand); first read. → Tenet 5 (apps & database) ↑",
+   "🟡 **Winning SAP ECC pipeline ahead of the early-2027 deadline; lost one decision-support database workload to Google Cloud**; first read. → Tenet 5 (apps & database) →"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "OCI demand: practice OCI business +25%–30% y/y vs UBS checks with 23 customers/partners showing no systemic delays on 6+GW coming online (SB #66105, 2026-11-04): **consistent**.",
+  "Pricing: blended prices +3%–4% y/y vs Deutsche Bank checks of 10–40% increases on cloud services, up to 2x for Sovereign/DRCC (SB #63354, 2026-10-19): **conflicting** (blended vs cloud-only scope).",
+  "Consumption AI uptake: 10%–15% of customers on consumption-based AI vs UBS partner check that fewer than 5 of 400+ customers bought the $500k minimum-spend Fusion AI package (SB #67343, 2026-11-04): different measures; **partly conflicting**.",
+  "First read on deal-cycle length (90–120 days vs 60–90); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (OCI RPO conversion): ↑ — OCI +25%–30% y/y and AI infrastructure adoption +15%–20% q/q in a Fortune 500 partner practice.",
+  "Tenet 4 (build-out margins): → — prices +3%–4% y/y, far below the 10–40% cloud increases in other checks.",
+  "Tenet 5 (apps & database): ↑ — applications +12%–14%, renewals 110%–112%, SAP ECC pipeline; offset by one database workload lost to Google Cloud."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 12%–14% — Applications business growth, September–November; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse30543&hl=fse30543,fse30946&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 25%–30% — OCI business growth, September–November; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse30543&hl=fse30543,fse30946&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 10%–12% — Renewal growth, September–November; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse33979&hl=fse33979,fse34422,fse34758&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 110%–112% — Renewal level, September–November; baseline: Prior-year level",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse30543&hl=fse30543,fse30946&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 3%–4% — Aggregate price increase, 2026-11-10; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse41237&hl=fse41237&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 90–120 days — Deal decision cycle, 2026-11-10; baseline: vs **60–90 days**",
+   "kind": "first_hand",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse29814&hl=fse29814,fse30053&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 10% — App-layer AI adoption, September–November; baseline: Quarter over quarter",
+   "kind": "first_hand",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse33979&hl=fse33979,fse34422,fse34758&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 15%–20% — Infra-layer AI adoption, September–November; baseline: Quarter over quarter",
+   "kind": "first_hand",
+   "citation": "[[12 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse22170&hl=fse22170,fse22747&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 10%–15% — Consumption-based AI mix, 2026-11-10; baseline: Share of customer base",
+   "kind": "first_hand",
+   "citation": "[[12 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse22170&hl=fse22170,fse22747&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: ~15% — Business growth forecast, December–February; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[[19 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse38067&hl=fse38067,fse39022,fse40292&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 12%–15% — Annual growth forecast, Calendar 2026; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[[19 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse38067&hl=fse38067,fse39022,fse40292&page=2)"
+  },
+  {
+   "ticker": "ORCL",
+   "text": "Oracle: 15%–17% — Annual growth forecast, Calendar 2027; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[[19 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse38067&hl=fse38067,fse39022,fse40292&page=2)"
+  },
+  {
+   "ticker": "OTHER:SAP",
+   "text": "SAP: early 2027 — ECC move-off deadline, 2026-11-10; baseline: Absolute date",
+   "kind": "hearsay",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-270190&scope=ANYWHERE&stmt=fse12770&hl=fse12770,fse13527,fse48199&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-81ad-aaee-c23f9d61044c",
+  "page_title": "Oracle - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

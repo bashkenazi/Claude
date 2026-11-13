@@ -1,0 +1,102 @@
+{
+ "doc_id": "EC-1000000-269384",
+ "ticker": "INTU",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Senior Executive at Advisory Firm Believes QuickBooks Will Maintain SMB Accounting Share as Clients Grow More Complex",
+ "released": "2026-11-08",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269384",
+ "as_company": "Intuit Inc",
+ "conversation_id": "7093__1794405552675",
+ "expert": "Partner and CFO, advisory firm with 55 active SMB/mid-market clients (current)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Intuit / QuickBooks",
+   "score": 4
+  },
+  {
+   "company": "Campfire",
+   "score": 4
+  },
+  {
+   "company": "NetSuite",
+   "score": 3
+  },
+  {
+   "company": "Sage Intacct",
+   "score": 3
+  }
+ ],
+ "verdict": "Intuit-related activity and QuickBooks usage at this 55-client advisory firm rose 5%-10% y/y as 9 in 10 new clients chose QuickBooks, but the expert sees 2026 flat and thinks only 1%-5% price increases would be accepted.",
+ "summary_variables": {
+  "Paid-customer and platform growth vs 13-14% guide": [
+   "🟢 **Intuit activity and QuickBooks usage +5%-10% y/y** on new-client wins; above company online paid-customer growth of +3% (SB #48888). → Tenet 2 (core funnel) ↑ [4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse9302&hl=fse9302,fse10058,fse10959&page=2)",
+   "🟢 **9 in 10 new clients choose QuickBooks**, setup in less than a day; firm adds 1 to 2 clients a month. → Tenet 2 (core funnel) ↑ [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse6958&hl=fse6958,fse14911&page=2)",
+   "🔴 **Activity flat in 2026 vs 2025 (estimate)**; first read on this outlook. → Tenet 2 (core funnel) ↓ [17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse14850&hl=fse14850,fse15302&page=2)"
+  ],
+  "Pricing and ARPC (Tenet 2)": [
+   "🔴 **1%-5% price increase acceptable (estimate); over 5% would surprise**, vs 2026-08-01 list increases of +13%/+22%/+24% (thesis page): **conflicting**. → Tenet 2 (pricing) ↓ [18 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse20095&hl=fse20095,fse20364&page=2)"
+  ],
+  "Competition and retention (Tenet 5)": [
+   "🟡 **Migrations balanced**: complex clients leave for NetSuite or Sage Intacct; Campfire wins AI early adopters; AI only incremental. → Tenet 5 (disruption contained) → [6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse11334&hl=fse11334,fse11396,fse11550,fse11665&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Activity/usage +5%-10% y/y (first-hand) vs company online paying customers +3% y/y at 8.9M (SB #48888): stronger in this channel.",
+  "Acceptable price increase 1%-5% (estimate) vs 2026-08-01 QBO list increases of +13% to +24% (thesis page data point): conflicting.",
+  "Balanced migrations incl. Campfire vs Cleveland noting Digits, Puzzle and Campfire gaining SMB traction (thesis page, 2026-07-09): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (core funnel and pricing): → — 9 in 10 new clients choose QBO and usage +5%-10%, but tolerance of only 1%-5% price increases sits well below the August list moves.",
+  "Tenet 5 (disruption contained): → — balanced migrations; Campfire named for AI early adopters, no share figure.",
+  "Tenet 1 (mid-market): ↓ — complex clients graduate to NetSuite/Sage Intacct rather than IES (no number)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INTU",
+   "text": "Advisory firm Intuit-related activity and QuickBooks usage +5%-10% y/y vs 2025",
+   "kind": "first_hand",
+   "citation": "[4 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse9302&hl=fse9302,fse10058,fse10959&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "9 in 10 new advisory-firm clients adopt QuickBooks",
+   "kind": "first_hand",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse6958&hl=fse6958,fse14911&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Firm adds 1 to 2 new QuickBooks clients per month",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse14850&hl=fse14850,fse15302&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "QuickBooks price increase of 1%-5% would be accepted; over 5% would surprise",
+   "kind": "estimate",
+   "citation": "[18 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse20095&hl=fse20095,fse20364&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "QuickBooks onboarding takes less than a day (a couple of hours)",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse8521&hl=fse8521,fse8568&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Intuit-related activity expected flat in 2026 vs 2025",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269384&scope=ANYWHERE&stmt=fse16202&hl=fse16202,fse16531,fse16592&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8109-bad2-e521daa8697a",
+  "page_title": "Intuit - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

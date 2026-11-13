@@ -1,0 +1,139 @@
+{
+ "doc_id": "EC-1000000-269665",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Principal at Technology Consulting Firm Sees Enterprise Buyers Cautious on Samsara AI Rollouts Despite Fleet Safety Opportunity",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269665",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794403992818",
+ "expert": "Principal at a technology consulting firm covering seven enterprise fleet accounts of 10,000\u201325,000 assets each",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 4
+  },
+  {
+   "company": "Motive",
+   "score": 3
+  },
+  {
+   "company": "Geotab",
+   "score": 3
+  }
+ ],
+ "verdict": "Prices on the expert's seven enterprise accounts are up 9%\u201315% y/y, but activity grew only 3%\u20134% normalized and the Nov\u2013Jan pipeline is flat as buyers wait for AI ROI proof.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "\ud83d\udd34 Nov 2026\u2013Jan 2027 pipeline flat; rollouts stall before eight-figure contracts, vs 2026-11-09 consultant (pipeline modestly above plan): conflicting. \u2192 Tenet 1 (enterprise expansion) \u2193"
+  ],
+  "GM/FCF through component cycle": [
+   "\ud83d\udfe2 Prices +9%\u201315% y/y, +3%\u20137% q/q, vs 2026-11-06 VP +3%\u20135% (higher) and 2026-11-06 MSP director +15%\u201320% (in range). \u2192 Tenet 3 (op leverage vs hardware cost) \u2191"
+  ],
+  "Competition & share": [
+   "\ud83d\udd34 Losing price-led GPS bids to Motive, Geotab and Verizon Connect, vs Jefferies aggressive-price competitors (SB #62604): confirming. \u2192 Tenet 4 (platform moat) \u2193"
+  ]
+ },
+ "characterization_changed": "Characterization changed from Positive: the expert's accounts grew only 3%\u20134% normalized, the Nov\u2013Jan pipeline is flat and 2026 may land 1%\u20132% below plan; pricing is the only clear positive.",
+ "changes": [
+  "Pipeline: flat for Nov\u2013Jan vs 2026-11-09 consultant 'modestly exceeds expectations': conflicting.",
+  "Pricing: +9%\u201315% y/y vs 2026-11-06 VP +3%\u20135% (higher) and 2026-11-06 MSP director +15%\u201320% (consistent).",
+  "Growth: 3%\u20134% normalized vs 2026-11-06 MSP director +10%\u201315%: slower.",
+  "Competition: losing price-led GPS bids vs Jefferies aggressive-price competitors (SB #62604): confirming."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): \u2193 \u2014 flat pipeline, AI rollouts stalled pending ROI proof.",
+  "Tenet 3 (op leverage vs hardware cost): \u2191 \u2014 prices +9%\u201315% y/y.",
+  "Tenet 4 (platform moat): \u2193 \u2014 losing price-led GPS bids."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 9%\u201315% \u2014 Pricing increase, Current, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse30681&hl=fse30681&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20137% \u2014 Pricing increase, Current, vs Quarter over quarter",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse30681&hl=fse30681&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20137% \u2014 Business activity growth, August\u2013October 2026, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[1 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse30681&hl=fse30681&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20134% \u2014 Normalized activity growth, August\u2013October 2026, vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse12969&hl=fse12969,fse13033,fse13079&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20134% \u2014 Existing customer expansion, Current, vs Continuity",
+   "kind": "first_hand",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse12969&hl=fse12969,fse13033,fse13079&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 10%\u201320% \u2014 Revenue growth, Nov 2026\u2013Jan 2027, vs Year over year",
+   "kind": "estimate",
+   "citation": "[[7 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse19590&hl=fse19590,fse20854,fse20988,fse21141&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20136% \u2014 Revenue growth, Nov 2026\u2013Jan 2027, vs Quarter over quarter",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269665)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: ~4% \u2014 Normalized revenue growth, Nov 2026\u2013Jan 2027, vs Quarter over quarter",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269665)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 50% \u2014 New logo share of pipeline, Current, vs Pipeline composition",
+   "kind": "estimate",
+   "citation": "[[15 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse22741&hl=fse22741,fse22798&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 45% \u2014 New logo share of pipeline, Current, vs Potential split",
+   "kind": "estimate",
+   "citation": "[[15 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse22741&hl=fse22741,fse22798&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 6%\u20138% \u2014 Preliminary growth estimate, Calendar 2027, vs Calendar 2026",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269665)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 7%\u20138% \u2014 SMB/Mid-market activity, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269665)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 8.5 or 9 \u2014 Partner enablement rating, Current, vs Out of 10",
+   "kind": "first_hand",
+   "citation": "[[6 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269665&scope=ANYWHERE&stmt=fse49396&hl=fse49396,fse49460&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources). No \"Samsara Thesis - Revised\" page exists; filed to the thesis-builder child page \"Samsara - Thesis Revised - 2026-11-05\" (has What Matters and tenets)."
+}

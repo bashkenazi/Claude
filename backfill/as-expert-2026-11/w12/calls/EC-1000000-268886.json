@@ -1,0 +1,110 @@
+{
+ "doc_id": "EC-1000000-268886",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "SVP at Global IT Services Firm Sees Samsara Gaining Share and Expects 12%–20% Business Growth in 2026",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268886",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794405530118",
+ "expert": "SVP at a global IT services firm advising asset-intensive enterprise customers on Samsara (telemetry, AI video safety, asset monitoring)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 4
+  },
+  {
+   "company": "Motive",
+   "score": 4
+  },
+  {
+   "company": "Geotab",
+   "score": 3
+  },
+  {
+   "company": "Verizon Connect",
+   "score": 2
+  }
+ ],
+ "verdict": "The expert's Samsara-related business grew 5%–10% y/y in Aug–Oct 2026, led by existing-customer expansion while new enterprise logos came in below plan.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "🟡 <b>Samsara business +5%–10% y/y</b> in Aug–Oct, vs 2026-11-05 partner reads of +20%–22% (telco channel) and ~25% (VAR): lower. → Tenet 1 (enterprise expansion) ↓",
+   "🟢 <b>Renewal spend +6%–15%</b> (estimate) as fleets add cameras and modules; expansion is 45%–55% of pipeline, in line with core NRR ~115% (SB #62603). → Tenet 1 (enterprise expansion) ↑",
+   "🔴 <b>New enterprise logos below plan</b> in Aug–Oct; first read on new-logo conversion. → Tenet 1 (enterprise expansion) ↓"
+  ],
+  "GM/FCF through component cycle": [
+   "🔴 <b>Effective negotiated pricing down 0%–5%</b> (estimate) on bundling, vs 2026-11-05 calls at +5%–7% (platform) and +10%–12%: <b>conflicting</b>. → Tenet 3 (op leverage vs hardware cost) ↓"
+  ],
+  "Competition & share": [
+   "🟢 <b>Samsara and Motive gaining, Verizon Connect under pressure</b>; matches the 2026-11-05 Verizon Connect director (Samsara in 85%–90% of deals). → Tenet 4 (platform moat) ↑"
+  ]
+ },
+ "characterization_changed": "Positive: the expert's own Samsara business grew only 5%–10% with new logos below plan and effective pricing down 0%–5%.",
+ "changes": [
+  "Growth: practice +5%–10% vs 2026-11-05 partner calls at +20%–22% (telco channel) and ~25% (VAR): lower.",
+  "Pricing: effective pricing down 0%–5% vs 2026-11-05 calls at +5%–7% for platform deals and +10%–12%: conflicting.",
+  "Share: Samsara and Motive gaining, Verizon Connect pressured vs 2026-11-05 Verizon Connect director (85%–90% deal presence): consistent.",
+  "Mix: pipeline 45%–55% expansion vs core NRR ~115% (SB #62603): consistent with expansion-led growth."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): → — renewal spend +6%–15% and an expansion-heavy pipeline vs new logos below plan and only 5%–10% practice growth.",
+  "Tenet 3 (op leverage vs hardware cost): ↓ — effective pricing down 0%–5% on bundling.",
+  "Tenet 4 (platform moat): ↑ — integrated platform wins multi-product deals; Verizon Connect losing.",
+  "Tenet 5 (Street FY28 too low): → — practice outlook 12%–20% for CY26 (estimate)."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 5%-10% — Expert's Samsara-related business; Aug–Oct 2026; vs Year-over-year",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268886&scope=ANYWHERE&stmt=fse8404&hl=fse8404,fse8731,fse9002&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 6%-15% — Renewal spending; Aug–Oct 2026; vs Year-over-year",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268886&scope=ANYWHERE&stmt=fse11860&hl=fse11860,fse13567&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 12%-20% — Business growth; Calendar 2026; vs Full-year 2025",
+   "kind": "estimate",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268886&scope=ANYWHERE&stmt=fse8782&hl=fse8782,fse17186,fse17278&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 45%-55% — Existing-customer expansion in pipeline; Nov 2026–Jan 2027; vs Total pipeline",
+   "kind": "estimate",
+   "citation": "[[9 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268886&scope=ANYWHERE&stmt=fse30343&hl=fse30343,fse30550,fse32229,fse35516&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 25%-35% — New-logo opportunities in pipeline; Nov 2026–Jan 2027; vs Total pipeline",
+   "kind": "estimate",
+   "citation": "[[22 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268886&scope=ANYWHERE&stmt=fse16339&hl=fse16339,fse16458&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 15%-25% — Renewals in pipeline; Nov 2026–Jan 2027; vs Total pipeline",
+   "kind": "estimate",
+   "citation": "[[22 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268886&scope=ANYWHERE&stmt=fse16339&hl=fse16339,fse16458&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 0%-5% — Effective negotiated pricing; Aug–Oct 2026; vs Year-over-year",
+   "kind": "estimate",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268886&scope=ANYWHERE&stmt=fse22000&hl=fse22000,fse22509,fse22666&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8165-90f5-d8386c085478",
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed to child page Samsara - Thesis Revised - 2026-11-05."
+}

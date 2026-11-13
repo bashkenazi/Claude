@@ -1,0 +1,151 @@
+{
+ "doc_id": "EC-1000000-268073",
+ "ticker": "CRDO",
+ "tier": 1,
+ "sector": "Hardware A-M",
+ "title": "Lead Architect for SoC at EnCharge AI Sees Credo Well Positioned in AEC but Facing Challenges in Optical",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268073",
+ "as_company": "Credo Technology Group Holding Ltd",
+ "conversation_id": "7093__1794405620901",
+ "expert": "Lead Architect for SoC at EnCharge AI (AI-inference chip startup; ex-MediaTek 224G SerDes)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Credo",
+   "score": 4
+  },
+  {
+   "company": "Marvell",
+   "score": 4
+  },
+  {
+   "company": "Broadcom",
+   "score": 4
+  },
+  {
+   "company": "MaxLinear",
+   "score": 3
+  },
+  {
+   "company": "Kandou AI",
+   "score": 2
+  }
+ ],
+ "verdict": "An SoC architect at an AI-chip startup estimates Credo holds 98%-99% of AEC and models optical at $600M-$650M in FY2027 rising to $1.1B in 2028, but sees Credo's optical reliability behind Marvell and AEC growth fading from 15%-20% in 2027-28 to 0%-5% by 2030 (all estimates; no first-hand purchase figures).",
+ "summary_variables": {
+  "ZF Optics ramp timing & attach": [
+   "Optical $600M-$650M FY27, $1.1B 2028, $2B 2030 (estimate), in line with SB #64381; reliability behind Marvell. Tenet 2 flat"
+  ],
+  "AEC durability through 1.6T / Rubin": [
+   "98%-99% AEC share (estimate) vs ~81% JPM (SB #61029), ~80% Edgewater (SB #49503): conflicting; MaxLinear ~25% 1.6T target. Tenet 1 flat",
+   "Copper/AEC growth 15%-20% 2027-28 -> 0%-5% 2030, negative from 2031 (estimate). Tenet 1 down"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "AEC share: 98%-99% (estimate) vs JPM model ~81% (SB #61029, 2026-10-06) and Edgewater ~80% at xAI (SB #49503, 2026-09-01): conflicting (higher).",
+  "Optical FY27: $600M-$650M (estimate) vs mgmt's >$600M FY27 optical guide (SB #64381, 2026-09-01): consistent, no upside.",
+  "Optical competitiveness: Credo optical 'not yet as strong as Marvell's' vs Third Bridge ex-Inphi 'Credo optical DSP a notch behind Marvell' (SB #64373, 2026-09-10): consistent.",
+  "First read on a multi-year AEC growth path (15%-20% 2027-28, 0%-5% 2030, negative from 2031); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (AEC grows for 5 years): ↓ — 15%-20% in 2027-28 slowing to 0%-5% by 2030 and negative from 2031 (estimate), though share is 98%-99% today.",
+  "Tenet 2 (ZF Optics → $1B+ by FY28): → — $1.1B 2028 optical estimate matches the tenet, but optical reliability trails Marvell.",
+  "Tenet 4 (new products): → — ZeroFlap telemetry cited as an optical selling point; no figures."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRDO",
+   "text": "Credo AEC market share 98%-99% (current)",
+   "kind": "estimate",
+   "citation": "[2 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse24876&hl=fse24876,fse29319,fse48580&page=2)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo optical revenue $600M-$650M FY2027",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo optical revenue $1.1B in 2028",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo optical revenue $1.5B in 2029",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo optical revenue $2B in 2030",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo total revenue $2.47B-$2.5B FY2027",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "AEC/copper ~60% of data center interconnects today (60/20/20 copper/optical/other), moving to 50/50 or 45/55 in ~5 years",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo copper/AEC growth 15%-20% y/y in 2027-2028",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo copper/AEC growth 0%-5% y/y in 2030, possibly negative from 2031",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "AEC market size $640M-$650M (2025-2026)",
+   "kind": "estimate",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Global optical market $25B-$26B (current year)",
+   "kind": "hearsay",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Optical transceivers $16.5B in 2025",
+   "kind": "hearsay",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Optical market growth 57%-58% y/y (current)",
+   "kind": "hearsay",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse2114&hl=fse2114,fse3190,fse19483,fse19559,fse19664,fse19963,fse20056,fse21489,fse21557,fse21622,fse24876,fse28251,fse29134,fse29319,fse29375,fse30161,fse32172,fse32345,fse32728,fse32875,fse34213,fse34352,fse34786,fse35339,fse35498,fse35566,fse36051,fse37341,fse37493,fse37663,fse37663,fse37793,fse37793,fse41008,fse41060,fse41119,fse41507,fse41529,fse42286,fse43088,fse43230,fse43277,fse43430,fse43483,fse55363,fse55484,fse55521&page=1)"
+  },
+  {
+   "ticker": "OTHER:MaxLinear",
+   "text": "MaxLinear targeting ~25% AEC share in the 1.6T cycle",
+   "kind": "hearsay",
+   "citation": "[3 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268073&scope=ANYWHERE&stmt=fse19963&hl=fse19963,fse20056,fse20227&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "38ea8833-33de-81d3-b0b0-e24ad0f511d1",
+  "page_title": "CRDO Thesis - Revised (Clean)"
+ },
+ "status": "done",
+ "note": "retry r5; GenSearch ok"
+}

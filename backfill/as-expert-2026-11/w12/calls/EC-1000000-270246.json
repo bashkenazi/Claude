@@ -1,0 +1,129 @@
+{
+ "doc_id": "EC-1000000-270246",
+ "ticker": "CRWD",
+ "tier": 1,
+ "sector": "Software A-L",
+ "title": "Director at Cybersecurity Consulting Firm Expects CrowdStrike-Related Business to Grow 20%\u201330% in 2026",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270246",
+ "as_company": "CrowdStrike Holdings Inc",
+ "conversation_id": "7093__1794403759708",
+ "expert": "Director at a global cybersecurity consulting firm (current; first-hand CRWD services revenue and deals)",
+ "weight": "High",
+ "characterization": "Very Positive",
+ "sentiment": [
+  {
+   "company": "CrowdStrike",
+   "score": 5
+  },
+  {
+   "company": "Palo Alto Networks",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 3
+  },
+  {
+   "company": "SentinelOne",
+   "score": 2
+  }
+ ],
+ "verdict": "The expert's CrowdStrike services business grew 20%\u201330% y/y in Aug\u2013Oct with deal sizes up 15%\u201320% on multi-module buys, while unit pricing was flat to down ~2%.",
+ "summary_variables": {
+  "NNARR vs bogey (channel growth)": [
+   "services revenue +20%\u201330% y/y (Aug\u2013Oct), below the 30%+ / doubling partners cited in Aug channel checks (SB #43076), above the 20% practice growth in May (SB #14872). \u2192 Tenet 1 (Flex/NNARR) \u2191",
+   "average deal size +15%\u201320% y/y as customers add Next-Gen SIEM and Cloud; first read on deal size. \u2192 Tenet 3 (emerging platform) \u2191"
+  ],
+  "Flex utilization": [
+   "at least half of deals on Falcon Flex vs Bernstein's \"nearly all contracts Flex since end of FY26\" (SB #66649): conflicting. \u2192 Tenet 1 (Flex/NNARR) \u2191"
+  ],
+  "FY29 model / margins": [
+   "unit pricing flat or down up to ~2% as CRWD trades price for multi-module size; same direction as Bernstein's 25\u201335% Flex discount on like-for-like SKUs (SB #66649). \u2192 Tenet 5 (margin/FCF) \u2193",
+   "partner delivery margin ~30% vs ~20% Microsoft and 15%\u201320% Palo Alto, giving partners a reason to lead with CRWD; first read. \u2192 Tenet 4 (core endpoint) \u2191"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Practice growth 20%\u201330% y/y (Aug\u2013Oct) vs partners citing 30%+ / doubling in Aug (SB #43076): slower; vs 20% practice growth in May (SB #14872): faster.",
+  "Flex in at least half of deals vs Bernstein \"nearly all contracts Flex since end of FY26\" (SB #66649): conflicting.",
+  "Unit pricing flat to down ~2% vs Bernstein 25\u201335% Flex discount on like-for-like SKUs (SB #66649): same direction (price pressure), smaller magnitude.",
+  "CRWD and PANW gaining share, SentinelOne losing vs Needham RFP where CRWD lost a Carbon Black displacement to SentinelOne (SB #34240): conflicting."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Flex/NNARR): \u2191 \u2014 services +20%\u201330% y/y and at least half of deals on Flex.",
+  "Tenet 2 (AIDR cycle): \u2192 \u2014 Charlotte AI 15%\u201325% faster alert handling (estimate); no AIDR figure.",
+  "Tenet 3 (emerging platform): \u2191 \u2014 deal sizes +15%\u201320% on Next-Gen SIEM and Cloud attach.",
+  "Tenet 4 (core endpoint): \u2191 \u2014 CRWD gaining enterprise share, SentinelOne losing; partner margin ~30% vs ~20% Microsoft.",
+  "Tenet 5 (margin/FCF): \u2193 \u2014 unit pricing flat to down ~2% to win larger deals."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRWD",
+   "text": "20%\u201330% \u2014 Expert's firm services revenue growth, August\u2013October 2026; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse1708&hl=fse1708,fse1809&page=1)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "15%\u201320% \u2014 Increase in average deal size, August\u2013October 2026; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[7 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse1809&hl=fse1809&page=1)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "flat or down by up to roughly 2% \u2014 Unit pricing change, August\u2013October 2026; baseline: Year over year",
+   "kind": "first_hand",
+   "citation": "[3 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse2532&hl=fse2532&page=1)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "about 30% \u2014 Delivery margins for expert's firm, Current; baseline: vs 20% for Microsoft",
+   "kind": "first_hand",
+   "citation": "[19 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse2862&hl=fse2862&page=1)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "at least half \u2014 Share of deals using Falcon Flex, August\u2013October 2026; baseline: Total expert deals",
+   "kind": "first_hand",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse2262&hl=fse2262,fse2328&page=1)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "15%\u201325% \u2014 Faster alert handling using Charlotte AI, Current; baseline: Manual triage",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse2993&hl=fse2993&page=1)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "20% \u2014 Expected services growth, Nov 2026\u2013Jan 2027; baseline: Year over year",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse1708&hl=fse1708,fse1809&page=1)"
+  },
+  {
+   "ticker": "CRWD",
+   "text": "20%\u201330% \u2014 Expected services growth, Calendar 2026; baseline: vs prior year",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse1708&hl=fse1708,fse1809&page=1)"
+  },
+  {
+   "ticker": "MSFT",
+   "text": "about 20% \u2014 Delivery margins for expert's firm, Current; baseline: vs 30% for CrowdStrike",
+   "kind": "first_hand",
+   "citation": "[19 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse2862&hl=fse2862&page=1)"
+  },
+  {
+   "ticker": "PANW",
+   "text": "15%-20% \u2014 Delivery margins for expert's firm, Current; baseline: vs 30% for CrowdStrike",
+   "kind": "first_hand",
+   "citation": "[15 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270246&scope=ANYWHERE&stmt=fse1809&hl=fse1809,fse2005&page=1)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "CRWD Thesis - Revised"
+ },
+ "status": "done",
+ "note": "GenSearch answer obtained from the conversation started for EC-1000000-268685 (vendor returned an answer citing only EC-1000000-270246); no separate ask for this doc."
+}

@@ -1,0 +1,116 @@
+{
+ "doc_id": "EC-1000000-269579",
+ "ticker": "TWLO",
+ "tier": 1,
+ "sector": "Unassigned",
+ "title": "Services Leader at Cybersecurity and Cloud Data Protection Software Company Expects 20%\u201340% Growth in Twilio Voice and Messaging",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269579",
+ "as_company": "Twilio Inc",
+ "conversation_id": "7093__1794403942301",
+ "expert": "Professional services leader at a cybersecurity and cloud data-protection software company; runs a Twilio integration practice (current)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Twilio",
+   "score": 4.0
+  }
+ ],
+ "verdict": "Across the ~10 accounts the expert serves, Twilio voice minutes and messages are up 20%\u201325% y/y with 9 of 10 customers growing, and new-project win rates rose to 80% from 50% after the May 2026 AI GA.",
+ "summary_variables": {
+  "Messaging organic growth (ex-fees)": [
+   "\ud83d\udfe2 **Voice minutes and messages +20%\u201325% y/y; 9 of 10 customers grew** (first-hand) vs mgmt messaging +17% and voice 20%+ in 3Q26 (SB #64363, #67665): consistent; conflicts with the 2026-11-06 RingCentral call (share to ~60%). \u2192 Tenet 2 (organic \u226510%) \u2191 {c1}",
+   "\ud83d\udfe2 **4 of 10 customers renewed this quarter at +15%\u201320% spend, cycles 40%\u201350% shorter** (first-hand); first read. \u2192 Tenet 2 (organic \u226510%) \u2191 {c9}"
+  ],
+  "Voice AI minutes \u00d7 ConversationRelay attach": [
+   "\ud83d\udfe2 **New-project win rate 80% vs 50% before the May 2026 AI GA** (first-hand); first read. \u2192 Tenet 1 (AI agent layer) \u2191 {c6}",
+   "\ud83d\udfe2 **~50% of AI POCs reach production; next quarter minutes/messages +20%\u201340%** (estimate); first read. \u2192 Tenet 1 (AI agent layer) \u2191 {c20}"
+  ],
+  "Gross profit dollar growth vs organic revenue": [
+   "\ud83d\udd34 **Outbound voice \\$1.40 per 100 min vs Telnyx \\$0.70; SMS \\$0.83 vs Plivo \\$0.50** (list prices), yet no migrations seen; first read. \u2192 Tenet 5 (carrier moat) \u2192 {c11}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Voice and messaging volumes **+20%\u201325% y/y** (first-hand) vs mgmt messaging organic +17% and voice 20%+ in 3Q26 (SB #64363, SB #67665): consistent.",
+  "Customer growth (9 of 10 accounts up) vs 2026-11-06 Expert Call (RingCentral VP: NA share down to ~60% from ~80%): **conflicting**.",
+  "Customer growth vs 2026-11-06 Expert Call (former onboarding manager: 20%\u201330% of customers trending to churn a year): **conflicting** (that view predates mid-2025).",
+  "First read on AI POC conversion (~50% to production) and win rate (80% vs 50%); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (AI agent layer): \u2191 \u2014 win rate 80% from 50% since the AI GA; Conversation Relay and Conversation Intelligence drive the volume gains.",
+  "Tenet 2 (organic growth \u226510%): \u2191 \u2014 volumes +20%\u201325% y/y and renewals at +15%\u201320% spend.",
+  "Tenet 3 (gross profit vs revenue): \u2192 \u2014 list prices stable, carrier fees passed through.",
+  "Tenet 5 (carrier moat): \u2192 \u2014 rivals list 40%\u201350% lower but the expert saw no migrations; one deal lost to Telnyx on price."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 20%-25% more \u2014 Voice minutes and messages; Year over year; vs Prior year",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 15%-20% increase \u2014 Spend among renewing customers; This quarter; vs Before renewal",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 40%-50% shorter \u2014 Renewal cycles; Year over year; vs Prior year",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 80% \u2014 Win rate for POCs/net-new; Since May 2026; vs 50% win rate",
+   "kind": "first_hand",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579&scope=ANYWHERE&stmt=fse45641&hl=fse45641,fse46036,fse46472&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 20% increase \u2014 Current year usage growth; 2026; vs 2025",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 20%-40% \u2014 Expected growth in minutes/messages; Next quarter; vs Year over year",
+   "kind": "estimate",
+   "citation": "[20 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579&scope=ANYWHERE&stmt=fse28975&hl=fse28975,fse29165&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: $0.83 per 100 \u2014 Outbound SMS price; At interview; vs Plivo $0.50",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579&scope=ANYWHERE&stmt=fse14724&hl=fse14724,fse39917,fse40652&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: $1.40 per 100 \u2014 Outbound voice price; At interview; vs Telnyx $0.70",
+   "kind": "first_hand",
+   "citation": "[11 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579&scope=ANYWHERE&stmt=fse14724&hl=fse14724,fse14951,fse15090,fse15192,fse50148&page=2)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 40%-50% lower \u2014 Competitor pricing; At interview; vs Twilio pricing",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579)"
+  },
+  {
+   "ticker": "TWLO",
+   "text": "Twilio: 50% \u2014 AI POCs reaching production; At interview; vs Total observed POCs",
+   "kind": "first_hand",
+   "citation": "[5 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269579&scope=ANYWHERE&stmt=fse14724&hl=fse14724,fse39917,fse40652&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Twilio - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

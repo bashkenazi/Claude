@@ -1,0 +1,133 @@
+{
+ "doc_id": "EC-1000000-265382",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Director of Sales Engineering at Celestica Inc. Sees AVC as a Strong Liquid-Cooling Supplier Amid Rising Adoption and Competition",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-265382",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794405531837",
+ "expert": "Director of sales engineering at Celestica (current); technical evaluator of AVC cold plates, manifolds and CDUs since 2024",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 4
+  },
+  {
+   "company": "Auras Technology",
+   "score": 3
+  },
+  {
+   "company": "Cooler Master",
+   "score": 3
+  },
+  {
+   "company": "Delta Electronics",
+   "score": 3
+  }
+ ],
+ "verdict": "A Celestica sales-engineering director who has evaluated AVC since 2024 sees <b>supply-reservation premiums of 10% to 30–40%</b> and AVC yields rising, while buyers plan 70/30–80/20 splits that can move to 60/40–50/50 in production.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "🔴 <b>Primary/secondary splits 70/30 or 80/20 can move to 60/40 or 50/50</b> in mass production (planning examples), vs JPM's ~50% AVC share per project (SB #58861). → Tenet 1 (Nvidia content and share) ↓",
+   "🔴 <b>Auras closing in via rumored Thailand capacity</b>, with Cooler Master and Delta also scaling; vs AVC ~30%, Cooler Master ~30% on GB (SB #64467). → Tenet 1 (Nvidia content and share) ↓"
+  ],
+  "ASIC liquid-cooling start": [
+   "🟢 <b>AVC custom-ASIC liquid revenue may surpass GPU by 2027</b> (estimate), consistent with mgmt's ASIC >50% of liquid revenue in 2027 (SB #54848). → Tenet 2 (ASIC ramp) ↑",
+   "🟢 <b>Liquid adoption 30% last year to 60% by 2027</b> (estimate) vs mgmt's >50% penetration in 2027 (SB #65392): consistent."
+  ],
+  "Gross margin": [
+   "🟢 <b>Supply-reservation premiums of 10% to 30–40%</b> when lead times stretch (first-hand), consistent with AVC's cold-plate ASP raises (SB #58857). → Tenet 3 (GM 34%+) ↑"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Planning splits 70/30–80/20 moving to 60/40–50/50 vs JPM's ~50% AVC share per project (SB #58861, 2026-09-29): consistent with ~50% in production.",
+  "ASIC liquid revenue may pass GPU by 2027 vs mgmt's ASIC >50% of liquid revenue in 2027 (SB #54848): consistent.",
+  "Liquid adoption 60% by 2027 vs mgmt's >50% penetration in 2027 (SB #65392): slightly higher.",
+  "Reservation premiums 10% to 30–40% vs JPM's AVC ASP raises on switch trays (SB #58857): consistent, pricing firm."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Nvidia content and share): ↓ — buyers plan to cut the primary supplier to 50%–60% in production; Auras, Cooler Master and Delta scaling.",
+  "Tenet 2 (ASIC ramp): ↑ — ASIC liquid revenue may pass GPU by 2027.",
+  "Tenet 3 (Margin and EPS): ↑ — 10% to 30–40% reservation premiums when lead times stretch."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Liquid Cooling Market: 30% — Adoption rate, Last year; vs Market total",
+   "kind": "estimate",
+   "citation": "[11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse25017&hl=fse25017,fse25225&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Liquid Cooling Market: 60% — Expected adoption rate, By 2027; vs Market total",
+   "kind": "estimate",
+   "citation": "[10 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse15695&hl=fse15695,fse15826,fse16185,fse44551,fse44582&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Data Center Racks: 15–20 kW — Preferred air cooling range, Current; vs High-density racks",
+   "kind": "first_hand",
+   "citation": "[25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse6658&hl=fse6658,fse29148&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Data Center Racks: 30 kW or more — Liquid cooling threshold, Current; vs Custom ASIC deployments",
+   "kind": "first_hand",
+   "citation": "[25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse6658&hl=fse6658,fse29148&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "Asia Vital Components: 10% to 30–40% — Supply-reservation premiums, Current; vs Standard pricing",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse21529&hl=fse21529,fse21631,fse24600&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscalers: At least nine months — Qualification timeline, Current; vs New product cycles",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscalers: Nine to 15 months — Full system validation, Current; vs Product cycle start",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Primary Supplier: 70/30 or 80/20 — Buyer planning allocation, Pre-production; vs Primary vs secondary",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse15695&hl=fse15695,fse15826,fse16185,fse16848,fse16901&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Primary Supplier: 60/40 or 50/50 — Buyer planning allocation, Production; vs Primary vs secondary",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse15695&hl=fse15695,fse15826,fse16185,fse16848,fse16901&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "End Users: 20–30% — Energy utilization savings, Current; vs Total energy use",
+   "kind": "estimate",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382&scope=ANYWHERE&stmt=fse29626&hl=fse29626,fse29731&page=2)"
+  },
+  {
+   "ticker": "3017 TT",
+   "text": "Asia Vital Components: December 2027 — Custom ASIC revenue crossover, By 2027; vs vs GPU-related revenue",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-265382)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8138-a495-d71f03b8a87b",
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

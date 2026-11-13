@@ -1,0 +1,83 @@
+{
+ "doc_id": "EC-1000000-239656",
+ "ticker": "NVDA",
+ "tier": 1,
+ "sector": "AI / GPU / Compute",
+ "title": "Former Director of Hardware Engineering at Meta Platforms Inc Believes Cooling Technology Startups Will Likely Be Acquired by Larger Industry Players",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239656",
+ "as_company": "NVIDIA Corp",
+ "conversation_id": "7093__1794405842262",
+ "expert": "Former Director of Hardware Engineering at Meta (interview 2026-08-07)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "NVIDIA",
+   "score": 3
+  },
+  {
+   "company": "Frore",
+   "score": 3
+  },
+  {
+   "company": "Established cooling providers",
+   "score": 4
+  },
+  {
+   "company": "TSMC / OSATs",
+   "score": 4
+  }
+ ],
+ "verdict": "A former Meta hardware-engineering director says NVIDIA's A100 bare-die cooling attempt 'did not turn out well' with some customers and integrated chip-level cooling is five to seven years from shipping, so racks stay on ~30C liquid loops for now.",
+ "summary_variables": {
+  "Rubin ramp execution": [
+   "A100 bare-die cooling did not turn out well [2 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239656&scope=ANYWHERE&stmt=fse17192&hl=fse17192,fse17316,fse17449,fse17569&page=2)",
+   "Integrated cooling five to seven years out [5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239656&scope=ANYWHERE&stmt=fse1366&hl=fse1366,fse6446,fse13480,fse14073,fse14175,fse15599,fse15708,fse20110,fse20188,fse26015,fse26283,fse33249,fse45742,fse45795,fse46157,fse46434,fse46733,fse46908,fse47147,fse47147,fse47355,fse54482,fse59228,fse59458&page=1)"
+  ],
+  "Compute share vs. XPU/ASIC": [
+   "Hyperscalers converging on 30C loops [13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239656&scope=ANYWHERE&stmt=fse10932&hl=fse10932,fse16471,fse16831&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on NVIDIA chip-level cooling and integrated-cooling timelines"
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 6 (supply execution): → — integrated cooling 5-7 years out",
+  "Tenet 3 (~75% share): → — 30C loop convergence, no share figure"
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA A100 bare-die cooling attempt 'did not turn out well' with some customers; H100 bare-die effort complex with limitations",
+   "kind": "hearsay",
+   "citation": "[2 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239656&scope=ANYWHERE&stmt=fse17192&hl=fse17192,fse17316,fse17449,fse17569&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Integrated chip-level cooling five to six years (optimistic) / five to seven years (pessimistic) from shipping",
+   "kind": "estimate",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239656&scope=ANYWHERE&stmt=fse1366&hl=fse1366,fse6446,fse13480,fse14073,fse14175,fse15599,fse15708,fse20110,fse20188,fse26015,fse26283,fse33249,fse45742,fse45795,fse46157,fse46434,fse46733,fse46908,fse47147,fse47147,fse47355,fse54482,fse59228,fse59458&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Hyperscaler liquid-cooling converging on 30C loops; most operators avoid moving quickly to 18C",
+   "kind": "first_hand",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239656&scope=ANYWHERE&stmt=fse10932&hl=fse10932,fse16471,fse16831&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Cooling-startup acquisition outcomes ~$800 million to just under $2 billion vs $10B-$20B standalone unlikely",
+   "kind": "estimate",
+   "citation": "[11 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239656&scope=ANYWHERE&stmt=fse47147&hl=fse47147,fse51962,fse52418&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "3bfa8833-33de-8116-ab07-ddcc0fcfad2b",
+  "page_title": "NVDA Thesis - Revised"
+ },
+ "status": "done",
+ "note": ""
+}

@@ -1,0 +1,113 @@
+{
+ "doc_id": "EC-1000000-270247",
+ "ticker": "TDC",
+ "tier": 3,
+ "sector": "Software M-Z",
+ "title": "Manager at IT Solutions Provider Expects Teradata Business to Be Flat or Decline Up to 5% in 2027",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-270247",
+ "as_company": "Teradata Corp",
+ "conversation_id": "7093__1794406453704",
+ "expert": "Manager at a large IT solutions provider (current; ~20 years in a Northeast territory, Fortune 50–500 clients)",
+ "weight": "Medium",
+ "characterization": "Negative",
+ "sentiment": [
+  {
+   "company": "Teradata",
+   "score": 2
+  },
+  {
+   "company": "Snowflake",
+   "score": 4
+  },
+  {
+   "company": "Databricks",
+   "score": 4
+  },
+  {
+   "company": "Microsoft",
+   "score": 4
+  }
+ ],
+ "verdict": "Teradata was in <b>none of the expert's last five to seven cloud-first AI deals</b>, Q4 2026 Teradata business was only <b>flat to up 0%–3%</b> y/y, and the pipeline is almost 100% renewals; he expects about -5% in Q1 2027.",
+ "summary_variables": {
+  "Cloud ARR": [
+   "🔴 Teradata Cloud spend 0%–5% at most y/y in Q4 2026; well below the 2026-11-09 call's footprint +12%–15% y/y: conflicting. [25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse22871&hl=fse22871,fse23132,fse23179,fse23201,fse23353&page=2)"
+  ],
+  "Demand / renewals": [
+   "🔴 Pipeline almost 100% renewals, no new greenfield; vs net new 10% of pipeline in the 2026-11-09 call: weaker. [13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse37213&hl=fse37213,fse38386&page=2)",
+   "🔴 Q1 2027 about -5% y/y; calendar 2027 flat to -0%–5% (estimate); first expert forecast of decline for 2027. [15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse35531&hl=fse35531,fse35591,fse44493,fse45217&page=2)"
+  ],
+  "Pricing & competition": [
+   "🔴 List +5%–8% but many renewals flat; customers shifting from three- and five-year terms to single-year and month-to-month; first read on contract terms. [6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse45756&hl=fse45756&page=2)",
+   "🔴 Teradata in none of the last five to seven cloud-first AI deals; Snowflake, Databricks and Microsoft Fabric gaining; consistent with the 2026-11-09 call. [8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse15339&hl=fse15339,fse16112,fse19939,fse50906,fse51047&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Cloud: Teradata Cloud spend 0%–5% y/y in Q4 2026 (expert) vs the 2026-11-09 call's software footprint +12%–15% y/y and consumption ~4% q/q: conflicting.",
+  "Pipeline: almost 100% renewals, no greenfield (expert) vs the 2026-11-09 call's pipeline of migration 50%–55%, expansion 25%, net new 10%: weaker.",
+  "Pricing: list +5%–8% but many renewals flat (expert); first read on Teradata price realization before 2026-11-10.",
+  "First read on contract terms shortening from three/five-year to single-year and month-to-month; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "No tenets on the TDC page; against its pitch (cloud ARR growth, total ARR 8–12%, 75%+ FCF returns): Cloud ARR ↓ — Teradata Cloud spend only 0%–5% y/y in this book; total ARR ↓ — flat 2026, about -5% Q1 2027; FCF/buybacks ↓ — flat renewals on 5%–8% list increases and shorter terms reduce visibility."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "TDC",
+   "text": "Teradata in none of last five to seven cloud-first AI/automation deals at a large IT solutions provider (Northeast)",
+   "kind": "first_hand",
+   "citation": "[1 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse15339&hl=fse15339,fse16112,fse16228&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata-related business flat to up 0%–3% y/y in Q4 2026; total Teradata spend flat to up 0%–5%",
+   "kind": "first_hand",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse19561&hl=fse19561,fse19800,fse19887,fse19939&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata Cloud spend 0%–5% at most y/y in Q4 2026; on-prem flat",
+   "kind": "first_hand",
+   "citation": "[25 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse22871&hl=fse22871,fse23132,fse23179,fse23201,fse23353&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata list price +5%–8% in 2026, many renewals flat on competitive offers",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse45756&hl=fse45756&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata pipeline almost 100% renewals, no new greenfield",
+   "kind": "first_hand",
+   "citation": "[13 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse37213&hl=fse37213,fse38386&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Customers shifting Teradata contracts from three/five-year to single-year and month-to-month terms",
+   "kind": "first_hand",
+   "citation": "[5 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse19058&hl=fse19058,fse24327,fse24479&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Teradata AI Studio and Tera evaluations under 10% of clients, unchanged from 90 days earlier",
+   "kind": "first_hand",
+   "citation": "[14 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse55817&hl=fse55817,fse56264&page=2)"
+  },
+  {
+   "ticker": "TDC",
+   "text": "Expert expects Teradata-related business about -5% in Q1 2027 and flat to -0%–5% in 2027",
+   "kind": "estimate",
+   "citation": "[15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-270247&scope=ANYWHERE&stmt=fse35531&hl=fse35531,fse35591,fse44493,fse45217&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "6836da4f-47f5-40d9-ac7b-a1c908e533bd",
+  "page_title": "TDC Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

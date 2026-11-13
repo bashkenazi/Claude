@@ -1,0 +1,150 @@
+{
+ "doc_id": "EC-1000000-269157",
+ "ticker": "DOCU",
+ "tier": 3,
+ "sector": "Software A-L",
+ "title": "Data & AI Practice Lead at Global Systems Integrator Expects Docusign Business to Grow 8%–10%, With IAM Supporting Retention and Upselling",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269157",
+ "as_company": "Docusign Inc",
+ "conversation_id": "7093__1794405943889",
+ "expert": "Data & AI practice lead at a global systems integrator and Docusign alliance partner (presales, implementation, integrations)",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Docusign",
+   "score": 4
+  },
+  {
+   "company": "Adobe",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert's Docusign practice grew 8%–10% y/y in Aug–Oct 2026, with churn about 10% lower and more than 90% of new revenue from existing-customer expansion.",
+ "summary_variables": {
+  "Back to double-digit growth": [
+   "🟡 <b>Practice +8%–10% y/y</b> in Aug–Oct, between the 2026-11-05 partner reads of about 5% and roughly 20%; still short of double digits. → Stance (double-digit growth) →",
+   "🔴 <b>New logos under 10% of new revenue</b> and 5%–7% of growth; first read. → Stance (double-digit growth) ↓"
+  ],
+  "DBNR / renewal expansion": [
+   "🟢 <b>Net retention slightly above 100%, churn about 10% lower</b>, renewal spend +2%–3%; consistent with the page's DBNR of 101%. → Stance (retention) ↑"
+  ],
+  "IAM adoption": [
+   "🟢 <b>Over 90% of new revenue from expansion and IAM upsell</b>; Cleveland saw IAM 3Q bookings slightly ahead (SB #63574): consistent. → Stance (IAM bet) ↑",
+   "🔴 <b>CLM adoption +1%–2%</b>; Cleveland saw CLM below expectations (SB #63588): consistent; vs 2026-11-05 PMO estimate of 8%–10%: lower. → Stance (IAM bet) ↓"
+  ],
+  "Pricing & competition": [
+   "🟡 <b>Pricing +1%–2%</b>, in line with inflation, as large customers move to three-year contracts; vs the 2026-11-05 PMO's ~20% IAM-related price rise: lower. → Stance (margins) →"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Growth: practice +8%–10% vs 2026-11-05 partner reads of about 5% (EC-1000000-268443) and roughly 20% (EC-1000000-268577): in between.",
+  "CLM: adoption +1%–2% vs Cleveland CLM below expectations and net-new CLM deal volume down y/y (SB #63588): consistent.",
+  "Retention: net retention slightly above 100% vs the thesis page's DBNR of 101%: consistent.",
+  "Pricing: +1%–2% vs the 2026-11-05 PMO's ~20% IAM-related price rise on lower plans: lower."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Stance (neutral; double-digit growth rests on IAM): → — 8%–10% practice growth with IAM driving over 90% of new revenue, but new logos are under 10% of new revenue and CLM is +1%–2%; supports 'not a short', not a re-acceleration."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 8%–10% — Practice revenue growth; 2026-08-01 to 2026-10-31; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse16535&hl=fse16535,fse17702,fse18637&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 8%–10% — Expected growth; Fiscal 2026; vs Full year",
+   "kind": "estimate",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse16535&hl=fse16535,fse17702,fse18637&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 8%–10% — Expected growth; 2026-11-01 to 2027-01-31; vs Year over year",
+   "kind": "estimate",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse16535&hl=fse16535,fse17702,fse18637&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 3%–4% — Customer usage growth; 2026-08-01 to 2026-10-31; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[16 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse19873&hl=fse19873,fse20203,fse20658&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 2%–3% — Seat count growth; 2026-08-01 to 2026-10-31; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[14 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse20203&hl=fse20203,fse21303&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 2%–3% — Higher renewal spend; 2026-08-01 to 2026-10-31; vs Prior year renewal",
+   "kind": "first_hand",
+   "citation": "[[14 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse20203&hl=fse20203,fse21303&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: ~10% lower — Churn rate; 2026-08-01 to 2026-10-31; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse22125&hl=fse22125,fse29465&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 1%–2% — Pricing increase; 2026-08-01 to 2026-10-31; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse39653&hl=fse39653&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 1%–2% — CLM adoption growth; 2026-08-01 to 2026-10-31; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse39653&hl=fse39653&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: ~10% — Increase in business workflows; 2026-08-01 to 2026-10-31; vs Year over year",
+   "kind": "first_hand",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse22125&hl=fse22125,fse29465&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: ~20% — Large customer consolidation rate; 2026-11-06; vs Current state",
+   "kind": "first_hand",
+   "citation": "[[6 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse44129&hl=fse44129,fse44250,fse44737&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: Roughly half — Market share in enterprise/mid-market; 2026-11-06; vs Total market",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse718&hl=fse718,fse3948,fse4448&page=1)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: >90% — Contribution to new revenue; 2026-08-01 to 2026-10-31; vs Total new revenue",
+   "kind": "first_hand",
+   "citation": "[[9 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse23327&hl=fse23327,fse23538,fse23648&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: <10% — New account contribution; 2026-08-01 to 2026-10-31; vs Total new revenue",
+   "kind": "first_hand",
+   "citation": "[[9 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse23327&hl=fse23327,fse23538,fse23648&page=2)"
+  },
+  {
+   "ticker": "DOCU",
+   "text": "Docusign: 5%–7% — New account revenue contribution; 2026-08-01 to 2026-10-31; vs Total business growth",
+   "kind": "first_hand",
+   "citation": "[[9 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269157&scope=ANYWHERE&stmt=fse23327&hl=fse23327,fse23538,fse23648&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "1bca8833-33de-81da-8e41-ced4aace7efb",
+  "page_title": "Docusign Thesis"
+ },
+ "status": "done",
+ "note": ""
+}

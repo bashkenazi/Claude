@@ -1,0 +1,129 @@
+{
+ "doc_id": "EC-1000000-264902",
+ "ticker": "ORCL",
+ "tier": 2,
+ "sector": "Software M-Z",
+ "title": "Head of Human Capital Management Solution Advisory Japan at Leading Software Company Believes SmartHR Should Prioritize AI Integration Over Complex Payroll Expansion",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-264902",
+ "as_company": "Oracle Corp",
+ "conversation_id": "7093__1794406712511",
+ "expert": "Former Head of HCM Solution Advisory Japan at a leading global software company; 20 years in Japan HCM",
+ "weight": "Low",
+ "characterization": "Negative",
+ "sentiment": [
+  {
+   "company": "SAP SuccessFactors",
+   "score": 4
+  },
+  {
+   "company": "ServiceNow",
+   "score": 4
+  },
+  {
+   "company": "Talent Palette",
+   "score": 4
+  },
+  {
+   "company": "Oracle",
+   "score": 2
+  },
+  {
+   "company": "SmartHR",
+   "score": 3
+  }
+ ],
+ "verdict": "A former Japan HCM advisory head sees Oracle losing very-large-enterprise (>10,000 employees) labor-management customers 'little by little' to local and modern SaaS vendors, with no churn rate given.",
+ "summary_variables": {
+  "Competition & share": [
+   "🔴 **Oracle losing >10,000-employee labor-management customers \"little by little\"** in Japan (no rate); conflicts with a UBS partner relay that Dell consolidated on Fusion and cut SAP, Salesforce and Workday (SB #67339, U.S.). → Tenet 5 (apps & database) ↓",
+   "🟡 **SAP SuccessFactors 25–30% of Japan HR cloud revenue** (estimate); SAP and Talent Palette top two in talent management, Workday catching up; first read."
+  ],
+  "Demand / orders": [
+   "🟡 **Japan large-enterprise labor-management SaaS penetration 70% vs 80–90% for talent management** (estimate); first read."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Fusion HCM competitive position: Oracle losing Japanese very-large-enterprise labor-management customers vs UBS partner relay that Dell consolidated on Fusion, cutting SAP, Salesforce and Workday (SB #67339, 2026-11-04): **conflicting** (different geography, single-partner relays on both sides).",
+  "First read on Japan HCM cloud penetration; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 5 (apps & database profit engine): ↓ slight — gradual Japan HCM churn at the largest enterprises; no rate or revenue given and Japan HCM is a small part of apps."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Japan HCM Industry: 20 years — Expert's industry experience, To 2026-11-06; baseline: N/A",
+   "kind": "first_hand",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264902&scope=ANYWHERE&stmt=fse3392&hl=fse3392,fse3732,fse3822&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Large Enterprise: More than 5,000 employees — Segment definition, Current; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264902)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Large Enterprise: More than 10,000 employees — Segment for Oracle/SAP labor management, Current; baseline: N/A",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264902)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Japan HCM Market: 80–90% — Talent management cloud use (Large Ent.), Current; baseline: Industry standard",
+   "kind": "estimate",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264902&scope=ANYWHERE&stmt=fse3392&hl=fse3392,fse5945,fse6048,fse6175,fse9405,fse10484,fse11218,fse13143,fse16792,fse18648,fse19852,fse22558,fse23130,fse38954&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Japan HCM Market: 70% — Labor/payroll SaaS use (Large Ent.), Current; baseline: Industry standard",
+   "kind": "estimate",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264902&scope=ANYWHERE&stmt=fse3392&hl=fse3392,fse5945,fse6048,fse6175,fse9405,fse10484,fse11218,fse13143,fse16792,fse18648,fse19852,fse22558,fse23130,fse38954&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Mid-Market: More than 90% — Talent cloud use (1,000–5,000 employees), Current; baseline: Industry standard",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264902)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Mid-Market: 70–80% — Labor cloud use (1,000–5,000 employees), Current; baseline: Industry standard",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264902)"
+  },
+  {
+   "ticker": "OTHER:SAP SuccessFactors",
+   "text": "SAP SuccessFactors: 25–30% — Share of Japan total HR cloud revenue, Current; baseline: Total market",
+   "kind": "estimate",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-264902&scope=ANYWHERE&stmt=fse38954&hl=fse38954&page=2)"
+  },
+  {
+   "ticker": "OTHER:Talent Palette",
+   "text": "Talent Palette: Approximately ¥10 billion — Reported ARR, 2026-11-06; baseline: Previous",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264902)"
+  },
+  {
+   "ticker": "OTHER:Kaonavi",
+   "text": "Kaonavi: Approximately ¥10 billion — Reported ARR, 2026-11-06; baseline: Previous",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264902)"
+  },
+  {
+   "ticker": "OTHER:SmartHR",
+   "text": "SmartHR: Less than 10 years — Age of new platform, Current; baseline: Legacy systems",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-264902)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-81ad-aaee-c23f9d61044c",
+  "page_title": "Oracle - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

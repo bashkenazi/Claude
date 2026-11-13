@@ -1,0 +1,93 @@
+{
+ "doc_id": "EC-1000000-269519",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Executive at Large Consulting Firm Sees Samsara Delivering Continued Growth and Market-Share Gains Into 2027",
+ "released": "2026-11-09",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269519",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794403984494",
+ "expert": "Strategy consultant at a global consulting firm advising logistics and retail fleets on platform evaluations",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 5
+  },
+  {
+   "company": "Motive",
+   "score": 3
+  },
+  {
+   "company": "Geotab",
+   "score": 3
+  },
+  {
+   "company": "Verizon Connect",
+   "score": 3
+  }
+ ],
+ "verdict": "No first-hand volumes: the consultant estimates Samsara-related activity +15%\u201317% y/y in Aug\u2013Oct with renewals modestly above plan as customers add AI safety.",
+ "summary_variables": {
+  "Enterprise expansion ($100K+ cohort)": [
+   "\ud83d\udfe2 ~60% of Nov\u2013Jan pipeline is expansion (estimate), vs 2026-11-06 MSP director (expansion over one-half of book): confirming. \u2192 Tenet 1 (enterprise expansion) \u2191"
+  ],
+  "GM/FCF through component cycle": [
+   "\ud83d\udfe1 Pricing +3%\u20135% (estimate), offset by multi-year discounts, vs 2026-11-06 IT services VP (+3%\u20135%): confirming; vs 2026-11-06 MSP director (+15%\u201320%): conflicting."
+  ],
+  "Competition & share": [
+   "\ud83d\udfe1 New-customer wins only roughly in line, on ROI validation and budget approvals, though modest share gains expected in mid-market and enterprise; vs 2026-11-05 call (#1/#2 in RFPs): consistent."
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Expansion: ~60% of pipeline (estimate) vs 2026-11-06 MSP director's expansion over one-half of book: confirming.",
+  "Pricing: +3%\u20135% (estimate) vs 2026-11-06 VP +3%\u20135% (confirming) and 2026-11-06 MSP director +15%\u201320% (conflicting).",
+  "Growth: +15%\u201317% (estimate) vs 2026-11-06 MSP director +10%\u201315% first-hand: similar."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (enterprise expansion): \u2191 \u2014 expansion ~60% of pipeline (estimate).",
+  "Tenet 4 (platform moat): \u2191 modestly \u2014 modest share gains expected; Motive wins on price."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 15%\u201317% \u2014 Increase in Samsara-related activity, August\u2013October 2026, vs Year over year",
+   "kind": "estimate",
+   "citation": "[[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269519&scope=ANYWHERE&stmt=fse13619&hl=fse13619,fse25464&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 20%\u201325% \u2014 Forecast business growth, Calendar 2026, vs Calendar 2025",
+   "kind": "estimate",
+   "citation": "[[8 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269519&scope=ANYWHERE&stmt=fse13619&hl=fse13619,fse25464&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: ~60% \u2014 Share of expansions in pipeline, Nov 2026\u2013Jan 2027, vs Total pipeline",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269519)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 3%\u20135% \u2014 Pricing increase, Year over year, vs Prior year",
+   "kind": "estimate",
+   "citation": "[[5 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269519&scope=ANYWHERE&stmt=fse30311&hl=fse30311,fse30728&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara: 20%\u201330% \u2014 Accident reduction for customers, Not specified, vs Pre-implementation",
+   "kind": "estimate",
+   "citation": "[[10 \u2022 Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-269519&scope=ANYWHERE&stmt=fse37374&hl=fse37374,fse37429&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed under new Expert Calls section (created before Data Sources). No \"Samsara Thesis - Revised\" page exists; filed to the thesis-builder child page \"Samsara - Thesis Revised - 2026-11-05\" (has What Matters and tenets)."
+}

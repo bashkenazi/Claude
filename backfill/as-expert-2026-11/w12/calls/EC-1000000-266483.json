@@ -1,0 +1,119 @@
+{
+ "doc_id": "EC-1000000-266483",
+ "ticker": "IOT",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Director and Managing Partner at Verizon Connect Sees Samsara Maintaining Its Telematics Leadership and Growth",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-266483",
+ "as_company": "Samsara Inc",
+ "conversation_id": "7093__1794405472397",
+ "expert": "Director and managing partner at Verizon Connect (competitor); ~20 years in telematics; sees Samsara in Fortune 100/500/1,000 deal flow",
+ "weight": "Medium",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Samsara",
+   "score": 4
+  },
+  {
+   "company": "Motive",
+   "score": 4
+  },
+  {
+   "company": "Trimble",
+   "score": 4
+  },
+  {
+   "company": "Platform Science",
+   "score": 4
+  }
+ ],
+ "verdict": "A Verizon Connect executive sees Samsara in 85%–90% of the competitive opportunities he works, though pricing changes have caused some churn.",
+ "summary_variables": {
+  "Competition & share": [
+   "🟢 <b>Samsara in 85%–90% of competitive opportunities</b> (first-hand, competitor view); matches Jefferies 'wins on platform' (SB #62604): consistent. → Tenet 4 (platform moat) ↑",
+   "🔴 <b>Pricing changes have contributed to churn</b> in some accounts, and OEM-embedded telematics is a headwind; Jefferies saw license cost scrutinised at renewals (SB #62601): consistent. → Tenet 1 (enterprise expansion) ↓"
+  ],
+  "Enterprise expansion ($100K+ cohort)": [
+   "🟢 <b>Cameras lift ARPU to about \\$50–\\$75 per month</b> (estimate) in the installed base; first read. → Tenet 1 (enterprise expansion) ↑"
+  ],
+  "Emerging products / white space": [
+   "🟡 <b>Trailer tracking growing 12%–15%</b> (estimate), possibly 20%–30% with consolidation, while ELD growth is single digits, if that; first read. → Tenet 2 (emerging products) ↑"
+  ]
+ },
+ "characterization_changed": "Very Positive: the only first-hand figure is deal presence (85%–90%); the expert also cites pricing-driven churn, OEM-embedded competition and single-digit ELD growth.",
+ "changes": [
+  "Win presence: Samsara in 85%–90% of competitive deals vs Jefferies 'wins on platform; competitors aggressive on price in large enterprise deals' (SB #62604): consistent.",
+  "Churn: pricing-related churn vs Jefferies check that license cost is a focus at renewals (SB #62601): consistent.",
+  "First read on camera ARPU uplift (\\$50–\\$75 per month) and trailer-tracking growth (12%–15%); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 4 (platform moat): ↑ — present in 85%–90% of competitive deals; OEM-embedded telematics is the stated threat.",
+  "Tenet 1 (enterprise expansion): → — camera upsell to \\$50–\\$75 per month ARPU vs pricing-driven churn.",
+  "Tenet 2 (emerging products): ↑ — trailer tracking 12%–15% growth (estimate), more than 60 million U.S. trailers."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 85%–90% — Presence in competitive opportunities; Current; vs Regular deal flow",
+   "kind": "first_hand",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse14000&hl=fse14000&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: $2 billion — Revenue; Current; vs Not specified",
+   "kind": "hearsay",
+   "citation": "[[24 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse36448&hl=fse36448,fse36926,fse37015,fse38319,fse40075&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: $50–$75 per month — ARPU via camera expansion; Current; vs Existing customer base",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse21156&hl=fse21156,fse21999&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Trailer Tracking Market: 12%–15% — Market growth; Year-over-year; vs Previous year",
+   "kind": "estimate",
+   "citation": "[[10 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse22823&hl=fse22823,fse23550,fse24365&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Trailer Tracking Market: around 15% — Market growth; Year-over-year; vs Previous year",
+   "kind": "estimate",
+   "citation": "[[21 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse22823&hl=fse22823,fse23142,fse23550&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Trailer Tracking Market: 20%–30% — Potential future market growth; Future; vs Current growth",
+   "kind": "estimate",
+   "citation": "[[10 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse22823&hl=fse22823,fse23550,fse24365&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "U.S. Trailer Universe: more than 60 million — Potential tracking units; Current; vs Total U.S. market",
+   "kind": "estimate",
+   "citation": "[[9 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse20859&hl=fse20859&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "ELD Market: single digits — Market growth; Current; vs Previous periods",
+   "kind": "first_hand",
+   "citation": "[[11 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-266483&scope=ANYWHERE&stmt=fse25403&hl=fse25403,fse25451&page=2)"
+  },
+  {
+   "ticker": "IOT",
+   "text": "Samsara Inc: 2%–3% — Illustrative growth; Year-over-year; vs $2 billion revenue base",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266483)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8165-90f5-d8386c085478",
+  "page_title": "Samsara - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "Filed to child page Samsara - Thesis Revised - 2026-11-05."
+}

@@ -1,0 +1,101 @@
+{
+ "doc_id": "EC-1000000-239548",
+ "ticker": "META",
+ "tier": 2,
+ "sector": "Internet",
+ "title": "Director of Affiliate Marketing at Macy\u2019s Sees Influencer Affiliates as an Upper-Funnel Channel Whose Value Extends Beyond Attributed Sales",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239548",
+ "as_company": "Meta Platforms Inc",
+ "conversation_id": "7093__1794404146033",
+ "expert": "Director of Affiliate Marketing at a retailer (Macy's per title); industry estimates only, no Meta first-hand data; interview 2026-08-07",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Meta Platforms Inc",
+   "score": 3
+  },
+  {
+   "company": "Macy's",
+   "score": 3
+  }
+ ],
+ "verdict": "The expert gave no first-hand Meta figures; their industry estimates put influencer affiliates at under 5% of retail e-commerce revenue with $1.50\u2013$4 ROAS vs $8\u2013$12 for coupon/loyalty, and affiliate wins only trigger a Meta paid-ad test.",
+ "summary_variables": {
+  "Ad price per ad + impression growth": [
+   "influencer ROAS $1.50\u2013$4 vs $8\u2013$12 for coupon/loyalty (estimate); first read, no earlier expert call or stored row. \u2192 Tenet 1 (core ads) \u2192",
+   "affiliate success only prompts a paid-ad test on Meta, with spend rising only if that test performs; first read. \u2192 Tenet 1 (core ads) \u2192"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "First read on influencer-affiliate ROAS and its link to Meta paid-ad budgets; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (core ads): \u2192 \u2014 industry estimates only (influencer revenue under 5% of retail e-commerce); no Meta spend figure."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Approximately 10% \u2014 Increase in retail e-commerce traffic from influencers, Not stated; baseline: Unspecified baseline",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Less than 5% \u2014 Influencer-attributed retail e-commerce revenue, Not stated; baseline: Average",
+   "kind": "estimate",
+   "citation": "[8 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548&scope=ANYWHERE&stmt=fse1781&hl=fse1781,fse1898&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Approximately 10%\u201315% \u2014 Affiliate share of total business, Not stated; baseline: Total business",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Approximately 5%\u201310% \u2014 Influencer share of affiliate sales, Not stated; baseline: Total affiliate",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "$0.50\u2013$1.50 \u2014 Influencer-affiliate sales per $100 of total GMV, Not stated; baseline: Derived from broad estimates",
+   "kind": "estimate",
+   "citation": "[27 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548&scope=ANYWHERE&stmt=fse22341&hl=fse22341,fse23479,fse24889,fse25093&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "5%\u201330% \u2014 Range of influencer commission rates, Not stated; baseline: Per campaign",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "About 15% \u2014 Average influencer commission rate, Not stated; baseline: Per campaign",
+   "kind": "estimate",
+   "citation": "[29 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548&scope=ANYWHERE&stmt=fse25723&hl=fse25723,fse25863,fse26400,fse26444&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "$1.50\u2013$4 \u2014 ROAS from influencer affiliate marketing, Not stated; baseline: Per dollar spent",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548&scope=ANYWHERE&stmt=fse2689&hl=fse2689,fse27761&page=1)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "$8\u2013$12 \u2014 ROAS from coupon and loyalty affiliate activity, Not stated; baseline: Per dollar spent",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239548&scope=ANYWHERE&stmt=fse2689&hl=fse2689,fse27761&page=1)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "Meta - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

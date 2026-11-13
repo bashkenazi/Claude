@@ -1,0 +1,124 @@
+{
+ "doc_id": "EC-1000000-266385",
+ "ticker": "3017 TT",
+ "tier": 2,
+ "sector": "Hardware A-M",
+ "title": "Senior Sales Manager at Super Micro Computer Inc. Sees Supply-Chain Reliability Driving AI Server Cooling Choices",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-266385",
+ "as_company": "Asia Vital Components Co Ltd",
+ "conversation_id": "7093__1794405376994",
+ "expert": "Senior sales manager selling L10/L11 AI racks at Super Micro Computer (current)",
+ "weight": "Medium",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Asia Vital Components",
+   "score": 3
+  },
+  {
+   "company": "Auras Technology",
+   "score": 3
+  },
+  {
+   "company": "NVIDIA",
+   "score": 3
+  }
+ ],
+ "verdict": "A Supermicro rack sales manager sees AVC cold plates, manifolds and CDUs in liquid-cooled builds but calls cooling a <b>\\$20,000 'tax' on a \\$9 million rack</b>, so availability, not brand, picks the supplier.",
+ "summary_variables": {
+  "Nvidia content and share": [
+   "🔴 <b>Auras cold-plate share roughly 4% to over 10%</b> after joining the GB300 AVL (hearsay), at the top of the ex-AVC account manager's Auras 5–10% (SB #64467): share leaking. → Tenet 1 (Nvidia content and share) ↓",
+   "🔴 <b>Server OEMs insourcing cold plates, CDUs and quick disconnects</b>, keeping third parties as at least one alternative; first read on OEM insourcing. → Tenet 1 (Nvidia content and share) ↓",
+   "🟢 <b>GB200, GB300, Vera Rubin and MI350X deployments all liquid-cooled</b> (first-hand), consistent with mgmt's >50% liquid penetration in 2027 (SB #65392)."
+  ],
+  "Gross margin": [
+   "🔴 <b>Cooling 'a couple thousand dollars' vs \\$50,000–\\$100,000 per GPU</b>; low differentiation, vs JPM's AVC ASP raises on switch trays (SB #58857): no pricing power seen from the rack side. → Tenet 3 (GM 34%+) ↓",
+   "🔴 <b>Nvidia designs GB300/Vera Rubin racks and may supply cold plates with compute trays</b>, limiting supplier leverage; first read. → Tenet 3 (GM 34%+) ↓"
+  ],
+  "ASIC liquid-cooling start": [
+   "🟡 <b>Only the top five hyperscalers can fund custom ASIC boards</b>; other customers stay on Intel/AMD, first read. → Tenet 2 (ASIC ramp) →"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Auras cold-plate share roughly 4% to over 10% (hearsay) vs ex-AVC account manager's Auras 5–10% on GB series (SB #64467, 2026-09-20): Auras gaining.",
+  "Cooling a couple thousand dollars per GPU tray vs JPM's VR cold-plate content US\\$3.0–3.5k per tray (SB #58854): similar order of magnitude.",
+  "Cooling lead times 'definitely increased' over the past year (no weeks given); first read on cooling lead times, no earlier expert call or stored row.",
+  "Rack-level cost up roughly 10% y/y, driven by memory (+10–20% m/m); first read on rack cost; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (Nvidia content and share): ↓ — Auras share 4% to over 10% (hearsay) and OEMs insourcing cold plates and CDUs.",
+  "Tenet 2 (ASIC ramp): → — only the top five hyperscalers build custom ASIC boards; no AVC-specific ASIC figure.",
+  "Tenet 3 (Margin and EPS): ↓ — cooling a \\$20,000 'tax' on a \\$9 million rack and Nvidia-set designs limit supplier pricing."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "3017 TT",
+   "text": "Asia Vital Components: a couple thousand dollars — Cost of cooling components (CDUs, manifolds, cold plates), Current; vs vs  **$50,000–$100,000**  per GPU",
+   "kind": "first_hand",
+   "citation": "[24 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385&scope=ANYWHERE&stmt=fse6450&hl=fse6450&page=2)"
+  },
+  {
+   "ticker": "OTHER:Super Micro Computer",
+   "text": "Server Manufacturer (Expert's Employer): roughly 10% — Total rack-level cost increase, Past year; vs Prior year",
+   "kind": "first_hand",
+   "citation": "[6 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385&scope=ANYWHERE&stmt=fse13577&hl=fse13577&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Memory/SSD Suppliers: 10%–20% — Component price increase, Monthly; vs Month-over-month",
+   "kind": "first_hand",
+   "citation": "[7 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385&scope=ANYWHERE&stmt=fse14311&hl=fse14311&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA: 4 — Number of GPUs per compute tray, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[2 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385&scope=ANYWHERE&stmt=fse4137&hl=fse4137&page=2)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA: $200,000–$300,000 — Cost per compute tray, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA: 18 — Compute trays per GB300 or Vera Rubin rack, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA: $5 million–$9 million — Total rack-level solution cost, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385)"
+  },
+  {
+   "ticker": "NVDA",
+   "text": "NVIDIA: around $5,000 — GPU cost in a normal server, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Chassis Suppliers: about $3,000 — Total cost for chassis components, Current; vs N/A",
+   "kind": "first_hand",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385)"
+  },
+  {
+   "ticker": "OTHER:Auras Technology",
+   "text": "Auras Technology: roughly 4%  to  over 10% — Market share in cold plates, Post-GB300 AVL; vs Prior share",
+   "kind": "hearsay",
+   "citation": "[8 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-266385&scope=ANYWHERE&stmt=fse16253&hl=fse16253,fse16411&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8138-a495-d71f03b8a87b",
+  "page_title": "Asia Vital Components - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

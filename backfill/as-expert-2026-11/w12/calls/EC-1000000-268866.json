@@ -1,0 +1,85 @@
+{
+ "doc_id": "EC-1000000-268866",
+ "ticker": "VRT",
+ "tier": 2,
+ "sector": "Hardware N-Z",
+ "title": "Automation Sales Executive at Schneider Electric Sees Vertiv’s Liquid Cooling and Lifecycle Services as Key Growth Opportunities Amid Execution Risks",
+ "released": "2026-11-06",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268866",
+ "as_company": "Vertiv Holdings Co",
+ "conversation_id": "7093__1794405965336",
+ "expert": "Automation Sales Executive at Schneider Electric (current competitor; 10+ years on data-center power and cooling projects; no Vertiv order-book view); interview 2026-11-04",
+ "short_expert": "Schneider automation sales exec (competitor)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Vertiv",
+   "score": 4.0
+  },
+  {
+   "company": "Eaton",
+   "score": 4.0
+  }
+ ],
+ "verdict": "A Schneider Electric sales executive (competitor, indirect view) sees AI racks moving from 10 kW–20 kW to 100 kW or more as Vertiv's liquid-cooling opening, but flags execution, Schneider/Eaton cooling acquisitions and hyperscaler pricing power. Note: GenSearch mixed in other documents; only this call's points are kept.",
+ "summary_variables": {
+  "Share in the converged and 800V transition": [
+   "🔴 Schneider (Motivair) and Eaton (Boyd Thermal) adding cooling through acquisitions to challenge Vertiv's thermal lead; first read in this channel. → Tenet 5 (share) ↓ {c15}",
+   "🔴 800 VDC shift named a 2–3 year vulnerability for AC UPS/PDU, consistent with SemiAnalysis on LV UPS displacement (SB #65942). → Tenet 5 (share) ↓ {c35}"
+  ],
+  "Orders / backlog conversion": [
+   "🟡 Racks 10 kW–20 kW → 100 kW or more; direct-to-chip required at 70 kW–100 kW, but utility shortfalls delay projects \"another two or three years\" vs ~75% of 2027 capacity under construction (SB #65561): conflicting. → Tenet 1 (order-led growth) → {c33}"
+  ]
+ },
+ "characterization_changed": "Characterization changed from Positive: GenSearch's Positive drew on other documents (another expert call and broker research); this competitor's own view pairs a liquid-cooling opportunity with execution, competitor-M&A and pricing-power risks.",
+ "changes": [
+  "Utility-capacity delays of two or three years vs SemiAnalysis: ~75% of 33.8GW due in 2027 already under construction (SB #65561): conflicting on near-term risk.",
+  "800 VDC risk to AC UPS vs SemiAnalysis: LV UPS (~20–25% of revenue) displaced by MV UPS (SB #65942): consistent.",
+  "First read on Schneider/Eaton cooling M&A as a share threat; no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (order-led growth): → — rack densities to 100 kW or more, but utility delays of two or three years.",
+  "Tenet 4 (services compounding): ↑ — customers pay a premium for reliability over the facility's three to five years lifecycle.",
+  "Tenet 5 (share and execution): ↓ — Schneider/Eaton cooling M&A, 800 VDC risk to UPS, hyperscaler pricing power."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 10 kW-20 kW — Traditional rack density (air cooling suffices); Current; vs AI deployments",
+   "kind": "first_hand",
+   "citation": "[[32 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268866&scope=ANYWHERE&stmt=fse7683&hl=fse7683,fse8087,fse8367,fse8420,fse8665,fse8853,fse9090,fse9271&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 30 kW-50 kW — Rack density where liquid cooling becomes attractive; Current; vs 10 kW-20 kW",
+   "kind": "first_hand",
+   "citation": "[[33 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268866&scope=ANYWHERE&stmt=fse19846&hl=fse19846,fse20124,fse20281,fse20349,fse20537,fse20755,fse20961,fse21022&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 70 kW-100 kW — Rack density requiring direct-to-chip cooling; Current; vs 30 kW-50 kW",
+   "kind": "first_hand",
+   "citation": "[[33 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268866&scope=ANYWHERE&stmt=fse19846&hl=fse19846,fse20124,fse20281,fse20349,fse20537,fse20755,fse20961,fse21022&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 100 kW or more — AI rack density; Current; vs 10 kW-20 kW",
+   "kind": "first_hand",
+   "citation": "[[7 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268866&scope=ANYWHERE&stmt=fse8087&hl=fse8087&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: another two or three years — Project delay when utility capacity is not secured; Current; vs Planned schedule",
+   "kind": "estimate",
+   "citation": "[[13 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-268866&scope=ANYWHERE&stmt=fse11678&hl=fse11678&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8161-b97b-cf0f77afc815",
+  "page_title": "Vertiv - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": "GenSearch answer drew on other documents despite the single-document scope; only this call's cited content kept."
+}

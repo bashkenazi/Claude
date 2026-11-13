@@ -1,0 +1,107 @@
+{
+ "doc_id": "EC-1000000-239635",
+ "ticker": "SPCX",
+ "tier": 2,
+ "sector": "Other Sectors",
+ "title": "Spacecraft GNC Engineer II at Varda Space Industries Optimistic About Expanding Opportunities in In-Orbit Manufacturing and Hypersonic Testing",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-239635",
+ "as_company": "Space Exploration Technologies Corp",
+ "conversation_id": "7093__1794405376180",
+ "expert": "Spacecraft GNC Engineer II at Varda Space Industries (current; launch customer and LEO peer); interview 2026-08-07",
+ "short_expert": "Varda GNC engineer (launch customer)",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "SpaceX",
+   "score": 4.0
+  },
+  {
+   "company": "Varda",
+   "score": 4.0
+  },
+  {
+   "company": "Cislunar Infrastructure",
+   "score": 5.0
+  },
+  {
+   "company": "In-orbit Data Centers",
+   "score": 2.0
+  },
+  {
+   "company": "Rocket Lab",
+   "score": 3.0
+  }
+ ],
+ "verdict": "A current Varda engineer (a SpaceX launch customer, interviewed 2026-08-07) gives no SpaceX figures of his own; he expects Starship online in \"the next few years\" to cut launch cost and sees LEO communications \"a bit saturated\" by Starlink and Amazon.",
+ "summary_variables": {
+  "Starship reuse and launch cost (Tenet 5)": [
+   "🟢 Starship expected online in \"the next few years\" (estimate) as falling launch costs widen in-orbit manufacturing demand; mgmt already had Flight 14 in orbit with 26 V3 satellites (SB #65090): consistent. → Tenet 5 (Starship reuse) ↑ {c2}",
+   "🟢 Varda demand \"almost 50/50\" government hypersonic testing vs pharma (estimate); first read on in-orbit manufacturing demand that rides SpaceX launches. {c4}"
+  ],
+  "Starlink net adds and ARPU": [
+   "🟡 LEO communications \"a bit saturated\" by Starlink and Amazon, hard for new entrants; first read, no subscriber or ARPU figure. → Tenet 4 (Starlink compounds) → {c6}"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Starship timing \"the next few years\" (estimate, interview 2026-08-07) vs mgmt: Flight 14 reached orbit and deployed 26 Starlink V3 satellites (SB #65090, 2026-10-20): later evidence is already ahead of the expert's view.",
+  "First read on in-orbit manufacturing demand mix (almost 50/50 government vs pharma); no earlier expert call or stored row."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 5 (Starship reuse cuts launch cost): ↑ — expects Starship within \"the next few years\" and continued falling launch costs, which enlarge payload demand.",
+  "Tenet 4 (Starlink to ~$30B FY27): → — LEO comms \"a bit saturated\" by Starlink and Amazon supports incumbency, but no subscriber or ARPU figure."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "SPCX",
+   "text": "SpaceX: the next few years — Starship availability; Future; vs Current launch systems",
+   "kind": "estimate",
+   "citation": "[[1 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239635&scope=ANYWHERE&stmt=fse303&hl=fse303&page=1)"
+  },
+  {
+   "ticker": "SPCX",
+   "text": "SpaceX: 10 spacecraft — Hypothetical mission count; Unspecified; vs One spacecraft",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239635)"
+  },
+  {
+   "ticker": "OTHER:Varda Space Industries",
+   "text": "Varda: almost 50/50 — Demand split: pharma vs gov; Current; vs Total interest",
+   "kind": "estimate",
+   "citation": "[[4 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239635&scope=ANYWHERE&stmt=fse6664&hl=fse6664,fse7080,fse7432&page=2)"
+  },
+  {
+   "ticker": "OTHER:Vast",
+   "text": "Vast: 2027 Q1 — Estimated launch date; Future; vs Not stated",
+   "kind": "estimate",
+   "citation": "[[2 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239635&scope=ANYWHERE&stmt=fse6664&hl=fse6664,fse7080,fse7231,fse7829,fse10359,fse16825,fse16919,fse17126,fse17192,fse20034,fse20210,fse20293,fse26724,fse26754,fse28553,fse28553,fse28785&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 2030 — ISS decommissioning; Future; vs Not stated",
+   "kind": "estimate",
+   "citation": "[[5 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239635&scope=ANYWHERE&stmt=fse28553&hl=fse28553,fse28785,fse28912,fse29140&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: dozens — Number of bus providers; Current; vs Not stated",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-239635)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: After five years — In-orbit data center deorbit; Unspecified; vs Boosted system",
+   "kind": "estimate",
+   "citation": "[[8 • Expert Call] ](https://research.alpha-sense.com?docid=EC-1000000-239635&scope=ANYWHERE&stmt=fse26200&hl=fse26200,fse26644,fse26695,fse26724,fse26754&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8129-bbe3-f72a689c2c96",
+  "page_title": "SpaceX - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}

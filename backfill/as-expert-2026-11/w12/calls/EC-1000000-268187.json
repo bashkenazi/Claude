@@ -1,0 +1,127 @@
+{
+ "doc_id": "EC-1000000-268187",
+ "ticker": "CRDO",
+ "tier": 1,
+ "sector": "Hardware A-M",
+ "title": "Principal Engineer at Semtech Corporation Is More Optimistic About Credo\u2019s Diversification Despite Optical DSP Headwinds",
+ "released": "2026-11-05",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-268187",
+ "as_company": "Credo Technology Group Holding Ltd",
+ "conversation_id": "7093__1794403767577",
+ "expert": "Principal Engineer, AI data-center interconnects, Semtech (competitor; current, 2 yrs)",
+ "weight": "Low",
+ "characterization": "Positive",
+ "sentiment": [
+  {
+   "company": "Credo",
+   "score": 4
+  },
+  {
+   "company": "Semtech",
+   "score": 4
+  },
+  {
+   "company": "Marvell",
+   "score": 3
+  },
+  {
+   "company": "Broadcom",
+   "score": 3
+  },
+  {
+   "company": "MaxLinear",
+   "score": 2
+  }
+ ],
+ "verdict": "A competitor engineer (no Credo orders or pricing of his own) puts Credo at 80\u201390% of the AEC business and at five of six major hyperscalers, but sees its optical-DSP line fading toward LPO/NPO/CPO.",
+ "summary_variables": {
+  "AEC durability through 1.6T / Rubin": [
+   "\ud83d\udfe2 **80\u201390% of the AEC business** (estimate), in line with JPM's ~81% (SB #61029) and Edgewater's ~80% at xAI (SB #49503). \u2192 Tenet 1 (AEC base) \u2191",
+   "\ud83d\udfe1 **AEC reach 5\u20137 meters** vs 1.5 m for passive copper at 200G/lane (estimate); Third Bridge put 1.6T AEC reach at ~5-6m (SB #64451): consistent."
+  ],
+  "Optical portfolio (the needle-mover)": [
+   "\ud83d\udd34 **Optical-DSP demand fading** as LPO, NPO and CPO take over, and Credo lacks the **2 nm / 3 nm** nodes Marvell and Broadcom use; conflicts with mgmt's >$100M FY27 optical-DSP line (SB #64381). \u2192 Tenet 2 (ZF Optics \\$1B+) \u2193"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "AEC share 80\u201390% (expert estimate) vs JPM model ~81% (SB #61029) and Edgewater ~80% at xAI (SB #49503): consistent.",
+  "Five of six major hyperscalers (expert) vs mgmt 'deep relationships with 5 hyperscalers' on the 2026-09-01 call (SB #49530): consistent.",
+  "AEC reach 5\u20137 m (expert) vs Third Bridge ~5-6m at 1.6T (SB #64451): consistent.",
+  "Optical DSP 'fading' and a node behind Marvell/Broadcom (expert) vs ex-Inphi exec 'a notch behind Marvell' (SB #64373): consistent; vs mgmt FY27 optical DSP >\\$100M within >\\$600M optical (SB #64381): conflicting."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 1 (AEC base): \u2191 \u2014 80\u201390% AEC share and five of six hyperscalers, no visible AEC challenger (estimate).",
+  "Tenet 2 (ZF Optics \\$1B+): \u2193 \u2014 optical DSP demand seen fading to LPO/NPO/CPO; DSP trails at 40 dB / 2-3 nm. Not quantified.",
+  "Tenet 4 (new products / Dust\u2192CPO): \u2191 \u2014 expert more optimistic on DustPhotonics/Hyperlume photonics diversification; coherent a 5+ year opportunity."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "CRDO",
+   "text": "Credo: 80\u201390% \u2014 Share of AEC business, Current; baseline: Total market",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187&scope=ANYWHERE&stmt=fse17178&hl=fse17178,fse17231&page=2)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo: five of six \u2014 Number of major hyperscalers served, Current; baseline: Total major hyperscalers",
+   "kind": "estimate",
+   "citation": "[1 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187&scope=ANYWHERE&stmt=fse17178&hl=fse17178,fse17231&page=2)"
+  },
+  {
+   "ticker": "CRDO",
+   "text": "Credo: 32 dB \u2014 Supported port loss for DSP, Current; baseline: vs Marvell's 40 dB",
+   "kind": "estimate",
+   "citation": "[9 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187&scope=ANYWHERE&stmt=fse14227&hl=fse14227,fse14312,fse14472&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 1.5 meters \u2014 Maximum regular copper reach, Current; baseline: at 200 Gbps-per-lane",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 5\u20137 meters \u2014 AEC reach, Current; baseline: vs regular copper",
+   "kind": "estimate",
+   "citation": "[17 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187&scope=ANYWHERE&stmt=fse7284&hl=fse7284,fse7407,fse8377,fse8698,fse8893&page=2)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: 15% \u2014 Interconnect share of data-center power, Current; baseline: Total power",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187)"
+  },
+  {
+   "ticker": "INDUSTRY",
+   "text": "Industry: ~20 pJ/bit \u2014 Pluggable energy efficiency, Current; baseline: vs 5 pJ/bit target",
+   "kind": "estimate",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: 40 dB \u2014 Supported port loss for DSP, Current; baseline: vs Credo's 32 dB",
+   "kind": "hearsay",
+   "citation": "[6 \u2022 Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187&scope=ANYWHERE&stmt=fse13381&hl=fse13381,fse17140,fse34122,fse34304,fse34428&page=2)"
+  },
+  {
+   "ticker": "MRVL",
+   "text": "Marvell: ~$5 billion \u2014 Cash on hand, Current; baseline: Not specified",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187)"
+  },
+  {
+   "ticker": "LITE",
+   "text": "Lumentum: $18 billion \u2014 Potential transaction value, Current; baseline: Not specified",
+   "kind": "hearsay",
+   "citation": "[Expert Call](https://research.alpha-sense.com?docid=EC-1000000-268187)"
+  }
+ ],
+ "filed": {
+  "page_id": null,
+  "page_title": "CRDO Thesis - Revised (Clean)"
+ },
+ "status": "done",
+ "note": "Created Expert Calls section (h2 toggle) before Data Sources."
+}

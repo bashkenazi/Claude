@@ -1,0 +1,100 @@
+{
+ "doc_id": "EC-1000000-269675",
+ "ticker": "INTU",
+ "tier": 2,
+ "sector": "Software A-L",
+ "title": "Director at Global Management Consultancy Sees Intuit Activity Staying Flat as Clients Delay Purchases Amid AI Uncertainty",
+ "released": "2026-11-10",
+ "url": "https://research.alpha-sense.com?docid=EC-1000000-269675",
+ "as_company": "Intuit Inc",
+ "conversation_id": "7093__1794405713017",
+ "expert": "Director, global management consultancy; advises ~15 CPG clients on payroll/HCM solution selection (current, adviser)",
+ "weight": "Low",
+ "characterization": "Mixed",
+ "sentiment": [
+  {
+   "company": "Intuit",
+   "score": 3
+  },
+  {
+   "company": "QuickBooks",
+   "score": 4
+  },
+  {
+   "company": "Gusto",
+   "score": 3
+  }
+ ],
+ "verdict": "Intuit activity and QuickBooks client counts were flat y/y across the adviser's ~15 CPG clients in Aug-Oct as companies pause tech purchases to assess AI, and the expert sees pricing flat to slightly lower over 12-18 months.",
+ "summary_variables": {
+  "Paid-customer and platform growth vs 13-14% guide": [
+   "🔴 **Intuit activity and QuickBooks client count flat Aug-Oct y/y** vs +5%-10% (2026-11-08) and +about 50% (2026-11-09) at smaller advisory firms: **conflicting**. → Tenet 2 (core funnel) ↓ [17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse8416&hl=fse8416,fse8531,fse8691,fse8878,fse8920,fse9023,fse9168,fse9260,fse9645,fse9728,fse9831,fse9883&page=2)",
+   "🔴 **Activity flat for calendar 2026 (estimate)**; clients pausing purchases to assess AI. → Tenet 2 (core funnel) ↓ [19 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse14544&hl=fse14544,fse14696,fse14799,fse14993,fse15121,fse15454,fse15645,fse15707,fse16018,fse16112,fse16215,fse16288,fse16342,fse16399&page=2)"
+  ],
+  "Pricing and ARPC (Tenet 2)": [
+   "🔴 **Pricing flat or slightly lower over 12-18 months (estimate)**; seat cuts and licences shared by two to three employees, vs per-client prices +25%-33% (2026-11-09 call): **conflicting**. → Tenet 2 (pricing) ↓ [20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse18665&hl=fse18665,fse18855&page=2)"
+  ]
+ },
+ "characterization_changed": null,
+ "changes": [
+  "Activity flat y/y vs +5%-10% (2026-11-08 advisory firm) and +about 50% (2026-11-09 fund administrator): conflicting.",
+  "Pricing flat to slightly lower (estimate) vs per-client prices +25%-33% (2026-11-09 call) and 2026-08-01 list increases of +13% to +24% (thesis page): conflicting.",
+  "Stickiness stable y/y vs Intuit retention steady at 83% (SB #59455): consistent."
+ ],
+ "inflection": false,
+ "thesis_impact": [
+  "Tenet 2 (core funnel and pricing): ↓ — flat activity and client count, and pricing seen flat to down via seat reductions.",
+  "Tenet 5 (disruption contained): → — share maintained, stickiness stable; AI impact incremental.",
+  "Tenet 1 (mid-market): → — Intuit Enterprise Suite relevant for lower-middle market; PE roll-ups an open question."
+ ],
+ "new_datapoints": [
+  {
+   "ticker": "INTU",
+   "text": "Adviser covers approximately 15 CPG clients",
+   "kind": "first_hand",
+   "citation": "[15 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse3823&hl=fse3823,fse4015,fse4126,fse4484,fse4597,fse4958&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Intuit-related activity flat Aug-Oct 2026 vs a year earlier",
+   "kind": "first_hand",
+   "citation": "[17 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse8416&hl=fse8416,fse8531,fse8691,fse8878,fse8920,fse9023,fse9168,fse9260,fse9645,fse9728,fse9831,fse9883&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "QuickBooks client count and usage flat Aug-Oct 2026 vs a year earlier",
+   "kind": "first_hand",
+   "citation": "[18 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse10072&hl=fse10072,fse10214,fse10317,fse10498,fse10658,fse10723,fse11130,fse11234,fse11337,fse11591,fse11663,fse11785,fse11944,fse12037,fse12420,fse12829,fse13134&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Intuit-related activity expected flat in calendar 2026 vs 2025",
+   "kind": "estimate",
+   "citation": "[19 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse14544&hl=fse14544,fse14696,fse14799,fse14993,fse15121,fse15454,fse15645,fse15707,fse16018,fse16112,fse16215,fse16288,fse16342,fse16399&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Client pricing flat or slightly lower over next 12-18 months",
+   "kind": "estimate",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse18665&hl=fse18665,fse18855&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Some clients share one licence across two to three employees (concurrent licensing)",
+   "kind": "hearsay",
+   "citation": "[20 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse18665&hl=fse18665,fse18855&page=2)"
+  },
+  {
+   "ticker": "INTU",
+   "text": "Outlook stable over the next 60 to 90 days",
+   "kind": "first_hand",
+   "citation": "[12 • Expert Call](https://research.alpha-sense.com?docid=EC-1000000-269675&scope=ANYWHERE&stmt=fse13394&hl=fse13394,fse13505,fse13637,fse13711&page=2)"
+  }
+ ],
+ "filed": {
+  "page_id": "40fa8833-33de-8109-bad2-e521daa8697a",
+  "page_title": "Intuit - Thesis Revised - 2026-11-05"
+ },
+ "status": "done",
+ "note": ""
+}
