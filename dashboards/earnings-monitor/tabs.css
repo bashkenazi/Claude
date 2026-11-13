@@ -272,6 +272,7 @@ table.sd-t td:first-child { min-width: 150px; }
 table.sk-rt th[data-sk] { cursor: pointer; user-select: none; } table.sk-rt th[aria-sort="ascending"]::after { content: " ▲"; } table.sk-rt th[aria-sort="descending"]::after { content: " ▼"; }
 table.sk-rt td:first-child { white-space: nowrap; }
 .sk-how > summary { text-transform: none; letter-spacing: 0; font-size: 13px; color: var(--accent); }
+table.sk-rt td.sk-sig { font-weight: 650; }
 /* Thesis tab */
 .sk-tenets { padding-left: 20px; margin: 6px 0; }
 .sk-tenets > li { margin: 0 0 12px; }
