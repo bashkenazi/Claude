@@ -54,6 +54,7 @@ Routines (Bobby's scheduled tasks; each publishes a page under Notion "Anthropic
 | idea-generator | Idea Generator | Sun 5:00 AM | "Idea Generator —" / "Ideas —" |
 | x-scan | Grok X bot (outside Claude) | varies | "X Idea Scan", "X List Monitor" |
 | output-sweep | Anthropic Output Sweep | daily 11:00 AM | (writes Supabase only; no Notion page) |
+| ai-apps-data | AI Apps Data (apps.srsinvest.com/ai → page db ai/apps_signals) | weekdays 9:47 PM | "AI Apps Data —" (callouts ticker "AI"; no datapoints, no Supabase) |
 
 Archiving (from 2026-11-03): the daily Anthropic Output Sweep reads every run page, loads its datapoints to
 public.research_evidence, its ideas/themes/theses to public.research_ideas, saves the full page to

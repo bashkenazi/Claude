@@ -2457,6 +2457,10 @@
     const d = AP.doc, T = d.tok || {}, O = d.or || {}, A = d.arr || {};
     let h = top + `<p class="aim-lede">The firm’s AI dashboards in one place: GPU rental prices, LLM token prices, OpenRouter token share, lab ARR claims, and the headline findings each dashboard publishes. Figures are copied from each dashboard’s data file on the date shown; open a dashboard for its full history and method.</p>`;
     h += `<div class="summary">${arr(d.calls).map(c => `<div class="stat"><span class="v${c.tone ? ' c-' + esc(c.tone) : ''}">${esc(c.v)}</span><span class="l">${esc(c.l)}</span><span class="l">${esc(c.s)}</span></div>`).join('')}</div>`;
+    // callouts: what changed since the previous nightly run (written by the "AI Apps Data" routine)
+    h += `<div class="aim-tb"><h3>Callouts${d.prev_asof ? ` <span class="sub">since the ${esc(fmtD(d.prev_asof))} run</span>` : ' <span class="sub">4-week changes (first run)</span>'}</h3>` +
+      (arr(d.callouts).length ? `<div class="list">${arr(d.callouts).map(c => `<div class="li"><span class="stripe ${c.tone === 'pos' ? 'pos' : c.tone === 'neg' ? 'neg' : 'inf'}"></span><div class="body">${esc(c.t)}</div>${c.u ? `<div class="side"><a class="ext" href="${esc(c.u)}" target="_blank" rel="noopener">source →</a></div>` : ''}</div>`).join('')}</div>` : none('Nothing in the AI dashboards moved enough to call out since the last run.')) +
+      `<p class="sub">Refreshed nightly by the AI Apps Data routine${arr(d.runs).length ? ` · previous runs: ${arr(d.runs).slice(0, 6).map(r => esc(fmtD(r.asof))).join(', ')}` : ''}.</p></div>`;
     h += `<h3>GPU rental prices: indices and Nebius spot</h3><div id="ap-gpu-body" class="aim-view">${apGpuHtml()}</div>`;
     // token prices + OpenRouter share
     const TS = arr(T.s).map((s, i) => ({ n: s.n, short: s.n.replace(/ \(broad\)/, ''), v: s.v, c: AIM_C[i % AIM_C.length] }));
@@ -2719,6 +2723,7 @@
   function renderThesis() {
     const host = document.getElementById('v-thesis'); if (!host) return;
     thStart();
+    if (!AP.loaded) apLoad(() => { try { renderThesis(); } catch (e) {} });
     const T = TH.doc;
     let h = head('AI thesis', T ? esc(T.title || 'AI thesis') : 'AI thesis', T ? esc(T.subtitle || '') : '');
     if (!T) { host.innerHTML = h + `<section class="panel">${none(esc(TH.err || 'Loading the thesis…'))}</section>`; return; }
@@ -2740,11 +2745,12 @@
         `<div><b>${esc(u.headline || '')}</b> ${esc(u.text || '')}</div>${u.why ? `<div class="sub">Why it matters: ${esc(u.why)}</div>` : ''}${u.proposed_change ? `<div class="sub th-prop">Proposed thesis change: ${esc(u.proposed_change)}</div>` : ''}` +
         `<div class="srcl"><span>Source</span>${esc(u.source || '')}${u.ev_id ? ` · datapoint #${esc(u.ev_id)}` : ''}</div></div>` +
         `<div class="side">${esc(fmtD(u.date))}${(u.status || 'open') === 'open' ? `<div class="th-act"><button type="button" class="btn" data-thu="${esc(u.id)}" data-st="reviewed">Reviewed</button><button type="button" class="btn" data-thu="${esc(u.id)}" data-st="dismissed">Dismiss</button></div>` : ''}</div></div>`).join('')}</div>` : none(TH.show === 'open' ? 'Nothing waiting for review.' : 'No datapoints flagged yet.')) + `</section>`;
-    // 3) signposts
+    // 3) signposts (plus the nightly apps.srsinvest.com reading where one maps to the signpost: ai/apps_signals.signposts)
     const SG = arr(T.signposts);
-    h += `<section class="panel" id="th-sign"><h2>Signposts</h2><p class="sub">What the deck assumed, what would confirm or break it, and the latest read from your datapoints.</p>` +
+    const thApps = id => { const a = ((AP.doc || {}).signposts || {})[id]; return a && a.value ? `<div class="th-apps"><span class="chip">SRS apps</span> ${esc(a.value)}<div class="sub">${esc(fmtD(a.date))} · <a class="ext" href="${esc(a.u)}" target="_blank" rel="noopener">dashboard →</a> · <a href="#ai/apps">AI › SRS apps data</a></div></div>` : ''; };
+    h += `<section class="panel" id="th-sign"><h2>Signposts</h2><p class="sub">What the deck assumed, what would confirm or break it, and the latest read from your datapoints. Rows tagged “SRS apps” add the nightly reading from the firm’s AI dashboards.</p>` +
       `<div class="tbl-wrap"><table class="dt th-sg"><thead><tr><th>Signpost</th><th>Deck baseline</th><th>Bull if</th><th>Bear if</th><th>Latest read</th><th>Status</th></tr></thead><tbody>${SG.map(s => `<tr><td><b>${esc(s.metric)}</b></td><td class="wrap">${esc(s.deck)}</td><td class="wrap c-pos">${esc(s.bull)}</td><td class="wrap c-neg">${esc(s.bear)}</td>` +
-      `<td class="wrap">${s.latest ? `${esc(s.latest.value)}<div class="sub">${esc(fmtD(s.latest.date))}${s.latest.source ? ' · ' + esc(s.latest.source) : ''}</div>` : '<span class="muted">–</span>'}</td><td>${thChip(s.status)}</td></tr>`).join('')}</tbody></table></div></section>`;
+      `<td class="wrap">${s.latest ? `${esc(s.latest.value)}<div class="sub">${esc(fmtD(s.latest.date))}${s.latest.source ? ' · ' + esc(s.latest.source) : ''}</div>` : '<span class="muted">–</span>'}${thApps(s.id)}</td><td>${thChip(s.status)}</td></tr>`).join('')}</tbody></table></div></section>`;
     // 4) pillars
     h += `<section class="panel" id="th-pil"><h2>Why we are bullish on OpenAI and Anthropic</h2><div class="grid3">${arr(T.pillars).map(p => `<div class="theme"><div class="chips">${thChip(p.status)}</div><h3>${esc(p.title)}</h3><p>${esc(p.claim)}</p>${p.since ? `<p class="sub"><b>Since the deck:</b> ${esc(p.since)}</p>` : ''}</div>`).join('')}</div></section>`;
     // 5) cases

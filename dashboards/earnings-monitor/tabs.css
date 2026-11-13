@@ -486,3 +486,6 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 #v-dcrisk .dcr-svg .early { fill: var(--neg); fill-opacity: .75; }
 #v-dcrisk .dcr-svg .later { fill: var(--muted); fill-opacity: .55; }
 #v-dcrisk .dcr-svg .key { fill: var(--accent); }
+
+/* AI thesis: nightly apps.srsinvest.com reading under a signpost */
+.th-apps { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--rule); font-size: 12.5px; color: var(--ink-2); }
