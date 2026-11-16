@@ -55,6 +55,7 @@ Routines (Bobby's scheduled tasks; each publishes a page under Notion "Anthropic
 | x-scan | Grok X bot (outside Claude) | varies | "X Idea Scan", "X List Monitor" |
 | output-sweep | Anthropic Output Sweep | daily 11:00 AM | (writes Supabase only; no Notion page) |
 | ai-apps-data | AI Apps Data (apps.srsinvest.com/ai → page db ai/apps_signals) | weekdays 9:47 PM | "AI Apps Data —" (callouts ticker "AI"; no datapoints, no Supabase) |
+| thesis-tracker | Thesis tracker (new Supabase datapoints → company thesis pages; flags → page db thesis_watch) | weekdays 8:45 AM, 2:45 PM, 6:45 PM | "Thesis Tracker —" (routine name "Thesis tracker"; callouts = its 🎯/🟢/🔴/🔄/⚔️ lines with tickers; themes from 🧵; by_sector = its "Changes by company" lines with SB ids; no Supabase load. It publishes a page only when something was flagged, so a day with no page is NOT "missed": take status and last_run from page db thesis_watch_meta/tracker (last_run, runs[]) and show "nothing material" for those runs) |
 
 Archiving (from 2026-11-03): the daily Anthropic Output Sweep reads every run page, loads its datapoints to
 public.research_evidence, its ideas/themes/theses to public.research_ideas, saves the full page to
