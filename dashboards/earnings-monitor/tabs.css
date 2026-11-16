@@ -489,3 +489,9 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 
 /* AI thesis: nightly apps.srsinvest.com reading under a signpost */
 .th-apps { margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--rule); font-size: 12.5px; color: var(--ink-2); }
+
+/* routines-overview v1 */
+.rt-t td { vertical-align: top; } .rt-t td.wrap { min-width: 200px; max-width: 340px; white-space: normal; }
+.rt-t td:nth-child(2) { white-space: normal; min-width: 130px; max-width: 220px; } .rt-t td:nth-child(5) { min-width: 220px; max-width: 320px; }
+.rt-what { border-top: 0; padding-top: 2px; } .rt-what > summary { font-size: 11.5px; text-transform: none; letter-spacing: 0; color: var(--accent); font-weight: 560; }
+.rt-what p { margin: 4px 0 0; max-width: 70ch; }

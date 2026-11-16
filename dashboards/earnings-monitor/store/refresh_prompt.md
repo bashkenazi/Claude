@@ -57,6 +57,14 @@ Routines (Bobby's scheduled tasks; each publishes a page under Notion "Anthropic
 | ai-apps-data | AI Apps Data (apps.srsinvest.com/ai → page db ai/apps_signals) | weekdays 9:47 PM | "AI Apps Data —" (callouts ticker "AI"; no datapoints, no Supabase) |
 | thesis-tracker | Thesis tracker (new Supabase datapoints → company thesis pages; flags → page db thesis_watch) | weekdays 8:45 AM, 2:45 PM, 6:45 PM | "Thesis Tracker —" (routine name "Thesis tracker"; callouts = its 🎯/🟢/🔴/🔄/⚔️ lines with tickers; themes from 🧵; by_sector = its "Changes by company" lines with SB ids; no Supabase load. It publishes a page only when something was flagged, so a day with no page is NOT "missed": take status and last_run from page db thesis_watch_meta/tracker (last_run, runs[]) and show "nothing material" for those runs) |
 
+Routines tab overview (Bobby, 2026-11-16: "include all my routines, even if it's not related to this artifact ... the one place
+where I see what agents I have running regularly, if they're running correctly, and what their last output was"): the tab's default
+view "All routines" (tabs.js marker "routines-overview v1") lists EVERY scheduled task live in the browser via the Claude Code Remote
+list_triggers tool (saved copy in page db routines_live/latest), with health, last run, next run and last output. Nothing to build
+for it; keep tabs/routines.json exactly as above (one entry per routine that publishes pages). When a new routine that publishes
+pages is added to the table above, also add its name pattern to RT_MATCH in tabs.js so its row links to its page.
+The Today tab's "Thesis watch" panel (marker "thesis-watch v1") reads page db thesis_watch live; nothing to build.
+
 Archiving (from 2026-11-03): the daily Anthropic Output Sweep reads every run page, loads its datapoints to
 public.research_evidence, its ideas/themes/theses to public.research_ideas, saves the full page to
 public.output_sweep_ledger (content_md), then MOVES the page to Anthropic Output › Archived

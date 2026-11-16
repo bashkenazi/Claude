@@ -115,6 +115,43 @@
       <div class="grid2 mk-short"><div><h3 class="c-pos">Leading</h3>${arr(M.leaders).slice(0, 3).map(row).join('')}</div><div><h3 class="c-neg">Lagging</h3>${arr(M.laggards).slice(0, 3).map(row).join('')}</div></div>
       ${full}</section>`;
   }
+  /* thesis-watch v1: company thesis tracker flags (db collection thesis_watch), shown on Today */
+  const TWX = { started: false, items: [], meta: null, show: 'open', db: null };
+  function twxStart() {
+    if (TWX.started) return; TWX.started = true;
+    if (!(window.claude && typeof window.claude.use === 'function')) return;
+    window.claude.use('db').then(db => { if (!db) return; TWX.db = db;
+      const rr = () => { const v = document.getElementById('v-today'); if (v && v.classList.contains('on')) { try { renderToday(); } catch (e) {} } };
+      db.collection('thesis_watch').onSnapshot(snap => { TWX.items = snap.docs.map(d => ({ id: d.id, ...JSON.parse(JSON.stringify(d.data())) })).sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')) || String(b.created || '').localeCompare(String(a.created || ''))); rr(); }, () => {});
+      db.collection('thesis_watch_meta').onSnapshot(snap => { const d = snap.docs.find(x => x.id === 'tracker'); TWX.meta = d ? JSON.parse(JSON.stringify(d.data())) : null; rr(); }, () => {});
+    }).catch(() => {});
+  }
+  function twxPanel() {
+    twxStart();
+    const open = TWX.items.filter(u => (u.status || 'open') === 'open'), xs = (TWX.show === 'open' ? open : TWX.items).slice(0, 40);
+    const dir = u => u.direction === 'strengthens' ? 'pos' : u.direction === 'weakens' ? 'neg' : 'mix';
+    const lab = u => (u.direction === 'strengthens' ? 'Supports' : u.direction === 'weakens' ? 'Against' : 'Changes') + (Number(u.strength) === 2 ? ' (strong)' : '');
+    const last = TWX.meta && TWX.meta.last_run ? `last run ${esc(fmtD(String(TWX.meta.last_run).slice(0, 10)))}` : 'not run yet';
+    return `<section class="panel" id="thesis-watch"><div class="panel-h"><h2>Thesis watch <span class="muted">${open.length} to review · ${last}</span></h2>` +
+      `<div class="seg" role="group" aria-label="Show"><button type="button" data-tws="open" aria-pressed="${TWX.show === 'open'}">To review</button><button type="button" data-tws="all" aria-pressed="${TWX.show === 'all'}">All (${TWX.items.length})</button></div></div>` +
+      `<p class="sub">New datapoints that materially support, contradict or change a company thesis. The tracker adds each one to the thesis page and logs any tenet or conviction change it made.</p>` +
+      (xs.length ? `<div class="list">${xs.map(u => `<div class="li"><span class="stripe ${dir(u)}"></span><div class="body">` +
+        `<div class="chips">${tk(u.ticker)}<span class="chip ${dir(u) === 'pos' ? 's-positive' : dir(u) === 'neg' ? 's-negative' : 's-mixed'}">${esc(lab(u))}</span>${u.tenet ? `<span class="chip">${esc(u.tenet)}</span>` : ''}${u.read_across_from ? `<span class="chip out">via ${esc(u.read_across_from)}</span>` : ''}${(u.status || 'open') !== 'open' ? `<span class="chip out">${esc(u.status)}</span>` : ''}</div>` +
+        `<div><b>${esc(u.headline || '')}</b></div>${u.why ? `<div class="sub">Why it matters: ${esc(u.why)}</div>` : ''}` +
+        `${u.action ? `<div class="sub">On the thesis page: ${esc(u.action)}</div>` : ''}${u.conviction && u.conviction.to != null ? `<div class="sub th-prop">Conviction ${esc(u.conviction.tenet || '')}: ${esc(u.conviction.from)} → ${esc(u.conviction.to)}/10</div>` : ''}` +
+        `<div class="srcl"><span>Source</span>${esc(u.source || '')}${u.ev_id ? ` · SB #${esc(u.ev_id)}` : ''}${u.page_url ? ` · <a class="ext" href="${esc(u.page_url)}" target="_blank" rel="noopener">${esc(u.page_title || 'Thesis page')} →</a>` : ''}</div></div>` +
+        `<div class="side">${esc(fmtD(u.date))}${(u.status || 'open') === 'open' ? `<div class="th-act"><button type="button" class="btn" data-twu="${esc(u.id)}" data-st="reviewed">Reviewed</button><button type="button" class="btn" data-twu="${esc(u.id)}" data-st="dismissed">Dismiss</button></div>` : ''}</div></div>`).join('')}</div>`
+        : none(TWX.show === 'open' ? 'Nothing waiting for review.' : 'No thesis flags yet.')) + `</section>`;
+  }
+  function twxBind() {
+    const host = document.getElementById('thesis-watch'); if (!host) return;
+    host.querySelectorAll('[data-tws]').forEach(b => b.addEventListener('click', () => { TWX.show = b.dataset.tws; renderToday(); }));
+    host.querySelectorAll('[data-twu]').forEach(b => b.addEventListener('click', async () => {
+      const u = TWX.items.find(x => x.id === b.dataset.twu); if (!u || !TWX.db) return; b.disabled = true;
+      const { id, ...rest } = u;
+      try { await TWX.db.collection('thesis_watch').doc(id).set({ ...rest, status: b.dataset.st, reviewed_at: new Date().toISOString() }); } catch (x) { b.disabled = false; }
+    }));
+  }
   function renderToday() {
     const digs = arr(TODAY.digests).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
     const latestBySkill = new Map();
@@ -152,12 +189,14 @@
       `<div class="runs">${strip}</div>` +
       `<div class="grid3">${col('pos', 'Most positive')}${col('neg', 'Most negative')}${col('inf', 'Inflections')}</div>` +
       (calls.some(c => kindOf(c) === 'oth') ? `<div>${col('oth', 'Other callouts')}</div>` : '') +
+      twxPanel() +
       `<div class="panel"><div class="panel-h"><h2>Latest themes</h2><a href="#ideas">All themes →</a></div>${themes.length ? `<div class="list">${lim(themes, 6).map(t =>
         `<div class="li"><div class="body"><b>${esc(t.theme)}</b>${arr(t.winners).length ? ' ' + arr(t.winners).slice(0, 4).map(x => tk(x, 'up')).join(' ') : ''}${arr(t.losers).length ? ' ' + arr(t.losers).slice(0, 4).map(x => tk(x, 'dn')).join(' ') : ''}<div class="sub">${srcList(t).length ? `<b class="srcb">${esc(srcList(t).slice(0, 3).join(' · '))}</b> · ` : ''}${esc(sk(t.skill))} · ${fmtD(t.date)}</div></div></div>`).join('')}</div>` : none('No themes in the latest digests.')}</div>` +
       `<div class="grid2"><div class="panel"><div class="panel-h"><h2>Recent prints</h2><a href="#earnings">All earnings →</a></div>${earn.length ? `<div class="list">${earn.map(it =>
         `<div class="li"><div class="body">${tk(it.ticker)} <b>${esc(it.company)}</b> <span class="sub">${esc(it.quarter)}</span><div>${attr(it.headline)}</div>${srcLine({ sources: arr(it.sources).slice(0, 5) })}</div><div class="side chips">${tone(it)}<span>${fmtD(it.date)}</span></div></div>`).join('')}</div>` : none('No prints in the last four days.')}</div>` +
       `<div class="panel"><div class="panel-h"><h2>Reporting this week</h2><span class="muted">Source: ${esc((arr(PR.upcoming)[0] || {}).source || 'FactSet calendar')} · <a href="#prep">Full calendar →</a></span></div>${up.length ? `<div class="list">${up.map(u =>
         `<div class="li"><div class="body">${tk(u.ticker)} <b>${esc(u.company)}</b>${u.bogeys ? `<div class="sub">${esc(u.bogeys)}</div>` : ''}</div><div class="side">${fmtDW(u.date)}${u.time ? ' · ' + esc(u.time) : ''}${u.date_status === 'projected' ? ' · projected' : ''}</div></div>`).join('')}</div>` : none('No covered names report in the next seven days.')}</div></div>`;
+    twxBind();
   }
 
   // ================= THEMES =================
@@ -1481,15 +1520,150 @@
 
   // ================= ROUTINES: one page per scheduled routine =================
   window.__onFull = () => { const h = location.hash || ''; if (h.startsWith('#routines')) renderRoutines(); else if (h.startsWith('#stocks/') && !/\/(thesis|qr|datapoints|earnings|management)$/.test(h)) renderStocks(); };
+
+  /* routines-overview v1: every scheduled task, live from Claude Code Remote list_triggers (saved copy in page db routines_live/latest) */
+  const RTL = { st: 'idle', tasks: [], at: '', src: '', err: '' };
+  const RTL_SRV = 'Claude Code Remote';
+  const RT_MATCH = [[/research (inbox )?(folder )?digest|research folder/i, 'research-folder-digest'], [/semianalysis/i, 'semianalysis-digest'], [/tech specialist/i, 'tech-email-digest-new'],
+    [/feedly/i, 'feedly-digest'], [/consensus revision/i, 'consensus-revisions'], [/idea gen/i, 'idea-generator'], [/output sweep/i, 'output-sweep'], [/sell-?side/i, 'sellside-folder-digest'],
+    [/alphasense digest/i, 'alphasense-digest'], [/universe (datapoint )?sweep/i, 'universe-sweep'], [/ai build/i, 'ai-build-sweep'], [/openclaw/i, 'openclaw-datapoints'], [/blog sweep/i, 'blog-sweep'],
+    [/morning/i, 'morning'], [/substack/i, 'substack-datapoints'], [/ai apps data/i, 'ai-apps-data'], [/^thesis tracker/i, 'thesis-tracker'], [/twitter/i, 'x-scan']];
+  const RT_DEST = [[/twitter_runs/, '𝕏 Feed tab', '#x'], [/insider_signals/, 'Mgmt & insiders tab', '#mgmt'], [/thesis_watch/, 'Today › Thesis watch', '#today'], [/collection "thesis"/, 'AI tab › AI thesis', '#ai'],
+    [/kpi_profiles/, 'Stocks › KPIs & guidance', '#stocks'], [/apps_signals/, 'AI tab › SRS apps data', '#ai'], [/Refresh Bobby Ashkenazi's "Bobby Tech Daily"/, 'This page (all tabs)', '#today'],
+    [/Thesis Revised/, 'Notion thesis pages', ''], [/Anthropic Output/, 'Notion › Anthropic Output', ''], [/Openclaw Output/, 'Notion › Openclaw Output', ''], [/research_evidence/, 'Supabase datapoints', '#datapoints'], [/store\/ideas|ledger\.json/, 'GitHub repo (ideas ledger)', '']];
+  const rtPay = r => { let p = r && (r.payload !== undefined ? r.payload : r); if (p && Array.isArray(p.content) && p.content[0] && p.content[0].text) p = p.content[0].text; if (typeof p === 'string') { try { p = JSON.parse(p); } catch (e) {} } return p; };
+  const rtET = ms => { if (ms == null || !isFinite(ms)) return ''; try { return new Date(ms).toLocaleString('en-US', { timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' ET'; } catch (e) { return new Date(ms).toISOString().slice(0, 16); } };
+  const rtMs = v => { const n = Date.parse(v || ''); return isFinite(n) ? n : null; };
+  function rtCron(expr) {
+    let tz = 'UTC', s = String(expr || '').trim(); const m = s.match(/^CRON_TZ=(\S+)\s+(.*)$/); if (m) { tz = m[1]; s = m[2]; }
+    const f = s.split(/\s+/); if (f.length !== 5) return null;
+    const rng = (x, lo, hi) => { const out = new Set(); x.split(',').forEach(p => { let [r, st] = p.split('/'); st = +st || 1; let a, b; if (r === '*') { a = lo; b = hi; } else if (r.includes('-')) { [a, b] = r.split('-').map(Number); } else { a = +r; b = st > 1 ? hi : a; } for (let i = a; i <= b; i += st) out.add(i); }); return out; };
+    const dow = rng(f[4], 0, 7); if (dow.has(7)) dow.add(0);
+    return { tz, f, min: [...rng(f[0], 0, 59)].sort((a, b) => a - b), hr: rng(f[1], 0, 23), dom: rng(f[2], 1, 31), mon: rng(f[3], 1, 12), dow };
+  }
+  function rtParts(ms, tz) { const p = {}; new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', weekday: 'short' }).formatToParts(new Date(ms)).forEach(x => { p[x.type] = x.value; }); return { mo: +p.month, d: +p.day, h: +p.hour % 24, mi: +p.minute, wd: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(p.weekday) }; }
+  function rtPrev(expr, now) {   // last scheduled fire time at or before now
+    const c = rtCron(expr); if (!c) return null;
+    const domAll = c.f[2] === '*', dowAll = c.f[4] === '*';
+    let t = Math.floor(now / 3600e3) * 3600e3;
+    try {
+      for (let i = 0; i < 24 * 9; i++, t -= 3600e3) {
+        const p = rtParts(t, c.tz);
+        const dayOk = (domAll || dowAll) ? (c.dom.has(p.d) && c.dow.has(p.wd)) : (c.dom.has(p.d) || c.dow.has(p.wd));
+        if (!c.mon.has(p.mo) || !dayOk || !c.hr.has(p.h)) continue;
+        for (let k = c.min.length - 1; k >= 0; k--) { const ms = t + (c.min[k] - p.mi) * 60e3; if (ms <= now) return ms; }
+      }
+    } catch (e) {}
+    return null;
+  }
+  function rtHuman(expr, once) {
+    if (!expr) return once ? 'Once, ' + rtET(rtMs(once)) : 'On demand (no schedule)';
+    const c = rtCron(expr); if (!c) return expr;
+    const z = /New_York/.test(c.tz) ? 'ET' : /Los_Angeles/.test(c.tz) ? 'PT' : c.tz === 'UTC' ? 'UTC' : c.tz.split('/').pop();
+    const DN = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const days = c.f[2] === '*' && c.f[4] === '*' ? 'Daily' : c.f[4] === '1-5' ? 'Weekdays' : c.f[2] === '*' ? [...c.dow].filter(x => x < 7).sort((a, b) => a - b).map(d => DN[d] + 's').join(', ') : 'Day ' + c.f[2] + ' of the month';
+    if (c.f[1] === '*' || c.f[1].includes('/')) return days + ', ' + (c.f[1] === '*' ? 'hourly' : 'every ' + c.f[1].split('/')[1] + ' hours') + ' at :' + String(c.min[0]).padStart(2, '0') + ' ' + z;
+    const times = [...c.hr].sort((a, b) => a - b).flatMap(h => c.min.map(m => ((h % 12) || 12) + ':' + String(m).padStart(2, '0') + (h < 12 ? ' AM' : ' PM')));
+    return days + ' ' + times.join(', ') + ' ' + z;
+  }
+  function rtSlim(t) {
+    const pr = String((t.derived_state && t.derived_state.prompt) || t.prompt || '');
+    const lr = t.last_run || null;
+    return { id: t.id, name: t.name || t.id, cron: t.cron_expression || '', once: t.run_once_at || '', enabled: t.enabled !== false, next: t.next_run_at || '', last_fired: t.last_fired_at || '',
+      last_run: lr ? { status: lr.status || '', fired_at: lr.fired_at || '', finished_at: lr.finished_at || '', session_id: lr.session_id || '', failure_reason: lr.failure_reason || '' } : null,
+      ended: t.ended_reason || '', susp: t.suspension_reason || '', created: t.created_at || '', computer: !!t.bound_device,
+      dest: RT_DEST.filter(([re]) => re.test(pr)).map(([, l, h]) => [l, h]).slice(0, 3), what: pr.replace(/\s+/g, ' ').slice(0, 420) };
+  }
+  function rtLoad() {
+    if (RTL.st !== 'idle') return; RTL.st = 'loading';
+    (async () => {
+      let db = null, mcp = null;
+      try { db = window.claude && window.claude.use ? await window.claude.use('db') : null; } catch (e) {}
+      try {
+        mcp = window.claude && window.claude.use ? await window.claude.use('mcp') : null;
+        if (!mcp) throw new Error('no connectors');
+        let cur = null, n = 0, all = [];
+        do {
+          const r = rtPay(await mcp.callTool(RTL_SRV, 'list_triggers', cur ? { limit: 100, cursor: cur } : { limit: 100 }, { cache: false }));
+          if (!r || !Array.isArray(r.data)) throw new Error('unexpected reply');
+          all = all.concat(r.data); cur = r.has_more ? r.next_cursor : null;
+        } while (cur && ++n < 10);
+        RTL.tasks = all.filter(t => !(t.run_once_at && !t.enabled)).map(rtSlim); RTL.at = new Date().toISOString(); RTL.src = 'live'; RTL.st = 'ok';
+        if (db) { try { await db.collection('routines_live').doc('latest').set({ at: RTL.at, tasks: RTL.tasks }); } catch (e) {} }
+      } catch (e) {
+        try {
+          const sn = db ? await db.collection('routines_live').doc('latest').get() : null;
+          if (sn && sn.exists) { const d = JSON.parse(JSON.stringify(sn.data())); RTL.tasks = arr(d.tasks); RTL.at = d.at || ''; RTL.src = 'saved'; RTL.st = 'ok'; }
+          else { RTL.st = 'err'; RTL.err = 'Your scheduled tasks could not be listed in this view. Open this page on claude.ai with the Claude Code Remote connector.'; }
+        } catch (x) { RTL.st = 'err'; RTL.err = 'Your scheduled tasks could not be listed in this view.'; }
+      }
+      if ((location.hash || '').startsWith('#routines')) renderRoutines();
+    })();
+  }
+  function rtHealth(t, rt) {
+    const lr = t.last_run, st = String(lr && lr.status || '').toUpperCase(), pageMs = rt ? rtMs(String(rt.last_run || '').replace(/^(\d{4}-\d\d-\d\dT\d\d:\d\d)$/, '$1:00-05:00')) : null;
+    if (!t.enabled) return ['paused', 'Paused', t.ended ? 'Ended: ' + t.ended.replace(/_/g, ' ') : t.susp ? 'On hold: ' + t.susp.replace(/_/g, ' ') : 'Turned off'];
+    if (lr && /RUNNING|PENDING|QUEUED|STARTED|IN_PROGRESS/.test(st) && !lr.finished_at) return ['run', 'Running now', 'Started ' + rtET(rtMs(lr.fired_at))];
+    const now = Date.now(), prev = t.cron ? rtPrev(t.cron, now) : null;
+    const fired = Math.max(rtMs(lr && lr.fired_at) || 0, rtMs(t.last_fired) || 0, pageMs || 0) || null;
+    if (prev && now - prev > 90 * 60e3 && (fired == null || fired < prev - 15 * 60e3)) return ['miss', 'Missed', 'Was due ' + rtET(prev) + (fired != null ? '; last fired ' + rtET(fired) : '; never fired')];
+    if (/FAIL|ERROR|CANCEL|TIMEOUT/.test(st)) return ['fail', 'Failed', (lr.failure_reason && !/UNSPECIFIED/.test(lr.failure_reason) ? lr.failure_reason.replace(/^ROUTINE_RUN_FAILURE_REASON_/, '').replace(/_/g, ' ').toLowerCase() : 'last run failed')];
+    if (/SUCCEEDED|SUCCESS|COMPLETED/.test(st)) return ['ok', 'OK', ''];
+    if (pageMs && !lr) return ['ok', 'OK', 'output page ' + rtET(pageMs)];
+    if (fired == null) return ['new', 'Not run yet', t.next ? 'First run ' + rtET(rtMs(t.next)) : ''];
+    return ['ok', 'Fired', 'no run record'];
+  }
+  const RT_CHIP = { ok: 's-positive', run: 'a-aligned', miss: 's-mixed', fail: 's-negative', paused: 'out', new: 'a-partial' };
+  const RT_ORD = { fail: 0, miss: 1, run: 2, ok: 3, new: 4, paused: 5 };
+  function rtOverview(list) {
+    rtLoad();
+    const byKey = new Map(list.map(r => [r.key, r]));
+    const used = new Set();
+    const rows = RTL.tasks.map(t => {
+      const m = RT_MATCH.find(([re]) => re.test(t.name)); const key = m ? m[1] : null; const rt = key ? byKey.get(key) : null; if (rt) used.add(key);
+      return { t, rt, h: rtHealth(t, rt) };
+    });
+    list.filter(r => !used.has(r.key)).forEach(rt => rows.push({ t: null, rt, h: rt.status === 'missed' ? ['miss', 'No new output', 'Latest page older than its schedule'] : rt.status === 'ok' ? ['ok', 'OK', ''] : ['new', esc(rt.status || '–'), ''] }));
+    rows.sort((a, b) => (RT_ORD[a.h[0]] - RT_ORD[b.h[0]]) || String(a.t ? a.t.next : '~').localeCompare(String(b.t ? b.t.next : '~')) || String(a.t ? a.t.name : a.rt.name).localeCompare(String(b.t ? b.t.name : b.rt.name)));
+    const cnt = k => rows.filter(r => r.h[0] === k).length;
+    const live = RTL.st === 'ok' ? (RTL.src === 'live' ? `Live from your scheduled tasks · ${esc(rtET(rtMs(RTL.at)))}` : `Saved copy from ${esc(rtET(rtMs(RTL.at)))} (live list not available in this view)`) : RTL.st === 'err' ? esc(RTL.err) : 'Loading your scheduled tasks…';
+    const stats = `<div class="summary"><div class="stat"><span class="v">${rows.length}</span><span class="l">Routines</span></div><div class="stat"><span class="v c-pos">${cnt('ok')}</span><span class="l">Running fine</span></div><div class="stat"><span class="v c-neg">${cnt('fail') + cnt('miss')}</span><span class="l">Need attention (failed or missed)</span></div><div class="stat"><span class="v">${cnt('run')}</span><span class="l">Running now</span></div><div class="stat"><span class="v">${cnt('paused')}</span><span class="l">Paused</span></div></div>`;
+    const outCell = r => {
+      const bits = [];
+      if (r.rt) {
+        const run = arr(r.rt.runs)[0];
+        bits.push(run ? `<a href="#routines/${esc(r.rt.key)}">${esc(run.title || run.date)}</a>${run.url ? ' ' + link(run.url, 'Notion') : ''}` : `<a href="#routines/${esc(r.rt.key)}">No run page yet</a>`);
+        if (r.rt.status === 'missed' && r.t) bits.push('<span class="chip s-mixed">No new output page</span>');
+      }
+      if (r.t && arr(r.t.dest).length && !(r.rt && arr(r.rt.runs).length)) bits.push(arr(r.t.dest).map(([l, h]) => h ? `<a href="${esc(h)}">${esc(l)}</a>` : esc(l)).join(' · '));
+      const lr = r.t && r.t.last_run; if (lr && lr.session_id) bits.push(`<a class="ext" href="https://claude.ai/code/session_${esc(String(lr.session_id).replace(/^cse_/, ''))}" target="_blank" rel="noopener">Run log →</a>`);
+      return bits.join('<br>') || '<span class="sub">–</span>';
+    };
+    const body = rows.map(r => {
+      const t = r.t, name = t ? t.name : r.rt.name, sched = t ? rtHuman(t.cron, t.once) : (r.rt.schedule || ''), lr = t && t.last_run;
+      const fired = t ? (rtMs(lr && lr.fired_at) || rtMs(t.last_fired)) : null, fin = rtMs(lr && lr.finished_at);
+      const dur = fired && fin && fin > fired ? ' · ' + Math.max(1, Math.round((fin - fired) / 60e3)) + ' min' : '';
+      return `<tr><td class="wrap"><b>${esc(name)}</b><div class="sub">${esc(sched)}${t && t.computer ? ' · needs your computer' : ''}${t ? '' : ' · no matching scheduled task (output pages only)'}</div>` +
+        (t && t.what ? `<details class="rt-what"><summary>What it does</summary><p class="sub">${esc(t.what)}${t.what.length >= 420 ? '…' : ''}</p></details>` : '') + `</td>` +
+        `<td><span class="chip ${RT_CHIP[r.h[0]] || 'out'}">${esc(r.h[1])}</span>${r.h[2] ? `<div class="sub">${esc(r.h[2])}</div>` : ''}</td>` +
+        `<td class="nowrap">${fired ? esc(rtET(fired)) + `<div class="sub">${esc((lr && lr.status ? String(lr.status).replace(/^ROUTINE_RUN_STATUS_/, '').toLowerCase() : 'fired') + dur)}</div>` : (r.rt && r.rt.last_run ? esc(String(r.rt.last_run).replace('T', ' ').replace(/:00(\.\d+)?Z$/, ' UTC')) + '<div class="sub">latest output page</div>' : '<span class="sub">–</span>')}</td>` +
+        `<td class="nowrap">${t && t.enabled && t.next ? esc(rtET(rtMs(t.next))) : '<span class="sub">–</span>'}</td>` +
+        `<td class="wrap">${outCell(r)}</td></tr>`;
+    }).join('');
+    return `<section class="panel" id="rt-all"><div class="panel-h"><h2>All routines</h2><span class="muted">${live}</span></div>` +
+      `<p class="sub" style="margin:0">Every agent you have on a schedule, whatever it feeds: whether it ran when it should have, how its last run ended, when it runs next and where its last output is. Pick a routine on the left for its full output.</p>` +
+      stats + (rows.length ? `<div class="tbl-wrap"><table class="dt rt-t"><thead><tr><th>Routine</th><th>Health</th><th>Last run</th><th>Next run</th><th>Last output</th></tr></thead><tbody>${body}</tbody></table></div>` : none(RTL.st === 'loading' ? 'Loading…' : 'No routines found.')) +
+      `<p class="sub">Health: Missed = no run within 90 minutes of a scheduled time; Failed = the last run ended in an error; OK = the last run finished. A run that finishes can still produce nothing new: the Last output column and each routine's page show that.</p></section>`;
+  }
   function renderRoutines() {
     const RT = D.routines || {}, list = arr(RT.routines);
     const host = document.getElementById('v-routines');
-    const key = ((location.hash || '').split('/')[1] || (list[0] && list[0].key) || '');
-    const cur = list.find(r => r.key === key) || list[0];
+    const key = ((location.hash || '').split('/')[1] || 'all');
+    const cur = key === 'all' ? null : (list.find(r => r.key === key) || null);
     const dotCls = st => st === 'ok' ? 'fresh' : st === 'missed' ? 'stale' : 'aging';
     const sent = s => s === 'positive' ? 'pos' : s === 'negative' ? 'neg' : 'mix';
-    const nav = `<nav class="rt-nav" aria-label="Routines">${list.map(r => `<a href="#routines/${esc(r.key)}"${cur && r.key === cur.key ? ' aria-current="page"' : ''}><i class="dot ${dotCls(r.status)}"></i><span><b>${esc(r.name)}</b><span class="sub">${esc(r.schedule || '')}</span></span></a>`).join('')}</nav>`;
-    let body = none('No routine output collected yet.');
+    const nav = `<nav class="rt-nav" aria-label="Routines"><a href="#routines/all"${!cur ? ' aria-current="page"' : ''}><i class="dot fresh"></i><span><b>All routines</b><span class="sub">Health of every scheduled agent</span></span></a>${list.map(r => `<a href="#routines/${esc(r.key)}"${cur && r.key === cur.key ? ' aria-current="page"' : ''}><i class="dot ${dotCls(r.status)}"></i><span><b>${esc(r.name)}</b><span class="sub">${esc(r.schedule || '')}</span></span></a>`).join('')}</nav>`;
+    let body = cur ? none('No routine output collected yet.') : rtOverview(list);
     if (cur) {
       const runs = lim(arr(cur.runs).filter(r => inWin(r.date, null)), 14);
       const runIx = Math.min(+((location.hash || '').split('/')[2] || 0), Math.max(0, runs.length - 1));
@@ -1513,7 +1687,7 @@
         '') +
         (runs.length ? `<section class="panel"><h2>Recent runs</h2><table class="dt"><thead><tr><th>Run</th><th>Window</th><th class="n">Datapoints</th><th>Supabase</th></tr></thead><tbody>${runs.map((r, i) => `<tr><td><a href="#routines/${esc(cur.key)}/${i}">${esc(r.title || r.date)}</a> ${link(r.url, '')}</td><td class="sub">${esc(r.window || '')}</td><td class="n">${esc(r.datapoint_count ?? '')}</td><td class="sub">${esc(r.supabase_line || '')}</td></tr>`).join('')}</tbody></table></section>` : '');
     }
-    host.innerHTML = head('Routines' + (RT.as_of ? ' · ' + esc(RT.as_of) : ''), 'Your scheduled research routines', 'One page per routine: its latest call-outs, themes and datapoints, whether it ran on schedule, and its recent runs. The Daily moves reasons are drawn from these first.') +
+    host.innerHTML = head('Routines' + (RT.as_of ? ' · ' + esc(RT.as_of) : ''), 'Every agent you run on a schedule', 'All your scheduled routines in one place: whether each ran when it should, how its last run ended and where its last output is, plus one page per research routine with its latest call-outs, themes and datapoints. The Daily moves reasons are drawn from these first.') +
       `<div class="rt-wrap">${nav}<div class="rt-body">${body}</div></div>`;
   }
 
