@@ -1,6 +1,56 @@
-{"rule": "A name surfaced as a long or short is not re-surfaced as new for 8 weeks.",
- "runs": [{"date": "2026-11-13",
-  "longs": ["992-HK", "VRT-US", "000660-KR"],
-  "shorts": ["009150-KR", "300308-CN", "3436-JP", "CRDO-US", "MRVL-US"],
-  "runners_up_long": ["HPQ-US", "2382-TW", "NTAP-US"],
-  "runners_up_short": ["LRCX-US", "ASML-NL", "NOW-US"]}]}
+{
+ "rule": "A name surfaced as a long or short is not re-surfaced as new for 8 weeks.",
+ "runs": [
+  {
+   "date": "2026-11-13",
+   "longs": [
+    "992-HK",
+    "VRT-US",
+    "000660-KR"
+   ],
+   "shorts": [
+    "009150-KR",
+    "300308-CN",
+    "3436-JP",
+    "CRDO-US",
+    "MRVL-US"
+   ],
+   "runners_up_long": [
+    "HPQ-US",
+    "2382-TW",
+    "NTAP-US"
+   ],
+   "runners_up_short": [
+    "LRCX-US",
+    "ASML-NL",
+    "NOW-US"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "longs": [
+    "SANM-US",
+    "2345-TW",
+    "9984-JP"
+   ],
+   "shorts": [
+    "6920-JP",
+    "3665-TW",
+    "3110-JP",
+    "NOW-US",
+    "HUT-US"
+   ],
+   "runners_up_long": [
+    "NTAP-US",
+    "AEHR-US",
+    "NVDA-US"
+   ],
+   "runners_up_short": [
+    "3017-TW",
+    "285A-JP",
+    "LITE-US"
+   ],
+   "notion": "https://app.notion.com/p/41aa883333de81abac75cacb25607d65"
+  }
+ ]
+}
