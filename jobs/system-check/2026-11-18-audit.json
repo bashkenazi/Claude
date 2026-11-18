@@ -1,0 +1,596 @@
+{
+ "checked_at": "2026-11-18T16:04:05Z",
+ "checked_by": "Manual audit (Claude Code)",
+ "note": "Run results were read from each routine's last session, not just its status: a run can say \"Succeeded\" when it was actually blocked.",
+ "items": [
+  {
+   "kind": "routine",
+   "name": "AI Apps Data (nightly 9:47 PM ET)",
+   "status": "fail",
+   "headline": "Fails every night: no connectors attached",
+   "problems": [
+    "This scheduled task has no connectors attached, so its sessions cannot reach Microsoft 365, Notion, Supabase or SRS MCP.",
+    "2026-11-18 run: SRS S3 and Notion tools could not be loaded; nothing written. It still shows 'Succeeded'."
+   ],
+   "fix": "Recreate the task with the SRS MCP and Notion connectors (or add them in the routine's settings).",
+   "trigger_id": "trig_014gdXQAoqtwQ86pbJU9wphw"
+  },
+  {
+   "kind": "routine",
+   "name": "Sell-Side Daily Research Extractor — afternoon (7:00 AM)",
+   "status": "fail",
+   "headline": "Duplicate of the 7:10/1:10 task and blocked every run",
+   "problems": [
+    "This scheduled task has no connectors attached, so its sessions cannot reach Microsoft 365, Notion, Supabase or SRS MCP.",
+    "Despite its name it runs weekdays at 7:00 AM, ten minutes before the working 7:10 task.",
+    "2026-11-18 run: blocked, nothing processed, no run row written."
+   ],
+   "fix": "Pause or delete it; the 7:10 + 1:10 task already covers the folder.",
+   "trigger_id": "trig_01SZEz28jb2DmeiF99xts9U3"
+  },
+  {
+   "kind": "routine",
+   "name": "Outstanding sweep (Tech Daily)",
+   "status": "fail",
+   "headline": "Will fail on first run: no connectors attached",
+   "problems": [
+    "This scheduled task has no connectors attached, so its sessions cannot reach Microsoft 365, Notion, Supabase or SRS MCP.",
+    "Needs Microsoft 365 (Sent Items) for the Outstanding tab. First run Thu 8:40 AM ET."
+   ],
+   "fix": "Recreate with the Microsoft 365 connector before tomorrow 8:40 AM.",
+   "trigger_id": "trig_01CmSVQRR8KhBfbvyU1xyrD9"
+  },
+  {
+   "kind": "routine",
+   "name": "Weekly analyst folder extractor",
+   "status": "fail",
+   "headline": "Will fail on first run: no connectors attached",
+   "problems": [
+    "This scheduled task has no connectors attached, so its sessions cannot reach Microsoft 365, Notion, Supabase or SRS MCP.",
+    "Needs Microsoft 365, Notion and Supabase. First run Sun 7:57 AM ET.",
+    "Ashish folder is handled by a prompt override, not yet in the skill's cached folder IDs."
+   ],
+   "fix": "Recreate with Microsoft 365, Notion and Supabase; fold the Ashish folder into the analyst-folder-extractor skill.",
+   "trigger_id": "trig_01A41KfcKCpFPFS1t4nTavvi"
+  },
+  {
+   "kind": "routine",
+   "name": "Nightly Thesis Backfill Routine",
+   "status": "warn",
+   "headline": "Nothing left to do: every Tier 1–2 name has a revised thesis",
+   "problems": [
+    "2026-11-18 run built 0 pages (~$2.40 per night spent checking)."
+   ],
+   "fix": "Pause it, or move more names into Tier 1–2.",
+   "trigger_id": "trig_01PkFmDQuhFDaEzc7r8bC71y"
+  },
+  {
+   "kind": "routine",
+   "name": "Markets weekly refresh",
+   "status": "warn",
+   "headline": "Not run yet; depends on an unmerged branch",
+   "problems": [
+    "Prompt checks out branch claude/vibrant-bardeen-0k20z1 because jobs/markets-weekly is not on main. First run Sun 1:37 PM PT."
+   ],
+   "fix": "Merge jobs/markets-weekly to main so the routine does not depend on a feature branch.",
+   "trigger_id": "trig_01QVpA3LVkFajvxSBkDYAdGo"
+  },
+  {
+   "kind": "routine",
+   "name": "Consensus Revisions",
+   "status": "fail",
+   "headline": "Last run (11-13) stopped: Master comps export 10 days old",
+   "problems": [
+    "Needs a fresh values CSV of 'Template (2)' saved to Documents/Trading comps.",
+    "Inconsistent with Tech Daily, which reads the workbook directly and never needs a CSV."
+   ],
+   "fix": "Save a fresh Master comps export before Friday 7 AM, or update the skill to read the workbook like Tech Daily does.",
+   "trigger_id": "trig_01NCPDSMuRFmUD2QQ4KM9ycq"
+  },
+  {
+   "kind": "routine",
+   "name": "Idea Generator",
+   "status": "warn",
+   "headline": "Ran 11-15 on stale Master comps (11.3.26)",
+   "problems": [
+    "Valuation inputs 9 trading days old; buy-% and ownership-crowding not pulled.",
+    "Prompt is a one-line instruction with no output location or Supabase rules."
+   ],
+   "fix": "Refresh the Master comps export; tighten the prompt like the other digests.",
+   "trigger_id": "trig_01VnQBq9DzXsEtohFHrWiDx4"
+  },
+  {
+   "kind": "routine",
+   "name": "Bobby Tech Daily refresh (9:20 AM)",
+   "status": "warn",
+   "headline": "Ran, but several inputs were missing",
+   "problems": [
+    "Feedly marked 'missed' for several days: there is no Feedly scheduled task.",
+    "Bloomberg Live workbook shows '#N/A Connection' in every cell, so FactSet closes are used.",
+    "About 40 thesis pages not re-read this run."
+   ],
+   "fix": "Re-save TechDaily_Live_Bloomberg from a connected Bloomberg terminal; create a Feedly routine or drop it from the Routines registry.",
+   "trigger_id": "trig_016XHWMU5iFnTSewgLzdeERi"
+  },
+  {
+   "kind": "routine",
+   "name": "Bobby Tech Daily refresh — midday",
+   "status": "warn",
+   "headline": "11-17: Daily moves not updated",
+   "problems": [
+    "Bloomberg Live file: 432/432 cells '#N/A Connection'.",
+    "Feedly missed."
+   ],
+   "fix": "Same fix as the morning refresh.",
+   "trigger_id": "trig_019yq3MUFSiggzj1HmHfZLxT"
+  },
+  {
+   "kind": "routine",
+   "name": "Bobby Tech Daily refresh — evening",
+   "status": "warn",
+   "headline": "11-17: FactSet closes used; twitter_runs unreadable",
+   "problems": [
+    "Bloomberg Live file '#N/A Connection'.",
+    "Could not read page db twitter_runs.",
+    "Feedly missed."
+   ],
+   "fix": "Same fix as the morning refresh.",
+   "trigger_id": "trig_017WRqk7HemsuGnmBjstimiM"
+  },
+  {
+   "kind": "routine",
+   "name": "Corporate access daily",
+   "status": "warn",
+   "headline": "Partial run: Outlook domain search returned nothing",
+   "problems": [
+    "Skipped correspondence backfill, analyst-email pass, Communication DB re-read and a month of conference backfill."
+   ],
+   "fix": "Check tomorrow's run; if domain search still fails, switch the skill to sender-address search.",
+   "trigger_id": "trig_01Ay6tMjmGzGY8ciPjMgSJTY"
+  },
+  {
+   "kind": "routine",
+   "name": "AlphaSense Digest",
+   "status": "warn",
+   "headline": "Ran; thin coverage on software and power names",
+   "problems": [
+    "Nothing usable for MSFT Ignite, GEV, Google compute, cyber, INTU; earnings-feed check skipped; 7 rows held.",
+    "Prompt says '~06:00 ET' but it runs at 5:43 ET."
+   ],
+   "fix": "",
+   "trigger_id": "trig_01AdzxQYoWg2Cedw5WqXbncX"
+  },
+  {
+   "kind": "routine",
+   "name": "Weekly Long/Short Ideas",
+   "status": "warn",
+   "headline": "11-16 ran from scratch: last week's data files were not saved",
+   "problems": [
+    "Surprise history 3.4 years instead of 7; Accton inputs a quarter stale."
+   ],
+   "fix": "Have the routine commit its refreshed data files so the next run builds on them.",
+   "trigger_id": "trig_01UzTeyzsjbhJSjyG5nfYWWg"
+  },
+  {
+   "kind": "routine",
+   "name": "Anthropic Output Sweep",
+   "status": "warn",
+   "headline": "Ran; ledger bug blocks retries",
+   "problems": [
+    "output_sweep_ledger.processed_at is NOT NULL, so a failed page cannot be left null for retry (a 1970 placeholder is used)."
+   ],
+   "fix": "Make processed_at nullable in Supabase (one migration).",
+   "trigger_id": "trig_01XawnybdQAxKeAxCqbgRxYQ"
+  },
+  {
+   "kind": "routine",
+   "name": "OpenClaw Output Datapoint Extractor",
+   "status": "warn",
+   "headline": "Ran; two company records mislabelled",
+   "problems": [
+    "research_directory 903 (Denso) carries Aisin's ticker; 896 (Aisin) is mislabelled."
+   ],
+   "fix": "Fix the two research_directory rows.",
+   "trigger_id": "trig_01GGWSnmaDAY8hJwwpEmczH2"
+  },
+  {
+   "kind": "routine",
+   "name": "Twitter Digest",
+   "status": "warn",
+   "headline": "Ran; skill is missing two files",
+   "problems": [
+    "Run-record reference file and tab-repair script are not in the installed twitter-digest skill."
+   ],
+   "fix": "Re-upload the skill with those files.",
+   "trigger_id": "trig_01XsDkh8ViR8Fv4MZWKyhSsG"
+  },
+  {
+   "kind": "routine",
+   "name": "Earnings Transcript Digest",
+   "status": "ok",
+   "headline": "10 calls read, 17 datapoints loaded",
+   "problems": [
+    "2317 TT not on Quartr yet; retried next run."
+   ],
+   "fix": "",
+   "trigger_id": "trig_01Hj5KU8bp7yomLwCdSVGuVe"
+  },
+  {
+   "kind": "routine",
+   "name": "Thesis tracker",
+   "status": "ok",
+   "headline": "30 flags, 22 thesis pages updated",
+   "problems": [],
+   "fix": "",
+   "trigger_id": "trig_01M8CqrihUCzvKNXteaLvnLa"
+  },
+  {
+   "kind": "routine",
+   "name": "AI thesis tracker",
+   "status": "ok",
+   "headline": "5 flags, tracker advanced",
+   "problems": [],
+   "fix": "",
+   "trigger_id": "trig_019X8kDq9n6PpcM69UEb2Pej"
+  },
+  {
+   "kind": "routine",
+   "name": "Sell-Side Daily Research Extractor (7:10 + 1:10)",
+   "status": "ok",
+   "headline": "Ran; today's folder had not arrived yet",
+   "problems": [
+    "Uses the general-purpose subagent fallback (by design)."
+   ],
+   "fix": "",
+   "trigger_id": "trig_01XxZpvJFfqadWNW1tnwhLnZ"
+  },
+  {
+   "kind": "routine",
+   "name": "Insider signals (universe)",
+   "status": "ok",
+   "headline": "All sources worked",
+   "problems": [
+    "Taiwan names are not covered by Canary."
+   ],
+   "fix": "",
+   "trigger_id": "trig_01CRHEhKJL49FoZ2dhx5bG4g"
+  },
+  {
+   "kind": "routine",
+   "name": "Tech Specialist Email Digest",
+   "status": "ok",
+   "headline": "15 loaded, 28 duplicates skipped",
+   "problems": [
+    "Used installed Datapoint Filter v1.4.1 rather than the Notion master."
+   ],
+   "fix": "",
+   "trigger_id": "trig_01Nbwu1ZNrQWtequVtj6Ccnc"
+  },
+  {
+   "kind": "routine",
+   "name": "SemiAnalysis Digest",
+   "status": "ok",
+   "headline": "No new emails in window (correct)",
+   "problems": [],
+   "fix": "",
+   "trigger_id": "trig_01MrpFhDeY5rPBH8Gc9YNHhb"
+  },
+  {
+   "kind": "routine",
+   "name": "Earnings Review",
+   "status": "ok",
+   "headline": "Nothing due; NVDA already done",
+   "problems": [],
+   "fix": "",
+   "trigger_id": "trig_01QzfSrsKryy6WTE2DjKYwUV"
+  },
+  {
+   "kind": "routine",
+   "name": "Research Folder Digest",
+   "status": "ok",
+   "headline": "5 datapoints loaded and verified",
+   "problems": [],
+   "fix": "",
+   "trigger_id": "trig_01FWUbz2T5ku7cY2LwQvMDon"
+  },
+  {
+   "kind": "routine",
+   "name": "KPI & guidance backfill (nightly)",
+   "status": "off",
+   "headline": "Paused since 11-06",
+   "problems": [
+    "106 of 111 NVDA guidance rows use expiring SRS links; a one-time URL fix is waiting for your approval."
+   ],
+   "fix": "Approve the URL fix, then re-enable if you want more KPI profiles.",
+   "trigger_id": "trig_01Hou3ypRhiGc5ni9gzfS4rQ"
+  },
+  {
+   "kind": "routine",
+   "name": "Feedly Daily (expected 8:00 AM)",
+   "status": "fail",
+   "headline": "No scheduled task exists",
+   "problems": [
+    "Tech Daily's Routines registry expects a daily Feedly digest; none is scheduled, so it shows 'missed' every day."
+   ],
+   "fix": "Create a Feedly digest routine, or remove Feedly from the Routines registry."
+  },
+  {
+   "kind": "skill",
+   "name": "datapoint-filter",
+   "status": "warn",
+   "headline": "Two copies can drift",
+   "problems": [
+    "Digests use the installed v1.4.1; the thesis tracker reads the Notion master first."
+   ],
+   "fix": "Keep one source of truth: publish the Notion master into the skill when it changes."
+  },
+  {
+   "kind": "skill",
+   "name": "industry-cycle",
+   "status": "warn",
+   "headline": "Installed twice",
+   "problems": [
+    "Appears as both a bobby-ashkenazi and an anthropic-skills skill."
+   ],
+   "fix": "Remove the older copy."
+  },
+  {
+   "kind": "skill",
+   "name": "twitter-digest",
+   "status": "warn",
+   "headline": "Missing reference file and tab-repair script",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "feedly-digest",
+   "status": "warn",
+   "headline": "Skill exists but no routine runs it",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "bwg-digest",
+   "status": "ok",
+   "headline": "On-demand only (no routine)",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "alphasense-digest",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "alphasense-expert-calls",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "analyst-day",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "analyst-folder-extractor",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "comps-screen",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "consensus-revisions",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "datapoint-organizer",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "earnings-preview-bobby",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "earnings-review",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "earnings-transcript-digest",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "idea-generator",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "initiation-optimized",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "management-prep",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "notion-cleaner",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "operating-comps",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "plain-summarizer",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "print-tables",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "quarterly-review",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "research-folder-digest",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "semianalysis-digest",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "tech-email-digest-new",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "skill",
+   "name": "thesis-builder",
+   "status": "ok",
+   "headline": "Installed in your SRS plugin",
+   "problems": [],
+   "fix": ""
+  },
+  {
+   "kind": "agent",
+   "name": "sellside-pdf-extractor",
+   "status": "warn",
+   "headline": "Not registered in scheduled sessions",
+   "problems": [
+    "The repo is cloned mid-session, so routines use a general-purpose fallback with the same instructions. Works, but runs on a generic agent type."
+   ],
+   "fix": ""
+  },
+  {
+   "kind": "agent",
+   "name": "datapoint-filter-pass",
+   "status": "warn",
+   "headline": "Not registered in scheduled sessions",
+   "problems": [
+    "Same fallback as sellside-pdf-extractor."
+   ],
+   "fix": ""
+  },
+  {
+   "kind": "connector",
+   "name": "Placer",
+   "status": "fail",
+   "headline": "Needs sign-in",
+   "problems": [
+    "Attached to 5 routines but not authorised."
+   ],
+   "fix": "Re-authorise Placer in claude.ai Settings › Connectors, or remove it from those routines."
+  },
+  {
+   "kind": "connector",
+   "name": "Bloomberg Live workbook (OneDrive)",
+   "status": "fail",
+   "headline": "Every cell reads #N/A Connection",
+   "problems": [
+    "Tech Daily falls back to FactSet end-of-day closes; intraday moves are missing."
+   ],
+   "fix": "Open and save TechDaily_Live_Bloomberg on a connected Bloomberg terminal."
+  },
+  {
+   "kind": "connector",
+   "name": "Master comps export",
+   "status": "fail",
+   "headline": "Newest export is 11.3.26",
+   "problems": [
+    "Consensus Revisions stops; Idea Generator uses stale valuation."
+   ],
+   "fix": "Save a fresh values export of 'Template (2)'."
+  },
+  {
+   "kind": "connector",
+   "name": "Microsoft 365, Notion, Supabase, SRS MCP, FactSet, AlphaSense, Insider Score, Canary",
+   "status": "ok",
+   "headline": "Working in every routine that has them attached",
+   "problems": [],
+   "fix": ""
+  }
+ ]
+}
