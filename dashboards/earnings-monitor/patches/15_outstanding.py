@@ -42,7 +42,8 @@ CSS = r"""
 """
 
 JS = r"""  """ + MARKER + r"""
-  const OS = { started: false, items: [], meta: null, db: null, err: '', who: 'all', st: 'open', q: '' };
+  const OS = { started: false, items: [], meta: null, db: null, err: '', who: 'all', st: 'open', src: 'all', q: '' };
+  const osSrc = r => r.source === 'slack' ? 'slack' : 'email';
   const OS_PEOPLE = [['poojan', 'Poojan'], ['adish', 'Adish'], ['ashish', 'Ashish'], ['rebecca', 'Rebecca'], ['ademola', 'Ademola'], ['other', 'Others']];
   const OS_LBL = { no_reply: 'No reply', replied: 'In progress', done: 'Done', closed: 'Closed', dismissed: 'Dismissed' };
   const OS_CHIP = { no_reply: 's-negative', replied: 's-mixed', done: 's-positive', closed: 'out', dismissed: 'out' };
@@ -65,7 +66,7 @@ JS = r"""  """ + MARKER + r"""
     const c = document.getElementById('os-count'); if (c) { const n = OS.items.filter(osOpen).length; c.textContent = n ? String(n) : ''; }
     const v = document.getElementById('v-outstanding'); if (v && v.classList.contains('on')) { try { renderOutstanding(); } catch (e) {} }
   }
-  UPD.outstanding = () => ({ t: OS.meta && OS.meta.last_run, src: 'sent-mail sweep' });
+  UPD.outstanding = () => ({ t: OS.meta && OS.meta.last_run, src: 'email + Slack sweep' });
   function renderOutstanding() {
     osStart();
     const host = document.getElementById('v-outstanding'); if (!host) return;
@@ -73,34 +74,36 @@ JS = r"""  """ + MARKER + r"""
     const cnt = k => open.filter(r => osPeople(r).includes(k)).length;
     const oldest = open.reduce((m, r) => Math.max(m, osAge(r)), 0);
     const q = OS.q.trim().toLowerCase();
-    let rows = all.filter(r => OS.who === 'all' || osPeople(r).includes(OS.who));
+    let rows = all.filter(r => (OS.who === 'all' || osPeople(r).includes(OS.who)) && (OS.src === 'all' || osSrc(r) === OS.src));
     rows = rows.filter(r => OS.st === 'all' ? true : OS.st === 'open' ? osOpen(r) : osSt(r) === OS.st || (OS.st === 'done' && ['done', 'closed', 'dismissed'].includes(osSt(r))));
-    if (q) rows = rows.filter(r => [r.ask, r.subject, r.evidence, r.ticker, ...(r.to || []).map(p => p.name)].join(' ').toLowerCase().includes(q));
+    if (q) rows = rows.filter(r => [r.ask, r.subject, r.evidence, r.ticker, r.channel, ...(r.to || []).map(p => p.name)].join(' ').toLowerCase().includes(q));
     rows.sort((a, b) => String(a.sent_at).localeCompare(String(b.sent_at)));
     const groups = (OS.who === 'all' ? OS_PEOPLE : OS_PEOPLE.filter(p => p[0] === OS.who)).map(([k, l]) => [k, l, rows.filter(r => osPeople(r)[0] === k || (OS.who !== 'all' && osPeople(r).includes(k)))]).filter(g => g[2].length);
-    const last = OS.meta && OS.meta.last_run ? `Last sweep ${esc(fmtD(String(OS.meta.last_run).slice(0, 10)))} · ${esc(OS.meta.window_days || 30)}-day window · ${esc(OS.meta.scanned || '?')} sent emails read` : 'Not swept yet';
+    const last = OS.meta && OS.meta.last_run ? `Last sweep ${esc(fmtD(String(OS.meta.last_run).slice(0, 10)))} · ${esc(OS.meta.window_days || 30)}-day window · ${esc(OS.meta.scanned || '?')} sent emails${OS.meta.slack_scanned != null ? ` and ${esc(OS.meta.slack_scanned)} Slack messages` : ''} read` : 'Not swept yet';
     const row = r => {
       const st = osSt(r), age = osAge(r), to = (r.to || []).map(p => p.name || p.email).join(', ');
       return `<div class="li"><span class="stripe os-${esc(st === 'dismissed' ? 'closed' : st)}"></span><div class="body">` +
-        `<div class="chips"><span class="chip ${OS_CHIP[st] || ''}">${esc(OS_LBL[st] || st)}</span>${r.ticker ? tk(r.ticker) : ''}<span class="sub">to ${esc(to)}</span>${r.manual_status ? '<span class="chip out">set by you</span>' : ''}</div>` +
+        `<div class="chips"><span class="chip ${OS_CHIP[st] || ''}">${esc(OS_LBL[st] || st)}</span><span class="chip out">${osSrc(r) === 'slack' ? 'Slack' + (r.channel ? ' · ' + esc(r.channel) : '') : 'Email'}</span>${r.ticker ? tk(r.ticker) : ''}<span class="sub">to ${esc(to)}</span>${r.manual_status ? '<span class="chip out">set by you</span>' : ''}</div>` +
         `<div class="os-ask">${esc(r.ask || '')}</div>` +
         (r.evidence ? `<div class="os-ev">${esc(r.evidence)}${r.reply_at ? ` <span class="muted">(${esc(fmtD(r.reply_at))})</span>` : ''}</div>` : '') +
-        `<div class="srcl"><span>Email</span>${r.link ? `<a class="ext" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.subject || 'Your email')} →</a>` : esc(r.subject || '')}${r.reply_link ? ` · <a class="ext" href="${esc(r.reply_link)}" target="_blank" rel="noopener">Their reply →</a>` : ''}</div></div>` +
+        `<div class="srcl"><span>${osSrc(r) === 'slack' ? 'Slack' : 'Email'}</span>${r.link ? `<a class="ext" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.subject || 'Your message')} →</a>` : esc(r.subject || '')}${r.reply_link ? ` · <a class="ext" href="${esc(r.reply_link)}" target="_blank" rel="noopener">Their reply →</a>` : ''}</div></div>` +
         `<div class="side">${esc(fmtD(r.sent_at))} · <span class="os-age${osOpen(r) && age >= 7 ? ' old' : ''}">${age}d</span>` +
         `<div class="os-act">${osOpen(r) ? `<button type="button" class="btn" data-os="${esc(r.id)}" data-st="done">Done</button><button type="button" class="btn" data-os="${esc(r.id)}" data-st="dismissed">Dismiss</button>` : (r.manual_status ? `<button type="button" class="btn" data-os="${esc(r.id)}" data-st="">Reopen</button>` : '')}</div></div></div>`;
     };
     host.innerHTML =
-      `<section class="panel" style="gap:8px"><span class="eyebrow">Outstanding · asks from your sent mail</span><h1>What you’re waiting on</h1>` +
-      `<p class="lede">Every question or request you emailed in the last 30 days, and whether the person did it, judged from their replies in every mail folder. Red: no reply. Amber: replied but not finished. Mark a row Done or Dismiss it and the next sweep keeps your call.</p><p class="sub">${last}</p></section>` +
+      `<section class="panel" style="gap:8px"><span class="eyebrow">Outstanding · asks from your email and Slack</span><h1>What you’re waiting on</h1>` +
+      `<p class="lede">Every question or request you sent by email or Slack (channels and DMs) in the last 30 days, and whether the person did it, judged from their replies in every mail folder and in Slack. Red: no reply. Amber: replied but not finished. Mark a row Done or Dismiss it and the next sweep keeps your call.</p><p class="sub">${last}</p></section>` +
       `<div class="summary">` + [['all', 'All open', open.length]].concat(OS_PEOPLE.map(([k, l]) => [k, l, cnt(k)])).map(([k, l, n]) => `<div class="stat${OS.who === k ? ' os-on' : ''}" data-osw="${k}" role="button" tabindex="0"><span class="v">${n}</span><span class="l">${esc(l)}</span></div>`).join('') +
       `<div class="stat"><span class="v">${open.length ? oldest + 'd' : '–'}</span><span class="l">Oldest open</span></div></div>` +
       `<div class="ctl" role="group" aria-label="Filters"><div class="seg" aria-label="Person">${[['all', 'Everyone']].concat(OS_PEOPLE).map(([k, l]) => `<button type="button" data-osw="${k}" aria-pressed="${OS.who === k}">${esc(l)}</button>`).join('')}</div>` +
       `<div class="seg" aria-label="Status">${[['open', 'Open'], ['no_reply', 'No reply'], ['replied', 'In progress'], ['done', 'Done'], ['all', 'All']].map(([k, l]) => `<button type="button" data-oss="${k}" aria-pressed="${OS.st === k}">${l}</button>`).join('')}</div>` +
+      `<div class="seg" aria-label="Source">${[['all', 'Email + Slack'], ['email', 'Email'], ['slack', 'Slack']].map(([k, l]) => `<button type="button" data-osc="${k}" aria-pressed="${OS.src === k}">${l}</button>`).join('')}</div>` +
       `<label for="os-q">Search <input type="search" id="os-q" placeholder="Ask, ticker or name" value="${esc(OS.q)}"></label><span class="count">${rows.length} shown</span></div>` +
       (OS.err ? none(esc(OS.err)) : !OS.db && !all.length ? none('Loading…') : !rows.length ? `<section class="panel">${none(OS.st === 'open' ? 'Nothing open for this filter.' : 'No asks match.')}</section>` :
         groups.map(([k, l, xs]) => `<section class="panel"><div class="os-who"><h2>${esc(l)}</h2><span class="muted">${xs.filter(osOpen).length} open · ${xs.length} shown</span></div><div class="list">${xs.map(row).join('')}</div></section>`).join(''));
     host.querySelectorAll('[data-osw]').forEach(b => { const go = () => { OS.who = b.dataset.osw; renderOutstanding(); }; b.addEventListener('click', go); b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); });
     host.querySelectorAll('[data-oss]').forEach(b => b.addEventListener('click', () => { OS.st = b.dataset.oss; renderOutstanding(); }));
+    host.querySelectorAll('[data-osc]').forEach(b => b.addEventListener('click', () => { OS.src = b.dataset.osc; renderOutstanding(); }));
     const qi = host.querySelector('#os-q'); if (qi) qi.addEventListener('input', () => { OS.q = qi.value; clearTimeout(OS.qt); OS.qt = setTimeout(() => { renderOutstanding(); const n = document.getElementById('os-q'); if (n) { n.focus(); n.setSelectionRange(n.value.length, n.value.length); } }, 250); });
     host.querySelectorAll('[data-os]').forEach(b => b.addEventListener('click', async () => {
       if (!OS.db) return; b.disabled = true;
