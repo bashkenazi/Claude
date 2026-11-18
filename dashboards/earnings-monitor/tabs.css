@@ -508,3 +508,14 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 #v-outstanding .stat.os-on { background: var(--surface-2); box-shadow: inset 0 -2px 0 var(--ink); }
 #v-outstanding .stat { cursor: pointer; }
 #v-outstanding .os-age.old { color: var(--neg); font-weight: 600; }
+
+/* system-check v1 */
+.sc-row { border-bottom: 1px solid var(--rule-2); }
+.sc-row > summary { display: flex; gap: 10px; align-items: baseline; padding: 8px 2px; cursor: pointer; list-style: none; text-transform: none; letter-spacing: normal; font-size: 14px; color: var(--ink); }
+.sc-row > summary::-webkit-details-marker { display: none; }
+.sc-ic { flex: 0 0 22px; font-weight: 700; text-align: center; border-radius: 4px; }
+.sc-ok .sc-ic { color: var(--pos); } .sc-fail .sc-ic { color: var(--neg); } .sc-warn .sc-ic { color: var(--warn); } .sc-off .sc-ic { color: var(--ink-3, #888); }
+.sc-nm { font-weight: 650; min-width: 0; } .sc-hd { color: var(--ink-2); font-size: 13px; flex: 1; min-width: 0; }
+.sc-det { padding: 0 0 10px 32px; font-size: 13px; } .sc-det ul { margin: 4px 0; padding-left: 18px; } .sc-fix { margin-top: 4px; }
+.sc-grp { margin-top: 6px; }
+@media (max-width: 640px) { .sc-row > summary { flex-wrap: wrap; } .sc-hd { flex-basis: 100%; padding-left: 32px; } }

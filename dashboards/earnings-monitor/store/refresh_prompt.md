@@ -64,6 +64,8 @@ list_triggers tool (saved copy in page db routines_live/latest), with health, la
 for it; keep tabs/routines.json exactly as above (one entry per routine that publishes pages). When a new routine that publishes
 pages is added to the table above, also add its name pattern to RT_MATCH in tabs.js so its row links to its page.
 The Today tab's "Thesis watch" panel (marker "thesis-watch v1") reads page db thesis_watch live; nothing to build.
+Routines › System check (#routines/check, marker "system-check v1") reads page db system_check/latest, written by the
+"System check (Tech Daily)" scheduled task, and overlays live list_triggers status; nothing to build, never write that document.
 
 Archiving (from 2026-11-03): the daily Anthropic Output Sweep reads every run page, loads its datapoints to
 public.research_evidence, its ideas/themes/theses to public.research_ideas, saves the full page to
