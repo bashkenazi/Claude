@@ -495,3 +495,16 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 .rt-t td:nth-child(2) { white-space: normal; min-width: 130px; max-width: 220px; } .rt-t td:nth-child(5) { min-width: 220px; max-width: 320px; }
 .rt-what { border-top: 0; padding-top: 2px; } .rt-what > summary { font-size: 11.5px; text-transform: none; letter-spacing: 0; color: var(--accent); font-weight: 560; }
 .rt-what p { margin: 4px 0 0; max-width: 70ch; }
+
+/* outstanding-tab v1 */
+#v-outstanding .os-who { display: flex; align-items: baseline; gap: 8px; padding: 10px 0 2px; border-bottom: 1px solid var(--rule-2); }
+#v-outstanding .os-who h2 { font-size: 15px; }
+#v-outstanding .stripe.os-no_reply { background: var(--neg); } #v-outstanding .stripe.os-replied { background: var(--warn); }
+#v-outstanding .stripe.os-done, #v-outstanding .stripe.os-closed { background: var(--pos); }
+#v-outstanding .os-ask { color: var(--ink); font-weight: 650; }
+#v-outstanding .os-ev { font-size: 12.5px; color: var(--ink-2); margin-top: 2px; }
+#v-outstanding .os-act { display: flex; gap: 4px; margin-top: 4px; justify-content: flex-end; }
+#v-outstanding .os-act .btn { padding: 2px 8px; font-size: 12px; }
+#v-outstanding .stat.os-on { background: var(--surface-2); box-shadow: inset 0 -2px 0 var(--ink); }
+#v-outstanding .stat { cursor: pointer; }
+#v-outstanding .os-age.old { color: var(--neg); font-weight: 600; }
