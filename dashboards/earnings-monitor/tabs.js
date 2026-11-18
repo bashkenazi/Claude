@@ -1655,15 +1655,64 @@
       stats + (rows.length ? `<div class="tbl-wrap"><table class="dt rt-t"><thead><tr><th>Routine</th><th>Health</th><th>Last run</th><th>Next run</th><th>Last output</th></tr></thead><tbody>${body}</tbody></table></div>` : none(RTL.st === 'loading' ? 'Loading…' : 'No routines found.')) +
       `<p class="sub">Health: Missed = no run within 90 minutes of a scheduled time; Failed = the last run ended in an error; OK = the last run finished. A run that finishes can still produce nothing new: the Last output column and each routine's page show that.</p></section>`;
   }
+  /* system-check v1 */
+  const SYC = { st: 'idle', doc: null, err: '', f: 'problems' };
+  const SYC_IC = { ok: '✓', warn: '!', fail: '✗', off: '–' }, SYC_ORD = { fail: 0, warn: 1, off: 2, ok: 3 };
+  const SYC_KIND = [['routine', 'Routines (scheduled tasks)'], ['skill', 'Skills'], ['agent', 'Agents'], ['connector', 'Connectors & data feeds']];
+  function scLoad() {
+    if (SYC.st !== 'idle') return; SYC.st = 'loading';
+    (async () => {
+      try {
+        const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+        if (!db) throw new Error('no db');
+        db.collection('system_check').doc('latest').onSnapshot(sn => { SYC.doc = sn && sn.exists ? JSON.parse(JSON.stringify(sn.data())) : null; SYC.st = 'ok'; scRe(); }, () => { SYC.st = 'err'; SYC.err = 'Could not read the system check.'; scRe(); });
+      } catch (e) { SYC.st = 'err'; SYC.err = 'The system check is kept in this page’s database; open the page on claude.ai to see it.'; scRe(); }
+    })();
+  }
+  function scRe() { const h = location.hash || ''; if (h.startsWith('#routines')) renderRoutines(); }
+  function scItems() {
+    const d = SYC.doc || {}, chk = rtMs(d.checked_at) || 0, out = arr(d.items).map(x => ({ ...x, live: '' }));
+    const byId = new Map(out.filter(x => x.trigger_id).map(x => [x.trigger_id, x]));
+    if (RTL.st === 'ok') RTL.tasks.forEach(t => {
+      const h = rtHealth(t, null), x = byId.get(t.id), lr = t.last_run, fired = rtMs(lr && lr.fired_at) || 0;
+      if (!x) { out.push({ kind: 'routine', name: t.name, status: h[0] === 'fail' || h[0] === 'miss' ? 'fail' : t.enabled ? 'warn' : 'off', headline: t.enabled ? 'New since the last check — not checked yet' : 'Paused', problems: h[2] ? [h[1] + ': ' + h[2]] : [], fix: '', live: 'live' }); return; }
+      if (!t.enabled && x.status !== 'off') { x.status = 'off'; x.live = 'Paused since the check'; }
+      if (h[0] === 'fail' || h[0] === 'miss') { x.status = 'fail'; x.live = h[1] + (h[2] ? ': ' + h[2] : ''); }
+      else if (fired > chk + 60e3 && t.enabled) x.live = 'Ran again ' + rtET(fired) + ' (after this check)';
+      x.session = lr && lr.session_id;
+    });
+    return out;
+  }
+  function scDot() { if (SYC.st === 'idle') scLoad(); const xs = scItems(); return xs.some(x => x.status === 'fail') ? 'stale' : xs.some(x => x.status === 'warn') ? 'aging' : 'fresh'; }
+  function scView() {
+    scLoad(); rtLoad();
+    if (SYC.st === 'err') return `<section class="panel">${none(esc(SYC.err))}</section>`;
+    if (!SYC.doc) return `<section class="panel">${none(SYC.st === 'ok' ? 'No system check has been written yet.' : 'Loading…')}</section>`;
+    const xs = scItems(), c = k => xs.filter(x => x.status === k).length;
+    const show = SYC.f === 'problems' ? xs.filter(x => x.status === 'fail' || x.status === 'warn') : xs;
+    const row = x => `<details class="sc-row sc-${esc(x.status)}"${x.status === 'fail' && SYC.f === 'problems' ? ' open' : ''}><summary><span class="sc-ic" aria-label="${esc(x.status)}">${SYC_IC[x.status] || '?'}</span><span class="sc-nm">${esc(x.name)}</span><span class="sc-hd">${esc(x.headline || '')}</span></summary>` +
+      `<div class="sc-det">${x.live ? `<div><span class="chip ${x.status === 'fail' ? 's-negative' : 'out'}">live</span> ${esc(x.live)}</div>` : ''}` +
+      (arr(x.problems).length ? `<ul>${arr(x.problems).map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : (x.status === 'ok' ? '<p class="sub">No problems found.</p>' : '')) +
+      (x.fix ? `<div class="sc-fix"><b>Fix:</b> ${esc(x.fix)}</div>` : '') +
+      (x.session ? `<div class="sub"><a class="ext" href="https://claude.ai/code/session_${esc(String(x.session).replace(/^cse_/, ''))}" target="_blank" rel="noopener">Last run log →</a></div>` : '') + `</div></details>`;
+    const grp = SYC_KIND.map(([k, l]) => { const g = show.filter(x => (x.kind || 'routine') === k).sort((a, b) => (SYC_ORD[a.status] - SYC_ORD[b.status]) || String(a.name).localeCompare(String(b.name))); return g.length ? `<div class="sc-grp"><h3>${esc(l)} <span class="sub">${g.length}</span></h3>${g.map(row).join('')}</div>` : ''; }).join('');
+    return `<section class="panel" id="rt-check"><div class="panel-h"><h2>System check</h2><span class="muted">Checked ${esc(rtET(rtMs(SYC.doc.checked_at)))}${SYC.doc.checked_by ? ' · ' + esc(SYC.doc.checked_by) : ''}${RTL.st === 'ok' ? ' · live routine status overlaid' : ''}</span></div>` +
+      `<p class="sub" style="margin:0">Every routine, skill, agent and data feed with a ✓ or ✗. Click a row for the problem and the fix. ${esc(SYC.doc.note || '')}</p>` +
+      `<div class="summary"><div class="stat"><span class="v c-pos">${c('ok')}</span><span class="l">✓ Working</span></div><div class="stat"><span class="v c-neg">${c('fail')}</span><span class="l">✗ Broken</span></div><div class="stat"><span class="v">${c('warn')}</span><span class="l">! Needs a look</span></div><div class="stat"><span class="v">${c('off')}</span><span class="l">Paused</span></div></div>` +
+      `<div class="ctl"><div class="seg" aria-label="Show">${[['problems', 'Problems only'], ['all', 'Everything']].map(([k, l]) => `<button type="button" data-scf="${k}" aria-pressed="${SYC.f === k}">${l}</button>`).join('')}</div></div>` +
+      (grp || none('Nothing to show.')) + `</section>`;
+  }
+  document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-scf]'); if (b) { SYC.f = b.dataset.scf; renderRoutines(); } });
+
   function renderRoutines() {
     const RT = D.routines || {}, list = arr(RT.routines);
     const host = document.getElementById('v-routines');
     const key = ((location.hash || '').split('/')[1] || 'all');
-    const cur = key === 'all' ? null : (list.find(r => r.key === key) || null);
+    const cur = (key === 'all' || key === 'check') ? null : (list.find(r => r.key === key) || null);
     const dotCls = st => st === 'ok' ? 'fresh' : st === 'missed' ? 'stale' : 'aging';
     const sent = s => s === 'positive' ? 'pos' : s === 'negative' ? 'neg' : 'mix';
-    const nav = `<nav class="rt-nav" aria-label="Routines"><a href="#routines/all"${!cur ? ' aria-current="page"' : ''}><i class="dot fresh"></i><span><b>All routines</b><span class="sub">Health of every scheduled agent</span></span></a>${list.map(r => `<a href="#routines/${esc(r.key)}"${cur && r.key === cur.key ? ' aria-current="page"' : ''}><i class="dot ${dotCls(r.status)}"></i><span><b>${esc(r.name)}</b><span class="sub">${esc(r.schedule || '')}</span></span></a>`).join('')}</nav>`;
-    let body = cur ? none('No routine output collected yet.') : rtOverview(list);
+    const nav = `<nav class="rt-nav" aria-label="Routines"><a href="#routines/all"${!cur && key !== 'check' ? ' aria-current="page"' : ''}><i class="dot fresh"></i><span><b>All routines</b><span class="sub">Health of every scheduled agent</span></span></a><a href="#routines/check"${key === 'check' ? ' aria-current="page"' : ''}><i class="dot ${scDot()}"></i><span><b>System check</b><span class="sub">✓ / ✗ for every routine, skill, agent and connector</span></span></a>${list.map(r => `<a href="#routines/${esc(r.key)}"${cur && r.key === cur.key ? ' aria-current="page"' : ''}><i class="dot ${dotCls(r.status)}"></i><span><b>${esc(r.name)}</b><span class="sub">${esc(r.schedule || '')}</span></span></a>`).join('')}</nav>`;
+    let body = cur ? none('No routine output collected yet.') : key === 'check' ? scView() : rtOverview(list);
     if (cur) {
       const runs = lim(arr(cur.runs).filter(r => inWin(r.date, null)), 14);
       const runIx = Math.min(+((location.hash || '').split('/')[2] || 0), Math.max(0, runs.length - 1));
