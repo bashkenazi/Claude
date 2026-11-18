@@ -1,0 +1,11 @@
+# derived each run
+data/panel.csv
+data/panel_scored.csv
+data/obs_long.csv
+data/study.json
+data/scorecard.json
+data/sector_tr_monthly.csv
+data/ism_proxy_fit.json
+data/factset_new/
+data/pagedb/
+out/
