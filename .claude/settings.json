@@ -17,7 +17,6 @@
       "ArtifactData",
       "Bash(python3 -I *)"
     ],
-    ],
     "ask": [
       "mcp__SRS_MCP__slack_upload_file",
       "mcp__Hex__delete_cell",
