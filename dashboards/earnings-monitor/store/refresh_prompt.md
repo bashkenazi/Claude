@@ -203,7 +203,7 @@ Then:
 - AI thesis tab (#thesis): its content lives only in the page database (collection "thesis", doc "ai", and collection
   "thesis_updates"), written by the "AI thesis tracker" scheduled task. The code comes from tabs.js/template.html; never
   write, rebuild or delete those database documents from this refresh.
-- Outstanding tab (#outstanding): Bobby's email asks and whether people did them, kept only in the page database
+- Outstanding tab (#outstanding): Bobby's email and Slack asks and whether people did them, kept only in the page database
   (collections "outstanding" and "outstanding_meta"), written by the "Outstanding sweep" scheduled task. The code comes
   from tabs.js/template.html; never write, rebuild or delete those documents from this refresh.
 - DC permits & financing tab (#dcrisk): a research report kept only in the page database (collection "dc_risk", doc
