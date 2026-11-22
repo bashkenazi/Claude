@@ -208,8 +208,11 @@ Then:
 - Outstanding tab (#outstanding): Bobby's email and Slack asks and whether people did them, kept only in the page database
   (collections "outstanding" and "outstanding_meta"), written by the "Outstanding sweep" scheduled task. The code comes
   from tabs.js/template.html; never write, rebuild or delete those documents from this refresh.
-- DC permits & financing tab (#dcrisk): a research report kept only in the page database (collection "dc_risk", doc
-  "report"). The code comes from tabs.js/template.html; never write, rebuild or delete that document from this refresh.
+- AI tab › 2028 build outlook (#ai/dcout; replaced the retired DC permits & financing tab on 2026-11-22, and #dcrisk
+  links redirect there): data center permitting and financing outlook kept only in the page database (collection "ai",
+  doc "dc_outlook"), whose signposts and change log the "AI thesis tracker" scheduled task updates. The old report doc
+  (collection "dc_risk", doc "report") is no longer shown. The code comes from tabs.js; never write, rebuild or delete
+  either document from this refresh.
 - AI tab › SRS models (#ai/models): the numbers from SRS's AI industry models (AI Master Model, AI Economics Master,
   AI Financings) live only in the page database (collection "ai_models", docs meta, capex, revisions, compute, econ,
   labs, fin, supply). The code comes from tabs.js; never write, rebuild or delete those documents from this refresh.

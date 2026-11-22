@@ -2097,7 +2097,6 @@
     thesis: () => ({ t: (TH.doc || {}).updated_at, src: 'SRS AI Update, Oct 2026, plus flagged datapoints', live: 'Live: the thesis and flags read from this page’s database' }),
     ai: () => ({ t: (D.dp_index || {}).as_of, src: 'datapoints' + (AI_DC.asof ? '; state GW as of ' + AI_DC.asof : ''), live: 'ALAB quarterly numbers are live from Visible Alpha' }),
     mgmt: () => ({ t: updMax([((D.mgmt || {}).questions || {}).as_of, ((D.mgmt || {}).insiders || {}).as_of]), src: 'Canary super analysts, Insider Score' }),
-    dcrisk: () => ({ t: (DCR.doc || {}).as_of, src: 'snapshot of the research doc; the doc itself may have later edits' }),
     notes: () => ({ live: 'Live: notes save to this page’s database as you write them' }),
     method: () => ({})
   };
@@ -2739,8 +2738,8 @@
     const st = AI.st, meta = new Map(arr((D.dp_index || {}).meta).map(m => [m.rid, m]));
     const f1 = v => v == null ? '–' : (+v).toFixed(1);
     const paint = () => {
-      let h = head('AI', 'AI infrastructure', 'SRS’s own AI models (capex, accelerator share, economics, financing, supply chain), the firm’s AI dashboards on apps.srsinvest.com (GPU rental and token prices, OpenRouter share, lab ARR), where the gigawatts are being built and where politics puts them at risk, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
-        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/apps">SRS apps data</a><a href="#ai/banks">Bank forecasts</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
+      let h = head('AI', 'AI infrastructure', 'SRS’s own AI models (capex, accelerator share, economics, financing, supply chain), the firm’s AI dashboards on apps.srsinvest.com (GPU rental and token prices, OpenRouter share, lab ARR), where the gigawatts are being built, where politics puts them at risk and who can still finance them, everything on Astera Labs revenue, and every datapoint on compute supply versus demand.') +
+        `<nav class="sk-tabs" aria-label="AI sections"><a href="#ai/models">SRS models</a><a href="#ai/apps">SRS apps data</a><a href="#ai/banks">Bank forecasts</a><a href="#ai/dc">Data centers &amp; politics</a><a href="#ai/dcout">2028 build outlook</a><a href="#ai/alab">ALAB revenue</a><a href="#ai/compute">Compute supply &amp; demand</a><a href="#ai/gpu">GPU rental prices</a></nav>`;
       // ---- 0) SRS AI models (page database, collection "ai_models") ----
       h += aimSectionHtml();
       // ---- 0b) bank forecasts (page database, collection "ai", doc "bank_forecasts") ----
@@ -2774,6 +2773,8 @@
         `<details class="fr"><summary>Source exhibit (stored with this page)</summary><img src="${esc(AI_DC.img)}" alt="Source map of critical IT GW by state and stage, colored by political risk tier" style="max-width:100%;height:auto;border:1px solid var(--rule);border-radius:6px;margin-top:8px" loading="lazy"><p class="sub">${esc(AI_DC.note || '')}</p></details>` +
         `<h3>Policy and political datapoints</h3><div id="ai-pol">${aiRowsHtml('policy')}</div></section>`;
       }
+      // ---- 1b) 2028 build outlook: permitting + financing (page database, collection "ai", doc "dc_outlook") ----
+      h += dcoSectionHtml();
       // ---- 2) ALAB revenue ----
       const alabRev = arr(D.bobby).concat(arr(D.rebecca)).filter(r => /^ALAB/i.test(r.ticker || '')).sort((a, b) => String(b.report_date).localeCompare(String(a.report_date)));
       h += `<section class="panel" id="ai-alab"><div class="panel-h"><h2>Astera Labs (ALAB): revenue</h2><a href="#stocks/ALAB/qr">Open ALAB on Stocks →</a></div>` +
@@ -2834,6 +2835,7 @@
     aimLoad(paint);
     bfLoad(paint);
     apLoad(paint);
+    dcoLoad(paint);
     if (!AI.dcLoaded) { AI.dcLoaded = true; (window.claude && window.claude.use ? window.claude.use('db') : Promise.resolve(null)).then(db => db ? db.collection('ai').doc('dc_states').get() : null)
       .then(sn => { if (sn && sn.exists) Object.assign(AI_DC, JSON.parse(JSON.stringify(sn.data()))); else AI.dcErr = 'The state data center figures are not loaded in this view.'; paint(); })
       .catch(() => { AI.dcErr = 'The state data center figures could not be read from this page’s database.'; paint(); }); }
@@ -3276,28 +3278,25 @@
       (!sells.length && !buys.length ? '<p class="sub">No Canary insider flags in this universe for the window.</p>' : '');
   }
 
-  // ================= DC PERMITS & FINANCING: research report kept in this page's database =================
-  /* dc-risk report tab v1 */
-  // The report lives in the page database (collection "dc_risk", doc "report"), not in the code, so page rebuilds leave it in place.
-  // Doc shape: {title, lede, as_of, updated_at, doc_url, source, sections:[{id, nav, title, blocks:[...]}], charts:{<id>: {...}}}
-  // Blocks: {t:'p'|'h3', md} | {t:'ul'|'ol', items:[md]} | {t:'table', head:[md], rows:[[md]], num:[bool]} | {t:'chart', id}
+  // ================= AI › 2028 build outlook: data center permitting + financing =================
+  /* ai-dc-outlook v1 */
+  // Folded into the AI tab (Models & data, #ai/dcout) on 2026-11-22 when the stand-alone "DC permits & financing" tab was retired.
+  // Content lives in the page database (collection "ai", doc "dc_outlook"), not in the code, so page rebuilds leave it in place.
+  // The "AI thesis tracker" scheduled task updates its signposts and change log as datapoints arrive.
+  // Doc: {title, lede, as_of, base_as_of, updated_at, doc_url, summary:[md], forecast:{head,num,rows,note}, bridge:<waterfall chart>,
+  //       scenarios:[md], tiers:{head,num,rows}, stress:[md], states:{head,num,rows}, signposts:[[when, event, status, md]],
+  //       changes:[[date, tone pos|neg|neutral, md, sb ids]], source}
   // md keeps only **bold**, *italic* and [label](https://...) links; everything else is escaped.
-  // Charts: {type:'waterfall', rows:[{l1, l2, kind:'start'|'delta'|'end', gw}], refs:[{name, gw}]} | {type:'timeline', ref_date, ref_label, rows:[{label, start, end, kind:'span'|'milestone', strong}]}
-  const DCR = { doc: null, err: '', started: false, timer: 0, io: null };
-  function dcrStart() {
-    if (DCR.started) return; DCR.started = true;
-    if (!(window.claude && typeof window.claude.use === 'function')) { DCR.err = 'The report is kept in this page’s database; open the page on claude.ai to see it.'; return; }
-    const stop = msg => { clearTimeout(DCR.timer); if (msg) DCR.err = msg; dcrPaint(); };
-    DCR.timer = setTimeout(() => { if (!DCR.doc && !DCR.err) { DCR.err = 'The report has not loaded yet; it will appear here when it does.'; dcrPaint(); } }, 10000);
+  // Charts: {type:'waterfall', rows:[{l1, l2, kind:'start'|'delta'|'end', gw}], refs:[{name, gw}]} | {type:'timeline', ref_date, ref_label, rows:[{label, start, end, kind, strong}]}
+  const DCO = { doc: null, err: '', started: false };
+  function dcoLoad(cb) {
+    if (DCO.started) return; DCO.started = true;
+    if (!(window.claude && typeof window.claude.use === 'function')) { DCO.err = 'Kept in this page’s database; open the page on claude.ai to see it.'; return; }
     window.claude.use('db').then(db => {
-      if (!db) { stop('The report is not available in this view.'); return; }
-      db.collection('dc_risk').doc('report').onSnapshot(s => {
-        DCR.doc = s && s.exists ? JSON.parse(JSON.stringify(s.data())) : null;
-        DCR.err = DCR.doc ? '' : 'No report saved yet.'; stop();
-      }, e => stop('The report could not load: ' + ((e && e.code) || 'error')));
-    }).catch(() => stop('The report is not available in this view.'));
+      if (!db) { DCO.err = 'Not available in this view.'; cb(); return; }
+      db.collection('ai').doc('dc_outlook').onSnapshot(s => { DCO.doc = s && s.exists ? JSON.parse(JSON.stringify(s.data())) : null; DCO.err = DCO.doc ? '' : 'Not saved yet.'; cb(); }, () => { DCO.err = 'Could not load the outlook.'; cb(); });
+    }).catch(() => { DCO.err = 'Not available in this view.'; cb(); });
   }
-  const dcrPaint = () => { if ((location.hash || '').startsWith('#dcrisk')) renderDcr(); };
   const dcrInline = s => esc(s).replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/(^|[^*\w])\*([^*\s][^*]*?)\*(?!\*)/g, '$1<i>$2</i>');
   const dcrMd = s => {
     const L = [];
@@ -3371,29 +3370,27 @@
     if (b.t === 'chart') return dcrChart((C || {})[b.id]);
     return '';
   }
-  function renderDcr() {
-    const host = document.getElementById('v-dcrisk'); if (!host) return;
-    dcrStart();
-    const T = DCR.doc;
-    if (DCR.io) { DCR.io.disconnect(); DCR.io = null; }
-    const link = T && T.doc_url ? ` <a class="ext" href="${esc(T.doc_url)}" target="_blank" rel="noopener">Open the editable doc ↗</a>` : '';
-    let h = head('Research report' + (T && T.as_of ? ' · as of ' + updFmt(T.as_of) : ''), T ? esc(T.title || 'Data center permits and financing') : 'Data center permits and financing', T ? esc(T.lede || '') + link : '');
-    if (!T) { host.innerHTML = h + `<section class="panel">${none(esc(DCR.err || 'Loading the report…'))}</section>`; return; }
-    const S = arr(T.sections);
-    h += `<nav class="sk-tabs dcr-nav" aria-label="Report sections">${S.map(s => `<a href="#dcrisk" data-dcr="dcr-${esc(s.id)}">${esc(s.nav || s.title)}</a>`).join('')}</nav>`;
-    h += S.map(s => `<section class="panel dcr-sec" id="dcr-${esc(s.id)}"><h2>${dcrMd(s.title)}</h2>${arr(s.blocks).map(b => dcrBlock(b, T.charts)).join('')}</section>`).join('');
-    if (T.source) h += `<p class="sub">${esc(T.source)}${T.updated_at ? ' · added to this page ' + updFmt(T.updated_at) : ''}</p>`;
-    host.innerHTML = h;
-    const smooth = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-    const links = [...host.querySelectorAll('.dcr-nav a')], nav = host.querySelector('.dcr-nav');
-    links.forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = document.getElementById(a.dataset.dcr); if (t) t.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' }); }));
-    if ('IntersectionObserver' in window) {
-      DCR.io = new IntersectionObserver(es => es.forEach(e => {
-        if (!e.isIntersecting) return;
-        links.forEach(a => { if (a.dataset.dcr === e.target.id) { a.setAttribute('aria-current', 'location'); if (nav && (a.offsetLeft < nav.scrollLeft || a.offsetLeft + a.offsetWidth > nav.scrollLeft + nav.clientWidth)) nav.scrollLeft = Math.max(0, a.offsetLeft - 16); } else a.removeAttribute('aria-current'); });
-      }), { rootMargin: '-25% 0px -65% 0px' });
-      host.querySelectorAll('.dcr-sec').forEach(s => DCR.io.observe(s));
-    }
+  const DCO_SP = { done: ['s-positive', 'Happened'], partial: ['s-mixed', 'Partial read'], slipped: ['s-negative', 'Slipped'], pending: ['out', 'Upcoming'], no_read: ['out', 'No read yet'] };
+  const DCO_TN = { pos: ['s-positive', 'Eases'], neg: ['s-negative', 'Tightens'], neutral: ['out', 'Context'] };
+  function dcoSectionHtml() {
+    const T = DCO.doc;
+    const hd = `<div class="panel-h"><h2>2028 build outlook: permitting and financing</h2><span class="sub">${T ? `Updated ${esc(updFmt(T.updated_at || T.as_of))} · base case set ${esc(updFmt(T.base_as_of))}` : ''}${T && T.doc_url ? ` · <a class="ext" href="${esc(T.doc_url)}" target="_blank" rel="noopener">Full report ↗</a>` : ''}</span></div>`;
+    if (!T) return `<section class="panel dco" id="ai-dcout">${hd}<p class="sub">${esc(DCO.err || 'Loading the outlook…')}</p></section>`;
+    const tb = t => t ? dcrBlock({ t: 'table', head: t.head, rows: t.rows, num: t.num }) : '';
+    const chip = (m, k) => { const x = m[k] || ['out', k || '–']; return `<span class="chip ${x[0]}">${esc(x[1])}</span>`; };
+    const ul = xs => `<ul class="b">${arr(xs).map(x => `<li>${dcrMd(x)}</li>`).join('')}</ul>`;
+    let h = `<section class="panel dco" id="ai-dcout">${hd}${T.lede ? `<p class="sub">${dcrMd(T.lede)}</p>` : ''}${ul(T.summary)}`;
+    const ch = arr(T.changes);
+    if (ch.length) h += `<h3>What changed since ${esc(updFmt(T.base_as_of))}</h3><div class="tbl-wrap"><table class="dt dcr-t"><thead><tr><th>Date</th><th>Read</th><th>What happened</th><th>SB</th></tr></thead><tbody>${ch.map(r => `<tr><td class="nowrap">${esc(fmtD(r[0]))}</td><td>${chip(DCO_TN, r[1])}</td><td>${dcrMd(r[2])}</td><td class="nowrap">${esc(r[3] || '')}</td></tr>`).join('')}</tbody></table></div>`;
+    if (arr(T.signposts).length) h += `<h3>Signposts</h3><div class="tbl-wrap"><table class="dt dcr-t"><thead><tr><th>When</th><th>Event</th><th>Status</th><th>Read</th></tr></thead><tbody>${arr(T.signposts).map(r => `<tr><td class="nowrap">${esc(r[0])}</td><td>${dcrMd(r[1])}</td><td>${chip(DCO_SP, r[2])}</td><td>${dcrMd(r[3])}</td></tr>`).join('')}</tbody></table></div>`;
+    h += `<h3>US data center additions, GW of critical IT</h3>${tb(T.forecast)}${T.forecast && T.forecast.note ? `<p class="sub">${dcrMd(T.forecast.note)}</p>` : ''}`;
+    if (T.bridge) h += dcrChart(T.bridge);
+    if (arr(T.scenarios).length) h += `<details class="fr"><summary>Bear, base and bull scenarios</summary>${ul(T.scenarios)}</details>`;
+    if (arr(T.stress).length) h += `<h3>Financing: who still gets money</h3>${ul(T.stress)}`;
+    if (T.tiers) h += `<details class="fr"><summary>Cost of capital by borrower tier</summary>${tb(T.tiers)}</details>`;
+    if (T.states) h += `<h3>Permitting rules by state</h3><p class="sub">GW by state and risk tier are in the panel above; this is the rulebook behind them.</p>${tb(T.states)}`;
+    if (T.source) h += `<p class="sub">${esc(T.source)}</p>`;
+    return h + `</section>`;
   }
 
   /* outstanding-tab v1 */
@@ -3469,8 +3466,8 @@
   setTimeout(osStart, 0);
 
   // ================= ROUTER =================
-  const VIEWS = ['today', 'outstanding', 'x', 'ai', 'thesis', 'dcrisk', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
-  const R = { outstanding: renderOutstanding, mgmt: renderMgmt, ai: () => {}, thesis: () => {}, dcrisk: renderDcr, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
+  const VIEWS = ['today', 'outstanding', 'x', 'ai', 'thesis', 'mgmt', 'daily', 'routines', 'stocks', 'notes', 'earnings', 'datapoints', 'screens', 'ideas', 'prep', 'health', 'sources', 'method'];
+  const R = { outstanding: renderOutstanding, mgmt: renderMgmt, ai: () => {}, thesis: () => {}, x: () => renderX(false), daily: renderDaily, routines: renderRoutines, stocks: renderStocks, notes: renderNotes, sources: renderSources, today: renderToday, themes: renderThemes, datapoints: renderDatapoints, screens: renderScreens, ideas: renderIdeas, prep: renderPrep, health: renderHealth };
   // ---- top tabs: drag to reorder; order remembered per viewer ----
   (function navOrder() {
     const nav = document.querySelector('nav.tabs'); if (!nav) return;
@@ -3596,7 +3593,7 @@
   document.addEventListener('keydown', e => { if (RF.open && e.key === 'Escape') { RF.open = false; rfPaint(); } });
   setTimeout(rfPaint, 0);
   function show() {
-    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes' || v === 'pipeline') v = 'ideas'; if (v === 'twitter') v = 'x'; if (v === 'thesis') { aiModeSet((location.hash.split('/')[1] || '') === 'tenets' ? 'tenets' : 'overview'); history.replaceState(null, '', '#ai'); v = 'ai'; } else if (v === 'ai' && (location.hash.split('/')[1] || '')) aiModeSet('data'); if (!VIEWS.includes(v)) v = 'today';
+    let v = (location.hash || '').slice(1).split('/')[0]; if (v === 'themes' || v === 'pipeline') v = 'ideas'; if (v === 'twitter') v = 'x'; if (v === 'dcrisk') { aiModeSet('data'); history.replaceState(null, '', '#ai/dcout'); v = 'ai'; } if (v === 'thesis') { aiModeSet((location.hash.split('/')[1] || '') === 'tenets' ? 'tenets' : 'overview'); history.replaceState(null, '', '#ai'); v = 'ai'; } else if (v === 'ai' && (location.hash.split('/')[1] || '')) aiModeSet('data'); if (!VIEWS.includes(v)) v = 'today';
     if (gAL) gAL.hidden = !(v === 'daily' && gA && gA.options.length > 1);
     if (v === 'routines' && done[v]) { renderRoutines(); }
     if (v === 'stocks' && done[v]) { renderStocks(); }
@@ -3604,7 +3601,6 @@
     if (v === 'outstanding' && done[v]) { renderOutstanding(); }
     if (v === 'ai') { aiShow(); done.ai = 1; }
     if (v === 'mgmt' && done[v]) { renderMgmt(); }
-    if (v === 'dcrisk' && done[v]) { renderDcr(); }
     if (R[v] && !done[v]) { try { R[v](); } catch (e) { document.getElementById('v-' + v).innerHTML = `<div class="nores">This tab could not render: ${esc(e.message)}</div>`; } done[v] = 1; }
     paintUpd(v);
     document.querySelectorAll('.view').forEach(el => el.classList.toggle('on', el.dataset.view === v));
