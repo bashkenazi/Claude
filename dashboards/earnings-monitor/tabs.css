@@ -509,3 +509,11 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 .sc-det { padding: 0 0 10px 32px; font-size: 13px; } .sc-det ul { margin: 4px 0; padding-left: 18px; } .sc-fix { margin-top: 4px; }
 .sc-grp { margin-top: 6px; }
 @media (max-width: 640px) { .sc-row > summary { flex-wrap: wrap; } .sc-hd { flex-basis: 100%; padding-left: 32px; } }
+
+/* tenet-sent-multi v1 */
+.tn-sent { display: inline-flex; flex-wrap: wrap; gap: 4px 6px; align-items: center; min-width: 0; max-width: 100%; }
+.tn-sl { color: var(--muted); margin-right: 2px; }
+.tn-sb { display: inline-flex; align-items: center; gap: 5px; font: inherit; font-size: 12px; padding: 3px 9px; border: 1px solid var(--rule); border-radius: 999px; background: var(--bg); color: var(--ink-2); cursor: pointer; }
+.tn-sb:hover { border-color: var(--ink-2); }
+.tn-sb.on { background: var(--surface-2); border-color: var(--ink); color: var(--ink); font-weight: 600; }
+.tn-sb.tn-sx { color: var(--muted); }

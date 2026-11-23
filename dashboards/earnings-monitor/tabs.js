@@ -1527,7 +1527,7 @@
   const RT_MATCH = [[/research (inbox )?(folder )?digest|research folder/i, 'research-folder-digest'], [/semianalysis/i, 'semianalysis-digest'], [/tech specialist/i, 'tech-email-digest-new'],
     [/feedly/i, 'feedly-digest'], [/consensus revision/i, 'consensus-revisions'], [/idea gen/i, 'idea-generator'], [/output sweep/i, 'output-sweep'], [/sell-?side/i, 'sellside-folder-digest'],
     [/alphasense digest/i, 'alphasense-digest'], [/universe (datapoint )?sweep/i, 'universe-sweep'], [/ai build/i, 'ai-build-sweep'], [/openclaw/i, 'openclaw-datapoints'], [/blog sweep/i, 'blog-sweep'],
-    [/morning/i, 'morning'], [/substack/i, 'substack-datapoints'], [/ai apps data/i, 'ai-apps-data'], [/^thesis tracker/i, 'thesis-tracker'], [/twitter/i, 'x-scan']];
+    [/morning/i, 'morning'], [/substack/i, 'substack-datapoints'], [/ai apps data/i, 'ai-apps-data'], [/^thesis tracker/i, 'thesis-tracker'], [/earnings transcript digest/i, 'earnings-transcripts'], [/twitter/i, 'x-scan']];
   const RT_DEST = [[/twitter_runs/, '𝕏 Feed tab', '#x'], [/insider_signals/, 'Mgmt & insiders tab', '#mgmt'], [/thesis_watch/, 'Today › Thesis watch', '#today'], [/collection "thesis"/, 'AI tab › AI thesis', '#ai'],
     [/kpi_profiles/, 'Stocks › KPIs & guidance', '#stocks'], [/apps_signals/, 'AI tab › SRS apps data', '#ai'], [/Refresh Bobby Ashkenazi's "Bobby Tech Daily"/, 'This page (all tabs)', '#today'],
     [/Thesis Revised/, 'Notion thesis pages', ''], [/Anthropic Output/, 'Notion › Anthropic Output', ''], [/Openclaw Output/, 'Notion › Openclaw Output', ''], [/research_evidence/, 'Supabase datapoints', '#datapoints'], [/store\/ideas|ledger\.json/, 'GitHub repo (ideas ledger)', '']];
@@ -2882,17 +2882,18 @@
     host.querySelectorAll('[data-tn]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const t = document.getElementById('tn-' + a.dataset.tn); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }));
   }
   /* ai-tenets v2 */
-  const TNF = (() => { let f = {}; try { f = JSON.parse(localStorage.getItem('tn-filt') || '{}'); } catch (e) {} return Object.assign({ tenet: '', sent: '', days: '', n: '10' }, f); })();
+  const TNF = (() => { let f = {}; try { f = JSON.parse(localStorage.getItem('tn-filt') || '{}'); } catch (e) {} f = Object.assign({ tenet: '', sent: [], days: '', n: '10' }, f); /* tenet-sent-multi v1 */
+    if (!Array.isArray(f.sent)) f.sent = f.sent === 'g' ? [2, 1] : f.sent === 'r' ? [-1, -2] : f.sent === '' || f.sent == null ? [] : [Number(f.sent)];
+    return f; })();
   const tnSave = () => { try { localStorage.setItem('tn-filt', JSON.stringify(TNF)); } catch (e) {} };
   const tnScore = d => d.score != null ? Number(d.score) : (d.stance === 'supports' ? 1 : d.stance === 'challenges' ? -1 : 0);
   const tnDots = s => { const c = s > 0 ? 'g' : s < 0 ? 'r' : 'b', n = Math.abs(s) === 2 ? 2 : 1, lab = s === 2 ? 'Strongly supports' : s === 1 ? 'Supports' : s === 0 ? 'Neutral' : s === -1 ? 'Weakens' : 'Strongly weakens'; return `<span class="tn-dots ${c}" title="${lab} the thesis" aria-label="${lab}">${'<i></i>'.repeat(n)}</span>`; };
-  const TN_SENT = [['', 'All sentiment'], ['g', 'All supportive (green)'], ['2', '●● Strongly supports'], ['1', '● Supports'], ['0', '● Neutral (blue)'], ['-1', '● Weakens'], ['-2', '●● Strongly weakens'], ['r', 'All weakening (red)']];
+  const TN_SENT = [[2, 'Strongly supports'], [1, 'Supports'], [0, 'Neutral'], [-1, 'Weakens'], [-2, 'Strongly weakens']];
   const TN_DAYS = [['', 'All dates'], ['7', 'Last week'], ['14', 'Last 2 weeks'], ['30', 'Last month'], ['90', 'Last 3 months']];
   const TN_N = [['5', '5 per tenet'], ['10', '10 per tenet'], ['25', '25 per tenet'], ['', 'All']];
   function tnPass(d, asOf) {
     const s = tnScore(d), f = TNF.sent;
-    if (f === 'g' && !(s > 0)) return false; if (f === 'r' && !(s < 0)) return false;
-    if (f !== '' && f !== 'g' && f !== 'r' && s !== Number(f)) return false;
+    if (f.length && !f.includes(Math.max(-2, Math.min(2, Math.round(s))))) return false;
     if (TNF.days) { const lim = new Date(asOf); lim.setDate(lim.getDate() - Number(TNF.days)); if (new Date(d.date) < lim) return false; }
     return true;
   }
@@ -2903,7 +2904,7 @@
     const opt = (xs, v) => xs.map(([k, l]) => `<option value="${esc(k)}"${String(v) === k ? ' selected' : ''}>${esc(l)}</option>`).join('');
     const bar = `<div class="tn-bar" role="group" aria-label="Datapoint filters">` +
       `<label>Tenet <select data-tnf="tenet"><option value="">All tenets</option>${TS.map(t => `<option value="${esc(t.key)}"${TNF.tenet === t.key ? ' selected' : ''}>${esc(t.title)}</option>`).join('')}</select></label>` +
-      `<label>Sentiment <select data-tnf="sent">${opt(TN_SENT, TNF.sent)}</select></label>` +
+      `<span class="tn-sent" role="group" aria-label="Sentiment (pick any; none = all)"><span class="tn-sl">Sentiment</span>${TN_SENT.map(([v, l]) => `<button type="button" class="tn-sb${TNF.sent.includes(v) ? ' on' : ''}" data-tns="${v}" aria-pressed="${TNF.sent.includes(v)}" title="${esc(l)}">${tnDots(v)}${esc(l)}</button>`).join('')}${TNF.sent.length ? '<button type="button" class="tn-sb tn-sx" data-tns="x">All</button>' : ''}</span>` +
       `<label>How far back <select data-tnf="days">${opt(TN_DAYS, TNF.days)}</select></label>` +
       `<label>How many <select data-tnf="n">${opt(TN_N, TNF.n)}</select></label>` +
       `<span class="sub">Newest first</span></div>`;
@@ -2927,7 +2928,8 @@
         (arr(t.staged).length ? `<h3>Staged, not yet in Supabase</h3>${arr(t.staged).map(g => `<div class="tn-stage"><div class="chips"><span class="tk-chip">${esc(g.t)}</span><span class="sub">${esc(fmtD(g.date))}</span></div>${esc(g.text)}<div class="srcl"><span>Source</span>${esc(g.primary)}${g.secondary ? ' via ' + esc(g.secondary) : ''}</div></div>`).join('')}` : '') +
         `</section>`;
     }).join('');
-    setTimeout(() => document.querySelectorAll('#v-thesis [data-tnf]').forEach(s => s.addEventListener('change', () => { TNF[s.dataset.tnf] = s.value; tnSave(); renderThesis(); })), 0);
+    setTimeout(() => { document.querySelectorAll('#v-thesis [data-tnf]').forEach(s => s.addEventListener('change', () => { TNF[s.dataset.tnf] = s.value; tnSave(); renderThesis(); }));
+      document.querySelectorAll('#v-thesis [data-tns]').forEach(b => b.addEventListener('click', () => { const v = b.dataset.tns; if (v === 'x') TNF.sent = []; else { const n = Number(v); TNF.sent = TNF.sent.includes(n) ? TNF.sent.filter(x => x !== n) : TNF.sent.concat(n); } tnSave(); renderThesis(); })); }, 0);
     return strip + bar + body;
   }
 
