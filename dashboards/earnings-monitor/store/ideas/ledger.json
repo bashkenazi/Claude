@@ -51,6 +51,32 @@
     "LITE-US"
    ],
    "notion": "https://app.notion.com/p/41aa883333de81abac75cacb25607d65"
+  },
+  {
+   "date": "2026-11-23",
+   "longs": [
+    "HPQ-US",
+    "AEHR-US",
+    "NVDA-US"
+   ],
+   "shorts": [
+    "AMAT-US",
+    "3017-TW",
+    "SHOP-US",
+    "SITM-US",
+    "LITE-US"
+   ],
+   "runners_up_long": [
+    "TTMI-US",
+    "MU-US",
+    "UCTT-US"
+   ],
+   "runners_up_short": [
+    "MTSI-US",
+    "IFX-DE",
+    "5801-JP"
+   ],
+   "notion": "https://app.notion.com/p/421a883333de819caca9f23d0638abe0"
   }
  ]
 }

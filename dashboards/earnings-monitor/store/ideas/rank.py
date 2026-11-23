@@ -22,7 +22,7 @@ for fs, s in sig.items():
     last = e[-1][2] if e else None
     fresh = last - st.median([x[2] for x in e[-9:-1]]) if len(e) >= 7 else None
     px = sorted(PW[fs].items()); p0 = px[-1][1][0]
-    pt = list(PT.get(fs, {}).values())
+    pt = [v for k, v in sorted(PT.get(fs, {}).items(), reverse=True)]   # latest target first
     n = nxt.get(fs)
     rows.append({'fs': fs, 't': c['t'], 'name': c['name'], 'tier': c['tier'], 'sub': (c.get('subs') or [c.get('sub')])[0],
                  'sig': s['score'], 'pctl': s['pctl'], 'parts': s['parts'], 'inp': s['inputs'], 'n_prints': len(e),
