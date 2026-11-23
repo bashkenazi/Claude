@@ -2928,7 +2928,7 @@
     const src = xs => arr(xs).map(([t, u]) => u ? `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t)).join('<br>');
     const lim = TNF.n ? Number(TNF.n) : Infinity;
     const body = TS.filter(t => !TNF.tenet || t.key === TNF.tenet).map(t => {
-      const FC = arr(t.checks), all = arr(t.dps).slice().sort((a, b) => (TNF.sort === 'strong' ? tnStrength(b) - tnStrength(a) : TNF.sort === 'weak' ? tnWeak(b) - tnWeak(a) : 0) || String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));
+      const FC = arr(t.checks), all = arr(t.dps).slice().sort((a, b) => ((b.key ? 1 : 0) - (a.key ? 1 : 0)) /* tenet-key-dps v1 */ || (TNF.sort === 'strong' ? tnStrength(b) - tnStrength(a) : TNF.sort === 'weak' ? tnWeak(b) - tnWeak(a) : 0) || String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));
       const pass = all.filter(d => tnPass(d, asOf)), DP = pass.slice(0, lim), G = t.gw;
       return `<section class="panel tn" id="tn-${esc(t.key)}"><div class="panel-h"><h2>${tnL(t)}${esc(t.title)}</h2><span class="chips">${thChip(t.status)}</span></div>` +
         (t.claim ? `<p class="lede">${esc(t.claim)}</p>` : '') +
@@ -2939,7 +2939,7 @@
         (FC.length ? `<h3>Fact check</h3><div class="tbl-wrap"><table class="dt tn-fc"><thead><tr><th>Claim</th><th>Verdict</th><th>What we found</th><th>Sources</th></tr></thead><tbody>${FC.map(f => `<tr><td class="wrap"><b>${esc(f.claim)}</b></td><td>${thChip(f.verdict, TN_V)}</td><td class="wrap">${esc(f.text)}</td><td class="wrap">${src(f.sources)}</td></tr>`).join('')}</tbody></table></div>` : '') +
         `<h3>Datapoints <span class="muted">${DP.length} of ${pass.length}${pass.length !== all.length ? ` matching (${all.length} total)` : ''}</span></h3>` +
         (() => { const miss = TNF.sent.filter(v => !all.some(d => tnLvl(d) === v && tnDateOk(d, asOf))); return miss.length ? `<p class="sub tn-miss">No ${miss.map(v => (TN_SENT.find(x => x[0] === v) || [, ''])[1].toLowerCase()).join(' or ')} datapoints in this tenet${TNF.days ? ' for these dates' : ''}.</p>` : ''; })() +
-        (DP.length ? `<div class="list">${DP.map(d => `<div class="li">${tnDots(tnScore(d))}<div class="body"><div class="chips"><span class="tk-chip">${esc(d.t)}</span></div>${esc(d.text)}<div class="srcl"><span>Source</span>${esc(d.src || '')} · SB #${esc(d.id)}</div></div><div class="side">${esc(fmtD(d.date))}</div></div>`).join('')}</div>` : none(all.length ? 'No datapoints match these filters.' : 'No datapoints linked yet.')) +
+        (DP.length ? `<div class="list">${DP.map(d => `<div class="li">${tnDots(tnScore(d))}<div class="body"><div class="chips">${d.key ? `<span class="tn-key" title="${esc(d.why_key || 'Key datapoint')}">Key</span>` : ''}<span class="tk-chip">${esc(d.t)}</span></div>${esc(d.text)}<div class="srcl"><span>Source</span>${esc(d.src || '')} · SB #${esc(d.id)}</div></div><div class="side">${esc(fmtD(d.date))}</div></div>`).join('')}</div>` : none(all.length ? 'No datapoints match these filters.' : 'No datapoints linked yet.')) +
         (arr(t.staged).length ? `<h3>Staged, not yet in Supabase</h3>${arr(t.staged).map(g => `<div class="tn-stage"><div class="chips"><span class="tk-chip">${esc(g.t)}</span><span class="sub">${esc(fmtD(g.date))}</span></div>${esc(g.text)}<div class="srcl"><span>Source</span>${esc(g.primary)}${g.secondary ? ' via ' + esc(g.secondary) : ''}</div></div>`).join('')}` : '') +
         `</section>`;
     }).join('');

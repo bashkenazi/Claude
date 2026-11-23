@@ -535,3 +535,6 @@ table.tn-x tr.tn-xh td { font-weight: 700; background: var(--surface-2); color: 
 table.tn-x tr.tn-xb td { font-weight: 600; }
 table.tn-x td.tn-dir { white-space: nowrap; font-weight: 600; }
 table.tn-x td.tn-dir.up { color: var(--pos); } table.tn-x td.tn-dir.dn { color: var(--neg); } table.tn-x td.tn-dir.fl { color: var(--ink-2); }
+
+/* tenet-key-dps v1 */
+.tn-key { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 6px; border-radius: 4px; background: var(--ink); color: var(--bg); margin-right: 4px; }
