@@ -2901,13 +2901,15 @@
   }
   function thTenets() {
     const D2 = TH.tenets; if (!D2) return `<section class="panel">${none('No tenet breakdown saved yet.')}</section>`;
-    const TS = arr(D2.tenets).slice().sort((a, b) => (a.sort || 0) - (b.sort || 0));
+    const TS = arr(D2.tenets).slice().sort((a, b) => (a.sort || 0) - (b.sort || 0)); /* tenet-numbers v1 */
+    { let ti = 0, ri = 0; TS.forEach(t => { t._lab = t.label || (t.kind === 'risk' ? 'Risk ' + (++ri) : 'Tenet ' + (++ti)); }); }
+    const tnL = t => `<span class="tn-num${/^risk/i.test(t._lab) ? ' risk' : ''}">${esc(t._lab)}</span> `;
     const asOf = String(D2.updated_at || new Date().toISOString()).slice(0, 10);
     const opt = (xs, v) => xs.map(([k, l]) => `<option value="${esc(k)}"${String(v) === k ? ' selected' : ''}>${esc(l)}</option>`).join('');
     const inView = TS.filter(t => !TNF.tenet || t.key === TNF.tenet).flatMap(t => arr(t.dps)).filter(d => tnDateOk(d, asOf));
     const lvN = v => inView.filter(d => tnLvl(d) === v).length;
     const bar = `<div class="tn-bar" role="group" aria-label="Datapoint filters">` +
-      `<label>Tenet <select data-tnf="tenet"><option value="">All tenets</option>${TS.map(t => `<option value="${esc(t.key)}"${TNF.tenet === t.key ? ' selected' : ''}>${esc(t.title)}</option>`).join('')}</select></label>` +
+      `<label>Tenet <select data-tnf="tenet"><option value="">All tenets</option>${TS.map(t => `<option value="${esc(t.key)}"${TNF.tenet === t.key ? ' selected' : ''}>${esc(t._lab)}: ${esc(t.title)}</option>`).join('')}</select></label>` +
       `<span class="tn-sent" role="group" aria-label="Sentiment (pick any; none = all)"><span class="tn-sl">Sentiment</span>${TN_SENT.map(([v, l]) => `<button type="button" class="tn-sb${TNF.sent.includes(v) ? ' on' : ''}" data-tns="${v}" aria-pressed="${TNF.sent.includes(v)}" title="${esc(l)}: ${lvN(v)} datapoints in view">${tnDots(v)}${esc(l)} <span class="tn-sn">${lvN(v)}</span></button>`).join('')}${TNF.sent.length ? '<button type="button" class="tn-sb tn-sx" data-tns="x">All</button>' : ''}</span>` +
       `<label>How far back <select data-tnf="days">${opt(TN_DAYS, TNF.days)}</select></label>` +
       `<label>How many <select data-tnf="n">${opt(TN_N, TNF.n)}</select></label>` +
@@ -2915,14 +2917,14 @@
     const key = `<div class="tn-key">${[[2, 'Strongly supports'], [1, 'Supports'], [0, 'Neutral or mixed'], [-1, 'Weakens'], [-2, 'Strongly weakens']].map(([s, l]) => `<span>${tnDots(s)}${esc(l)}</span>`).join('')}<span class="sub">scored against the AI bull thesis</span></div>`;
     const bal = ds => { const g = ds.filter(d => tnScore(d) > 0).length, r = ds.filter(d => tnScore(d) < 0).length, b = ds.length - g - r, n = ds.length || 1; return `<div class="tn-bal" title="${g} green · ${b} blue · ${r} red"><i class="g" style="width:${g / n * 100}%"></i><i class="b" style="width:${b / n * 100}%"></i><i class="r" style="width:${r / n * 100}%"></i></div>`; };
     const strip = `<section class="panel"><div class="panel-h"><h2>Tenets</h2><span class="muted">updated ${esc(fmtD(asOf))}</span></div>${key}` +
-      `<div class="tn-strip">${TS.map(t => { const n = arr(t.dps), g = n.filter(d => tnScore(d) > 0).length, r = n.filter(d => tnScore(d) < 0).length; return `<a href="#ai" data-tn="${esc(t.key)}"><span class="chips">${thChip(t.status)}</span><b>${esc(t.title)}</b>${n.length ? bal(n) : ''}<span class="sub">${n.length} datapoints${n.length ? ` · ${g} green · ${r} red` : ''}${arr(t.checks).length ? ` · ${arr(t.checks).length} fact check${arr(t.checks).length > 1 ? 's' : ''}` : ''}</span></a>`; }).join('')}</div>` +
+      `<div class="tn-strip">${TS.map(t => { const n = arr(t.dps), g = n.filter(d => tnScore(d) > 0).length, r = n.filter(d => tnScore(d) < 0).length; return `<a href="#ai" data-tn="${esc(t.key)}"><span class="chips">${thChip(t.status)}</span><b>${tnL(t)}${esc(t.title)}</b>${n.length ? bal(n) : ''}<span class="sub">${n.length} datapoints${n.length ? ` · ${g} green · ${r} red` : ''}${arr(t.checks).length ? ` · ${arr(t.checks).length} fact check${arr(t.checks).length > 1 ? 's' : ''}` : ''}</span></a>`; }).join('')}</div>` +
       (D2.storage ? `<p class="sub">${esc(D2.storage)}</p>` : '') + `</section>`;
     const src = xs => arr(xs).map(([t, u]) => u ? `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t)).join('<br>');
     const lim = TNF.n ? Number(TNF.n) : Infinity;
     const body = TS.filter(t => !TNF.tenet || t.key === TNF.tenet).map(t => {
       const FC = arr(t.checks), all = arr(t.dps).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));
       const pass = all.filter(d => tnPass(d, asOf)), DP = pass.slice(0, lim), G = t.gw;
-      return `<section class="panel tn" id="tn-${esc(t.key)}"><div class="panel-h"><h2>${esc(t.title)}</h2><span class="chips">${thChip(t.status)}</span></div>` +
+      return `<section class="panel tn" id="tn-${esc(t.key)}"><div class="panel-h"><h2>${tnL(t)}${esc(t.title)}</h2><span class="chips">${thChip(t.status)}</span></div>` +
         (t.claim ? `<p class="lede">${esc(t.claim)}</p>` : '') +
         (t.srs_view ? `<p class="tn-view"><b>SRS view:</b> ${esc(t.srs_view)}</p>` : '') +
         (G && arr(G.rows).length ? `<h3>${esc(G.title || 'GW deployed')}</h3><div class="tbl-wrap"><table class="dt tn-gw"><thead><tr>${arr(G.cols).map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${arr(G.rows).map(r => `<tr>${arr(r).map((c, i) => `<td class="${i > 1 ? 'wrap' : ''}">${i === 1 ? esc(fmtD(c)) : esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${G.note ? `<p class="sub">${esc(G.note)}</p>` : ''}` : '') +

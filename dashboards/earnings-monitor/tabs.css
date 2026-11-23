@@ -522,3 +522,7 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 .tn-sn { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 400; }
 .tn-sb.on .tn-sn { color: var(--ink-2); }
 .tn-miss { margin: -4px 0 8px; }
+
+/* tenet-numbers v1 */
+.tn-num { display: inline-block; font-size: .78em; font-weight: 700; letter-spacing: .02em; padding: 1px 7px; margin-right: 4px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); vertical-align: 2px; white-space: nowrap; }
+.tn-num.risk { background: var(--neg-wash); color: var(--neg); }
