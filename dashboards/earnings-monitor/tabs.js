@@ -2891,6 +2891,8 @@
   const TN_SENT = [[2, 'Strongly supports'], [1, 'Supports'], [0, 'Neutral'], [-1, 'Weakens'], [-2, 'Strongly weakens']];
   const TN_DAYS = [['', 'All dates'], ['7', 'Last week'], ['14', 'Last 2 weeks'], ['30', 'Last month'], ['90', 'Last 3 months']];
   const TN_N = [['5', '5 per tenet'], ['10', '10 per tenet'], ['25', '25 per tenet'], ['', 'All']];
+  const tnLvl = d => Math.max(-2, Math.min(2, Math.round(tnScore(d)))); /* tenet-sent-counts v1 */
+  function tnDateOk(d, asOf) { if (!TNF.days) return true; const lim = new Date(asOf); lim.setDate(lim.getDate() - Number(TNF.days)); return !(new Date(d.date) < lim); }
   function tnPass(d, asOf) {
     const s = tnScore(d), f = TNF.sent;
     if (f.length && !f.includes(Math.max(-2, Math.min(2, Math.round(s))))) return false;
@@ -2902,9 +2904,11 @@
     const TS = arr(D2.tenets).slice().sort((a, b) => (a.sort || 0) - (b.sort || 0));
     const asOf = String(D2.updated_at || new Date().toISOString()).slice(0, 10);
     const opt = (xs, v) => xs.map(([k, l]) => `<option value="${esc(k)}"${String(v) === k ? ' selected' : ''}>${esc(l)}</option>`).join('');
+    const inView = TS.filter(t => !TNF.tenet || t.key === TNF.tenet).flatMap(t => arr(t.dps)).filter(d => tnDateOk(d, asOf));
+    const lvN = v => inView.filter(d => tnLvl(d) === v).length;
     const bar = `<div class="tn-bar" role="group" aria-label="Datapoint filters">` +
       `<label>Tenet <select data-tnf="tenet"><option value="">All tenets</option>${TS.map(t => `<option value="${esc(t.key)}"${TNF.tenet === t.key ? ' selected' : ''}>${esc(t.title)}</option>`).join('')}</select></label>` +
-      `<span class="tn-sent" role="group" aria-label="Sentiment (pick any; none = all)"><span class="tn-sl">Sentiment</span>${TN_SENT.map(([v, l]) => `<button type="button" class="tn-sb${TNF.sent.includes(v) ? ' on' : ''}" data-tns="${v}" aria-pressed="${TNF.sent.includes(v)}" title="${esc(l)}">${tnDots(v)}${esc(l)}</button>`).join('')}${TNF.sent.length ? '<button type="button" class="tn-sb tn-sx" data-tns="x">All</button>' : ''}</span>` +
+      `<span class="tn-sent" role="group" aria-label="Sentiment (pick any; none = all)"><span class="tn-sl">Sentiment</span>${TN_SENT.map(([v, l]) => `<button type="button" class="tn-sb${TNF.sent.includes(v) ? ' on' : ''}" data-tns="${v}" aria-pressed="${TNF.sent.includes(v)}" title="${esc(l)}: ${lvN(v)} datapoints in view">${tnDots(v)}${esc(l)} <span class="tn-sn">${lvN(v)}</span></button>`).join('')}${TNF.sent.length ? '<button type="button" class="tn-sb tn-sx" data-tns="x">All</button>' : ''}</span>` +
       `<label>How far back <select data-tnf="days">${opt(TN_DAYS, TNF.days)}</select></label>` +
       `<label>How many <select data-tnf="n">${opt(TN_N, TNF.n)}</select></label>` +
       `<span class="sub">Newest first</span></div>`;
@@ -2924,6 +2928,7 @@
         (G && arr(G.rows).length ? `<h3>${esc(G.title || 'GW deployed')}</h3><div class="tbl-wrap"><table class="dt tn-gw"><thead><tr>${arr(G.cols).map(c => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${arr(G.rows).map(r => `<tr>${arr(r).map((c, i) => `<td class="${i > 1 ? 'wrap' : ''}">${i === 1 ? esc(fmtD(c)) : esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${G.note ? `<p class="sub">${esc(G.note)}</p>` : ''}` : '') +
         (FC.length ? `<h3>Fact check</h3><div class="tbl-wrap"><table class="dt tn-fc"><thead><tr><th>Claim</th><th>Verdict</th><th>What we found</th><th>Sources</th></tr></thead><tbody>${FC.map(f => `<tr><td class="wrap"><b>${esc(f.claim)}</b></td><td>${thChip(f.verdict, TN_V)}</td><td class="wrap">${esc(f.text)}</td><td class="wrap">${src(f.sources)}</td></tr>`).join('')}</tbody></table></div>` : '') +
         `<h3>Datapoints <span class="muted">${DP.length} of ${pass.length}${pass.length !== all.length ? ` matching (${all.length} total)` : ''}</span></h3>` +
+        (() => { const miss = TNF.sent.filter(v => !all.some(d => tnLvl(d) === v && tnDateOk(d, asOf))); return miss.length ? `<p class="sub tn-miss">No ${miss.map(v => (TN_SENT.find(x => x[0] === v) || [, ''])[1].toLowerCase()).join(' or ')} datapoints in this tenet${TNF.days ? ' for these dates' : ''}.</p>` : ''; })() +
         (DP.length ? `<div class="list">${DP.map(d => `<div class="li">${tnDots(tnScore(d))}<div class="body"><div class="chips"><span class="tk-chip">${esc(d.t)}</span></div>${esc(d.text)}<div class="srcl"><span>Source</span>${esc(d.src || '')} · SB #${esc(d.id)}</div></div><div class="side">${esc(fmtD(d.date))}</div></div>`).join('')}</div>` : none(all.length ? 'No datapoints match these filters.' : 'No datapoints linked yet.')) +
         (arr(t.staged).length ? `<h3>Staged, not yet in Supabase</h3>${arr(t.staged).map(g => `<div class="tn-stage"><div class="chips"><span class="tk-chip">${esc(g.t)}</span><span class="sub">${esc(fmtD(g.date))}</span></div>${esc(g.text)}<div class="srcl"><span>Source</span>${esc(g.primary)}${g.secondary ? ' via ' + esc(g.secondary) : ''}</div></div>`).join('')}` : '') +
         `</section>`;

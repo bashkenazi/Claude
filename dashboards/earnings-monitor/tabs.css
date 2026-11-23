@@ -517,3 +517,8 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 .tn-sb:hover { border-color: var(--ink-2); }
 .tn-sb.on { background: var(--surface-2); border-color: var(--ink); color: var(--ink); font-weight: 600; }
 .tn-sb.tn-sx { color: var(--muted); }
+
+/* tenet-sent-counts v1 */
+.tn-sn { font-variant-numeric: tabular-nums; color: var(--muted); font-weight: 400; }
+.tn-sb.on .tn-sn { color: var(--ink-2); }
+.tn-miss { margin: -4px 0 8px; }
