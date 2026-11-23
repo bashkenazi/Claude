@@ -18,3 +18,5 @@ js = rep(js, "`<span class=\"sub\">Newest first</span></div>`;", "`<label>Sort <
 js = rep(js, "all = arr(t.dps).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));",
          "all = arr(t.dps).slice().sort((a, b) => (TNF.sort === 'strong' ? tnStrength(b) - tnStrength(a) : 0) || String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));")
 open(JS, 'w').write(js); print('applied')
+# Follow-up (2026-11-23, marker "tenet-weakest v1"): 'weak' sort option added directly in tabs.js — negatives first
+# (score ascending), then evidence quality, then newest.

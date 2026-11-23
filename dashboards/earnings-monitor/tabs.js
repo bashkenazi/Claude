@@ -2893,7 +2893,8 @@
   const TN_N = [['5', '5 per tenet'], ['10', '10 per tenet'], ['25', '25 per tenet'], ['', 'All']];
   const tnLvl = d => Math.max(-2, Math.min(2, Math.round(tnScore(d)))); /* tenet-sent-counts v1 */
   /* tenet-strongest v1 */
-  const TN_SORT = [['new', 'Newest first'], ['strong', 'Strongest first']];
+  const TN_SORT = [['new', 'Newest first'], ['strong', 'Strongest first'], ['weak', 'Weakest first (challenges the thesis)']]; /* tenet-weakest v1 */
+  const tnWeak = d => -tnLvl(d) * 10 + tnQual(d);
   const tnQual = d => { const s = String((d.text || '') + ' ' + (d.src || '')); if (/\b(est\.?|estimates?|model|forecasts?|scenario|opinion|expects?|targets?|could|may|might|channel checks?|views?|thinks?)\b/i.test(s)) return 0; if (/\b(10-[QK]|filing|S-1|press release|earnings|call|reported|actual|signed|approved|issued|voted|adopted|filed|guide|mgmt|management|CFO|CEO|IR|regulator|TCEQ|ERCOT|PUCT|County|AG)\b/.test(s)) return 2; return 1; };
   const tnStrength = d => Math.abs(tnLvl(d)) * 10 + tnQual(d);
   function tnDateOk(d, asOf) { if (!TNF.days) return true; const lim = new Date(asOf); lim.setDate(lim.getDate() - Number(TNF.days)); return !(new Date(d.date) < lim); }
@@ -2918,7 +2919,7 @@
       `<label>How far back <select data-tnf="days">${opt(TN_DAYS, TNF.days)}</select></label>` +
       `<label>How many <select data-tnf="n">${opt(TN_N, TNF.n)}</select></label>` +
       `<label>Sort <select data-tnf="sort">${opt(TN_SORT, TNF.sort)}</select></label>` +
-      `${TNF.sort === 'strong' ? '<span class="sub">Strongest = strongly supports/weakens first, then reported facts over estimates, then newest</span>' : ''}</div>`;
+      `${TNF.sort === 'strong' ? '<span class="sub">Strongest = strongly supports/weakens first, then reported facts over estimates, then newest</span>' : TNF.sort === 'weak' ? '<span class="sub">Weakest = strongly weakens first, then weakens, neutral, supports; reported facts over estimates, then newest</span>' : ''}</div>`;
     const key = `<div class="tn-key">${[[2, 'Strongly supports'], [1, 'Supports'], [0, 'Neutral or mixed'], [-1, 'Weakens'], [-2, 'Strongly weakens']].map(([s, l]) => `<span>${tnDots(s)}${esc(l)}</span>`).join('')}<span class="sub">scored against the AI bull thesis</span></div>`;
     const bal = ds => { const g = ds.filter(d => tnScore(d) > 0).length, r = ds.filter(d => tnScore(d) < 0).length, b = ds.length - g - r, n = ds.length || 1; return `<div class="tn-bal" title="${g} green · ${b} blue · ${r} red"><i class="g" style="width:${g / n * 100}%"></i><i class="b" style="width:${b / n * 100}%"></i><i class="r" style="width:${r / n * 100}%"></i></div>`; };
     const strip = `<section class="panel"><div class="panel-h"><h2>Tenets</h2><span class="muted">updated ${esc(fmtD(asOf))}</span></div>${key}` +
@@ -2927,7 +2928,7 @@
     const src = xs => arr(xs).map(([t, u]) => u ? `<a class="ext" href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>` : esc(t)).join('<br>');
     const lim = TNF.n ? Number(TNF.n) : Infinity;
     const body = TS.filter(t => !TNF.tenet || t.key === TNF.tenet).map(t => {
-      const FC = arr(t.checks), all = arr(t.dps).slice().sort((a, b) => (TNF.sort === 'strong' ? tnStrength(b) - tnStrength(a) : 0) || String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));
+      const FC = arr(t.checks), all = arr(t.dps).slice().sort((a, b) => (TNF.sort === 'strong' ? tnStrength(b) - tnStrength(a) : TNF.sort === 'weak' ? tnWeak(b) - tnWeak(a) : 0) || String(b.date).localeCompare(String(a.date)) || (b.id || 0) - (a.id || 0));
       const pass = all.filter(d => tnPass(d, asOf)), DP = pass.slice(0, lim), G = t.gw;
       return `<section class="panel tn" id="tn-${esc(t.key)}"><div class="panel-h"><h2>${tnL(t)}${esc(t.title)}</h2><span class="chips">${thChip(t.status)}</span></div>` +
         (t.claim ? `<p class="lede">${esc(t.claim)}</p>` : '') +
