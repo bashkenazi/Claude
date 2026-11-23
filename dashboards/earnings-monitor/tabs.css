@@ -526,3 +526,12 @@ details.mg-long { border: 0; padding: 0; } details.mg-long > summary { text-tran
 /* tenet-numbers v1 */
 .tn-num { display: inline-block; font-size: .78em; font-weight: 700; letter-spacing: .02em; padding: 1px 7px; margin-right: 4px; border-radius: 4px; background: var(--surface-2); color: var(--ink-2); vertical-align: 2px; white-space: nowrap; }
 .tn-num.risk { background: var(--neg-wash); color: var(--neg); }
+
+/* tenet-tables v1 */
+table.tn-x td { white-space: normal; vertical-align: top; }
+table.tn-x td.wrap { min-width: 90px; max-width: 420px; }
+table.tn-x td:first-child { min-width: 160px; }
+table.tn-x tr.tn-xh td { font-weight: 700; background: var(--surface-2); color: var(--ink-2); font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; }
+table.tn-x tr.tn-xb td { font-weight: 600; }
+table.tn-x td.tn-dir { white-space: nowrap; font-weight: 600; }
+table.tn-x td.tn-dir.up { color: var(--pos); } table.tn-x td.tn-dir.dn { color: var(--neg); } table.tn-x td.tn-dir.fl { color: var(--ink-2); }
