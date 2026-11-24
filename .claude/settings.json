@@ -53,5 +53,19 @@
       "mcp__github__fork_repository",
       "mcp__github__actions_run_trigger"
     ]
+  },
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "matcher": "mcp__SRS_MCP__.*|mcp__Notion__.*|mcp__Supabase__.*|mcp__FactSet__.*|mcp__Insider_Score__.*|mcp__Claude_Docs__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/auto-allow-mcp.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
   }
 }
