@@ -1,0 +1,296 @@
+{
+ "note": "Weekly FactSet pulls for jobs/markets-weekly. Window start = macro_start; results overlay the committed history in data/factset_raw.",
+ "macro_start": "2024-01-02",
+ "macro": [
+  {
+   "seriesId": "FRBRIFLGFCY10@US",
+   "frequency": "M",
+   "name": "FRBRIFLGFCY10_US"
+  },
+  {
+   "seriesId": "FRBRIFLGFCY02@US",
+   "frequency": "M",
+   "name": "FRBRIFLGFCY02_US"
+  },
+  {
+   "seriesId": "FRBRIFLGFCM03@US",
+   "frequency": "M",
+   "name": "FRBRIFLGFCM03_US"
+  },
+  {
+   "seriesId": "FRBRIFLGFCY05@US",
+   "frequency": "M",
+   "name": "FRBRIFLGFCY05_US"
+  },
+  {
+   "seriesId": "FRBRIFSPFF@US",
+   "frequency": "M",
+   "name": "FRBRIFSPFF_US"
+  },
+  {
+   "seriesId": "ITONMAXD@US",
+   "frequency": "M",
+   "name": "ITONMAXD_US"
+  },
+  {
+   "seriesId": "FRBRIFLGFCIIY10@US",
+   "frequency": "M",
+   "name": "FRBRIFLGFCIIY10_US"
+  },
+  {
+   "seriesId": "USIR6389706",
+   "frequency": "M",
+   "name": "USIR6389706"
+  },
+  {
+   "seriesId": "USIR1578126",
+   "frequency": "M",
+   "name": "USIR1578126"
+  },
+  {
+   "seriesId": "DOLICLAIMUI@US",
+   "frequency": "M",
+   "name": "DOLICLAIMUI_US"
+  },
+  {
+   "seriesId": "US.LMCLAIMS",
+   "frequency": "M",
+   "name": "US_LMCLAIMS"
+  },
+  {
+   "seriesId": "US.CBASSET",
+   "frequency": "M",
+   "name": "US_CBASSET"
+  },
+  {
+   "seriesId": "FRBBCABLCCBA@US",
+   "frequency": "M",
+   "name": "FRBBCABLCCBA_US"
+  },
+  {
+   "seriesId": "US.LMUEMPR",
+   "frequency": null,
+   "name": "US_LMUEMPR"
+  },
+  {
+   "seriesId": "USSU0014446",
+   "frequency": null,
+   "name": "USSU0014446"
+  },
+  {
+   "seriesId": "US.CPIALL",
+   "frequency": null,
+   "name": "US_CPIALL"
+  },
+  {
+   "seriesId": "US.CPICORE",
+   "frequency": null,
+   "name": "US_CPICORE"
+  },
+  {
+   "seriesId": "USLM1012144",
+   "frequency": null,
+   "name": "USLM1012144"
+  },
+  {
+   "seriesId": "US.HCSTARTS",
+   "frequency": null,
+   "name": "US_HCSTARTS"
+  },
+  {
+   "seriesId": "US.HCPERMIT",
+   "frequency": null,
+   "name": "US_HCPERMIT"
+  },
+  {
+   "seriesId": "CENHSOLDTOT@US",
+   "frequency": null,
+   "name": "CENHSOLDTOT_US"
+  },
+  {
+   "seriesId": "NAHBWFHMI",
+   "frequency": null,
+   "name": "NAHBWFHMI"
+  },
+  {
+   "seriesId": "US.LMWAGES",
+   "frequency": null,
+   "name": "US_LMWAGES"
+  },
+  {
+   "seriesId": "USLM2253126",
+   "frequency": null,
+   "name": "USLM2253126"
+  },
+  {
+   "seriesId": "USSU0009518",
+   "frequency": null,
+   "name": "USSU0009518"
+  },
+  {
+   "seriesId": "USSU0009522",
+   "frequency": null,
+   "name": "USSU0009522"
+  },
+  {
+   "seriesId": "CENANXANO",
+   "frequency": null,
+   "name": "CENANXANO"
+  },
+  {
+   "seriesId": "US.INDPRODMG",
+   "frequency": null,
+   "name": "US_INDPRODMG"
+  },
+  {
+   "seriesId": "FRBUTLB50001",
+   "frequency": null,
+   "name": "FRBUTLB50001"
+  },
+  {
+   "seriesId": "USSU0486263",
+   "frequency": null,
+   "name": "USSU0486263"
+  },
+  {
+   "seriesId": "US.MAM2",
+   "frequency": null,
+   "name": "US_MAM2"
+  },
+  {
+   "seriesId": "US.RSALESN",
+   "frequency": null,
+   "name": "US_RSALESN"
+  },
+  {
+   "seriesId": "CENRETAIL@MVP@US",
+   "frequency": null,
+   "name": "CENRETAIL_MVP_US"
+  },
+  {
+   "seriesId": "US.INDINVR",
+   "frequency": null,
+   "name": "US_INDINVR"
+  },
+  {
+   "seriesId": "US.LMVAC",
+   "frequency": null,
+   "name": "US_LMVAC"
+  },
+  {
+   "seriesId": "BEANIPABA03RG3@US",
+   "frequency": null,
+   "name": "BEANIPABA03RG3_US"
+  },
+  {
+   "seriesId": "USSU0587918",
+   "frequency": null,
+   "name": "USSU0587918"
+  },
+  {
+   "seriesId": "USSU1293726",
+   "frequency": null,
+   "name": "USSU1293726"
+  }
+ ],
+ "prices_weekly": {
+  "startDate": "2024-01-02",
+  "frequency": "W",
+  "batches": {
+   "core": [
+    "SPY-US",
+    "RSP-US",
+    "QQQ-US",
+    "IWM-US",
+    "MDY-US"
+   ],
+   "cyc": [
+    "XLY-US",
+    "XLI-US",
+    "XLB-US",
+    "XLF-US",
+    "XLE-US"
+   ],
+   "def": [
+    "XLP-US",
+    "XLU-US",
+    "XLV-US",
+    "XLK-US",
+    "SMH-US"
+   ],
+   "xasset": [
+    "HYG-US",
+    "LQD-US",
+    "IEF-US",
+    "TLT-US",
+    "GLD-US"
+   ],
+   "xasset2": [
+    "UUP-US",
+    "CPER-US",
+    "DBC-US",
+    "EEM-US",
+    "EFA-US"
+   ],
+   "factor": [
+    "SPHB-US",
+    "SPLV-US",
+    "MTUM-US",
+    "XHB-US",
+    "KRE-US"
+   ]
+  }
+ },
+ "prices_daily": {
+  "start": "today minus 14 months",
+  "frequency": "D",
+  "batches": {
+   "d_core": [
+    "SPY-US",
+    "RSP-US",
+    "IWM-US",
+    "XLY-US",
+    "XLP-US"
+   ],
+   "d_sect": [
+    "XLI-US",
+    "XLB-US",
+    "XLF-US",
+    "XLE-US",
+    "XLU-US"
+   ],
+   "d_sect2": [
+    "XLV-US",
+    "XLK-US",
+    "HYG-US",
+    "IEF-US",
+    "SMH-US"
+   ]
+  }
+ },
+ "returns_monthly": {
+  "startDate": "2024-01-02",
+  "frequency": "M",
+  "dividendAdjust": "EXDATE_C",
+  "batches": {
+   "tr1": [
+    "SPY-US",
+    "XLY-US",
+    "XLI-US",
+    "XLB-US",
+    "XLF-US",
+    "XLE-US",
+    "XLK-US"
+   ],
+   "tr2": [
+    "XLP-US",
+    "XLU-US",
+    "XLV-US",
+    "RSP-US",
+    "IWM-US",
+    "HYG-US",
+    "IEF-US"
+   ]
+  }
+ }
+}
