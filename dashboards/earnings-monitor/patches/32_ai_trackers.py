@@ -67,13 +67,13 @@ function trkDC(C, PB) {
 function trkTok(C, TD) {
   const R = TD.rows || [], f = TRK.f, q = (f.tq || '').toLowerCase();
   const cos = [...new Set(R.map(r => r.co))].sort(), kinds = [...new Set(R.map(r => r.kind))].sort();
-  const KL = { absolute: 'Absolute volume', growth: 'Growth rate', forecast: 'Forecast', share: 'Share' };
+  const KL = { absolute: 'Absolute volume', growth: 'Growth rate', forecast: 'Forecast', share: 'Share', pricing: 'Token pricing' };
   const abs = R.filter(r => r.tpm != null).sort((a, b) => a.date.localeCompare(b.date));
   const latest = {}; abs.forEach(r => { const k = r.co + '|' + r.metric; latest[k] = latest[k] || []; latest[k].push(r); });
   const latRows = Object.values(latest).map(xs => { const l = xs[xs.length - 1], p = xs.length > 1 ? xs[xs.length - 2] : null; return { l, p, g: p ? l.tpm / p.tpm : null }; }).sort((a, b) => b.l.tpm - a.l.tpm);
   const rows = R.filter(r => (!f.tco || r.co === f.tco) && (!f.tkind || r.kind === f.tkind) && (!q || JSON.stringify(r).toLowerCase().includes(q))).sort((a, b) => b.date.localeCompare(a.date));
   const fq = v => v == null ? '–' : v >= 10 ? v.toFixed(0) : v >= 1 ? v.toFixed(2) : v.toFixed(3);
-  C.innerHTML = `<section class="panel"><span class="eyebrow">AI · token demand</span><h1>Token demand: every number we have</h1>
+  C.innerHTML = `<section class="panel"><span class="eyebrow">AI · token demand</span><h1>Token demand and pricing: every number we have</h1>
 <p class="op-call">${esc(TD.view)}</p>
 <h3>Latest absolute volumes (${esc(TD.unit)})</h3><div class="tbl-wrap"><table class="op-t"><thead><tr><th>Company · metric</th><th class="n">Latest</th><th class="n">As of</th><th class="n">Prior</th><th class="n">Prior date</th><th class="n">Change</th><th>Basis</th></tr></thead><tbody>${latRows.map(x => `<tr><td><b>${esc(x.l.co)}</b> · ${esc(x.l.metric)}</td><td class="n"><b>${fq(x.l.tpm)}</b></td><td class="n">${esc(x.l.date)}</td><td class="n">${x.p ? fq(x.p.tpm) : '–'}</td><td class="n">${x.p ? esc(x.p.date) : '–'}</td><td class="n">${x.g ? x.g.toFixed(1) + 'x' : '–'}</td><td class="note">${esc(x.l.value)}</td></tr>`).join('')}</tbody></table></div>
 <p class="sub">Volumes are not comparable across companies: first-party API, all surfaces and claimed serving volumes are counted differently.</p>
