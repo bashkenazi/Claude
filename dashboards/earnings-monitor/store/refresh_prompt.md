@@ -31,6 +31,16 @@ new row per date, on conflict do nothing, and read the latest one first).
 
 Prices are intraday Bloomberg from the Master comps Live sheet; the Live sheet only changes when the workbook is saved,
 so say in the Daily moves status line when the file's lastModifiedDateTime is more than 30 minutes old.
+COMP SHEET NOT AVAILABLE -> FACTSET (Bobby, 2026-11-25): use FactSet for updated pricing whenever the comp sheet is not
+available. "Not available" = no workbook found, the Live/Feed sheets cannot be read (after the retries below), rows were
+not shown, or the workbook is stale: not saved today (ET), or (EVENING) last saved before 16:00 ET. Then take prices
+and moves from FactSet GlobalPrices on tabs/universe.json ids (batches of 50, fields price, adjust SPLIT, last ~12
+days; 1D = last close vs prior close, 5D vs 5 closes back), keep each name's Group from universe.json, and say
+"FactSet closes through <date> (comp sheet <missing | unreadable | last saved <time>>)" in the Daily moves status
+line. For Valuation, keep the workbook's estimates but recompute the price-based fields (P/E, EV multiples, % from
+52W high, Perf 7D/30D) from the FactSet price when the workbook price is older than the FactSet close; if no workbook
+can be read at all, carry the previous tabs/comps.json and label its as_of. Never present stale sheet prices as
+today's.
 In the steps below, "(EVENING)" means the 16:00 run and "(MIDDAY)" means the 10:00/12:00/14:00 runs.
 
 Rules: read-only on Notion, SharePoint, Outlook, AlphaSense and FactSet. Never run a digest or other skill that
@@ -97,8 +107,9 @@ A. Master comps = prices, daily moves, valuation, screens. Read it straight from
      If the read comes back as a PDF conversion (no "## Sheet: Live"), retry up to 3 times. Map tickers to
      tabs/universe.json by full Bloomberg ticker, then (US or no exchange) by the first token; a Sub sector column,
      when present, wins over universe.json.
-   If a read says rows were not shown, stop and report it rather than using a partial universe. Fallback for
-   closes only: FactSet GlobalPrices on universe.json ids.
+   If a read says rows were not shown, do not use a partial universe: fall back to FactSet as below. Whenever the
+   comp sheet is not available or stale (see COMP SHEET NOT AVAILABLE -> FACTSET above), prices and moves come from
+   FactSet GlobalPrices on universe.json ids.
 B. Companies DB (Notion collection://54e1fc28-0c99-43cf-9d42-a6aa7de55d87; columns Company, Ticker, BBG Ticker,
    Sector, Sub-sector, Tier, In Master Comps) = the names Bobby follows closely: earnings, prep, idea and
    today-tab focus. Upcoming prints (Prep & calendar, and the Earnings tab's "Reported, review not run yet" panel):
@@ -141,7 +152,7 @@ Pull in parallel with subagents, each writing JSON into a scratch folder <S>:
    tabs/prep.json from management-prep, analyst-day, print-tables, quarterly-review plus next-4-weeks prints from
    FactSet for Companies DB names with Tier 1–3 or In Master Comps checked (same set as B).
 5. tabs/daily.json — only after step 4 (the day's digests are the first source of reasons):
-   prices from universe A (MIDDAY: Live sheet; EVENING: closes). Shape: as_of, universe_n, summary[] (connect
+   prices from universe A (MIDDAY: Live sheet; EVENING: closes; FactSet GlobalPrices whenever the comp sheet is not available or stale). Shape: as_of, universe_n, summary[] (connect
    the moves into themes, most important first), sectors[] (group, n, median_1d, best, worst, why — empty when no driver is found), up[]/down[] (top 12 each), moves[] (every priced name: t, n, g, c), and stories{} keyed by
    ticker ({why, sources, confidence}) for every name that moved >=5% AND >=3 points away from its sector median
    (most extreme first, cap 60). Sources for each story, in order: the routine pages from step 4, then desk mail
